@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1729">
+  <meta name="description" content="Offline Tiles Survive hero roster and five-hero squad planner.">
+  <title>Tiles Survive Hero Planner</title>
+  <link rel="icon" href="data:image/png;base64,__APP_ICON__">
+  <style>__APP_CSS__</style>
+  <style>
+    .slot img{height:128px;object-fit:contain;background:linear-gradient(180deg,#254d78,#10243e)}
+    .formation-guide{display:grid;gap:10px}.formation-banner{display:grid;gap:3px;padding:14px;border:2px solid var(--cyan);border-radius:13px;background:#153f59}.formation-banner span,.guide-card h3{color:var(--cyan);font-size:.72rem;font-weight:900;text-transform:uppercase;letter-spacing:.04em}.formation-banner strong{font-size:1.35rem}.formation-banner small{color:var(--gold);font-weight:800}.formation-banner em{color:var(--muted);font-size:.72rem;font-style:normal}.guide-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.guide-card{min-width:0;padding:12px 13px;border-radius:11px;background:#1d3b62}.guide-card h3{margin:0 0 7px}.guide-card p{font-size:.84rem;line-height:1.42;margin:0}.guide-card>small{display:block;color:var(--muted);font-size:.72rem;line-height:1.35;margin-top:7px}.guide-card ol{display:grid;gap:6px;list-style:none;padding:0;margin:0}.guide-card li{display:grid;gap:1px;font-size:.8rem}.guide-card li span{color:var(--muted);font-size:.73rem}.guide-card.resource h3{color:var(--gold)}.guide-card.watch{grid-column:1/-1;background:#182f50}.release-prompt{margin-top:12px}
+    @media(max-width:680px){.guide-grid{grid-template-columns:1fr}.guide-card.watch{grid-column:auto}.slot img{height:112px}}
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand"><img src="data:image/png;base64,__APP_ICON__" alt=""><div><span>Tiles Survive</span><h1>Hero Squad Lab</h1></div></div>
+    <div class="header-meta"><span class="status-dot"></span>Client config 2.6.0.235 <small>28 base heroes · 6 ascended forms</small></div>
+  </header>
+
+  <nav class="top-nav" aria-label="Planner sections">
+    <button data-tab="squad" class="active">Squad Builder</button>
+    <button data-tab="stats">Hero Stats</button>
+    <button data-tab="skills">Skills</button>
+    <button data-tab="roster">My Roster</button>
+    <button data-tab="release">Release &amp; Access</button>
+    <div class="save-tools">
+      <span id="save-status" title="State is stored in this browser for this exact file location.">Saving locally…</span>
+      <button id="export-profile" class="quiet">Export profile</button>
+      <button id="import-profile" class="quiet">Import profile</button>
+      <input id="profile-file" type="file" accept="application/json,.json" hidden>
+    </div>
+  </nav>
+
+  <main class="workspace" id="workspace">
+    <section class="roster-pane" id="roster-pane">
+      <div class="pane-heading">
+        <div><h2 id="roster-title">Hero roster</h2><p id="roster-hint">Click heroes to build a five-hero formation.</p></div>
+        <div class="filters">
+          <select id="faction-filter" aria-label="Faction filter"><option>All factions</option><option>Mountain</option><option>Wasteland</option><option>Sky</option><option>Sea</option></select>
+          <select id="role-filter" aria-label="Role filter"><option>All roles</option><option>Melee</option><option>Mid</option><option>Range</option></select>
+          <select id="rarity-filter" aria-label="Rarity filter"><option>All rarities</option><option>SSR</option><option>SR</option><option>R</option></select>
+        </div>
+      </div>
+      <div class="hero-scroll" id="hero-scroll" tabindex="0" aria-label="Hero roster, scrollable">
+        <div class="hero-grid" id="hero-grid"></div>
+      </div>
+    </section>
+
+    <div class="splitter" id="splitter" role="separator" aria-orientation="vertical" aria-label="Resize panels" tabindex="0"></div>
+
+    <section class="detail-pane" id="detail-pane" aria-live="polite">
+      <div id="detail-content"></div>
+    </section>
+  </main>
+
+  <footer><strong>Offline build.</strong> Images and data are inside this file. Browser save is tied to this file location; export a profile before moving or replacing it.</footer>
+
+  <script>window.__HERO_DATA__=__EMBEDDED_HERO_JSON__;</script>
+  <script>__APP_JS__</script>
+</body>
+</html>

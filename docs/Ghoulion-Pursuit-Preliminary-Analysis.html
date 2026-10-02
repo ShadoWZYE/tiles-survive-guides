@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ghoulion Pursuit - preliminary calculation study</title>
+<style>
+:root{--bg:#09182c;--card:#122b4b;--card2:#19395f;--line:#37658d;--text:#eff7ff;--muted:#b9cee2;--cyan:#37ddd5;--gold:#ffca4b;--green:#6ee7a8}
+*{box-sizing:border-box} body{margin:0;background:linear-gradient(135deg,#071426,#0d2440);color:var(--text);font:16px/1.5 system-ui,Segoe UI,sans-serif}
+main{max-width:1100px;margin:auto;padding:34px 22px 60px} h1{font-size:clamp(30px,5vw,52px);line-height:1.05;margin:.1em 0} h2{margin-top:36px} h3{color:var(--cyan)}
+.eyebrow{color:var(--cyan);font-weight:800;letter-spacing:.09em} .lede{font-size:20px;color:var(--muted);max-width:850px}
+.verdict,.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;margin:18px 0} .verdict{border-left:6px solid var(--cyan)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px} .metric{background:var(--card2);border-radius:13px;padding:16px} .metric b{display:block;color:var(--gold);font-size:28px}
+table{width:100%;border-collapse:collapse;background:var(--card);border-radius:12px;overflow:hidden} th,td{text-align:left;padding:10px 12px;border-bottom:1px solid #294e72} th{color:var(--cyan);background:#0e2541} .ok{color:var(--green);font-weight:750}
+code{color:var(--gold)} li{margin:.45em 0} .warning{border-left:5px solid var(--gold)} .small{color:var(--muted);font-size:14px} @media(max-width:700px){table{font-size:13px}th,td{padding:8px 6px}}
+</style></head><body><main>
+<div class="eyebrow">TILES SURVIVE - GHOULION PURSUIT</div>
+<h1>What the rally reports actually show</h1>
+<p class="lede">Preliminary analysis of 10 Ghoulion rallies from State #1007 on 8 September 2026, checked against the current client configuration.</p>
+
+<section class="verdict"><h2>Short answer</h2>
+<p>The displayed Ghoulion result is calculated as the <strong>exact sum of each member's independently displayed damage</strong>. Identical participant damage repeats under different rally leaders. In this sample, changing the leader did not change another player's contribution.</p>
+<p>This supports using a weak march to open one rally while stronger marches manually join other rallies—provided every march gets into a Ghoulion rally and no strong march is left idle.</p></section>
+
+<div class="grid">
+<div class="metric"><b>10 / 10</b>headline totals exactly matched the member sum</div>
+<div class="metric"><b>49</b>visible member contributions transcribed</div>
+<div class="metric"><b>8</b>same-player damage values repeated under different leaders</div>
+<div class="metric"><b>0</b>rounding difference in any supplied rally total</div>
+</div>
+
+<h2>Confirmed calculation</h2>
+<div class="card"><code>Rally Damage Caused = member 1 damage + member 2 damage + ... + member N damage</code>
+<p>The equality holds exactly, to the point, in every supplied report. The top number is not a separate leader calculation or an opaque multiplier.</p></div>
+
+<h3>Unexplained calculation fingerprint</h3>
+<div class="card"><p>All 49 visible member contributions are exactly <strong>one or two points below a multiple of 200</strong>: 38 values have remainder 198 and 11 have remainder 199 when divided by 200.</p>
+<p>This strongly indicates quantization or rounding inside the combat calculation. The client records show that the level-1 Ghoulion uses a special tier-10 boss infantry unit with health value 1, five level-10 NPC heroes, and a flat all-hero defense value of 9,878. Those records do <strong>not</strong> explain which operation creates the 200-point steps, so the pattern is reported as observed—not mislabeled as a decoded formula.</p></div>
+
+<h2>Leader-independence evidence</h2>
+<p>These contributions repeated exactly while the named rally leader changed:</p>
+<table><thead><tr><th>Member</th><th>Damage</th><th>Observed leaders</th><th>Samples</th></tr></thead><tbody><tr><td>TheShadowWZYE</td><td>183,399</td><td>Addalicious, Братишка, Тётя</td><td>4</td></tr><tr><td>TheShadowWZYE</td><td>1,133,798</td><td>Persey, Reikon, Solip0_0</td><td>4</td></tr><tr><td>Broodje</td><td>115,599</td><td>Addalicious, Solip0_0, Братишка</td><td>3</td></tr><tr><td>Donwijote</td><td>1,250,598</td><td>Solip0_0, Тётя</td><td>2</td></tr><tr><td>IceSurfer</td><td>1,385,798</td><td>Persey, Solip0_0</td><td>2</td></tr><tr><td>Milana</td><td>3,627,598</td><td>Reikon, TheShadowWZYE</td><td>2</td></tr><tr><td>Solip0_0</td><td>755,198</td><td>Addalicious, Persey</td><td>2</td></tr><tr><td>лилмами</td><td>847,398</td><td>Solip0_0, Тётя</td><td>2</td></tr></tbody></table>
+<p class="small">Exact repetition does not prove that every possible rally bonus is disabled. It is strong evidence that the starter's formation does not globally multiply the participant damage displayed by Ghoulion.</p>
+
+<h2>Recommended 30-minute playbook</h2>
+<ol>
+<li>R4/R5 raises the Beast Trap donation buff before starting the event.</li>
+<li>Players open one Ghoulion rally with their weakest usable march.</li>
+<li>They manually place their strongest remaining marches into other Ghoulion rallies.</li>
+<li>Fill rallies and keep all marches cycling. Do not leave a strong march idle merely to preserve the pattern.</li>
+<li>Do not start unrelated rallies during the event window.</li>
+<li>If too few Ghoulion rallies exist, start another immediately—even with a strong squad. Throughput matters more than ritual.</li>
+</ol>
+
+<h2>Current client constants</h2>
+<div class="grid">
+<div class="metric"><b>1,800 s</b>event duration</div><div class="metric"><b>999</b>configured rally attempts</div>
+<div class="metric"><b>5 / 10 min</b>Ghoulion rally wait choices</div><div class="metric"><b>25</b>maximum combat rounds</div>
+<div class="metric"><b>1.0</b>damage-to-score rate</div><div class="metric"><b>999,999,999</b>configured boss health</div>
+</div>
+
+<h3>Beast Trap attack buff</h3><p>Configured steps: <strong>10%, 20%, 40%, 60%, 80%, 100% Troop Attack</strong>.</p>
+<h3>Early-state MVP alliance-reward multiplier</h3><p>Below 30M: 1x; 30M+: 2x; 40M+: 3x; 80M+: 4x. This is a reward multiplier driven by the MVP's damage, not a multiplier applied to the rally's combat damage.</p>
+<h3>Solo damage thresholds</h3><p>400K, 1M, 2M, 10M, 20M, 30M, 40M, 60M and 80M.</p>
+
+<h2>What these reports cannot tell us</h2>
+<div class="card warning"><p>The summary reports do not contain heroes, troop counts, gear, Behemoths or per-squad attributes. Therefore they cannot identify which formation produced a damage tier or reconstruct the server's low-level troop-versus-boss equation.</p>
+<p>The extended damage section below the summary repeats or expands damage attribution; it does not expose the missing formation inputs.</p>
+<p>The client contains attribute aggregation and reward tables, but the authoritative battle result arrives from the server. Any exact hero damage equation published without controlled formation inputs would currently be guesswork.</p></div>
+
+<h2>Raw rally validation</h2>
+<table><thead><tr><th>Time</th><th>Leader</th><th>Members</th><th>Reported damage</th><th>Sum check</th></tr></thead><tbody><tr><td>19:22:01</td><td>Reikon</td><td>4</td><td>14,054,193</td><td class='ok'>exact</td></tr><tr><td>19:22:51</td><td>Addalicious</td><td>5</td><td>3,567,593</td><td class='ok'>exact</td></tr><tr><td>19:26:45</td><td>TheShadowWZYE</td><td>5</td><td>11,459,190</td><td class='ok'>exact</td></tr><tr><td>19:27:16</td><td>Solip0_0</td><td>5</td><td>4,976,991</td><td class='ok'>exact</td></tr><tr><td>19:27:18</td><td>Братишка</td><td>5</td><td>28,571,791</td><td class='ok'>exact</td></tr><tr><td>19:28:44</td><td>Тётя</td><td>5</td><td>4,019,192</td><td class='ok'>exact</td></tr><tr><td>19:28:49</td><td>Persey</td><td>5</td><td>6,501,990</td><td class='ok'>exact</td></tr><tr><td>19:32:17</td><td>TheShadowWZYE</td><td>5</td><td>8,136,391</td><td class='ok'>exact</td></tr><tr><td>19:32:52</td><td>Solip0_0</td><td>5</td><td>17,241,990</td><td class='ok'>exact</td></tr><tr><td>19:32:55</td><td>Братишка</td><td>5</td><td>4,992,192</td><td class='ok'>exact</td></tr></tbody></table>
+
+<h2>Next-event experiment</h2>
+<p>To settle leader-versus-participant behavior completely, one player should use the exact same preset twice: once to start a rally and once to join. Keep troop count, heroes, Behemoth and the Beast Trap level unchanged. The two member-damage rows—not total rally damage—are the result to compare.</p>
+<p class="small">Evidence level: client-config confirmed for constants; report-confirmed for arithmetic and repeated contributions; inferred for the recommended allocation strategy.</p>
+</main></body></html>

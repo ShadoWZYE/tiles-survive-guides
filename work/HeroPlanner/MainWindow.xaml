@@ -1,0 +1,470 @@
+<Window x:Class="TilesSurviveHeroPlanner.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:TilesSurviveHeroPlanner"
+        Title="Tiles Survive Hero Planner" Width="1500" Height="920" MinWidth="1120" MinHeight="720"
+        WindowStartupLocation="CenterScreen" Icon="Assets/app-icon.ico" Background="#0B1629" Foreground="{StaticResource InkBrush}">
+    <Window.Resources>
+        <local:RarityBrushConverter x:Key="RarityBrush" />
+        <local:BoolVisibilityConverter x:Key="BoolVisibility" />
+        <local:NumberConverter x:Key="Number" />
+    </Window.Resources>
+    <Grid>
+        <Grid.Background>
+            <RadialGradientBrush Center="0.18,0.08" GradientOrigin="0.18,0.08" RadiusX="0.95" RadiusY="1.1">
+                <GradientStop Color="#244F78" Offset="0" />
+                <GradientStop Color="#101F38" Offset="0.46" />
+                <GradientStop Color="#08111F" Offset="1" />
+            </RadialGradientBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid Margin="30,24,30,18">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <StackPanel>
+                <TextBlock Text="TILES SURVIVE" FontWeight="Black" FontSize="15" Foreground="{StaticResource AccentBrush}" />
+                <TextBlock Text="Hero Squad Lab" FontWeight="Black" FontSize="38" Margin="0,-3,0,2" />
+                <TextBlock Text="Build a five-hero squad from the client’s actual roster and card art." FontSize="15" Foreground="{StaticResource MutedInkBrush}" />
+            </StackPanel>
+            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                <Border Background="#142A48" CornerRadius="14" Padding="16,9" BorderBrush="#2C507A" BorderThickness="1">
+                    <StackPanel Orientation="Horizontal">
+                        <Ellipse Width="9" Height="9" Fill="{StaticResource AccentBrush}" Margin="0,0,9,0" />
+                        <TextBlock Text="Client config 2.6.0.235" FontWeight="SemiBold" />
+                    </StackPanel>
+                </Border>
+                <TextBlock Text="28 base heroes  •  6 ascended forms" Foreground="{StaticResource MutedInkBrush}"
+                           FontSize="12" HorizontalAlignment="Center" Margin="0,5,0,0" />
+            </StackPanel>
+        </Grid>
+
+        <Border Grid.Row="1" Margin="30,0,30,16" Background="#C9142744" CornerRadius="14"
+                BorderBrush="#294A72" BorderThickness="1" Padding="7">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <UniformGrid Rows="1">
+                    <Button x:Name="SquadNav" Content="SQUAD BUILDER" Tag="0" Click="Navigation_Click"
+                            Background="#168C87" BorderBrush="#3DE0D4" Padding="22,10" Margin="0,0,6,0" FontWeight="Bold" />
+                    <Button x:Name="StatsNav" Content="HERO STATS" Tag="1" Click="Navigation_Click"
+                            Padding="22,10" Margin="0,0,6,0" FontWeight="Bold" />
+                    <Button x:Name="SkillsNav" Content="SKILLS" Tag="2" Click="Navigation_Click"
+                            Padding="22,10" Margin="0,0,6,0" FontWeight="Bold" />
+                    <Button x:Name="RosterNav" Content="MY ROSTER" Tag="3" Click="Navigation_Click"
+                            Padding="22,10" Margin="0,0,6,0" FontWeight="Bold" />
+                    <Button x:Name="ReleaseNav" Content="RELEASE &amp; ACCESS" Tag="4" Click="Navigation_Click"
+                            Padding="22,10" FontWeight="Bold" />
+                </UniformGrid>
+                <TextBlock Grid.Column="1" Text="Select a section, then inspect any hero from the roster."
+                           HorizontalAlignment="Right" VerticalAlignment="Center" Margin="18,0,10,0"
+                           Foreground="{StaticResource MutedInkBrush}" />
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="2" Margin="30,0,30,18">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.55*" MinWidth="560" />
+                <ColumnDefinition Width="14" />
+                <ColumnDefinition Width="1*" MinWidth="390" />
+            </Grid.ColumnDefinitions>
+
+            <Border Background="#D9142744" CornerRadius="18" BorderBrush="#294A72" BorderThickness="1" Padding="18">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid Margin="2,0,2,14">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="RosterTitle" Text="Hero roster" FontSize="21" FontWeight="Bold" VerticalAlignment="Center" />
+                        <ComboBox x:Name="FactionFilter" Grid.Column="1" Margin="8,0" SelectionChanged="Filter_Changed">
+                            <ComboBoxItem Content="All factions" IsSelected="True" />
+                            <ComboBoxItem Content="Mountain" />
+                            <ComboBoxItem Content="Wasteland" />
+                            <ComboBoxItem Content="Sky" />
+                            <ComboBoxItem Content="Sea" />
+                        </ComboBox>
+                        <ComboBox x:Name="RoleFilter" Grid.Column="2" Margin="0,0,8,0" SelectionChanged="Filter_Changed">
+                            <ComboBoxItem Content="All roles" IsSelected="True" />
+                            <ComboBoxItem Content="Melee" />
+                            <ComboBoxItem Content="Mid" />
+                            <ComboBoxItem Content="Range" />
+                        </ComboBox>
+                        <ComboBox x:Name="RarityFilter" Grid.Column="3" SelectionChanged="Filter_Changed">
+                            <ComboBoxItem Content="All rarities" IsSelected="True" />
+                            <ComboBoxItem Content="SSR" />
+                            <ComboBoxItem Content="SR" />
+                            <ComboBoxItem Content="R" />
+                        </ComboBox>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="18" /></Grid.ColumnDefinitions>
+                        <ScrollViewer x:Name="HeroRosterScroll" VerticalScrollBarVisibility="Hidden"
+                                      HorizontalScrollBarVisibility="Disabled" PanningMode="VerticalOnly"
+                                      ScrollChanged="HeroRosterScroll_ScrollChanged"
+                                      PreviewMouseMove="HeroRosterScroll_MouseMove"
+                                      PreviewMouseLeftButtonUp="HeroRosterScroll_MouseLeftButtonUp"
+                                      LostMouseCapture="HeroRosterScroll_LostMouseCapture">
+                            <ItemsControl x:Name="HeroRoster" PreviewMouseLeftButtonDown="HeroRosterScroll_MouseLeftButtonDown">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate><WrapPanel /></ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Button Click="HeroCard_Click" Tag="{Binding}" Padding="0" Margin="5" Width="142" Height="222"
+                                            Background="Transparent" BorderThickness="0">
+                                        <Border CornerRadius="12" BorderThickness="3" BorderBrush="{Binding Rarity, Converter={StaticResource RarityBrush}}"
+                                                Background="#203A61" ClipToBounds="True">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="*" />
+                                                    <RowDefinition Height="72" />
+                                                </Grid.RowDefinitions>
+                                                <Image Source="{Binding Portrait}" Stretch="UniformToFill" />
+                                                <Border VerticalAlignment="Top" HorizontalAlignment="Left" Margin="7" CornerRadius="7"
+                                                        Background="{Binding Rarity, Converter={StaticResource RarityBrush}}" Padding="7,3">
+                                                    <TextBlock Text="{Binding Rarity}" FontWeight="Black" FontSize="12" />
+                                                </Border>
+                                                <Border VerticalAlignment="Top" HorizontalAlignment="Right" Margin="7" CornerRadius="10" Background="#D90D1A2C" Padding="6,3"
+                                                        Visibility="{Binding HasAscension, Converter={StaticResource BoolVisibility}}">
+                                                    <TextBlock Text="ASC" FontSize="10" Foreground="{StaticResource GoldBrush}" FontWeight="Bold" />
+                                                </Border>
+                                                <Border x:Name="OwnedBadge" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="7"
+                                                        Width="31" Height="31" CornerRadius="16" Background="#159F69"
+                                                        BorderBrush="#78F2BA" BorderThickness="2"
+                                                        Visibility="{Binding IsOwned, Converter={StaticResource BoolVisibility}}">
+                                                    <TextBlock Text="✓" FontSize="19" FontWeight="Black" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                </Border>
+                                                <Border Grid.Row="1" Background="#EF142743" Padding="9,7">
+                                                    <StackPanel>
+                                                        <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="15" TextTrimming="CharacterEllipsis" />
+                                                        <TextBlock FontSize="11" Foreground="{StaticResource MutedInkBrush}">
+                                                            <Run Text="{Binding Faction}" /><Run Text="  •  " /><Run Text="{Binding Role}" />
+                                                        </TextBlock>
+                                                        <TextBlock FontSize="11" Foreground="{StaticResource AccentBrush}">
+                                                            <Run Text="Index " /><Run Text="{Binding CompositeIndex, StringFormat=F1}" />
+                                                        </TextBlock>
+                                                    </StackPanel>
+                                                </Border>
+                                            </Grid>
+                                        </Border>
+                                    </Button>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
+                        <ScrollBar x:Name="HeroRosterBar" Grid.Column="1" Orientation="Vertical"
+                                   Minimum="0" SmallChange="80" ValueChanged="HeroRosterBar_ValueChanged"
+                                   Maximum="{Binding ElementName=HeroRosterScroll, Path=ScrollableHeight}"
+                                   LargeChange="{Binding ElementName=HeroRosterScroll, Path=ViewportHeight}"
+                                   ViewportSize="{Binding ElementName=HeroRosterScroll, Path=ViewportHeight}" />
+                    </Grid>
+                </Grid>
+            </Border>
+
+            <GridSplitter Grid.Column="1" Width="7" HorizontalAlignment="Center" VerticalAlignment="Stretch"
+                          Background="#3A638D" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext"
+                          ShowsPreview="True" Cursor="SizeWE" />
+
+            <Border x:Name="InspectorPanel" Grid.Column="2" Background="#E8142744" CornerRadius="18" BorderBrush="#294A72" BorderThickness="1" Padding="14">
+                <Grid>
+                    <TabControl x:Name="InspectorTabs" Background="Transparent" BorderThickness="0"
+                                Foreground="{StaticResource InkBrush}">
+                        <TabControl.Resources>
+                            <Style TargetType="TabItem">
+                                <Setter Property="Foreground" Value="{StaticResource InkBrush}" />
+                            </Style>
+                        </TabControl.Resources>
+                        <TabControl.Template>
+                            <ControlTemplate TargetType="TabControl">
+                                <ContentPresenter Content="{TemplateBinding SelectedContent}"
+                                                  ContentTemplate="{TemplateBinding SelectedContentTemplate}" />
+                            </ControlTemplate>
+                        </TabControl.Template>
+
+                        <TabItem Header="SQUAD">
+                            <Grid Margin="6,14,6,4">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" /><RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" /><RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid>
+                                    <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+                                    <StackPanel>
+                                        <TextBlock Text="Your squad" FontSize="22" FontWeight="Bold" />
+                                        <TextBlock x:Name="SelectionStatus" Text="0 / 5 selected" Foreground="{StaticResource MutedInkBrush}" />
+                                    </StackPanel>
+                                    <Button Grid.Column="1" Content="Clear" Click="Clear_Click" Padding="12,6" VerticalAlignment="Center" />
+                                </Grid>
+                                <ItemsControl x:Name="SelectedSquad" Grid.Row="1" Margin="0,14">
+                                    <ItemsControl.ItemsPanel><ItemsPanelTemplate><UniformGrid Columns="5" /></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border Margin="3" CornerRadius="10" BorderThickness="2" BorderBrush="{Binding Rarity, Converter={StaticResource RarityBrush}}" ClipToBounds="True" Height="148" Background="#10243E">
+                                                <Grid>
+                                                    <Image Source="{Binding Portrait}" Stretch="Uniform" />
+                                                    <Border VerticalAlignment="Bottom" Background="#D90A1424" Padding="4">
+                                                        <StackPanel>
+                                                            <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="11" TextAlignment="Center" TextTrimming="CharacterEllipsis" />
+                                                            <TextBlock Text="{Binding FormationBand}" Foreground="{StaticResource AccentBrush}" FontSize="9" TextAlignment="Center" />
+                                                        </StackPanel>
+                                                    </Border>
+                                                </Grid>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                                <Border x:Name="OptimizerPanel" Grid.Row="2" Background="#1D3558" CornerRadius="13" Padding="13" Margin="0,0,0,12">
+                                    <StackPanel>
+                                        <TextBlock Text="Optimize five-hero squads" FontWeight="Bold" FontSize="16" />
+                                        <TextBlock Text="Role coverage is a planner constraint, not an in-game bonus." TextWrapping="Wrap" Foreground="{StaticResource MutedInkBrush}" FontSize="12" Margin="0,3,0,10" />
+                                        <Grid>
+                                            <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+                                            <StackPanel Orientation="Horizontal">
+                                                <ComboBox x:Name="ModePicker" AutomationProperties.AutomationId="ModePicker" AutomationProperties.Name="Squad objective" SelectionChanged="ModePicker_Changed">
+                                                    <ComboBoxItem Content="Balanced" IsSelected="True" /><ComboBoxItem Content="Offense" /><ComboBoxItem Content="Survival" /><ComboBoxItem Content="PvE farming" />
+                                                </ComboBox>
+                                                <CheckBox x:Name="RoleCoverage" Content="All roles" IsChecked="True" Foreground="{StaticResource InkBrush}" VerticalAlignment="Center" Margin="10,0,0,0" Checked="OptimizerOption_Changed" Unchecked="OptimizerOption_Changed" />
+                                                <ComboBox x:Name="AccessPicker" Margin="10,0,0,0" SelectionChanged="OptimizerOption_Changed">
+                                                    <ComboBoxItem Content="All access" IsSelected="True" />
+                                                    <ComboBoxItem Content="Owned only" />
+                                                    <ComboBoxItem Content="F2P confirmed" />
+                                                    <ComboBoxItem Content="F2P + events" />
+                                                    <ComboBoxItem Content="IAP-linked" />
+                                                </ComboBox>
+                                            </StackPanel>
+                                            <Button Grid.Column="1" Content="Build best" Background="#168C87" BorderBrush="#3DE0D4" FontWeight="Bold" Click="Optimize_Click" />
+                                        </Grid>
+                                    </StackPanel>
+                                </Border>
+                                <Grid x:Name="TopConfigurationsPanel" Grid.Row="3">
+                                    <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /></Grid.RowDefinitions>
+                                    <StackPanel Margin="2,0,0,7">
+                                        <TextBlock Text="Top configurations" FontSize="17" FontWeight="Bold" />
+                                        <TextBlock x:Name="TopConfigurationsStatus" Foreground="{StaticResource MutedInkBrush}" FontSize="11" />
+                                    </StackPanel>
+                                    <ListBox x:Name="TopSquads" Grid.Row="1" Background="Transparent" Foreground="{StaticResource InkBrush}" BorderThickness="0"
+                                             ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="TopSquads_SelectionChanged">
+                                        <ListBox.ItemContainerStyle>
+                                            <Style TargetType="ListBoxItem">
+                                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                                <Setter Property="Padding" Value="0" />
+                                            </Style>
+                                        </ListBox.ItemContainerStyle>
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <Border Background="#1A3152" CornerRadius="10" Padding="10,8" Margin="0,3">
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions><ColumnDefinition Width="Auto" /><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+                                                        <TextBlock Text="{Binding Label}" Foreground="{StaticResource AccentBrush}" FontWeight="Black" Margin="0,2,9,0" />
+                                                        <StackPanel Grid.Column="1">
+                                                            <TextBlock Text="{Binding Names}" Foreground="{StaticResource InkBrush}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
+                                                            <TextBlock Text="{Binding SynergySummary}" Foreground="{StaticResource MutedInkBrush}" FontSize="11" TextWrapping="Wrap" Margin="0,3,0,0" />
+                                                        </StackPanel>
+                                                        <StackPanel Grid.Column="2" Margin="9,0,0,0" HorizontalAlignment="Right">
+                                                            <TextBlock Text="{Binding Score, StringFormat=F1}" Foreground="{StaticResource GoldBrush}" FontWeight="Bold" HorizontalAlignment="Right" />
+                                                            <TextBlock Text="{Binding SynergyLabel}" Foreground="{StaticResource AccentBrush}" FontSize="10" HorizontalAlignment="Right" Margin="0,3,0,0" />
+                                                        </StackPanel>
+                                                    </Grid>
+                                                </Border>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
+                                </Grid>
+                                <ScrollViewer x:Name="FormationGuidePanel" Grid.Row="2" Grid.RowSpan="2" Visibility="Collapsed" VerticalScrollBarVisibility="Auto">
+                                    <StackPanel Margin="0,2,5,0">
+                                        <Border Background="#163F59" BorderBrush="{StaticResource AccentBrush}" BorderThickness="2" CornerRadius="12" Padding="14" Margin="0,0,0,10">
+                                            <StackPanel>
+                                                <TextBlock Text="FORMATION READY" Foreground="{StaticResource AccentBrush}" FontSize="11" FontWeight="Black" />
+                                                <TextBlock x:Name="FormationModeLabel" FontSize="22" FontWeight="Black" Margin="0,3,0,0" />
+                                                <TextBlock x:Name="FormationScoreLabel" Foreground="{StaticResource GoldBrush}" FontWeight="Bold" Margin="0,2,0,0" />
+                                                <TextBlock Text="Click a selected hero on the left to revise the squad." Foreground="{StaticResource MutedInkBrush}" FontSize="11" Margin="0,3,0,0" />
+                                            </StackPanel>
+                                        </Border>
+                                        <Border Background="#1D3558" CornerRadius="11" Padding="13" Margin="0,0,0,8">
+                                            <StackPanel><TextBlock Text="PLACEMENT — FRONT TO BACK" Foreground="{StaticResource AccentBrush}" FontWeight="Black" FontSize="11" /><TextBlock x:Name="FormationPositions" TextWrapping="Wrap" LineHeight="20" Margin="0,5,0,0" /></StackPanel>
+                                        </Border>
+                                        <Border Background="#1D3558" CornerRadius="11" Padding="13" Margin="0,0,0,8">
+                                            <StackPanel><TextBlock Text="HOW IT FUNCTIONS" Foreground="{StaticResource AccentBrush}" FontWeight="Black" FontSize="11" /><TextBlock x:Name="FormationFunction" TextWrapping="Wrap" LineHeight="19" Margin="0,5,0,0" /></StackPanel>
+                                        </Border>
+                                        <Border Background="#1D3558" CornerRadius="11" Padding="13" Margin="0,0,0,8">
+                                            <StackPanel><TextBlock Text="BATTLE GUIDE" Foreground="{StaticResource AccentBrush}" FontWeight="Black" FontSize="11" /><TextBlock x:Name="FormationBattleGuide" TextWrapping="Wrap" LineHeight="19" Margin="0,5,0,0" /></StackPanel>
+                                        </Border>
+                                        <Border Background="#1D3558" CornerRadius="11" Padding="13" Margin="0,0,0,8">
+                                            <StackPanel><TextBlock Text="RESOURCE PRIORITY" Foreground="{StaticResource GoldBrush}" FontWeight="Black" FontSize="11" /><TextBlock x:Name="FormationResourceFocus" TextWrapping="Wrap" LineHeight="19" Margin="0,5,0,0" /></StackPanel>
+                                        </Border>
+                                        <Border Background="#182F50" CornerRadius="11" Padding="13">
+                                            <StackPanel><TextBlock Text="WATCH FOR" Foreground="{StaticResource MutedInkBrush}" FontWeight="Black" FontSize="11" /><TextBlock x:Name="FormationWeaknesses" TextWrapping="Wrap" LineHeight="19" Margin="0,5,0,0" /></StackPanel>
+                                        </Border>
+                                    </StackPanel>
+                                </ScrollViewer>
+                            </Grid>
+                        </TabItem>
+
+                        <TabItem Header="STATS">
+                            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                <Grid x:Name="StatsPanel" Margin="8,16">
+                                    <Grid.ColumnDefinitions><ColumnDefinition Width="170" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
+                                    <Border CornerRadius="14" BorderThickness="3" BorderBrush="{Binding Rarity, Converter={StaticResource RarityBrush}}" ClipToBounds="True" Height="232" VerticalAlignment="Top">
+                                        <Image Source="{Binding Portrait}" Stretch="UniformToFill" />
+                                    </Border>
+                                    <StackPanel Grid.Column="1" Margin="18,0,0,0">
+                                        <TextBlock Text="{Binding Name}" FontSize="30" FontWeight="Black" />
+                                        <TextBlock Foreground="{StaticResource MutedInkBrush}" Margin="0,0,0,13"><Run Text="{Binding Rarity}" /><Run Text="  •  " /><Run Text="{Binding Faction}" /><Run Text="  •  " /><Run Text="{Binding Role}" /></TextBlock>
+                                        <Border Background="#1D3558" CornerRadius="11" Padding="13" Margin="0,0,0,8"><StackPanel><TextBlock Text="MAX-LEVEL BATTLE POWER" Foreground="{StaticResource MutedInkBrush}" FontSize="11" /><TextBlock Text="{Binding BattlePower, Converter={StaticResource Number}}" FontSize="23" FontWeight="Bold" Foreground="{StaticResource GoldBrush}" /></StackPanel></Border>
+                                        <UniformGrid Columns="2">
+                                            <Border Background="#1D3558" CornerRadius="10" Padding="11" Margin="0,0,4,7"><StackPanel><TextBlock Text="ATTACK" FontSize="10" Foreground="{StaticResource MutedInkBrush}" /><TextBlock Text="{Binding Attack, Converter={StaticResource Number}}" FontWeight="Bold" FontSize="17" /></StackPanel></Border>
+                                            <Border Background="#1D3558" CornerRadius="10" Padding="11" Margin="4,0,0,7"><StackPanel><TextBlock Text="DEFENSE" FontSize="10" Foreground="{StaticResource MutedInkBrush}" /><TextBlock Text="{Binding Defense, Converter={StaticResource Number}}" FontWeight="Bold" FontSize="17" /></StackPanel></Border>
+                                            <Border Background="#1D3558" CornerRadius="10" Padding="11" Margin="0,0,4,7"><StackPanel><TextBlock Text="HEALTH" FontSize="10" Foreground="{StaticResource MutedInkBrush}" /><TextBlock Text="{Binding Health, Converter={StaticResource Number}}" FontWeight="Bold" FontSize="17" /></StackPanel></Border>
+                                            <Border Background="#1D3558" CornerRadius="10" Padding="11" Margin="4,0,0,7"><StackPanel><TextBlock Text="MARCH CAPACITY" FontSize="10" Foreground="{StaticResource MutedInkBrush}" /><TextBlock Text="{Binding MarchCapacity, Converter={StaticResource Number}}" FontWeight="Bold" FontSize="17" /></StackPanel></Border>
+                                        </UniformGrid>
+                                        <TextBlock Text="Extracted maximum configuration values; your owned hero level and gear are not applied." Foreground="{StaticResource MutedInkBrush}" TextWrapping="Wrap" FontSize="12" Margin="0,7,0,0" />
+                                    </StackPanel>
+                                </Grid>
+                            </ScrollViewer>
+                        </TabItem>
+
+                        <TabItem Header="SKILLS">
+                            <Grid Margin="8,16">
+                                <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /></Grid.RowDefinitions>
+                                <StackPanel x:Name="SkillsHeader" Orientation="Horizontal" Margin="0,0,0,12">
+                                    <Image Width="58" Height="78" Source="{Binding Portrait}" Stretch="UniformToFill" />
+                                    <StackPanel Margin="12,7,0,0"><TextBlock Text="{Binding Name}" FontSize="24" FontWeight="Bold" /><TextBlock Text="Decoded client mechanics" Foreground="{StaticResource MutedInkBrush}" /></StackPanel>
+                                </StackPanel>
+                                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                                    <ItemsControl x:Name="SkillsList">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Border Background="#1B3456" BorderBrush="#31577E" BorderThickness="1" CornerRadius="12" Padding="14" Margin="0,0,0,9">
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions><ColumnDefinition Width="76" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
+                                                        <Border Width="64" Height="64" CornerRadius="12" Background="#10233D" BorderBrush="#3A648F" BorderThickness="1" VerticalAlignment="Top">
+                                                            <Image Source="{Binding Icon}" Stretch="Uniform" Margin="5" />
+                                                        </Border>
+                                                        <StackPanel Grid.Column="1" Margin="12,0,0,0">
+                                                            <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions><TextBlock Text="{Binding DisplayName}" FontSize="17" FontWeight="Bold" /><TextBlock Grid.Column="1" Text="{Binding LevelLabel}" Foreground="{StaticResource MutedInkBrush}" FontSize="11" /></Grid>
+                                                            <TextBlock Text="{Binding Mechanics}" Foreground="{StaticResource AccentBrush}" FontWeight="SemiBold" Margin="0,3,0,7" />
+                                                            <TextBlock Text="CLIENT DESCRIPTION TEMPLATE" Foreground="{StaticResource MutedInkBrush}" FontSize="10" FontWeight="Bold" />
+                                                            <TextBlock Text="{Binding Description}" TextWrapping="Wrap" Margin="0,2,0,8" FontSize="13" LineHeight="18" />
+                                                            <TextBlock Text="{Binding DamageLabel}" Foreground="{StaticResource GoldBrush}" FontWeight="SemiBold" Margin="0,0,0,5" />
+                                                            <Border Background="#142B49" CornerRadius="8" Padding="9,7">
+                                                                <StackPanel><TextBlock Text="EXPECTED PAYOFF" Foreground="{StaticResource MutedInkBrush}" FontSize="10" FontWeight="Bold" /><TextBlock Text="{Binding ExpectedPayoff}" TextWrapping="Wrap" Margin="0,3,0,0" FontSize="12.5" LineHeight="17" /></StackPanel>
+                                                            </Border>
+                                                        </StackPanel>
+                                                    </Grid>
+                                                </Border>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </ScrollViewer>
+                            </Grid>
+                        </TabItem>
+
+                        <TabItem Header="ROSTER">
+                            <StackPanel Margin="10,18">
+                                <Grid Margin="0,0,0,16">
+                                    <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+                                    <StackPanel>
+                                        <TextBlock Text="My roster" FontSize="27" FontWeight="Black" />
+                                        <TextBlock x:Name="OwnedCount" Foreground="{StaticResource MutedInkBrush}" />
+                                    </StackPanel>
+                                    <Button Grid.Column="1" Content="All" Click="MarkAllOwned_Click" Padding="11,6" Margin="0,0,7,0" />
+                                    <Button Grid.Column="2" Content="None" Click="ClearOwned_Click" Padding="11,6" />
+                                </Grid>
+                                <Border Background="#163454" BorderBrush="#2B5A82" BorderThickness="1" CornerRadius="12" Padding="14" Margin="0,0,0,12">
+                                    <StackPanel>
+                                        <TextBlock Text="CLICK HERO CARDS ON THE LEFT" Foreground="{StaticResource AccentBrush}" FontWeight="Bold" FontSize="11" />
+                                        <TextBlock Text="Each click marks or unmarks a hero as owned. A green check stays visible on every selected card, and your choices are saved locally." TextWrapping="Wrap" Margin="0,5,0,0" />
+                                    </StackPanel>
+                                </Border>
+                                <StackPanel>
+                                    <Border Background="#1D3558" CornerRadius="11" Padding="13" Margin="0,0,0,7">
+                                        <StackPanel><TextBlock Text="WHAT TO GET NEXT" Foreground="{StaticResource AccentBrush}" FontWeight="Bold" FontSize="11" /><TextBlock x:Name="UnlockRecommendation" TextWrapping="Wrap" Margin="0,4,0,0" /></StackPanel>
+                                    </Border>
+                                    <Border Background="#1D3558" CornerRadius="11" Padding="13">
+                                        <StackPanel><TextBlock Text="RESOURCE FOCUS" Foreground="{StaticResource GoldBrush}" FontWeight="Bold" FontSize="11" /><TextBlock x:Name="ResourceRecommendation" TextWrapping="Wrap" Margin="0,4,0,0" /></StackPanel>
+                                    </Border>
+                                </StackPanel>
+                            </StackPanel>
+                        </TabItem>
+
+                        <TabItem Header="RELEASE">
+                            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                <StackPanel x:Name="ReleasePanel" Margin="10,18">
+                                    <TextBlock Text="Server release timeline" FontSize="29" FontWeight="Black" />
+                                    <TextBlock Text="Enter the date this server opened; the complete upcoming schedule updates automatically." Foreground="{StaticResource MutedInkBrush}" TextWrapping="Wrap" Margin="0,0,0,12" />
+                                    <DatePicker x:Name="ServerOpenDate" SelectedDateChanged="ServerOpenDate_Changed" Foreground="#10213B" Margin="0,0,0,10" />
+
+                                    <Border Background="#163F59" BorderBrush="{StaticResource AccentBrush}" BorderThickness="2" CornerRadius="12" Padding="15" Margin="0,0,0,12">
+                                        <StackPanel>
+                                            <TextBlock Text="WHAT RELEASES NEXT" Foreground="{StaticResource AccentBrush}" FontSize="11" FontWeight="Black" />
+                                            <TextBlock x:Name="NextReleaseTitle" Text="Enter your server opening date" FontSize="23" FontWeight="Black" Margin="0,3,0,0" />
+                                            <TextBlock x:Name="NextReleaseDates" Text="The next configured hero window will appear here." Foreground="{StaticResource GoldBrush}" FontSize="16" FontWeight="Bold" TextWrapping="Wrap" Margin="0,3,0,0" />
+                                            <TextBlock x:Name="NextReleaseCountdown" Text="The timeline updates automatically." Foreground="{StaticResource MutedInkBrush}" Margin="0,3,0,0" />
+                                        </StackPanel>
+                                    </Border>
+
+                                    <TextBlock Text="UPCOMING TIMELINE" Foreground="{StaticResource MutedInkBrush}" FontSize="11" FontWeight="Black" Margin="0,0,0,5" />
+                                    <ItemsControl x:Name="ReleaseSchedule" Margin="0,0,0,12">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Border Background="#1D3558" CornerRadius="9" Padding="10,8" Margin="0,0,0,5">
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions><ColumnDefinition Width="58" /><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+                                                        <TextBlock Text="{Binding Marker}" Foreground="{StaticResource AccentBrush}" FontWeight="Black" VerticalAlignment="Center" />
+                                                        <StackPanel Grid.Column="1">
+                                                            <TextBlock Text="{Binding HeroName}" FontSize="15" FontWeight="Bold" />
+                                                            <TextBlock Text="{Binding WeekLabel}" Foreground="{StaticResource MutedInkBrush}" FontSize="11" />
+                                                        </StackPanel>
+                                                        <StackPanel Grid.Column="2" HorizontalAlignment="Right">
+                                                            <TextBlock Text="{Binding DateLabel}" Foreground="{StaticResource GoldBrush}" FontWeight="SemiBold" HorizontalAlignment="Right" />
+                                                            <TextBlock Text="{Binding RelativeLabel}" Foreground="{StaticResource MutedInkBrush}" FontSize="11" HorizontalAlignment="Right" />
+                                                        </StackPanel>
+                                                    </Grid>
+                                                </Border>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+
+                                    <Border x:Name="ReleaseSelectionHint" Background="#182F50" CornerRadius="10" Padding="12">
+                                        <TextBlock Text="Click a hero card on the left to inspect that hero's release window and acquisition evidence." Foreground="{StaticResource MutedInkBrush}" TextWrapping="Wrap" />
+                                    </Border>
+                                    <Border x:Name="ReleaseEvidencePanel" Background="#182F50" CornerRadius="10" Padding="12" Visibility="Collapsed">
+                                        <StackPanel>
+                                            <TextBlock Text="SELECTED HERO EVIDENCE" Foreground="{StaticResource MutedInkBrush}" FontSize="11" FontWeight="Black" />
+                                            <TextBlock FontSize="16" FontWeight="Bold" Margin="0,3,0,0"><Run Text="{Binding Name, Mode=OneWay}" /><Run Text="  •  " /><Run Text="{Binding ReleaseLabel, Mode=OneWay}" /></TextBlock>
+                                            <TextBlock x:Name="ReleaseEstimate" Text="Enter a server opening date to calculate this hero's estimate." Foreground="{StaticResource GoldBrush}" FontWeight="SemiBold" Margin="0,2,0,0" />
+                                            <TextBlock Text="{Binding AcquisitionEvidence}" Foreground="{StaticResource MutedInkBrush}" TextWrapping="Wrap" Margin="0,2,0,0" />
+                                        </StackPanel>
+                                    </Border>
+                                    <TextBlock Text="Client-side scheduling can be changed or overridden by the publisher. These are planning windows, not confirmed release dates." Foreground="{StaticResource MutedInkBrush}" TextWrapping="Wrap" FontSize="12" Margin="0,10,0,0" />
+                                </StackPanel>
+                            </ScrollViewer>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <Border Grid.Row="3" Background="#CC08111F" BorderBrush="#243E61" BorderThickness="0,1,0,0" Padding="30,11">
+            <TextBlock Foreground="{StaticResource MutedInkBrush}" FontSize="12" TextWrapping="Wrap">
+                Planning model: Balanced combines configured power, offense, and durability. PvE farming additionally values sustained utility and extracted global Stamina-cost reduction. Skill synergy adds a capped squad-level bonus from decoded effects. Exact cooldowns, targeting, control uptime, equipment, awakenings, and live server overrides are not simulated.
+            </TextBlock>
+        </Border>
+    </Grid>
+</Window>

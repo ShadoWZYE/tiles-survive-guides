@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>TilesSurviveHeroPlanner</AssemblyName>
+    <RootNamespace>TilesSurviveHeroPlanner</RootNamespace>
+    <ApplicationIcon>Assets\app-icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Resource Include="Assets\app-icon.ico" />
+    <Resource Include="..\..\outputs\hero-report\TilesSurvive-Hero-Data.json" Link="Data\heroes.json" />
+    <Resource Include="..\..\outputs\hero-tool\images\*.png" Link="Images\%(Filename)%(Extension)" />
+    <Resource Include="..\..\outputs\hero-tool\images\skill-icons\*.png" Link="Images\SkillIcons\%(Filename)%(Extension)" />
+  </ItemGroup>
+</Project>

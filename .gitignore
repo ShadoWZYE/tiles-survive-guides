@@ -1,6 +1,29 @@
-__pycache__/
+# Build output
+**/bin/
+**/obj/
+outputs/hero-tool/publish/
+
+# Python environments and caches
+**/__pycache__/
 *.py[cod]
 .venv/
 venv/
+
+# Temporary and local-state output
 tmp/
-*.png
+captures/
+outputs/chrome-offline-*/
+outputs/offline-planner-check.png
+outputs/hero-tool/ui-preview*.png
+outputs/hero-tool/ui-*.png
+
+# Packet captures and extracted traffic
+*.etl
+*.pcap
+*.pcapng
+*.flows
+work/map-mitm/
+
+# Local profiles and secrets
+*.local.json
+profile.json
