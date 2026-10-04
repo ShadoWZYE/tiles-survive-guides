@@ -63,6 +63,8 @@ Current bilingual PDFs place English first and Russian second in the same file:
 
 Additional earlier reports are under `docs/reports/`. New PDFs should continue using the combined English/Russian format.
 
+Standalone Reservoir Raid quick-reference images: [English PNG](outputs/reservoir-raid/VeD-Reservoir-Raid-Quick-Reference-EN.png) and [Russian PNG](outputs/reservoir-raid/VeD-Reservoir-Raid-Quick-Reference-RU.png). Rebuild with `python work/ReservoirRaid/build_quick_reference.py` (requires Pillow); this does not modify the PDF.
+
 - March Capacity report
 - Troop Load report
 - Reservoir Raid guides
