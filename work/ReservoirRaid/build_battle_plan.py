@@ -127,41 +127,46 @@ class Map(Flowable):
     def draw(self):
         c=self.canv
         c.setFillColor(colors.HexColor('#F2E6D3'));c.roundRect(0,0,W,self.height,8,fill=1,stroke=0)
-        def project(x,y): return (91+.38*(x-y))*mm,(25+.5*(x+y-125))*mm
+        def project(x,y): return (91+.65*(x-y))*mm,(16+.65*(x+y-142))*mm
         # Same client coordinates and isometric x-y / x+y projection as the earlier map.
         nodes=[
-          ('factory',138,195,'P3: Завод 3' if self.ru else 'P3: Plant 3',['HoloCrow / monika'],2,148,48),
-          ('powerstation',100,200,'C: Солнечная' if self.ru else 'C: Solar',['LadyGroz / Filin','Wróżka Nerwuska1'],2,119,48),
-          ('zombie',119,162,'C: Комплекс T+15' if self.ru else 'C: Dev T+15',['LadyGroz / Filin'],2,90,48),
-          ('process_center',56,105,'A: Центр 1' if self.ru else 'A: Treatment 1',['Salman / Luke','Avalon / Shikiiigami'],2,38,48),
-          ('factory',33,119,'P1: Завод 1' if self.ru else 'P1: Plant 1',['Lexxiii / CaptMac'],2,10,48),
-          ('factory',205,119,'P2: Завод 2' if self.ru else 'P2: Plant 2',['Баламут / IBRAHIM Zain'],132,148,48),
-          ('process_center',181,132,'B: Центр 2' if self.ru else 'B: Treatment 2',['Loki / Sattow / Hammy'],132,119,48),
-          ('tank',119,76,'D: Военный T+15' if self.ru else 'D: Munitions T+15',['Martyku / Bruklin88'],132,90,48),
-          ('airport',138,37,'D: Площадка' if self.ru else 'D: Helipad',['Martyku / Bruklin88','Mortisha'],132,38,48),
-          ('factory',100,42,'P4: Завод 4' if self.ru else 'P4: Plant 4',['KayKat / ryan'],132,10,48),
-          ('center',117,117,'S: Центр T+15' if self.ru else 'S: Central T+15',['ChaosGoblin / Artur','Wanderlust / Yildiz'],62,148,58),
+          ('factory',138,195,'P3: Завод 3' if self.ru else 'P3: Plant 3',['HoloCrow / monika'],34,150,44),
+          ('powerstation',100,200,'C: Солнечная' if self.ru else 'C: Solar',['LadyGroz / Filin','Wróżka Nerwuska1'],4,91,43),
+          ('zombie',119,162,'C: Комплекс T+15' if self.ru else 'C: Dev T+15',['LadyGroz / Filin'],50,85,44),
+          ('process_center',56,105,'A: Центр 1' if self.ru else 'A: Treatment 1',['Salman / Luke','Avalon / Shikiiigami'],45,1,50),
+          ('factory',33,119,'P1: Завод 1' if self.ru else 'P1: Plant 1',['Lexxiii / CaptMac'],4,35,43),
+          ('factory',205,119,'P2: Завод 2' if self.ru else 'P2: Plant 2',['Баламут / IBRAHIM Zain'],129,146,50),
+          ('process_center',181,132,'B: Центр 2' if self.ru else 'B: Treatment 2',['Loki / Sattow / Hammy'],103,101,47),
+          ('tank',119,76,'D: Военный T+15' if self.ru else 'D: Munitions T+15',['Martyku / Bruklin88'],102,62,40),
+          ('airport',138,37,'D: Площадка' if self.ru else 'D: Helipad',['Martyku / Bruklin88','Mortisha'],144,47,35),
+          ('factory',100,42,'P4: Завод 4' if self.ru else 'P4: Plant 4',['KayKat / ryan'],137,6,43),
+          ('center',117,117,'S: Центр T+15' if self.ru else 'S: Central T+15',['ChaosGoblin / Artur','Wanderlust / Yildiz'],51,51,48),
         ]
         c.setStrokeColor(colors.HexColor('#007C9D'));c.setLineWidth(1);c.setDash(3,2)
         for x,y in [(86,150),(86,90),(154,150),(154,90)]:
             px,py=project(x,y);c.circle(px,py,6*mm,fill=0,stroke=1)
         c.setDash()
-        c.setFillColor(colors.HexColor('#006B85'));c.setFont('Bold',7.5)
-        for x,y,name in [(86,150,'4uzhaya'),(86,90,'Yesimemily'),(154,150,'Xaroth'),(154,90,'Bulik')]:
-            px,py=project(x,y);c.drawCentredString(px,py-9*mm,name)
+        c.setFillColor(colors.HexColor('#006B85'));c.setFont('Bold',7.2)
+        for x,y,name,offset in [(86,150,'4uzhaya',-9),(86,90,'Yesimemily',-9),(154,150,'Xaroth',9),(154,90,'Bulik',9)]:
+            px,py=project(x,y);c.drawCentredString(px,py+offset*mm,name)
         for kind,x,y,label,names,bx,by,bw in nodes:
             px,py=project(x,y)
-            ax=(bx+bw if bx<20 else bx if bx>120 else bx+bw/2)*mm
-            ay=(by+12 if bx<20 or bx>120 else by)*mm
-            c.setStrokeColor(colors.HexColor('#8B765A'));c.setLineWidth(.6);c.line(ax,ay,px,py)
+            bh=8+4*len(names)
+            # Short connectors terminate at the nearest label edge.
+            ax=max(bx*mm,min(px,(bx+bw)*mm))
+            ay=max(by*mm,min(py,(by+bh)*mm))
+            c.setStrokeColor(colors.HexColor('#AA9475'));c.setLineWidth(.45);c.line(ax,ay,px,py)
         for kind,x,y,label,names,bx,by,bw in nodes:
             px,py=project(x,y)
             asset=Path(__file__).parent/'assets'/f'sp_icon_big_ava_building_{kind}.png'
-            c.drawImage(ImageReader(str(asset)),px-7*mm,py-7*mm,14*mm,14*mm,mask='auto',preserveAspectRatio=True)
-            c.setFillColor(colors.white);c.setStrokeColor(colors.HexColor('#AE9F89'));c.roundRect(bx*mm,by*mm,bw*mm,24*mm,4,fill=1,stroke=1)
-            c.setFillColor(NAVY);c.setFont('Bold',8);c.drawString((bx+2)*mm,(by+18)*mm,label)
-            c.setFont('Body',7.4)
-            for i,name in enumerate(names): c.drawString((bx+2)*mm,(by+12-i*4.5)*mm,name)
+            c.drawImage(ImageReader(str(asset)),px-8*mm,py-8*mm,16*mm,16*mm,mask='auto',preserveAspectRatio=True)
+            bh=8+4*len(names)
+            c.saveState();c.setFillAlpha(.80);c.setStrokeAlpha(.30)
+            c.setFillColor(colors.white);c.setStrokeColor(colors.HexColor('#AE9F89'));c.setLineWidth(.4)
+            c.roundRect(bx*mm,by*mm,bw*mm,bh*mm,3,fill=1,stroke=1);c.restoreState()
+            c.setFillColor(NAVY);c.setFont('Bold',7.6);c.drawString((bx+2)*mm,(by+bh-4.5)*mm,label)
+            c.setFont('Body',7.1)
+            for i,name in enumerate(names): c.drawString((bx+2)*mm,(by+bh-8.5-i*4)*mm,name)
 
 story=[]
 def title(x): story.append(p(x,'title'))
