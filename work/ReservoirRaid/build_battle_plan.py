@@ -98,8 +98,8 @@ groups=[
  ('HQ',[('TheShadowWZYE',6.84)],'Commander','Командир',
   'Lead calls, count attendance, track score and incoming rallies. Support the nearest safe objective with main march.',
   'Команды, явка, счет и ралли врага. Основной марш - помощь ближайшему безопасному объекту.',
-  'Keep command visibility. Coordinate S and substitutes. Backup commander: Artur, subject to pre-battle acceptance.',
-  'Контролировать карту, S и запасных. Заместитель: Artur, после подтверждения перед боем.'),
+  'Keep command visibility. Coordinate S and substitutes. Confirmed second-in-command: Shikiiigami. They take command if HQ is unavailable.',
+  'Контролировать карту, S и запасных. Согласованный заместитель: Shikiiigami. При отсутствии HQ принимает командование.'),
 ]
 reserves=[
  ('Blockbuster',12.49,'1','First call: fifth S combat march, or replace missing Treatment/utility anchor','Первый вызов: пятый боевой марш S, либо замена якоря центра/полезного объекта'),
@@ -117,6 +117,8 @@ chat_en = chat_en.replace('follow TheShadowWZYE.', 'follow this plan unless HQ c
 chat_ru = chat_ru.replace('командует TheShadowWZYE.', 'следовать плану, пока HQ не изменит.').replace('помощь, затем центр T+15.', 'сами выбирают помощь/атаки; центр T+15.').replace('Гарнизоны стоят до замены.', 'Если прикрыто и безопасно, идти на следующую роль без разрешения; сообщить.').replace('; дополнительные только с пользой.', '.').replace('Не атаковать сильных в одиночку, не гоняться за убийствами.', 'Безопасную разлитую воду собирать сразу; доступна обеим сторонам.').replace('Запасные входят', 'Blockbuster - первая замена. Запасные входят')
 chat_en = chat_en.replace('[VeD] RR:', '[VeD] RR: HQ=TheShadowWZYE.')
 chat_ru = chat_ru.replace('[VeD] RR:', '[VeD] RR: HQ=TheShadowWZYE.')
+chat_en = chat_en.replace('HQ=TheShadowWZYE.', 'HQ=TheShadowWZYE; 2IC=Shikiiigami.')
+chat_ru = chat_ru.replace('HQ=TheShadowWZYE.', 'HQ=TheShadowWZYE; 2IC=Shikiiigami.')
 assert len(chat_en)<=1000 and len(chat_ru)<=1000
 players=[x for g in groups for x in g[1]]
 assert len(players)==30 and len(set(n for n,_ in players))==30
@@ -171,13 +173,17 @@ class Map(Flowable):
 story=[]
 def title(x): story.append(p(x,'title'))
 def h(x): story.append(p(x,'h'))
-def body(x): story.append(p(x))
+def body(x):
+    x=x.replace('the agreed backup Artur takes calls', 'the confirmed second-in-command Shikiiigami takes command')
+    x=x.replace('согласованный заместитель Artur', 'согласованный заместитель Shikiiigami')
+    story.append(p(x))
 def page(): story.append(PageBreak())
 for ru in (False,True):
     if ru: page()
     title('[VeD] Reservoir Raid' if not ru else '[VeD] Рейд на резервуар')
     body('R4 command plan | 4 October 2026 | English version' if not ru else 'План командования R4 | 4 октября 2026 | Русская версия')
     body('<b>Commander: TheShadowWZYE. 30 starters + 8 confirmed substitutes.</b> Allocate the strongest available march by the roster below. Group labels remain the same in both languages.' if not ru else '<b>Командир: TheShadowWZYE. 30 основных + 8 подтвержденных запасных.</b> Использовать сильнейший доступный марш по распределению ниже. Обозначения групп одинаковы в обоих языках.')
+    body('<b>Second-in-command (2IC): Shikiiigami - confirmed.</b> Takes command if TheShadowWZYE is unavailable. Otherwise keeps the assigned Treatment 1 support role.' if not ru else '<b>Заместитель командира (2IC): Shikiiigami - согласовано.</b> Принимает командование, если TheShadowWZYE недоступен. В остальное время помогает центру 1 по плану.')
     h('Battle objective and opening' if not ru else 'Цель боя и старт')
     body('Win by Alliance Water. A/B hold both Treatment Centers; P1-P4 capture or probe their Plants; C/D take Solar/Helipad with S support. Empty objectives: capture immediately. A defended objective stronger than your pair: report, preserve troops and request a coordinated attack. R4 may concede a remote Plant to protect the major income buildings.' if not ru else 'Победа определяется союзной водой. A/B держат оба центра; P1-P4 берут или проверяют заводы; C/D берут солнечную/площадку с помощью S. Пустую точку брать сразу. Если защита сильнее вашей пары - доклад, сохранение войск и запрос общей атаки. R4 может отдать дальний завод ради основных доходных зданий.')
     h('When to move without asking' if not ru else 'Когда можно идти без разрешения')
