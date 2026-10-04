@@ -59,6 +59,7 @@ Current bilingual PDFs place English first and Russian second in the same file:
 
 - [Collections Guide - EN/RU](docs/Tiles-Survive-Collections-Guide-EN-RU.pdf)
 - [Hero Gear Upgrade Guide - EN/RU](docs/Tiles-Survive-Hero-Gear-Upgrade-Guide-EN-RU.pdf)
+- [VeD Reservoir Raid battle plan - EN/RU](docs/reports/Tiles-Survive-Reservoir-Raid-VeD-Battle-Plan-EN-RU.pdf): named assignments for 30 starters and 8 confirmed substitutes, R4 calls, rotations, and the Blockbuster entry contingency. [Copy-paste alliance messages](docs/reports/Tiles-Survive-Reservoir-Raid-VeD-Battle-Plan-EN-RU.txt). Rebuild with `python work/ReservoirRaid/build_battle_plan.py` (requires ReportLab).
 
 Additional earlier reports are under `docs/reports/`. New PDFs should continue using the combined English/Russian format.
 
