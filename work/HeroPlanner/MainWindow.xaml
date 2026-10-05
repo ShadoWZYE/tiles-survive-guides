@@ -178,8 +178,8 @@
                                                         <TextBlock FontSize="11" Foreground="{StaticResource MutedInkBrush}">
                                                             <Run Text="{Binding Faction}" /><Run Text="  •  " /><Run Text="{Binding Role}" />
                                                         </TextBlock>
-                                                        <TextBlock FontSize="11" Foreground="{StaticResource AccentBrush}">
-                                                            <Run Text="Index " /><Run Text="{Binding CompositeIndex, StringFormat=F1}" />
+                                                        <TextBlock FontSize="11" Foreground="{StaticResource AccentBrush}" ToolTip="{Binding EstimateHint}">
+                                                            <Run Text="Est. " /><Run Text="{Binding CompositeIndex, StringFormat=F1}" />
                                                         </TextBlock>
                                                     </StackPanel>
                                                 </Border>
@@ -382,7 +382,10 @@
                                             <Border Background="#1D3558" CornerRadius="10" Padding="11" Margin="0,0,4,7"><StackPanel><TextBlock Text="HEALTH" FontSize="10" Foreground="{StaticResource MutedInkBrush}" /><TextBlock Text="{Binding Health, Converter={StaticResource Number}}" FontWeight="Bold" FontSize="17" /></StackPanel></Border>
                                             <Border Background="#1D3558" CornerRadius="10" Padding="11" Margin="4,0,0,7"><StackPanel><TextBlock Text="MARCH CAPACITY" FontSize="10" Foreground="{StaticResource MutedInkBrush}" /><TextBlock Text="{Binding MarchCapacity, Converter={StaticResource Number}}" FontWeight="Bold" FontSize="17" /></StackPanel></Border>
                                         </UniformGrid>
-                                        <TextBlock Text="Extracted maximum configuration values; your owned hero level and gear are not applied." Foreground="{StaticResource MutedInkBrush}" TextWrapping="Wrap" FontSize="12" Margin="0,7,0,0" />
+                                        <TextBlock Text="The stats above are extracted maximum values. Estimates below use recorded builds plus reference assumptions." Foreground="{StaticResource MutedInkBrush}" TextWrapping="Wrap" FontSize="12" Margin="0,7,0,0" />
+                                        <Expander x:Name="EstimateDetailsExpander" Header="Estimate details" IsExpanded="False" Margin="0,12,0,0">
+                                            <TextBox Text="{Binding EstimateDetails, Mode=OneWay}" IsReadOnly="True" TextWrapping="Wrap" Background="Transparent" BorderThickness="0" Foreground="{StaticResource MutedInkBrush}" Padding="0,8" />
+                                        </Expander>
                                     </StackPanel>
                                 </Grid>
                             </ScrollViewer>
@@ -526,7 +529,7 @@
 
         <Border Grid.Row="3" Background="#CC08111F" BorderBrush="#243E61" BorderThickness="0,1,0,0" Padding="30,11">
             <TextBlock Foreground="{StaticResource MutedInkBrush}" FontSize="12" TextWrapping="Wrap">
-                Planning model: Balanced combines configured power, offense, and durability. PvE farming additionally values sustained utility and extracted global Stamina-cost reduction. Skill synergy adds a capped squad-level bonus from decoded effects. Exact cooldowns, targeting, control uptime, equipment, awakenings, and live server overrides are not simulated.
+                Estimated scores use recorded builds where available and reference assumptions otherwise. Low-confidence inference, not measured combat strength. Details are tucked under Stats → Estimate details.
             </TextBlock>
         </Border>
         <Grid x:Name="BuildOverlay" Grid.RowSpan="4" Panel.ZIndex="50" Visibility="Collapsed" Background="#C908111F" KeyboardNavigation.TabNavigation="Cycle" PreviewKeyDown="BuildOverlay_KeyDown">

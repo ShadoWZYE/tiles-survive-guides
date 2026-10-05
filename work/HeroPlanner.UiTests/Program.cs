@@ -30,6 +30,9 @@ internal static class Program
         var window = Create(); // Exercises XAML initialization and both mode-picker event handlers.
         var heroes = (List<Hero>)typeof(MainWindow).GetField("_heroes", BindingFlags.Instance | BindingFlags.NonPublic)!.GetValue(window)!;
         var becca = heroes.Single(h => h.Name == "Becca");
+        Check(heroes.All(h => h.Estimate is not null && double.IsFinite(h.Estimate.Score)), "Missing default hero estimate");
+        Check(heroes.Where(h => h.Rarity == "SSR").Select(h => Math.Round(h.CompositeIndex, 3)).Distinct().Count() > 5, "SSR reference estimates collapsed into ties");
+        Check(!((Expander)window.FindName("EstimateDetailsExpander")).IsExpanded, "Estimate details should be tucked away by default");
         Check(new HeroSkill { RaidLevelParameters = ["pve_effect|damage_heal_text|effect_param2|99"] }.DamageLabel.Contains("not simulated"), "Modifier falsely displayed as ATK damage");
         var legacySettings = new UpgradeSettings { Goal = "direct" }; legacySettings.Clean();
         Check(legacySettings.Goal == "power", "Legacy direct metric did not migrate safely");

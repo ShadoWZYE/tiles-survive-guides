@@ -173,7 +173,7 @@
       return `<button class="hero-card${selected ? " selected" : ""}" data-slug="${esc(hero.asset_slug)}" data-rarity="${esc(hero.rarity)}" aria-label="${esc(hero.name)}${own ? ", owned" : ""}">
         <img src="${hero.portrait_data}" alt="${esc(hero.name)}" draggable="false">
         <span class="rarity">${esc(hero.rarity)}</span>${hero.has_ascension ? '<span class="asc">ASC</span>' : ''}${own ? '<span class="owned-badge" title="Owned">✓</span>' : ''}
-        <span class="card-copy"><strong>${esc(hero.name)}</strong><small>${esc(hero.faction)} · ${esc(hero.role)}</small><small class="index">Index ${number(hero.composite_index)}</small></span>
+        <span class="card-copy"><strong>${esc(hero.name)}</strong><small>${esc(hero.faction)} · ${esc(hero.role)}</small><small class="index" title="${esc(hero.estimate?.basis)} · low-confidence estimate">Est. ${number(hero.composite_index)}</small></span>
       </button>`;
     }).join("") || '<div class="empty-state">No heroes match these filters.</div>';
     $$(".hero-card").forEach(card => card.addEventListener("click", () => {
@@ -271,7 +271,7 @@
   }
 
   function heroHeader(hero) {
-    return `<div class="section-head"><div><h2>${esc(hero.name)}</h2><p>${esc(hero.rarity)} · ${esc(hero.faction)} · ${esc(hero.role)} · ${esc(hero.has_ascension ? "Ascension available" : "Base form")}</p></div></div>`;
+    return `<div class="section-head"><div><h2>${esc(hero.name)}</h2><p>${esc(hero.rarity)} · ${esc(hero.faction)} · ${esc(hero.role)} · ${esc(hero.has_ascension ? "Ascension available" : "Base form")}</p></div></div><details><summary>Estimate details</summary><p>${esc(hero.estimate?.basis)} · low confidence · scenario range ${number(hero.estimate?.low)}–${number(hero.estimate?.high)}. Unknown fields use level 110, rank 3 step 6, capped skills and no gear. Recorded values replace assumptions. Equal development is not equal resource cost.</p><p>Representative non-text effects, inferred activations and utility weights form a planning proxy, not a combat simulation. Scenario factors: damage 0.5–2.5×, utility 0.5–1.5×; not statistical confidence intervals. Unknown effects receive a generic prior. Fixed reference anchors allow scores above 100. Server overrides remain unverified. Resource percentages still use their selected power/stat metric.</p></details>`;
   }
 
   function renderDetail() {
@@ -357,7 +357,7 @@
 
   function renderStats() {
     const hero = activeHero();
-    $("#detail-content").innerHTML = `${heroHeader(hero)}<div class="hero-detail"><img class="portrait-large" src="${hero.portrait_data}" alt="${esc(hero.name)}"><div><div class="stat-grid"><div class="stat wide"><small>Max-level battle power</small><strong>${number(hero.max_level_battle_power)}</strong></div><div class="stat"><small>Attack</small><strong>${number(hero.max_level_attack)}</strong></div><div class="stat"><small>Defense</small><strong>${number(hero.max_level_defense)}</strong></div><div class="stat"><small>Health</small><strong>${number(hero.max_level_health)}</strong></div><div class="stat"><small>March capacity</small><strong>${number(hero.max_level_march_capacity)}</strong></div><div class="stat"><small>Offense index</small><strong>${number(hero.offense_index)}</strong></div><div class="stat"><small>Durability index</small><strong>${number(hero.durability_index)}</strong></div></div><p class="evidence">Extracted maximum configuration values. Your owned hero level, stars, and gear are not applied.</p></div></div>`;
+    $("#detail-content").innerHTML = `${heroHeader(hero)}<div class="hero-detail"><img class="portrait-large" src="${hero.portrait_data}" alt="${esc(hero.name)}"><div><div class="stat-grid"><div class="stat wide"><small>Max-level battle power</small><strong>${number(hero.max_level_battle_power)}</strong></div><div class="stat"><small>Attack</small><strong>${number(hero.max_level_attack)}</strong></div><div class="stat"><small>Defense</small><strong>${number(hero.max_level_defense)}</strong></div><div class="stat"><small>Health</small><strong>${number(hero.max_level_health)}</strong></div><div class="stat"><small>March capacity</small><strong>${number(hero.max_level_march_capacity)}</strong></div><div class="stat"><small>Estimated offense</small><strong>${number(hero.offense_index)}</strong></div><div class="stat"><small>Estimated durability</small><strong>${number(hero.durability_index)}</strong></div></div><p class="evidence">ATK/DEF/HP and power above are maximum configuration values. Estimated components use recorded builds plus reference assumptions.</p></div></div>`;
   }
 
   function renderSkills() {
@@ -383,8 +383,8 @@
       <div class="release-hero"><img src="${hero.portrait_data}" alt=""><div><h3>${esc(hero.name)} ${owned(hero)?'<span style="color:var(--good)">✓ Owned</span>':''}</h3><p>${esc(hero.rarity)} · ${esc(hero.faction)} · ${esc(hero.role)}</p><button class="button" id="toggle-owned">${owned(hero)?"Remove owned check":"Mark as owned"}</button></div></div>
       <div class="control-strip"><label>${esc(hero.name)} current stars<input id="current-stars" type="number" min="0" max="99" step="1" placeholder="Unknown" value="${progress.current ?? ''}"></label><label>Your star target<input id="target-stars" type="number" min="0" max="99" step="1" placeholder="Not set" value="${progress.target ?? ''}"></label><button class="button secondary" id="save-stars">Save stars</button></div><p class="evidence">Legacy whole-star notes only. Leave blank if unknown. They do not drive upgrade comparisons; record the exact rank step below. No guessed star-to-power scaling.</p>
       ${UpgradeUI.editor(hero.asset_slug,profile)}<div class="recommendations"><div class="notice"><strong>What to unlock next (max-configuration heuristic)</strong><br>${esc(recommendation.unlock)}</div></div>${UpgradeUI.panel(state.squad,profile)}`;
-    UpgradeUI.bindEditor(hero.asset_slug,profile,saveProfile,renderDetail);
-    UpgradeUI.bindPanel(profile,saveProfile,renderDetail);
+    UpgradeUI.bindEditor(hero.asset_slug,profile,saveProfile,renderAll);
+    UpgradeUI.bindPanel(profile,saveProfile,renderAll);
     $("#save-stars").onclick=()=>{
       const inputs=[$("#current-stars"),$("#target-stars")];
       if(inputs.some(input=>!input.reportValidity()))return;
@@ -421,7 +421,15 @@
     $("#server-date").onchange=event=>{profile.serverOpenDate=event.target.value;saveProfile();renderDetail()};
   }
 
+  let lastEstimateBuilds=null;
   function renderAll() {
+    const snapshot=JSON.stringify(heroes.map(h=>profile.heroProgress?.[h.asset_slug]?.build||null));
+    if(snapshot!==lastEstimateBuilds){
+      for(const hero of heroes){const result=EstimateModel.evaluate(hero.asset_slug,profile.heroProgress?.[hero.asset_slug]?.build,window.__UPGRADE_DATA__,window.__ESTIMATE_DATA__);
+        hero.estimate=result;hero.offense_index=result.offense;hero.durability_index=result.durability;hero.composite_index=result.score;}
+      heroes.sort((a,b)=>b.composite_index-a.composite_index||a.name.localeCompare(b.name));optimizerCache.clear();
+      lastEstimateBuilds=JSON.stringify(heroes.map(h=>profile.heroProgress?.[h.asset_slug]?.build||null));
+    }
     document.documentElement.style.setProperty("--left", `${profile.leftWidth}%`);
     renderCards(); renderDetail(); saveProfile();
   }

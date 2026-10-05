@@ -1,6 +1,22 @@
 using System.Text.Json;
 using TilesSurviveHeroPlanner;
 
+if (args.Length > 2 && args[1] == "--estimates")
+{
+    var root = args[2]; var upgrades = UpgradeData.Parse(File.ReadAllText(Path.Combine(root, "TilesSurvive-Upgrade-Data.json")));
+    var estimates = EstimateData.Parse(File.ReadAllText(Path.Combine(root, "Hero-Estimate-Model.json")));
+    var estimateCases = new List<object>();
+    foreach (var slug in estimates.Heroes.Keys)
+    {
+        var h = upgrades.Heroes[slug]; var model = estimates.Heroes[slug];
+        HeroBuild?[] builds = [null, new() { Stage = model.ReferenceStage, Level = model.ReferenceLevel, Gear = [], Skills = model.Skills.ToDictionary(s => s.Id, s => s.ReferenceLevel) },
+            new() { Stage = h.Stages[0].Id, Level = 1, Skills = h.Skills.ToDictionary(s => s.Id, s => 0) }, new() { Level = 55 }];
+        foreach (var saved in builds) estimateCases.Add(new { slug, saved, result = EstimateModel.Evaluate(slug, saved, upgrades, estimates) });
+    }
+    Console.WriteLine(JsonSerializer.Serialize(estimateCases, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }));
+    return;
+}
+
 if (args.Length > 2 && args[1] == "--targeted")
 {
     var data = UpgradeData.Parse(File.ReadAllText(args[2]));

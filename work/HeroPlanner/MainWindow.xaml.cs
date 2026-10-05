@@ -37,7 +37,9 @@ public partial class MainWindow : Window
         InitializeComponent();
         LoadHeroes();
         LoadUpgradeData();
+        LoadEstimates();
         LoadProfile();
+        RefreshEstimates();
         SaveProfile();
         HeroRoster.ItemsSource = _heroes;
         SelectedSquad.ItemsSource = _selected;
@@ -58,6 +60,30 @@ public partial class MainWindow : Window
         using var stream = streamInfo.Stream;
         var heroes = JsonSerializer.Deserialize<List<Hero>>(stream) ?? [];
         _heroes.AddRange(heroes.OrderByDescending(hero => hero.CompositeIndex).ThenBy(hero => hero.Name));
+    }
+
+    private EstimateData _estimates = new();
+    private void LoadEstimates()
+    {
+        var resource = Application.GetResourceStream(new Uri("pack://application:,,,/TilesSurviveHeroPlanner;component/Data/estimates.json"))!;
+        using var reader = new StreamReader(resource.Stream); _estimates = EstimateData.Parse(reader.ReadToEnd());
+        if (_heroes.Any(h => !_estimates.Heroes.ContainsKey(h.AssetSlug))) throw new InvalidDataException("Incomplete hero estimate coverage.");
+    }
+    private string? _lastEstimateBuilds;
+    private bool RefreshEstimates()
+    {
+        string snapshot = JsonSerializer.Serialize(_heroBuilds);
+        if (snapshot == _lastEstimateBuilds) return false;
+        foreach (var hero in _heroes)
+        {
+            var result = EstimateModel.Evaluate(hero.AssetSlug, _heroBuilds.GetValueOrDefault(hero.AssetSlug), _upgradeData, _estimates);
+            hero.Estimate = result; hero.OffenseIndex = result.Offense; hero.DurabilityIndex = result.Durability; hero.CompositeIndex = result.Score;
+        }
+        _heroes.Sort((a, b) => { int score = b.CompositeIndex.CompareTo(a.CompositeIndex); return score != 0 ? score : StringComparer.Ordinal.Compare(a.Name, b.Name); });
+        HeroRoster.Items.Refresh();
+        if (_activeHero is not null) { StatsPanel.DataContext = null; StatsPanel.DataContext = _activeHero; }
+        _lastEstimateBuilds = snapshot;
+        return true;
     }
 
     private void LoadProfile()

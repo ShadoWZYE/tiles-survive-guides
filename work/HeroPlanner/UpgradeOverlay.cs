@@ -321,8 +321,15 @@ public partial class MainWindow
     {
         if (e.Key == Key.Escape) { CloseBuild_Click(sender, e); e.Handled = true; }
     }
+    private bool _refreshingEstimateViews;
     private void RefreshUpgradeViews()
     {
+        if (!_refreshingEstimateViews && RefreshEstimates())
+        {
+            _refreshingEstimateViews = true;
+            try { RebuildOptimizer(); UpdateSquadPresentation(); }
+            finally { _refreshingEstimateViews = false; }
+        }
         RefreshResourcePriority();
         if (ResourceRecommendation is not null) ResourceRecommendation.Text = "Choose five heroes, then use their small edit buttons to record current builds and compare data-driven next upgrades. No fixed hero order.";
         if (BuildOverlay.Visibility == Visibility.Visible)
