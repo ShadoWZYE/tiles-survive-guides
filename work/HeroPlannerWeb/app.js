@@ -5,6 +5,7 @@
   const DEFAULT_PROFILE = {
     version: 1,
     ownedHeroes: [],
+    heroProgress: {},
     serverOpenDate: "2026-09-02",
     mode: "Balanced",
     access: "All access",
@@ -47,10 +48,12 @@
     const tests = [
       ["summon", "Summon"], ["heal", "Healing"], ["shield", "Shield"], ["stun", "Stun"],
       ["speeddown", "Slow"], ["weaken_team_atk", "ATK reduction"], ["weaken_team_def", "DEF reduction"],
+      ["weaken_enemy_def", "DEF reduction"],
+      ["weaken_enemy_atk", "ATK reduction"],
       ["dmg_dec", "Damage reduction"], ["inc_dmg", "Damage boost"], ["crit", "Critical effect"],
       ["stamina", "Stamina reduction"], ["hpmax", "Maximum health"]
     ];
-    const result = tests.filter(([needle]) => source.includes(needle)).map(([, label]) => label);
+    const result = [...new Set(tests.filter(([needle]) => source.includes(needle)).map(([, label]) => label))];
     if (!result.length && (skill.normal_attack || source.includes("damage"))) result.push("Damage");
     return result.length ? result : ["Mechanic not yet classified"];
   }
@@ -93,6 +96,7 @@
     return {
       version: 1,
       ownedHeroes: [...new Set(ownedHeroes)],
+      heroProgress: FormationPriority.sanitizeProgress(candidate.heroProgress, bySlug.keys()),
       serverOpenDate: /^\d{4}-\d{2}-\d{2}$/.test(candidate.serverOpenDate || "") ? candidate.serverOpenDate : DEFAULT_PROFILE.serverOpenDate,
       mode: allowedModes.includes(candidate.mode) ? candidate.mode : DEFAULT_PROFILE.mode,
       access: allowedAccess.includes(candidate.access) ? candidate.access : DEFAULT_PROFILE.access,
@@ -178,7 +182,7 @@
       if (state.tab === "release") state.releaseActive = hero.asset_slug;
       else state.active = hero.asset_slug;
       if (state.tab === "release") {}
-      else if (state.tab === "roster") toggleOwned(hero);
+      else if (state.tab === "roster") {} // Select for editing; the explicit owned button changes ownership.
       else if (state.tab === "squad") toggleSquad(hero);
       renderCards();
       renderDetail();
@@ -272,7 +276,7 @@
 
   function renderDetail() {
     $$(".top-nav [data-tab]").forEach(button => button.classList.toggle("active", button.dataset.tab === state.tab));
-    const titles = {squad:["Hero roster","Click heroes to build a five-hero formation."],stats:["Choose a hero","Click a card to inspect extracted maximum stats."],skills:["Choose a hero","Click a card to inspect skills, icons, and modeled payoff."],roster:["My roster","Click any hero to toggle the owned check."],release:["Release roster","Click a hero for its release and access evidence."]};
+    const titles = {squad:["Hero roster","Click heroes to build a five-hero formation."],stats:["Choose a hero","Click a card to inspect extracted maximum stats."],skills:["Choose a hero","Click a card to inspect skills, icons, and modeled payoff."],roster:["My roster","Select a hero to edit stars; use its owned button to change ownership."],release:["Release roster","Click a hero for its release and access evidence."]};
     $("#roster-title").textContent = titles[state.tab][0]; $("#roster-hint").textContent = titles[state.tab][1];
     if (state.tab === "squad") renderSquad();
     else if (state.tab === "stats") renderStats();
@@ -292,6 +296,7 @@
       <div class="squad-slots">${[0,1,2,3,4].map(i => selected[i] ? `<div class="slot"><img src="${selected[i].portrait_data}" alt=""><b>${esc(selected[i].name)}</b><small>${esc(selected[i].role)} · position ${i+1}</small></div>` : '<div class="slot empty">Empty</div>').join("")}</div>
       ${planning}`;
     $("#clear-squad").onclick = () => {state.squad=[];renderCards();renderDetail()};
+    if (complete) $("#formation-mode").onchange = event => {profile.mode=event.target.value;optimizerCache.clear();saveProfile();renderDetail()};
     if (!complete) {
       $("#mode").value = profile.mode; $("#access").value = profile.access; $("#role-coverage").checked = profile.requireRoleCoverage;
       $("#mode").onchange = event => {profile.mode=event.target.value; optimizerCache.clear(); state.squad=orderFormation(selected).map(h=>h.asset_slug); saveProfile();renderDetail()};
@@ -304,12 +309,12 @@
   function renderFormationGuide(squad) {
     const base = squad.reduce((sum, hero) => sum + scoreHero(hero), 0) / 5;
     const synergy = evaluateSynergy(squad);
-    const carries = [...squad].sort((a,b) => b.offense_index - a.offense_index).slice(0,2);
+    const carries = FormationPriority.carries(squad);
     const sustain = squad.filter(hero => ["Healing","Shield","Damage reduction"].some(mechanic => hero.mechanics.has(mechanic)));
     const control = squad.filter(hero => hero.mechanics.has("Stun") || hero.mechanics.has("Slow"));
     const debuff = squad.filter(hero => hero.mechanics.has("ATK reduction") || hero.mechanics.has("DEF reduction"));
     const positions = squad.map((hero,index) => `<li><strong>${index+1}. ${esc(hero.name)}</strong><span>${esc(hero.role)} · ${esc(positionJob(hero,carries))}</span></li>`).join("");
-    const functionParts = [`Primary damage comes from ${carries.map(hero=>hero.name).join(" and ")}.`];
+    const functionParts = [`Modeled damage core: ${carries.map(hero=>hero.name).join(" and ")}. This is not a measured DPS ranking.`];
     if (debuff.length) functionParts.push(`${debuff.slice(0,2).map(hero=>hero.name).join("/")} weakens targets before the main damage window.`);
     if (control.length) functionParts.push(`${control.slice(0,2).map(hero=>hero.name).join("/")} creates control windows.`);
     if (sustain.length) functionParts.push(`${sustain.slice(0,2).map(hero=>hero.name).join("/")} keeps the formation active through longer exchanges.`);
@@ -318,7 +323,7 @@
     if (control.length) battle.push("commit burst while control is active instead of splitting damage");
     if (sustain.length) battle.push("keep the frontline together so protection covers the carries");
     if (profile.mode === "PvE farming" && squad.some(hero=>hero.staminaReduction)) battle.push("use this formation for repeated PvE actions to exploit its Stamina reduction");
-    const priority = [...squad].sort((a,b)=>scoreHero(b)-scoreHero(a)).slice(0,3).map((hero,index)=>`<li><strong>${index+1}. ${esc(hero.name)}</strong><span>${esc(resourceReason(hero,carries))}</span></li>`).join("");
+    const priority = FormationPriority.rank(squad, profile.mode).map((item,index)=>`<li><strong>${index+1}. ${esc(item.hero.name)}</strong><span>${esc(item.reason)}</span></li>`).join("");
     const gaps=[];
     ["Melee","Mid","Range"].forEach(role=>{if(!squad.some(hero=>hero.role===role))gaps.push(`no ${role.toLowerCase()} hero`)});
     if(!sustain.length)gaps.push("no extracted healing, shield, or damage-reduction layer");
@@ -326,7 +331,8 @@
     if(!squad.some(hero=>hero.mechanics.has("DEF reduction")))gaps.push("no extracted defense break for burst damage");
     if(profile.mode==="PvE farming"&&!squad.some(hero=>hero.staminaReduction))gaps.push("no extracted Stamina economy effect");
     return `<section class="formation-guide"><div class="formation-banner"><span>Formation ready</span><strong>${esc(profile.mode)} formation</strong><small>Modeled score ${number(base+synergy.bonus)} · ${number(base)} base + ${number(synergy.bonus)} synergy</small><em>Click a selected hero on the left to revise the squad.</em></div>
-      <div class="guide-grid"><article class="guide-card"><h3>Placement · front to back</h3><ol>${positions}</ol></article><article class="guide-card"><h3>How it functions</h3><p>${esc(functionParts.join(" "))}</p><small>${esc(synergy.summary)}</small></article><article class="guide-card"><h3>Battle guide</h3><p>${esc(battle.length ? `${battle.join("; then ")}.` : "Focus one target at a time and protect the two highest-offense heroes; this squad has no strong extracted timing combo.")}</p></article><article class="guide-card resource"><h3>Resource priority</h3><ol>${priority}</ol></article><article class="guide-card watch"><h3>Watch for</h3><p>${esc(gaps.length ? `Main modeled gaps: ${gaps.slice(0,3).join("; ")}.` : "No obvious structural gap in the extracted roles and mechanics. Exact cooldowns, targeting, gear, and live balance can still change performance.")}</p></article></div></section>`;
+      <div class="control-strip"><label>Formation goal<select id="formation-mode">${["Balanced","Offense","Survival","PvE farming"].map(m=>`<option${m===profile.mode?' selected':''}>${m}</option>`).join("")}</select></label></div>
+      <div class="guide-grid"><article class="guide-card"><h3>Placement · front to back</h3><ol>${positions}</ol></article><article class="guide-card"><h3>How it functions</h3><p>${esc(functionParts.join(" "))}</p><small>${esc(synergy.summary)}</small></article><article class="guide-card"><h3>Battle guide</h3><p>${esc(battle.length ? `${battle.join("; then ")}.` : "Focus one target at a time and protect your damage core.")}</p></article><article class="guide-card resource"><h3>Resource priority</h3><ol>${priority}</ol><small>Role-based guide, not upgrade ROI. Gear, skill levels, shard costs and star breakpoints are not simulated. Equal indices use a stable ID tie-break, not a proven advantage.</small></article><article class="guide-card"><h3>Star-upgrade queue</h3><p>${esc(starQueue(squad))}</p><small>Set current stars and your chosen target in My roster. Reaching a star target does not finish gear or skill upgrades.</small></article><article class="guide-card watch"><h3>Watch for</h3><p>${esc(gaps.length ? `Main modeled gaps: ${gaps.slice(0,3).join("; ")}.` : "No obvious structural gap in the extracted roles and mechanics. Exact cooldowns, targeting, gear, and live balance can still change performance.")}</p></article></div></section>`;
   }
 
   function positionJob(hero,carries) {
@@ -338,11 +344,15 @@
     return "support the core rotation";
   }
 
-  function resourceReason(hero,carries) {
-    if(carries.includes(hero))return "Raise the squad's main damage ceiling first.";
-    if(["Healing","Shield","Damage reduction"].some(mechanic=>hero.mechanics.has(mechanic)))return "Improve sustain uptime after the carries are stable.";
-    if(["Stun","Slow","ATK reduction","DEF reduction"].some(mechanic=>hero.mechanics.has(mechanic)))return "Improve the utility that enables the whole formation.";
-    return "Upgrade after the carries and core utility.";
+  function starQueue(squad) {
+    const plan = FormationPriority.starPlan(squad, profile.mode, profile.heroProgress);
+    const pending = plan.filter(x=>x.status==="pending").map(x=>`${x.hero.name} ${x.current}★ → ${x.target}★`);
+    const unknown = plan.filter(x=>x.status==="unknown").map(x=>x.hero.name);
+    const reached = plan.filter(x=>x.status==="reached").map(x=>x.hero.name);
+    return [pending.length ? `Planned order: ${pending.join("; ")}.` : "No pending star targets recorded.",
+      unknown.length ? `Not assessed (missing stars/target): ${unknown.join(", ")}.` : "",
+      reached.length ? `Target reached: ${reached.join(", ")}.` : "",
+      "Check the next skill unlock and shard cost in-game; stars do not rescale the modeled squad score."].filter(Boolean).join(" ");
   }
 
   function renderStats() {
@@ -358,20 +368,27 @@
   function bestOwnedAndTargets() {
     const ownedHeroes = heroes.filter(owned);
     const unowned = heroes.filter(hero => !owned(hero) && matchesAccess(hero, profile.access === "Owned only" ? "All access" : profile.access));
-    if (ownedHeroes.length < 5) return {unlock:`Mark your remaining heroes. Strongest current candidates: ${unowned.sort((a,b)=>scoreHero(b)-scoreHero(a)).slice(0,Math.max(3,5-ownedHeroes.length)).map(h=>h.name).join(", ") || "none"}.`, resources:ownedHeroes.length ? `Initial focus: ${ownedHeroes.sort((a,b)=>scoreHero(b)-scoreHero(a)).slice(0,3).map(h=>h.name).join(", ")}.` : "No owned heroes selected yet."};
+    if (ownedHeroes.length < 5) return {unlock:`Mark your remaining heroes. Strongest current candidates: ${unowned.sort((a,b)=>scoreHero(b)-scoreHero(a)).slice(0,Math.max(3,5-ownedHeroes.length)).map(h=>h.name).join(", ") || "none"}.`, resources:ownedHeroes.length ? `Provisional role-based order: ${FormationPriority.rank(ownedHeroes,profile.mode).map(x=>x.hero.name).join(" → ")}. ${starQueue(ownedHeroes)}` : "No owned heroes selected yet."};
     const current = findTopSquads(ownedHeroes,1)[0] || findTopSquads(ownedHeroes,1,false)[0];
     const upgrades = unowned.map(candidate => {
       const next = findTopSquads([...ownedHeroes,candidate],1)[0] || findTopSquads([...ownedHeroes,candidate],1,false)[0];
       return {candidate,next,gain:next.score-current.score};
     }).sort((a,b)=>b.gain-a.gain||b.next.score-a.next.score).slice(0,3);
-    return {unlock:upgrades.length ? `Best modeled next targets: ${upgrades.map(x=>`${x.candidate.name} (${x.gain>=0?"+":""}${number(x.gain)} squad points)`).join("; ")}.` : "You own the complete extracted roster.",resources:`Best fieldable squad: ${current.heroes.map(h=>h.name).join(" · ")}. Focus scarce resources first on ${[...current.heroes].sort((a,b)=>scoreHero(b)-scoreHero(a)).slice(0,2).map(h=>h.name).join(" and ")}.`};
+    return {unlock:upgrades.length ? `Best modeled next targets: ${upgrades.map(x=>`${x.candidate.name} (${x.gain>=0?"+":""}${number(x.gain)} squad points)`).join("; ")}.` : "You own the complete extracted roster.",resources:`Best modeled owned squad: ${current.heroes.map(h=>h.name).join(" · ")}. Role-based investment order: ${FormationPriority.rank(current.heroes,profile.mode).map(x=>x.hero.name).join(" → ")}. ${starQueue(current.heroes)}`};
   }
 
   function renderRoster() {
-    const hero=activeHero(), recommendation=bestOwnedAndTargets();
+    const hero=activeHero(), recommendation=bestOwnedAndTargets(), progress=profile.heroProgress[hero.asset_slug] || {};
     $("#detail-content").innerHTML = `<div class="section-head"><div><h2>My roster</h2><p>${profile.ownedHeroes.length} / ${heroes.length} marked as owned</p></div><div class="roster-actions"><button class="button secondary" id="all-owned">Mark all</button><button class="button danger" id="none-owned">Clear</button></div></div>
       <div class="release-hero"><img src="${hero.portrait_data}" alt=""><div><h3>${esc(hero.name)} ${owned(hero)?'<span style="color:var(--good)">✓ Owned</span>':''}</h3><p>${esc(hero.rarity)} · ${esc(hero.faction)} · ${esc(hero.role)}</p><button class="button" id="toggle-owned">${owned(hero)?"Remove owned check":"Mark as owned"}</button></div></div>
+      <div class="control-strip"><label>${esc(hero.name)} current stars<input id="current-stars" type="number" min="0" max="99" step="1" placeholder="Unknown" value="${progress.current ?? ''}"></label><label>Your star target<input id="target-stars" type="number" min="0" max="99" step="1" placeholder="Not set" value="${progress.target ?? ''}"></label><button class="button secondary" id="save-stars">Save stars</button></div><p class="evidence">Optional whole-star planning fields, not the game's maximum. Leave blank if unknown. Targets reached are skipped only in the star queue, not gear or skills. No guessed star-to-power scaling.</p>
       <div class="recommendations"><div class="notice"><strong>What to unlock next</strong><br>${esc(recommendation.unlock)}</div><div class="notice"><strong>Where to spend resources</strong><br>${esc(recommendation.resources)}</div></div>`;
+    $("#save-stars").onclick=()=>{
+      const inputs=[$("#current-stars"),$("#target-stars")];
+      if(inputs.some(input=>!input.reportValidity()))return;
+      const [current,target]=inputs.map(input=>input.value===""?null:FormationPriority.cleanStars(Number(input.value)));
+      profile.heroProgress[hero.asset_slug]={current,target};saveProfile();renderDetail();
+    };
     $("#toggle-owned").onclick=()=>{toggleOwned(hero);renderCards();renderDetail()};
     $("#all-owned").onclick=()=>setProfile({...profile,ownedHeroes:heroes.map(h=>h.asset_slug)});
     $("#none-owned").onclick=()=>setProfile({...profile,ownedHeroes:[]});

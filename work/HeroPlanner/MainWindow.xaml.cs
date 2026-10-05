@@ -22,12 +22,18 @@ public partial class MainWindow : Window
     private bool _syncingRosterScroll;
     private bool _loadingProfile;
     private static readonly DateTime AllianceServerOpenDate = new(2026, 9, 2);
-    private static readonly string ProfilePath = Path.Combine(
+    private static readonly string DefaultProfilePath = Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
         "TilesSurviveHeroPlanner", "profile.json");
 
-    public MainWindow()
+    private readonly string ProfilePath;
+
+    public MainWindow() : this(DefaultProfilePath) { }
+
+    // Isolated profile path also lets UI regression tests preserve the real user's save.
+    private MainWindow(string profilePath)
     {
+        ProfilePath = profilePath;
         InitializeComponent();
         LoadHeroes();
         LoadProfile();
@@ -46,7 +52,7 @@ public partial class MainWindow : Window
 
     private void LoadHeroes()
     {
-        var streamInfo = Application.GetResourceStream(new Uri("pack://application:,,,/Data/heroes.json"));
+        var streamInfo = Application.GetResourceStream(new Uri("pack://application:,,,/TilesSurviveHeroPlanner;component/Data/heroes.json"));
         if (streamInfo is null) throw new InvalidOperationException("Embedded hero data was not found.");
         using var stream = streamInfo.Stream;
         var heroes = JsonSerializer.Deserialize<List<Hero>>(stream) ?? [];
@@ -59,6 +65,7 @@ public partial class MainWindow : Window
         try
         {
             HashSet<string> owned = [];
+            Dictionary<string, HeroProgress> progress = [];
             DateTime? serverOpenDate = AllianceServerOpenDate;
             if (File.Exists(ProfilePath))
             {
@@ -72,10 +79,16 @@ public partial class MainWindow : Window
                 {
                     var profile = JsonSerializer.Deserialize<PlannerProfile>(json) ?? new PlannerProfile();
                     owned = profile.OwnedHeroes;
+                    progress = profile.HeroProgress ?? [];
                     serverOpenDate = profile.ServerOpenDate ?? AllianceServerOpenDate;
                 }
             }
-            foreach (var hero in _heroes) hero.IsOwned = owned.Contains(hero.AssetSlug);
+            foreach (var hero in _heroes)
+            {
+                hero.IsOwned = owned.Contains(hero.AssetSlug);
+                if (progress.TryGetValue(hero.AssetSlug, out var entry) && entry is not null)
+                    hero.Progress = new() { Current = HeroProgress.Clean(entry.Current), Target = HeroProgress.Clean(entry.Target) };
+            }
             ServerOpenDate.SelectedDate = serverOpenDate;
         }
         catch (JsonException)
@@ -95,6 +108,8 @@ public partial class MainWindow : Window
         var profile = new PlannerProfile
         {
             OwnedHeroes = _heroes.Where(hero => hero.IsOwned).Select(hero => hero.AssetSlug).ToHashSet(),
+            HeroProgress = _heroes.Where(hero => hero.Progress.Current is not null || hero.Progress.Target is not null)
+                .ToDictionary(hero => hero.AssetSlug, hero => hero.Progress),
             ServerOpenDate = ServerOpenDate.SelectedDate?.Date,
         };
         File.WriteAllText(ProfilePath, JsonSerializer.Serialize(profile, new JsonSerializerOptions { WriteIndented = true }));
@@ -134,10 +149,7 @@ public partial class MainWindow : Window
         }
         if (InspectorTabs.SelectedIndex == 3)
         {
-            hero.IsOwned = !hero.IsOwned;
-            SaveProfile();
-            HeroRoster.Items.Refresh();
-            RefreshOwnedState();
+            // Editing star progress must not accidentally change ownership.
             return;
         }
         if (InspectorTabs.SelectedIndex != 0) return;
@@ -218,7 +230,7 @@ public partial class MainWindow : Window
         if (sender is not Button { Tag: string tabText } || !int.TryParse(tabText, out int tabIndex)) return;
         InspectorTabs.SelectedIndex = tabIndex;
         UpdateNavigationState(tabIndex);
-        RosterTitle.Text = tabIndex == 3 ? "My roster — click cards to mark owned" : "Hero roster";
+        RosterTitle.Text = tabIndex == 3 ? "My roster — select a hero to edit" : "Hero roster";
         if (tabIndex == 4)
         {
             _releaseHero = null;
@@ -251,6 +263,43 @@ public partial class MainWindow : Window
         StatsPanel.DataContext = hero;
         SkillsHeader.DataContext = hero;
         SkillsList.ItemsSource = hero.Skills.OrderBy(skill => skill.NormalAttack ? -1 : skill.Slot);
+        StarHeroLabel.Text = $"{hero.Name} — optional star plan";
+        ToggleActiveOwned.Content = hero.IsOwned ? "Remove owned check" : "Mark as owned";
+        CurrentStars.Text = hero.Progress.Current?.ToString() ?? "";
+        TargetStars.Text = hero.Progress.Target?.ToString() ?? "";
+        StarSaveStatus.Text = "Leave blank if unknown. Whole stars only; input range is not the game's maximum.";
+    }
+
+    private void ToggleActiveOwned_Click(object sender, RoutedEventArgs e)
+    {
+        if (_activeHero is null) return;
+        _activeHero.IsOwned = !_activeHero.IsOwned;
+        ToggleActiveOwned.Content = _activeHero.IsOwned ? "Remove owned check" : "Mark as owned";
+        SaveProfile();
+        HeroRoster.Items.Refresh();
+        RefreshOwnedState();
+    }
+
+    private void SaveStars_Click(object sender, RoutedEventArgs e)
+    {
+        if (_activeHero is null) return;
+        bool TryStars(string text, out int? result)
+        {
+            result = null;
+            if (string.IsNullOrWhiteSpace(text)) return true;
+            if (int.TryParse(text, out int value) && HeroProgress.Clean(value) is not null) { result = value; return true; }
+            return false;
+        }
+        if (!TryStars(CurrentStars.Text, out int? current) || !TryStars(TargetStars.Text, out int? target))
+        {
+            StarSaveStatus.Text = "Enter a whole number from 0 to 99, or leave blank. Nothing was changed.";
+            return;
+        }
+        _activeHero.Progress = new() { Current = current, Target = target };
+        SaveProfile();
+        UpdateRecommendations();
+        UpdateSquadPresentation();
+        StarSaveStatus.Text = "Saved locally. Stars change the target queue, not simulated power.";
     }
 
     private void Clear_Click(object sender, RoutedEventArgs e)
@@ -274,6 +323,14 @@ public partial class MainWindow : Window
 
     private void ModePicker_Changed(object sender, SelectionChangedEventArgs e)
     {
+        if (ReferenceEquals(sender, FormationModePicker))
+        {
+            if (ModePicker.SelectedIndex != FormationModePicker.SelectedIndex)
+                ModePicker.SelectedIndex = FormationModePicker.SelectedIndex;
+            return;
+        }
+        if (FormationModePicker is not null && FormationModePicker.SelectedIndex != ModePicker.SelectedIndex)
+            FormationModePicker.SelectedIndex = ModePicker.SelectedIndex;
         NormalizeSelectedOrder();
         RebuildOptimizer();
         UpdateRecommendations();
@@ -326,7 +383,7 @@ public partial class MainWindow : Window
         var squad = OrderForFormation(_selected, CurrentMode).ToList();
         double baseScore = squad.Average(hero => ScoreHero(hero, CurrentMode));
         var synergy = EvaluateSynergy(squad, CurrentMode);
-        var carries = squad.OrderByDescending(hero => hero.OffenseIndex).Take(2).ToList();
+        var carries = FormationPriority.Carries(squad);
         var sustain = squad.Where(hero => hero.HasMechanic("Healing") || hero.HasMechanic("Shield") || hero.HasMechanic("Damage reduction")).ToList();
         var control = squad.Where(hero => hero.HasMechanic("Stun") || hero.HasMechanic("Slow")).ToList();
         var debuff = squad.Where(hero => hero.HasMechanic("ATK reduction") || hero.HasMechanic("DEF reduction")).ToList();
@@ -338,7 +395,7 @@ public partial class MainWindow : Window
 
         var functionParts = new List<string>
         {
-            $"Primary damage comes from {string.Join(" and ", carries.Select(hero => hero.Name))}."
+            $"Modeled damage core: {string.Join(" and ", carries.Select(hero => hero.Name))}. This is not a measured DPS ranking."
         };
         if (debuff.Count > 0) functionParts.Add($"{string.Join("/", debuff.Select(hero => hero.Name).Take(2))} weakens targets before the main damage window.");
         if (control.Count > 0) functionParts.Add($"{string.Join("/", control.Select(hero => hero.Name).Take(2))} creates control windows.");
@@ -355,9 +412,11 @@ public partial class MainWindow : Window
             ? "Focus one target at a time and protect the two highest-offense heroes; this squad has no strong extracted timing combo."
             : string.Join("; then ", battleSteps) + ".";
 
-        var priorities = squad.OrderByDescending(hero => ScoreHero(hero, CurrentMode)).Take(3).ToList();
-        FormationResourceFocus.Text = string.Join("\n", priorities.Select((hero, index) =>
-            $"{index + 1}. {hero.Name} — {ResourceReason(hero, carries)}"));
+        var priorities = FormationPriority.Rank(squad, CurrentMode);
+        FormationResourceFocus.Text = string.Join("\n", priorities.Select((item, index) =>
+            $"{index + 1}. {item.Hero.Name} — {item.Reason}"))
+            + "\n\nRole-based guide, not upgrade ROI. Gear, skill levels, shard costs and star breakpoints are not simulated. Equal indices use a stable ID tie-break, not a proven advantage."
+            + "\n\nSTAR-UPGRADE QUEUE\n" + StarQueue(squad);
 
         var weaknesses = new List<string>();
         foreach (string role in new[] { "Melee", "Mid", "Range" })
@@ -381,12 +440,18 @@ public partial class MainWindow : Window
         return "support the core rotation";
     }
 
-    private static string ResourceReason(Hero hero, IReadOnlyList<Hero> carries)
+    private string StarQueue(IEnumerable<Hero> squad)
     {
-        if (carries.Contains(hero)) return "raise the squad's main damage ceiling first.";
-        if (hero.HasMechanic("Healing") || hero.HasMechanic("Shield") || hero.HasMechanic("Damage reduction")) return "improve sustain uptime after the carries are stable.";
-        if (hero.HasMechanic("Stun") || hero.HasMechanic("Slow") || hero.HasMechanic("ATK reduction") || hero.HasMechanic("DEF reduction")) return "improve the utility that enables the whole formation.";
-        return "upgrade after the formation's carries and core utility.";
+        var plan = FormationPriority.Rank(squad, CurrentMode).Select(x => x.Hero).ToList();
+        var pending = plan.Where(h => h.Progress.Status == "pending").Select(h => $"{h.Name} {h.Progress.Current}★ → {h.Progress.Target}★").ToList();
+        var unknown = plan.Where(h => h.Progress.Status == "unknown").Select(h => h.Name).ToList();
+        var reached = plan.Where(h => h.Progress.Status == "reached").Select(h => h.Name).ToList();
+        return string.Join(" ", new[] {
+            pending.Count > 0 ? "Planned order: " + string.Join("; ", pending) + "." : "No pending star targets recorded.",
+            unknown.Count > 0 ? "Not assessed (missing stars/target): " + string.Join(", ", unknown) + "." : "",
+            reached.Count > 0 ? "Target reached: " + string.Join(", ", reached) + "." : "",
+            "Set stars in My roster. Check the next skill unlock and shard cost in-game; stars do not rescale the modeled squad score. Reaching a star target does not finish gear or skills."
+        }.Where(s => s.Length > 0));
     }
 
     private static IEnumerable<Hero> OrderForFormation(IEnumerable<Hero> heroes, PlannerMode mode) => heroes
@@ -578,6 +643,8 @@ public partial class MainWindow : Window
 
     private void RefreshOwnedState()
     {
+        if (_activeHero is not null && ToggleActiveOwned is not null)
+            ToggleActiveOwned.Content = _activeHero.IsOwned ? "Remove owned check" : "Mark as owned";
         OwnedCount.Text = $"{_heroes.Count(hero => hero.IsOwned)} / {_heroes.Count} marked as owned";
         RebuildOptimizer();
         UpdateRecommendations();
@@ -603,7 +670,7 @@ public partial class MainWindow : Window
             UnlockRecommendation.Text = $"Mark your remaining heroes. Strongest current candidates are: {string.Join(", ", targets)}.";
             ResourceRecommendation.Text = owned.Count == 0
                 ? "No owned heroes selected yet."
-                : $"Initial focus: {string.Join(", ", owned.OrderByDescending(hero => ScoreHero(hero, CurrentMode)).Take(3).Select(hero => hero.Name))}.";
+                : $"Provisional role-based order: {string.Join(" → ", FormationPriority.Rank(owned, CurrentMode).Select(x => x.Hero.Name))}. {StarQueue(owned)}";
             return;
         }
 
@@ -622,9 +689,9 @@ public partial class MainWindow : Window
             ? "You own the complete extracted roster."
             : "Best modeled next targets: " + string.Join("; ", upgrades.Select(item =>
                 $"{item.candidate.Name} ({(item.gain > 0 ? "+" : "")}{item.gain:0.0} squad points)")) + ".";
-        ResourceRecommendation.Text = "Best fieldable squad: " + current.Names +
-            ". Focus scarce resources first on " + string.Join(" and ", current.Heroes
-                .OrderByDescending(hero => ScoreHero(hero, CurrentMode)).Take(2).Select(hero => hero.Name)) + ".";
+        ResourceRecommendation.Text = "Best modeled owned squad: " + current.Names +
+            ". Role-based investment order: " + string.Join(" → ", FormationPriority.Rank(current.Heroes, CurrentMode)
+                .Select(item => item.Hero.Name)) + ". " + StarQueue(current.Heroes);
     }
 
     private void ServerOpenDate_Changed(object sender, SelectionChangedEventArgs e)

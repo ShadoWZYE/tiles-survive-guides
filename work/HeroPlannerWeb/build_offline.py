@@ -28,7 +28,8 @@ def main() -> None:
 
     html = (HERE / "index.template.html").read_text(encoding="utf-8")
     html = html.replace("__APP_CSS__", (HERE / "app.css").read_text(encoding="utf-8"))
-    html = html.replace("__APP_JS__", (HERE / "app.js").read_text(encoding="utf-8"))
+    html = html.replace("__APP_JS__", (HERE / "formation-priority.js").read_text(encoding="utf-8")
+                        + "\n" + (HERE / "app.js").read_text(encoding="utf-8"))
     html = html.replace("__APP_ICON__", png_data(ICON_PATH))
     html = html.replace("__EMBEDDED_HERO_JSON__", json.dumps(heroes, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/"))
     OUTPUT_PATH.write_text(html, encoding="utf-8")

@@ -15,7 +15,8 @@ The Hero Planner supports:
 - Owned-roster selection and portable profile import/export
 - Balanced, Offense, Survival, and PvE squad scoring
 - Five-position front-to-back formation guidance
-- Modeled skill synergy and resource-priority explanations
+- Modeled skill synergy and formation-specific investment explanations (separate from squad scoring)
+- Optional current-star / personal-target fields and a saved star-upgrade queue
 - F2P, event-accessible, owned-only, and IAP-linked filters
 - Hero stats, skill icons, decoded descriptions, and release/access evidence
 - Persistent server-opening date and release timeline
@@ -28,6 +29,12 @@ Source locations:
 - `outputs/hero-report/` - normalized hero data, ranking CSV, and methodology
 - `outputs/hero-tool/images/` - hero portraits and skill icons used by the planners
 
+Investment guidance is a transparent role-based policy, not an upgrade-return simulator. Balanced and PvE use primary damage core, frontline anchor, secondary damage core, then sustain/utility; Survival moves the anchor and sustain first; Offense develops both damage candidates first. If your frontline dies early, fix that before following the default damage order. Damage candidates use the extracted offense index among non-melee heroes, keeping midline healers in the sustain layer where possible. Ties prefer ranged heroes, then stable IDs, not a claimed combat advantage. Enemy-wide DEF/ATK reduction is recognized alongside the existing team-effect tags.
+
+For example, Rosie / Layla / Becca / Ray / Maddie defaults to **Becca → Rosie → Ray → Layla → Maddie** in Balanced mode. This is a starting policy, not proof that Becca has the highest live DPS or the cheapest next upgrade.
+
+In **My roster**, select a hero and optionally save current whole stars and your chosen target. Leave either blank when unknown. The star queue follows the formation's investment order and skips heroes already at their chosen target; it does not remove them from gear/skill priorities. No star-to-power multiplier, skill-unlock breakpoint, sub-star progress, ascension conversion, shard-cost or gear simulation is assumed. Old profiles still load with unknown star progress. Star fields are local to each edition's existing profile format; the formats are not interchangeable.
+
 ### Build the desktop planner
 
 ```powershell
@@ -39,7 +46,11 @@ dotnet build work\HeroPlanner\HeroPlanner.csproj -c Release
 ```powershell
 python work\HeroPlannerWeb\build_offline.py
 python -m unittest work.HeroPlannerWeb.test_offline_build
+dotnet build work\HeroPlanner.Tests
+node --test work\HeroPlannerWeb\test_formation_priority.cjs
 ```
+
+Windows-only UI regression (uses an isolated temporary profile): `dotnet run --project work/HeroPlanner.UiTests`. Optional browser interaction regression: install Playwright, then run `node work/HeroPlannerWeb/test_browser_smoke.cjs`; `PLANNER_PLAYWRIGHT` can point to its module and `PLANNER_BROWSER` can select an installed Chromium executable. Both test ownership preservation, star persistence and goal-dependent priorities.
 
 ## Windows companion and display tools
 

@@ -34,6 +34,9 @@ class OfflineBuildTests(unittest.TestCase):
         self.assertIn("Import profile", self.html)
         self.assertIn("localStorage.setItem", self.html)
         self.assertIn('serverOpenDate: "2026-09-02"', self.html)
+        self.assertIn("FormationPriority.sanitizeProgress", self.html)
+        self.assertIn('id="save-stars"', self.html)
+        self.assertIn("Star-upgrade queue", self.html)
 
     def test_completed_squad_guide_and_release_selection_are_embedded(self) -> None:
         self.assertIn("Formation ready", self.html)

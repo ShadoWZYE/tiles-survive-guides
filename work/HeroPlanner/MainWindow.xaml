@@ -292,6 +292,9 @@
                                             <StackPanel>
                                                 <TextBlock Text="FORMATION READY" Foreground="{StaticResource AccentBrush}" FontSize="11" FontWeight="Black" />
                                                 <TextBlock x:Name="FormationModeLabel" FontSize="22" FontWeight="Black" Margin="0,3,0,0" />
+                                                <ComboBox x:Name="FormationModePicker" SelectedIndex="0" SelectionChanged="ModePicker_Changed" Margin="0,6,0,4" AutomationProperties.Name="Formation objective">
+                                                    <ComboBoxItem Content="Balanced" /><ComboBoxItem Content="Offense" /><ComboBoxItem Content="Survival" /><ComboBoxItem Content="PvE farming" />
+                                                </ComboBox>
                                                 <TextBlock x:Name="FormationScoreLabel" Foreground="{StaticResource GoldBrush}" FontWeight="Bold" Margin="0,2,0,0" />
                                                 <TextBlock Text="Click a selected hero on the left to revise the squad." Foreground="{StaticResource MutedInkBrush}" FontSize="11" Margin="0,3,0,0" />
                                             </StackPanel>
@@ -376,6 +379,7 @@
                         </TabItem>
 
                         <TabItem Header="ROSTER">
+                            <ScrollViewer VerticalScrollBarVisibility="Auto">
                             <StackPanel Margin="10,18">
                                 <Grid Margin="0,0,0,16">
                                     <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
@@ -389,7 +393,19 @@
                                 <Border Background="#163454" BorderBrush="#2B5A82" BorderThickness="1" CornerRadius="12" Padding="14" Margin="0,0,0,12">
                                     <StackPanel>
                                         <TextBlock Text="CLICK HERO CARDS ON THE LEFT" Foreground="{StaticResource AccentBrush}" FontWeight="Bold" FontSize="11" />
-                                        <TextBlock Text="Each click marks or unmarks a hero as owned. A green check stays visible on every selected card, and your choices are saved locally." TextWrapping="Wrap" Margin="0,5,0,0" />
+                                        <TextBlock Text="Select a hero to edit stars. Use Mark as owned / Remove owned check below to change ownership. Selecting a hero does not change its owned status. Choices are saved locally." TextWrapping="Wrap" Margin="0,5,0,0" />
+                                    </StackPanel>
+                                </Border>
+                                <Border Background="#163454" CornerRadius="12" Padding="14" Margin="0,0,0,12">
+                                    <StackPanel>
+                                        <TextBlock x:Name="StarHeroLabel" Foreground="{StaticResource AccentBrush}" FontWeight="Bold" />
+                                        <Button x:Name="ToggleActiveOwned" Content="Mark as owned" Click="ToggleActiveOwned_Click" HorizontalAlignment="Left" Padding="10,5" Margin="0,6,0,2" />
+                                        <WrapPanel Margin="0,8,0,5">
+                                            <StackPanel Margin="0,0,12,0"><TextBlock Text="Current stars" /><TextBox x:Name="CurrentStars" Width="95" AutomationProperties.Name="Current stars" /></StackPanel>
+                                            <StackPanel Margin="0,0,12,0"><TextBlock Text="Your target" /><TextBox x:Name="TargetStars" Width="95" AutomationProperties.Name="Star target" /></StackPanel>
+                                            <Button Content="Save stars" Click="SaveStars_Click" VerticalAlignment="Bottom" Padding="10,5" />
+                                        </WrapPanel>
+                                        <TextBlock x:Name="StarSaveStatus" TextWrapping="Wrap" FontSize="11" Foreground="{StaticResource MutedInkBrush}" />
                                     </StackPanel>
                                 </Border>
                                 <StackPanel>
@@ -401,6 +417,7 @@
                                     </Border>
                                 </StackPanel>
                             </StackPanel>
+                            </ScrollViewer>
                         </TabItem>
 
                         <TabItem Header="RELEASE">

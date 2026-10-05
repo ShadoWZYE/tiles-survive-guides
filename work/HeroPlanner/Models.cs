@@ -52,6 +52,7 @@ public sealed class Hero
 
     [JsonIgnore] public bool IsSelected { get; set; }
     [JsonIgnore] public bool IsOwned { get; set; }
+    [JsonIgnore] public HeroProgress Progress { get; set; } = new();
     [JsonIgnore] public string Portrait => $"pack://application:,,,/Images/{AssetSlug}.png";
     [JsonIgnore] public string FormationBand => Role switch
     {
@@ -177,7 +178,9 @@ public sealed class HeroSkill
         Add("stun", "Stun");
         Add("speeddown", "Slow");
         Add("weaken_team_atk", "ATK reduction");
+        Add("weaken_enemy_atk", "ATK reduction");
         Add("weaken_team_def", "DEF reduction");
+        Add("weaken_enemy_def", "DEF reduction");
         Add("dmg_dec", "Damage reduction");
         Add("inc_dmg", "Damage boost");
         Add("crit", "Critical effect");
@@ -248,6 +251,7 @@ public sealed class ReleaseScheduleItem
 
 public sealed class PlannerProfile
 {
+    [JsonPropertyName("hero_progress")] public Dictionary<string, HeroProgress> HeroProgress { get; set; } = [];
     [JsonPropertyName("owned_heroes")] public HashSet<string> OwnedHeroes { get; set; } = [];
     [JsonPropertyName("server_open_date")] public DateTime? ServerOpenDate { get; set; }
 }
