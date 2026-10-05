@@ -85,34 +85,36 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <Grid Margin="2,0,2,14">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.4*" />
                             <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <StackPanel>
-                            <TextBlock x:Name="RosterTitle" Text="Hero roster" FontSize="21" FontWeight="Bold" />
-                            <ComboBox x:Name="ComparisonBasisPicker" Width="175" HorizontalAlignment="Left" Margin="0,5,0,0" SelectionChanged="ComparisonBasis_Changed" AutomationProperties.Name="Comparison basis">
+                        <TextBlock x:Name="RosterTitle" Grid.ColumnSpan="4" Text="Hero roster" FontSize="21" FontWeight="Bold" Margin="0,0,0,8" />
+                            <ComboBox x:Name="ComparisonBasisPicker" Grid.Row="1" MinWidth="0" Height="32" VerticalAlignment="Top" Margin="0,0,8,0" SelectionChanged="ComparisonBasis_Changed" AutomationProperties.Name="Comparison basis">
                                 <ComboBoxItem Content="Equal builds" Tag="reference" IsSelected="True" />
                                 <ComboBoxItem Content="Flat max stats" Tag="flat" />
                                 <ComboBoxItem Content="My builds" Tag="recorded" />
                             </ComboBox>
-                        </StackPanel>
-                        <ComboBox x:Name="FactionFilter" Grid.Column="1" Margin="8,0" SelectionChanged="Filter_Changed">
+                        <ComboBox x:Name="FactionFilter" Grid.Row="1" Grid.Column="1" MinWidth="0" Height="32" VerticalAlignment="Top" Margin="0,0,8,0" SelectionChanged="Filter_Changed" AutomationProperties.Name="Faction filter">
                             <ComboBoxItem Content="All factions" IsSelected="True" />
                             <ComboBoxItem Content="Mountain" />
                             <ComboBoxItem Content="Wasteland" />
                             <ComboBoxItem Content="Sky" />
                             <ComboBoxItem Content="Sea" />
                         </ComboBox>
-                        <ComboBox x:Name="RoleFilter" Grid.Column="2" Margin="0,0,8,0" SelectionChanged="Filter_Changed">
+                        <ComboBox x:Name="RoleFilter" Grid.Row="1" Grid.Column="2" MinWidth="0" Height="32" VerticalAlignment="Top" Margin="0,0,8,0" SelectionChanged="Filter_Changed" AutomationProperties.Name="Role filter">
                             <ComboBoxItem Content="All roles" IsSelected="True" />
                             <ComboBoxItem Content="Melee" />
                             <ComboBoxItem Content="Mid" />
                             <ComboBoxItem Content="Range" />
                         </ComboBox>
-                        <ComboBox x:Name="RarityFilter" Grid.Column="3" SelectionChanged="Filter_Changed">
+                        <ComboBox x:Name="RarityFilter" Grid.Row="1" Grid.Column="3" MinWidth="0" Height="32" VerticalAlignment="Top" SelectionChanged="Filter_Changed" AutomationProperties.Name="Rarity filter">
                             <ComboBoxItem Content="All rarities" IsSelected="True" />
                             <ComboBoxItem Content="SSR" />
                             <ComboBoxItem Content="SR" />

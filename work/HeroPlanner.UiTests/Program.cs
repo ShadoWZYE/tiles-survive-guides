@@ -217,6 +217,27 @@ internal static class Program
         Check(StarProgress.Slots(new() { Rank = 11, Step = 1 }).Count == 0, "Unmodeled ascension display guessed");
         var captured = window.Content as FrameworkElement;
         captured!.Measure(new Size(1500, 920)); captured.Arrange(new Rect(0, 0, 1500, 920)); captured.UpdateLayout();
+        void AssertRosterHeader(double width)
+        {
+            captured.Measure(new Size(width, 920)); captured.Arrange(new Rect(0, 0, width, 920)); captured.UpdateLayout();
+            var title = (TextBlock)window.FindName("RosterTitle");
+            var pickers = new[] { "ComparisonBasisPicker", "FactionFilter", "RoleFilter", "RarityFilter" }
+                .Select(name => (ComboBox)window.FindName(name)).ToArray();
+            var rowY = pickers[0].TranslatePoint(new Point(), captured).Y;
+            Check(rowY >= title.TranslatePoint(new Point(), captured).Y + title.ActualHeight, "Roster filters overlap title");
+            for (int i = 0; i < pickers.Length; i++)
+            {
+                var picker = pickers[i];
+                Check(Math.Abs(picker.ActualHeight - 32) < 0.1, "Roster filter stretched vertically");
+                Check(Math.Abs(picker.TranslatePoint(new Point(), captured).Y - rowY) < 0.1, "Roster filters are misaligned");
+                Check(picker.ActualWidth >= 100, "Roster filter is too narrow for its label");
+                if (i > 0)
+                    Check(picker.TranslatePoint(new Point(), captured).X >= pickers[i - 1].TranslatePoint(new Point(), captured).X + pickers[i - 1].ActualWidth + 7,
+                        "Roster filters overlap or lack spacing");
+            }
+        }
+        AssertRosterHeader(1120);
+        AssertRosterHeader(1500);
         IEnumerable<DependencyObject> Walk(DependencyObject parent)
         {
             for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
@@ -252,6 +273,14 @@ internal static class Program
         if (!string.IsNullOrWhiteSpace(screenshot)) { Directory.CreateDirectory(Path.GetDirectoryName(screenshot)!); using var output = File.Create(screenshot); encoder.Save(output); }
         Invoke(window, "CloseBuild_Click", new Button(), new RoutedEventArgs());
         Check(Field<Dictionary<string, HeroBuild>>(window, "_heroBuilds")[becca.AssetSlug].Level == 2, "Closing lost an autosaved edit");
+        var headerScreenshot = Environment.GetEnvironmentVariable("PLANNER_HEADER_SCREENSHOT");
+        if (!string.IsNullOrWhiteSpace(headerScreenshot))
+        {
+            captured.UpdateLayout();
+            var preview = new RenderTargetBitmap(1500, 920, 96, 96, PixelFormats.Pbgra32); preview.Render(captured);
+            var previewEncoder = new PngBitmapEncoder(); previewEncoder.Frames.Add(BitmapFrame.Create(preview));
+            Directory.CreateDirectory(Path.GetDirectoryName(headerScreenshot)!); using var output = File.Create(headerScreenshot); previewEncoder.Save(output);
+        }
         var priorityScreenshot = Environment.GetEnvironmentVariable("PLANNER_PRIORITY_SCREENSHOT");
         if (!string.IsNullOrWhiteSpace(priorityScreenshot))
         {
