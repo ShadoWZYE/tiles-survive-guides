@@ -1,6 +1,6 @@
 # Tiles Survive client inspection tools
 
-Tested on 5 October 2026. This guide records how to inspect an installed client without changing the game, and what is still missing from the investigation into placing the alliance Gather Point on Ghoulion Pursuit. Asset extraction works. Native metadata deobfuscation and the exact Ghoulion button visibility condition are not solved.
+Tested on 5 October 2026. The installed Windows client explicitly shows the Ghoulion Pursuit **Set Gather Point** button only to **R5 or above**. Ordinary open-ground Gather Points are a separate R4/R5 workflow. The Ghoulion button passes the building's own coordinates to the Gather Point dialog. This guide documents that finding and the offline tools used to verify it without interacting with the running game.
 
 The remembered tool name is likely **IL2CPP / Il2CppDumper**, not LLCP. IL2CPP is Unity's native compilation system; Il2CppDumper reads its binary and metadata. It is not a universal decryptor.
 
@@ -18,8 +18,10 @@ The remembered tool name is likely **IL2CPP / Il2CppDumper**, not LLCP. IL2CPP i
 | pefile 2024.8.26 and Capstone 5.0.9 | Read PE layout and disassemble disk bytes offline | Entry-point inspection works; not proof of unpacking |
 | `probe_metadata_patterns.py` | Measure repetition and try an explicitly unvalidated frequency-based XOR mask | Readable target names recovered; metadata header remains invalid |
 | `trace_native_file.py` | Follow bounded direct control flow in disk-backed x64 PE sections | Loader reaches an unresolved indirect dispatcher; no game code executed |
+| `unpack_client_lzma.py` | Decode seven verified raw LZMA streams directly from disk | Native sections recovered; refuses a different client SHA-256 |
+| Unicorn 2.1.4 in a private investigation script | Interpret loader bytes in isolated guest memory | Located compression streams; stopped at an unmodeled external call |
 
-All repository scripts listed above are under `work/hero-extraction/`. UnityPy, pefile and Capstone are external dependencies. The audit and synthetic tests need only Python's standard library. None of these commands attaches to the game or executes a game DLL.
+All repository scripts listed above are under `work/hero-extraction/`. UnityPy, pefile and Capstone are external dependencies. The audit, metadata probe and disk LZMA decoder use Python's standard library. The synthetic tracer test uses its optional dependencies. None of the published commands attaches to the game, loads a game DLL, or executes game instructions.
 
 ## Paths and versions
 
@@ -96,7 +98,7 @@ Current native evidence:
 - Entry-point RVA `0xB02FEB7` starts with a push and a call into another address in the packed section. That stub does not expose the Gather Point method.
 - Literal searches did not find `global-metadata.dat` or the metadata magic in GameAssembly or NEP2. NEP2's presence does not establish which component transforms the metadata.
 
-The header suggests a custom wrapper or transformation. Its algorithm and keys are **not identified**. Preserved magic does not mean the file is usable, and replacing the second word with a guessed Unity version is not decryption.
+The metadata body has a recoverable 1,152-byte repeating XOR layer, described below. Its protected prefix and tail are not fully decoded. Preserved magic does not mean the complete file is usable, and replacing the second word with a guessed Unity version is not decryption.
 
 The available Il2CppDumper executable was in the private tools inventory at `Desktop\Tiles Survival Tools\work\tools\Il2CppDumper\Il2CppDumper.exe`. Parameterized usage:
 
@@ -109,21 +111,28 @@ On this build it fails with `Metadata file supplied is not valid metadata file`.
 
 The [Il2CppInspector XOR plugin source](https://raw.githubusercontent.com/djkaty/Il2CppInspectorPlugins/master/Core/XOR-Decryptor/Plugin.cs) inspected here enters its image decoding path for ELF inputs and returns for other formats. It is not a verified decoder for this Windows PE client. Do not reuse keys, RVAs or decoder recipes from another game merely because it also ships NEP2.
 
-## Gather Point findings and remaining work
+## How to place the Gather Point on Ghoulion Pursuit
 
-Localization includes an event-screen `Set Gather Point` string and a message allowing **R4 or R5** to set the alliance Gather Point. This supports general R4 permission; it does not establish every event-specific UI condition.
+Ask the alliance **R5** to open the Ghoulion Pursuit event screen, tap **Set Gather Point**, then confirm the coordinates in the Gather Point dialog. The event handler supplies the existing Ghoulion building's coordinates automatically. Do not use the clover marker editor or select neighboring open ground for this operation.
 
-The extracted `AllianceGatherSetGatherPointsParameter.lua` constructs the `AllianceGather:SetGatherPoints` request with alliance ID and map X/Y. This identifies the request shape, not a safe way to bypass the client or proof that the server accepts occupied-building coordinates. No request was sent.
+The missing button on an R4 screen is explained by the event-specific **R5** visibility check. Localization allowing R4/R5 applies to the ordinary Gather Point workflow; it does not override the Ghoulion screen's stricter check. No cooldown check appears on the native visibility or click path for this button. The click handler requires an existing alliance portal and rejects its state value 8. Do not translate that state into a named gameplay condition without checking the enum.
 
-`TradeStationModule:CanSetAllianceGatherPointByCoordinate` blocks coordinates in pieces configured with a trade station, without checking whether that activity is active. It is one Lua-side restriction, not the complete placement rule.
+This is verified against native Windows build **2.6.200.276**, paired with the inspected cache assets. It establishes the client workflow and button gate, not a live server acceptance test. No Gather Point request or alliance-state change was made. A different build or a hotfix replacing these methods needs its own check.
 
-`ui_alliance_portal_advanced` is associated with `AllianceBossUIMediator` and contains `p_btn_relocation`, serialized inactive by default. The Gather Point dialog is associated with `AllianceGatherSetUIMediator` and has X/Y value labels and a setting button. The event module is referenced through the native bridge as `AlliancePortalModule`.
+### Evidence from the recovered native sections
 
-The important unresolved step is to recover and inspect the **runtime visibility and click handlers** for the event relocation control, then trace the target coordinates into `AllianceGatherSetUIMediator`. A prefab's inactive flag cannot prove an R5-only requirement, cooldown gate, or absence of the feature. The clover alliance marker is a separate system and is not evidence of the Gather Point's position.
+| Check | Verified result |
+| --- | --- |
+| `AllianceBossUIMediator.OnCompShow`, RVA `0x364D480` | Calls `PlayerModule.get_IsR5orAbove`, then uses that result to show/hide `_setFocusButton` |
+| Native field offsets | `_setFocusButton` is at instance offset `0x288`; `_btnRelocation` is separately at `0x300` |
+| `AllianceBossUIMediator.OnClickSetFocus`, RVA `0x364CDE0` | Gets the alliance's portal, obtains `GetLocation`, and copies that coordinate into the dialog parameter |
+| Dialog parameter type | Metadata identifies `AllianceGatherSetUIMediator.Parameter`; its `coord` field is at `0x10` |
+| UI destination | The handler reads `UINameConstant` static offset `0x930`, identified as `AllianceGatherSetUIMediator`, and opens that UI |
+| `AllianceGatherSetUIMediator.OnSettingClick`, RVA `0x32F6470` | Reads map X/Y from the supplied coordinate and creates the Gather Point request |
 
-Read-only process checks found limited query access but Windows denied VM_READ and full query access with error 5. The running tool token had medium integrity and no SeDebugPrivilege. Codex filesystem full access does not imply an elevated Windows process token. No memory dump was obtained. Do not repeatedly retry the same denied call or describe it as successful extraction.
+`AllianceGatherSetGatherPointsParameter.lua` identifies the request as `AllianceGather:SetGatherPoints`, with alliance ID, map X and map Y. It was inspected, not sent. `TradeStationModule:CanSetAllianceGatherPointByCoordinate` adds a Lua-side restriction for pieces configured with a trade station. That is not the Ghoulion button's visibility rule.
 
-Future attempts should first recheck file hashes and version pairing, reproduce the asset export, and pursue offline loader analysis or a build-specific metadata decoder. Only accept a decoded candidate after validating its header, table bounds, strings and compatibility with the corresponding binary. Then trace the UI handler; do not turn the current partial findings into instructions for users.
+The clover alliance marker is a separate system. The focus, automation and relocation objects in the event prefab are also separate controls. A serialized inactive flag alone is not evidence of a permission gate; the R5 finding comes from the recovered handler and field-offset table.
 
 ## Privacy and publication
 
@@ -131,19 +140,22 @@ Keep raw game code, bundles, metadata, DLLs, captures and memory dumps out of th
 
 ## Offline decoding investigation
 
-The user selected offline analysis only because runtime inspection could interact with anti-cheat. Do not attach to the game, request its process memory, execute a client DLL, or use a runtime hook as part of this route. The following commands operate on disk bytes only:
+The user selected offline analysis only because runtime inspection could interact with anti-cheat. Do not attach to the game, request its process memory, load a client DLL, or use a runtime hook as part of this route. The following published commands operate on disk bytes only:
 
 ```powershell
-& $taskPython work/hero-extraction/probe_metadata_patterns.py --metadata "$buildRoot\tspc_Data\il2cpp_data\Metadata\global-metadata.dat" --reference-offset 0x800000 --period 128 --known-text AllianceGatherSetUIMediator --known-text AllianceBossUIMediator --known-text AlliancePortalModule --candidate-output "$privateOutput\xor128-candidate"
+& $taskPython work/hero-extraction/probe_metadata_patterns.py --metadata "$buildRoot\tspc_Data\il2cpp_data\Metadata\global-metadata.dat" --reference-offset 8387712 --period 1152 --sample-size 2097152 --known-text AllianceGatherSetUIMediator --known-text AllianceBossUIMediator --known-text AlliancePortalModule --candidate-output "$privateOutput\xor1152-candidate"
 & $taskPython work/hero-extraction/trace_native_file.py --binary "$buildRoot\GameAssembly.dll" --output "$privateOutput\loader-trace.json"
+& $taskPython work/hero-extraction/unpack_client_lzma.py --binary "$buildRoot\GameAssembly.dll" --output "$privateOutput\native-rva-image.bin"
 ```
 
 The statistical probe assumes the most common plaintext byte is lowercase `e` in its reference region. This is a hypothesis, not a recovered loader key. Its default reference window is 1 MiB starting at 8 MiB. The candidate output is intentionally named `candidate.dat`, not `global-metadata.dat`.
 
-In a 64 KiB region beginning at offset 4096, equal-byte frequency at lag 128 was **30.45%**, versus **0.34%** at lag 1. The XOR candidate recovered exact occurrences of `AllianceGatherSetUIMediator` at offset 733540, `AllianceBossUIMediator` at 3251415, and `AlliancePortalModule` at 736626. Its header still fails validation, and many surrounding bytes remain corrupt. These observations support a repeating-mask layer; they do not establish the complete encoding algorithm.
+The earlier 128-byte probe was incomplete. The larger observed period is **1,152 bytes**; lag equality was about **62.13%**, compared with **30.45%** at 128 and **0.34%** at 1. The selected reference offset is aligned to 1,152. About **99.8%** of the candidate's 1–10 MiB region was ASCII or NUL. Structural checks recovered coherent strings, methods, types, images and native field offsets. The first 136 bytes and last 72 bytes remain unsuitable for treating the candidate as fully decoded metadata.
 
-Additional readable candidate fragments identify `AllianceGatherSetUIMediator-CanSetGatherPoint0`, the setting-button update method, `OnSetGatherPointClick`, and `OnRelocationClick`. The event prefab contains separate focus, automation and relocation objects, while candidate member names include `_setFocusButton`, `_autoButton` and `_btnRelocation`. Do not equate relocation with Gather Point placement. Recover the actual bindings and handler bodies before attributing an action to a button.
+Useful recovered layout checkpoints are string literals at `0x100`, literal data at `0x85EE0`, strings at `0x239D88`, 36-byte method records at `0xD25778`, 12-byte field records at `0x2244AA0`, and 88-byte type records at `0x29A9798`. There are 43,318 type definitions and 129 images. Method records match the version-31 layout, including `returnParameterToken`; this does not repair the protected header. The `Assembly-CSharp.dll` native module is at RVA `0x6977660`, its method-pointer table at `0x78D5700`, and the field-offset pointer table at `0x77E4000`. These are build-specific offsets, not portable recipes.
 
-The bounded entry trace visited 11 blocks and 126 instructions before an indirect jump through `r9`. Offline arithmetic on the entry seed and its file-backed operand resolved that first dispatch target to RVA `0xB08C8F5`. A second trace from that RVA visited 6 blocks and 57 instructions and ended in a push/return dispatch. The tracer records unresolved indirect branches and possible push/return dispatch; it does not emulate them or claim to unpack the image. Further static dispatcher analysis is still required before reaching the metadata loader.
+The bounded static tracer cannot follow the loader's indirect VM dispatch on its own. A private Unicorn CPU model interpreted only disk-backed bytes in synthetic guest memory, with imported functions replaced by stop hooks. Local allocation, name lookup, memory protection and the observed checksum loop were modeled without invoking Windows APIs. No running process was read. Disk copies of Windows module headers/exports supplied lookup data; their function entry points remained stop hooks. The model stopped at `GetProcessAffinityMask` after locating seven LZMA streams. No actual process-affinity query was made.
+
+The published decoder reproduces those seven stream decodes directly, without CPU modeling, using raw LZMA with `lc=3`, `lp=0`, `pb=2`. It validates the client hash, exact compressed lengths, decompressed lengths, and end markers. Its output is indexed by RVA, with original pointer values at the preferred image base. It does not apply runtime fixups, initialize IL2CPP, repair metadata, or create a loadable DLL. Keep that output private and read it as analysis bytes.
 
 Other probes tried a zero-frequency mask, an English-frequency score, whole-word XOR/subtraction masks, and simple position-counter corrections. None yielded validated metadata. Searching known-text mask fragments found matches inside metadata but not in GameAssembly, NEP2 or UnityPlayer. Do not report these attempts as a working decoder.

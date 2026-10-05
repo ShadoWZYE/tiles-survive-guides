@@ -1,5 +1,6 @@
 import importlib.util
 import json
+import lzma
 from pathlib import Path
 import struct
 import subprocess
@@ -11,9 +12,26 @@ sys.path.insert(0, str(Path(__file__).parent))
 from audit_native_client import entropy, metadata_header, pe_sections
 from export_client_asset import read_sos_entry
 from probe_metadata_patterns import infer_xor_mask, xor_bytes
+from unpack_client_lzma import decode_stream, unpack
 
 
 class ClientInspectionTests(unittest.TestCase):
+    def test_lzma_decoder_requires_exact_complete_stream(self):
+        plain = b'Offline synthetic code bytes' * 100
+        encoded = lzma.compress(plain, format=lzma.FORMAT_RAW, filters=[{
+            'id': lzma.FILTER_LZMA1, 'dict_size': 8388608, 'lc': 3, 'lp': 0, 'pb': 2}])
+        self.assertEqual(decode_stream(encoded, len(plain)), plain)
+        for payload, size in ((encoded, len(plain)-1), (encoded, len(plain)+1),
+                              (encoded[:-1], len(plain)), (encoded+b'x', len(plain))):
+            with self.assertRaises(ValueError):
+                decode_stream(payload, size)
+        with self.assertRaises(ValueError):
+            decode_stream(encoded, 0)
+
+    def test_lzma_layout_is_hash_gated(self):
+        with self.assertRaisesRegex(ValueError, 'Unverified client hash'):
+            unpack(b'not the verified client')
+
     def test_metadata_wrapper_is_not_standard_version(self):
         data = struct.pack("<II", 0xFAB11BAF, 64) + bytes(56)
         self.assertTrue(metadata_header(data)["second_word_equals_file_size"])
