@@ -82,6 +82,35 @@ internal static class Program
         Check(Field<TextBlock>(window, "_starSliderLabel").Text.Contains("step 5/6"), "Partial-rank label missing");
         var captured = window.Content as FrameworkElement;
         captured!.Measure(new Size(1500, 920)); captured.Arrange(new Rect(0, 0, 1500, 920)); captured.UpdateLayout();
+        IEnumerable<DependencyObject> Walk(DependencyObject parent)
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+            { var child = VisualTreeHelper.GetChild(parent, i); yield return child; foreach (var nested in Walk(child)) yield return nested; }
+        }
+        var roster = (ItemsControl)window.FindName("HeroRoster");
+        int checkedBadges = 0, ascensionBadges = 0;
+        foreach (var controls in Walk(roster).OfType<StackPanel>().Where(p => p.Name == "CardControls"))
+        {
+            var owned = controls.Children.OfType<CheckBox>().Single();
+            var edit = controls.Children.OfType<Button>().Single();
+            Check(edit.TranslatePoint(new Point(), controls).Y >= owned.TranslatePoint(new Point(), controls).Y + owned.ActualHeight,
+                "Edit button overlaps ownership badge");
+            var cardGrid = (Grid)controls.Parent;
+            var asc = cardGrid.Children.OfType<Border>().Single(b => b.Name == "AscensionBadge");
+            if (asc.Visibility == Visibility.Visible)
+            {
+                ascensionBadges++;
+                Check(controls.TranslatePoint(new Point(), cardGrid).Y >= asc.TranslatePoint(new Point(), cardGrid).Y + asc.ActualHeight,
+                    "Ownership controls overlap ASC badge");
+            }
+            if (owned.IsChecked == true)
+            {
+                checkedBadges++;
+                Check(((TextBlock)owned.Template.FindName("OwnedMark", owned)).Visibility == Visibility.Visible,
+                    "Owned green checkmark missing");
+            }
+        }
+        Check(checkedBadges > 0 && ascensionBadges > 0, "Card layout assertions did not exercise owned/ASC badges");
         var image = new RenderTargetBitmap(1500, 920, 96, 96, PixelFormats.Pbgra32); image.Render(captured);
         var encoder = new PngBitmapEncoder(); encoder.Frames.Add(BitmapFrame.Create(image));
         var screenshot = Environment.GetEnvironmentVariable("PLANNER_NATIVE_SCREENSHOT");

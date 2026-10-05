@@ -140,14 +140,34 @@
                                                         Background="{Binding Rarity, Converter={StaticResource RarityBrush}}" Padding="7,3">
                                                     <TextBlock Text="{Binding Rarity}" FontWeight="Black" FontSize="12" />
                                                 </Border>
-                                                <Border VerticalAlignment="Top" HorizontalAlignment="Right" Margin="7" CornerRadius="10" Background="#D90D1A2C" Padding="6,3"
+                                                <Border x:Name="AscensionBadge" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="7" CornerRadius="10" Background="#D90D1A2C" Padding="6,3"
                                                         Visibility="{Binding HasAscension, Converter={StaticResource BoolVisibility}}">
                                                     <TextBlock Text="ASC" FontSize="10" Foreground="{StaticResource GoldBrush}" FontWeight="Bold" />
                                                 </Border>
-                                                <StackPanel VerticalAlignment="Top" HorizontalAlignment="Right" Margin="7">
+                                                <StackPanel x:Name="CardControls" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="7,36,7,0">
                                                     <CheckBox x:Name="OwnedCheck" IsChecked="{Binding IsOwned, Mode=TwoWay}" Checked="Ownership_Changed" Unchecked="Ownership_Changed"
                                                               PreviewMouseLeftButtonDown="CardControl_MouseDown" PreviewMouseLeftButtonUp="CardOwned_MouseUp"
-                                                              HorizontalAlignment="Center" ToolTip="Owned" AutomationProperties.Name="Owned hero" />
+                                                              Width="31" Height="31" HorizontalAlignment="Center" ToolTip="Toggle owned / unowned" AutomationProperties.Name="Owned hero">
+                                                        <CheckBox.Template>
+                                                            <ControlTemplate TargetType="CheckBox">
+                                                                <Border x:Name="OwnedBadge" CornerRadius="16" Background="#D90D1A2C"
+                                                                        BorderBrush="#71869D" BorderThickness="2">
+                                                                    <TextBlock x:Name="OwnedMark" Text="✓" FontSize="19" FontWeight="Black" Foreground="White"
+                                                                               HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed" />
+                                                                </Border>
+                                                                <ControlTemplate.Triggers>
+                                                                    <Trigger Property="IsChecked" Value="True">
+                                                                        <Setter TargetName="OwnedBadge" Property="Background" Value="#159F69" />
+                                                                        <Setter TargetName="OwnedBadge" Property="BorderBrush" Value="#78F2BA" />
+                                                                        <Setter TargetName="OwnedMark" Property="Visibility" Value="Visible" />
+                                                                    </Trigger>
+                                                                    <Trigger Property="IsKeyboardFocused" Value="True">
+                                                                        <Setter TargetName="OwnedBadge" Property="BorderBrush" Value="White" />
+                                                                    </Trigger>
+                                                                </ControlTemplate.Triggers>
+                                                            </ControlTemplate>
+                                                        </CheckBox.Template>
+                                                    </CheckBox>
                                                     <Button Content="✎" Tag="{Binding}" Click="EditBuild_Click" PreviewMouseLeftButtonDown="CardControl_MouseDown"
                                                             Width="27" Height="25" Padding="2" Margin="0,5,0,0" FontSize="15" ToolTip="Edit hero build"
                                                             AutomationProperties.Name="Edit hero build" />
