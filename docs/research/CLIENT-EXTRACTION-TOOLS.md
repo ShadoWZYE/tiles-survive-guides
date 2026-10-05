@@ -16,6 +16,8 @@ The remembered tool name is likely **IL2CPP / Il2CppDumper**, not LLCP. IL2CPP i
 | `audit_native_client.py` | Inspect metadata headers, hashes and PE sections | Identified nonstandard metadata header and packed binary layout |
 | Il2CppDumper 6.7.46 | Recover IL2CPP type information from usable native inputs | Current metadata rejected as invalid |
 | pefile 2024.8.26 and Capstone 5.0.9 | Read PE layout and disassemble disk bytes offline | Entry-point inspection works; not proof of unpacking |
+| `probe_metadata_patterns.py` | Measure repetition and try an explicitly unvalidated frequency-based XOR mask | Readable target names recovered; metadata header remains invalid |
+| `trace_native_file.py` | Follow bounded direct control flow in disk-backed x64 PE sections | Loader reaches an unresolved indirect dispatcher; no game code executed |
 
 All repository scripts listed above are under `work/hero-extraction/`. UnityPy, pefile and Capstone are external dependencies. The audit and synthetic tests need only Python's standard library. None of these commands attaches to the game or executes a game DLL.
 
@@ -126,3 +128,22 @@ Future attempts should first recheck file hashes and version pairing, reproduce 
 ## Privacy and publication
 
 Keep raw game code, bundles, metadata, DLLs, captures and memory dumps out of this public repository. Use the ignored repository `tmp/` directory or a separate private directory. Publish scripts, synthetic tests and the findings above. Review `git status` and the staged diff before pushing. This investigation does not modify the installation, launch its DLLs, inject code, disable protections, or change alliance state.
+
+## Offline decoding investigation
+
+The user selected offline analysis only because runtime inspection could interact with anti-cheat. Do not attach to the game, request its process memory, execute a client DLL, or use a runtime hook as part of this route. The following commands operate on disk bytes only:
+
+```powershell
+& $taskPython work/hero-extraction/probe_metadata_patterns.py --metadata "$buildRoot\tspc_Data\il2cpp_data\Metadata\global-metadata.dat" --reference-offset 0x800000 --period 128 --known-text AllianceGatherSetUIMediator --known-text AllianceBossUIMediator --known-text AlliancePortalModule --candidate-output "$privateOutput\xor128-candidate"
+& $taskPython work/hero-extraction/trace_native_file.py --binary "$buildRoot\GameAssembly.dll" --output "$privateOutput\loader-trace.json"
+```
+
+The statistical probe assumes the most common plaintext byte is lowercase `e` in its reference region. This is a hypothesis, not a recovered loader key. Its default reference window is 1 MiB starting at 8 MiB. The candidate output is intentionally named `candidate.dat`, not `global-metadata.dat`.
+
+In a 64 KiB region beginning at offset 4096, equal-byte frequency at lag 128 was **30.45%**, versus **0.34%** at lag 1. The XOR candidate recovered exact occurrences of `AllianceGatherSetUIMediator` at offset 733540, `AllianceBossUIMediator` at 3251415, and `AlliancePortalModule` at 736626. Its header still fails validation, and many surrounding bytes remain corrupt. These observations support a repeating-mask layer; they do not establish the complete encoding algorithm.
+
+Additional readable candidate fragments identify `AllianceGatherSetUIMediator-CanSetGatherPoint0`, the setting-button update method, `OnSetGatherPointClick`, and `OnRelocationClick`. The event prefab contains separate focus, automation and relocation objects, while candidate member names include `_setFocusButton`, `_autoButton` and `_btnRelocation`. Do not equate relocation with Gather Point placement. Recover the actual bindings and handler bodies before attributing an action to a button.
+
+The bounded entry trace visited 11 blocks and 126 instructions before an indirect jump through `r9`. Offline arithmetic on the entry seed and its file-backed operand resolved that first dispatch target to RVA `0xB08C8F5`. A second trace from that RVA visited 6 blocks and 57 instructions and ended in a push/return dispatch. The tracer records unresolved indirect branches and possible push/return dispatch; it does not emulate them or claim to unpack the image. Further static dispatcher analysis is still required before reaching the metadata loader.
+
+Other probes tried a zero-frequency mask, an English-frequency score, whole-word XOR/subtraction masks, and simple position-counter corrections. None yielded validated metadata. Searching known-text mask fragments found matches inside metadata but not in GameAssembly, NEP2 or UnityPlayer. Do not report these attempts as a working decoder.

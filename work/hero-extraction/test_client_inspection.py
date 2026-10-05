@@ -1,5 +1,8 @@
+import importlib.util
+import json
 from pathlib import Path
 import struct
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -7,6 +10,7 @@ import unittest
 sys.path.insert(0, str(Path(__file__).parent))
 from audit_native_client import entropy, metadata_header, pe_sections
 from export_client_asset import read_sos_entry
+from probe_metadata_patterns import infer_xor_mask, xor_bytes
 
 
 class ClientInspectionTests(unittest.TestCase):
@@ -24,6 +28,21 @@ class ClientInspectionTests(unittest.TestCase):
         self.assertEqual(entropy(bytes(100)), 0)
         self.assertEqual(entropy(bytes(range(256))), 8)
 
+    def test_statistical_mask_on_synthetic_fixture(self):
+        mask = bytes((1, 2, 3, 4))
+        plain = b'e' * 4096
+        encoded = xor_bytes(plain, mask)
+        inferred = infer_xor_mask(encoded, 4, ord('e'))
+        self.assertEqual(inferred, mask)
+        self.assertEqual(xor_bytes(encoded, inferred), plain)
+        self.assertEqual(xor_bytes(encoded[1:5], inferred, 1), b'eeee')
+
+    def test_invalid_statistical_parameters(self):
+        with self.assertRaises(ValueError):
+            infer_xor_mask(b'x', 128, 0)
+        with self.assertRaises(ValueError):
+            xor_bytes(b'x', b'')
+
     def test_reject_non_pe(self):
         with self.assertRaises(ValueError):
             pe_sections(b"not-a-dll")
@@ -35,6 +54,37 @@ class ClientInspectionTests(unittest.TestCase):
         data[60:] = b"PE\0\0"
         with self.assertRaises(ValueError):
             pe_sections(data)
+
+    @unittest.skipUnless(importlib.util.find_spec('pefile') and importlib.util.find_spec('capstone'),
+                         'Optional offline tracing dependencies are not installed')
+    def test_static_tracer_does_not_resolve_indirect_jump(self):
+        data = bytearray(1024)
+        data[:2] = b'MZ'
+        struct.pack_into('<I', data, 0x3C, 0x80)
+        data[0x80:0x84] = b'PE\0\0'
+        struct.pack_into('<HHIIIHH', data, 0x84, 0x8664, 1, 0, 0, 0, 0xF0, 0x2022)
+        optional = 0x98
+        struct.pack_into('<H', data, optional, 0x20B)
+        struct.pack_into('<I', data, optional + 16, 0x1000)
+        struct.pack_into('<Q', data, optional + 24, 0x180000000)
+        struct.pack_into('<II', data, optional + 32, 0x1000, 512)
+        struct.pack_into('<II', data, optional + 56, 0x2000, 512)
+        section = optional + 0xF0
+        data[section:section + 8] = b'.text\0\0\0'
+        struct.pack_into('<IIII', data, section + 8, 512, 0x1000, 512, 512)
+        struct.pack_into('<I', data, section + 36, 0x60000020)
+        data[512:514] = b'\xFF\xE0'  # jmp rax, inspected as bytes only.
+        with tempfile.TemporaryDirectory() as folder:
+            binary = Path(folder)/'synthetic.bin'
+            output = Path(folder)/'trace.json'
+            binary.write_bytes(data)
+            subprocess.run([sys.executable, str(Path(__file__).with_name('trace_native_file.py')),
+                            '--binary', str(binary), '--output', str(output)],
+                           check=True, capture_output=True, timeout=20)
+            result = json.loads(output.read_text())
+            self.assertEqual(result['instruction_count'], 1)
+            self.assertEqual(result['unresolved_indirect_branches'], 1)
+            self.assertFalse(result['budget_reached'])
 
     def test_sos_geometry_does_not_change_address_unit(self):
         slots = 4096
