@@ -88,6 +88,15 @@ internal static class Program
         Invoke(window, "UndoUpgrade_Click", new Button(), new RoutedEventArgs());
         Check(Field<Dictionary<string, HeroBuild>>(window, "_heroBuilds")[becca.AssetSlug].Level == 1 && settings.Inventory["hero-xp"] == 100000, "Undo did not restore build and balance");
         var resourceFilter = (ComboBox)window.FindName("ResourceClassFilter");
+        resourceFilter.SelectedIndex = 1;
+        var fragmentGroups = priorityPanel.Children.OfType<Expander>().Where(e => e.Header.ToString()!.Contains("Hero fragments")).ToList();
+        Check(fragmentGroups.Count == 1 && priorityPanel.Children.OfType<Expander>().Count() == 1, "Hero fragments must be compared in one shared group");
+        var fragmentCards = (StackPanel)fragmentGroups.Single().Content;
+        var fragmentTop = fragmentCards.Children.OfType<Border>().Select(b => ((StackPanel)b.Child).Children.OfType<WrapPanel>().Single().Children.OfType<Button>().First()).Select(b => (UpgradeCandidate)b.Tag).ToList();
+        var expectedFragments = UpgradeModel.Evaluate(new[] { "rosie", "layla", "becca", "ray", "maddie" },
+            Field<Dictionary<string, HeroBuild>>(window, "_heroBuilds"), data, settings).Candidates.Where(c => c.Kind == "rank" && c.Blocked is null && c.Gain is not null)
+            .OrderByDescending(c => c.Gain).ThenByDescending(c => c.Efficiency).ThenBy(c => c.Label, StringComparer.Ordinal).Take(3);
+        Check(fragmentTop.Select(c => c.Label).SequenceEqual(expectedFragments.Select(c => c.Label)), "Shared fragment top three must rank across heroes by percent gain");
         resourceFilter.SelectedIndex = 3;
         Check(priorityPanel.Children.OfType<Expander>().First().Header.ToString()!.Contains("Hero XP"), "Resource class filter not applied");
         var xpCards = (StackPanel)priorityPanel.Children.OfType<Expander>().First().Content;
@@ -146,6 +155,11 @@ internal static class Program
         Field<ComboBox>(window, "_targetedPoolEditor").SelectedIndex = 1;
         var targetedText = (TextBox)window.FindName("TargetedResourceText");
         Check(targetedText.Text.Contains("TARGETED DRAFT") && targetedText.Text.Contains("Provisional target"), "Targeted recommendation missing");
+        var draftCards = (StackPanel)window.FindName("TargetedDraftCards");
+        Check(targetedText.Text.Length < 150 && draftCards.Children.OfType<Border>().Any(), "Targeted draft must use a concise recommendation and separate hero cards");
+        Check(draftCards.Children.OfType<Border>().All(b => ((StackPanel)b.Child).Children.OfType<TextBox>().All(t => t.IsReadOnly)), "Draft card text must stay selectable");
+        Check(draftCards.Children.OfType<Expander>().Any(e => e.Header.ToString()!.Contains("Pool rates") && !e.IsExpanded), "Pool/model notes must be collapsed by default");
+        Check(Field<StackPanel>(window, "_overlayResults").Children.OfType<Expander>().Any(), "Overlay comparison must use structured resource groups");
         Check(Field<UpgradeSettings>(window, "_upgradeSettings").TargetedPool == "newbie_recuit_up_1", "Pool choice not autosaved");
         Field<Slider>(window, "_starSlider").Value = 5;
         Check(Field<Dictionary<string, HeroBuild>>(window, "_heroBuilds")[becca.AssetSlug].Stage == data.Heroes[becca.AssetSlug].Stages[5].Id, "Star slider did not autosave exact partial rank");
@@ -222,6 +236,17 @@ internal static class Program
             var preview = new RenderTargetBitmap(1500, 920, 96, 96, PixelFormats.Pbgra32); preview.Render(captured);
             var previewEncoder = new PngBitmapEncoder(); previewEncoder.Frames.Add(BitmapFrame.Create(preview));
             Directory.CreateDirectory(Path.GetDirectoryName(priorityScreenshot)!); using var output = File.Create(priorityScreenshot); previewEncoder.Save(output);
+        }
+        var targetedScreenshot = Environment.GetEnvironmentVariable("PLANNER_TARGETED_SCREENSHOT");
+        if (!string.IsNullOrWhiteSpace(targetedScreenshot))
+        {
+            var guide = (ScrollViewer)window.FindName("FormationGuidePanel");
+            captured.UpdateLayout();
+            var point = targetedText.TranslatePoint(new Point(), guide);
+            guide.ScrollToVerticalOffset(guide.VerticalOffset + point.Y - 25); captured.UpdateLayout();
+            var preview = new RenderTargetBitmap(1500, 920, 96, 96, PixelFormats.Pbgra32); preview.Render(captured);
+            var previewEncoder = new PngBitmapEncoder(); previewEncoder.Frames.Add(BitmapFrame.Create(preview));
+            Directory.CreateDirectory(Path.GetDirectoryName(targetedScreenshot)!); using var output = File.Create(targetedScreenshot); previewEncoder.Save(output);
         }
         window.Close();
         var reopened = Create();

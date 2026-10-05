@@ -1,6 +1,5 @@
 using System.Globalization;
 using System.IO;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -23,7 +22,7 @@ public partial class MainWindow
     private TextBlock _levelLabel = new();
     private readonly Dictionary<int, (ComboBox Type, TextBox Level)> _gearEditors = [];
     private readonly Dictionary<string, TextBox> _budgetEditors = [];
-    private TextBox _overlayResults = new();
+    private StackPanel _overlayResults = new();
     private IInputElement? _focusBeforeOverlay;
     private bool _populatingEditor;
     private Slider _starSlider = new();
@@ -191,7 +190,7 @@ public partial class MainWindow
         comparison.Children.Add(new Expander { Header = "Resource balances · blank means unknown", Content = budgetPanel, Foreground = Brushes.White, Margin = new Thickness(0, 10, 0, 10) });
         comparison.Children.Add(CopyText("Metric and balances also save automatically. Invalid entries keep the last valid value."));
         comparison.Children.Add(new Expander { Header = "Model limits / assumptions", Content = CopyText(UpgradeCaveats), Foreground = Brushes.White });
-        _overlayResults = Selectable(""); comparison.Children.Add(_overlayResults);
+        _overlayResults = new StackPanel(); comparison.Children.Add(_overlayResults);
         _levelEditor.TextChanged += (_, _) => SaveBuildOnEdit();
         _stageEditor.SelectionChanged += (_, _) => SaveBuildOnEdit();
         _gearModeEditor.SelectionChanged += (_, _) => SaveBuildOnEdit();
@@ -320,58 +319,18 @@ public partial class MainWindow
     {
         if (e.Key == Key.Escape) { CloseBuild_Click(sender, e); e.Handled = true; }
     }
-    private string UpgradeSummary()
-    {
-        if (_selected.Count != 5) return "Select five heroes in Squad Builder first. Use the edit button below each hero's checkbox to record current builds.";
-        var result = UpgradeModel.Evaluate(_selected.Select(h => h.AssetSlug), _heroBuilds, _upgradeData, _upgradeSettings);
-        if (result.Missing.Count > 0) return "Record these builds with the small edit buttons first:\n" + string.Join("\n", result.Missing);
-        var text = new StringBuilder($"Client {_upgradeData.ClientBuild} · {_upgradeSettings.Goal} · next-step comparison\nGain per cost within the same material. Based on saved builds.\n");
-        foreach (var group in result.Candidates.GroupBy(c => c.Group))
-        {
-            text.AppendLine($"\n{_upgradeData.Items.GetValueOrDefault(group.Key ?? "") ?? group.Key ?? "Unranked costs"} [{group.Key ?? "multiple / unlisted"}]");
-            foreach (var c in group)
-            {
-                text.AppendLine(c.Label);
-                text.AppendLine(c.Blocked ?? (c.Gain is double gain ? $"{gain:0.####}% recorded formation gain · " + (c.Efficiency is double efficiency ? $"{efficiency:0.####}% per 100 resource units" : "not comparable") : "Return not modeled"));
-                text.AppendLine("Cost: " + (c.Cost.Count == 0 ? "Not listed; not assumed free" : string.Join(" + ", c.Cost.Select(x => $"{x.Value:0.##} {_upgradeData.Items.GetValueOrDefault(x.Key) ?? x.Key} [{x.Key}]"))) + $" · {c.Affordability}");
-                if (c.Delta is { } delta) text.AppendLine($"ATK +{delta[0]:0.##} · DEF +{delta[1]:0.##} · HP +{delta[2]:0.##}");
-                text.AppendLine(c.Detail); text.AppendLine();
-            }
-        }
-        if (result.Candidates.Count == 0) text.AppendLine("No next upgrades match this filter.");
-        text.AppendLine(string.Join("; ", result.Notes.Distinct()));
-        text.AppendLine(TargetedSummary()); return text.ToString();
-    }
-    private string TargetedSummary()
-    {
-        var text = new StringBuilder("\nTARGETED DRAFT · voucher target\n");
-        var pool = _upgradeData.TargetedDraft?.Pools.Find(p => p.Id == _upgradeSettings.TargetedPool);
-        if (pool is null) return text.Append("Choose the matching in-game target pool in any hero's Upgrade comparison panel.").ToString();
-        text.AppendLine($"Pool {pool.Id} · {pool.SingleCost} voucher per single draw · configured unlock level {pool.UnlockLevel} (check live access).");
-        text.AppendLine($"Displayed selected-target rates: hero {pool.SelectedHeroChance}; fragments {pool.SelectedShardChance}; bonus hero cards {pool.SelectedBonusChance}. These are NOT fragment yields or guarantees per voucher.");
-        var result = UpgradeModel.EvaluateTargeted(_selected.Select(h => h.AssetSlug), _heroBuilds, _upgradeData, _upgradeSettings, pool);
-        var first = result.Candidates.FirstOrDefault(c => c.Efficiency > 0);
-        var affordable = result.Candidates.Where(c => c.Remaining == 0 && c.Blocked is null).ToList();
-        if (affordable.Count > 0) text.AppendLine("Use existing fragments first: " + string.Join(", ", affordable.Select(c => c.Name)) + ". Recheck your build after upgrading.");
-        bool provisional = result.Candidates.Any(c => c.Balance is null);
-        text.AppendLine(first is null ? "No positive, level-eligible target can be ranked from these formation builds." : $"{(provisional ? "Provisional target (missing balances)" : "Suggested target")}: {first.Name} · best recorded {_upgradeSettings.Goal} milestone gain per missing fragment.");
-        foreach (var c in result.Candidates)
-        {
-            text.AppendLine($"{c.Name}: complete rank {c.Rank}, step {c.Step} · {c.Cost:0.##} fragments along the remaining steps · " +
-                (c.Balance is double balance ? $"{balance:0.##} held; {c.Remaining:0.##} still needed" : "balance unknown; full remaining cost used") + $" · {c.Gain:0.####}% formation gain" +
-                (c.Efficiency is double e ? $" · {e:0.####}% per 100 missing fragments" : "") + (c.Blocked is null ? "" : $" · {c.Blocked}"));
-            text.AppendLine($"Milestone skill caps: {string.Join('/', c.SkillCaps)}. Skill upgrades still cost books; caps alone give no free levels.");
-        }
-        if (result.Missing.Count > 0) text.AppendLine(string.Join("\n", result.Missing));
-        var eligible = pool.Choices.Where(c => _selected.All(h => h.AssetSlug != c.Slug)).Select(c => _upgradeData.Heroes.GetValueOrDefault(c.Slug)?.Name ?? c.HeroInternal);
-        if (eligible.Any()) text.AppendLine("Outside this formation / not modeled for replacement: " + string.Join(", ", eligible));
-        text.AppendLine("This is a formation-growth target, not expected combat return per voucher. Equal rates allow a fragment-efficiency comparison, but duplicate conversion, pity progress, unlock/replacement value and utility skills are not simulated. Check the live pool; availability can differ. Building gates still apply.");
-        return text.ToString();
-    }
     private void RefreshUpgradeViews()
     {
         RefreshResourcePriority();
         if (ResourceRecommendation is not null) ResourceRecommendation.Text = "Choose five heroes, then use their small edit buttons to record current builds and compare data-driven next upgrades. No fixed hero order.";
-        if (BuildOverlay.Visibility == Visibility.Visible) _overlayResults.Text = UpgradeSummary();
+        if (BuildOverlay.Visibility == Visibility.Visible)
+        {
+            _overlayResults.Children.Clear();
+            if (_selected.Count != 5) { _overlayResults.Children.Add(Selectable("Select five heroes in Squad Builder first.")); return; }
+            RenderUpgradeGroups(_overlayResults, UpgradeModel.Evaluate(_selected.Select(h => h.AssetSlug), _heroBuilds, _upgradeData, _upgradeSettings), "all", false);
+            var draft = new StackPanel(); var heading = Selectable("", true); draft.Children.Add(heading);
+            var cards = new StackPanel(); draft.Children.Add(cards); RenderTargetedDraft(cards, heading);
+            _overlayResults.Children.Add(new Expander { Header = "Targeted Draft", Content = draft, Foreground = Brushes.White, Margin = new Thickness(0, 10, 0, 0) });
+        }
     }
 }

@@ -33,28 +33,35 @@ public partial class MainWindow
     }
     private void RefreshResourcePriority()
     {
-        if (ResourcePriorityCards is null || TargetedResourceText is null || ResourceModelLimits is null) return;
+        if (ResourcePriorityCards is null || TargetedResourceText is null || TargetedDraftCards is null || ResourceModelLimits is null) return;
         ResourcePriorityCards.Children.Clear(); ResourceModelLimits.Text = UpgradeCaveats;
         UndoUpgradeButton.IsEnabled = _lastRecordedUpgrade is not null;
-        TargetedResourceText.Text = _selected.Count == 5 ? TargetedSummary() : "Choose a five-hero formation first.";
+        RenderTargetedDraft(TargetedDraftCards, TargetedResourceText);
         if (_selected.Count != 5) { FormationResourceFocus.Text = "Select five heroes, then record their current builds using the edit buttons."; return; }
         var result = UpgradeModel.Evaluate(_selected.Select(h => h.AssetSlug), _heroBuilds, _upgradeData, _upgradeSettings);
         if (result.Missing.Count > 0) { FormationResourceFocus.Text = "Record these builds first:\n" + string.Join("\n", result.Missing); return; }
-        FormationResourceFocus.Text = $"Metric: {_upgradeSettings.Goal} · Client {_upgradeData.ClientBuild}\nTop 3 per individual resource, by formation % increase. Efficiency per 100 resource units is separate. Select and copy any text.";
+        FormationResourceFocus.Text = $"Metric: {_upgradeSettings.Goal} · Client {_upgradeData.ClientBuild}\nTop 3 by formation % increase in each resource group. Hero fragments are compared together. Efficiency per 100 resource units is separate. Select and copy any text.";
         string filter = (ResourceClassFilter.SelectedItem as ComboBoxItem)?.Tag as string ?? "all";
+        RenderUpgradeGroups(ResourcePriorityCards, result, filter, true);
+    }
+    private void RenderUpgradeGroups(Panel target, UpgradeResult result, string filter, bool showActions)
+    {
+        target.Children.Clear();
+        if (result.Missing.Count > 0) { target.Children.Add(Selectable("Record these builds first:\n" + string.Join("\n", result.Missing))); return; }
         int groups = 0;
         foreach (var group in result.Candidates.Where(c => filter == "all" || ResourceClass(c.Group) == filter)
-            .GroupBy(c => c.Group ?? "mixed:" + string.Join("+", c.Cost.Keys.Order())))
+            .GroupBy(c => c.Kind == "rank" ? "hero-fragments" : c.Group ?? "mixed:" + string.Join("+", c.Cost.Keys.Order())))
         {
             groups++;
             var content = new StackPanel();
             var ordered = group.OrderByDescending(c => c.Gain ?? double.NegativeInfinity).ThenByDescending(c => c.Efficiency ?? double.NegativeInfinity).ThenBy(c => c.Label, StringComparer.Ordinal).ToList();
             var top = ordered.Where(c => c.Blocked is null && c.Gain is not null).Take(3).ToList();
-            string resourceName = group.Key.StartsWith("mixed:", StringComparison.Ordinal) ?
+            string resourceName = group.Key == "hero-fragments" ? "Hero fragments · all heroes" : group.Key.StartsWith("mixed:", StringComparison.Ordinal) ?
                 (group.First().Cost.Count == 0 ? "Unlisted costs" : "Mixed: " + string.Join(" + ", group.First().Cost.Keys.Order().Select(id => _upgradeData.Items.GetValueOrDefault(id) ?? id))) :
                 _upgradeData.Items.GetValueOrDefault(group.Key) ?? group.Key;
-            ResourcePriorityCards.Children.Add(new Expander { Header = $"{resourceName} · top {top.Count}",
+            target.Children.Add(new Expander { Header = $"{resourceName} · top {top.Count}",
                 IsExpanded = true, Content = content, Foreground = Brushes.White, Margin = new Thickness(0, 8, 0, 4) });
+            if (group.Key == "hero-fragments") content.Children.Add(Selectable("Compare where to focus fragments across heroes. Costs below remain hero-specific; universal-fragment conversion is not deducted automatically."));
             int rank = 0; var locked = new StackPanel();
             foreach (var c in ordered.OrderBy(c => top.Contains(c) ? 0 : 1))
             {
@@ -71,6 +78,8 @@ public partial class MainWindow
                 var details = c.Detail + (c.Delta is { } d ? $"\nATK +{d[0]:0.##} · DEF +{d[1]:0.##} · HP +{d[2]:0.##}" : "") +
                     "\nResource IDs: " + (c.Cost.Count == 0 ? "unlisted" : string.Join(", ", c.Cost.Keys));
                 card.Children.Add(new Expander { Header = "Details / requirements", Content = Selectable(details), Foreground = Brushes.White });
+                if (showActions)
+                {
                 var actions = new WrapPanel { Margin = new Thickness(0, 8, 0, 0) }; card.Children.Add(actions);
                 var record = new Button { Content = "Record completed", Tag = c, IsEnabled = eligible, Padding = new Thickness(10, 6, 10, 6),
                     ToolTip = "Confirm you have already completed this exact upgrade in the game. Updates the saved planner build and deducts known balances; unknown balances stay unknown." };
@@ -78,12 +87,13 @@ public partial class MainWindow
                 record.Click += RecordUpgrade_Click; actions.Children.Add(record);
                 var edit = new Button { Content = "Edit build / balances", Tag = _heroes.Find(h => h.AssetSlug == c.Slug), Padding = new Thickness(10, 6, 10, 6), Margin = new Thickness(6, 0, 0, 0) };
                 edit.Click += EditBuild_Click; actions.Children.Add(edit);
+                }
                 (top.Contains(c) ? content : locked).Children.Add(border);
             }
             if (locked.Children.Count > 0) content.Children.Add(new Expander { Header = $"Other / locked / unmodeled ({locked.Children.Count})", Content = locked, Foreground = Brushes.Gold, Margin = new Thickness(0, 8, 0, 0) });
         }
-        if (groups == 0) ResourcePriorityCards.Children.Add(Selectable("No next upgrades match this resource class / affordability filter."));
-        if (result.Notes.Count > 0) ResourcePriorityCards.Children.Add(new Expander { Header = "Excluded / unknown build data", Content = Selectable(string.Join("\n", result.Notes.Distinct())), Foreground = Brushes.White, Margin = new Thickness(0, 8, 0, 0) });
+        if (groups == 0) target.Children.Add(Selectable("No next upgrades match this resource class / affordability filter."));
+        if (result.Notes.Count > 0) target.Children.Add(new Expander { Header = "Excluded / unknown build data", Content = Selectable(string.Join("\n", result.Notes.Distinct())), Foreground = Brushes.White, Margin = new Thickness(0, 8, 0, 0) });
     }
     private static bool SameBuild(HeroBuild? a, HeroBuild? b) => a is not null && b is not null &&
         a.Stage == b.Stage && a.Level == b.Level && (a.Skills ?? []).OrderBy(x => x.Key).SequenceEqual((b.Skills ?? []).OrderBy(x => x.Key)) &&

@@ -347,7 +347,10 @@
                                                 <TextBox x:Name="UpgradeActionStatus" IsReadOnly="True" TextWrapping="Wrap" Background="Transparent" BorderThickness="0" Foreground="{StaticResource AccentBrush}" Padding="0" Margin="0,0,0,8" />
                                                 <StackPanel x:Name="ResourcePriorityCards" />
                                                 <Expander Header="Targeted Draft recommendations" IsExpanded="True" Foreground="White" Margin="0,10,0,6">
-                                                    <TextBox x:Name="TargetedResourceText" IsReadOnly="True" TextWrapping="Wrap" Background="Transparent" BorderThickness="0" Foreground="White" Padding="0" Margin="0,7,0,0" />
+                                                    <StackPanel>
+                                                        <TextBox x:Name="TargetedResourceText" IsReadOnly="True" TextWrapping="Wrap" Background="Transparent" BorderThickness="0" Foreground="White" FontSize="15" FontWeight="Bold" Padding="0" Margin="0,7,0,8" />
+                                                        <StackPanel x:Name="TargetedDraftCards" />
+                                                    </StackPanel>
                                                 </Expander>
                                                 <Expander Header="Model limits and assumptions" Foreground="{StaticResource MutedInkBrush}" Margin="0,6,0,0">
                                                     <TextBox x:Name="ResourceModelLimits" IsReadOnly="True" TextWrapping="Wrap" Background="Transparent" BorderThickness="0" Foreground="{StaticResource MutedInkBrush}" Padding="0" Margin="0,7,0,0" />
