@@ -86,6 +86,8 @@ The scripts under `work/hero-extraction/` decode the relevant client configurati
 
 Tests that require those locally extracted tables skip with an explicit message in a clean public checkout. The checked-in normalized data and all planner artwork remain sufficient to build both planners.
 
+For reproducible asset inspection, native-file auditing, and the current Ghoulion Gather Point findings, see [Client inspection tools](docs/research/CLIENT-EXTRACTION-TOOLS.md). It separates working asset extraction from the unresolved native metadata decoding step and includes tested commands and cache-pack pitfalls.
+
 ## Privacy and safety
 
 Raw packet captures, session material, certificates, local browser profiles, personal account coordinates, and temporary reverse-engineering output are intentionally excluded. The included capture launcher writes only to the ignored local `captures/` directory.
