@@ -1,29 +1,51 @@
 # Build output
 **/bin/
 **/obj/
+outputs/*.exe
 outputs/hero-tool/publish/
-
-# Python environments and caches
-**/__pycache__/
-*.py[cod]
-.venv/
-venv/
-
-# Temporary and local-state output
-tmp/
-captures/
-outputs/chrome-offline-*/
-outputs/offline-planner-check.png
 outputs/hero-tool/ui-preview*.png
 outputs/hero-tool/ui-*.png
+outputs/chrome-offline-*/
+outputs/offline-planner-check.png
+
+# Python environments and caches
+work/mitmproxy-venv/
+work/tools/
+**/__pycache__/
+*.pyc
+*.py[cod]
 
 # Packet captures and extracted traffic
-*.etl
-*.pcap
-*.pcapng
-*.flows
-work/map-mitm/
+work/map-capture/*.etl
+work/map-capture/*.pcapng
+work/map-capture/*.bin
+work/map-mitm/captured/
+work/map-mitm/*.flows
+work/map-mitm/*.log
+work/map-mitm/*.pid
 
-# Local profiles and secrets
+# Temporary proxy identity and saved machine state
+work/map-mitm/mitmproxy-conf/
+work/map-mitm/proxy-state.json
+work/map-mitm/known-account.local.json
+work/hero-extraction/generated/
+work/hero-extraction/generated-v2/
+
+# Locally copied driver/runtime artifact
+NEPKernel.sys
+
+# Desktop-only working material and private extracts retained during consolidation
+tmp/
+output/
+captures/
 *.local.json
 profile.json
+*.flows
+*.pcap
+*.pcapng
+*.etl
+work/map-mitm/
+outputs/*.rar
+outputs/Ghoulion-Pursuit-Preliminary-Analysis.html
+.venv/
+venv/

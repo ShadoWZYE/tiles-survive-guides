@@ -86,13 +86,47 @@ def main():
     parser.add_argument("--client-build", required=True)
     parser.add_argument("--language", type=Path, default=DEFAULT_LANGUAGE_PACK)
     parser.add_argument("--output", type=Path, default=ROOT / "outputs/hero-report/TilesSurvive-Upgrade-Data.json")
+    parser.add_argument("--targeted-source", type=Path, help="Private extracted Targeted Draft tables")
     args = parser.parse_args()
     roster = json.loads((ROOT / "outputs/hero-report/TilesSurvive-Hero-Data.json").read_text(encoding="utf-8"))
     localized = decode_language_pack(args.language) if args.language.exists() else {}
     data = export(args.source, roster, args.client_build, localized)
+    if args.targeted_source:
+        data["targeted_draft"] = export_targeted(args.targeted_source, args.source, roster, data["source_hashes"])
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8")
     print(f"Exported {len(data['heroes'])} heroes, {len(data['gear'])} universal gear types; {args.output.stat().st_size:,} bytes")
+
+def export_targeted(source, hero_source, roster, hashes):
+    def rows(name):
+        paths = list(source.glob(f"*_{name}.cfg"))
+        if len(paths) != 1:
+            raise ValueError(f"Expected one {name} table")
+        hashes[name] = hashlib.sha256(paths[0].read_bytes()).hexdigest()
+        return decode_table(paths[0])["rows"]
+    items = {r["InternalId"]: r for r in rows("itemlist")}
+    contrasts = {r["InternalId"]: r for r in rows("survival_up_drop_contrast")}
+    up = {r["InternalId"]: r for r in rows("survival_up_card_pool")}
+    survivor_rows = decode_table(next(hero_source.glob("*_survivor.cfg")))["rows"]
+    names = {r["InternalId"]: r["Id"] for r in survivor_rows}
+    by_internal = {names[r["hero_id"]]: r["asset_slug"] for r in roster}
+    pools = []
+    for r in rows("survival_card_pool"):
+        if r["CostItem"] != 208308 or not r["UpCardPool"]:
+            continue
+        u = up[r["UpCardPool"]]
+        choices = []
+        for contrast in u["UpHero"]:
+            c = contrasts[contrast]
+            item = items[c["HeroItemId"]]
+            choices.append({"slug": by_internal.get(item["Para1"], ""), "hero_internal": item["Para1"], "shard_item": str(c["HeroChipId"])})
+        pools.append({"id": r["Id"], "choices": choices, "single_cost": r["SingleDrawCost"],
+                      "pity": r["FloorsTimes"], "unlock_level": r["UnlockLevel"],
+                      "selected_hero_chance": u["HeroChanceShow"].split('|')[0],
+                      "selected_shard_chance": u["ChipChanceShow"].split('|')[0],
+                      "selected_bonus_chance": u["GachaChanceShow"].split('|')[0]})
+    return {"card_item": "208308", "pools": pools,
+            "notes": "Available pool must be selected from the live in-game choices; server age alone is not inferred. Display probabilities are per reward category, not fragment yields. Pity and duplicate conversion are not simulated. Recommendations compare formation milestone gain per remaining hero-specific fragment, conditional on targeting that eligible hero, not expected return per voucher."}
 
 if __name__ == "__main__":
     main()

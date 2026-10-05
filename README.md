@@ -17,6 +17,8 @@ The Hero Planner supports:
 - Five-position front-to-back formation guidance
 - Modeled skill synergy (separate from build-specific upgrade comparisons)
 - Exact rank-step, level, skill and optional universal-gear recording
+- Native rank-step slider with game star art and partial progress; every valid edit autosaves
+- Native Targeted Draft target recommendations from the eligible pool and remaining fragment cost
 - Next-upgrade stat/contribution returns grouped by actual resource, with balances and affordability filtering
 - Optional legacy whole-star / personal-target notes, preserved but not converted into exact rank progress
 - F2P, event-accessible, owned-only, and IAP-linked filters
@@ -43,7 +45,7 @@ Investment recommendations no longer impose a role-based hero order. Select five
 
 Costs use destination rank/skill rows, cumulative hero-XP differences, and current gear-row next-level XP. XP assumes zero progress toward the next level. Building gates must be checked in-game; affordability means enough recorded materials, not a guarantee the upgrade is unlocked. Ascension, profession/exclusive gear, refinement and shard conversion are excluded. Exact rank/step labels are client identifiers, not an unverified conversion to displayed whole stars. Legacy whole-star notes remain saved separately.
 
-The Windows app's **DATA-DRIVEN UPGRADES** button opens its embedded self-contained calculator in your browser, carrying the selected squad and seeding ownership/star notes only if that browser profile is new. Build edits are saved in the browser's own profile; they are not synchronized back to WPF. Both entry points use the same calculation code. Browser profile export/import retains builds and balances. No game process hooking, online requests or automatic spending is involved.
+The Windows app calculates upgrades **natively**. Each hero card has a small **edit button below its owned checkbox**. It opens an in-app overlay with separate rank/step dropdowns, current skill caps and the game's skill icons. Gear and comparison details are collapsed initially. **Every valid edit saves immediately** in the Windows profile (`hero_builds` / `upgrade_settings`), including metric and balance changes; no Save/Cancel action is needed. Invalid entries retain the last valid data and display a warning. Close/Escape simply dismiss the overlay without undoing saved edits. Profile updates use an atomic temporary-file replacement. Opening the editor never changes ownership or the selected squad. In **My roster**, clicking a card toggles owned/unowned again; in **Squad Builder**, clicking a card selects/removes it from the formation. The checkbox changes ownership in either view. Native results and browser results have regression-tested numerical parity. The Windows package no longer launches or embeds a browser calculator. No game process hooking, online requests or automatic spending is involved.
 
 ### Build the desktop planner
 
@@ -60,16 +62,32 @@ dotnet build work\HeroPlanner.Tests
 node --test work\HeroPlannerWeb\test_formation_priority.cjs work\HeroPlannerWeb\test_upgrade_model.cjs
 ```
 
-Rebuild the offline edition **before** building/publishing WPF; the desktop package embeds that HTML. Windows-only UI regression (isolated temporary profile): `dotnet run --project work/HeroPlanner.UiTests`. Browser interaction regression: install Playwright, then run `node work/HeroPlannerWeb/test_browser_smoke.cjs`; `PLANNER_PLAYWRIGHT` can point to its module and `PLANNER_BROWSER` can select an installed Chromium executable. Tests cover cost-driven order changes, currencies, unknown builds, skill caps, ownership, build persistence, metrics, embedded resources and mobile layout. Legacy role-helper parity tests are retained for regression, but that policy no longer drives displayed investment recommendations.
+Windows-only UI regression (isolated temporary profile): `dotnet run --project work/HeroPlanner.UiTests`. Build the native console tests, then run `node --test work/HeroPlannerWeb/test_native_upgrade_parity.cjs` for 60 cross-edition cases spanning rank steps, metrics, unknown skill levels and gear. Browser interaction regression: install Playwright, then run `node work/HeroPlannerWeb/test_browser_smoke.cjs`; `PLANNER_PLAYWRIGHT` can point to its module and `PLANNER_BROWSER` can select an installed Chromium executable. Tests cover cost-driven order changes, currencies, unknown builds, skill caps, ownership, native overlay and immediate autosave, invalid-save protection, profile persistence and mobile layout. Legacy role-helper parity tests are retained for regression, but that policy no longer drives displayed investment recommendations.
+
+### Local working directory
+
+The canonical working repository is **`C:\Users\Shadow\Desktop\Tiles Survival Tools`**, consolidated with the latest published files. Private extracts and Desktop-only scratch tools remain local and excluded from publication. The previous Desktop history is retained on local branch `desktop-before-consolidation-20261005`; overwritten older public files were backed up in `C:\Users\Shadow\Desktop\Tiles-Tools-Merge-Backup-20261005`. The earlier Downloads checkout is left intact as a fallback, not an active working directory. Do not switch future development back to Downloads.
 
 To refresh progression after privately extracting the selected config tables:
 
 ```powershell
-python work\hero-extraction\build_upgrade_data.py PRIVATE_EXTRACT_DIRECTORY --client-build YOUR_CLIENT_BUILD
+python work\hero-extraction\build_upgrade_data.py PRIVATE_EXTRACT_DIRECTORY --client-build YOUR_CLIENT_BUILD --targeted-source PRIVATE_DRAFT_TABLE_DIRECTORY
 python work\HeroPlannerWeb\build_offline.py
 ```
 
 The exporter uses the existing CFG/language decoders, refuses missing/ambiguous tables and stores normalized fields only. Recheck the model assumptions when refreshing to another client version.
+
+### Native Targeted Draft guidance
+
+Select the in-game pool under a hero's **Upgrade comparison → Targeted Draft**. This setting saves automatically. The selectable targets come from `survival_card_pool → survival_up_card_pool → survival_up_drop_contrast → itemlist → survivor`; they are not inferred from server age. Draft Voucher item ID is `208308`. The client UI uses `UpHero` for selectable targets, not the decorative `HeroFullPic` list.
+
+For heroes in the selected formation, the planner sums destination fragment costs through the next completed six-step rank (or next configured rank above that range), subtracts recorded hero-specific fragments, and compares the selected stat/power gain per missing fragment. Already affordable milestones say to use existing fragments first. Unknown balances produce a **provisional** target; missing build data blocks the recommendation. This is not an expected return per voucher or a replacement/unlock recommendation for heroes outside the formation. Skill caps do not grant free skill levels; book costs and utility effects remain separate. Building gates must be checked in-game.
+
+Displayed selected-target probabilities are retained as category rates, not interpreted as guaranteed fragments. Duplicate conversion, pity progress, reward-quantity distribution, live pool eligibility overrides and full battle outcomes are not simulated. The native rank slider stores exact configured rank/step identifiers. Its six-sector preview uses extracted client star art, with sectors rendered by the planner; it does not assert the client's star-color mapping. Legacy whole-star notes are preserved separately and never silently converted.
+
+```powershell
+dotnet run --project work\HeroPlanner.Tests -- unused --targeted outputs\hero-report\TilesSurvive-Upgrade-Data.json
+```
 
 ## Windows companion and display tools
 

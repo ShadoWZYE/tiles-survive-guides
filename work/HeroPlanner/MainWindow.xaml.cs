@@ -36,6 +36,7 @@ public partial class MainWindow : Window
         ProfilePath = profilePath;
         InitializeComponent();
         LoadHeroes();
+        LoadUpgradeData();
         LoadProfile();
         SaveProfile();
         HeroRoster.ItemsSource = _heroes;
@@ -59,31 +60,6 @@ public partial class MainWindow : Window
         _heroes.AddRange(heroes.OrderByDescending(hero => hero.CompositeIndex).ThenBy(hero => hero.Name));
     }
 
-    private void OpenUpgradePlanner_Click(object sender, RoutedEventArgs e)
-    {
-        try
-        {
-            var resource = Application.GetResourceStream(new Uri("pack://application:,,,/TilesSurviveHeroPlanner;component/Data/upgrade-planner.html"))
-                ?? throw new InvalidOperationException("Embedded upgrade planner missing.");
-            using var reader = new StreamReader(resource.Stream);
-            var html = reader.ReadToEnd();
-            var initial = JsonSerializer.Serialize(new {
-                ownedHeroes = _heroes.Where(h => h.IsOwned).Select(h => h.AssetSlug),
-                heroProgress = _heroes.ToDictionary(h => h.AssetSlug, h => new { current = h.Progress.Current, target = h.Progress.Target })
-            });
-            var squad = JsonSerializer.Serialize(_selected.Select(h => h.AssetSlug));
-            // Seed only a new browser profile. Browser build edits never overwrite the native profile.
-            var seed = "<script>window.__INITIAL_SQUAD__=" + squad + ";try{if(!localStorage.getItem('tiles-survive-hero-planner-profile-v1'))localStorage.setItem('tiles-survive-hero-planner-profile-v1',JSON.stringify(" + initial + "));}catch(e){}</script>";
-            html = html.Replace("<script>window.__HERO_DATA__=", seed + "<script>window.__HERO_DATA__=");
-            var folder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "TilesSurviveHeroPlanner");
-            Directory.CreateDirectory(folder);
-            var path = Path.Combine(folder, "Upgrade-Planner.html");
-            File.WriteAllText(path, html);
-            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(path) { UseShellExecute = true });
-        }
-        catch (Exception ex) { MessageBox.Show("Could not open the offline upgrade planner: " + ex.Message); }
-    }
-
     private void LoadProfile()
     {
         _loadingProfile = true;
@@ -105,6 +81,9 @@ public partial class MainWindow : Window
                     var profile = JsonSerializer.Deserialize<PlannerProfile>(json) ?? new PlannerProfile();
                     owned = profile.OwnedHeroes;
                     progress = profile.HeroProgress ?? [];
+                    _heroBuilds = (profile.HeroBuilds ?? []).Where(x => _heroes.Any(h => h.AssetSlug == x.Key) && x.Value is not null).ToDictionary();
+                    _upgradeSettings = profile.UpgradeSettings ?? new();
+                    _upgradeSettings.Clean();
                     serverOpenDate = profile.ServerOpenDate ?? AllianceServerOpenDate;
                 }
             }
@@ -133,11 +112,19 @@ public partial class MainWindow : Window
         var profile = new PlannerProfile
         {
             OwnedHeroes = _heroes.Where(hero => hero.IsOwned).Select(hero => hero.AssetSlug).ToHashSet(),
+            HeroBuilds = _heroBuilds,
+            UpgradeSettings = _upgradeSettings,
             HeroProgress = _heroes.Where(hero => hero.Progress.Current is not null || hero.Progress.Target is not null)
                 .ToDictionary(hero => hero.AssetSlug, hero => hero.Progress),
             ServerOpenDate = ServerOpenDate.SelectedDate?.Date,
         };
-        File.WriteAllText(ProfilePath, JsonSerializer.Serialize(profile, new JsonSerializerOptions { WriteIndented = true }));
+        string pendingPath = ProfilePath + "." + Guid.NewGuid().ToString("N") + ".pending";
+        try
+        {
+            File.WriteAllText(pendingPath, JsonSerializer.Serialize(profile, new JsonSerializerOptions { WriteIndented = true }));
+            File.Move(pendingPath, ProfilePath, overwrite: true);
+        }
+        finally { if (File.Exists(pendingPath)) File.Delete(pendingPath); }
     }
 
     private PlannerMode CurrentMode => ((ComboBoxItem?)ModePicker.SelectedItem)?.Content?.ToString() switch
@@ -161,6 +148,7 @@ public partial class MainWindow : Window
 
     private void HeroCard_Click(object sender, RoutedEventArgs e)
     {
+        if (BuildOverlay.Visibility == Visibility.Visible || (e.OriginalSource is not null && !ReferenceEquals(e.OriginalSource, sender))) return;
         if (sender is not Button { Tag: Hero hero }) return;
         SetActiveHero(hero);
         if (InspectorTabs.SelectedIndex == 4)
@@ -174,7 +162,8 @@ public partial class MainWindow : Window
         }
         if (InspectorTabs.SelectedIndex == 3)
         {
-            // Editing star progress must not accidentally change ownership.
+            hero.IsOwned = !hero.IsOwned;
+            HeroRoster.Items.Refresh(); SaveProfile(); RefreshOwnedState();
             return;
         }
         if (InspectorTabs.SelectedIndex != 0) return;
@@ -437,7 +426,7 @@ public partial class MainWindow : Window
             ? "Focus one target at a time and protect the two highest-offense heroes; this squad has no strong extracted timing combo."
             : string.Join("; then ", battleSteps) + ".";
 
-        FormationResourceFocus.Text = "Open DATA-DRIVEN UPGRADES above. Your selected squad is carried into the offline browser calculator. Record exact rank steps, levels and skills there to compare next upgrades by actual resource cost. No fixed hero order is imposed. Browser build profiles are saved separately from this app.";
+        RefreshUpgradeViews();
 
         var weaknesses = new List<string>();
         foreach (string role in new[] { "Melee", "Mid", "Range" })
@@ -646,7 +635,9 @@ public partial class MainWindow : Window
 
     private void Ownership_Changed(object sender, RoutedEventArgs e)
     {
-        if (sender is not CheckBox { DataContext: Hero }) return;
+        e.Handled = true;
+        if (_loadingProfile || sender is not CheckBox { IsLoaded: true, DataContext: Hero hero } check) return;
+        hero.IsOwned = check.IsChecked == true;
         SaveProfile();
         RefreshOwnedState();
     }
@@ -689,7 +680,7 @@ public partial class MainWindow : Window
             int needed = 5 - owned.Count;
             var targets = unowned.OrderByDescending(hero => ScoreHero(hero, CurrentMode)).Take(Math.Max(needed, 3)).Select(hero => hero.Name);
             UnlockRecommendation.Text = $"Mark your remaining heroes. Strongest current candidates are: {string.Join(", ", targets)}.";
-            ResourceRecommendation.Text = "Use DATA-DRIVEN UPGRADES for build-specific return comparisons. Select a five-hero formation first.";
+            ResourceRecommendation.Text = "Use the small edit buttons below the owned checkboxes to record builds. Select a five-hero formation for upgrade comparisons.";
             return;
         }
 
@@ -708,7 +699,7 @@ public partial class MainWindow : Window
             ? "You own the complete extracted roster."
             : "Best modeled next targets: " + string.Join("; ", upgrades.Select(item =>
                 $"{item.candidate.Name} ({(item.gain > 0 ? "+" : "")}{item.gain:0.0} squad points)")) + ".";
-        ResourceRecommendation.Text = "Use DATA-DRIVEN UPGRADES above for next-step cost and stat comparisons; record your current builds in the offline calculator. Unlock recommendations here remain max-configuration heuristics.";
+        ResourceRecommendation.Text = "Use the small edit buttons below the owned checkboxes for next-step cost and stat comparisons. Unlock suggestions here remain max-configuration heuristics.";
     }
 
     private void ServerOpenDate_Changed(object sender, SelectionChangedEventArgs e)

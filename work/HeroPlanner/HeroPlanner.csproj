@@ -11,7 +11,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Resource Include="Assets\app-icon.ico" />
-    <Resource Include="..\..\outputs\Tiles-Survive-Hero-Planner-Offline.html" Link="Data\upgrade-planner.html" />
+    <Resource Include="..\..\outputs\hero-report\TilesSurvive-Upgrade-Data.json" Link="Data\upgrades.json" />
     <Resource Include="..\..\outputs\hero-report\TilesSurvive-Hero-Data.json" Link="Data\heroes.json" />
     <Resource Include="..\..\outputs\hero-tool\images\*.png" Link="Images\%(Filename)%(Extension)" />
     <Resource Include="..\..\outputs\hero-tool\images\skill-icons\*.png" Link="Images\SkillIcons\%(Filename)%(Extension)" />

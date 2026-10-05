@@ -43,7 +43,6 @@
                 </Border>
                 <TextBlock Text="28 base heroes  •  6 ascended forms" Foreground="{StaticResource MutedInkBrush}"
                            FontSize="12" HorizontalAlignment="Center" Margin="0,5,0,0" />
-                <Button Content="DATA-DRIVEN UPGRADES" Click="OpenUpgradePlanner_Click" Margin="0,8,0,0" />
             </StackPanel>
         </Grid>
 
@@ -145,12 +144,14 @@
                                                         Visibility="{Binding HasAscension, Converter={StaticResource BoolVisibility}}">
                                                     <TextBlock Text="ASC" FontSize="10" Foreground="{StaticResource GoldBrush}" FontWeight="Bold" />
                                                 </Border>
-                                                <Border x:Name="OwnedBadge" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="7"
-                                                        Width="31" Height="31" CornerRadius="16" Background="#159F69"
-                                                        BorderBrush="#78F2BA" BorderThickness="2"
-                                                        Visibility="{Binding IsOwned, Converter={StaticResource BoolVisibility}}">
-                                                    <TextBlock Text="✓" FontSize="19" FontWeight="Black" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                                </Border>
+                                                <StackPanel VerticalAlignment="Top" HorizontalAlignment="Right" Margin="7">
+                                                    <CheckBox x:Name="OwnedCheck" IsChecked="{Binding IsOwned, Mode=TwoWay}" Checked="Ownership_Changed" Unchecked="Ownership_Changed"
+                                                              PreviewMouseLeftButtonDown="CardControl_MouseDown" PreviewMouseLeftButtonUp="CardOwned_MouseUp"
+                                                              HorizontalAlignment="Center" ToolTip="Owned" AutomationProperties.Name="Owned hero" />
+                                                    <Button Content="✎" Tag="{Binding}" Click="EditBuild_Click" PreviewMouseLeftButtonDown="CardControl_MouseDown"
+                                                            Width="27" Height="25" Padding="2" Margin="0,5,0,0" FontSize="15" ToolTip="Edit hero build"
+                                                            AutomationProperties.Name="Edit hero build" />
+                                                </StackPanel>
                                                 <Border Grid.Row="1" Background="#EF142743" Padding="9,7">
                                                     <StackPanel>
                                                         <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="15" TextTrimming="CharacterEllipsis" />
@@ -394,7 +395,7 @@
                                 <Border Background="#163454" BorderBrush="#2B5A82" BorderThickness="1" CornerRadius="12" Padding="14" Margin="0,0,0,12">
                                     <StackPanel>
                                         <TextBlock Text="CLICK HERO CARDS ON THE LEFT" Foreground="{StaticResource AccentBrush}" FontWeight="Bold" FontSize="11" />
-                                        <TextBlock Text="Select a hero to edit stars. Use Mark as owned / Remove owned check below to change ownership. Selecting a hero does not change its owned status. Choices are saved locally." TextWrapping="Wrap" Margin="0,5,0,0" />
+                                        <TextBlock Text="Click a card here to mark it owned / unowned. The small edit button below its checkbox opens the build overlay without changing ownership. Your build and resource balances are saved locally in this Windows app." TextWrapping="Wrap" Margin="0,5,0,0" />
                                     </StackPanel>
                                 </Border>
                                 <Border Background="#163454" CornerRadius="12" Padding="14" Margin="0,0,0,12">
@@ -484,5 +485,21 @@
                 Planning model: Balanced combines configured power, offense, and durability. PvE farming additionally values sustained utility and extracted global Stamina-cost reduction. Skill synergy adds a capped squad-level bonus from decoded effects. Exact cooldowns, targeting, control uptime, equipment, awakenings, and live server overrides are not simulated.
             </TextBlock>
         </Border>
+        <Grid x:Name="BuildOverlay" Grid.RowSpan="4" Panel.ZIndex="50" Visibility="Collapsed" Background="#C908111F" KeyboardNavigation.TabNavigation="Cycle" PreviewKeyDown="BuildOverlay_KeyDown">
+            <Border Margin="55,30" MaxWidth="900" MaxHeight="780" VerticalAlignment="Center" Background="#172A49" BorderBrush="#31D6C8" BorderThickness="1" CornerRadius="16" Padding="22">
+                <Grid>
+                    <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+                    <DockPanel Margin="0,0,0,12">
+                        <Button DockPanel.Dock="Right" Content="Close" Click="CloseBuild_Click" Padding="12,5" />
+                        <TextBlock x:Name="BuildTitle" FontSize="24" FontWeight="Bold" />
+                    </DockPanel>
+                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto"><StackPanel x:Name="BuildFields" /></ScrollViewer>
+                    <StackPanel Grid.Row="2" Margin="0,12,0,0">
+                        <TextBlock x:Name="BuildError" TextWrapping="Wrap" Foreground="{StaticResource GoldBrush}" Margin="0,0,0,8" />
+                        <Button Content="Close" Click="CloseBuild_Click" Background="#168C87" HorizontalAlignment="Left" />
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
     </Grid>
 </Window>

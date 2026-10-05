@@ -53,7 +53,7 @@ public sealed class Hero
     [JsonIgnore] public bool IsSelected { get; set; }
     [JsonIgnore] public bool IsOwned { get; set; }
     [JsonIgnore] public HeroProgress Progress { get; set; } = new();
-    [JsonIgnore] public string Portrait => $"pack://application:,,,/Images/{AssetSlug}.png";
+    [JsonIgnore] public string Portrait => $"pack://application:,,,/TilesSurviveHeroPlanner;component/Images/{AssetSlug}.png";
     [JsonIgnore] public string FormationBand => Role switch
     {
         "Melee" => "Frontline",
@@ -131,7 +131,7 @@ public sealed class HeroSkill
 
     [JsonIgnore] public string DisplayName => !string.IsNullOrWhiteSpace(LocalizedName)
         ? LocalizedName : NormalAttack ? "Basic attack" : Slot > 0 ? $"Skill {Slot}" : HumanizeInternalName();
-    [JsonIgnore] public string Icon => string.IsNullOrWhiteSpace(IconAsset) ? "" : $"pack://application:,,,/Images/SkillIcons/{IconAsset}.png";
+    [JsonIgnore] public string Icon => string.IsNullOrWhiteSpace(IconAsset) ? "" : $"pack://application:,,,/TilesSurviveHeroPlanner;component/Images/SkillIcons/{IconAsset}.png";
     [JsonIgnore] public string Description => string.IsNullOrWhiteSpace(GameDescription)
         ? "The English client has no squad description for this skill."
         : System.Text.RegularExpressions.Regex.Replace(GameDescription, @"\{(\d+)\}", "[runtime value $1]");
@@ -251,6 +251,8 @@ public sealed class ReleaseScheduleItem
 
 public sealed class PlannerProfile
 {
+    [JsonPropertyName("hero_builds")] public Dictionary<string, HeroBuild> HeroBuilds { get; set; } = [];
+    [JsonPropertyName("upgrade_settings")] public UpgradeSettings UpgradeSettings { get; set; } = new();
     [JsonPropertyName("hero_progress")] public Dictionary<string, HeroProgress> HeroProgress { get; set; } = [];
     [JsonPropertyName("owned_heroes")] public HashSet<string> OwnedHeroes { get; set; } = [];
     [JsonPropertyName("server_open_date")] public DateTime? ServerOpenDate { get; set; }
