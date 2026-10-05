@@ -18,7 +18,7 @@
     const inventory={};
     if(value?.inventory && typeof value.inventory==="object")for(const [key,n] of Object.entries(value.inventory))
       if(typeof n==="number"&&Number.isFinite(n)&&n>=0&&n<=1e12)inventory[key]=n;
-    return {goal:goals.includes(value?.goal)?value.goal:"power",seconds:integer(value?.seconds,300)||30,inventory,onlyAffordable:value?.onlyAffordable===true};
+    return {goal:goals.includes(value?.goal)&&value.goal!=="direct"?value.goal:"power",seconds:integer(value?.seconds,300)||30,inventory,onlyAffordable:value?.onlyAffordable===true};
   }
   function state(slug,build,data,seconds) {
     const h=data.heroes[slug], b=sanitizeBuild(build,h), missing=[];
@@ -36,23 +36,16 @@
       if(!entry||slots.has(type.slot)||type.hero_level_required>b.level)return {error:"invalid, duplicate-slot or level-gated gear"};
       slots.add(type.slot);stats.forEach((_,i)=>stats[i]+=entry.stats[i]);power+=entry.power;
     }
-    let direct=0, directKnown=true;
+    // Offline native audit invalidated the display-parameter damage model.
     for(const skill of h.skills) {
       const n=b.skills[skill.id], cap=stage.skill_caps[skill.slot]??0;
       if(n!==undefined && (n>cap || (n>0&&!row(skill.levels,n))))return {error:`${skill.name}: level exceeds cap or is absent from data`};
-      if(skill.effect_type!==1 || !skill.damage_params.length || skill.conditional || skill.cooldown<=0)continue;
-      if(n===undefined){directKnown=false;continue;}
-      if(n===0)continue;
-      const coeff=skill.damage_ratio*(skill.damage_params[0]+(skill.damage_params[1]||0)*(n-1));
-      const window=seconds*1000;
-      const casts=window>skill.first_cast?Math.ceil((window-skill.first_cast)/skill.cooldown):0;
-      direct+=stats[0]*coeff*casts;
     }
     for(const skill of h.skills) {
       const n=b.skills[skill.id];
       if(n>0)power+=row(skill.levels,n)?.power||0;
     }
-    return {build:b,stage,level,stats,power,direct:directKnown?direct:null,missing};
+    return {build:b,stage,level,stats,power,direct:null,missing};
   }
   function evaluate(slugs,builds,data,settings={}) {
     settings=sanitizeSettings(settings);
@@ -93,10 +86,10 @@
         if(n===undefined){result.notes.push(`${h.name}: ${skill.name} level missing`);continue;}
         const next=row(skill.levels,n+1);
         if(!next)continue;
-        const supported=skill.effect_type===1&&skill.damage_params.length>0&&!skill.conditional&&skill.cooldown>0;
+        const supported=false;
         // Utility/conditional skills retain their cost and changed parameters, not an invented zero payoff.
         add(slug,`${h.name}: ${skill.name} ${n} → ${n+1}`,"skill",{...s.build,skills:{...s.build.skills,[skill.id]:n+1}},next.cost,
-          `SlgItemReq material cost. ${supported?"Affine direct-output estimate; ignores animation hit counts, movement and mitigation.":"Runtime utility / conditional effect not simulated."} ${next.params.join("; ")}`,
+          `SlgItemReq material cost. Runtime damage and utility return are not simulated; parameter values are modifiers, not ATK coefficients. ${next.params.join("; ")}`,
           n+1>cap?`Needs a higher rank (current skill cap ${cap})`:null,settings.goal==="direct"&&!supported);
       }
       for(const g of s.build.gear||[]){const type=data.gear[g.id], current=row(type.levels,g.level), next=row(type.levels,g.level+1);

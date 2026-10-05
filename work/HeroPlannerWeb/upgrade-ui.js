@@ -48,19 +48,19 @@
       }
     }
     return `<section class="guide-card resource" style="grid-column:1/-1"><h3>Data-driven next upgrades</h3><p>Client ${esc(data().client_build)}. Adjacent upgrades, ranked by gain per cost within each exact material. No fixed hero order. These are stat/contribution comparisons, not a complete battle simulation.</p>
-      <div class="control-strip"><label>Return metric<select id="upgrade-goal">${UpgradeModel.goals.map(g=>`<option value="${g}"${g===s.goal?' selected':''}>${labels[g]}</option>`).join('')}</select></label><label>Output window (seconds)${input('upgrade-seconds',s.seconds,300)}</label><label><input id="upgrade-affordable" type="checkbox"${s.onlyAffordable?' checked':''}> Only affordable</label></div>
-      <p>Direct-output mode is low-confidence: assumed affine skill scaling and millisecond cooldowns; no animation hit counts, defense, targeting, buffs, healing, control or summons. Power is the sum of recorded config contributions, not measured team power. ATK/HP/DEF totals are not damage/survival predictions. Rank unlocks do not grant free skill levels.</p>
+      <div class="control-strip"><label>Return metric<select id="upgrade-goal">${UpgradeModel.goals.filter(g=>g!=="direct").map(g=>`<option value="${g}"${g===s.goal?' selected':''}>${labels[g]}</option>`).join('')}</select></label><label><input id="upgrade-affordable" type="checkbox"${s.onlyAffordable?' checked':''}> Only affordable</label></div>
+      <p>Offline native audit invalidated the experimental direct-output ranking: display parameters are not runtime damage coefficients. Complete effects, cast timing and dynamic patches remain unverified. Power is the sum of recorded config contributions, not measured team power. ATK/HP/DEF totals are not damage/survival predictions. Rank unlocks do not grant free skill levels.</p>
       <details><summary>Resource balances (blank = unknown)</summary><div class="control-strip">${materials.map((id,i)=>`<label>${esc(data().items[id]||id)} [${esc(id)}]<input data-material="${esc(id)}" id="budget-${i}" type="number" min="0" max="1000000000000" step="1" placeholder="Unknown" value="${s.inventory[id]??''}"></label>`).join('')}</div></details>
       <button class="button secondary" id="save-upgrade-settings">Apply metric / balances</button><p>Building gates must be checked in-game. XP costs assume zero progress toward the next level. Shard conversions and multi-resource efficiencies are not assumed. Equal returns are ties; alphabetical display order is not an advantage.</p>${content}</section>`;
   }
   function bindPanel(profile,save,render){
     const button=document.getElementById('save-upgrade-settings');if(!button)return;
     button.onclick=()=>{
-      const fields=[document.getElementById('upgrade-seconds'),...document.querySelectorAll('[data-material]')];
+      const fields=[...document.querySelectorAll('[data-material]')];
       if(fields.some(x=>!x.reportValidity()))return;
       const inventory={...profile.upgradeSettings?.inventory};
       document.querySelectorAll('[data-material]').forEach(x=>{if(x.value==='')delete inventory[x.dataset.material];else inventory[x.dataset.material]=Number(x.value);});
-      profile.upgradeSettings=UpgradeModel.sanitizeSettings({goal:document.getElementById('upgrade-goal').value,seconds:Number(fields[0].value),onlyAffordable:document.getElementById('upgrade-affordable').checked,inventory});save();render();
+      profile.upgradeSettings=UpgradeModel.sanitizeSettings({goal:document.getElementById('upgrade-goal').value,seconds:profile.upgradeSettings?.seconds,onlyAffordable:document.getElementById('upgrade-affordable').checked,inventory});save();render();
     };
   }
   root.UpgradeUI={editor,bindEditor,panel,bindPanel};

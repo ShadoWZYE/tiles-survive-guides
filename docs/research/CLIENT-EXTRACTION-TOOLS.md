@@ -159,3 +159,14 @@ The bounded static tracer cannot follow the loader's indirect VM dispatch on its
 The published decoder reproduces those seven stream decodes directly, without CPU modeling, using raw LZMA with `lc=3`, `lp=0`, `pb=2`. It validates the client hash, exact compressed lengths, decompressed lengths, and end markers. Its output is indexed by RVA, with original pointer values at the preferred image base. It does not apply runtime fixups, initialize IL2CPP, repair metadata, or create a loadable DLL. Keep that output private and read it as analysis bytes.
 
 Other probes tried a zero-frequency mask, an English-frequency score, whole-word XOR/subtraction masks, and simple position-counter corrections. None yielded validated metadata. Searching known-text mask fragments found matches inside metadata but not in GameAssembly, NEP2 or UnityPlayer. Do not report these attempts as a working decoder.
+
+## Offline hero combat audit
+
+`work/hero-extraction/audit_combat_effects.py` inventories all supported heroes'
+runtime skill/release links, timeline events (keeping projectile-hit context),
+and per-effect numeric dependencies. It requires the same pack fingerprint as
+the planner dataset and validates its four tables against the current manifest.
+It does not execute effects or produce a combat ranking. See
+[the 2026-10-05 audit](HERO-COMBAT-AUDIT-2026-10-05.md) for native RVAs, findings,
+private disassembly tooling and remaining limitations. Keep raw timelines,
+metadata and recovered native images private; publish only normalized audit data.

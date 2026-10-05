@@ -39,16 +39,18 @@ test('all exported heroes have usable initial builds and bounded candidate retur
     assert.ok(r.candidates.length>0,slug);assert.ok(r.candidates.every(c=>c.gain===null||Number.isFinite(c.gain)),slug);
   }
 });
-test('direct-output estimates respond to skill level and retain unsupported utility as unknown',()=>{
+test('display parameters never invent combat return; legacy direct settings migrate to power',()=>{
   const d=structuredClone(fixture),h=d.heroes.a;
   h.stages.forEach(s=>s.skill_caps=[2,2]);
   h.skills=[{id:'hit',name:'Hit',slot:0,effect_type:1,damage_ratio:1,damage_params:[1,1],cooldown:1000,first_cast:0,conditional:false,levels:[{level:1,power:0,cost:{book:1},params:[]},{level:2,power:0,cost:{book:2},params:[]}]},
     {id:'utility',name:'Utility',slot:1,effect_type:3,damage_ratio:0,damage_params:[],cooldown:1000,first_cast:0,conditional:true,levels:[{level:1,power:0,cost:{book:1},params:[]},{level:2,power:0,cost:{book:2},params:[]}]}];
   const b={...builds.a,skills:{hit:1,utility:1}};
-  assert.equal(model.state('a',b,d,30).direct,3000);
+  assert.equal(model.state('a',b,d,30).direct,null);
+  assert.equal(model.sanitizeSettings({goal:'direct'}).goal,'power');
   const r=model.evaluate(['a'],{a:b},d,{goal:'direct'});
-  const hit=r.candidates.find(c=>c.label.includes('Hit'));assert.equal(hit.gain,100);assert.equal(hit.efficiency,5000);
-  const utility=r.candidates.find(c=>c.label.includes('Utility'));assert.equal(utility.gain,null);assert.ok(utility.unsupported);
+  assert.equal(r.goal,'power');
+  const hit=r.candidates.find(c=>c.label.includes('Hit'));assert.equal(hit.gain,0);assert.equal(hit.efficiency,0);
+  const utility=r.candidates.find(c=>c.label.includes('Utility'));assert.equal(utility.gain,0);
   const unknown={...b,skills:{utility:1}};assert.equal(model.evaluate(['a'],{a:unknown},d,{goal:'direct'}).baseline.direct,null);
 });
 test('duplicate gear slots and level gates are blocked instead of counted twice',()=>{

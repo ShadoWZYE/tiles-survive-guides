@@ -1,0 +1,5364 @@
+{
+  "heroes_verified": 29,
+  "heroes": {
+    "dave": {
+      "name": "Dave",
+      "skills": [
+        {
+          "id": "survivor_dave_attack",
+          "runtime_skill": "survivor_dave_attack",
+          "base_cooldown_ms": 1000,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.33,
+              "reference": "damage_dave_attack",
+              "event_type": 1,
+              "context": "projectile_hit"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "damage_dave_attack",
+              "type": 0,
+              "base_param2": 1000,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_dave_skill_1",
+          "runtime_skill": "survivor_dave_skill_1",
+          "base_cooldown_ms": 9000,
+          "base_pre_cooldown_ms": 6300,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.33,
+              "reference": "damage_dave_skill_1",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.44,
+              "reference": "damage_dave_skill_1",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.55,
+              "reference": "damage_dave_skill_1",
+              "event_type": 1,
+              "context": "projectile_hit"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "damage_dave_skill_1",
+              "type": 0,
+              "base_param2": 4500,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "damage_dave_skill_1_text",
+              "type": 0,
+              "base_param2": 13500,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_dave_skill_2",
+          "runtime_skill": "survivor_dave_skill_2",
+          "base_cooldown_ms": 99999,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "dave_skill_2_weaken_team_atk",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "dave_skill_2_weaken_team_def",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_dave_skill_3",
+          "runtime_skill": "survivor_dave_skill_3",
+          "base_cooldown_ms": 99999,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "effect_skill_3_fake_text_orange",
+              "type": 1,
+              "base_param2": 200,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_2",
+              "type": 1,
+              "base_param2": 300,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_3",
+              "type": 1,
+              "base_param2": 400,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_4",
+              "type": 1,
+              "base_param2": 500,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        }
+      ]
+    },
+    "knotty": {
+      "name": "Knotty",
+      "skills": [
+        {
+          "id": "survivor_knotty_attack",
+          "runtime_skill": "survivor_knotty_attack",
+          "base_cooldown_ms": 1000,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.5699999928474426,
+              "reference": "damage_knotty_attack",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.5699999928474426,
+              "reference": "knotty_attack_summon_explode",
+              "event_type": 1,
+              "context": "projectile_hit"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "damage_knotty_attack",
+              "type": 0,
+              "base_param2": 850,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "damage_knotty_attack_2",
+              "type": 0,
+              "base_param2": 1700,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "knotty_attack_summon_explode",
+              "type": 7,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 3000
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_knotty_skill_1",
+          "runtime_skill": "survivor_knotty_skill_1",
+          "base_cooldown_ms": 11000,
+          "base_pre_cooldown_ms": 7700,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "knotty_skill_1_buff_inc_dmg",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "knotty_skill_1_buff_inc_dmg_text",
+              "type": 0,
+              "base_param2": 500,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "knotty_skill_1_buff_inc_range_text",
+              "type": 0,
+              "base_param2": 1000,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "knotty_skill_1_buff_time_text",
+              "type": 0,
+              "base_param2": 7000,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_knotty_skill_2",
+          "runtime_skill": "survivor_knotty_skill_2",
+          "base_cooldown_ms": 99999,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "knotty_skill_2_buff_inc_atk",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_knotty_skill_3",
+          "runtime_skill": "survivor_knotty_skill_3",
+          "base_cooldown_ms": 99999,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "effect_skill_3_fake_text_orange",
+              "type": 1,
+              "base_param2": 200,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_2",
+              "type": 1,
+              "base_param2": 300,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_3",
+              "type": 1,
+              "base_param2": 400,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_4",
+              "type": 1,
+              "base_param2": 500,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        }
+      ]
+    },
+    "tony": {
+      "name": "Tony",
+      "skills": [
+        {
+          "id": "survivor_tony_attack",
+          "runtime_skill": "survivor_tony_attack",
+          "base_cooldown_ms": 1000,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.033043477684259415,
+              "reference": "damage_tony_attack",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.11652173846960068,
+              "reference": "damage_tony_attack_2",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.1721739023923874,
+              "reference": "damage_tony_attack_2",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.1721739023923874,
+              "reference": "damage_tony_attack_2",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.29739129543304443,
+              "reference": "damage_tony_attack_2",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.35304346680641174,
+              "reference": "damage_tony_attack_2",
+              "event_type": 1,
+              "context": "projectile_hit"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "damage_tony_attack",
+              "type": 0,
+              "base_param2": 100,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "damage_tony_attack_2",
+              "type": 0,
+              "base_param2": 100,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "damage_tony_attack_text",
+              "type": 0,
+              "base_param2": 1020,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_tony_skill_1",
+          "runtime_skill": "survivor_tony_skill_1",
+          "base_cooldown_ms": 8000,
+          "base_pre_cooldown_ms": 5600,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.1,
+              "reference": "tony_skill_1_jump",
+              "event_type": 1,
+              "context": "timeline"
+            },
+            {
+              "stage_time_seconds": 0.05,
+              "reference": "damage_tony_skill_1_2",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.35,
+              "reference": "damage_tony_skill_1_2",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.6,
+              "reference": "damage_tony_skill_1_2",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.6,
+              "reference": "kt_tony_skill_1_buff_mark",
+              "event_type": 1,
+              "context": "projectile_hit"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "damage_tony_skill_1_1",
+              "type": 0,
+              "base_param2": 250,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "damage_tony_skill_1_2",
+              "type": 0,
+              "base_param2": 1500,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "damage_tony_skill_1_text",
+              "type": 0,
+              "base_param2": 5000,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "kt_tony_skill_1_buff_mark",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "kt_tony_skill_1_buff_mark_text",
+              "type": 0,
+              "base_param2": 120,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "tony_skill_1_jump",
+              "type": 13,
+              "base_param2": 400,
+              "base_param3": 750,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_tony_skill_2",
+          "runtime_skill": "survivor_tony_skill_2",
+          "base_cooldown_ms": 99999,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "kt_tony_skill_1_buff_inc_dmg_dec",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "kt_tony_skill_2_buff_inc_team_def",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_tony_skill_3",
+          "runtime_skill": "survivor_tony_skill_3",
+          "base_cooldown_ms": 99999,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "effect_skill_3_empty",
+              "type": 1,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange",
+              "type": 1,
+              "base_param2": 200,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_2",
+              "type": 1,
+              "base_param2": 300,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_3",
+              "type": 1,
+              "base_param2": 400,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_4",
+              "type": 1,
+              "base_param2": 500,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        }
+      ]
+    },
+    "nikola": {
+      "name": "Nikola",
+      "skills": [
+        {
+          "id": "survivor_nikola_attack",
+          "runtime_skill": "survivor_nikola_attack",
+          "base_cooldown_ms": 1000,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.15294118225574493,
+              "reference": "damage_nikola_attack",
+              "event_type": 1,
+              "context": "projectile_hit"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "damage_attack_100",
+              "type": 0,
+              "base_param2": 1000,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "damage_nikola_attack",
+              "type": 0,
+              "base_param2": 660,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_nikola_skill_1",
+          "runtime_skill": "survivor_nikola_skill_1",
+          "base_cooldown_ms": 7000,
+          "base_pre_cooldown_ms": 4900,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.0,
+              "reference": "kt_nikola_skill_1_shield",
+              "event_type": 1,
+              "context": "timeline"
+            },
+            {
+              "stage_time_seconds": 0.5,
+              "reference": "kt_nikola_skill_1_buff_inc_atk",
+              "event_type": 1,
+              "context": "timeline"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "kt_nikola_skill_1_buff_inc_atk",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "kt_nikola_skill_1_shield",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "kt_nikola_skill_1_shield_text",
+              "type": 0,
+              "base_param2": 12000,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_nikola_skill_2",
+          "runtime_skill": "survivor_nikola_skill_2",
+          "base_cooldown_ms": 0,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "nikola_skill_2_cleanse",
+              "type": 10,
+              "base_param2": 1,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "nikola_skill_2_inc_atk",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "nikola_skill_2_inc_def",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "nikola_skill_2_shield",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_nikola_skill_3",
+          "runtime_skill": "survivor_nikola_skill_3",
+          "base_cooldown_ms": 99999,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "effect_skill_3_empty",
+              "type": 1,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange",
+              "type": 1,
+              "base_param2": 200,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_2",
+              "type": 1,
+              "base_param2": 300,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_3",
+              "type": 1,
+              "base_param2": 400,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_4",
+              "type": 1,
+              "base_param2": 500,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        }
+      ]
+    },
+    "becca": {
+      "name": "Becca",
+      "skills": [
+        {
+          "id": "survivor_becca_attack",
+          "runtime_skill": "survivor_becca_attack",
+          "base_cooldown_ms": 1000,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.05999999865889549,
+              "reference": "damage_becca_attack",
+              "event_type": 1,
+              "context": "projectile_hit"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "damage_attack_100",
+              "type": 0,
+              "base_param2": 1000,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "damage_becca_attack",
+              "type": 0,
+              "base_param2": 600,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_becca_skill_1",
+          "runtime_skill": "survivor_becca_skill_1",
+          "base_cooldown_ms": 9000,
+          "base_pre_cooldown_ms": 6300,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.513081431388855,
+              "reference": "damage_becca_skill_1",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.0,
+              "reference": "becca_skill_1_self_crit",
+              "event_type": 1,
+              "context": "timeline"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "becca_skill_1_self_crit",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "becca_skill_1_trigger_text",
+              "type": 0,
+              "base_param2": 25,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "damage_becca_skill_1",
+              "type": 0,
+              "base_param2": 14000,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_becca_skill_2",
+          "runtime_skill": "survivor_becca_skill_2",
+          "base_cooldown_ms": 99999,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "buff_becca_skill_2_weaken_enemy_def",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_becca_skill_3",
+          "runtime_skill": "survivor_becca_skill_3",
+          "base_cooldown_ms": 99999,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "effect_skill_3_empty",
+              "type": 1,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange",
+              "type": 1,
+              "base_param2": 200,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_2",
+              "type": 1,
+              "base_param2": 300,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_3",
+              "type": 1,
+              "base_param2": 400,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_4",
+              "type": 1,
+              "base_param2": 500,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        }
+      ]
+    },
+    "wright": {
+      "name": "Wright",
+      "skills": [
+        {
+          "id": "survivor_wright_attack",
+          "runtime_skill": "survivor_wright_attack",
+          "base_cooldown_ms": 1000,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.03333333507180214,
+              "reference": "damage_wright_attack",
+              "event_type": 1,
+              "context": "projectile_hit"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "damage_attack_100",
+              "type": 0,
+              "base_param2": 1000,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "damage_wright_attack",
+              "type": 0,
+              "base_param2": 600,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_wright_skill_1",
+          "runtime_skill": "survivor_wright_skill_1",
+          "base_cooldown_ms": 9000,
+          "base_pre_cooldown_ms": 6300,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.30000001192092896,
+              "reference": "wright_skill_summon_damagezone",
+              "event_type": 1,
+              "context": "projectile_hit"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "damage_wright_skill_1",
+              "type": 0,
+              "base_param2": 10000,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "wright_skill_summon_damagezone",
+              "type": 7,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 1000
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_wright_skill_2",
+          "runtime_skill": "survivor_wright_skill_2",
+          "base_cooldown_ms": 99999,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "kt_wright_skill_2_buff_inc_team_atk",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_wright_skill_3",
+          "runtime_skill": "survivor_wright_skill_3",
+          "base_cooldown_ms": 99999,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "effect_skill_3_empty",
+              "type": 1,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange",
+              "type": 1,
+              "base_param2": 200,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_2",
+              "type": 1,
+              "base_param2": 300,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_3",
+              "type": 1,
+              "base_param2": 400,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_4",
+              "type": 1,
+              "base_param2": 500,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        }
+      ]
+    },
+    "tithi": {
+      "name": "Kiki",
+      "skills": [
+        {
+          "id": "survivor_tithi_attack",
+          "runtime_skill": "survivor_tithi_attack",
+          "base_cooldown_ms": 1200,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.6100000143051147,
+              "reference": "damage_tithi_attack",
+              "event_type": 1,
+              "context": "projectile_hit"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "damage_attack_60",
+              "type": 0,
+              "base_param2": 600,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "damage_tithi_attack",
+              "type": 0,
+              "base_param2": 430,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_tithi_skill_1",
+          "runtime_skill": "survivor_tithi_skill_1",
+          "base_cooldown_ms": 9000,
+          "base_pre_cooldown_ms": 6300,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.5,
+              "reference": "damage_tithi_skill_1",
+              "event_type": 1,
+              "context": "projectile_hit"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "damage_tithi_skill_1",
+              "type": 0,
+              "base_param2": 10000,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "tithi_skill_1_buff_text",
+              "type": 0,
+              "base_param2": 150,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_tithi_skill_2",
+          "runtime_skill": "survivor_tithi_skill_2",
+          "base_cooldown_ms": 99999,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "kt_tithi_skill_2_buff_inc_self_atk",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_tithi_skill_3",
+          "runtime_skill": "survivor_tithi_skill_3",
+          "base_cooldown_ms": 99999,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "effect_skill_3_empty",
+              "type": 1,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange",
+              "type": 1,
+              "base_param2": 200,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_2",
+              "type": 1,
+              "base_param2": 300,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_3",
+              "type": 1,
+              "base_param2": 400,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_4",
+              "type": 1,
+              "base_param2": 500,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        }
+      ]
+    },
+    "tara": {
+      "name": "Tara",
+      "skills": [
+        {
+          "id": "survivor_tara_attack",
+          "runtime_skill": "survivor_tara_attack",
+          "base_cooldown_ms": 1000,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.42500001192092896,
+              "reference": "damage_tara_attack",
+              "event_type": 1,
+              "context": "projectile_hit"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "damage_attack_60",
+              "type": 0,
+              "base_param2": 600,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "damage_tara_attack",
+              "type": 0,
+              "base_param2": 480,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_tara_skill_1",
+          "runtime_skill": "survivor_tara_skill_1",
+          "base_cooldown_ms": 8000,
+          "base_pre_cooldown_ms": 5600,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.7234042286872864,
+              "reference": "damage_tara_skill_1",
+              "event_type": 1,
+              "context": "projectile_hit"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "damage_tara_skill_1",
+              "type": 0,
+              "base_param2": 6000,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "tara_skill_text_damage",
+              "type": 0,
+              "base_param2": 7500,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_tara_skill_2",
+          "runtime_skill": "survivor_tara_skill_2",
+          "base_cooldown_ms": 99999,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "kt_tara_skill_2_buff_inc_team_def",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_tara_skill_3",
+          "runtime_skill": "survivor_tara_skill_3",
+          "base_cooldown_ms": 99999,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "effect_skill_3_empty",
+              "type": 1,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange",
+              "type": 1,
+              "base_param2": 200,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_2",
+              "type": 1,
+              "base_param2": 300,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_3",
+              "type": 1,
+              "base_param2": 400,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_4",
+              "type": 1,
+              "base_param2": 500,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        }
+      ]
+    },
+    "jacob": {
+      "name": "Jacob",
+      "skills": [
+        {
+          "id": "survivor_jacob_attack",
+          "runtime_skill": "survivor_jacob_attack",
+          "base_cooldown_ms": 1500,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.3100000023841858,
+              "reference": "damage_jacob_attack",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.3100000023841858,
+              "reference": "jacob_attack_weaken_def",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.6000000238418579,
+              "reference": "damage_jacob_attack",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.6000000238418579,
+              "reference": "jacob_attack_weaken_def",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.9100000262260437,
+              "reference": "damage_jacob_attack",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.9100000262260437,
+              "reference": "jacob_attack_weaken_def",
+              "event_type": 1,
+              "context": "projectile_hit"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "damage_jacob_attack",
+              "type": 0,
+              "base_param2": 300,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "jacob_attack_text_damage",
+              "type": 0,
+              "base_param2": 1000,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "jacob_attack_text_time",
+              "type": 0,
+              "base_param2": 500,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "jacob_attack_weaken_def",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_jacob_skill_1",
+          "runtime_skill": "survivor_jacob_skill_1",
+          "base_cooldown_ms": 8000,
+          "base_pre_cooldown_ms": 5600,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.5,
+              "reference": "jacob_skill_summon_damagezone",
+              "event_type": 1,
+              "context": "projectile_hit"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "jacob_skill_summon_damagezone",
+              "type": 7,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 8000
+            },
+            {
+              "id": "jacob_skill_text_damage",
+              "type": 0,
+              "base_param2": 10000,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_jacob_skill_2",
+          "runtime_skill": "survivor_jacob_skill_2",
+          "base_cooldown_ms": 99999,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "kt_jacob_skill_2_weaken_team_atk",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "kt_jacob_skill_2_weaken_team_def",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_jacob_skill_3",
+          "runtime_skill": "survivor_jacob_skill_3",
+          "base_cooldown_ms": 99999,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "effect_skill_3_empty",
+              "type": 1,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange",
+              "type": 1,
+              "base_param2": 200,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_2",
+              "type": 1,
+              "base_param2": 300,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_3",
+              "type": 1,
+              "base_param2": 400,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_4",
+              "type": 1,
+              "base_param2": 500,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        }
+      ]
+    },
+    "tarzan": {
+      "name": "Tarzan",
+      "skills": [
+        {
+          "id": "survivor_tarzan_attack",
+          "runtime_skill": "survivor_tarzan_attack",
+          "base_cooldown_ms": 1000,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.4166666567325592,
+              "reference": "damage_tarzan_attack_1",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.20000000298023224,
+              "reference": "tarzan_attack_buff_inc_self_dmg_dec",
+              "event_type": 1,
+              "context": "timeline"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "damage_attack_60",
+              "type": 0,
+              "base_param2": 600,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "damage_tarzan_attack_1",
+              "type": 0,
+              "base_param2": 210,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "tarzan_attack_buff_inc_self_dmg_dec",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_tarzan_skill_1",
+          "runtime_skill": "survivor_tarzan_skill_1",
+          "base_cooldown_ms": 6000,
+          "base_pre_cooldown_ms": 4200,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.1,
+              "reference": "tarzan_skill_1_jump",
+              "event_type": 1,
+              "context": "timeline"
+            },
+            {
+              "stage_time_seconds": 0.95,
+              "reference": "tarzan_skill_1_buff_counterattack",
+              "event_type": 1,
+              "context": "timeline"
+            },
+            {
+              "stage_time_seconds": 0.5,
+              "reference": "damage_tarzan_skill_1_3",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.45,
+              "reference": "tarzan_skill_summon_vfx",
+              "event_type": 1,
+              "context": "timeline"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "damage_tarzan_counterattack",
+              "type": 0,
+              "base_param2": 1000,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "damage_tarzan_skill_1",
+              "type": 0,
+              "base_param2": 6500,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "damage_tarzan_skill_1_3",
+              "type": 0,
+              "base_param2": 5500,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "tarzan_skill_1_buff_counterattack",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "tarzan_skill_1_buff_counterattack_text",
+              "type": 0,
+              "base_param2": 150,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "tarzan_skill_1_jump",
+              "type": 13,
+              "base_param2": 400,
+              "base_param3": 2000,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "tarzan_skill_summon_vfx",
+              "type": 7,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 3000
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_tarzan_skill_2",
+          "runtime_skill": "survivor_tarzan_skill_2",
+          "base_cooldown_ms": 99999,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "kt_tarzan_skill_2_buff_inc_self_atk",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "kt_tarzan_skill_2_buff_inc_self_def",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_tarzan_skill_3",
+          "runtime_skill": "survivor_tarzan_skill_3",
+          "base_cooldown_ms": 99999,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "effect_skill_3_empty",
+              "type": 1,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange",
+              "type": 1,
+              "base_param2": 200,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_2",
+              "type": 1,
+              "base_param2": 300,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_3",
+              "type": 1,
+              "base_param2": 400,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_4",
+              "type": 1,
+              "base_param2": 500,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        }
+      ]
+    },
+    "chiron": {
+      "name": "Chiron",
+      "skills": [
+        {
+          "id": "survivor_chiron_attack",
+          "runtime_skill": "survivor_chiron_attack",
+          "base_cooldown_ms": 1000,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.6499999761581421,
+              "reference": "damage_chiron_attack",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.0,
+              "reference": "chiron_skill_1_self_crit",
+              "event_type": 1,
+              "context": "timeline"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "chiron_skill_1_self_crit",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "damage_attack_100",
+              "type": 0,
+              "base_param2": 1000,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "damage_chiron_attack",
+              "type": 0,
+              "base_param2": 800,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_chiron_skill_1",
+          "runtime_skill": "survivor_chiron_skill_1",
+          "base_cooldown_ms": 9000,
+          "base_pre_cooldown_ms": 6300,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.45652174949645996,
+              "reference": "damage_chiron_skill_1",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.45652174949645996,
+              "reference": "chiron_skill_1_debuff_def",
+              "event_type": 1,
+              "context": "projectile_hit"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "chiron_skill_1_debuff_def",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "chiron_skill_1_debuff_def_text",
+              "type": 0,
+              "base_param2": 100,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "damage_chiron_skill_1",
+              "type": 0,
+              "base_param2": 10000,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_chiron_skill_2",
+          "runtime_skill": "survivor_chiron_skill_2",
+          "base_cooldown_ms": 99999,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "kt_chiron_skill_2_inc_team_atk",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "kt_chiron_skill_2_inc_team_def",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_chiron_skill_3",
+          "runtime_skill": "survivor_chiron_skill_3",
+          "base_cooldown_ms": 99999,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "effect_skill_3_empty",
+              "type": 1,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange",
+              "type": 1,
+              "base_param2": 200,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_2",
+              "type": 1,
+              "base_param2": 300,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_3",
+              "type": 1,
+              "base_param2": 400,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_4",
+              "type": 1,
+              "base_param2": 500,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        }
+      ]
+    },
+    "undine": {
+      "name": "Undine",
+      "skills": [
+        {
+          "id": "survivor_undine_attack",
+          "runtime_skill": "survivor_undine_attack",
+          "base_cooldown_ms": 1000,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "damage_undine_attack",
+              "type": 0,
+              "base_param2": 440,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_undine_skill_1",
+          "runtime_skill": "survivor_undine_skill_1",
+          "base_cooldown_ms": 8000,
+          "base_pre_cooldown_ms": 6400,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.1899999976158142,
+              "reference": "damage_undine_skill1",
+              "event_type": 1,
+              "context": "projectile_hit"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "damage_undine_skill1",
+              "type": 0,
+              "base_param2": 3650,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_undine_skill_2",
+          "runtime_skill": "survivor_undine_skill_2",
+          "base_cooldown_ms": 99999,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "damage_undine_skill2",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_undine_skill_3",
+          "runtime_skill": "survivor_undine_skill_3",
+          "base_cooldown_ms": 99999,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "effect_skill_3_fake_text_orange",
+              "type": 1,
+              "base_param2": 200,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_2",
+              "type": 1,
+              "base_param2": 300,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_3",
+              "type": 1,
+              "base_param2": 400,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_4",
+              "type": 1,
+              "base_param2": 500,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        }
+      ]
+    },
+    "ray": {
+      "name": "Ray",
+      "skills": [
+        {
+          "id": "survivor_ray_attack",
+          "runtime_skill": "survivor_ray_attack",
+          "base_cooldown_ms": 1000,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.25,
+              "reference": "ray_attack_summon_damagezone",
+              "event_type": 1,
+              "context": "projectile_hit"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "damage_attack_60",
+              "type": 0,
+              "base_param2": 600,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "damage_ray_attack",
+              "type": 0,
+              "base_param2": 360,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "ray_attack_summon_damagezone",
+              "type": 7,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 1000
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_ray_skill_1",
+          "runtime_skill": "survivor_ray_skill_1",
+          "base_cooldown_ms": 9000,
+          "base_pre_cooldown_ms": 6300,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.30979999899864197,
+              "reference": "ray_skill_summon_damagezone2",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.4425197243690491,
+              "reference": "ray_skill_summon_damagezone",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.5732283592224121,
+              "reference": "ray_skill_summon_damagezone3",
+              "event_type": 1,
+              "context": "projectile_hit"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "damage_ray_skill_1",
+              "type": 0,
+              "base_param2": 3200,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "damage_ray_skill_1_2",
+              "type": 0,
+              "base_param2": 2400,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "damage_ray_skill_1_3",
+              "type": 0,
+              "base_param2": 4000,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "damage_ray_skill_1_text",
+              "type": 0,
+              "base_param2": 9600,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "ray_skill_summon_damagezone",
+              "type": 7,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 1000
+            },
+            {
+              "id": "ray_skill_summon_damagezone2",
+              "type": 7,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 1000
+            },
+            {
+              "id": "ray_skill_summon_damagezone3",
+              "type": 7,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 1000
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_ray_skill_2",
+          "runtime_skill": "survivor_ray_skill_2",
+          "base_cooldown_ms": 5000,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "damage_eagl_attack",
+              "type": 0,
+              "base_param2": 4000,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "ray_skill_3_eagle_buff",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "survivor_ray_skill_2_triger_effect",
+              "type": 1,
+              "base_param2": 2000,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "survivor_ray_skill_2_triger_effect_text",
+              "type": 1,
+              "base_param2": 500,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_ray_skill_3",
+          "runtime_skill": "survivor_ray_skill_3",
+          "base_cooldown_ms": 99999,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "effect_skill_3_empty",
+              "type": 1,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange",
+              "type": 1,
+              "base_param2": 200,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_2",
+              "type": 1,
+              "base_param2": 300,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_3",
+              "type": 1,
+              "base_param2": 400,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_4",
+              "type": 1,
+              "base_param2": 500,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        }
+      ]
+    },
+    "shark": {
+      "name": "Shark",
+      "skills": [
+        {
+          "id": "survivor_shark_attack",
+          "runtime_skill": "survivor_shark_attack",
+          "base_cooldown_ms": 1500,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.3499999940395355,
+              "reference": "damage_shark_attack",
+              "event_type": 1,
+              "context": "projectile_hit"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "damage_shark_attack",
+              "type": 0,
+              "base_param2": 570,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_shark_skill_1",
+          "runtime_skill": "survivor_shark_skill_1",
+          "base_cooldown_ms": 10000,
+          "base_pre_cooldown_ms": 4200,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.33000001311302185,
+              "reference": "shark_skill_1_buff_inc_self_dmg_dec",
+              "event_type": 1,
+              "context": "timeline"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "damage_shark_skill_1",
+              "type": 0,
+              "base_param2": 830,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "shark_skill_1_buff_inc_self_dmg_dec",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_shark_skill_2",
+          "runtime_skill": "survivor_shark_skill_2",
+          "base_cooldown_ms": 99999,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "shark_skill_2_buff_inc_def",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "shark_skill_2_buff_inc_hpmax",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_shark_skill_3",
+          "runtime_skill": "survivor_shark_skill_3",
+          "base_cooldown_ms": 99999,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "effect_skill_3_fake_text_orange",
+              "type": 1,
+              "base_param2": 200,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_2",
+              "type": 1,
+              "base_param2": 300,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_3",
+              "type": 1,
+              "base_param2": 400,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_4",
+              "type": 1,
+              "base_param2": 500,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        }
+      ]
+    },
+    "ragnar": {
+      "name": "Ragnar",
+      "skills": [
+        {
+          "id": "survivor_ragnar_attack",
+          "runtime_skill": "survivor_ragnar_attack",
+          "base_cooldown_ms": 1000,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.3499999940395355,
+              "reference": "damage_ragnar_attack",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.3499999940395355,
+              "reference": "damage_ragnar_attack",
+              "event_type": 1,
+              "context": "projectile_hit"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "damage_ragnar_attack",
+              "type": 0,
+              "base_param2": 900,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "survivor_ragnar_attack_1_triger_times",
+              "type": 0,
+              "base_param2": 2,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "survivor_ragnar_attack_debuff_text",
+              "type": 0,
+              "base_param2": -150,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_ragnar_skill_1",
+          "runtime_skill": "survivor_ragnar_skill_1",
+          "base_cooldown_ms": 10000,
+          "base_pre_cooldown_ms": 7000,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.0,
+              "reference": "ragnar_skill_1_summon",
+              "event_type": 1,
+              "context": "timeline"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "damage_ragnar_skill_1",
+              "type": 0,
+              "base_param2": 4000,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "ragnar_skill_1_summon",
+              "type": 7,
+              "base_param2": 2,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 7000
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_ragnar_skill_2",
+          "runtime_skill": "survivor_ragnar_skill_2",
+          "base_cooldown_ms": 99999,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "ragnar_skill_2_buff_inc_atk",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "ragnar_skill_2_buff_inc_def",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_ragnar_skill_3",
+          "runtime_skill": "survivor_ragnar_skill_3",
+          "base_cooldown_ms": 99999,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "effect_skill_3_fake_text_orange",
+              "type": 1,
+              "base_param2": 200,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_2",
+              "type": 1,
+              "base_param2": 300,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_3",
+              "type": 1,
+              "base_param2": 400,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_4",
+              "type": 1,
+              "base_param2": 500,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        }
+      ]
+    },
+    "lava": {
+      "name": "Lava",
+      "skills": [
+        {
+          "id": "survivor_lava_attack",
+          "runtime_skill": "survivor_lava_attack",
+          "base_cooldown_ms": 300,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.21428571428571427,
+              "reference": "lava_attack01_cast_vfx",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.21428571428571427,
+              "reference": "lava_attack02_cast_vfx",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.21428571428571427,
+              "reference": "damage_lava_attack",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.21428571428571427,
+              "reference": "lava_attack01_hit_vfx",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.21428571428571427,
+              "reference": "lava_attack02_hit_vfx",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.21428571428571427,
+              "reference": "lava_attack_add_burn",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.21428571428571427,
+              "reference": "lava_skill_2_lowhp_heal",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.21428571428571427,
+              "reference": "lava_skill_1_burning_extra",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.6,
+              "reference": "damage_lava_attack_2",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.6,
+              "reference": "lava_attack01_hit_vfx",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.6,
+              "reference": "lava_attack02_hit_vfx",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.6,
+              "reference": "lava_attack_add_burn",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.6,
+              "reference": "lava_skill_2_lowhp_heal",
+              "event_type": 1,
+              "context": "projectile_hit"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "damage_lava_attack",
+              "type": 0,
+              "base_param2": 350,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "damage_lava_attack_2",
+              "type": 0,
+              "base_param2": 350,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "lava_attack01_cast_vfx",
+              "type": 0,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "lava_attack01_hit_vfx",
+              "type": 0,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "lava_attack02_cast_vfx",
+              "type": 0,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "lava_attack02_hit_vfx",
+              "type": 0,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "lava_attack_add_burn",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "lava_skill_1_burning_extra",
+              "type": 0,
+              "base_param2": 150,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "lava_skill_2_lowhp_heal",
+              "type": 1,
+              "base_param2": 500,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "survivor_lava_attack_1_triger_times",
+              "type": 0,
+              "base_param2": 250,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "survivor_lava_attack_debuff_text",
+              "type": 0,
+              "base_param2": 500,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_lava_skill_1",
+          "runtime_skill": "survivor_lava_skill_1",
+          "base_cooldown_ms": 12000,
+          "base_pre_cooldown_ms": 8400,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.3243243098258972,
+              "reference": "lava_skill_1_molten",
+              "event_type": 1,
+              "context": "timeline"
+            },
+            {
+              "stage_time_seconds": 0.3243243098258972,
+              "reference": "lava_skill_1_material",
+              "event_type": 1,
+              "context": "timeline"
+            },
+            {
+              "stage_time_seconds": 0.3243243098258972,
+              "reference": "damage_lava_skill_1",
+              "event_type": 1,
+              "context": "projectile_hit"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "damage_lava_skill_1",
+              "type": 0,
+              "base_param2": 8000,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "lava_skill_1_burning_extra",
+              "type": 0,
+              "base_param2": 150,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "lava_skill_1_material",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "lava_skill_1_molten",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "lava_skill_1_molten_text_damage",
+              "type": 0,
+              "base_param2": 15,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "lava_skill_1_molten_text_speed",
+              "type": 0,
+              "base_param2": 100,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_lava_skill_2",
+          "runtime_skill": "survivor_lava_skill_2",
+          "base_cooldown_ms": 99999,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "lava_skill_2_highhp_buff",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "lava_skill_2_text_damage",
+              "type": 0,
+              "base_param2": 750,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "lava_skill_2_text_heal",
+              "type": 0,
+              "base_param2": 100,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_lava_skill_3",
+          "runtime_skill": "survivor_lava_skill_3",
+          "base_cooldown_ms": 99999,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "effect_skill_3_fake_text_orange",
+              "type": 1,
+              "base_param2": 200,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_2",
+              "type": 1,
+              "base_param2": 300,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_3",
+              "type": 1,
+              "base_param2": 400,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_4",
+              "type": 1,
+              "base_param2": 500,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        }
+      ]
+    },
+    "maddie": {
+      "name": "Maddie",
+      "skills": [
+        {
+          "id": "survivor_maddie_attack",
+          "runtime_skill": "survivor_maddie_attack",
+          "base_cooldown_ms": 1000,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.10000000149011612,
+              "reference": "damage_maddie_attack",
+              "event_type": 1,
+              "context": "projectile_hit"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "damage_attack_100",
+              "type": 0,
+              "base_param2": 1000,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "damage_maddie_attack",
+              "type": 0,
+              "base_param2": 600,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_maddie_skill_1",
+          "runtime_skill": "survivor_maddie_skill_1",
+          "base_cooldown_ms": 10000,
+          "base_pre_cooldown_ms": 7000,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.7064103484153748,
+              "reference": "summon_maddie_skill_1",
+              "event_type": 1,
+              "context": "projectile_hit"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "damage_maddie_skill_1",
+              "type": 0,
+              "base_param2": 10000,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "summon_maddie_skill_1",
+              "type": 7,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 2000
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_maddie_skill_2",
+          "runtime_skill": "survivor_maddie_skill_2",
+          "base_cooldown_ms": 12000,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.31889763474464417,
+              "reference": "maddie_skill_summon_dog",
+              "event_type": 1,
+              "context": "timeline"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "heal_summon_frank_skill",
+              "type": 1,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "maddie_skill_summon_dog",
+              "type": 7,
+              "base_param2": 2,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 10000
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_maddie_skill_3",
+          "runtime_skill": "survivor_maddie_skill_3",
+          "base_cooldown_ms": 99999,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "effect_skill_3_empty",
+              "type": 1,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange",
+              "type": 1,
+              "base_param2": 200,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_2",
+              "type": 1,
+              "base_param2": 300,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_3",
+              "type": 1,
+              "base_param2": 400,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_4",
+              "type": 1,
+              "base_param2": 500,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        }
+      ]
+    },
+    "rosie": {
+      "name": "Rosie",
+      "skills": [
+        {
+          "id": "survivor_rosie_attack",
+          "runtime_skill": "survivor_rosie_attack",
+          "base_cooldown_ms": 1000,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.36944442987442017,
+              "reference": "damage_rosie_attack_1",
+              "event_type": 1,
+              "context": "projectile_hit"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "damage_attack_100",
+              "type": 0,
+              "base_param2": 1000,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "damage_rosie_attack_1",
+              "type": 0,
+              "base_param2": 940,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "damage_rosie_attack_2",
+              "type": 0,
+              "base_param2": 940,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_rosie_skill_1",
+          "runtime_skill": "survivor_rosie_skill_1",
+          "base_cooldown_ms": 8000,
+          "base_pre_cooldown_ms": 5600,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.4399999976158142,
+              "reference": "damage_rosie_skill_1",
+              "event_type": 1,
+              "context": "projectile_hit"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "damage_rosie_skill_1",
+              "type": 0,
+              "base_param2": 4500,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_rosie_skill_2",
+          "runtime_skill": "survivor_rosie_skill_2",
+          "base_cooldown_ms": 99999,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "buff_rosie_skill_2_leech",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_rosie_skill_3",
+          "runtime_skill": "survivor_rosie_skill_3",
+          "base_cooldown_ms": 99999,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "effect_skill_3_empty",
+              "type": 1,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange",
+              "type": 1,
+              "base_param2": 200,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_2",
+              "type": 1,
+              "base_param2": 300,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_3",
+              "type": 1,
+              "base_param2": 400,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_4",
+              "type": 1,
+              "base_param2": 500,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        }
+      ]
+    },
+    "layla": {
+      "name": "Layla",
+      "skills": [
+        {
+          "id": "survivor_layla_attack",
+          "runtime_skill": "survivor_layla_attack",
+          "base_cooldown_ms": 1200,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.7,
+              "reference": "damage_layla_attack",
+              "event_type": 1,
+              "context": "projectile_hit"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "damage_attack_100",
+              "type": 0,
+              "base_param2": 1000,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "damage_layla_attack",
+              "type": 0,
+              "base_param2": 600,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_layla_skill_1",
+          "runtime_skill": "survivor_layla_skill_1",
+          "base_cooldown_ms": 10000,
+          "base_pre_cooldown_ms": 7000,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.2199999988079071,
+              "reference": "layla_skill_1_buff",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.2199999988079071,
+              "reference": "layla_skill_1_heal",
+              "event_type": 1,
+              "context": "projectile_hit"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "damage_layla_skill_1_dot",
+              "type": 0,
+              "base_param2": 100,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "layla_skill_1_buff",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "layla_skill_1_buff_heal",
+              "type": 1,
+              "base_param2": 100,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "layla_skill_1_heal",
+              "type": 1,
+              "base_param2": 2840,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "layla_skill_1_heal_text",
+              "type": 1,
+              "base_param2": 3440,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_layla_skill_2",
+          "runtime_skill": "survivor_layla_skill_2",
+          "base_cooldown_ms": 99999,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "kt_layla_skill_3_inc_self_hp_limit",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_layla_skill_3",
+          "runtime_skill": "survivor_layla_skill_3",
+          "base_cooldown_ms": 99999,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "effect_skill_3_empty",
+              "type": 1,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange",
+              "type": 1,
+              "base_param2": 200,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_2",
+              "type": 1,
+              "base_param2": 300,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_3",
+              "type": 1,
+              "base_param2": 400,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_4",
+              "type": 1,
+              "base_param2": 500,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        }
+      ]
+    },
+    "candy": {
+      "name": "Candy",
+      "skills": [
+        {
+          "id": "survivor_candy_attack",
+          "runtime_skill": "survivor_candy_attack",
+          "base_cooldown_ms": 1000,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.0,
+              "reference": "damage_candy_attack",
+              "event_type": 1,
+              "context": "projectile_hit"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "damage_attack_100",
+              "type": 0,
+              "base_param2": 1000,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "damage_candy_attack",
+              "type": 0,
+              "base_param2": 600,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_candy_skill_1",
+          "runtime_skill": "survivor_candy_skill_1",
+          "base_cooldown_ms": 10000,
+          "base_pre_cooldown_ms": 7000,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.0,
+              "reference": "buff_candy_skill_1",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.0,
+              "reference": "heal_candy_skill_1",
+              "event_type": 1,
+              "context": "projectile_hit"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "buff_candy_skill_1",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "heal_candy_skill_1",
+              "type": 1,
+              "base_param2": 670,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "heal_candy_skill_1_hot",
+              "type": 1,
+              "base_param2": 670,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_candy_skill_2",
+          "runtime_skill": "survivor_candy_skill_2",
+          "base_cooldown_ms": 99999,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "buff_candy_skill_2_weaken_enemy_atk",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_candy_skill_3",
+          "runtime_skill": "survivor_candy_skill_3",
+          "base_cooldown_ms": 99999,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "effect_skill_3_empty",
+              "type": 1,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange",
+              "type": 1,
+              "base_param2": 200,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_2",
+              "type": 1,
+              "base_param2": 300,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_3",
+              "type": 1,
+              "base_param2": 400,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_4",
+              "type": 1,
+              "base_param2": 500,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        }
+      ]
+    },
+    "mike": {
+      "name": "Mike",
+      "skills": [
+        {
+          "id": "survivor_mike_attack",
+          "runtime_skill": "survivor_mike_attack",
+          "base_cooldown_ms": 1000,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.4,
+              "reference": "damage_mike_attack",
+              "event_type": 1,
+              "context": "projectile_hit"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "damage_attack_100",
+              "type": 0,
+              "base_param2": 1000,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "damage_mike_attack",
+              "type": 0,
+              "base_param2": 600,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_mike_skill_1",
+          "runtime_skill": "survivor_mike_skill_1",
+          "base_cooldown_ms": 10000,
+          "base_pre_cooldown_ms": 5000,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.6,
+              "reference": "summon_mike_skill_1",
+              "event_type": 1,
+              "context": "timeline"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "mike_skill_1_buff",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "mike_skill_1_buff_heal",
+              "type": 1,
+              "base_param2": 600,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "mike_skill_1_buff_heal_text",
+              "type": 0,
+              "base_param2": 600,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "mike_skill_1_buff_text",
+              "type": 0,
+              "base_param2": 150,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "mike_skill_1_debuff",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "mike_skill_1_debuff_text",
+              "type": 0,
+              "base_param2": 150,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "summon_mike_skill_1",
+              "type": 7,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 5500
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_mike_skill_2",
+          "runtime_skill": "survivor_mike_skill_2",
+          "base_cooldown_ms": 99999,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "mike_skill_2_buff",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "mike_skill_2_buff_2",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_mike_skill_3",
+          "runtime_skill": "survivor_mike_skill_3",
+          "base_cooldown_ms": 99999,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "effect_skill_3_empty",
+              "type": 1,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange",
+              "type": 1,
+              "base_param2": 200,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_2",
+              "type": 1,
+              "base_param2": 300,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_3",
+              "type": 1,
+              "base_param2": 400,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_orange_4",
+              "type": 1,
+              "base_param2": 500,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        }
+      ]
+    },
+    "lucky": {
+      "name": "Lucky",
+      "skills": [
+        {
+          "id": "survivor_lucky_attack",
+          "runtime_skill": "survivor_lucky_attack",
+          "base_cooldown_ms": 2000,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.1599999964237213,
+              "reference": "damage_lucky_attack",
+              "event_type": 1,
+              "context": "projectile_hit"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "damage_attack_100",
+              "type": 0,
+              "base_param2": 1000,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "damage_lucky_attack",
+              "type": 0,
+              "base_param2": 600,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_lucky_skill_1",
+          "runtime_skill": "survivor_lucky_skill_1",
+          "base_cooldown_ms": 8000,
+          "base_pre_cooldown_ms": 5600,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.6399999856948853,
+              "reference": "damage_lucky_skill_1",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.6399999856948853,
+              "reference": "damage_lucky_skill_1_buff",
+              "event_type": 1,
+              "context": "projectile_hit"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "damage_lucky_skill_1",
+              "type": 4,
+              "base_param2": 1000,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "damage_lucky_skill_1_buff",
+              "type": 19,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "damage_lucky_skill_1_dot",
+              "type": 0,
+              "base_param2": 200,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "damage_lucky_skill_1_text",
+              "type": 0,
+              "base_param2": 4800,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_lucky_skill_2",
+          "runtime_skill": "survivor_lucky_skill_2",
+          "base_cooldown_ms": 99999,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "buff_lucky_skill_2_increase_def",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "text_lucky_skill_2_eco_1",
+              "type": 0,
+              "base_param2": 1000,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "text_lucky_skill_2_eco_2",
+              "type": 0,
+              "base_param2": 25,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_lucky_skill_3",
+          "runtime_skill": "survivor_lucky_skill_3",
+          "base_cooldown_ms": 99999,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "effect_skill_3_empty",
+              "type": 1,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_purple",
+              "type": 1,
+              "base_param2": 100,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_purple_2",
+              "type": 1,
+              "base_param2": 150,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_purple_3",
+              "type": 1,
+              "base_param2": 200,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        }
+      ]
+    },
+    "sarge": {
+      "name": "Sarge",
+      "skills": [
+        {
+          "id": "survivor_sarge_attack",
+          "runtime_skill": "survivor_sarge_attack",
+          "base_cooldown_ms": 1000,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.0,
+              "reference": "damage_sarge_attack",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.20000000298023224,
+              "reference": "damage_sarge_attack",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.4000000059604645,
+              "reference": "damage_sarge_attack",
+              "event_type": 1,
+              "context": "projectile_hit"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "damage_sarge_attack",
+              "type": 0,
+              "base_param2": 200,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "damage_sarge_attack_text",
+              "type": 0,
+              "base_param2": 340,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_sarge_skill_1",
+          "runtime_skill": "survivor_sarge_skill_1",
+          "base_cooldown_ms": 7000,
+          "base_pre_cooldown_ms": 4900,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.3400000035762787,
+              "reference": "sarge_skill_1_boom",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.3400000035762787,
+              "reference": "sarge_skill_summon_boom",
+              "event_type": 1,
+              "context": "projectile_hit"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "sarge_skill_1_boom",
+              "type": 0,
+              "base_param2": 4450,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "sarge_skill_summon_boom",
+              "type": 7,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 4100
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_sarge_skill_2",
+          "runtime_skill": "survivor_sarge_skill_2",
+          "base_cooldown_ms": 0,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "sarge_skill_2_buff",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "text_sarge_skill_2_eco_1",
+              "type": 0,
+              "base_param2": 1000,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_sarge_skill_3",
+          "runtime_skill": "survivor_sarge_skill_3",
+          "base_cooldown_ms": 99999,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "effect_skill_3_empty",
+              "type": 1,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_purple",
+              "type": 1,
+              "base_param2": 100,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_purple_2",
+              "type": 1,
+              "base_param2": 150,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_purple_3",
+              "type": 1,
+              "base_param2": 200,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        }
+      ]
+    },
+    "freja": {
+      "name": "Freja",
+      "skills": [
+        {
+          "id": "survivor_freja_attack",
+          "runtime_skill": "survivor_freja_attack",
+          "base_cooldown_ms": 1000,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.2428198605775833,
+              "reference": "damage_freja_attack_1",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.28333333134651184,
+              "reference": "damage_freja_attack_2",
+              "event_type": 1,
+              "context": "projectile_hit"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "damage_attack_60",
+              "type": 0,
+              "base_param2": 600,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "damage_freja_attack_1",
+              "type": 0,
+              "base_param2": 300,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "damage_freja_attack_2",
+              "type": 0,
+              "base_param2": 300,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_freja_skill_1",
+          "runtime_skill": "survivor_freja_skill_1",
+          "base_cooldown_ms": 6000,
+          "base_pre_cooldown_ms": 4200,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.4479452669620514,
+              "reference": "damage_freja_skill_1",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.0,
+              "reference": "buff_freja_skill_1_shield",
+              "event_type": 1,
+              "context": "timeline"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "buff_freja_skill_1_shield",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "damage_freja_skill_1",
+              "type": 0,
+              "base_param2": 5600,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_freja_skill_2",
+          "runtime_skill": "survivor_freja_skill_2",
+          "base_cooldown_ms": 99999,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "buff_freja_skill_2_crit",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "buff_freja_skill_2_shield",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "text_freja_skill_2_eco_1",
+              "type": 0,
+              "base_param2": 1000,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_freja_skill_3",
+          "runtime_skill": "survivor_freja_skill_3",
+          "base_cooldown_ms": 99999,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "effect_skill_3_empty",
+              "type": 1,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_purple",
+              "type": 1,
+              "base_param2": 100,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_purple_2",
+              "type": 1,
+              "base_param2": 150,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_purple_3",
+              "type": 1,
+              "base_param2": 200,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        }
+      ]
+    },
+    "travis": {
+      "name": "Travis",
+      "skills": [
+        {
+          "id": "survivor_travis_attack",
+          "runtime_skill": "survivor_travis_attack",
+          "base_cooldown_ms": 1000,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.23076923191547394,
+              "reference": "damage_travis_attack",
+              "event_type": 1,
+              "context": "projectile_hit"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "damage_attack_100",
+              "type": 0,
+              "base_param2": 1000,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "damage_travis_attack",
+              "type": 0,
+              "base_param2": 1040,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_travis_skill_1",
+          "runtime_skill": "survivor_travis_skill_1",
+          "base_cooldown_ms": 8000,
+          "base_pre_cooldown_ms": 5600,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.0,
+              "reference": "travis_skill_1_mark",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.2849999964237213,
+              "reference": "damage_travis_skill_1",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.2849999964237213,
+              "reference": "travis_skill_1_debuff_def",
+              "event_type": 1,
+              "context": "projectile_hit"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "damage_travis_skill_1",
+              "type": 0,
+              "base_param2": 7000,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "travis_skill_1_debuff_def",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "travis_skill_1_debuff_def_text",
+              "type": 0,
+              "base_param2": 100,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "travis_skill_1_mark",
+              "type": 0,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_travis_skill_2",
+          "runtime_skill": "survivor_travis_skill_2",
+          "base_cooldown_ms": 99999,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "kt_travis_skill_2_inc_atk",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "text_travis_skill_2_eco_1",
+              "type": 0,
+              "base_param2": 1000,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_travis_skill_3",
+          "runtime_skill": "survivor_travis_skill_3",
+          "base_cooldown_ms": 99999,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "effect_skill_3_empty",
+              "type": 1,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_purple",
+              "type": 1,
+              "base_param2": 100,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_purple_2",
+              "type": 1,
+              "base_param2": 150,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_purple_3",
+              "type": 1,
+              "base_param2": 200,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        }
+      ]
+    },
+    "eva": {
+      "name": "Eva",
+      "skills": [
+        {
+          "id": "survivor_eva_attack",
+          "runtime_skill": "survivor_eva_attack",
+          "base_cooldown_ms": 1000,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.14000000059604645,
+              "reference": "damage_eva_attack",
+              "event_type": 1,
+              "context": "projectile_hit"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "damage_attack_100",
+              "type": 0,
+              "base_param2": 1000,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "damage_eva_attack",
+              "type": 0,
+              "base_param2": 600,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_eva_skill_1",
+          "runtime_skill": "survivor_eva_skill_1",
+          "base_cooldown_ms": 7000,
+          "base_pre_cooldown_ms": 4900,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.3955695629119873,
+              "reference": "damage_eva_skill_1",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.4430379271507263,
+              "reference": "damage_eva_skill_1",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.4968353807926178,
+              "reference": "damage_eva_skill_1",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.5411391854286194,
+              "reference": "damage_eva_skill_1",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.5886075496673584,
+              "reference": "damage_eva_skill_1",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.6329113245010376,
+              "reference": "damage_eva_skill_1",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.6835442185401917,
+              "reference": "damage_eva_skill_1",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.7215189337730408,
+              "reference": "damage_eva_skill_1",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.0,
+              "reference": "eva_skill_1_buff",
+              "event_type": 1,
+              "context": "timeline"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "damage_eva_skill_1",
+              "type": 0,
+              "base_param2": 750,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "eva_skill_1_buff",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "eva_skill_1_buff_text",
+              "type": 0,
+              "base_param2": 2000,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_eva_skill_2",
+          "runtime_skill": "survivor_eva_skill_2",
+          "base_cooldown_ms": 99999,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "eva_skill_2_buff",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "text_freja_skill_2_eco_1",
+              "type": 0,
+              "base_param2": 1000,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_eva_skill_3",
+          "runtime_skill": "survivor_eva_skill_3",
+          "base_cooldown_ms": 99999,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "effect_skill_3_empty",
+              "type": 1,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_purple",
+              "type": 1,
+              "base_param2": 100,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_purple_2",
+              "type": 1,
+              "base_param2": 150,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_purple_3",
+              "type": 1,
+              "base_param2": 200,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        }
+      ]
+    },
+    "ken": {
+      "name": "Chef",
+      "skills": [
+        {
+          "id": "survivor_ken_attack",
+          "runtime_skill": "survivor_ken_attack",
+          "base_cooldown_ms": 1000,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.23000000417232513,
+              "reference": "damage_ken_attack",
+              "event_type": 1,
+              "context": "projectile_hit"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "damage_attack_100",
+              "type": 0,
+              "base_param2": 1000,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "damage_ken_attack",
+              "type": 0,
+              "base_param2": 600,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_ken_skill_1",
+          "runtime_skill": "survivor_ken_skill_1",
+          "base_cooldown_ms": 6000,
+          "base_pre_cooldown_ms": 4200,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.3214285671710968,
+              "reference": "ken_skill_1_taunt",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.3214285671710968,
+              "reference": "ken_skill_1_heal",
+              "event_type": 1,
+              "context": "timeline"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "ken_skill_1_heal",
+              "type": 1,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "ken_skill_1_taunt",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_ken_skill_2",
+          "runtime_skill": "survivor_ken_skill_2",
+          "base_cooldown_ms": 999999,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.25,
+              "reference": "ken_skill_2_buff",
+              "event_type": 1,
+              "context": "timeline"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "ken_skill_2_buff",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "text_ken_skill_2_eco_1",
+              "type": 0,
+              "base_param2": 1000,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_ken_skill_3",
+          "runtime_skill": "survivor_ken_skill_3",
+          "base_cooldown_ms": 99999,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "effect_skill_3_empty",
+              "type": 1,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_purple",
+              "type": 1,
+              "base_param2": 100,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_purple_2",
+              "type": 1,
+              "base_param2": 150,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_purple_3",
+              "type": 1,
+              "base_param2": 200,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        }
+      ]
+    },
+    "rusty": {
+      "name": "Rusty",
+      "skills": [
+        {
+          "id": "survivor_rusty_attack",
+          "runtime_skill": "survivor_rusty_attack",
+          "base_cooldown_ms": 1000,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.33000001311302185,
+              "reference": "damage_rusty_attack",
+              "event_type": 1,
+              "context": "projectile_hit"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "damage_attack_100",
+              "type": 0,
+              "base_param2": 1000,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "damage_rusty_attack",
+              "type": 0,
+              "base_param2": 600,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_rusty_skill_1",
+          "runtime_skill": "survivor_rusty_skill_1",
+          "base_cooldown_ms": 7000,
+          "base_pre_cooldown_ms": 3500,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.23974081873893738,
+              "reference": "rusty_skill_1",
+              "event_type": 1,
+              "context": "timeline"
+            },
+            {
+              "stage_time_seconds": 0.5,
+              "reference": "damage_rusty_skill_1",
+              "event_type": 1,
+              "context": "projectile_hit"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "damage_rusty_skill_1",
+              "type": 0,
+              "base_param2": 3000,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "rusty_skill_1",
+              "type": 4,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_rusty_skill_2",
+          "runtime_skill": "survivor_rusty_skill_2",
+          "base_cooldown_ms": 99999,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "effect_skill_3_empty",
+              "type": 1,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_blue",
+              "type": 1,
+              "base_param2": 50,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_blue_2",
+              "type": 1,
+              "base_param2": 75,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_blue_3",
+              "type": 1,
+              "base_param2": 100,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        }
+      ]
+    },
+    "tim": {
+      "name": "Ghost",
+      "skills": [
+        {
+          "id": "survivor_tim_attack",
+          "runtime_skill": "survivor_tim_attack",
+          "base_cooldown_ms": 1000,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.3100000023841858,
+              "reference": "damage_tim_attack",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.5099999904632568,
+              "reference": "damage_tim_attack",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.7099999785423279,
+              "reference": "damage_tim_attack",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.9100000262260437,
+              "reference": "damage_tim_attack",
+              "event_type": 1,
+              "context": "projectile_hit"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "damage_tim_attack",
+              "type": 0,
+              "base_param2": 300,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_tim_skill_1",
+          "runtime_skill": "survivor_tim_skill_1",
+          "base_cooldown_ms": 6000,
+          "base_pre_cooldown_ms": 4200,
+          "timeline_events": [
+            {
+              "stage_time_seconds": 0.4700460731983185,
+              "reference": "tim_skill_summon_slow",
+              "event_type": 1,
+              "context": "projectile_hit"
+            },
+            {
+              "stage_time_seconds": 0.4700460731983185,
+              "reference": "tim_skill_summon_fx",
+              "event_type": 1,
+              "context": "projectile_hit"
+            }
+          ],
+          "referenced_effects": [
+            {
+              "id": "tim_dot_damage_origin",
+              "type": 0,
+              "base_param2": 1500,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "tim_skill_summon_fx",
+              "type": 7,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 4500
+            },
+            {
+              "id": "tim_skill_summon_slow",
+              "type": 7,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 4500
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        },
+        {
+          "id": "survivor_tim_skill_2",
+          "runtime_skill": "survivor_tim_skill_2",
+          "base_cooldown_ms": 99999,
+          "base_pre_cooldown_ms": 0,
+          "timeline_events": [],
+          "referenced_effects": [
+            {
+              "id": "effect_skill_3_empty",
+              "type": 1,
+              "base_param2": 0,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_blue",
+              "type": 1,
+              "base_param2": 50,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_blue_2",
+              "type": 1,
+              "base_param2": 75,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            },
+            {
+              "id": "effect_skill_3_fake_text_blue_3",
+              "type": 1,
+              "base_param2": 100,
+              "base_param3": 0,
+              "custom_formula": false,
+              "summon_lifetime_ms": 0
+            }
+          ],
+          "missing_assets": [],
+          "unresolved_event_references": [],
+          "complete_combat_graph_verified": false
+        }
+      ]
+    }
+  },
+  "scope": "Dependency inventory only. References and modifiers are not executed hit counts. No complete combat graph or combat-return ranking certified.",
+  "provenance": {
+    "native_build": "2.6.200.276",
+    "audit_date": "2026-10-05",
+    "config_pack_sha256": "53bc9fbb60ebab1719186eaeb3b24169c56d09273a5684ead0c4f11bb2329edc",
+    "manifest_sha256": "e7978f2a438f800c7ec52f818a451d549ea1693d68523036e33ae3396c74e8a3",
+    "table_sha256": {
+      "pve_new_effect": "15db33ac9e7ce75a12d5fa182e95067d9c00c58a2ea5ec98ac297aae85fa63fe",
+      "pve_new_skill": "8c185eb18de4aac7e89e14599e684d76577c8fadcb5b1b4fa9e2c6e1c0ec5731",
+      "pve_skill_release": "04b7eeec91e41594d6873592619b171becc343214047fbb95f282995a24c2fcf",
+      "survivor_skill_type": "894c4959e2d86bab266a3fc1cb71aac3bcddaa49adc9cc003dde61547e127612"
+    },
+    "timeline_export_sha256": {
+      "raid_action_survivor_eunjoo_skill_1_increased_damage": "7f1c2b45ec4e7270931b42681ebb7d1b6a1112826fd76686131a157f44465a7e",
+      "raid_action_survivor_eunjoo_attack_update": "580c1f412869c081894171457b52e821fa81eee99b8ef3e88422ee483ce1aa48",
+      "common_action_collection_mining_lv3_2": "c6f812f568d3685b655de3aee63d8c25a5769f08ab74d3a82059c40d7e4294a7",
+      "raid_action_survivor_lucky_awake1_attack": "fa86230032c77b2a7c9887797edc33d62a7f27a35d562fe70d05813fc4078fd9",
+      "common_action_collection_mining_lv2_1": "9474f17f51c0749a2498efa48375c6d014b44fa0e5b4826f85530b14a0e94733",
+      "raid_action_survivor_rosie_skill_1_wakeup": "fcd0b5c5495ff09e53a09d3ee031e703d26694488644dac1e6bb2ba17af74732",
+      "raid_action_machine_skill_1": "e2b9a74659356004fefc489aa3ef6a4fddbdde319326af298372afeec79d8b40",
+      "raid_action_survivor_eva_death": "6bb7f23e05c1d161a4b48156896061fd8bb3607adeeae79ab4183d7c50ac699a",
+      "raid_action_survivor_chiron_skill_1": "e64aa066c8006ce4fbfea860787481231d46a5ceef1b94657b058ad538636127",
+      "raid_action_survivor_ray_attack": "8d22f4e3421eca1be4194e48bdb020d5e15f3ef01cd41860088e42971012f54f",
+      "raid_action_survivor_maddie_skill_2": "b5668ba71fefbe08d6be2eb4ce5a10ba1333c90f6bd7debfa310ee575761f566",
+      "raid_action_survivor_eunjoo_skill_3": "827fd43b76d46b805a1f9570f1598003ae93241231863a1dfc4a5bafadc19ece",
+      "raid_action_survivor_becca_skill_1": "8c251293284eed4c4d7d38208a878a8464d81269bb029f931cb2d171eb0ada22",
+      "raid_action_survivor_tony_skill_1_2": "800b0c7202de0c351a2c939d5842b94f16eb5a3532df196d44790dd069ce00dd",
+      "raid_action_survivor_travis_skill_1": "27d470a1ff551c5edc789e40d6cbc44928e3b0631748af8d3940d6537f964467",
+      "raid_action_survivor_shark_skill_1": "0b4abf350c918a9b1378ef6eb8c76d621b4c43bffdcab877d6e257d4a1fda7e1",
+      "raid_action_treasurechest_4_open": "82da179a486486409d991431a3a9f135a60fcb9a859ae1ac660728fc51fb62d4",
+      "raid_action_survivor_ken_skill_3": "2d4620c299fb8a0c24e544d659c906fe81f0b6c3382410ecee9721cf17e07497",
+      "raid_action_survivor_ray_skill_1_wakeup": "e5bd801188eff5db9ad79ee1d26f93b41410858f3a6fc10a3e437d999f050d27",
+      "raid_action_survivor_tim_death": "c29deef018d35ee801039b1f59b477f903a9fba548a44c6eb9b960e131aff5a8",
+      "raid_action_survivor_freja_skill_1": "1971c5e6e5c23351e3e6a77d27dd0396992b134bca3fb1d14b667d43fa3200be",
+      "raid_action_survivor_layla_skill_1_update": "e6cadf1d1f4fbf1e66b32996edd5259bf197cde9c613e2eec8dc4e4ae7493022",
+      "common_action_collection_mining_lv2_2": "36452c8db0e0d2cc0bb932075738b4cf8d8188caee978be21f6b363d8ca8c558",
+      "common_action_collection_gather_lv2_1_wheat": "49eb8aaf09b9e868d337597589b3346a300718084886ede09f2e7859f6f0435d",
+      "raid_action_survivor_nikola_skill_1_wakeup": "e09a3ad2d3d5ce2758bae441eaa8206ce453f57e5a19c8960156664d5d36b518",
+      "raid_action_survivor_ragnar_attack": "19048a48bea6f4f24062b6ba6d4936754329c94e3210866d6c54437bdfc76de7",
+      "raid_action_survivor_layla_death": "808bdca129143e08a515c97a58ce4da6e34631828e876ab08fc448f2884155c4",
+      "common_action_collection_death_tree_ice": "4897e2f9e5f3947deaa9711a1c391c07ec4c4cc68c975ac9af49fd35ba7b3993",
+      "raid_action_survivor_rusty_skill_1_kt": "5eea327b31f5eccabfa61c12c941f0fc53523418aa881c80eef1d329eab89c29",
+      "raid_action_survivor_eunjoo_skill_2": "0e49c352ade3df1a493eab53211d4d68717884cba5bc13652e788e24d2c30a0b",
+      "raid_action_survivor_nanami_skill03": "49d74ff19aff8ce12b18df55e4f073bb5dfb7f2df9fafb3199e7e74108f014e6",
+      "common_action_collection_gather_lv1": "2c75333ee593e09a0d4bd4f30bf7e4c7efe484f985b725414d7e6602b401b9a6",
+      "raid_action_survivor_freja_death": "33cd3b5e6eccbdf79c8049ef363479ea25d4c347b6d471475e72ec1675720148",
+      "raid_action_survivor_layla_attack": "4a54ca2ed30ce11bb6d348a8e685e0d1c676289dbfdc4fc926c3455c17273e65",
+      "raid_action_survivor_brooke_attack": "56d481cb2fe853f829a5f288aeb96ddbfa71257fa7641b4dcfe685817ccc272a",
+      "raid_action_survivor_nikola_skill_1": "4763c4542f4df1652b5e15d6c6a55cea03d44e8883aebe4a74c3ed0bedb8a850",
+      "raid_action_survivor_dave_skill_2": "5d8a2e1d346c6d555f50446a092ebaf08b79586a797b7ec3f8148f978dc3f76c",
+      "raid_action_survivor_wright_skill_1": "841eb953549a1d3a0f1ae4dc99eac791cb846cb9ffaed3e2076394181e94fca7",
+      "raid_action_survivor_tim_skill_2": "a61221d4fc34d25908714e29e9f715a7aca8226b82bd2b28a286728ebd8e5fd6",
+      "raid_action_survivor_rosie_skill_2": "bba053842c2114b0f80d020487233035d8448d7a2da9c75b5afd0de73139ffa9",
+      "raid_action_maddie_summon_end": "e7747e7e05adcb5008ce62b7e86f34510a20fb611e08213b96216ff018b6fdfc",
+      "raid_action_survivor_wright_skill_3": "445fdd67692839299336bb4e4e1a649efe3d4a33aa5b8456bcf03eb5215ce2fc",
+      "raid_action_survivor_eva_attack": "4244c29380ec8e6f19afb7ff71852129665c62bdaeee4731143192af105a57db",
+      "raid_action_survivor_sarge_attack": "46b53bfca2ba38e9f9975e0334891f78876b9a64b8ce89d2328ae57ce87149d2",
+      "raid_action_survivor_ken_skill_2": "8d83014e485c8b6987899e1454b1f37e615d75bce0cbde4b661e8fbad0890984",
+      "raid_action_survivor_wright_attack": "dac7033e885f0ace4785f8bac81548743bf313b8545cd49151183aa04e6b63d0",
+      "common_action_collection_gather_lv3_1": "fca9eac81b31e8c5d5826b6277ca659aacf83ca656672754ed02da8af1c45f16",
+      "raid_action_survivor_ragnar_skill": "1351d1bcba43280fdea39bec645a0b3a0dac0315aa098187459bd592538b1d9c",
+      "raid_action_survivor_freja_attack_2": "47193d103cd41c45a60394caa7c5fb96e1a2099fdcf5dd15ca3dd6be8eb4d9b4",
+      "raid_action_survivor_nanami_skill01": "6979455231f537b7154522b5acaade7afa2abce983b586c51c753a2fae71c442",
+      "raid_action_survivor_layla_skill_1_wakeup": "0912898dfcdd53b3e9991564d12a9bb07f6b0e8d593d4e8a13c79af63083a496",
+      "raid_action_survivor_tim_attack": "6a64afcecd9371d6b713980526ede73fd9265e03bc318374c44beea89ea97945",
+      "raid_action_survivor_tarzan_skill_1": "9701e2dcaa57024f4a5a88172e160b90230ded75760da997b5cb8d39dbf03841",
+      "raid_action_survivor_becca_attack": "cb3a757dfcd839c85c15f6dcf77ddb21c1dc5a23c51108985420b8c03e465f43",
+      "common_action_collection_death_gather": "026ef88a4f94f48862944184acb55417cc872b7df87931abbcd715bb3b60f951",
+      "raid_action_survivor_undine_skill_1": "8ff4bf2c1177e99307c5327fd32cbd076e37f439bd19e3e98fd94d04b696b462",
+      "raid_action_survivor_candy_skill_1_wakeup": "b4ab427d8a4ce09bd3f0b255698bdd11b3deea2ced6aece0fd4c2c4aafaea117",
+      "raid_action_survivor_rosie_skill_1": "8dbc6dc0e24dfc71fa364e1510fc500475ff3af4ae80e8d26200beb46641e27a",
+      "raid_action_survivor_sarge_death": "8bb35c921a815f4005f62922b7b39b98146fbcf1f7496e8b90b6c99da7beb8d8",
+      "common_action_collection_choptree_lv3_2": "385880595c0967d57ed1a41c07d30ec0e85b0f56fe09d515396100f2b9dd9db8",
+      "hero_show_survivor_freja": "902744fa449d4f2d3ac67ad564ff71357b73c4c3c5307edab75dded4e85ed673",
+      "raid_action_survivor_ken_death": "8f272574c9c29ee01fdbaa31d2a869cf9a3317c6843ffc8225f7835c8e544287",
+      "raid_action_survivor_brooke_skill_2_3": "f5009b2b93ff5fe3ac93c5c31f9c13f523532247feef63068c159c74f0fceaf7",
+      "raid_action_survivor_travis_death": "770ddd4120797852137edc0b862cd62bff87fc62576125cc389390076db7a209",
+      "raid_action_survivor_rusty_death": "d982b23b3afdf52f65fa1e10184b62d4235502c0de5aa41432a7d47dbadf63bf",
+      "raid_action_survivor_lucky_attack": "bf5ef42433886140bb37b91ddaf048eb64078838caf88756b6b21c35d7657372",
+      "raid_action_survivor_eunjoo_skill_1_update": "abba56ebec222084ee01e36135f119af79d952aa1ea872552ea123e89ef54981",
+      "raid_action_survivor_lucky_death": "c44ed77ad0816aee7d412cfeba10bb22883bd73608fed8ca8abb907928bd8b7c",
+      "raid_action_survivor_lucky_skill_summon_attack": "b15e0157d1c979558fabcf3cee7fca9b724df77415c814e2b507037327da2d95",
+      "common_action_collection_gather_yellow_lv3_2": "127bdb5afa2207c9ac654efa9d8543f9018aaa88d8e4f2fd2170e308a0c5ad7e",
+      "raid_action_survivor_tarzan_counterattack": "8f61e4ffc67c99057d97df559e3a703eeaad9d141abcc4d471b99157d0f1cc0f",
+      "common_action_collection_gather_lv3_2_wheat": "b37bc638b0b874fb87905dfb0aae79f7fb60584e4b88bfba773366fdb0cc3965",
+      "raid_action_machine_skill_3": "62f7b700b5f9dc527f8ed80d7a40789100c0603d3775df37b9c7982771fdf1ba",
+      "common_action_collection_gather_lv3_2": "6a882fb971560fd4972ff0161e1e78106d95820d46e6f86e663821d0d488548c",
+      "raid_action_survivor_tara_skill_1": "1e63f2ae0869f57ecfe779d82e589d6a65b7c119f5813962a77966d4867b7c9d",
+      "raid_action_survivor_tithi_attack": "e95aafc42d6de4b6077c8e4d0ee158643b38762b275163e71146599a160ee663",
+      "common_action_collection_gather_yellow_lv3_1": "53e54561f10b68ebd9e4cd1f4918d82da2e5b41408eb0db9ba6c7c5a4a4c8e1a",
+      "raid_action_maddie_grenade_deathexplode": "009b83ad3cbfb492ba8714f2b79bc47f7d8368657505040b4c7975e5d2fcc047",
+      "raid_action_survivor_mike_attack": "f525720fe18d7b82d8a987e1f59115a3f4d6ae97274a399ead37227dfad7c1d9",
+      "raid_action_survivor_brooke_skill_1_wakeup": "c431812d4bce607492fdfaa78f101c4b588a380ef0872aebbb81a84a2965396b",
+      "common_action_collection_gather_yellow_lv2_2": "9b4108dbecfeb32f60343d38babe019c2903bae742e459644f8864496e7797f8",
+      "raid_action_survivor_knotty_attack": "e28f55af6fd76a2bb23242ebc2197b30c55349944c96db2189a519d3a4c9ad68",
+      "raid_action_survivor_dave_attack": "ff249c536f7109a4322bcd5550a2d6967b1d149e83cfc2671e66d31d941fb594",
+      "raid_action_survivor_mike_skill_1": "e76db2f0c27f819bb325d836b35be16b5e406a22ccfbba9f8d3d0f5d4d1c17cd",
+      "raid_action_survivor_nikola_death": "0328c2ccb25b6782b258d3b08fff06af6408550df813446af0b02619ed568bed",
+      "raid_action_maddie_summon_start": "f40900e8a5b57ec763b809de5fff80cc32ae145b8f0df460e0e7cbbd780a9349",
+      "raid_action_survivor_nanami_skill02": "f8218a96475fc318fd38d02be0a5383c436c19d25c909b22fce06bd94b936b48",
+      "raid_action_survivor_basile_skill_2": "f01bde90f54e888239e33ea6afb1f35e28ff08abc501f4c952bfe415a57bc80c",
+      "raid_action_survivor_shark_attack": "04343287c79e74f1a834c07dde0adb18a5b60cbce79afb6b4d7f7a8746b8a06e",
+      "raid_action_treasurechest_3_open": "31ed2458d4e767e5ef1b380b9b6e26eb5fb3b8c3f3dcbce3e42c7cf972309153",
+      "raid_action_treasurechest_2_idle": "ff689e25d363c3fda8835e170e494dccefa0876569c586f8097cdd5cff3f2ada",
+      "raid_action_survivor_jane_skill_1_spawn": "3d78c05bc1157c9d3e4868a2ff9cd2a01657924831795d1e5313f778106cd24f",
+      "raid_action_survivor_mike_death": "ffa5d6e7d5fa37e64f52149e80f5e093e4a5dd45709fff8c564a4c7456759eef",
+      "raid_action_survivor_wright_skill_2": "4ad519f437959103b14a6a10ebd8947f34b8543f76d7e429716f3927eba898ad",
+      "raid_action_survivor_lava_skill_1": "1311c873f206030a99f9600d97118839e91acf614b8c05bacef23525efa08a7c",
+      "raid_action_lucky_summon_start_fx": "6121098a31e22c8202c8f7c9eb65413e177fb8b066a3284750fdb5e1e2bdefb0",
+      "raid_action_survivor_eunjoo_attack": "eb2d0d832f4f399eb01facb7315c3a0f6801ff7c4d42d55413508dff96eafcae",
+      "raid_action_survivor_jane_attack": "2dbe5cbdcea27657a5cd1965b1b148ee458a42b97aac454e800416a13ff08a21",
+      "raid_action_survivor_layra_skill03": "fb1b8eaa12a05c45db938c585d81633dd679cda4b9b915ca4c82629a1149325c",
+      "common_action_collection_gather_lv2_2_wheat": "42b122c7e462ebc3f0fc19c1bfb2408907308beec6a3d6c5e6bf86aff495b59b",
+      "raid_action_survivor_lucky_skill_1_2": "ab771e9fdc43975dca60ce2a3311d30d4733bf4a329bb1fb435ea264e37e195e",
+      "raid_action_survivor_tarzan_attack_1": "a5db1196a7d5899fc95adf40d76671825ed907233ccd76a9339ecdce5ca846f7",
+      "raid_action_survivor_ray_death": "ba87dfb63589eef11e897a8c18c733dc580bc6fd84cbaf272dfc432f12c6df5f",
+      "raid_action_survivor_eunjoo_skill_2_increased_damage": "0b987c87c438d7b709413232339ac3beee73fdf83b6fbb34781f8c24188c38dc",
+      "common_action_collection_choptree_lv2_1": "66d6c6584bcce3edbac948918c8cf247503f849763585b742066360e8f016b3d",
+      "raid_action_survivor_maddie_frank_idle": "4fd5de907b3f344ff3ba580aa330429356d9b7e73d9da66c723a48bcdaa700eb",
+      "raid_action_survivor_becca_death": "d4f8982543e6446586f07a026fafa49cd8ed29e97c7e13021d86493f18f29411",
+      "raid_action_survivor_candy_skill_1": "373eabbf1561016278eb04e447372b3183a467c64b9093ecc320ff3c67bd759e",
+      "raid_action_survivor_lucky_skill_1": "3fceb00d6bdb232e9b6dd7e6e2235cfca070e346368aac0843c8eb215b8d80d8",
+      "raid_action_survivor_candy_skill_3": "f3e9881153619f190b777755fed6b229b87741ad42c472ff8dc7962bea4fcc05",
+      "raid_action_survivor_maddie_skill_1_update": "907b4bcff90ab9a249b5334e4e4b109980e5ff984443965080c36a4c6c7aa1b0",
+      "common_action_collection_death_tree": "b6553475a74eb880247bfc2500ba4a6a0817e698dc72fec87576835a1e20d166",
+      "hero_show_survivor_nikola": "fb85c061bcb84b523180eaf7975f354ea83b2df521d803d2c91be72d320d8385",
+      "raid_action_survivor_nanami_attack": "b86409e08913252bf6ab043dff753cbaf8647f3eda6461425923c4d9b8729022",
+      "raid_action_survivor_maddie_skill_2_enemy": "9924949847f10b98f94a87f97ec37ce032d208d84720c39599fdc6fc0eadb26b",
+      "raid_action_survivor_tony_death": "2094412379fed8be23ca93ac8eab761e1a02379117a9986e734b857e152747f6",
+      "raid_action_survivor_lucky_skill_summon_attack_wakeup": "40489b1ce5bac350029c29bc57d36dab2237938d1847f72cfedff7eb406e3bd6",
+      "raid_action_survivor_jacob_summon_death": "3ba3cc67e5527dc3f7e7d2e9fafc9364f2ab60af462410fc5303fd440c498fb4",
+      "raid_action_survivor_tarzan_death": "6c51ae56ad06e0afed29c7a59630b439d69927078e4a32a633313aa6587c2067",
+      "common_action_kingdom_zombie_Kraken_Tentacle_attack": "a815f2fd7ba368571b30cc2eba3be3eb6b3e914084369ba08677b83d0dc4ccea",
+      "hero_show_survivor_ken": "1126166157a09b7f161f3604888279f88a1e1b1c0dcd86d74830f69b5c165f9c",
+      "common_action_bomb_open": "6c71b4e9fed38b1c4539e595967ffd9c7085366fad56e137ce161b252f0bfe09",
+      "raid_action_survivor_maddie_attack": "d9f0d331ba4c3d41df9ff396df49df6f611005817c5676248227a35673843f8f",
+      "raid_action_treasurechest_3_idle": "e45ca31b6c6fc240499c8bbfc98b7a552925a39fbe0bac5a2af4df28feb3744e",
+      "common_action_collection_gather_yellow_lv2_1": "5fa27e923136acc3238029ab9495a73d35c0a39f103211ead0bcae900f43b0b1",
+      "raid_action_survivor_candy_attack": "44bddef6801136a6547405a19f01c1b2eaf8c53ef4f8262ad5383a219177e424",
+      "raid_action_survivor_brooke_skill_2_4": "7a2d155ac5f7d0c21f7ccf094f24f1f3e1f2a7b2f3a4d0141b1887eaffc43c66",
+      "common_action_collection_gather_lv2_1": "44f6df2183a49cd2c8bd34c86b76c09c16b3fdf7683e1f994c46bec89dc6268f",
+      "raid_action_treasurechest_2_open": "575dc6d704947eda78cccdf508bfc1d941cfdba0899306fe86b3503be270310b",
+      "raid_action_survivor_jane_skill_3": "fdc901210611e3f997ee82eb816367af526455e8688559675bd91dcd66be9375",
+      "raid_action_survivor_ragnar_skill_1_summon": "d2df87aee799835c6d6490f60b0adf711d1e41e42d5fbe590565c59688a50608",
+      "common_action_collection_mining_lv3_1": "392322ea057e433139bf2154908c041a15884ccd6bf27e4d273b759dff1693d8",
+      "raid_action_survivor_freja_skill_3": "14b1a8aa3ede7b55acd5654aa76e164f80bf3e6c00831a181002c3d44e8c9f06",
+      "common_action_collection_gather_lv3_1_wheat": "086e196336c45c05f655853e667ab33af51d30a0afca802524919b71a144ffcd",
+      "raid_action_survivor_travis_skill_1_update": "47a62ccb3418c5dafade5aa59720aab0a0a490c1fa1a494191a7f2e4f508c267",
+      "raid_action_survivor_brooke_skill_1": "78479d5b6d31301dfb3ffdc89407a92e32674e451d603c4e074e76342b795529",
+      "raid_action_survivor_eunjoo_skill_3_power": "311880a8c3962d9e5e725b10fe5a5788b7b7b3cb7b611b3555a398fc5a9cfd03",
+      "raid_action_survivor_eva_skill_1": "2f93ad4eb9a836cf84cfe870102092efb5a94a1997ba48087505fa60b7dbea78",
+      "raid_action_survivor_tarzan_attack_2": "7112d0e0f1dbda767d7400cb004594f0dae9d79975d8e85e6b7f37e97deea82f",
+      "raid_action_survivor_undine_attack": "3f9f01a35f316186e7d2a47ae6b95c712ef1afe1cc1444e0f29a7e99e768c1db",
+      "raid_action_survivor_travis_attack": "a3bf9fb6e3a2aba5884ee8344df68d606e1148483e3db298ce912e0dd3c362cf",
+      "raid_action_maddie_grenade_deathexplode_wakeup": "8405e4ff2a221004b4dc2141c09a4f706e8cd2fdfe192dc0e58fc66aee0db1ee",
+      "raid_action_survivor_dave_skill_1": "f00d0feef5907d286f0b03dd6ec9a3a38574f8e6ba2d4ddaec7cc37fcca2073d",
+      "raid_action_survivor_tim_skill_1": "2c6badae952fce9c6dcfbfe25f67dc5f4ee49fbf8f592fb2b6e091963b568e75",
+      "common_action_collection_choptree_lv3_1": "ace6c73720dbb51e7a890c46c554caf8c2ff985ec5050a2ddbd36439bbecc2e0",
+      "raid_action_survivor_ken_attack": "79600c07417a721c5717f618ebf7be91baa71aa7e7d14c610f2e09392aafdd8c",
+      "raid_action_survivor_jacob_attack": "e69e31c54df95d1259dfb37f1f037e7fed412aad2e252f54e3aaa742c5748f36",
+      "common_action_collection_choptree_lv1": "2376ce75f9d80f2ebffd8175db10e99f6b19d5415a9a43e664a3d825a323324e",
+      "raid_action_survivor_brooke_skill_2_1": "02c2e82b513a9663aacbd452dcbf4755b2885f8f6acba94430a02700dd411e0d",
+      "common_action_collection_mining_lv1": "3b922bc60b29f0009eb102fdade461f582a3bebcad044fd29d9c1bfde00cbcb1",
+      "raid_action_survivor_jacob_skill_1": "6823ee026e9259814524c794341ce7acb214eb4d4c83692290ad03f906270f43",
+      "raid_action_treasurechest_1_idle": "d082fa98363c46317c42edd6ed04c2a516966e653cd0700ed9c7c63438e36265",
+      "raid_action_survivor_basile_skill_1": "662e6f4f026266ae984d59dfe9098807d11d5b172bf8490791505a1e03f328a1",
+      "raid_action_sarge_summon_start_fx_1": "3871a567376e76b4b7b69b5e0adbc2500dafb74061e1d5643da2b3df244983d3",
+      "raid_action_survivor_lava_death": "aa30071ef4ae6065d508ec3f051602cd63c0d2ee0838d2989d6b723e337000cf",
+      "common_action_giftbox_open": "a3951749b5161a43b82fc3eef59bc71c07b3af5567449d76735d3962324b1151",
+      "raid_action_survivor_tithi_skill_1": "d904741c191ef8c14f0618be0485102230541dda844879e7f7a76a03adc2b337",
+      "raid_action_survivor_ragnar_attack_2": "26bb8201811b564ca942ed047be597345e5f5752042ca325fc22de764e5d34d8",
+      "raid_action_survivor_mike_attack02": "0b42c4e7a905c765fdf7e3d172f67a24839850aee3a4dad88d409cfc7b04975e",
+      "raid_action_survivor_nikola_attack_update": "a2f0c03da65e8e477637198a6220545ab3c7d81973c5434f7e9cb121557cadf2",
+      "raid_action_survivor_sarge_skill_1": "0c36d030be438632bfbf5c0b39e8df05f2c825cca449410528f69553b7818355",
+      "raid_action_survivor_travis_skill_3": "7bfdc6a141ab0940c3622432bc7cedff4e8abb3f5c3766e81f8bc41243104116",
+      "raid_action_survivor_lucky_skill_2_kt": "304207a35d7fd21cd410153327168f1e425bbda26cab4e2e9c85311a4820cd75",
+      "survivor_tony_skill_1_wakeup_effect": "8343ba3daf9dbc6f7289bc2c05b133e20c18124a8c3d357d39ee7eeb8137a152",
+      "raid_action_survivor_tara_attack": "bc8ba20115928dfb6793c8e8a8607ec23c4848d43defcf07011e95986b0237ae",
+      "raid_action_survivor_ray_skill_1": "ae94629f145cc7c1d272fe29d0fcb2e48e84766d36a743cbefbfaef0a964bfba",
+      "raid_action_survivor_candy_death": "6198f3eb345c3ba5abc8e0b99eb4ddb98779de023704f76c81fe1ca2d508f8df",
+      "common_action_treasure_boss": "d4281aee12ec46ea6aef39955b066bdea1e78c78ef2e705d40b7bb675088ee39",
+      "raid_action_treasurechest_4_idle": "679c88b3c374837092d668217a91530d94fb44a638f9e5a0ff4a8d0f7103fc21",
+      "raid_action_survivor_rosie_attack_1": "4fa83e6d0092cef1314ccca1ce443e57f2ed717a5a977b70e26b89bca8941818",
+      "raid_action_survivor_candy_skill_2": "4357ac7fcd6e8844d4b7916395f60a8e1cf0ea1d5024e5f318af5da4ec3b3dfa",
+      "raid_action_survivor_knotty_attack_2": "e5a172814f619dbff7e630770ff781f8debb12d16bd0f5d2b192d339282e8d7c",
+      "raid_action_survivor_ken_skill_1_heal": "f9911f2115701213f25599005695feb8517d4d9db11552c852527c24f5c4091f",
+      "raid_action_survivor_rosie_attack_2": "c92e58f1fc9a1b96af0ec2e042ee8b37993e7a902c029b4886bd1c1cd7887597",
+      "raid_action_summon_eagle_skill": "b3b41b59d3135cebf34a1709961c3c7af879860268ac6d00ce0c419fa4106de4",
+      "raid_action_survivor_maddie_death": "eac6de01980165552ead6f7fb68fb769ce5270eccc63c4c7213b1dd3170242b2",
+      "raid_action_survivor_eunjoo_skill_1": "935a575536247745715cd3c7d5ee95ca76d83746b490b22b7d255b1ed440edd5",
+      "raid_action_survivor_basile_attack": "7c046a7862fdb6d35de4afa77c3e1f260e3e369a9f1011705020756381ff5a9e",
+      "raid_action_survivor_layla_skill_1": "d3ee839780a0bda062daf096fd2454ddf16b68f080dcce16140472c92a526ab9",
+      "raid_action_survivor_jane_skill_1": "00c6e6bd06ca9a4c624499e7299fe9c68a573f338d2e0b93a1cb5720a8eb7b18",
+      "raid_action_survivor_sarge_attack_kt": "7d27c43ba11202e47ae5eb4adfc1ad53f086569d4cad4b2e1d44427747ad66c6",
+      "common_action_collection_gather_yellow_lv1": "6bae802b3eeaf67fe3f30e55d4886b17b1c4e74d6283dc3a47ff4dc2946ea8fc",
+      "raid_action_survivor_dave_death": "bc385dce79c8b70bb23e5dc2495a8b067de9fc49f4717ad1a6404a5ce2c58efe",
+      "raid_action_survivor_maddie_skill_1": "72e0b5b81340503794990a544dbfa971b6eac1fd247cf612a776237de27f92e3",
+      "raid_action_survivor_rusty_attack": "17139124553be4cb854bd96e5c9b373aabbe10e906adf9e327e0eca6e13b9868",
+      "raid_action_survivor_eva_skill_1_update": "e85b8b6c081fb012d36573264e01f7d5dff3a210379510d6ea187e9c8a1d73c5",
+      "common_action_collection_death_gather_yellow": "32dddb829cf0aa3ceab8bc1f1617d1567625e8aa4e3e3e9e28d6b3dd9e7c9e35",
+      "raid_action_survivor_layla_skill_2": "119a98364d7eddfff08211c76c80e90089f8a604d2b18740170c064246985421",
+      "raid_action_survivor_lucky_skill_2": "c6391939eb8c58f74b625e94ad2bc5c45727402bb7e90d3407063c64764949de",
+      "raid_action_ally_soldier_attack": "e710ce08e68b349f8d85f58db1dd77450f6bb7d31875b21af674054a0a8e620e",
+      "common_action_collection_death_mine": "800c98be32119d148a0d3c2c5f9d9dcf163bb9a38a4e47daca7369dd94a46fe8",
+      "raid_action_survivor_chiron_attack": "43f3b28fe935a3b1aa264f9b4c58618f803eaf0ac7055aa47c47d91558488fae",
+      "raid_action_survivor_nikola_attack": "f62c26340e988a7da8cd21a0490340671d349fe3b672de60847dc95ac6ec0619",
+      "raid_action_survivor_freja_attack_1": "bed4e4169538c6b46291ed50fcfec276da9503144b407bf1cc03cae425849d16",
+      "raid_action_machine_skill_2": "bc69368dd54a40388070d05cd8f010c8d693be296d7a2b4fe39f5e03cbe0670f",
+      "raid_action_summon_frank_skill": "b005946abbf0d2c373660214c1b05b8e27d31d1326f0ca9e11bd347962aa169c",
+      "raid_action_survivor_ragnar_attack_3": "93b0874ff7d36d74ee604a97f1c55fc9881091de9aa4571f09f48171315f2def",
+      "raid_action_survivor_lucky_skill_1_3": "e6882c4460fe8d51e4078bf7ee67c02bdb4e091d0cb45675b9f5a3a56c2d24dc",
+      "common_action_kingdom_zombie_krakenboss_attack": "2a467b83453742f587453523c6eb245ff662662894d21c1450e295947f152e11",
+      "raid_action_survivor_layla_skill_3": "cc3cf19740cec3c1bbafe6485abce2cd74a942ba200c2b71bc3f3ccec0ec5670",
+      "raid_action_survivor_tony_skill_1": "407af4815e6175a4a12f55a345830eef973acd1b5a502cb6fabaff974df49853",
+      "common_action_collection_choptree_lv2_2": "967b527f7a4a81824adc7f8707dbe4cc71bf8e313cdafd0efaadb564bde71534",
+      "raid_action_survivor_jane_skill_1_boom": "788640f531a212dd4cf8e99985c1ecdf63aa13bc96660708756f7672ebaebb6f",
+      "raid_action_sarge_summon_start_fx": "ae0e1a8a542428e90c0eb67fb6da8607730440beda22b255472e8fd260f194d1",
+      "raid_action_survivor_brooke_skill_2_2": "0b7ec081bab5815a19b563b1d96324825b209d24a9c98ea455122bdd97945608",
+      "raid_action_survivor_maddie_skill_1_wakeup_grenade": "8a43aac60985b4a2b6cd6d412822426863bf7075a706762b2add3909ee681a27",
+      "raid_action_survivor_lucky_skill_1_wakeup": "4f56d23c6f3d6438d65b2e7154667d0a087242424668057cdf6812a0bc5cd940",
+      "raid_action_survivor_rusty_skill_1": "4e50896cee73ac6c17a2445aa4dec0e91df9472945e6d7885bd33d8cb1dc1eb6",
+      "raid_action_sarge_summon_end_fx": "dd38d8e15367b84862d7bd9bcd038ea7a3201306d8df5513c6b06cecb9e75f67",
+      "common_action_collection_gather_lv2_2": "67c76ed4915bec9e596779bceb8ddb10c046c84355da250e251589eaf811fd2c",
+      "raid_action_survivor_becca_skill_1_wakeup": "b3e40329061c1f43438e2ed67bb7d8fb20f599fb0efbb2463c299582b7d5818d",
+      "common_action_giftbox_spawn": "3069be3b38b2771721312f73331843de0b11d70371e5d1f69cebf4e6ca326d88",
+      "raid_action_survivor_tony_skill_1_3": "19a74397702cb86f2cdfa1b016d606fae4799468b8fb149d8f0cfc34ecb217d4",
+      "raid_action_survivor_tim_skill_1_update": "6a31a086d4509a14773976f18bb70db5337ba5183082a395a17af806f0ed86b2",
+      "raid_action_survivor_sarge_skill_1_update": "31ffcd592ec15520be1aecf16e938c0ceea370d760c97a4cbf9e28b97a184791",
+      "hero_show_survivor_eva": "b27c36e2622e20aeb5d4d7d6d1d6e6c8c20dd10cbaa947a941fb486d77dfd50b",
+      "raid_action_treasurechest_1_open": "a42065d5a2c858dbb1d6039987c5d678d48f55e0026f2cb0901fb55f0d7ba79d",
+      "hero_show_survivor_ray": "e091e530f92ade8491a61571d152b49483c1c4448c7015b169c33370f40ed5be",
+      "raid_action_survivor_ken_skill_1": "9fd968519587be76f10db9f0f020baae244d8414c3b62a5ca5a4892ac73be808",
+      "raid_action_survivor_rosie_death": "0105e0afa37043f857d64d8a3434933438a8a92fe35e6ac45440ee43fdda7044",
+      "raid_action_survivor_chiron_death": "48274bf729b856bc0dfb4db90d5f52058eaa9799a8f9bac17fdfa48a709e94ba",
+      "raid_action_survivor_nanami_skill03_parry": "6d4657e39d68b7536a7c70c3f7f80837f18073f14fc38438c443998617bc3faf",
+      "raid_action_survivor_becca_skill_2": "a5d2c2f6bb95c1227418fa715355ff2693edd2509c5ef5054e6c987092e8ffce",
+      "raid_action_survivor_tony_attack": "3d538e11e17bcd436487802aaa0c258c2f82f5360e89fb57a6862ab6c8cae8f7",
+      "raid_action_survivor_nanami_attack_2": "84c4e350b23f6caa45cd988a9a9fcbd56e00354c079a8bac699db8f81c5b7789",
+      "raid_action_survivor_eunjoo_skill_2_update": "1f85146ddf7dcca03ed30679b22c792b205c2a5bf1ac39d977ce006a0a6f0d2f",
+      "raid_action_survivor_lava_attack": "54a01e27b503a74b3cec366cd0cb703faef61831831ff565dbab2237f1a2b063",
+      "raid_action_survivor_eva_skill_1_wakeup_damage": "1c2bf62fcd9596d54fcd9adeacdcac7f77158105db3861dd4df1b2c92c2f652f",
+      "common_action_treasure_monster": "f499a9bc735164397c9b5296b920c6474cafb2256c0f6fbaf20f15b6790183b9"
+    }
+  }
+}

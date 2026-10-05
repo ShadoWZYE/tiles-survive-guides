@@ -30,6 +30,9 @@ internal static class Program
         var window = Create(); // Exercises XAML initialization and both mode-picker event handlers.
         var heroes = (List<Hero>)typeof(MainWindow).GetField("_heroes", BindingFlags.Instance | BindingFlags.NonPublic)!.GetValue(window)!;
         var becca = heroes.Single(h => h.Name == "Becca");
+        Check(new HeroSkill { RaidLevelParameters = ["pve_effect|damage_heal_text|effect_param2|99"] }.DamageLabel.Contains("not simulated"), "Modifier falsely displayed as ATK damage");
+        var legacySettings = new UpgradeSettings { Goal = "direct" }; legacySettings.Clean();
+        Check(legacySettings.Goal == "power", "Legacy direct metric did not migrate safely");
         Check(becca.IsOwned && becca.Progress.Current is null, "Old profile lost ownership / invented stars");
         ((TabControl)window.FindName("InspectorTabs")).SelectedIndex = 3;
         Invoke(window, "HeroCard_Click", new Button { Tag = becca }, new RoutedEventArgs());

@@ -169,7 +169,7 @@ public partial class MainWindow
         _goalEditor = new ComboBox { Width = 300 };
         foreach (var choice in GoalChoices()) _goalEditor.Items.Add(choice);
         _goalEditor.SelectedItem = _goalEditor.Items.Cast<Choice>().First(c => c.Id == _upgradeSettings.Goal);
-        Field(metric, "Return metric", _goalEditor); _secondsEditor = NumberEditor(_upgradeSettings.Seconds); Field(metric, "Window (1–300 sec)", _secondsEditor);
+        Field(metric, "Return metric", _goalEditor); _secondsEditor = NumberEditor(_upgradeSettings.Seconds);
         _affordableEditor = new CheckBox { Content = "Only affordable", IsChecked = _upgradeSettings.OnlyAffordable, Margin = new Thickness(0, 25, 0, 0), Foreground = Brushes.White };
         metric.Children.Add(_affordableEditor);
         comparison.Children.Add(CopyText("Targeted Draft · choose the pool matching the heroes offered in-game", true));
@@ -208,7 +208,7 @@ public partial class MainWindow
     }
     private static IEnumerable<Choice> GoalChoices() => new[] {
         new Choice("power", "Configured power contribution"), new Choice("attack", "Hero ATK total"), new Choice("health", "Hero HP total"),
-        new Choice("defense", "Hero DEF total"), new Choice("direct", "Experimental direct-output potential") };
+        new Choice("defense", "Hero DEF total") };
     private void DrawRankProgress(UpgradeStage? stage)
     {
         _starPreview.Children.Clear();
@@ -232,7 +232,7 @@ public partial class MainWindow
             _starPreview.Children.Add(grid);
         }
     }
-    private const string UpgradeCaveats = "Ranks raise skill caps, not free skill levels. XP assumes zero progress toward the next level; check building gates in-game. Costs compare only the same resource ID; shard conversion is not assumed. Power/stat contributions are not measured combat strength. Direct-output mode is low-confidence (assumed affine scaling and millisecond cooldowns); animation hit counts, mitigation, targeting, healing, conditional buffs/debuffs, control and summons are not simulated. Equal returns are ties, not a hero preference.";
+    private const string UpgradeCaveats = "Ranks raise skill caps, not free skill levels. XP assumes zero progress toward the next level; check building gates in-game. Costs compare only the same resource ID; shard conversion is not assumed. Power/stat contributions are not measured combat strength. Offline native audit found that display parameters are not runtime damage coefficients; the experimental direct-output ranking has been removed. Complete cast timing, damage zones, summons, mitigation, healing and conditional effects remain unresolved. Skill parameter values are modifiers, not multiples of ATK. Server overrides and dynamic patches cannot be certified by this offline snapshot. Equal returns are ties, not a hero preference.";
     private bool ReadSettings()
     {
         if (!int.TryParse(_secondsEditor.Text, out int seconds) || seconds is < 1 or > 300) { BuildError.Text = "Window must be a whole number from 1 to 300."; return false; }

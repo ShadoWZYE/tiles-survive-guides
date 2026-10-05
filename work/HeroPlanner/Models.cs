@@ -135,28 +135,10 @@ public sealed class HeroSkill
     [JsonIgnore] public string Description => string.IsNullOrWhiteSpace(GameDescription)
         ? "The English client has no squad description for this skill."
         : System.Text.RegularExpressions.Regex.Replace(GameDescription, @"\{(\d+)\}", "[runtime value $1]");
-    [JsonIgnore] public string DamageLabel => MaxLevelDamageCoefficient is double coefficient
-        ? $"Configured max-level direct coefficient: {coefficient:0.###}× ATK"
-        : "No direct max-level damage coefficient found.";
+    [JsonIgnore] public string DamageLabel => "Runtime damage not simulated. Skill-level parameters are modifiers, not multiples of ATK.";
     [JsonIgnore] public string LevelLabel => ConfiguredMaxLevel is null ? "Level data unavailable" : $"Configured to level {ConfiguredMaxLevel}";
     [JsonIgnore] public string Mechanics => DescribeMechanics();
     [JsonIgnore] public string ExpectedPayoff => DescribePayoff();
-
-    private double? MaxLevelDamageCoefficient
-    {
-        get
-        {
-            var values = RaidLevelParameters
-                .Where(value => value.Contains("damage", StringComparison.OrdinalIgnoreCase))
-                .Select(value => value.Split('|').LastOrDefault())
-                .Select(value => double.TryParse(value, System.Globalization.NumberStyles.Float,
-                    System.Globalization.CultureInfo.InvariantCulture, out double parsed) ? parsed : (double?)null)
-                .Where(value => value is not null)
-                .Select(value => value!.Value)
-                .ToList();
-            return values.Count > 0 ? values.Max() : null;
-        }
-    }
 
     private string HumanizeInternalName()
     {
@@ -209,7 +191,6 @@ public sealed class HeroSkill
                 : "Global PvE economy: lowers Stamina spent per action, allowing more farming from the same daily resource.";
         }
         if (mechanics.Contains("Summon")) return "Adds another battlefield source of pressure; practical value depends on summon uptime and survivability.";
-        if (MaxLevelDamageCoefficient is double coefficient) return $"Direct damage skill; the extracted max-level effect reaches about {coefficient:0.###}× ATK before live modifiers.";
         return "The client exposes this effect, but its practical payoff needs a fuller battle-effect simulation.";
     }
 }

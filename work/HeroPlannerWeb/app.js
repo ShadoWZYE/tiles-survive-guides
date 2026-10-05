@@ -59,12 +59,6 @@
     return result.length ? result : ["Mechanic not yet classified"];
   }
 
-  function maxDamageCoefficient(skill) {
-    const values = (skill.raid_level_parameters || []).filter(value => /damage/i.test(value))
-      .map(value => Number(value.split("|").at(-1))).filter(Number.isFinite);
-    return values.length ? Math.max(...values) : null;
-  }
-
   function payoffFor(skill) {
     const mechanics = mechanicsFor(skill);
     if (skill.normal_attack) return "Reliable basic damage; mostly a baseline rather than a reason to build the hero.";
@@ -78,8 +72,7 @@
       return reduction ? `Global PvE economy: the extracted maximum benefit reduces Stamina consumption by ${number(reduction)}%, allowing more farming from the same daily resource.` : "Global PvE economy: lowers Stamina spent per action.";
     }
     if (mechanics.includes("Summon")) return "Adds another battlefield source of pressure; practical value depends on summon uptime and survivability.";
-    const coefficient = maxDamageCoefficient(skill);
-    return coefficient !== null ? `Direct damage skill; the extracted max-level effect reaches about ${number(coefficient)}× ATK before live modifiers.` : "The client exposes this effect, but its practical payoff needs a fuller battle-effect simulation.";
+    return "The client exposes this effect, but its practical payoff needs a fuller battle-effect simulation.";
   }
 
   function loadProfile() {
@@ -369,7 +362,7 @@
 
   function renderSkills() {
     const hero = activeHero();
-    $("#detail-content").innerHTML = `${heroHeader(hero)}<div class="skill-list">${hero.skills.map(skill => `<article class="skill-card">${skill.icon_data ? `<img src="${skill.icon_data}" alt="">` : '<div></div>'}<div><h3>${esc(skill.display_name || (skill.normal_attack ? "Basic attack" : `Skill ${skill.slot}`))}</h3><span class="tags">${esc(skill.mechanics.join(" · "))} · ${skill.configured_max_level ? `Level ${skill.configured_max_level}` : "Level data unavailable"}</span><p>${esc((skill.game_description || "The English client has no squad description for this skill.").replace(/\{(\d+)\}/g,"[runtime value $1]"))}</p><p class="payoff"><strong>Expected payoff:</strong> ${esc(skill.payoff)}</p><p class="evidence">${maxDamageCoefficient(skill) !== null ? `Configured max-level direct coefficient: ${number(maxDamageCoefficient(skill))}× ATK.` : "No direct max-level damage coefficient found."}</p></div></article>`).join("")}</div>`;
+    $("#detail-content").innerHTML = `${heroHeader(hero)}<div class="skill-list">${hero.skills.map(skill => `<article class="skill-card">${skill.icon_data ? `<img src="${skill.icon_data}" alt="">` : '<div></div>'}<div><h3>${esc(skill.display_name || (skill.normal_attack ? "Basic attack" : `Skill ${skill.slot}`))}</h3><span class="tags">${esc(skill.mechanics.join(" · "))} · ${skill.configured_max_level ? `Level ${skill.configured_max_level}` : "Level data unavailable"}</span><p>${esc((skill.game_description || "The English client has no squad description for this skill.").replace(/\{(\d+)\}/g,"[runtime value $1]"))}</p><p class="payoff"><strong>Expected payoff:</strong> ${esc(skill.payoff)}</p><p class="evidence">Runtime damage not simulated. Skill-level parameters are modifiers, not multiples of ATK.</p></div></article>`).join("")}</div>`;
   }
 
   function bestOwnedAndTargets() {

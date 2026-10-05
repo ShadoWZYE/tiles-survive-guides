@@ -22,7 +22,7 @@ public sealed class UpgradeSettings
     public string? TargetedPool { get; set; }
     public void Clean()
     {
-        if (!UpgradeModel.Goals.Contains(Goal)) Goal = "power";
+        if (!UpgradeModel.Goals.Contains(Goal) || Goal == "direct") Goal = "power";
         if (Seconds is < 1 or > 300) Seconds = 30;
         Inventory = (Inventory ?? []).Where(x => double.IsFinite(x.Value) && x.Value is >= 0 and <= 1e12).ToDictionary();
     }
@@ -139,7 +139,9 @@ public sealed class UpgradeSkill
     public double Cooldown { get; set; }
     public double FirstCast { get; set; }
     public List<UpgradeSkillLevel> Levels { get; set; } = [];
-    [JsonIgnore] public bool DirectSupported => EffectType == 1 && DamageParams.Length > 0 && !Conditional && Cooldown > 0;
+    // Offline native audit: display DamageParam is not a runtime damage coefficient.
+    // No skill currently has a verified complete effect/cast graph.
+    [JsonIgnore] public bool DirectSupported => false;
 }
 public sealed class UpgradeSkillLevel
 {
@@ -193,7 +195,7 @@ public static class UpgradeModel
             if (state is null) result.Missing.Add($"{data.Heroes.GetValueOrDefault(slug)?.Name ?? slug}: {error}"); else states[slug] = state;
         }
         if (result.Missing.Count > 0 || states.Count == 0) return result;
-        if (states.Values.Any(s => Metric(s, settings.Goal) is null)) { result.Missing.Add("The selected metric requires known direct-skill levels."); return result; }
+        if (states.Values.Any(s => Metric(s, settings.Goal) is null)) { result.Missing.Add("Combat return unavailable: complete runtime effects are not verified."); return result; }
         double total = states.Values.Sum(s => Metric(s, settings.Goal)!.Value);
         if (total <= 0) { result.Missing.Add("No positive formation baseline for this metric."); return result; }
         foreach (var choice in pool.Choices.Where(c => states.ContainsKey(c.Slug)).DistinctBy(c => c.Slug))
@@ -238,20 +240,16 @@ public static class UpgradeModel
             { error = "invalid, duplicate-slot or level-gated gear"; return null; }
             for (int i = 0; i < 3; i++) stats[i] += entry.Stats[i]; power += entry.Power;
         }
-        var skills = b.Skills ?? []; double direct = 0; bool known = true;
+        var skills = b.Skills ?? [];
         foreach (var skill in h.Skills)
         {
-            if (!skills.TryGetValue(skill.Id, out int n)) { notes.Add($"{skill.Name}: skill level unknown; power excluded"); if (skill.DirectSupported) known = false; continue; }
+            if (!skills.TryGetValue(skill.Id, out int n)) { notes.Add($"{skill.Name}: skill level unknown; power excluded"); continue; }
             int cap = skill.Slot < stage.SkillCaps.Length ? stage.SkillCaps[skill.Slot] : 0;
             var sl = skill.Levels.Find(l => l.Level == n);
             if (n < 0 || n > cap || (n > 0 && sl is null)) { error = $"{skill.Name}: level exceeds cap or is absent from data"; return null; }
             if (n > 0) power += sl!.Power;
-            if (!skill.DirectSupported || n == 0) continue;
-            double coefficient = skill.DamageRatio * (skill.DamageParams[0] + skill.DamageParams.ElementAtOrDefault(1) * (n - 1));
-            double casts = seconds * 1000 > skill.FirstCast ? Math.Ceiling((seconds * 1000 - skill.FirstCast) / skill.Cooldown) : 0;
-            direct += stats[0] * coefficient * casts;
         }
-        return new(b, stage, level, stats, power, known ? direct : null, notes);
+        return new(b, stage, level, stats, power, null, notes);
     }
     public static UpgradeResult Evaluate(IEnumerable<string> slugs, Dictionary<string, HeroBuild> builds, UpgradeData data, UpgradeSettings settings)
     {
@@ -302,7 +300,7 @@ public static class UpgradeModel
                 var next = skill.Levels.Find(l => l.Level == n + 1); if (next is null) continue;
                 int cap = s.Stage.SkillCaps.ElementAtOrDefault(skill.Slot); var after = s.Build.Copy(); after.Skills[skill.Id] = n + 1;
                 Add(slug, $"{h.Name}: {skill.Name} {n} → {n + 1}", "skill", after, next.Cost,
-                    "SlgItemReq cost. " + (skill.DirectSupported ? "Experimental affine direct-output potential; animation/mitigation excluded. " : "Runtime utility/conditional effect not simulated. ") + string.Join(';', next.Params),
+                    "SlgItemReq cost. Runtime damage and utility return are not simulated; parameter values are modifiers, not ATK coefficients. " + string.Join(';', next.Params),
                     n + 1 > cap ? $"Needs higher rank (current cap {cap})" : null, settings.Goal == "direct" && !skill.DirectSupported);
             }
             foreach (var g in s.Build.Gear ?? [])

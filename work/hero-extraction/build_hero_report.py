@@ -164,7 +164,6 @@ def build(source: Path, language_pack: Path | None = DEFAULT_LANGUAGE_PACK) -> l
         base_benefits = benefit_map(max_level["BenefitsTroops"])
 
         skills = []
-        damage_coefficients = []
         for skill_id_text in hero["SkillConfig"]:
             skill_id = int(skill_id_text)
             skill_type = skill_types.get(skill_id)
@@ -173,8 +172,6 @@ def build(source: Path, language_pack: Path | None = DEFAULT_LANGUAGE_PACK) -> l
             configured_levels = skill_levels.get(skill_id, [])
             max_skill = max(configured_levels, key=lambda row: row["Level"]) if configured_levels else None
             damage_params = [float(value) for value in skill_type.get("DamageParam", [])]
-            if not skill_type.get("NormalAttack") and damage_params:
-                damage_coefficients.append(damage_params[0])
             overall = []
             if max_skill:
                 for item in max_skill.get("OverallBenefit", []):
@@ -242,7 +239,7 @@ def build(source: Path, language_pack: Path | None = DEFAULT_LANGUAGE_PACK) -> l
             "max_level_defense": base_benefits.get(BENEFIT_IDS["defense"], 0.0),
             "max_level_health": base_benefits.get(BENEFIT_IDS["health"], 0.0),
             "max_level_march_capacity": base_benefits.get(BENEFIT_IDS["march_capacity"], 0.0),
-            "best_non_basic_damage_coefficient": max(damage_coefficients, default=0.0),
+            "best_non_basic_damage_coefficient": None,  # Not established by display parameters.
             "skills": skills,
         })
 
@@ -251,12 +248,9 @@ def build(source: Path, language_pack: Path | None = DEFAULT_LANGUAGE_PACK) -> l
     defense_values = [row["max_level_defense"] for row in result]
     health_values = [row["max_level_health"] for row in result]
     power_values = [row["max_level_battle_power"] for row in result]
-    coefficient_values = [row["best_non_basic_damage_coefficient"] for row in result]
     for row in result:
-        offense = (
-            minmax(attack_values, row["max_level_attack"]) * 0.65
-            + minmax(coefficient_values, row["best_non_basic_damage_coefficient"]) * 0.35
-        )
+        # Native audit invalidated the DamageParam proxy. Use verified ATK only.
+        offense = minmax(attack_values, row["max_level_attack"])
         durability = (
             minmax(health_values, row["max_level_health"]) * 0.70
             + minmax(defense_values, row["max_level_defense"]) * 0.30
@@ -348,7 +342,7 @@ This report contains {len(heroes)} independently playable base heroes. Chief ava
 
 The ranking is a reproducible **configuration comparison**, not a combat simulation or a claim about the live meta. It excludes team synergy, targeting, crowd control, healing, exclusive gear, awakening replacements, mode-specific AI, and any server-side balance override. A hero with a low offense index may be an excellent support.
 
-The composite index uses max-level values from this client: 40% configured battle power, 35% offense, and 25% durability. Offense is 65% hero attack and 35% the largest non-basic `DamageParam[0]`; durability is 70% health and 30% defense. Every input is min-max normalized across the extracted roster. Ties are left visible rather than broken with invented precision.
+The composite index uses max-level values from this client: 40% configured battle power, 35% offense, and 25% durability. Offense is the normalized hero ATK stat only; durability is 70% health and 30% defense. The offline native audit invalidated the old display-DamageParam proxy, which has been removed. These weights remain planning heuristics, not game combat formulas. Every input is min-max normalized across the extracted roster. Ties are left visible rather than broken with invented precision.
 
 ## Configuration ranking
 
