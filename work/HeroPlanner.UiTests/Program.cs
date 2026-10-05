@@ -80,6 +80,25 @@ internal static class Program
         Field<Slider>(window, "_starSlider").Value = 5;
         Check(Field<Dictionary<string, HeroBuild>>(window, "_heroBuilds")[becca.AssetSlug].Stage == data.Heroes[becca.AssetSlug].Stages[5].Id, "Star slider did not autosave exact partial rank");
         Check(Field<TextBlock>(window, "_starSliderLabel").Text.Contains("step 5/6"), "Partial-rank label missing");
+        Check(Field<StackPanel>(window, "_starPreview").Children.Count == 5, "Star preview must have five slots");
+        void AssertStars(int rank, int step, string[] baseSprites, int? partialSlot = null, string? partialSprite = null)
+        {
+            var stage = data.Heroes[becca.AssetSlug].Stages.Single(s => s.Rank == rank && s.Step == step);
+            var slots = StarProgress.Slots(stage);
+            Check(slots.Select(s => s.BaseSprite).SequenceEqual(baseSprites), $"Wrong star row at {rank}/{step}");
+            Check(slots.Where(s => s.ProgressSprite is not null).Count() == (partialSlot is null ? 0 : 1), "Wrong number of partial stars");
+            if (partialSlot is int index) Check(slots[index].ProgressSprite == partialSprite && slots[index].Steps == step, "Wrong partial-star color/slot");
+        }
+        string empty = StarProgress.Empty, purple = StarProgress.Purple, gold = StarProgress.Gold;
+        AssertStars(0, 0, [empty, empty, empty, empty, empty]);
+        AssertStars(2, 1, [purple, empty, empty, empty, empty], 1, purple);
+        AssertStars(3, 3, [purple, purple, empty, empty, empty], 2, purple);
+        AssertStars(5, 6, [purple, purple, purple, purple, purple]);
+        AssertStars(6, 1, [purple, purple, purple, purple, purple], 0, gold);
+        AssertStars(8, 6, [gold, gold, gold, purple, purple]);
+        AssertStars(10, 6, [gold, gold, gold, gold, gold]);
+        Check(StarProgress.Label(null).Contains("unknown"), "Unknown stars are shown as zero");
+        Check(StarProgress.Slots(new() { Rank = 11, Step = 1 }).Count == 0, "Unmodeled ascension display guessed");
         var captured = window.Content as FrameworkElement;
         captured!.Measure(new Size(1500, 920)); captured.Arrange(new Rect(0, 0, 1500, 920)); captured.UpdateLayout();
         IEnumerable<DependencyObject> Walk(DependencyObject parent)

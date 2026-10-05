@@ -84,10 +84,10 @@ public partial class MainWindow
         _starSlider.Value = Math.Max(-1, h.Stages.FindIndex(s => s.Id == b.Stage));
         BuildFields.Children.Add(_starPreview); BuildFields.Children.Add(_starSliderLabel); BuildFields.Children.Add(_starSlider);
         var top = new WrapPanel(); BuildFields.Children.Add(top);
-        _rankEditor = new ComboBox { Width = 190, Height = 34, FontSize = 14, ToolTip = "Configured rank identifier; not an assumed whole-star conversion." };
+        _rankEditor = new ComboBox { Width = 190, Height = 34, FontSize = 14, ToolTip = "Ranks 1–5 fill purple stars. Ranks 6–10 replace them with gold stars. Step 6 completes a star." };
         _stageEditor = new ComboBox { Width = 190, Height = 34, FontSize = 14 };
         _rankEditor.Items.Add(new Choice(null, "Unknown"));
-        foreach (int rank in h.Stages.Select(s => s.Rank).Distinct()) _rankEditor.Items.Add(new Choice(rank.ToString(), $"Rank {rank}"));
+        foreach (int rank in h.Stages.Select(s => s.Rank).Distinct()) _rankEditor.Items.Add(new Choice(rank.ToString(), rank == 0 ? "0 stars · Rank 0" : rank <= 5 ? $"Purple star {rank} · Rank {rank}" : rank <= 10 ? $"Gold star {rank - 5} · Rank {rank}" : $"Rank {rank}"));
         var currentStage = h.Stages.Find(s => s.Id == b.Stage);
         _rankEditor.SelectedItem = _rankEditor.Items.Cast<Choice>().FirstOrDefault(c => c.Id == currentStage?.Rank.ToString()) ?? _rankEditor.Items[0];
         void UpdateCaps()
@@ -107,7 +107,7 @@ public partial class MainWindow
             bool wasPopulating = _populatingEditor; _populatingEditor = true;
             _stageEditor.Items.Clear(); _stageEditor.Items.Add(new Choice(null, "Unknown"));
             if (int.TryParse((_rankEditor.SelectedItem as Choice)?.Id, out int rank))
-                foreach (var s in h.Stages.Where(s => s.Rank == rank)) _stageEditor.Items.Add(new Choice(s.Id, $"Step {s.Step}"));
+                foreach (var s in h.Stages.Where(s => s.Rank == rank)) _stageEditor.Items.Add(new Choice(s.Id, s.Step == 0 ? "No star progress" : s.Step == 6 ? "Step 6/6 · full star" : $"Step {s.Step}/6 · partial"));
             _stageEditor.SelectedItem = _stageEditor.Items.Cast<Choice>().FirstOrDefault(c => c.Id == b.Stage) ?? _stageEditor.Items[0];
             UpdateCaps();
             _populatingEditor = wasPopulating;
@@ -116,7 +116,7 @@ public partial class MainWindow
         _rankEditor.SelectionChanged += (_, _) => Steps(); _stageEditor.SelectionChanged += (_, _) => UpdateCaps();
         Field(top, "Configured rank", _rankEditor); Field(top, "Rank step", _stageEditor);
         _levelEditor = NumberEditor(b.Level); _levelLabel = Field(top, "Hero level", _levelEditor);
-        BuildFields.Children.Add(CopyText("Match rank/step and skill caps in-game. Whole-star notes are not converted automatically."));
+        BuildFields.Children.Add(CopyText("Match the five-star row and partial step to your hero. Step 6 completes that star. Sectors show steps, not fragment-cost percentages."));
         var skills = new WrapPanel(); BuildFields.Children.Add(skills);
         foreach (var skill in h.Skills)
         {
@@ -211,25 +211,25 @@ public partial class MainWindow
     private void DrawRankProgress(UpgradeStage? stage)
     {
         _starPreview.Children.Clear();
-        _starSliderLabel.Text = stage is null ? "Star progress unknown · drag or choose rank/step" : $"Rank {stage.Rank} · step {stage.Step}" + (stage.Rank is > 0 and <= 10 ? "/6" : "");
-        // The six-point client star is a visual progress indicator, not an inferred star-color conversion.
-        var grid = new Grid { Width = 48, Height = 48, ToolTip = "Game star icon; filled sectors show this rank's six configured steps. Exact rank/step is shown below." };
+        _starSliderLabel.Text = StarProgress.Label(stage);
+        _starPreview.ToolTip = "Five star slots: purple first, then gold replaces purple. Sectors show configured steps, not a fraction of fragment cost. Unknown rank is not zero stars.";
         BitmapImage Sprite(string name) => new(new Uri($"pack://application:,,,/TilesSurviveHeroPlanner;component/Images/{name}.png"));
-        grid.Children.Add(new Image { Source = Sprite("sp_base_survivor_star_1"), Opacity = .6 });
-        if (stage is not null && stage.Step > 0)
+        foreach (var slot in StarProgress.Slots(stage))
         {
-            var image = new Image { Source = Sprite("sp_base_survivor_star_3") };
-            if (stage.Step < 6 && stage.Rank <= 10)
+            var grid = new Grid { Width = 36, Height = 36, Margin = new Thickness(0, 0, 4, 0), Opacity = stage is null ? .35 : 1 };
+            grid.Children.Add(new Image { Source = Sprite(slot.BaseSprite) });
+            if (slot.ProgressSprite is string progress)
             {
-                var points = new List<Point> { new(24, 24) };
-                for (int i = 0; i <= stage.Step * 12; i++)
-                { double angle = (-90 + i * 5) * Math.PI / 180; points.Add(new(24 + 40 * Math.Cos(angle), 24 + 40 * Math.Sin(angle))); }
+                var image = new Image { Source = Sprite(progress) };
+                var points = new List<Point> { new(18, 18) };
+                for (int i = 0; i <= slot.Steps * 12; i++)
+                { double angle = (-90 + i * 5) * Math.PI / 180; points.Add(new(18 + 32 * Math.Cos(angle), 18 + 32 * Math.Sin(angle))); }
                 var figure = new PathFigure { StartPoint = points[0], IsClosed = true };
                 figure.Segments.Add(new PolyLineSegment(points.Skip(1), true)); image.Clip = new PathGeometry([figure]);
+                grid.Children.Add(image);
             }
-            grid.Children.Add(image);
+            _starPreview.Children.Add(grid);
         }
-        _starPreview.Children.Add(grid);
     }
     private const string UpgradeCaveats = "Ranks raise skill caps, not free skill levels. XP assumes zero progress toward the next level; check building gates in-game. Costs compare only the same resource ID; shard conversion is not assumed. Power/stat contributions are not measured combat strength. Direct-output mode is low-confidence (assumed affine scaling and millisecond cooldowns); animation hit counts, mitigation, targeting, healing, conditional buffs/debuffs, control and summons are not simulated. Equal returns are ties, not a hero preference.";
     private bool ReadSettings()

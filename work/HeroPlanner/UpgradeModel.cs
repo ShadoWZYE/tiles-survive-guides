@@ -88,6 +88,37 @@ public sealed class UpgradeStage
     public int LevelMax { get; set; }
     public int BuildingRequired { get; set; }
 }
+public sealed record StarSlot(string BaseSprite, string? ProgressSprite = null, int Steps = 0);
+public static class StarProgress
+{
+    public const string Empty = "sp_base_survivor_star_1";
+    public const string Purple = "sp_base_survivor_star_2";
+    public const string Gold = "sp_base_survivor_star_3";
+    public static List<StarSlot> Slots(UpgradeStage? stage)
+    {
+        // Base-hero configuration: ten ranks, six steps each. Five purple slots, then gold replacements.
+        if (stage is null || stage.Rank == 0) return Enumerable.Repeat(new StarSlot(Empty), 5).ToList();
+        if (stage.Rank is < 1 or > 10 || stage.Step is < 1 or > 6) return [];
+        int completed = stage.Rank - (stage.Step == 6 ? 0 : 1);
+        var slots = Enumerable.Range(0, 5).Select(i => new StarSlot(completed >= 5 ? (i < completed - 5 ? Gold : Purple) : (i < completed ? Purple : Empty))).ToList();
+        if (stage.Step < 6)
+        {
+            int index = (stage.Rank - 1) % 5;
+            slots[index] = slots[index] with { ProgressSprite = stage.Rank <= 5 ? Purple : Gold, Steps = stage.Step };
+        }
+        return slots;
+    }
+    public static string Label(UpgradeStage? stage)
+    {
+        if (stage is null) return "Stars unknown · drag or choose rank/step";
+        if (stage.Rank == 0) return "0 stars · Rank 0 · step 0";
+        if (stage.Rank is < 1 or > 10 || stage.Step is < 1 or > 6) return $"Rank {stage.Rank} · step {stage.Step} · star display unsupported";
+        int completed = stage.Rank - (stage.Step == 6 ? 0 : 1);
+        string stars = completed <= 5 ? $"{completed} purple {(completed == 1 ? "star" : "stars")}" : completed == 10 ? "5 gold stars" : $"{completed - 5} gold + {10 - completed} purple stars";
+        string next = stage.Step < 6 ? $" + {stage.Step}/6 toward the next {(stage.Rank <= 5 ? "purple" : "gold")} star" : "";
+        return $"{stars}{next}\nRank {stage.Rank} · step {stage.Step}/6";
+    }
+}
 public sealed class UpgradeLevel
 {
     public int Level { get; set; }
