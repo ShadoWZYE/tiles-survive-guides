@@ -223,7 +223,7 @@ public partial class MainWindow
                 var image = new Image { Source = Sprite(progress) };
                 var points = new List<Point> { new(18, 18) };
                 for (int i = 0; i <= slot.Steps * 12; i++)
-                { double angle = (-90 + i * 5) * Math.PI / 180; points.Add(new(18 + 32 * Math.Cos(angle), 18 + 32 * Math.Sin(angle))); }
+                { double angle = (-90 - i * 5) * Math.PI / 180; points.Add(new(18 + 32 * Math.Cos(angle), 18 + 32 * Math.Sin(angle))); }
                 var figure = new PathFigure { StartPoint = points[0], IsClosed = true };
                 figure.Segments.Add(new PolyLineSegment(points.Skip(1), true)); image.Clip = new PathGeometry([figure]);
                 grid.Children.Add(image);

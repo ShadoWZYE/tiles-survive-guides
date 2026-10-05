@@ -81,6 +81,10 @@ internal static class Program
         Check(Field<Dictionary<string, HeroBuild>>(window, "_heroBuilds")[becca.AssetSlug].Stage == data.Heroes[becca.AssetSlug].Stages[5].Id, "Star slider did not autosave exact partial rank");
         Check(Field<TextBlock>(window, "_starSliderLabel").Text.Contains("step 5/6"), "Partial-rank label missing");
         Check(Field<StackPanel>(window, "_starPreview").Children.Count == 5, "Star preview must have five slots");
+        var partialImage = ((Grid)Field<StackPanel>(window, "_starPreview").Children[0]).Children.OfType<Image>().Last();
+        var partialPath = (PathGeometry)partialImage.Clip;
+        var partialPoints = ((PolyLineSegment)partialPath.Figures[0].Segments[0]).Points;
+        Check(partialPoints[1].X < 18, "Partial star must fill counterclockwise from the top");
         void AssertStars(int rank, int step, string[] baseSprites, int? partialSlot = null, string? partialSprite = null)
         {
             var stage = data.Heroes[becca.AssetSlug].Stages.Single(s => s.Rank == rank && s.Step == step);
