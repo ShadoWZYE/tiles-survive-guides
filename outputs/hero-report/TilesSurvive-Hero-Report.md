@@ -1,8 +1,8 @@
 # Tiles Survive hero asset report
 
-Source: local installed client configuration pack, client `2.6.0.235`.
+Source: local installed client configuration pack, client `2.6.200.276`.
 
-This report contains 28 independently playable base heroes. Chief avatars, monsters, and six `_orange` awakening/rarity-up replacement records are excluded from the ranking. Account power is intentionally not used as a release or identity key because it changes frequently. Rarity labels use the verified in-game mapping: code 4 is SSR, 3 is SR, and 2 is R.
+This report contains 29 independently playable base heroes. Chief avatars, monsters, and six `_orange` awakening/rarity-up replacement records are excluded from the ranking. Account power is intentionally not used as a release or identity key because it changes frequently. Rarity labels use the verified in-game mapping: code 4 is SSR, 3 is SR, and 2 is R.
 
 ## Important limits
 
@@ -29,19 +29,20 @@ The composite index uses max-level values from this client: 40% configured battl
 | 13 | Ray | Mountain | Range | SSR | 90.39 | 13 | 1 | - | - |
 | 14 | Shark | Sea | Melee | SSR | 89.12 | 14 | 1 | 26-28 | 2.3.800 |
 | 14 | Ragnar | Sea | Melee | SSR | 89.12 | 14 | 1 | 28-30 | 2.4.000 |
-| 16 | Maddie | Sky | Range | SSR | 88.21 | 16 | 1 | - | - |
-| 16 | Rosie | Mountain | Melee | SSR | 88.21 | 16 | 1 | - | - |
-| 16 | Layla | Wasteland | Mid | SSR | 88.21 | 16 | 1 | 2-3 | - |
-| 16 | Candy | Wasteland | Mid | SSR | 88.21 | 16 | 1 | 12-14 | 1.8.70 |
-| 16 | Mike | Sky | Melee | SSR | 88.21 | 16 | 1 | 24-26 | - |
-| 21 | Lucky | Sky | Range | SR | 55.32 | 21 | 21 | - | - |
-| 21 | Sarge | Sky | Range | SR | 55.32 | 21 | 21 | - | - |
-| 21 | Freja | Mountain | Mid | SR | 55.32 | 21 | 21 | - | - |
-| 21 | Travis | Wasteland | Mid | SR | 55.32 | 21 | 21 | - | - |
-| 21 | Eva | Wasteland | Melee | SR | 55.32 | 21 | 21 | - | - |
-| 26 | Chef | Mountain | Melee | SR | 53.06 | 26 | 21 | - | - |
-| 27 | Rusty | Mountain | Melee | R | 0.84 | 27 | 27 | - | - |
-| 27 | Ghost | Wasteland | Mid | R | 0.84 | 27 | 27 | - | - |
+| 16 | Lava | Mountain | Melee | SSR | 89.06 | 16 | 1 | 36-38 | 2.6.200 |
+| 17 | Maddie | Sky | Range | SSR | 88.21 | 17 | 1 | - | - |
+| 17 | Rosie | Mountain | Melee | SSR | 88.21 | 17 | 1 | - | - |
+| 17 | Layla | Wasteland | Mid | SSR | 88.21 | 17 | 1 | 2-3 | - |
+| 17 | Candy | Wasteland | Mid | SSR | 88.21 | 17 | 1 | 12-14 | 1.8.70 |
+| 17 | Mike | Sky | Melee | SSR | 88.21 | 17 | 1 | 24-26 | - |
+| 22 | Lucky | Sky | Range | SR | 55.32 | 22 | 22 | - | - |
+| 22 | Sarge | Sky | Range | SR | 55.32 | 22 | 22 | - | - |
+| 22 | Freja | Mountain | Mid | SR | 55.32 | 22 | 22 | - | - |
+| 22 | Travis | Wasteland | Mid | SR | 55.32 | 22 | 22 | - | - |
+| 22 | Eva | Wasteland | Melee | SR | 55.32 | 22 | 22 | - | - |
+| 27 | Chef | Mountain | Melee | SR | 53.06 | 27 | 22 | - | - |
+| 28 | Rusty | Mountain | Melee | R | 0.84 | 28 | 28 | - | - |
+| 28 | Ghost | Wasteland | Mid | R | 0.84 | 28 | 28 | - | - |
 
 ## Release-planning signals
 
@@ -49,23 +50,24 @@ The composite index uses max-level values from this client: 40% configured battl
 
 | Hero | Asset ID | Faction | Role | Server week | Client gate | Minimum server | Rank |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| Layla | layla | Wasteland | Mid | 2-3 | - | - | 16 |
+| Layla | layla | Wasteland | Mid | 2-3 | - | - | 17 |
 | Becca | becca | Wasteland | Range | 4-5 | 1.13.0 | - | 3 |
 | Nikola | nikola | Mountain | Melee | 6-8 | - | - | 3 |
 | Tarzan | tarzan | Mountain | Melee | 8-10 | - | 2.2.800 | 3 |
 | Tara | tara | Mountain | Mid | 10-12 | - | - | 3 |
-| Candy | candy | Wasteland | Mid | 12-14 | 1.8.70 | - | 16 |
+| Candy | candy | Wasteland | Mid | 12-14 | 1.8.70 | - | 17 |
 | Jacob | jacob | Wasteland | Melee | 14-16 | - | - | 3 |
 | Chiron | chiron | Wasteland | Mid | 16-18 | - | 2.2.800 | 3 |
 | Kiki | tithi | Sky | Range | 18-20 | - | - | 3 |
 | Wright | wright | Sky | Mid | 20-22 | - | - | 3 |
 | Tony | tony | Sky | Melee | 22-24 | - | - | 3 |
-| Mike | mike | Sky | Melee | 24-26 | - | - | 16 |
+| Mike | mike | Sky | Melee | 24-26 | - | - | 17 |
 | Shark | shark | Sea | Melee | 26-28 | 2.3.800 | 2.3.800 | 14 |
 | Ragnar | ragnar | Sea | Melee | 28-30 | 2.4.000 | 2.4.000 | 14 |
 | Knotty | knotty | Sea | Range | 30-32 | 2.4.200 | 2.4.200 | 2 |
 | Undine | undine | Sea | Mid | 32-34 | 2.4.500 | - | 3 |
 | Dave | dave | Sea | Mid | 34-36 | 2.5.500 | - | 1 |
+| Lava | lava | Mountain | Melee | 36-38 | 2.6.200 | 2.6.200 | 16 |
 
 ## Acquisition evidence
 
@@ -100,6 +102,7 @@ The composite index uses max-level values from this client: 40% configured battl
 | Sarge | Recruitable (F2P confirmed) | high | yes | no | no |
 | Tony | Recruitable (F2P confirmed) | high | yes | yes | yes |
 | Travis | Recruitable (F2P confirmed) | high | yes | no | no |
+| Lava | IAP-linked; free route unconfirmed | medium | no | no | yes |
 | Lucky | Acquisition route unknown | low | no | no | no |
 
 ## Files

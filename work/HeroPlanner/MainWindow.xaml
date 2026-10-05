@@ -38,10 +38,10 @@
                 <Border Background="#142A48" CornerRadius="14" Padding="16,9" BorderBrush="#2C507A" BorderThickness="1">
                     <StackPanel Orientation="Horizontal">
                         <Ellipse Width="9" Height="9" Fill="{StaticResource AccentBrush}" Margin="0,0,9,0" />
-                        <TextBlock Text="Client config 2.6.0.235" FontWeight="SemiBold" />
+                        <TextBlock x:Name="ConfigVersionText" FontWeight="SemiBold" />
                     </StackPanel>
                 </Border>
-                <TextBlock Text="28 base heroes  •  6 ascended forms" Foreground="{StaticResource MutedInkBrush}"
+                <TextBlock x:Name="RosterCountText" Foreground="{StaticResource MutedInkBrush}"
                            FontSize="12" HorizontalAlignment="Center" Margin="0,5,0,0" />
             </StackPanel>
         </Grid>

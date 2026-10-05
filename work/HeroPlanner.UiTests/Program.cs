@@ -50,6 +50,9 @@ internal static class Program
         var focus = (TextBox)window.FindName("FormationResourceFocus");
         Check(focus.Text.Contains("Record these builds"), "Unknown builds must not receive a guessed ranking");
         var data = Field<UpgradeData>(window, "_upgradeData");
+        Check(((TextBlock)window.FindName("ConfigVersionText")).Text.Contains(data.ClientBuild), "Header build must match embedded progression data");
+        Check(((TextBlock)window.FindName("RosterCountText")).Text.StartsWith(heroes.Count.ToString()), "Header roster count must match current heroes");
+        Check(heroes.Select(h => h.AssetSlug).ToHashSet().SetEquals(data.Heroes.Keys), "Native roster/progression mismatch");
         foreach (var name in new[] { "Rosie", "Layla", "Becca", "Ray", "Maddie" })
         {
             var hero = heroes.Single(h => h.Name == name); bool ownedBefore = hero.IsOwned;

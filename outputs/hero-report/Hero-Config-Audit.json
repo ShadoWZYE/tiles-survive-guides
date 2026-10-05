@@ -1,0 +1,16 @@
+{
+  "audited_date": "2026-10-05",
+  "native_build": "2.6.200.276",
+  "config_pack_sha256": "53bc9fbb60ebab1719186eaeb3b24169c56d09273a5684ead0c4f11bb2329edc",
+  "manifest_sha256": "e7978f2a438f800c7ec52f818a451d549ea1693d68523036e33ae3396c74e8a3",
+  "language_sha256": "193c0acd9551f47713c8c53faddbc377778266d5b7569d22025ee3c18827edc5",
+  "tables_verified": 20,
+  "heroes_verified": 29,
+  "previous_heroes_compared": 28,
+  "progression_changes": {},
+  "roster_stat_skill_changes": {},
+  "added_heroes": [
+    "lava"
+  ],
+  "scope": "Current local cache matched to BinVersionList_Realtime; no server overrides or full battle runtime simulated."
+}

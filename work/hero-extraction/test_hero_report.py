@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import unittest
+import json
 from pathlib import Path
 import sys
 
@@ -53,8 +54,9 @@ class HeroExtractionTests(unittest.TestCase):
 
     def test_all_portraits_are_native_card_size(self) -> None:
         images = Path(__file__).resolve().parents[2] / "outputs" / "hero-tool" / "images"
-        portraits = sorted(images.glob("*.png"))
-        self.assertEqual(28, len(portraits))
+        roster = json.loads((images.parent.parent / 'hero-report' / 'TilesSurvive-Hero-Data.json').read_text(encoding='utf-8'))
+        portraits = sorted(images / (hero['asset_slug'] + '.png') for hero in roster)
+        self.assertEqual({h['asset_slug'] for h in roster}, {p.stem for p in portraits})
         for portrait in portraits:
             data = portrait.read_bytes()
             self.assertEqual(b"\x89PNG\r\n\x1a\n", data[:8])

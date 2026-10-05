@@ -104,7 +104,8 @@ def main() -> None:
     for channel in ("G", "R"):
         index_dir = args.game_assets / "AssetBundle2" / channel / "Windows"
         asset_indices = sorted(index_dir.glob(f"bundle_assets_{channel}_*.json"))
-        bundle_indices = sorted(index_dir.glob(f"bundle_list_{channel}_*.json"))
+        bundle_indices = list(index_dir.glob(f"bundle_list_{channel}_*.json")) + list((args.downloaded_assets / 'AssetBundle2').glob(f"bundle_list_{channel}_*.json"))
+        bundle_indices.sort(key=lambda path: tuple(int(n) for n in path.stem.split('_')[-1].split('.')))
         if not asset_indices or not bundle_indices:
             continue
         asset_map = asset_bundle_ids(asset_indices[-1], wanted - locations.keys())
@@ -123,14 +124,11 @@ def main() -> None:
     extracted: set[str] = set()
     hero_by_asset = {hero["portrait_asset"]: hero for hero in heroes}
     for (channel, digest), names in by_bundle.items():
-        candidates = (
-            args.downloaded_assets / "AssetBundle2" / channel / "Windows" / digest,
-            args.game_assets / "AssetBundle2" / channel / "Windows" / digest,
-        )
-        bundle_path = next((path for path in candidates if path.exists()), None)
-        if bundle_path is None:
+        from export_client_asset import locate_bundle
+        try:
+            raw, _ = locate_bundle([args.downloaded_assets, args.game_assets], channel, digest)
+        except FileNotFoundError:
             continue
-        raw = bundle_path.read_bytes()
         unity_offset = raw.find(b"UnityFS")
         if unity_offset < 0:
             continue

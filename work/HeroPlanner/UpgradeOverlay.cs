@@ -36,6 +36,8 @@ public partial class MainWindow
         var resource = Application.GetResourceStream(new Uri("pack://application:,,,/TilesSurviveHeroPlanner;component/Data/upgrades.json"))
             ?? throw new InvalidDataException("Embedded upgrade data missing.");
         using var reader = new StreamReader(resource.Stream); _upgradeData = UpgradeData.Parse(reader.ReadToEnd());
+        ConfigVersionText.Text = "Client config " + _upgradeData.ClientBuild;
+        RosterCountText.Text = $"{_heroes.Count} base heroes  •  {_heroes.Count(h => h.HasAscension)} ascended forms";
     }
     private static TextBlock CopyText(string text, bool heading = false) => new()
     {

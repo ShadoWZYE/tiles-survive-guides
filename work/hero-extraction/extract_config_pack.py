@@ -40,11 +40,15 @@ def read_entries(data: bytes) -> list[Entry]:
     entries: list[Entry] = []
     for index in range(count):
         ordinal, block, size = struct.unpack_from("<III", data, 16 + index * 12)
-        if ordinal != index:
-            raise ValueError(f"Directory ordinal mismatch at {index}: {ordinal}")
-        name_pos = name_table_offset + index * NAME_SLOT_SIZE
+        if ordinal == 0xFFFFFFFF:
+            continue  # Deleted entry in an updated cache.
+        if ordinal >= name_slots:
+            raise ValueError(f"Directory name slot outside pack: {ordinal}")
+        name_pos = name_table_offset + ordinal * NAME_SLOT_SIZE
         name_size = data[name_pos]
         name = data[name_pos + 1 : name_pos + 1 + name_size].decode("utf-8")
+        if block * 4096 + size > len(data):
+            raise ValueError(f"Entry outside pack: {name}")
         entries.append(Entry(index, block, size, name))
     return entries
 

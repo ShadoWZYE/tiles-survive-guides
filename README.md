@@ -39,7 +39,7 @@ Source locations:
 
 Investment recommendations no longer impose a role-based hero order. Select five heroes, record their builds under **My roster → My build**, and choose a return metric. The calculator recomputes each adjacent rank, level, skill or recorded gear upgrade from the installed client tables. All five exact ranks/levels are required; blank skill levels remain unknown, not maximum. Gear can be explicitly absent or unknown/excluded. Invalid caps and duplicate gear slots are rejected.
 
-**Data provenance:** progression is normalized from client **2.6.200.276**, covering 28 base heroes and 18 universal gear types. Table hashes are retained in `outputs/hero-report/TilesSurvive-Upgrade-Data.json`. Existing portrait/roster reference and squad-selection heuristics retain their older 2.6.0.235 snapshot; hero identity is joined by ID, not guessed names. Raw extracted tables remain private.
+**Data provenance:** roster and progression were checked on **5 October 2026** against the installed **2.6.200.276** client's downloaded configuration cache, with all 20 source tables matching `BinVersionList_Realtime.json`. The refreshed dataset covers **29 base heroes**, including Lava, and 18 universal gear types. All 28 previously included heroes had identical exported progression, stats and skills, including Ray; no unverified nerf multiplier is applied. Audit evidence is in `outputs/hero-report/Hero-Config-Audit.json`, with table hashes in `TilesSurvive-Upgrade-Data.json`. This verifies local configuration, not unobserved server overrides or a full battle simulation. Raw tables remain private.
 
 **How returns are calculated:** each candidate changes one recorded build while holding the other four constant. Gain is the percentage change in the selected formation total; efficiency is that gain per 100 units of the exact listed resource. Rankings compare only the same resource ID. Hero-specific shards are not treated as a shared currency; mixed/unlisted costs have no efficiency ranking. Configured power contributions and ATK/DEF/HP totals are not win-rate, survival or live-damage predictions. Rank unlocks raise caps but do not automatically grant skill upgrades. Skill costs use the configured `SlgItemReq` field; verify the applicable expense in-game.
 
@@ -70,6 +70,8 @@ Windows-only UI regression (isolated temporary profile): `dotnet run --project w
 
 The canonical working repository is **`C:\Users\Shadow\Desktop\Tiles Survival Tools`**, consolidated with the latest published files. Private extracts and Desktop-only scratch tools remain local and excluded from publication. The previous Desktop history is retained on local branch `desktop-before-consolidation-20261005`; overwritten older public files were backed up in `C:\Users\Shadow\Desktop\Tiles-Tools-Merge-Backup-20261005`. The earlier Downloads checkout is left intact as a fallback, not an active working directory. Do not switch future development back to Downloads.
 
+After publishing the native executable, `work/HeroPlanner/install_desktop.ps1` creates a real **Tiles Survive Hero Planner** Desktop shortcut targeting the current published build in this repository. It gracefully closes the planner, preserves an old standalone Desktop executable under `Tiles-Tools-Launcher-Backup`, verifies the shortcut target and relaunches the app. Existing saved profiles are unaffected.
+
 To refresh progression after privately extracting the selected config tables:
 
 ```powershell
@@ -77,7 +79,7 @@ python work\hero-extraction\build_upgrade_data.py PRIVATE_EXTRACT_DIRECTORY --cl
 python work\HeroPlannerWeb\build_offline.py
 ```
 
-The exporter uses the existing CFG/language decoders, refuses missing/ambiguous tables and stores normalized fields only. Recheck the model assumptions when refreshing to another client version.
+The exporter uses the existing CFG/language decoders, refuses missing/ambiguous tables and stores normalized fields only. For a current-cache refresh, use `work/hero-extraction/refresh_hero_data.py` with explicit `--pack`, `--manifest`, `--language`, `--client-build`, `--audited-date`, `--private-output` (fresh directory) and `--output outputs/hero-report`. This refuses stale manifest hashes and audits changes for every hero before publishing normalized output. Recheck model assumptions when refreshing to another client version.
 
 ### Native Targeted Draft guidance
 

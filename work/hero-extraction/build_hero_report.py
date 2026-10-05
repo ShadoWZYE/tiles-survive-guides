@@ -94,10 +94,13 @@ def clean_game_text(value: str) -> str:
 
 
 def build(source: Path, language_pack: Path | None = DEFAULT_LANGUAGE_PACK) -> list[dict[str, Any]]:
-    decoded = {
-        name: decode_table(source / filename)
-        for name, filename in TABLE_FILES.items()
-    }
+    decoded = {}
+    for name, filename in TABLE_FILES.items():
+        table_name = filename.split('_', 1)[1]
+        matches = [path for path in source.glob('*.cfg') if path.name.partition('_')[0].isdigit() and path.name.partition('_')[2] == table_name]
+        if len(matches) != 1:
+            raise ValueError(f"Expected one {table_name}, found {len(matches)}")
+        decoded[name] = decode_table(matches[0])
     localized = decode_language_pack(language_pack) if language_pack and language_pack.exists() else {}
 
     benefit_names = {

@@ -2179,6 +2179,157 @@
     "composite_rank": 14
   },
   {
+    "name": "Lava",
+    "asset_slug": "lava",
+    "hero_id": 25300242,
+    "faction": "Mountain",
+    "role": "Melee",
+    "rarity": "SSR",
+    "rarity_code": 4,
+    "hero_generation": "H1",
+    "real_generation": 1,
+    "client_version": "2.6.200",
+    "minimum_server_version": "2.6.200",
+    "display_priority": 155,
+    "portrait_asset": "sp_avatar_survivor_squad_lava",
+    "small_portrait_asset": "sp_avatar_skill_survivor_lava",
+    "ascension_hero_id": null,
+    "has_ascension": false,
+    "acquisition_class": "iap_linked",
+    "acquisition_label": "IAP-linked; free route unconfirmed",
+    "acquisition_confidence": "medium",
+    "recruit_pool": false,
+    "turntable_event": false,
+    "iap_linked": true,
+    "generic_drop_table": false,
+    "release_week_min": 36,
+    "release_week_max": 38,
+    "release_rule_count": 14,
+    "max_level": 150,
+    "max_level_battle_power": 640000,
+    "max_level_attack": 24000.0,
+    "max_level_defense": 4800.0,
+    "max_level_health": 1600000.0,
+    "max_level_march_capacity": 20000.0,
+    "best_non_basic_damage_coefficient": 0.43544,
+    "skills": [
+      {
+        "id": 25401384,
+        "internal_name": "survivor_lava_attack",
+        "display_name": "Claw Combo",
+        "game_description": "Swings the Lava Claws in a brutal combo. Each hit deals damage equal to {0}% of Attack and has a {1}% chance to inflict Burning (deals damage equal to {2}% of Attack per second) for 3 seconds.",
+        "name_key": "survivor_lava_attack_name_newse",
+        "description_key": "survivor_lava_attack_description_newse",
+        "icon_asset": "sp_icon_survivor_skill_lava_1",
+        "slot": 0,
+        "normal_attack": true,
+        "damage_ratio": 1.0,
+        "damage_params": [
+          1.26123,
+          0.01704
+        ],
+        "skill_value": 0,
+        "classification": 1,
+        "effect_type": 1,
+        "effect_description_key": "hero_skill_effect_type_damage",
+        "squad_parameter_map": "",
+        "raid_level_parameters": [
+          "pve_effect|damage_lava_attack|effect_param2|1.49",
+          "pve_effect|survivor_lava_attack_1_triger_times|effect_param2|1",
+          "pve_effect|survivor_lava_attack_debuff_text|effect_param2|1"
+        ],
+        "configured_max_level": 50,
+        "max_level_overall_benefits": []
+      },
+      {
+        "id": 25401385,
+        "internal_name": "survivor_lava_skill_1",
+        "display_name": "Molten Rampage",
+        "game_description": "“Let my rage erupt like molten fury!” Roars and shatters the ground, dealing damage equal to {0}% of Attack to nearby enemies and entering a Berserk status for 5 seconds. While Berserk, Attack Speed increases by {1}%. Normal Attacks that hit Burning targets deal {2}% additional damage.",
+        "name_key": "survivor_lava_skill_1_name_newse",
+        "description_key": "survivor_lava_skill_1_description_newse",
+        "icon_asset": "sp_icon_survivor_skill_lava_2",
+        "slot": 1,
+        "normal_attack": false,
+        "damage_ratio": 1.0,
+        "damage_params": [
+          0.43544,
+          0.0284
+        ],
+        "skill_value": 90,
+        "classification": 2,
+        "effect_type": 1,
+        "effect_description_key": "hero_skill_effect_type_damage",
+        "squad_parameter_map": "",
+        "raid_level_parameters": [
+          "pve_effect|damage_lava_skill_1|effect_param2|1.49",
+          "pve_effect|lava_skill_1_molten_text_speed|effect_param2|1",
+          "pve_effect|lava_skill_1_molten_text_damage|effect_param2|1",
+          "",
+          "pve_effect|lava_skill_1_burning_extra|effect_param2|1"
+        ],
+        "configured_max_level": 50,
+        "max_level_overall_benefits": []
+      },
+      {
+        "id": 25401386,
+        "internal_name": "survivor_lava_skill_2",
+        "display_name": "Molten Duality",
+        "game_description": "When Health is above 50%, Auto Attack Damage increases by {0}%. When Health is below 50%, each Normal Attack hit restores Health equal to {1}% of Attack.",
+        "name_key": "survivor_lava_skill_2_name_newse",
+        "description_key": "survivor_lava_skill_2_description_newse",
+        "icon_asset": "sp_icon_survivor_skill_lava_3",
+        "slot": 2,
+        "normal_attack": false,
+        "damage_ratio": 1.0,
+        "damage_params": [
+          0.2903,
+          0.01893
+        ],
+        "skill_value": 0,
+        "classification": 3,
+        "effect_type": 4,
+        "effect_description_key": "hero_skill_effect_type_damage",
+        "squad_parameter_map": "",
+        "raid_level_parameters": [
+          "pve_effect|lava_skill_2_text_damage|effect_param2|1.49",
+          "pve_effect|lava_skill_2_text_heal|effect_param2|1.49"
+        ],
+        "configured_max_level": 50,
+        "max_level_overall_benefits": []
+      },
+      {
+        "id": 25401387,
+        "internal_name": "survivor_lava_skill_3",
+        "display_name": "Molten Heart",
+        "game_description": "Lava's all Stats +{0}%.",
+        "name_key": "survivor_lava_skill_3_name_newse",
+        "description_key": "survivor_lava_skill_3_description_newse",
+        "icon_asset": "sp_icon_survivor_skill_lava_4",
+        "slot": 3,
+        "normal_attack": false,
+        "damage_ratio": 0.0,
+        "damage_params": [],
+        "skill_value": 0,
+        "classification": 4,
+        "effect_type": 3,
+        "effect_description_key": "",
+        "squad_parameter_map": "",
+        "raid_level_parameters": [
+          "pve_effect|effect_skill_3_fake_text_orange_2|effect_param2|0|2"
+        ],
+        "configured_max_level": 5,
+        "max_level_overall_benefits": []
+      }
+    ],
+    "offense_index": 68.73,
+    "durability_index": 100.0,
+    "composite_index": 89.06,
+    "offense_rank": 16,
+    "durability_rank": 1,
+    "composite_rank": 16
+  },
+  {
     "name": "Maddie",
     "asset_slug": "maddie",
     "hero_id": 25300015,
@@ -2319,9 +2470,9 @@
     "offense_index": 66.32,
     "durability_index": 100.0,
     "composite_index": 88.21,
-    "offense_rank": 16,
+    "offense_rank": 17,
     "durability_rank": 1,
-    "composite_rank": 16
+    "composite_rank": 17
   },
   {
     "name": "Rosie",
@@ -2465,9 +2616,9 @@
     "offense_index": 66.32,
     "durability_index": 100.0,
     "composite_index": 88.21,
-    "offense_rank": 16,
+    "offense_rank": 17,
     "durability_rank": 1,
-    "composite_rank": 16
+    "composite_rank": 17
   },
   {
     "name": "Layla",
@@ -2614,9 +2765,9 @@
     "offense_index": 66.32,
     "durability_index": 100.0,
     "composite_index": 88.21,
-    "offense_rank": 16,
+    "offense_rank": 17,
     "durability_rank": 1,
-    "composite_rank": 16
+    "composite_rank": 17
   },
   {
     "name": "Candy",
@@ -2762,9 +2913,9 @@
     "offense_index": 66.32,
     "durability_index": 100.0,
     "composite_index": 88.21,
-    "offense_rank": 16,
+    "offense_rank": 17,
     "durability_rank": 1,
-    "composite_rank": 16
+    "composite_rank": 17
   },
   {
     "name": "Mike",
@@ -2910,9 +3061,9 @@
     "offense_index": 66.32,
     "durability_index": 100.0,
     "composite_index": 88.21,
-    "offense_rank": 16,
+    "offense_rank": 17,
     "durability_rank": 1,
-    "composite_rank": 16
+    "composite_rank": 17
   },
   {
     "name": "Lucky",
@@ -3061,9 +3212,9 @@
     "offense_index": 45.75,
     "durability_index": 60.47,
     "composite_index": 55.32,
-    "offense_rank": 21,
-    "durability_rank": 21,
-    "composite_rank": 21
+    "offense_rank": 22,
+    "durability_rank": 22,
+    "composite_rank": 22
   },
   {
     "name": "Sarge",
@@ -3210,9 +3361,9 @@
     "offense_index": 45.75,
     "durability_index": 60.47,
     "composite_index": 55.32,
-    "offense_rank": 21,
-    "durability_rank": 21,
-    "composite_rank": 21
+    "offense_rank": 22,
+    "durability_rank": 22,
+    "composite_rank": 22
   },
   {
     "name": "Freja",
@@ -3364,9 +3515,9 @@
     "offense_index": 45.75,
     "durability_index": 60.47,
     "composite_index": 55.32,
-    "offense_rank": 21,
-    "durability_rank": 21,
-    "composite_rank": 21
+    "offense_rank": 22,
+    "durability_rank": 22,
+    "composite_rank": 22
   },
   {
     "name": "Travis",
@@ -3513,9 +3664,9 @@
     "offense_index": 45.75,
     "durability_index": 60.47,
     "composite_index": 55.32,
-    "offense_rank": 21,
-    "durability_rank": 21,
-    "composite_rank": 21
+    "offense_rank": 22,
+    "durability_rank": 22,
+    "composite_rank": 22
   },
   {
     "name": "Eva",
@@ -3664,9 +3815,9 @@
     "offense_index": 45.75,
     "durability_index": 60.47,
     "composite_index": 55.32,
-    "offense_rank": 21,
-    "durability_rank": 21,
-    "composite_rank": 21
+    "offense_rank": 22,
+    "durability_rank": 22,
+    "composite_rank": 22
   },
   {
     "name": "Chef",
@@ -3816,9 +3967,9 @@
     "offense_index": 39.3,
     "durability_index": 60.47,
     "composite_index": 53.06,
-    "offense_rank": 26,
-    "durability_rank": 21,
-    "composite_rank": 26
+    "offense_rank": 27,
+    "durability_rank": 22,
+    "composite_rank": 27
   },
   {
     "name": "Rusty",
@@ -3936,9 +4087,9 @@
     "offense_index": 2.41,
     "durability_index": 0.0,
     "composite_index": 0.84,
-    "offense_rank": 27,
-    "durability_rank": 27,
-    "composite_rank": 27
+    "offense_rank": 28,
+    "durability_rank": 28,
+    "composite_rank": 28
   },
   {
     "name": "Ghost",
@@ -4054,8 +4205,8 @@
     "offense_index": 2.41,
     "durability_index": 0.0,
     "composite_index": 0.84,
-    "offense_rank": 27,
-    "durability_rank": 27,
-    "composite_rank": 27
+    "offense_rank": 28,
+    "durability_rank": 28,
+    "composite_rank": 28
   }
 ]

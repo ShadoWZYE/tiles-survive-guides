@@ -33,6 +33,7 @@ def main() -> None:
                         + "\n" + (HERE / "upgrade-ui.js").read_text(encoding="utf-8")
                         + "\n" + (HERE / "app.js").read_text(encoding="utf-8"))
     upgrades = json.loads((ROOT / "outputs/hero-report/TilesSurvive-Upgrade-Data.json").read_text(encoding="utf-8"))
+    html = html.replace('__CLIENT_BUILD__', upgrades['client_build']).replace('__HERO_COUNT__', str(len(heroes)))
     html = html.replace("__EMBEDDED_UPGRADE_JSON__", json.dumps(upgrades, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/"))
     html = html.replace("__APP_ICON__", png_data(ICON_PATH))
     html = html.replace("__EMBEDDED_HERO_JSON__", json.dumps(heroes, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/"))

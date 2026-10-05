@@ -17,7 +17,7 @@ def stats(values):
 def export(source: Path, roster: list, version: str, localized: dict) -> dict:
     files = {}
     def table(name):
-        matches = list(source.glob(f"*_{name}.cfg"))
+        matches = [path for path in source.glob('*.cfg') if path.name.partition('_')[0].isdigit() and path.name.partition('_')[2] == name + '.cfg']
         if len(matches) != 1:
             raise ValueError(f"Expected exactly one {name} table, found {len(matches)}")
         files[name] = hashlib.sha256(matches[0].read_bytes()).hexdigest()
