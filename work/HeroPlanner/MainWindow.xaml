@@ -331,7 +331,28 @@
                                             <StackPanel><TextBlock Text="BATTLE GUIDE" Foreground="{StaticResource AccentBrush}" FontWeight="Black" FontSize="11" /><TextBlock x:Name="FormationBattleGuide" TextWrapping="Wrap" LineHeight="19" Margin="0,5,0,0" /></StackPanel>
                                         </Border>
                                         <Border Background="#1D3558" CornerRadius="11" Padding="13" Margin="0,0,0,8">
-                                            <StackPanel><TextBlock Text="RESOURCE PRIORITY" Foreground="{StaticResource GoldBrush}" FontWeight="Black" FontSize="11" /><TextBlock x:Name="FormationResourceFocus" TextWrapping="Wrap" LineHeight="19" Margin="0,5,0,0" /></StackPanel>
+                                            <StackPanel>
+                                                <TextBlock Text="RESOURCE PRIORITY" Foreground="{StaticResource GoldBrush}" FontWeight="Black" FontSize="11" />
+                                                <TextBox x:Name="FormationResourceFocus" IsReadOnly="True" TextWrapping="Wrap" Background="Transparent" BorderThickness="0" Foreground="White" Padding="0" Margin="0,7,0,8" />
+                                                <ComboBox x:Name="ResourceClassFilter" SelectedIndex="0" SelectionChanged="ResourceFilter_Changed" AutomationProperties.Name="Resource class filter" Margin="0,0,0,8">
+                                                    <ComboBoxItem Content="All resource classes" Tag="all" />
+                                                    <ComboBoxItem Content="Rank fragments" Tag="rank" />
+                                                    <ComboBoxItem Content="Skill materials" Tag="skill" />
+                                                    <ComboBoxItem Content="Hero XP" Tag="hero-xp" />
+                                                    <ComboBoxItem Content="Gear XP" Tag="gear-xp" />
+                                                    <ComboBoxItem Content="Mixed / other resources" Tag="other" />
+                                                </ComboBox>
+                                                <TextBox Text="After upgrading in the game, click Record completed. This updates the planner only and deducts known recorded balances. Unknown balances stay unknown. Check building gates in-game." IsReadOnly="True" TextWrapping="Wrap" Background="Transparent" BorderThickness="0" Foreground="{StaticResource MutedInkBrush}" Padding="0" Margin="0,0,0,8" />
+                                                <Button x:Name="UndoUpgradeButton" Content="Undo last recorded upgrade" Click="UndoUpgrade_Click" IsEnabled="False" HorizontalAlignment="Left" Padding="10,6" Margin="0,0,0,6" />
+                                                <TextBox x:Name="UpgradeActionStatus" IsReadOnly="True" TextWrapping="Wrap" Background="Transparent" BorderThickness="0" Foreground="{StaticResource AccentBrush}" Padding="0" Margin="0,0,0,8" />
+                                                <StackPanel x:Name="ResourcePriorityCards" />
+                                                <Expander Header="Targeted Draft recommendations" IsExpanded="True" Foreground="White" Margin="0,10,0,6">
+                                                    <TextBox x:Name="TargetedResourceText" IsReadOnly="True" TextWrapping="Wrap" Background="Transparent" BorderThickness="0" Foreground="White" Padding="0" Margin="0,7,0,0" />
+                                                </Expander>
+                                                <Expander Header="Model limits and assumptions" Foreground="{StaticResource MutedInkBrush}" Margin="0,6,0,0">
+                                                    <TextBox x:Name="ResourceModelLimits" IsReadOnly="True" TextWrapping="Wrap" Background="Transparent" BorderThickness="0" Foreground="{StaticResource MutedInkBrush}" Padding="0" Margin="0,7,0,0" />
+                                                </Expander>
+                                            </StackPanel>
                                         </Border>
                                         <Border Background="#182F50" CornerRadius="11" Padding="13">
                                             <StackPanel><TextBlock Text="WATCH FOR" Foreground="{StaticResource MutedInkBrush}" FontWeight="Black" FontSize="11" /><TextBlock x:Name="FormationWeaknesses" TextWrapping="Wrap" LineHeight="19" Margin="0,5,0,0" /></StackPanel>

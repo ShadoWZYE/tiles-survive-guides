@@ -20,6 +20,8 @@ The Hero Planner supports:
 - Native rank-step slider with game star art and partial progress; every valid edit autosaves
 - Native Targeted Draft target recommendations from the eligible pool and remaining fragment cost
 - Next-upgrade stat/contribution returns grouped by actual resource, with balances and affordability filtering
+- Selectable native priority cards, resource-class filters, and the top three percentage gains per individual material
+- One-click local recording of completed upgrades, with balance updates and last-action Undo
 - Optional legacy whole-star / personal-target notes, preserved but not converted into exact rank progress
 - F2P, event-accessible, owned-only, and IAP-linked filters
 - Hero stats, skill icons, decoded descriptions, and release/access evidence
@@ -88,6 +90,14 @@ Displayed selected-target probabilities are retained as category rates, not inte
 ```powershell
 dotnet run --project work\HeroPlanner.Tests -- unused --targeted outputs\hero-report\TilesSurvive-Upgrade-Data.json
 ```
+
+### Native resource priority actions
+
+The formation panel separates resources into selectable upgrade cards. Filter by **Rank fragments**, **Skill materials**, **Hero XP**, **Gear XP** or **Mixed / other**. Each individual resource shows its top three unblocked, modeled candidates by formation **percentage increase**, not by cost efficiency; efficiency per 100 units is displayed separately. Hero-specific fragment currencies remain distinct. Mixed-cost combinations are also kept separate. Other, locked and unmodeled upgrades remain available in collapsed sections, not silently discarded.
+
+After completing an upgrade in the game, use **Record completed** on its card. This only advances the locally saved hero rank step, level, skill or gear level. Known resource balances are deducted; unknown balances remain unknown. Insufficient known balances and invalid rank/level gates block recording. Building gates still require an in-game check. The action re-evaluates its destination and rejects stale cards; a save failure restores the in-memory build and inventory. No request is sent to the game and no vouchers are spent.
+
+**Undo last recorded upgrade** restores the previous local build and balances for the last action in this app session. It refuses to overwrite a later build or inventory edit. All priority text and expanded details support text selection/copying. Native regression tests cover the top-three ordering, filters, all four upgrade kinds, immediate disk persistence, stale clicks, insufficient/unknown balances, rollback on a locked profile file, and Undo protection.
 
 ## Windows companion and display tools
 

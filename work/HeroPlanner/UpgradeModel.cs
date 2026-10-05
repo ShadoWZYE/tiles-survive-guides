@@ -165,7 +165,11 @@ public sealed class UpgradeGearLevel
 }
 public sealed record BuildState(HeroBuild Build, UpgradeStage Stage, UpgradeLevel Level, double[] Stats, double Power, double? Direct, List<string> Notes);
 public sealed record UpgradeCandidate(string Slug, string Label, string Kind, Dictionary<string, double> Cost,
-    string? Group, double? Gain, double? Efficiency, string Affordability, string Detail, string? Blocked, bool Unsupported, double[]? Delta);
+    string? Group, double? Gain, double? Efficiency, string Affordability, string Detail, string? Blocked, bool Unsupported, double[]? Delta)
+{
+    [JsonIgnore] public HeroBuild? Before { get; init; }
+    [JsonIgnore] public HeroBuild? After { get; init; }
+}
 public sealed class UpgradeResult
 {
     public List<string> Missing { get; } = [];
@@ -272,7 +276,7 @@ public static class UpgradeModel
             double? efficiency = gain is not null && group is not null && blocked is null ? gain / cost[group] * 100 : null;
             if (settings.OnlyAffordable && (affordability != "affordable" || blocked is not null)) return;
             result.Candidates.Add(new(slug, label, kind, cost, group, gain, efficiency, affordability, detail, blocked, unsupported,
-                next?.Stats.Select((v, i) => v - before.Stats[i]).ToArray()));
+                next?.Stats.Select((v, i) => v - before.Stats[i]).ToArray()) { Before = before.Build.Copy(), After = after.Copy() });
         }
         foreach (var (slug, s) in states)
         {

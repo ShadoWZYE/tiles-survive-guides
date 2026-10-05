@@ -23,7 +23,7 @@ public partial class MainWindow
     private TextBlock _levelLabel = new();
     private readonly Dictionary<int, (ComboBox Type, TextBox Level)> _gearEditors = [];
     private readonly Dictionary<string, TextBox> _budgetEditors = [];
-    private TextBlock _overlayResults = new();
+    private TextBox _overlayResults = new();
     private IInputElement? _focusBeforeOverlay;
     private bool _populatingEditor;
     private Slider _starSlider = new();
@@ -191,7 +191,7 @@ public partial class MainWindow
         comparison.Children.Add(new Expander { Header = "Resource balances · blank means unknown", Content = budgetPanel, Foreground = Brushes.White, Margin = new Thickness(0, 10, 0, 10) });
         comparison.Children.Add(CopyText("Metric and balances also save automatically. Invalid entries keep the last valid value."));
         comparison.Children.Add(new Expander { Header = "Model limits / assumptions", Content = CopyText(UpgradeCaveats), Foreground = Brushes.White });
-        _overlayResults = CopyText("", false); comparison.Children.Add(_overlayResults);
+        _overlayResults = Selectable(""); comparison.Children.Add(_overlayResults);
         _levelEditor.TextChanged += (_, _) => SaveBuildOnEdit();
         _stageEditor.SelectionChanged += (_, _) => SaveBuildOnEdit();
         _gearModeEditor.SelectionChanged += (_, _) => SaveBuildOnEdit();
@@ -370,7 +370,7 @@ public partial class MainWindow
     }
     private void RefreshUpgradeViews()
     {
-        if (FormationResourceFocus is not null) FormationResourceFocus.Text = UpgradeSummary() + "\n\n" + UpgradeCaveats;
+        RefreshResourcePriority();
         if (ResourceRecommendation is not null) ResourceRecommendation.Text = "Choose five heroes, then use their small edit buttons to record current builds and compare data-driven next upgrades. No fixed hero order.";
         if (BuildOverlay.Visibility == Visibility.Visible) _overlayResults.Text = UpgradeSummary();
     }

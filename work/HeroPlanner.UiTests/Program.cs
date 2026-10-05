@@ -47,7 +47,7 @@ internal static class Program
         ((TabControl)window.FindName("InspectorTabs")).SelectedIndex = 0;
         foreach (var name in new[] { "Rosie", "Layla", "Becca", "Ray", "Maddie" })
             Invoke(window, "HeroCard_Click", new Button { Tag = heroes.Single(h => h.Name == name) }, new RoutedEventArgs());
-        var focus = (TextBlock)window.FindName("FormationResourceFocus");
+        var focus = (TextBox)window.FindName("FormationResourceFocus");
         Check(focus.Text.Contains("Record these builds"), "Unknown builds must not receive a guessed ranking");
         var data = Field<UpgradeData>(window, "_upgradeData");
         foreach (var name in new[] { "Rosie", "Layla", "Becca", "Ray", "Maddie" })
@@ -70,12 +70,82 @@ internal static class Program
             Invoke(window, "CloseBuild_Click", new Button(), new RoutedEventArgs());
         }
         Check(focus.Text.Contains("per 100 resource units") && !focus.Text.Contains("Record these builds"), "Native upgrade ranking missing");
+        var priorityPanel = (StackPanel)window.FindName("ResourcePriorityCards");
+        Check(priorityPanel.Children.OfType<Expander>().Any(), "Resource cards missing");
+        var settings = Field<UpgradeSettings>(window, "_upgradeSettings");
+        settings.Inventory["hero-xp"] = 100000;
+        Invoke(window, "RefreshUpgradeViews");
+        var beforeRecord = Field<Dictionary<string, HeroBuild>>(window, "_heroBuilds")[becca.AssetSlug].Copy();
+        var candidate = UpgradeModel.Evaluate(new[] { "rosie", "layla", "becca", "ray", "maddie" },
+            Field<Dictionary<string, HeroBuild>>(window, "_heroBuilds"), data, settings).Candidates.First(c => c.Slug == becca.AssetSlug && c.Kind == "level" && c.Blocked is null);
+        var recordButton = new Button { Tag = candidate };
+        Invoke(window, "RecordUpgrade_Click", recordButton, new RoutedEventArgs());
+        Check(Field<Dictionary<string, HeroBuild>>(window, "_heroBuilds")[becca.AssetSlug].Level == beforeRecord.Level + 1, "Record completed did not advance level");
+        Check(settings.Inventory["hero-xp"] == 100000 - candidate.Cost["hero-xp"], "Recorded balance not deducted");
+        Check(JsonSerializer.Deserialize<PlannerProfile>(File.ReadAllText(profilePath))!.HeroBuilds[becca.AssetSlug].Level == 2, "Recorded upgrade not saved to disk");
+        Invoke(window, "RecordUpgrade_Click", recordButton, new RoutedEventArgs());
+        Check(Field<Dictionary<string, HeroBuild>>(window, "_heroBuilds")[becca.AssetSlug].Level == 2, "Stale/double-click recorded twice");
+        Invoke(window, "UndoUpgrade_Click", new Button(), new RoutedEventArgs());
+        Check(Field<Dictionary<string, HeroBuild>>(window, "_heroBuilds")[becca.AssetSlug].Level == 1 && settings.Inventory["hero-xp"] == 100000, "Undo did not restore build and balance");
+        var resourceFilter = (ComboBox)window.FindName("ResourceClassFilter");
+        resourceFilter.SelectedIndex = 3;
+        Check(priorityPanel.Children.OfType<Expander>().First().Header.ToString()!.Contains("Hero XP"), "Resource class filter not applied");
+        var xpCards = (StackPanel)priorityPanel.Children.OfType<Expander>().First().Content;
+        Check(xpCards.Children.OfType<Border>().Count() <= 3, "More than top three choices displayed");
+        var topCandidates = xpCards.Children.OfType<Border>().Select(b => ((StackPanel)b.Child).Children.OfType<WrapPanel>().Single().Children.OfType<Button>().First()).Select(b => (UpgradeCandidate)b.Tag).ToList();
+        var expectedTop = UpgradeModel.Evaluate(new[] { "rosie", "layla", "becca", "ray", "maddie" },
+            Field<Dictionary<string, HeroBuild>>(window, "_heroBuilds"), data, settings).Candidates.Where(c => c.Group == "hero-xp" && c.Blocked is null && c.Gain is not null)
+            .OrderByDescending(c => c.Gain).ThenByDescending(c => c.Efficiency).ThenBy(c => c.Label, StringComparer.Ordinal).Take(3).Select(c => c.Label);
+        Check(topCandidates.Select(c => c.Label).SequenceEqual(expectedTop), "Top three are not ordered by percentage increase");
+        Check(xpCards.Children.OfType<Border>().All(b => ((StackPanel)b.Child).Children.OfType<TextBox>().All(t => t.IsReadOnly)), "Priority card text is not selectable read-only text");
+        settings.Inventory["hero-xp"] = 0;
+        Invoke(window, "RecordUpgrade_Click", new Button { Tag = candidate }, new RoutedEventArgs());
+        Check(Field<Dictionary<string, HeroBuild>>(window, "_heroBuilds")[becca.AssetSlug].Level == 1 && settings.Inventory["hero-xp"] == 0, "Insufficient recorded balance allowed an upgrade");
+        settings.Inventory["hero-xp"] = 100000;
+        var rankCandidate = UpgradeModel.Evaluate(new[] { "rosie", "layla", "becca", "ray", "maddie" },
+            Field<Dictionary<string, HeroBuild>>(window, "_heroBuilds"), data, settings).Candidates.First(c => c.Slug == becca.AssetSlug && c.Kind == "rank" && c.Blocked is null);
+        Check(rankCandidate.Cost.Keys.All(id => !settings.Inventory.ContainsKey(id)), "Unknown fragment balance fixture is not unknown");
+        Invoke(window, "RecordUpgrade_Click", new Button { Tag = rankCandidate }, new RoutedEventArgs());
+        Check(Field<Dictionary<string, HeroBuild>>(window, "_heroBuilds")[becca.AssetSlug].Stage == rankCandidate.After!.Stage, "Rank record did not advance exact partial step");
+        Check(rankCandidate.Cost.Keys.All(id => !settings.Inventory.ContainsKey(id)), "Unknown fragment balances were invented");
+        var builds = Field<Dictionary<string, HeroBuild>>(window, "_heroBuilds");
+        builds[becca.AssetSlug].Level = 2;
+        Invoke(window, "UndoUpgrade_Click", new Button(), new RoutedEventArgs());
+        Check(builds[becca.AssetSlug].Level == 2, "Undo overwrote a later edit");
+        builds[becca.AssetSlug].Level = 1;
+        Invoke(window, "UndoUpgrade_Click", new Button(), new RoutedEventArgs());
+        Check(builds[becca.AssetSlug].Stage == beforeRecord.Stage, "Rank undo did not restore original step");
+        using (var lockedProfile = new FileStream(profilePath, FileMode.Open, FileAccess.Read, FileShare.None))
+        {
+            Invoke(window, "RecordUpgrade_Click", new Button { Tag = candidate }, new RoutedEventArgs());
+            Check(builds[becca.AssetSlug].Level == 1 && settings.Inventory["hero-xp"] == 100000, "Save failure changed build or inventory");
+        }
+        foreach (string kind in new[] { "skill", "gear" })
+        {
+            var advanced = beforeRecord.Copy(); advanced.Level = 120;
+            advanced.Stage = data.Heroes[becca.AssetSlug].Stages.Single(s => s.Rank == 3 && s.Step == 6).Id;
+            var gear = data.Gear.First(g => g.Value.HeroLevelRequired <= advanced.Level);
+            advanced.Gear = [new() { Id = gear.Key, Level = gear.Value.Levels[0].Level }];
+            builds[becca.AssetSlug] = advanced;
+            var step = UpgradeModel.Evaluate(new[] { "rosie", "layla", "becca", "ray", "maddie" }, builds, data, settings).Candidates.First(c => c.Slug == becca.AssetSlug && c.Kind == kind && c.Blocked is null);
+            Invoke(window, "RecordUpgrade_Click", new Button { Tag = step }, new RoutedEventArgs());
+            Check(builds[becca.AssetSlug].Skills.OrderBy(x => x.Key).SequenceEqual(step.After!.Skills.OrderBy(x => x.Key)) &&
+                builds[becca.AssetSlug].Gear!.Select(g => (g.Id, g.Level)).SequenceEqual(step.After.Gear!.Select(g => (g.Id, g.Level))), $"{kind} record wrong destination");
+            Invoke(window, "UndoUpgrade_Click", new Button(), new RoutedEventArgs());
+            Check(builds[becca.AssetSlug].Skills.OrderBy(x => x.Key).SequenceEqual(advanced.Skills.OrderBy(x => x.Key)) &&
+                builds[becca.AssetSlug].Gear!.Select(g => (g.Id, g.Level)).SequenceEqual(advanced.Gear!.Select(g => (g.Id, g.Level))), $"{kind} undo wrong destination");
+        }
+        builds[becca.AssetSlug] = beforeRecord.Copy(); Invoke(window, "SaveProfile"); Invoke(window, "RefreshUpgradeViews");
+        resourceFilter.SelectedIndex = 4;
+        Check(priorityPanel.Children.OfType<Expander>().Count() == 0, "Empty gear filter retained other resources");
+        resourceFilter.SelectedIndex = 0;
         ((ComboBox)window.FindName("FormationModePicker")).SelectedIndex = 2;
         Check(((ComboBox)window.FindName("ModePicker")).SelectedIndex == 2 && focus.Text.Contains("per 100 resource units"), "Formation mode picker not synchronized");
         Invoke(window, "EditBuild_Click", new Button { Tag = becca }, new RoutedEventArgs());
         Field<TextBox>(window, "_levelEditor").Text = "2";
         Field<ComboBox>(window, "_targetedPoolEditor").SelectedIndex = 1;
-        Check(focus.Text.Contains("TARGETED DRAFT") && focus.Text.Contains("Provisional target"), "Targeted recommendation missing");
+        var targetedText = (TextBox)window.FindName("TargetedResourceText");
+        Check(targetedText.Text.Contains("TARGETED DRAFT") && targetedText.Text.Contains("Provisional target"), "Targeted recommendation missing");
         Check(Field<UpgradeSettings>(window, "_upgradeSettings").TargetedPool == "newbie_recuit_up_1", "Pool choice not autosaved");
         Field<Slider>(window, "_starSlider").Value = 5;
         Check(Field<Dictionary<string, HeroBuild>>(window, "_heroBuilds")[becca.AssetSlug].Stage == data.Heroes[becca.AssetSlug].Stages[5].Id, "Star slider did not autosave exact partial rank");
@@ -140,6 +210,19 @@ internal static class Program
         if (!string.IsNullOrWhiteSpace(screenshot)) { Directory.CreateDirectory(Path.GetDirectoryName(screenshot)!); using var output = File.Create(screenshot); encoder.Save(output); }
         Invoke(window, "CloseBuild_Click", new Button(), new RoutedEventArgs());
         Check(Field<Dictionary<string, HeroBuild>>(window, "_heroBuilds")[becca.AssetSlug].Level == 2, "Closing lost an autosaved edit");
+        var priorityScreenshot = Environment.GetEnvironmentVariable("PLANNER_PRIORITY_SCREENSHOT");
+        if (!string.IsNullOrWhiteSpace(priorityScreenshot))
+        {
+            resourceFilter.SelectedIndex = 3;
+            var guide = (ScrollViewer)window.FindName("FormationGuidePanel");
+            var priorityText = (TextBox)window.FindName("FormationResourceFocus");
+            captured.UpdateLayout();
+            var point = priorityText.TranslatePoint(new Point(), guide);
+            guide.ScrollToVerticalOffset(guide.VerticalOffset + point.Y - 25); captured.UpdateLayout();
+            var preview = new RenderTargetBitmap(1500, 920, 96, 96, PixelFormats.Pbgra32); preview.Render(captured);
+            var previewEncoder = new PngBitmapEncoder(); previewEncoder.Frames.Add(BitmapFrame.Create(preview));
+            Directory.CreateDirectory(Path.GetDirectoryName(priorityScreenshot)!); using var output = File.Create(priorityScreenshot); previewEncoder.Save(output);
+        }
         window.Close();
         var reopened = Create();
         Invoke(reopened, "SetActiveHero", ((List<Hero>)typeof(MainWindow).GetField("_heroes", BindingFlags.Instance | BindingFlags.NonPublic)!.GetValue(reopened)!).Single(h => h.Name == "Becca"));
@@ -151,6 +234,6 @@ internal static class Program
         Check(Field<Dictionary<string, HeroBuild>>(reopened, "_heroBuilds")[becca.AssetSlug].Stage == data.Heroes[becca.AssetSlug].Stages[5].Id, "Partial rank missing after reopen");
         reopened.Close();
         app.Shutdown();
-        Console.WriteLine("WPF UI regression passed: startup, legacy profile, click-to-own/unown, isolated edit overlay, immediate autosave, invalid-save protection, native persistence and data-driven comparisons. Real profile untouched.");
+        Console.WriteLine("WPF UI regression passed: ownership, autosave, star layout, selectable priority cards, resource filters, top-three percent ordering, rank/level/skill/gear recording, balance deduction, stale-click protection, save rollback and safe Undo. Real profile untouched.");
     }
 }
