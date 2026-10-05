@@ -36,11 +36,13 @@ class OfflineBuildTests(unittest.TestCase):
         self.assertIn('serverOpenDate: "2026-09-02"', self.html)
         self.assertIn("FormationPriority.sanitizeProgress", self.html)
         self.assertIn('id="save-stars"', self.html)
-        self.assertIn("Star-upgrade queue", self.html)
+        self.assertTrue("Data-driven next upgrades" in self.html)
+        self.assertTrue('id="save-build"' in self.html)
+        self.assertTrue("__EMBEDDED_UPGRADE_JSON__" not in self.html)
 
     def test_completed_squad_guide_and_release_selection_are_embedded(self) -> None:
         self.assertIn("Formation ready", self.html)
-        self.assertIn("Resource priority", self.html)
+        self.assertTrue("Data-driven next upgrades" in self.html)
         self.assertIn("Battle guide", self.html)
         self.assertIn("object-fit:contain", self.html)
         self.assertIn("releaseActive", self.html)

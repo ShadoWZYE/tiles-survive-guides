@@ -40,10 +40,13 @@ internal static class Program
         foreach (var name in new[] { "Rosie", "Layla", "Becca", "Ray", "Maddie" })
             Invoke(window, "HeroCard_Click", new Button { Tag = heroes.Single(h => h.Name == name) }, new RoutedEventArgs());
         var focus = (TextBlock)window.FindName("FormationResourceFocus");
-        Check(focus.Text.StartsWith("1. Becca") && focus.Text.Contains("2. Rosie") && focus.Text.Contains("3. Ray"), "Wrong balanced guide");
-        Check(focus.Text.Contains("Target reached: Becca"), "Guide missing reached target");
+        Check(focus.Text.Contains("DATA-DRIVEN UPGRADES") && focus.Text.Contains("No fixed hero order"), "Missing data-driven calculator guidance");
+        Check(focus.Text.Contains("saved separately"), "Separate browser profile must be explicit");
         ((ComboBox)window.FindName("FormationModePicker")).SelectedIndex = 2;
-        Check(((ComboBox)window.FindName("ModePicker")).SelectedIndex == 2 && focus.Text.StartsWith("1. Rosie"), "Formation mode picker not synchronized");
+        Check(((ComboBox)window.FindName("ModePicker")).SelectedIndex == 2 && focus.Text.Contains("No fixed hero order"), "Formation mode picker not synchronized");
+        using (var embedded = Application.GetResourceStream(new Uri("pack://application:,,,/TilesSurviveHeroPlanner;component/Data/upgrade-planner.html"))!.Stream)
+        using (var reader = new StreamReader(embedded))
+            Check(reader.ReadToEnd().Contains("Data-driven next upgrades"), "Offline upgrade calculator not embedded");
         window.Close();
         var reopened = Create();
         Invoke(reopened, "SetActiveHero", ((List<Hero>)typeof(MainWindow).GetField("_heroes", BindingFlags.Instance | BindingFlags.NonPublic)!.GetValue(reopened)!).Single(h => h.Name == "Becca"));

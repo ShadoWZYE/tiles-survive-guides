@@ -6,6 +6,7 @@
     version: 1,
     ownedHeroes: [],
     heroProgress: {},
+    upgradeSettings: {},
     serverOpenDate: "2026-09-02",
     mode: "Balanced",
     access: "All access",
@@ -23,7 +24,7 @@
   let state = {
     tab: "squad",
     active: heroes[0].asset_slug,
-    squad: [],
+    squad: (window.__INITIAL_SQUAD__||[]).filter(slug=>bySlug.has(slug)).slice(0,5),
     faction: "All factions",
     role: "All roles",
     rarity: "All rarities",
@@ -93,10 +94,16 @@
     const ownedHeroes = Array.isArray(candidate.ownedHeroes) ? candidate.ownedHeroes.filter(slug => bySlug.has(slug)) : [];
     const allowedModes = ["Balanced", "Offense", "Survival", "PvE farming"];
     const allowedAccess = ["All access", "F2P confirmed", "F2P + events", "IAP-linked", "Owned only"];
+    const heroProgress=FormationPriority.sanitizeProgress(candidate.heroProgress, bySlug.keys());
+    for(const [slug,h] of Object.entries(window.__UPGRADE_DATA__?.heroes||{})) {
+      const build=UpgradeModel.sanitizeBuild(candidate.heroProgress?.[slug]?.build,h);
+      if(build)heroProgress[slug]={...heroProgress[slug],build};
+    }
     return {
       version: 1,
       ownedHeroes: [...new Set(ownedHeroes)],
-      heroProgress: FormationPriority.sanitizeProgress(candidate.heroProgress, bySlug.keys()),
+      heroProgress,
+      upgradeSettings: UpgradeModel.sanitizeSettings(candidate.upgradeSettings),
       serverOpenDate: /^\d{4}-\d{2}-\d{2}$/.test(candidate.serverOpenDate || "") ? candidate.serverOpenDate : DEFAULT_PROFILE.serverOpenDate,
       mode: allowedModes.includes(candidate.mode) ? candidate.mode : DEFAULT_PROFILE.mode,
       access: allowedAccess.includes(candidate.access) ? candidate.access : DEFAULT_PROFILE.access,
@@ -276,7 +283,7 @@
 
   function renderDetail() {
     $$(".top-nav [data-tab]").forEach(button => button.classList.toggle("active", button.dataset.tab === state.tab));
-    const titles = {squad:["Hero roster","Click heroes to build a five-hero formation."],stats:["Choose a hero","Click a card to inspect extracted maximum stats."],skills:["Choose a hero","Click a card to inspect skills, icons, and modeled payoff."],roster:["My roster","Select a hero to edit stars; use its owned button to change ownership."],release:["Release roster","Click a hero for its release and access evidence."]};
+    const titles = {squad:["Hero roster","Click heroes to build a five-hero formation."],stats:["Choose a hero","Click a card to inspect extracted maximum stats."],skills:["Choose a hero","Click a card to inspect skills, icons, and modeled payoff."],roster:["My roster","Select a hero to record its build; use its owned button to change ownership."],release:["Release roster","Click a hero for its release and access evidence."]};
     $("#roster-title").textContent = titles[state.tab][0]; $("#roster-hint").textContent = titles[state.tab][1];
     if (state.tab === "squad") renderSquad();
     else if (state.tab === "stats") renderStats();
@@ -296,6 +303,7 @@
       <div class="squad-slots">${[0,1,2,3,4].map(i => selected[i] ? `<div class="slot"><img src="${selected[i].portrait_data}" alt=""><b>${esc(selected[i].name)}</b><small>${esc(selected[i].role)} · position ${i+1}</small></div>` : '<div class="slot empty">Empty</div>').join("")}</div>
       ${planning}`;
     $("#clear-squad").onclick = () => {state.squad=[];renderCards();renderDetail()};
+    UpgradeUI.bindPanel(profile,saveProfile,renderDetail);
     if (complete) $("#formation-mode").onchange = event => {profile.mode=event.target.value;optimizerCache.clear();saveProfile();renderDetail()};
     if (!complete) {
       $("#mode").value = profile.mode; $("#access").value = profile.access; $("#role-coverage").checked = profile.requireRoleCoverage;
@@ -323,7 +331,6 @@
     if (control.length) battle.push("commit burst while control is active instead of splitting damage");
     if (sustain.length) battle.push("keep the frontline together so protection covers the carries");
     if (profile.mode === "PvE farming" && squad.some(hero=>hero.staminaReduction)) battle.push("use this formation for repeated PvE actions to exploit its Stamina reduction");
-    const priority = FormationPriority.rank(squad, profile.mode).map((item,index)=>`<li><strong>${index+1}. ${esc(item.hero.name)}</strong><span>${esc(item.reason)}</span></li>`).join("");
     const gaps=[];
     ["Melee","Mid","Range"].forEach(role=>{if(!squad.some(hero=>hero.role===role))gaps.push(`no ${role.toLowerCase()} hero`)});
     if(!sustain.length)gaps.push("no extracted healing, shield, or damage-reduction layer");
@@ -332,7 +339,7 @@
     if(profile.mode==="PvE farming"&&!squad.some(hero=>hero.staminaReduction))gaps.push("no extracted Stamina economy effect");
     return `<section class="formation-guide"><div class="formation-banner"><span>Formation ready</span><strong>${esc(profile.mode)} formation</strong><small>Modeled score ${number(base+synergy.bonus)} · ${number(base)} base + ${number(synergy.bonus)} synergy</small><em>Click a selected hero on the left to revise the squad.</em></div>
       <div class="control-strip"><label>Formation goal<select id="formation-mode">${["Balanced","Offense","Survival","PvE farming"].map(m=>`<option${m===profile.mode?' selected':''}>${m}</option>`).join("")}</select></label></div>
-      <div class="guide-grid"><article class="guide-card"><h3>Placement · front to back</h3><ol>${positions}</ol></article><article class="guide-card"><h3>How it functions</h3><p>${esc(functionParts.join(" "))}</p><small>${esc(synergy.summary)}</small></article><article class="guide-card"><h3>Battle guide</h3><p>${esc(battle.length ? `${battle.join("; then ")}.` : "Focus one target at a time and protect your damage core.")}</p></article><article class="guide-card resource"><h3>Resource priority</h3><ol>${priority}</ol><small>Role-based guide, not upgrade ROI. Gear, skill levels, shard costs and star breakpoints are not simulated. Equal indices use a stable ID tie-break, not a proven advantage.</small></article><article class="guide-card"><h3>Star-upgrade queue</h3><p>${esc(starQueue(squad))}</p><small>Set current stars and your chosen target in My roster. Reaching a star target does not finish gear or skill upgrades.</small></article><article class="guide-card watch"><h3>Watch for</h3><p>${esc(gaps.length ? `Main modeled gaps: ${gaps.slice(0,3).join("; ")}.` : "No obvious structural gap in the extracted roles and mechanics. Exact cooldowns, targeting, gear, and live balance can still change performance.")}</p></article></div></section>`;
+      <div class="guide-grid"><article class="guide-card"><h3>Placement · front to back</h3><ol>${positions}</ol></article><article class="guide-card"><h3>How it functions</h3><p>${esc(functionParts.join(" "))}</p><small>${esc(synergy.summary)}</small></article><article class="guide-card"><h3>Battle guide</h3><p>${esc(battle.length ? `${battle.join("; then ")}.` : "Focus one target at a time and protect your damage core.")}</p></article>${UpgradeUI.panel(squad.map(h=>h.asset_slug),profile)}<article class="guide-card watch"><h3>Watch for</h3><p>${esc(gaps.length ? `Main modeled gaps: ${gaps.slice(0,3).join("; ")}.` : "No obvious structural gap in the extracted roles and mechanics. Exact cooldowns, targeting, gear, and live balance can still change performance.")}</p></article></div></section>`;
   }
 
   function positionJob(hero,carries) {
@@ -368,26 +375,28 @@
   function bestOwnedAndTargets() {
     const ownedHeroes = heroes.filter(owned);
     const unowned = heroes.filter(hero => !owned(hero) && matchesAccess(hero, profile.access === "Owned only" ? "All access" : profile.access));
-    if (ownedHeroes.length < 5) return {unlock:`Mark your remaining heroes. Strongest current candidates: ${unowned.sort((a,b)=>scoreHero(b)-scoreHero(a)).slice(0,Math.max(3,5-ownedHeroes.length)).map(h=>h.name).join(", ") || "none"}.`, resources:ownedHeroes.length ? `Provisional role-based order: ${FormationPriority.rank(ownedHeroes,profile.mode).map(x=>x.hero.name).join(" → ")}. ${starQueue(ownedHeroes)}` : "No owned heroes selected yet."};
+    if (ownedHeroes.length < 5) return {unlock:`Mark your remaining heroes. Strongest current candidates: ${unowned.sort((a,b)=>scoreHero(b)-scoreHero(a)).slice(0,Math.max(3,5-ownedHeroes.length)).map(h=>h.name).join(", ") || "none"}.`};
     const current = findTopSquads(ownedHeroes,1)[0] || findTopSquads(ownedHeroes,1,false)[0];
     const upgrades = unowned.map(candidate => {
       const next = findTopSquads([...ownedHeroes,candidate],1)[0] || findTopSquads([...ownedHeroes,candidate],1,false)[0];
       return {candidate,next,gain:next.score-current.score};
     }).sort((a,b)=>b.gain-a.gain||b.next.score-a.next.score).slice(0,3);
-    return {unlock:upgrades.length ? `Best modeled next targets: ${upgrades.map(x=>`${x.candidate.name} (${x.gain>=0?"+":""}${number(x.gain)} squad points)`).join("; ")}.` : "You own the complete extracted roster.",resources:`Best modeled owned squad: ${current.heroes.map(h=>h.name).join(" · ")}. Role-based investment order: ${FormationPriority.rank(current.heroes,profile.mode).map(x=>x.hero.name).join(" → ")}. ${starQueue(current.heroes)}`};
+    return {unlock:upgrades.length ? `Best modeled next targets: ${upgrades.map(x=>`${x.candidate.name} (${x.gain>=0?"+":""}${number(x.gain)} squad points)`).join("; ")}.` : "You own the complete extracted roster."};
   }
 
   function renderRoster() {
     const hero=activeHero(), recommendation=bestOwnedAndTargets(), progress=profile.heroProgress[hero.asset_slug] || {};
     $("#detail-content").innerHTML = `<div class="section-head"><div><h2>My roster</h2><p>${profile.ownedHeroes.length} / ${heroes.length} marked as owned</p></div><div class="roster-actions"><button class="button secondary" id="all-owned">Mark all</button><button class="button danger" id="none-owned">Clear</button></div></div>
       <div class="release-hero"><img src="${hero.portrait_data}" alt=""><div><h3>${esc(hero.name)} ${owned(hero)?'<span style="color:var(--good)">✓ Owned</span>':''}</h3><p>${esc(hero.rarity)} · ${esc(hero.faction)} · ${esc(hero.role)}</p><button class="button" id="toggle-owned">${owned(hero)?"Remove owned check":"Mark as owned"}</button></div></div>
-      <div class="control-strip"><label>${esc(hero.name)} current stars<input id="current-stars" type="number" min="0" max="99" step="1" placeholder="Unknown" value="${progress.current ?? ''}"></label><label>Your star target<input id="target-stars" type="number" min="0" max="99" step="1" placeholder="Not set" value="${progress.target ?? ''}"></label><button class="button secondary" id="save-stars">Save stars</button></div><p class="evidence">Optional whole-star planning fields, not the game's maximum. Leave blank if unknown. Targets reached are skipped only in the star queue, not gear or skills. No guessed star-to-power scaling.</p>
-      <div class="recommendations"><div class="notice"><strong>What to unlock next</strong><br>${esc(recommendation.unlock)}</div><div class="notice"><strong>Where to spend resources</strong><br>${esc(recommendation.resources)}</div></div>`;
+      <div class="control-strip"><label>${esc(hero.name)} current stars<input id="current-stars" type="number" min="0" max="99" step="1" placeholder="Unknown" value="${progress.current ?? ''}"></label><label>Your star target<input id="target-stars" type="number" min="0" max="99" step="1" placeholder="Not set" value="${progress.target ?? ''}"></label><button class="button secondary" id="save-stars">Save stars</button></div><p class="evidence">Legacy whole-star notes only. Leave blank if unknown. They do not drive upgrade comparisons; record the exact rank step below. No guessed star-to-power scaling.</p>
+      ${UpgradeUI.editor(hero.asset_slug,profile)}<div class="recommendations"><div class="notice"><strong>What to unlock next (max-configuration heuristic)</strong><br>${esc(recommendation.unlock)}</div></div>${UpgradeUI.panel(state.squad,profile)}`;
+    UpgradeUI.bindEditor(hero.asset_slug,profile,saveProfile,renderDetail);
+    UpgradeUI.bindPanel(profile,saveProfile,renderDetail);
     $("#save-stars").onclick=()=>{
       const inputs=[$("#current-stars"),$("#target-stars")];
       if(inputs.some(input=>!input.reportValidity()))return;
       const [current,target]=inputs.map(input=>input.value===""?null:FormationPriority.cleanStars(Number(input.value)));
-      profile.heroProgress[hero.asset_slug]={current,target};saveProfile();renderDetail();
+      profile.heroProgress[hero.asset_slug]={...progress,current,target};saveProfile();renderDetail();
     };
     $("#toggle-owned").onclick=()=>{toggleOwned(hero);renderCards();renderDetail()};
     $("#all-owned").onclick=()=>setProfile({...profile,ownedHeroes:heroes.map(h=>h.asset_slug)});

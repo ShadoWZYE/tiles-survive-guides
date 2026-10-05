@@ -59,6 +59,31 @@ public partial class MainWindow : Window
         _heroes.AddRange(heroes.OrderByDescending(hero => hero.CompositeIndex).ThenBy(hero => hero.Name));
     }
 
+    private void OpenUpgradePlanner_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            var resource = Application.GetResourceStream(new Uri("pack://application:,,,/TilesSurviveHeroPlanner;component/Data/upgrade-planner.html"))
+                ?? throw new InvalidOperationException("Embedded upgrade planner missing.");
+            using var reader = new StreamReader(resource.Stream);
+            var html = reader.ReadToEnd();
+            var initial = JsonSerializer.Serialize(new {
+                ownedHeroes = _heroes.Where(h => h.IsOwned).Select(h => h.AssetSlug),
+                heroProgress = _heroes.ToDictionary(h => h.AssetSlug, h => new { current = h.Progress.Current, target = h.Progress.Target })
+            });
+            var squad = JsonSerializer.Serialize(_selected.Select(h => h.AssetSlug));
+            // Seed only a new browser profile. Browser build edits never overwrite the native profile.
+            var seed = "<script>window.__INITIAL_SQUAD__=" + squad + ";try{if(!localStorage.getItem('tiles-survive-hero-planner-profile-v1'))localStorage.setItem('tiles-survive-hero-planner-profile-v1',JSON.stringify(" + initial + "));}catch(e){}</script>";
+            html = html.Replace("<script>window.__HERO_DATA__=", seed + "<script>window.__HERO_DATA__=");
+            var folder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "TilesSurviveHeroPlanner");
+            Directory.CreateDirectory(folder);
+            var path = Path.Combine(folder, "Upgrade-Planner.html");
+            File.WriteAllText(path, html);
+            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(path) { UseShellExecute = true });
+        }
+        catch (Exception ex) { MessageBox.Show("Could not open the offline upgrade planner: " + ex.Message); }
+    }
+
     private void LoadProfile()
     {
         _loadingProfile = true;
@@ -412,11 +437,7 @@ public partial class MainWindow : Window
             ? "Focus one target at a time and protect the two highest-offense heroes; this squad has no strong extracted timing combo."
             : string.Join("; then ", battleSteps) + ".";
 
-        var priorities = FormationPriority.Rank(squad, CurrentMode);
-        FormationResourceFocus.Text = string.Join("\n", priorities.Select((item, index) =>
-            $"{index + 1}. {item.Hero.Name} — {item.Reason}"))
-            + "\n\nRole-based guide, not upgrade ROI. Gear, skill levels, shard costs and star breakpoints are not simulated. Equal indices use a stable ID tie-break, not a proven advantage."
-            + "\n\nSTAR-UPGRADE QUEUE\n" + StarQueue(squad);
+        FormationResourceFocus.Text = "Open DATA-DRIVEN UPGRADES above. Your selected squad is carried into the offline browser calculator. Record exact rank steps, levels and skills there to compare next upgrades by actual resource cost. No fixed hero order is imposed. Browser build profiles are saved separately from this app.";
 
         var weaknesses = new List<string>();
         foreach (string role in new[] { "Melee", "Mid", "Range" })
@@ -668,9 +689,7 @@ public partial class MainWindow : Window
             int needed = 5 - owned.Count;
             var targets = unowned.OrderByDescending(hero => ScoreHero(hero, CurrentMode)).Take(Math.Max(needed, 3)).Select(hero => hero.Name);
             UnlockRecommendation.Text = $"Mark your remaining heroes. Strongest current candidates are: {string.Join(", ", targets)}.";
-            ResourceRecommendation.Text = owned.Count == 0
-                ? "No owned heroes selected yet."
-                : $"Provisional role-based order: {string.Join(" → ", FormationPriority.Rank(owned, CurrentMode).Select(x => x.Hero.Name))}. {StarQueue(owned)}";
+            ResourceRecommendation.Text = "Use DATA-DRIVEN UPGRADES for build-specific return comparisons. Select a five-hero formation first.";
             return;
         }
 
@@ -689,9 +708,7 @@ public partial class MainWindow : Window
             ? "You own the complete extracted roster."
             : "Best modeled next targets: " + string.Join("; ", upgrades.Select(item =>
                 $"{item.candidate.Name} ({(item.gain > 0 ? "+" : "")}{item.gain:0.0} squad points)")) + ".";
-        ResourceRecommendation.Text = "Best modeled owned squad: " + current.Names +
-            ". Role-based investment order: " + string.Join(" → ", FormationPriority.Rank(current.Heroes, CurrentMode)
-                .Select(item => item.Hero.Name)) + ". " + StarQueue(current.Heroes);
+        ResourceRecommendation.Text = "Use DATA-DRIVEN UPGRADES above for next-step cost and stat comparisons; record your current builds in the offline calculator. Unlock recommendations here remain max-configuration heuristics.";
     }
 
     private void ServerOpenDate_Changed(object sender, SelectionChangedEventArgs e)

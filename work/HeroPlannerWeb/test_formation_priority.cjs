@@ -9,7 +9,10 @@ const policy = require("./formation-priority.js");
 const root = path.resolve(__dirname, "../..");
 const dataPath = path.join(root, "outputs/hero-report/TilesSurvive-Hero-Data.json");
 const context = vm.createContext({window: {__HERO_DATA__: JSON.parse(fs.readFileSync(dataPath, "utf8"))},
-  localStorage: {getItem: () => null}, FormationPriority: policy});
+  localStorage: {getItem: () => null}, FormationPriority: policy, UpgradeModel:require('./upgrade-model.js')});
+context.__UPGRADE_DATA__=JSON.parse(fs.readFileSync(path.join(root,'outputs/hero-report/TilesSurvive-Upgrade-Data.json'),'utf8'));
+context.window.__UPGRADE_DATA__=context.__UPGRADE_DATA__;
+vm.runInContext(fs.readFileSync(path.join(__dirname,'upgrade-ui.js'),'utf8'),context);
 // Use the production parser and recommendation functions without mounting the browser shell.
 const source = fs.readFileSync(path.join(__dirname, "app.js"), "utf8");
 assert.ok(source.includes("wireShell(); renderAll(); registerWebMcp();"));
@@ -51,14 +54,14 @@ test("old and malformed profiles sanitize safely; zero stars survives roundtrip"
   for(const value of [-1,100,3.5,"4",Infinity,NaN]) assert.equal(policy.cleanStars(value),null);
   assert.equal(policy.sanitizeProgress({[slug]:{current:-1,target:"5"}},[slug])[slug],undefined);
 });
-test("formation guide and owned-roster resource recommendation share the policy", () => {
+test("formation investment view requires actual builds instead of imposing a role order", () => {
   profile.ownedHeroes=example.map(h=>h.asset_slug);profile.mode="Balanced";
   profile.heroProgress={};
   const guide=context.hooks.renderFormationGuide(example);
-  const resources=context.hooks.bestOwnedAndTargets().resources;
-  assert.match(guide,/1\. Becca/);assert.match(guide,/2\. Rosie/);assert.match(guide,/3\. Ray/);
-  assert.match(resources,/Becca → Rosie → Ray → Layla → Maddie/);
-  assert.match(guide,/Star-upgrade queue/);assert.match(guide,/not upgrade ROI/);
+  assert.match(guide,/Data-driven next upgrades/);
+  assert.match(guide,/Record these builds/);
+  assert.match(guide,/No fixed hero order/);
+  assert.doesNotMatch(guide,/Role-based guide, not upgrade ROI/);
 });
 test("desktop and browser investment rules agree across modes and edge cases", () => {
   const output=JSON.parse(execFileSync("dotnet",["run","--no-build","--project",path.join(root,"work/HeroPlanner.Tests"),"--",dataPath],{encoding:"utf8"}));

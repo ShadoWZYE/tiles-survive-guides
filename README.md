@@ -15,8 +15,10 @@ The Hero Planner supports:
 - Owned-roster selection and portable profile import/export
 - Balanced, Offense, Survival, and PvE squad scoring
 - Five-position front-to-back formation guidance
-- Modeled skill synergy and formation-specific investment explanations (separate from squad scoring)
-- Optional current-star / personal-target fields and a saved star-upgrade queue
+- Modeled skill synergy (separate from build-specific upgrade comparisons)
+- Exact rank-step, level, skill and optional universal-gear recording
+- Next-upgrade stat/contribution returns grouped by actual resource, with balances and affordability filtering
+- Optional legacy whole-star / personal-target notes, preserved but not converted into exact rank progress
 - F2P, event-accessible, owned-only, and IAP-linked filters
 - Hero stats, skill icons, decoded descriptions, and release/access evidence
 - Persistent server-opening date and release timeline
@@ -29,11 +31,19 @@ Source locations:
 - `outputs/hero-report/` - normalized hero data, ranking CSV, and methodology
 - `outputs/hero-tool/images/` - hero portraits and skill icons used by the planners
 
-Investment guidance is a transparent role-based policy, not an upgrade-return simulator. Balanced and PvE use primary damage core, frontline anchor, secondary damage core, then sustain/utility; Survival moves the anchor and sustain first; Offense develops both damage candidates first. If your frontline dies early, fix that before following the default damage order. Damage candidates use the extracted offense index among non-melee heroes, keeping midline healers in the sustain layer where possible. Ties prefer ranged heroes, then stable IDs, not a claimed combat advantage. Enemy-wide DEF/ATK reduction is recognized alongside the existing team-effect tags.
+### Data-driven upgrade comparisons
 
-For example, Rosie / Layla / Becca / Ray / Maddie defaults to **Becca → Rosie → Ray → Layla → Maddie** in Balanced mode. This is a starting policy, not proof that Becca has the highest live DPS or the cheapest next upgrade.
+Investment recommendations no longer impose a role-based hero order. Select five heroes, record their builds under **My roster → My build**, and choose a return metric. The calculator recomputes each adjacent rank, level, skill or recorded gear upgrade from the installed client tables. All five exact ranks/levels are required; blank skill levels remain unknown, not maximum. Gear can be explicitly absent or unknown/excluded. Invalid caps and duplicate gear slots are rejected.
 
-In **My roster**, select a hero and optionally save current whole stars and your chosen target. Leave either blank when unknown. The star queue follows the formation's investment order and skips heroes already at their chosen target; it does not remove them from gear/skill priorities. No star-to-power multiplier, skill-unlock breakpoint, sub-star progress, ascension conversion, shard-cost or gear simulation is assumed. Old profiles still load with unknown star progress. Star fields are local to each edition's existing profile format; the formats are not interchangeable.
+**Data provenance:** progression is normalized from client **2.6.200.276**, covering 28 base heroes and 18 universal gear types. Table hashes are retained in `outputs/hero-report/TilesSurvive-Upgrade-Data.json`. Existing portrait/roster reference and squad-selection heuristics retain their older 2.6.0.235 snapshot; hero identity is joined by ID, not guessed names. Raw extracted tables remain private.
+
+**How returns are calculated:** each candidate changes one recorded build while holding the other four constant. Gain is the percentage change in the selected formation total; efficiency is that gain per 100 units of the exact listed resource. Rankings compare only the same resource ID. Hero-specific shards are not treated as a shared currency; mixed/unlisted costs have no efficiency ranking. Configured power contributions and ATK/DEF/HP totals are not win-rate, survival or live-damage predictions. Rank unlocks raise caps but do not automatically grant skill upgrades. Skill costs use the configured `SlgItemReq` field; verify the applicable expense in-game.
+
+**Experimental direct-output potential:** assumes affine `DamageParam` scaling and millisecond cooldowns over the chosen time window. Those runtime interpretations are not independently verified. It omits animation hit counts, targeting, movement, defense, conditional buffs/debuffs, healing, control and summons. Unsupported utility effects are shown as **return not modeled**, not assumed worthless. Do not use this as a complete combat simulator or a definitive ranking for Becca versus Rosie. Power/stat modes measure only their named contribution, not these effects.
+
+Costs use destination rank/skill rows, cumulative hero-XP differences, and current gear-row next-level XP. XP assumes zero progress toward the next level. Building gates must be checked in-game; affordability means enough recorded materials, not a guarantee the upgrade is unlocked. Ascension, profession/exclusive gear, refinement and shard conversion are excluded. Exact rank/step labels are client identifiers, not an unverified conversion to displayed whole stars. Legacy whole-star notes remain saved separately.
+
+The Windows app's **DATA-DRIVEN UPGRADES** button opens its embedded self-contained calculator in your browser, carrying the selected squad and seeding ownership/star notes only if that browser profile is new. Build edits are saved in the browser's own profile; they are not synchronized back to WPF. Both entry points use the same calculation code. Browser profile export/import retains builds and balances. No game process hooking, online requests or automatic spending is involved.
 
 ### Build the desktop planner
 
@@ -47,10 +57,19 @@ dotnet build work\HeroPlanner\HeroPlanner.csproj -c Release
 python work\HeroPlannerWeb\build_offline.py
 python -m unittest work.HeroPlannerWeb.test_offline_build
 dotnet build work\HeroPlanner.Tests
-node --test work\HeroPlannerWeb\test_formation_priority.cjs
+node --test work\HeroPlannerWeb\test_formation_priority.cjs work\HeroPlannerWeb\test_upgrade_model.cjs
 ```
 
-Windows-only UI regression (uses an isolated temporary profile): `dotnet run --project work/HeroPlanner.UiTests`. Optional browser interaction regression: install Playwright, then run `node work/HeroPlannerWeb/test_browser_smoke.cjs`; `PLANNER_PLAYWRIGHT` can point to its module and `PLANNER_BROWSER` can select an installed Chromium executable. Both test ownership preservation, star persistence and goal-dependent priorities.
+Rebuild the offline edition **before** building/publishing WPF; the desktop package embeds that HTML. Windows-only UI regression (isolated temporary profile): `dotnet run --project work/HeroPlanner.UiTests`. Browser interaction regression: install Playwright, then run `node work/HeroPlannerWeb/test_browser_smoke.cjs`; `PLANNER_PLAYWRIGHT` can point to its module and `PLANNER_BROWSER` can select an installed Chromium executable. Tests cover cost-driven order changes, currencies, unknown builds, skill caps, ownership, build persistence, metrics, embedded resources and mobile layout. Legacy role-helper parity tests are retained for regression, but that policy no longer drives displayed investment recommendations.
+
+To refresh progression after privately extracting the selected config tables:
+
+```powershell
+python work\hero-extraction\build_upgrade_data.py PRIVATE_EXTRACT_DIRECTORY --client-build YOUR_CLIENT_BUILD
+python work\HeroPlannerWeb\build_offline.py
+```
+
+The exporter uses the existing CFG/language decoders, refuses missing/ambiguous tables and stores normalized fields only. Recheck the model assumptions when refreshing to another client version.
 
 ## Windows companion and display tools
 

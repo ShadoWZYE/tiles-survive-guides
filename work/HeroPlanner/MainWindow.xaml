@@ -43,6 +43,7 @@
                 </Border>
                 <TextBlock Text="28 base heroes  •  6 ascended forms" Foreground="{StaticResource MutedInkBrush}"
                            FontSize="12" HorizontalAlignment="Center" Margin="0,5,0,0" />
+                <Button Content="DATA-DRIVEN UPGRADES" Click="OpenUpgradePlanner_Click" Margin="0,8,0,0" />
             </StackPanel>
         </Grid>
 
