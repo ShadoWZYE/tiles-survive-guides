@@ -4,13 +4,24 @@ This deliberately low-confidence inference model covers all 29 supported base
 heroes without personal build input. The native Windows and offline browser
 planners display one compact **Est.** score. Per-hero assumptions, basis and
 scenario range are hidden under **Estimate details**, collapsed by default. No
-new input fields, save buttons or required setup have been added.
+mandatory build inputs or save buttons are required. One compact comparison-basis
+selector keeps personal progress separate from fair comparisons:
+
+- **Equal builds** (default): all heroes use the same reference development;
+  saved rank, level, skills, gear and ownership do not affect their scores.
+- **Flat max stats**: original maximum-stat indices only, with no inferred skill
+  pressure, utility, Stamina economy or synergy bonus. Identical stats tie honestly.
+- **My builds** (opt-in): valid recorded values replace reference defaults.
+
+The selected basis is saved separately. Old profiles default to Equal builds.
+Resource priorities independently use recorded builds of owned heroes only;
+reference assumptions are never substituted into upgrade costs or record actions.
 
 ## Reference and personal data
 
 The reference is level 110, rank 3 step 6, skills at that rank's configured caps,
 no gear. This compares equal development, **not equal resource expenditure**.
-Valid saved rank, level, skill and gear values replace the respective defaults.
+In My builds mode only, valid saved rank, level, skill and gear values replace the respective defaults.
 Missing skills use the reference skill level limited by the effective rank's cap;
 explicitly locked level 0 remains locked. Invalid values are not accepted as
 observations. Assumptions remain in the calculation only: they are never written

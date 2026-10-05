@@ -34,11 +34,13 @@
   const labels={power:'Configured power contribution',attack:'Hero ATK total',health:'Hero HP total',defense:'Hero DEF total',direct:'Experimental direct-output potential'};
   function panel(slugs,profile){
     const s=UpgradeModel.sanitizeSettings(profile.upgradeSettings),builds=Object.fromEntries(slugs.map(id=>[id,profile.heroProgress?.[id]?.build]));
-    const r=slugs.length===5?UpgradeModel.evaluate(slugs,builds,data(),s):null;
+    const owned=slugs.filter(id=>profile.ownedHeroes?.includes(id));
+    const r=slugs.length===5?UpgradeModel.evaluate(owned,builds,data(),s):null;
     const materials=[...new Set(slugs.flatMap(id=>{const h=data().heroes[id];return h?h.stages.flatMap(x=>Object.keys(x.cost)).concat(h.skills.flatMap(x=>x.levels.flatMap(l=>Object.keys(l.cost)))):[];})), 'hero-xp','gear-xp'];
     let content='<p>Select five heroes in Your squad before comparing upgrades.</p>';
     if(r){
-      if(r.missing.length)content=`<p>Record these builds in My roster first:</p><ul>${r.missing.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`;
+      if(!owned.length)content='<p>Mark the heroes you own before prioritising resources. Comparator assumptions are never used here.</p>';
+      else if(r.missing.length)content=`<p>Record these owned builds in My roster first:</p><ul>${r.missing.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`;
       else{
         let group='';content=r.candidates.map(c=>{
           const heading=c.group!==group?`<h4>${esc(data().items[c.group]||c.group||'Multiple / unlisted costs')} · resource ${esc(c.group||'unranked')}</h4>`:'';group=c.group;

@@ -12,6 +12,14 @@ test('recorded fields override defaults without mutating the build; unknowns rem
   const partial=model.evaluate(slug,saved,upgrades,estimates);assert.equal(partial.basis,'Recorded + assumed');assert.ok(partial.score<ref.score);assert.equal(JSON.stringify(saved),snapshot);
   assert.equal(model.evaluate(slug,{level:999},upgrades,estimates).basis,'Reference build');
 });
+test('fair comparator ignores personal stars and ownership; recorded and flat modes are explicit',()=>{
+  const saved={stage:upgrades.heroes.rosie.stages[0].id,level:1,skills:{},gear:[],owned:true};
+  const ref=model.evaluate('rosie',null,upgrades,estimates),flat={offense:100,durability:100,score:100};
+  assert.deepEqual(model.compare('rosie',saved,upgrades,estimates,'reference',flat),ref);
+  assert.deepEqual(model.compare('rosie',{...saved,owned:false,level:110},upgrades,estimates,'reference',flat),ref);
+  assert.ok(model.compare('rosie',saved,upgrades,estimates,'recorded',flat).score<ref.score);
+  assert.equal(model.compare('rosie',saved,upgrades,estimates,'flat',flat).score,100);
+});
 test('native/browser estimates agree for all heroes and incomplete, reference and locked builds',()=>{
   const root=path.resolve(__dirname,'../..'),cases=JSON.parse(execFileSync('dotnet',['run','--no-build','--project',path.join(root,'work/HeroPlanner.Tests'),'--','unused','--estimates',path.join(root,'outputs/hero-report')],{encoding:'utf8',maxBuffer:1024*1024}));
   assert.equal(cases.length,116);

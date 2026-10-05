@@ -59,10 +59,19 @@ public partial class MainWindow : Window
         if (streamInfo is null) throw new InvalidOperationException("Embedded hero data was not found.");
         using var stream = streamInfo.Stream;
         var heroes = JsonSerializer.Deserialize<List<Hero>>(stream) ?? [];
+        foreach (var hero in heroes) _flatIndices[hero.AssetSlug] = (hero.OffenseIndex, hero.DurabilityIndex, hero.CompositeIndex);
         _heroes.AddRange(heroes.OrderByDescending(hero => hero.CompositeIndex).ThenBy(hero => hero.Name));
     }
 
     private EstimateData _estimates = new();
+    private string _comparisonBasis = "reference";
+    private readonly Dictionary<string, (double Offense, double Durability, double Score)> _flatIndices = [];
+    private void ComparisonBasis_Changed(object sender, SelectionChangedEventArgs e)
+    {
+        if (_loadingProfile || _estimates.Heroes.Count == 0 || ComparisonBasisPicker.SelectedItem is not ComboBoxItem item) return;
+        _comparisonBasis = item.Tag as string ?? "reference";
+        RefreshEstimates(); SaveProfile(); RebuildOptimizer(); UpdateSquadPresentation();
+    }
     private void LoadEstimates()
     {
         var resource = Application.GetResourceStream(new Uri("pack://application:,,,/TilesSurviveHeroPlanner;component/Data/estimates.json"))!;
@@ -72,11 +81,13 @@ public partial class MainWindow : Window
     private string? _lastEstimateBuilds;
     private bool RefreshEstimates()
     {
-        string snapshot = JsonSerializer.Serialize(_heroBuilds);
+        string snapshot = _comparisonBasis + (_comparisonBasis == "recorded" ? JsonSerializer.Serialize(_heroBuilds) : "");
         if (snapshot == _lastEstimateBuilds) return false;
         foreach (var hero in _heroes)
         {
-            var result = EstimateModel.Evaluate(hero.AssetSlug, _heroBuilds.GetValueOrDefault(hero.AssetSlug), _upgradeData, _estimates);
+            var flat = _flatIndices[hero.AssetSlug];
+            var result = _comparisonBasis == "flat" ? new HeroEstimate(flat.Offense, flat.Durability, flat.Score, flat.Score, flat.Score, "Flat max stats") :
+                EstimateModel.Evaluate(hero.AssetSlug, _comparisonBasis == "recorded" ? _heroBuilds.GetValueOrDefault(hero.AssetSlug) : null, _upgradeData, _estimates);
             hero.Estimate = result; hero.OffenseIndex = result.Offense; hero.DurabilityIndex = result.Durability; hero.CompositeIndex = result.Score;
         }
         _heroes.Sort((a, b) => { int score = b.CompositeIndex.CompareTo(a.CompositeIndex); return score != 0 ? score : StringComparer.Ordinal.Compare(a.Name, b.Name); });
@@ -110,6 +121,7 @@ public partial class MainWindow : Window
                     _heroBuilds = (profile.HeroBuilds ?? []).Where(x => _heroes.Any(h => h.AssetSlug == x.Key) && x.Value is not null).ToDictionary();
                     _upgradeSettings = profile.UpgradeSettings ?? new();
                     _upgradeSettings.Clean();
+                    _comparisonBasis = profile.ComparisonBasis is "recorded" or "flat" ? profile.ComparisonBasis : "reference";
                     serverOpenDate = profile.ServerOpenDate ?? AllianceServerOpenDate;
                 }
             }
@@ -120,6 +132,7 @@ public partial class MainWindow : Window
                     hero.Progress = new() { Current = HeroProgress.Clean(entry.Current), Target = HeroProgress.Clean(entry.Target) };
             }
             ServerOpenDate.SelectedDate = serverOpenDate;
+            ComparisonBasisPicker.SelectedItem = ComparisonBasisPicker.Items.Cast<ComboBoxItem>().First(i => (string)i.Tag == _comparisonBasis);
         }
         catch (JsonException)
         {
@@ -140,6 +153,7 @@ public partial class MainWindow : Window
             OwnedHeroes = _heroes.Where(hero => hero.IsOwned).Select(hero => hero.AssetSlug).ToHashSet(),
             HeroBuilds = _heroBuilds,
             UpgradeSettings = _upgradeSettings,
+            ComparisonBasis = _comparisonBasis,
             HeroProgress = _heroes.Where(hero => hero.Progress.Current is not null || hero.Progress.Target is not null)
                 .ToDictionary(hero => hero.AssetSlug, hero => hero.Progress),
             ServerOpenDate = ServerOpenDate.SelectedDate?.Date,
@@ -567,7 +581,8 @@ public partial class MainWindow : Window
             .OrderByDescending(result => result.Score).ThenBy(result => result.Names).ToList();
     }
 
-    private static double ScoreHero(Hero hero, PlannerMode mode) => mode switch
+    private static double ScoreHero(Hero hero, PlannerMode mode) => hero.Estimate?.Basis == "Flat max stats" ? mode switch
+    { PlannerMode.Offense => hero.OffenseIndex, PlannerMode.Survival => hero.DurabilityIndex, _ => hero.CompositeIndex } : mode switch
     {
         PlannerMode.Offense => hero.OffenseIndex * 0.75 + hero.CompositeIndex * 0.25,
         PlannerMode.Survival => hero.DurabilityIndex * 0.75 + hero.CompositeIndex * 0.25,
@@ -578,6 +593,7 @@ public partial class MainWindow : Window
 
     private static (double Bonus, string Summary) EvaluateSynergy(IReadOnlyList<Hero> squad, PlannerMode mode, bool includeSummary = true)
     {
+        if (squad.Any(h => h.Estimate?.Basis == "Flat max stats")) return (0, "Flat stats: skill synergy excluded");
         var interactions = includeSummary ? new List<string>() : null;
         double bonus = 0;
         HeroMechanic combined = HeroMechanic.None;
@@ -686,6 +702,7 @@ public partial class MainWindow : Window
         OwnedCount.Text = $"{_heroes.Count(hero => hero.IsOwned)} / {_heroes.Count} marked as owned";
         RebuildOptimizer();
         UpdateRecommendations();
+        RefreshResourcePriority();
     }
 
     private void UpdateRecommendations()

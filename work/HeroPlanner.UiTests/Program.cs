@@ -52,7 +52,11 @@ internal static class Program
         Check(JsonSerializer.Deserialize<PlannerProfile>(File.ReadAllText(profilePath))!.HeroProgress[becca.AssetSlug].Current == 4, "Stars not persisted");
         ((TabControl)window.FindName("InspectorTabs")).SelectedIndex = 0;
         foreach (var name in new[] { "Rosie", "Layla", "Becca", "Ray", "Maddie" })
+        {
+            heroes.Single(h => h.Name == name).IsOwned = true;
             Invoke(window, "HeroCard_Click", new Button { Tag = heroes.Single(h => h.Name == name) }, new RoutedEventArgs());
+        }
+        double referenceBecca = becca.CompositeIndex;
         var focus = (TextBox)window.FindName("FormationResourceFocus");
         Check(focus.Text.Contains("Record these builds"), "Unknown builds must not receive a guessed ranking");
         var data = Field<UpgradeData>(window, "_upgradeData");
@@ -81,10 +85,25 @@ internal static class Program
         Check(focus.Text.Contains("per 100 resource units") && !focus.Text.Contains("Record these builds"), "Native upgrade ranking missing");
         var priorityPanel = (StackPanel)window.FindName("ResourcePriorityCards");
         Check(priorityPanel.Children.OfType<Expander>().Any(), "Resource cards missing");
+        Check(Math.Abs(becca.CompositeIndex - referenceBecca) < 1e-8, "Equal comparator used saved low-star build");
+        var basisPicker = (ComboBox)window.FindName("ComparisonBasisPicker");
+        basisPicker.SelectedIndex = 2;
+        Check(becca.CompositeIndex < referenceBecca && becca.Estimate!.Basis != "Reference build", "Explicit My builds mode did not use the recorded build");
+        basisPicker.SelectedIndex = 1;
+        Check(becca.CompositeIndex == 100 && becca.Estimate!.Basis == "Flat max stats", "Flat stats mode not restored from original config indices");
+        basisPicker.SelectedIndex = 0;
+        Check(Math.Abs(becca.CompositeIndex - referenceBecca) < 1e-8, "Equal comparison did not restore fair reference score");
         var settings = Field<UpgradeSettings>(window, "_upgradeSettings");
         settings.Inventory["hero-xp"] = 100000;
         Invoke(window, "RefreshUpgradeViews");
         var beforeRecord = Field<Dictionary<string, HeroBuild>>(window, "_heroBuilds")[becca.AssetSlug].Copy();
+        var rayHero = heroes.Single(h => h.AssetSlug == "ray");
+        var unownedRequest = UpgradeModel.Evaluate(new[] { "ray" }, Field<Dictionary<string, HeroBuild>>(window, "_heroBuilds"), data, settings).Candidates.First(c => c.Kind == "level" && c.Blocked is null);
+        int rayLevel = Field<Dictionary<string, HeroBuild>>(window, "_heroBuilds")["ray"].Level!.Value;
+        rayHero.IsOwned = false;
+        Invoke(window, "RecordUpgrade_Click", new Button { Tag = unownedRequest }, new RoutedEventArgs());
+        Check(Field<Dictionary<string, HeroBuild>>(window, "_heroBuilds")["ray"].Level == rayLevel, "Unowned hero received a recorded upgrade");
+        rayHero.IsOwned = true; Invoke(window, "RefreshUpgradeViews");
         var candidate = UpgradeModel.Evaluate(new[] { "rosie", "layla", "becca", "ray", "maddie" },
             Field<Dictionary<string, HeroBuild>>(window, "_heroBuilds"), data, settings).Candidates.First(c => c.Slug == becca.AssetSlug && c.Kind == "level" && c.Blocked is null);
         var recordButton = new Button { Tag = candidate };

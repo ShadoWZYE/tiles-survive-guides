@@ -4,6 +4,7 @@
   const STORAGE_KEY = "tiles-survive-hero-planner-profile-v1";
   const DEFAULT_PROFILE = {
     version: 1,
+    comparisonBasis: "reference",
     ownedHeroes: [],
     heroProgress: {},
     upgradeSettings: {},
@@ -20,6 +21,7 @@
   const heroes = window.__HERO_DATA__.map(normalizeHero)
     .sort((a, b) => b.composite_index - a.composite_index || a.name.localeCompare(b.name));
   const bySlug = new Map(heroes.map(hero => [hero.asset_slug, hero]));
+  const flatIndices = new Map(heroes.map(h=>[h.asset_slug,{offense:h.offense_index,durability:h.durability_index,score:h.composite_index}]));
   let profile = loadProfile();
   let state = {
     tab: "squad",
@@ -94,6 +96,7 @@
     }
     return {
       version: 1,
+      comparisonBasis: ["flat","recorded"].includes(candidate.comparisonBasis)?candidate.comparisonBasis:"reference",
       ownedHeroes: [...new Set(ownedHeroes)],
       heroProgress,
       upgradeSettings: UpgradeModel.sanitizeSettings(candidate.upgradeSettings),
@@ -173,7 +176,7 @@
       return `<button class="hero-card${selected ? " selected" : ""}" data-slug="${esc(hero.asset_slug)}" data-rarity="${esc(hero.rarity)}" aria-label="${esc(hero.name)}${own ? ", owned" : ""}">
         <img src="${hero.portrait_data}" alt="${esc(hero.name)}" draggable="false">
         <span class="rarity">${esc(hero.rarity)}</span>${hero.has_ascension ? '<span class="asc">ASC</span>' : ''}${own ? '<span class="owned-badge" title="Owned">✓</span>' : ''}
-        <span class="card-copy"><strong>${esc(hero.name)}</strong><small>${esc(hero.faction)} · ${esc(hero.role)}</small><small class="index" title="${esc(hero.estimate?.basis)} · low-confidence estimate">Est. ${number(hero.composite_index)}</small></span>
+        <span class="card-copy"><strong>${esc(hero.name)}</strong><small>${esc(hero.faction)} · ${esc(hero.role)}</small><small class="index" title="${esc(hero.estimate?.basis)}">${profile.comparisonBasis==='flat'?'Stats':'Est.'} ${number(hero.composite_index)}</small></span>
       </button>`;
     }).join("") || '<div class="empty-state">No heroes match these filters.</div>';
     $$(".hero-card").forEach(card => card.addEventListener("click", () => {
@@ -203,6 +206,7 @@
   }
 
   function scoreHero(hero, mode = profile.mode) {
+    if(profile.comparisonBasis==='flat')return mode==='Offense'?hero.offense_index:mode==='Survival'?hero.durability_index:hero.composite_index;
     if (mode === "Offense") return hero.offense_index * .75 + hero.composite_index * .25;
     if (mode === "Survival") return hero.durability_index * .75 + hero.composite_index * .25;
     if (mode === "PvE farming") return hero.offense_index * .45 + hero.durability_index * .30 + hero.composite_index * .25 + Math.min(40, hero.staminaReduction * 1.3);
@@ -221,6 +225,7 @@
   }
 
   function evaluateSynergy(squad, includeSummary = true) {
+    if(profile.comparisonBasis==='flat')return {bonus:0,summary:'Flat stats: skill synergy excluded'};
     const has = mechanic => squad.some(hero => hero.mechanics.has(mechanic));
     const providers = mechanic => squad.filter(hero => hero.mechanics.has(mechanic)).slice(0, 2).map(hero => hero.name).join("/");
     const carries = () => [...squad].sort((a, b) => b.offense_index - a.offense_index).slice(0, 2).map(hero => hero.name).join("/");
@@ -271,7 +276,8 @@
   }
 
   function heroHeader(hero) {
-    return `<div class="section-head"><div><h2>${esc(hero.name)}</h2><p>${esc(hero.rarity)} · ${esc(hero.faction)} · ${esc(hero.role)} · ${esc(hero.has_ascension ? "Ascension available" : "Base form")}</p></div></div><details><summary>Estimate details</summary><p>${esc(hero.estimate?.basis)} · low confidence · scenario range ${number(hero.estimate?.low)}–${number(hero.estimate?.high)}. Unknown fields use level 110, rank 3 step 6, capped skills and no gear. Recorded values replace assumptions. Equal development is not equal resource cost.</p><p>Representative non-text effects, inferred activations and utility weights form a planning proxy, not a combat simulation. Scenario factors: damage 0.5–2.5×, utility 0.5–1.5×; not statistical confidence intervals. Unknown effects receive a generic prior. Fixed reference anchors allow scores above 100. Server overrides remain unverified. Resource percentages still use their selected power/stat metric.</p></details>`;
+    const details=profile.comparisonBasis==='flat'?'Flat maximum configuration stats only. Saved stars, levels, skills, gear and ownership are ignored. Identical stats legitimately tie. Skill and synergy weights are excluded.':`${esc(hero.estimate?.basis)} · low confidence · scenario range ${number(hero.estimate?.low)}–${number(hero.estimate?.high)}. Equal builds uses level 110, rank 3 step 6, capped skills and no gear for everyone. ONLY My builds uses your saved progression; unknown fields then use reference defaults. Equal development is not equal resource cost. Representative effects and inferred utility form a planning proxy, not a combat simulation. Scenario factors: damage 0.5–2.5×, utility 0.5–1.5×; not statistical confidence intervals. Fixed reference anchors allow scores above 100. Server overrides remain unverified.`;
+    return `<div class="section-head"><div><h2>${esc(hero.name)}</h2><p>${esc(hero.rarity)} · ${esc(hero.faction)} · ${esc(hero.role)} · ${esc(hero.has_ascension ? "Ascension available" : "Base form")}</p></div></div><details><summary>Estimate details</summary><p>${details}</p><p>Resource priorities independently use actual recorded builds of owned heroes.</p></details>`;
   }
 
   function renderDetail() {
@@ -423,18 +429,20 @@
 
   let lastEstimateBuilds=null;
   function renderAll() {
-    const snapshot=JSON.stringify(heroes.map(h=>profile.heroProgress?.[h.asset_slug]?.build||null));
+    const snapshot=profile.comparisonBasis+(profile.comparisonBasis==='recorded'?JSON.stringify(heroes.map(h=>profile.heroProgress?.[h.asset_slug]?.build||null)):'');
     if(snapshot!==lastEstimateBuilds){
-      for(const hero of heroes){const result=EstimateModel.evaluate(hero.asset_slug,profile.heroProgress?.[hero.asset_slug]?.build,window.__UPGRADE_DATA__,window.__ESTIMATE_DATA__);
+      for(const hero of heroes){const result=EstimateModel.compare(hero.asset_slug,profile.heroProgress?.[hero.asset_slug]?.build,window.__UPGRADE_DATA__,window.__ESTIMATE_DATA__,profile.comparisonBasis,flatIndices.get(hero.asset_slug));
         hero.estimate=result;hero.offense_index=result.offense;hero.durability_index=result.durability;hero.composite_index=result.score;}
       heroes.sort((a,b)=>b.composite_index-a.composite_index||a.name.localeCompare(b.name));optimizerCache.clear();
-      lastEstimateBuilds=JSON.stringify(heroes.map(h=>profile.heroProgress?.[h.asset_slug]?.build||null));
+      lastEstimateBuilds=profile.comparisonBasis+(profile.comparisonBasis==='recorded'?JSON.stringify(heroes.map(h=>profile.heroProgress?.[h.asset_slug]?.build||null)):'');
     }
     document.documentElement.style.setProperty("--left", `${profile.leftWidth}%`);
+    $('#comparison-basis').value=profile.comparisonBasis;
     renderCards(); renderDetail(); saveProfile();
   }
 
   function wireShell() {
+    $('#comparison-basis').onchange=event=>{profile.comparisonBasis=event.target.value;renderAll();};
     $$(".top-nav [data-tab]").forEach(button => button.onclick=()=>{state.tab=button.dataset.tab;if(state.tab==="release")state.releaseActive=null;renderDetail()});
     [["#faction-filter","faction"],["#role-filter","role"],["#rarity-filter","rarity"]].forEach(([selector,key]) => $(selector).onchange=event=>{state[key]=event.target.value;renderCards()});
     $("#export-profile").onclick=exportProfile;

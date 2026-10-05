@@ -91,7 +91,14 @@
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock x:Name="RosterTitle" Text="Hero roster" FontSize="21" FontWeight="Bold" VerticalAlignment="Center" />
+                        <StackPanel>
+                            <TextBlock x:Name="RosterTitle" Text="Hero roster" FontSize="21" FontWeight="Bold" />
+                            <ComboBox x:Name="ComparisonBasisPicker" Width="175" HorizontalAlignment="Left" Margin="0,5,0,0" SelectionChanged="ComparisonBasis_Changed" AutomationProperties.Name="Comparison basis">
+                                <ComboBoxItem Content="Equal builds" Tag="reference" IsSelected="True" />
+                                <ComboBoxItem Content="Flat max stats" Tag="flat" />
+                                <ComboBoxItem Content="My builds" Tag="recorded" />
+                            </ComboBox>
+                        </StackPanel>
                         <ComboBox x:Name="FactionFilter" Grid.Column="1" Margin="8,0" SelectionChanged="Filter_Changed">
                             <ComboBoxItem Content="All factions" IsSelected="True" />
                             <ComboBoxItem Content="Mountain" />
@@ -179,7 +186,7 @@
                                                             <Run Text="{Binding Faction}" /><Run Text="  •  " /><Run Text="{Binding Role}" />
                                                         </TextBlock>
                                                         <TextBlock FontSize="11" Foreground="{StaticResource AccentBrush}" ToolTip="{Binding EstimateHint}">
-                                                            <Run Text="Est. " /><Run Text="{Binding CompositeIndex, StringFormat=F1}" />
+                                                            <Run Text="{Binding IndexPrefix, Mode=OneWay}" /><Run Text="{Binding CompositeIndex, StringFormat=F1}" />
                                                         </TextBlock>
                                                     </StackPanel>
                                                 </Border>
@@ -529,7 +536,7 @@
 
         <Border Grid.Row="3" Background="#CC08111F" BorderBrush="#243E61" BorderThickness="0,1,0,0" Padding="30,11">
             <TextBlock Foreground="{StaticResource MutedInkBrush}" FontSize="12" TextWrapping="Wrap">
-                Estimated scores use recorded builds where available and reference assumptions otherwise. Low-confidence inference, not measured combat strength. Details are tucked under Stats → Estimate details.
+                Equal builds ignores your saved progression. My builds is opt-in; resource priorities always use owned heroes' actual builds. Details: Stats → Estimate details.
             </TextBlock>
         </Border>
         <Grid x:Name="BuildOverlay" Grid.RowSpan="4" Panel.ZIndex="50" Visibility="Collapsed" Background="#C908111F" KeyboardNavigation.TabNavigation="Cycle" PreviewKeyDown="BuildOverlay_KeyDown">

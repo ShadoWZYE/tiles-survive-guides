@@ -336,7 +336,7 @@ public partial class MainWindow
         {
             _overlayResults.Children.Clear();
             if (_selected.Count != 5) { _overlayResults.Children.Add(Selectable("Select five heroes in Squad Builder first.")); return; }
-            RenderUpgradeGroups(_overlayResults, UpgradeModel.Evaluate(_selected.Select(h => h.AssetSlug), _heroBuilds, _upgradeData, _upgradeSettings), "all", false);
+            RenderUpgradeGroups(_overlayResults, UpgradeModel.Evaluate(_selected.Where(h => h.IsOwned).Select(h => h.AssetSlug), _heroBuilds, _upgradeData, _upgradeSettings), "all", false);
             var draft = new StackPanel(); var heading = Selectable("", true); draft.Children.Add(heading);
             var cards = new StackPanel(); draft.Children.Add(cards); RenderTargetedDraft(cards, heading);
             _overlayResults.Children.Add(new Expander { Header = "Targeted Draft", Content = draft, Foreground = Brushes.White, Margin = new Thickness(0, 10, 0, 0) });

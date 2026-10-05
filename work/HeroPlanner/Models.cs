@@ -52,8 +52,9 @@ public sealed class Hero
 
     [JsonIgnore] public bool IsSelected { get; set; }
     [JsonIgnore] public HeroEstimate? Estimate { get; set; }
+    [JsonIgnore] public string IndexPrefix => Estimate?.Basis == "Flat max stats" ? "Stats " : "Est. ";
     [JsonIgnore] public string EstimateHint => Estimate is null ? "Estimate unavailable" : $"{Estimate.Basis} · low confidence · scenario range {Estimate.Low:0.0}–{Estimate.High:0.0}. Not a measured combat rating.";
-    [JsonIgnore] public string EstimateDetails => EstimateHint + "\nUnknown fields use level 110, rank 3 step 6, capped skill levels and no gear. Saved values replace assumptions; skill levels are capped by the selected rank. This is equal development, not equal resource cost.\nOne representative non-text damage effect is assumed per activation; passive cadence, hit count, utility weights and effectiveness are inferred. Conservative/optimistic scenarios vary damage pressure 0.5–2.5× and utility 0.5–1.5×. These are sensitivity ranges, not statistical confidence intervals. Healing, shields, control, debuffs and summons receive planning weights, not a full simulation.\nScores use fixed reference-roster anchors, so a developed build can exceed 100. Unknown effects use a generic prior, not zero. Server changes and live overrides remain unverified. Resource-priority percentages still compare their explicitly selected power/stat metric, not this inferred combat score.";
+    [JsonIgnore] public string EstimateDetails => Estimate?.Basis == "Flat max stats" ? "Flat maximum configuration stats only. Saved stars, levels, skills, gear and ownership are ignored. Heroes with identical configuration stats legitimately tie. Stat weights are a planning comparison, not combat strength; skill and synergy weights are excluded." : EstimateHint + "\nEqual builds use level 110, rank 3 step 6, capped skill levels and no gear for everyone. Saved values are used ONLY when My builds is selected; missing fields then use those reference defaults. Skill levels are capped by the selected rank. This is equal development, not equal resource cost.\nOne representative non-text damage effect is assumed per activation; passive cadence, hit count, utility weights and effectiveness are inferred. Conservative/optimistic scenarios vary damage pressure 0.5–2.5× and utility 0.5–1.5×. These are sensitivity ranges, not statistical confidence intervals. Healing, shields, control, debuffs and summons receive planning weights, not a full simulation.\nScores use fixed reference-roster anchors, so a developed build can exceed 100. Unknown effects use a generic prior, not zero. Server changes and live overrides remain unverified. Resource-priority percentages use actual recorded builds of owned heroes, independently of the comparator basis.";
     [JsonIgnore] public bool IsOwned { get; set; }
     [JsonIgnore] public HeroProgress Progress { get; set; } = new();
     [JsonIgnore] public string Portrait => $"pack://application:,,,/TilesSurviveHeroPlanner;component/Images/{AssetSlug}.png";
@@ -235,6 +236,7 @@ public sealed class ReleaseScheduleItem
 
 public sealed class PlannerProfile
 {
+    [JsonPropertyName("comparison_basis")] public string ComparisonBasis { get; set; } = "reference";
     [JsonPropertyName("hero_builds")] public Dictionary<string, HeroBuild> HeroBuilds { get; set; } = [];
     [JsonPropertyName("upgrade_settings")] public UpgradeSettings UpgradeSettings { get; set; } = new();
     [JsonPropertyName("hero_progress")] public Dictionary<string, HeroProgress> HeroProgress { get; set; } = [];

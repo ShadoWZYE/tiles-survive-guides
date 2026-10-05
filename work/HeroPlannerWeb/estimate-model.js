@@ -19,5 +19,9 @@
     return {...calculate(1,1),low:calculate(.5,.5).score,high:calculate(2.5,1.5).score,
       basis:known===0?'Reference build':known===model.skills.length+3?'Recorded build':'Recorded + assumed'};
   }
-  const api={evaluate};if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.EstimateModel=api;
+  function compare(slug,saved,upgrades,estimates,basis,flat){
+    return basis==='flat'?{...flat,low:flat.score,high:flat.score,basis:'Flat max stats'}:
+      evaluate(slug,basis==='recorded'?saved:null,upgrades,estimates);
+  }
+  const api={evaluate,compare};if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.EstimateModel=api;
 })(globalThis);

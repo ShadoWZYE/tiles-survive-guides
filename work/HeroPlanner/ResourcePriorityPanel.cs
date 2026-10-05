@@ -38,9 +38,11 @@ public partial class MainWindow
         UndoUpgradeButton.IsEnabled = _lastRecordedUpgrade is not null;
         RenderTargetedDraft(TargetedDraftCards, TargetedResourceText);
         if (_selected.Count != 5) { FormationResourceFocus.Text = "Select five heroes, then record their current builds using the edit buttons."; return; }
-        var result = UpgradeModel.Evaluate(_selected.Select(h => h.AssetSlug), _heroBuilds, _upgradeData, _upgradeSettings);
+        var owned = _selected.Where(h => h.IsOwned).Select(h => h.AssetSlug).ToList();
+        if (owned.Count == 0) { FormationResourceFocus.Text = "Mark the heroes you own before prioritising resources. Comparator assumptions are never used here."; return; }
+        var result = UpgradeModel.Evaluate(owned, _heroBuilds, _upgradeData, _upgradeSettings);
         if (result.Missing.Count > 0) { FormationResourceFocus.Text = "Record these builds first:\n" + string.Join("\n", result.Missing); return; }
-        FormationResourceFocus.Text = $"Metric: {_upgradeSettings.Goal} · Client {_upgradeData.ClientBuild}\nTop 3 by formation % increase in each resource group. Hero fragments are compared together. Efficiency per 100 resource units is separate. Select and copy any text.";
+        FormationResourceFocus.Text = $"Metric: {_upgradeSettings.Goal} · Client {_upgradeData.ClientBuild}\nOwned heroes only; actual recorded builds. Top 3 by % increase across these owned heroes in each resource group. Hero fragments are compared together. Efficiency per 100 resource units is separate. Select and copy any text.";
         string filter = (ResourceClassFilter.SelectedItem as ComboBoxItem)?.Tag as string ?? "all";
         RenderUpgradeGroups(ResourcePriorityCards, result, filter, true);
     }
@@ -103,11 +105,12 @@ public partial class MainWindow
     {
         e.Handled = true;
         if (sender is not Button { Tag: UpgradeCandidate requested }) return;
+        if (!_heroes.Any(h => h.AssetSlug == requested.Slug && h.IsOwned)) { UpgradeActionStatus.Text = "Only owned heroes can receive recorded upgrades."; RefreshResourcePriority(); return; }
         if (BuildOverlay.Visibility == Visibility.Visible) { UpgradeActionStatus.Text = "Close the build editor before recording an upgrade."; return; }
         if (!SameBuild(_heroBuilds.GetValueOrDefault(requested.Slug), requested.Before))
         { UpgradeActionStatus.Text = "This upgrade card is out of date. Use the refreshed list."; RefreshResourcePriority(); return; }
         // Re-evaluate rather than trust an old button, stale cost or a changed eligibility condition.
-        var fresh = UpgradeModel.Evaluate(_selected.Select(h => h.AssetSlug), _heroBuilds, _upgradeData, _upgradeSettings).Candidates
+        var fresh = UpgradeModel.Evaluate(_selected.Where(h => h.IsOwned).Select(h => h.AssetSlug), _heroBuilds, _upgradeData, _upgradeSettings).Candidates
             .Find(c => c.Slug == requested.Slug && c.Label == requested.Label && SameBuild(c.After, requested.After));
         if (_selected.Count != 5 || fresh is null || fresh.Blocked is not null || fresh.After is null || HasKnownShortfall(fresh))
         { UpgradeActionStatus.Text = "Cannot record this upgrade. Check the current build, rank caps and balances."; return; }

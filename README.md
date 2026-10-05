@@ -14,7 +14,7 @@ The Hero Planner supports:
 
 - Owned-roster selection and portable profile import/export
 - Balanced, Offense, Survival, and PvE squad scoring
-- All-hero low-confidence reference estimates; saved builds override defaults and details stay collapsed ([model](docs/research/HERO-REFERENCE-ESTIMATES.md))
+- Fair all-hero Equal builds comparison by default; Flat max stats and opt-in My builds modes. Resource priorities use actual owned builds; details stay collapsed ([model](docs/research/HERO-REFERENCE-ESTIMATES.md))
 - Five-position front-to-back formation guidance
 - Modeled skill synergy (separate from build-specific upgrade comparisons)
 - Exact rank-step, level, skill and optional universal-gear recording
