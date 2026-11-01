@@ -1,0 +1,245 @@
+{
+  "date": "2026-11-01",
+  "source": "18 initial screenshots plus 1 additional Arabic-named starter screenshot; green=starter, yellow=reserve",
+  "starters": [
+    {
+      "name": "Addalicious",
+      "power_M": 56.4,
+      "group": "S",
+      "screenshot": 3
+    },
+    {
+      "name": "ChaosGoblin",
+      "power_M": 24.43,
+      "group": "S",
+      "screenshot": 1
+    },
+    {
+      "name": "Paradise flower",
+      "power_M": 27.98,
+      "group": "S",
+      "screenshot": 3
+    },
+    {
+      "name": "подвальная мышь",
+      "power_M": 24.0,
+      "group": "S",
+      "screenshot": 18
+    },
+    {
+      "name": "Yildiz",
+      "power_M": 21.02,
+      "group": "A",
+      "screenshot": 1
+    },
+    {
+      "name": "LadyGroz",
+      "power_M": 19.31,
+      "group": "A",
+      "screenshot": 2
+    },
+    {
+      "name": "Lamga",
+      "power_M": 21.4,
+      "group": "A",
+      "screenshot": 7
+    },
+    {
+      "name": "Shikiiigami",
+      "power_M": 16.65,
+      "group": "A",
+      "screenshot": 1
+    },
+    {
+      "name": "Sattow",
+      "power_M": 29.72,
+      "group": "B",
+      "screenshot": 1
+    },
+    {
+      "name": "ryan",
+      "power_M": 16.37,
+      "group": "B",
+      "screenshot": 9
+    },
+    {
+      "name": "Azrael",
+      "power_M": 15.2,
+      "group": "B",
+      "screenshot": 6
+    },
+    {
+      "name": "Martyku",
+      "power_M": 20.55,
+      "group": "C",
+      "screenshot": 4
+    },
+    {
+      "name": "creative",
+      "power_M": 20.64,
+      "group": "C",
+      "screenshot": 4
+    },
+    {
+      "name": "Баламут",
+      "power_M": 15.68,
+      "group": "C",
+      "screenshot": 6
+    },
+    {
+      "name": "MenInPantyhose",
+      "power_M": 16.55,
+      "group": "D",
+      "screenshot": 8
+    },
+    {
+      "name": "Bruklin88",
+      "power_M": 15.33,
+      "group": "D",
+      "screenshot": 6
+    },
+    {
+      "name": "Пятница",
+      "power_M": 16.77,
+      "group": "D",
+      "screenshot": 12
+    },
+    {
+      "name": "Peacheybites!",
+      "power_M": 15.81,
+      "group": "P1",
+      "screenshot": 5
+    },
+    {
+      "name": "Filin",
+      "power_M": 12.85,
+      "group": "P1",
+      "screenshot": 7
+    },
+    {
+      "name": "HoloCrow",
+      "power_M": 15.81,
+      "group": "P2",
+      "screenshot": 5
+    },
+    {
+      "name": "Sukuna",
+      "power_M": 14.41,
+      "group": "P2",
+      "screenshot": 8
+    },
+    {
+      "name": "Александр",
+      "power_M": 13.99,
+      "group": "P3",
+      "screenshot": 9
+    },
+    {
+      "name": "M1K3.Marius",
+      "power_M": 12.4,
+      "group": "P3",
+      "screenshot": 8
+    },
+    {
+      "name": "Wild berry777",
+      "power_M": 13.44,
+      "group": "P4",
+      "screenshot": 11
+    },
+    {
+      "name": "الفدرالي",
+      "power_M": 10.88,
+      "group": "P4",
+      "screenshot": 19
+    },
+    {
+      "name": "Lunar",
+      "power_M": 10.31,
+      "group": "G",
+      "screenshot": 13
+    },
+    {
+      "name": "nikkita",
+      "power_M": 9.35,
+      "group": "G",
+      "screenshot": 11
+    },
+    {
+      "name": "Золото Мира",
+      "power_M": 9.69,
+      "group": "G",
+      "screenshot": 12
+    },
+    {
+      "name": "black beard",
+      "power_M": 10.49,
+      "group": "G",
+      "screenshot": 15
+    },
+    {
+      "name": "TheShadoWZYE",
+      "power_M": 12.0,
+      "group": "HQ",
+      "screenshot": 2
+    }
+  ],
+  "reserves": [
+    {
+      "name": "Artur",
+      "power_M": 22.92,
+      "screenshot": 3
+    },
+    {
+      "name": "IBRAHIM Zain",
+      "power_M": 11.93,
+      "screenshot": 10
+    },
+    {
+      "name": "Bulik",
+      "power_M": 10,
+      "screenshot": 14
+    },
+    {
+      "name": "Cass",
+      "power_M": 7.54,
+      "screenshot": 16
+    },
+    {
+      "name": "GRANDAL",
+      "power_M": 5.41,
+      "screenshot": 17
+    }
+  ],
+  "sum_displayed_starter_power_M": 539.43,
+  "displayed_header_power_M": 499.76,
+  "discrepancy_M": 39.67,
+  "group_chat_remove": [
+    "Adam Kedavra",
+    "Blockbuster",
+    "IT-Nerd01",
+    "Luke",
+    "None",
+    "Roronoa zoro",
+    "SaRSaLa",
+    "Schari",
+    "The goodfather",
+    "Wróżka Nerwuska1",
+    "Xaroth",
+    "Андрей Ф",
+    "Эрджей",
+    "табакошка"
+  ],
+  "group_chat_add": [
+    "Azrael",
+    "Cass",
+    "GRANDAL",
+    "Lamga",
+    "M1K3.Marius",
+    "Sukuna",
+    "nikkita",
+    "Александр",
+    "Золото Мира",
+    "подвальная мышь"
+  ],
+  "comparison": "25 October available roster versus 1 November selected roster; actual chat membership not inspected"
+}

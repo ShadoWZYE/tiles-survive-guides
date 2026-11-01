@@ -1,0 +1,229 @@
+{
+  "date": "2026-10-18",
+  "source": "17 user-supplied screenshots; green=start, yellow=reserve",
+  "starters": [
+    {
+      "name": "ChaosGoblin",
+      "power_M": 18.35,
+      "group": "S"
+    },
+    {
+      "name": "Artur",
+      "power_M": 18.69,
+      "group": "S"
+    },
+    {
+      "name": "Paradise flower",
+      "power_M": 20.82,
+      "group": "S"
+    },
+    {
+      "name": "LadyGroz",
+      "power_M": 15.72,
+      "group": "S"
+    },
+    {
+      "name": "Luke",
+      "power_M": 14.0,
+      "group": "A"
+    },
+    {
+      "name": "Blockbuster",
+      "power_M": 16.99,
+      "group": "A"
+    },
+    {
+      "name": "Yildiz",
+      "power_M": 16.8,
+      "group": "A"
+    },
+    {
+      "name": "Shikiiigami",
+      "power_M": 11.39,
+      "group": "A"
+    },
+    {
+      "name": "Sattow",
+      "power_M": 24.84,
+      "group": "B"
+    },
+    {
+      "name": "ryan",
+      "power_M": 12.89,
+      "group": "B"
+    },
+    {
+      "name": "Salman",
+      "power_M": 17.49,
+      "group": "B"
+    },
+    {
+      "name": "Martyku",
+      "power_M": 14.39,
+      "group": "C"
+    },
+    {
+      "name": "табакошка",
+      "power_M": 17.6,
+      "group": "C"
+    },
+    {
+      "name": "SaRSaLa",
+      "power_M": 12.04,
+      "group": "C"
+    },
+    {
+      "name": "Баламут",
+      "power_M": 12.52,
+      "group": "D"
+    },
+    {
+      "name": "Bruklin88",
+      "power_M": 12.33,
+      "group": "D"
+    },
+    {
+      "name": "Пятница",
+      "power_M": 13.18,
+      "group": "D"
+    },
+    {
+      "name": "Peacheybites!",
+      "power_M": 11.75,
+      "group": "P1"
+    },
+    {
+      "name": "Schari",
+      "power_M": 8.81,
+      "group": "P1"
+    },
+    {
+      "name": "MenInPantyhose",
+      "power_M": 12.8,
+      "group": "P2"
+    },
+    {
+      "name": "Azrael",
+      "power_M": 12.52,
+      "group": "P2"
+    },
+    {
+      "name": "HoloCrow",
+      "power_M": 11.6,
+      "group": "P3"
+    },
+    {
+      "name": "الفدرالي",
+      "power_M": 8.58,
+      "group": "P3"
+    },
+    {
+      "name": "Wild berry777",
+      "power_M": 11.09,
+      "group": "P4"
+    },
+    {
+      "name": "M1K3.Marius",
+      "power_M": 9.84,
+      "group": "P4"
+    },
+    {
+      "name": "Monika",
+      "power_M": 7.86,
+      "group": "G"
+    },
+    {
+      "name": "Эрджей",
+      "power_M": 9.86,
+      "group": "G"
+    },
+    {
+      "name": "Bartek",
+      "power_M": 6.22,
+      "group": "G"
+    },
+    {
+      "name": "IBRAHIM Zain",
+      "power_M": 8.86,
+      "group": "G"
+    },
+    {
+      "name": "TheShadoWZYE",
+      "power_M": 9.27,
+      "group": "HQ"
+    }
+  ],
+  "reserves": [
+    {
+      "name": "Александр",
+      "power_M": 11.33
+    },
+    {
+      "name": "BuBu",
+      "power_M": 11.29
+    },
+    {
+      "name": "KayKat",
+      "power_M": 10.18
+    },
+    {
+      "name": "BrianJohan-",
+      "power_M": 9.57
+    },
+    {
+      "name": "black beard",
+      "power_M": 8.01
+    },
+    {
+      "name": "Elisabett",
+      "power_M": 7.85
+    },
+    {
+      "name": "nikkita",
+      "power_M": 7.68
+    },
+    {
+      "name": "Андрей Ф",
+      "power_M": 6.31
+    },
+    {
+      "name": "ELiveR",
+      "power_M": 4.6
+    },
+    {
+      "name": "GRANDAL",
+      "power_M": 4.01
+    }
+  ],
+  "displayed_header_power_M": 362.73,
+  "sum_displayed_starter_power_M": 399.1,
+  "discrepancy_M": 36.37,
+  "group_chat_remove": [
+    "Bulik",
+    "Filin",
+    "Hammy",
+    "Joker",
+    "None",
+    "Xaroth",
+    "hellolleh",
+    "Шампунь"
+  ],
+  "group_chat_add": [
+    "Azrael",
+    "Blockbuster",
+    "BrianJohan-",
+    "ELiveR",
+    "Elisabett",
+    "GRANDAL",
+    "IBRAHIM Zain",
+    "MenInPantyhose",
+    "Paradise flower",
+    "Peacheybites!",
+    "Wild berry777",
+    "black beard",
+    "nikkita",
+    "Эрджей",
+    "табакошка"
+  ],
+  "comparison": "Previous 11 October registered roster; monika/Monika treated as same player"
+}

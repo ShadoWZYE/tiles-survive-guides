@@ -4,6 +4,7 @@ from pathlib import Path
 import struct
 import sys
 import unittest
+from tempfile import TemporaryDirectory
 
 sys.path.insert(0, str(Path(__file__).parent))
 from refresh_hero_data import verified_tables
@@ -35,6 +36,15 @@ class RefreshTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'Missing'):
             verified_tables(data, {}, {'not_present'})
 
+    def test_realtime_loose_patch_overrides_pack_but_must_match_manifest(self):
+        data,_=self.fixture();patched=b'new patch'
+        with TemporaryDirectory() as folder:
+            p=Path(folder);(p/'survivor.bin').write_bytes(patched)
+            result=verified_tables(data,{'survivor':hashlib.md5(patched).hexdigest()},{'survivor'},p)
+            self.assertEqual(result['survivor'][1],patched)
+            with self.assertRaisesRegex(ValueError,'mismatch'):
+                verified_tables(data,{'survivor':'0'*32},{'survivor'},p)
+
     def test_public_roster_and_progression_stay_joined_by_id(self):
         root = Path(__file__).resolve().parents[2] / 'outputs' / 'hero-report'
         roster = json.loads((root / 'TilesSurvive-Hero-Data.json').read_text(encoding='utf-8'))
@@ -47,6 +57,14 @@ class RefreshTests(unittest.TestCase):
             self.assertEqual([hero['max_level_attack'],hero['max_level_defense'],hero['max_level_health']],level['stats'])
             self.assertEqual(hero['max_level_battle_power'],level['power'])
             self.assertEqual({s['internal_name'] for s in hero['skills']},{s['id'] for s in progression['skills']})
+
+    def test_display_names_are_not_internal_asset_identifiers(self):
+        root=Path(__file__).resolve().parents[2]/'outputs/hero-report'
+        roster=json.loads((root/'TilesSurvive-Hero-Data.json').read_text(encoding='utf-8'))
+        names={h['name']:h['asset_slug'] for h in roster}
+        self.assertEqual(names['Ghost'],'tim')
+        self.assertEqual(names['Kiki'],'tithi')
+        self.assertEqual(names['Chef'],'ken')
 
 if __name__ == '__main__':
     unittest.main()

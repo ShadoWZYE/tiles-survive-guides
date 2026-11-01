@@ -5,6 +5,8 @@
   const DEFAULT_PROFILE = {
     version: 1,
     comparisonBasis: "reference",
+    battleSeconds: 0,
+    enemyFaction: "Unknown",
     ownedHeroes: [],
     heroProgress: {},
     upgradeSettings: {},
@@ -21,7 +23,8 @@
   const heroes = window.__HERO_DATA__.map(normalizeHero)
     .sort((a, b) => b.composite_index - a.composite_index || a.name.localeCompare(b.name));
   const bySlug = new Map(heroes.map(hero => [hero.asset_slug, hero]));
-  const flatIndices = new Map(heroes.map(h=>[h.asset_slug,{offense:h.offense_index,durability:h.durability_index,score:h.composite_index}]));
+  const hpRange = Math.max(...heroes.map(h=>h.max_level_health))-Math.min(...heroes.map(h=>h.max_level_health));
+  const flatIndices = new Map(heroes.map(h=>[h.asset_slug,{offense:h.offense_index,durability:h.durability_index,score:h.composite_index,healthContribution:hpRange>0?70*h.max_level_health/hpRange:0}]));
   let profile = loadProfile();
   let state = {
     tab: "squad",
@@ -97,8 +100,10 @@
     return {
       version: 1,
       comparisonBasis: ["flat","recorded"].includes(candidate.comparisonBasis)?candidate.comparisonBasis:"reference",
+      battleSeconds: [10,20,30].includes(candidate.battleSeconds)?candidate.battleSeconds:0,
       ownedHeroes: [...new Set(ownedHeroes)],
       heroProgress,
+      enemyFaction: FactionModel.normalize(candidate.enemyFaction),
       upgradeSettings: UpgradeModel.sanitizeSettings(candidate.upgradeSettings),
       serverOpenDate: /^\d{4}-\d{2}-\d{2}$/.test(candidate.serverOpenDate || "") ? candidate.serverOpenDate : DEFAULT_PROFILE.serverOpenDate,
       mode: allowedModes.includes(candidate.mode) ? candidate.mode : DEFAULT_PROFILE.mode,
@@ -209,20 +214,15 @@
     if(profile.comparisonBasis==='flat')return mode==='Offense'?hero.offense_index:mode==='Survival'?hero.durability_index:hero.composite_index;
     if (mode === "Offense") return hero.offense_index * .75 + hero.composite_index * .25;
     if (mode === "Survival") return hero.durability_index * .75 + hero.composite_index * .25;
-    if (mode === "PvE farming") return hero.offense_index * .45 + hero.durability_index * .30 + hero.composite_index * .25 + Math.min(40, hero.staminaReduction * 1.3);
+    if (mode === "PvE farming") return hero.offense_index * .45 + hero.durability_index * .30 + hero.composite_index * .25;
     return hero.composite_index;
   }
 
   function orderFormation(items, mode = profile.mode) {
-    const roleOrder = {Melee: 0, Mid: 1, Range: 2};
-    return [...items].sort((a, b) => {
-      const band = (roleOrder[a.role] ?? 3) - (roleOrder[b.role] ?? 3);
-      if (band) return band;
-      const av = a.role === "Melee" ? a.durability_index : a.role === "Range" ? a.offense_index : scoreHero(a, mode);
-      const bv = b.role === "Melee" ? b.durability_index : b.role === "Range" ? b.offense_index : scoreHero(b, mode);
-      return bv - av || a.name.localeCompare(b.name);
-    });
+    return formationEvaluation(items,mode).heroes;
   }
+
+  function formationEvaluation(items,mode=profile.mode){return FormationModel.evaluate(items,mode,profile.comparisonBasis==='flat',FactionModel.compose(items.map(h=>h.faction)).healthBonus);}
 
   function evaluateSynergy(squad, includeSummary = true) {
     if(profile.comparisonBasis==='flat')return {bonus:0,summary:'Flat stats: skill synergy excluded'};
@@ -230,7 +230,9 @@
     const providers = mechanic => squad.filter(hero => hero.mechanics.has(mechanic)).slice(0, 2).map(hero => hero.name).join("/");
     const carries = () => [...squad].sort((a, b) => b.offense_index - a.offense_index).slice(0, 2).map(hero => hero.name).join("/");
     const interactions = [];
+    const passiveBonus = FormationModel.passiveBonus(squad,profile.mode);
     let bonus = 0;
+    if(passiveBonus!==0)interactions.push('Permanent team stat buffs (recorded or reference skill level)');
     if (has("DEF reduction")) { bonus += ({Offense:1.2,Survival:.8,"PvE farming":1.1}[profile.mode] ?? 1); interactions.push(`${providers("DEF reduction")} DEF break → ${carries()}`); }
     const sustain = has("Healing") || has("Shield") || has("Damage reduction");
     if (has("ATK reduction") && sustain) { bonus += ({Survival:1.2,Offense:.7,"PvE farming":1}[profile.mode] ?? .9); interactions.push(`${providers("ATK reduction")} ATK down + sustain`); }
@@ -249,14 +251,18 @@
     if (has("Summon") && (control || has("DEF reduction") || has("Damage boost") || has("Critical effect"))) { bonus += .35; interactions.push(`${providers("Summon")} summon + team utility`); }
     if (profile.mode === "PvE farming") {
       const stamina = [...squad].sort((a,b) => b.staminaReduction - a.staminaReduction)[0];
-      if (stamina?.staminaReduction) interactions.unshift(`${stamina.name} −${number(stamina.staminaReduction)}% Stamina cost`);
+      if (stamina?.staminaReduction) interactions.unshift(`${stamina.name}: maximum configured Stamina economy −${number(stamina.staminaReduction)}% (excluded from combat score)`);
     }
-    bonus = Math.min(6, bonus);
+    bonus = passiveBonus + Math.min(6, bonus);
     return {bonus, summary: !includeSummary ? "" : interactions.length ? interactions.slice(0,3).join(" · ") + (interactions.length > 3 ? ` · +${interactions.length - 3} more` : "") : "No modeled cross-skill pairing"};
   }
 
+  function factionBonus(squad){return FactionModel.scoreBonus(squad,profile.mode,profile.comparisonBasis==='flat',profile.enemyFaction);}
+  function counterScenario(){return profile.enemyFaction==='Unknown'?'Enemy faction unknown: counter damage excluded from ranking.':`Counter scenario: attacks land on ${profile.enemyFaction} targets; this is a planning estimate.`;}
+  function enemyPicker(){return `<div class="control-strip"><label>Enemy target faction (optional)<select id="enemy-faction">${['Unknown','Mountain','Wasteland','Sky','Sea'].map(f=>`<option${profile.enemyFaction===f?' selected':''}>${f}</option>`).join('')}</select></label></div><p class="evidence">Unknown excludes counter damage; a selected faction assumes attacks land on that faction.</p>`;}
+
   function findTopSquads(pool, limit = 20, roleCoverage = profile.requireRoleCoverage) {
-    const key = `${pool.map(hero => hero.asset_slug).join(",")}|${profile.mode}|${roleCoverage}|${limit}`;
+    const key = `${pool.map(hero => hero.asset_slug).join(",")}|${profile.mode}|${roleCoverage}|${limit}|${profile.enemyFaction}`;
     if (optimizerCache.has(key)) return optimizerCache.get(key);
     const best = [];
     for (let a=0;a<pool.length-4;a++) for(let b=a+1;b<pool.length-3;b++) for(let c=b+1;c<pool.length-2;c++) for(let d=c+1;d<pool.length-1;d++) for(let e=d+1;e<pool.length;e++) {
@@ -264,20 +270,27 @@
       if (roleCoverage && new Set(squad.map(hero => hero.role)).size < 3) continue;
       const base = squad.reduce((sum, hero) => sum + scoreHero(hero), 0) / 5;
       const synergy = evaluateSynergy(squad, false).bonus;
-      const item = {heroes: orderFormation(squad), base, synergy, score: base + synergy};
+      const faction = factionBonus(squad);
+      const placement = formationEvaluation(squad);
+      const frontline = placement.adjustment;
+      const item = {heroes: placement.heroes, base, synergy, faction, frontline, score: base + synergy + faction + frontline};
       if (best.length < limit || item.score > best[best.length-1].score) {
         best.push(item); best.sort((x,y) => y.score - x.score || x.heroes.map(h=>h.name).join().localeCompare(y.heroes.map(h=>h.name).join()));
         if (best.length > limit) best.pop();
       }
     }
-    best.forEach(item => item.summary = evaluateSynergy(item.heroes).summary);
+    best.forEach(item => item.summary = evaluateSynergy(item.heroes).summary + " · " + FactionModel.summary(FactionModel.compose(item.heroes.map(h=>h.faction))));
     optimizerCache.set(key, best);
     return best;
   }
 
   function heroHeader(hero) {
-    const details=profile.comparisonBasis==='flat'?'Flat maximum configuration stats only. Saved stars, levels, skills, gear and ownership are ignored. Identical stats legitimately tie. Skill and synergy weights are excluded.':`${esc(hero.estimate?.basis)} · low confidence · scenario range ${number(hero.estimate?.low)}–${number(hero.estimate?.high)}. Equal builds uses level 110, rank 3 step 6, capped skills and no gear for everyone. ONLY My builds uses your saved progression; unknown fields then use reference defaults. Equal development is not equal resource cost. Representative effects and inferred utility form a planning proxy, not a combat simulation. Scenario factors: damage 0.5–2.5×, utility 0.5–1.5×; not statistical confidence intervals. Fixed reference anchors allow scores above 100. Server overrides remain unverified.`;
-    return `<div class="section-head"><div><h2>${esc(hero.name)}</h2><p>${esc(hero.rarity)} · ${esc(hero.faction)} · ${esc(hero.role)} · ${esc(hero.has_ascension ? "Ascension available" : "Base form")}</p></div></div><details><summary>Estimate details</summary><p>${details}</p><p>Resource priorities independently use actual recorded builds of owned heroes.</p></details>`;
+    const skills=window.__ESTIMATE_DATA__?.heroes?.[hero.asset_slug]?.skills||[];
+    const castNote=profile.battleSeconds&&Object.keys(hero.estimate?.openingCastCounts||{}).length?`Completed casts: ${Object.entries(hero.estimate.openingCastCounts).map(([id,n])=>`${hero.skills.find(s=>s.internal_name===id)?.display_name||"Skill"}: ${n}`).join("; ")}. `:"";
+    const healingNote=hero.estimate?.rawHealingPotential?.length?`Raw healing per dispatch (one recipient; before modifiers and overheal; informational only): ${hero.estimate.rawHealingPotential.map(x=>`${hero.skills.find(s=>s.internal_name===x.skillId)?.display_name||"Skill"}: ${x.formula} [${x.execution}]`).join("; ")}. `:"";
+    const evidence=`${healingNote}${castNote}${profile.battleSeconds?`Opening ${profile.battleSeconds} game seconds: initial delays, a shared casting slot and remaining periodic ticks. Known immediate hits and buffs use their timeline offsets, including in-progress casts. Other effects keep the completion fallback. One casting slot per hero, configured priority, speed 1 and no interruptions or deaths; utility weights unchanged. Unresolved cast paths retain their sustained proxy. `:"Sustained comparison. "}Skill evidence: ${skills.filter(s=>s.damage_selection_basis==='direct_hit_reference').length} skills have linked direct damage effects; ${skills.filter(s=>s.has_damage_zone).length} have damage zones; ${skills.filter(s=>s.has_summon_dependency).length} have summon dependencies. ${skills.reduce((n,s)=>n+(s.permanent_stat_sources?.length||0),0)} permanent stat buffs are modeled; ${skills.reduce((n,s)=>n+(s.sequence_effect_ids?.length||0),0)} checked child strikes are included. ${skills.reduce((n,s)=>n+(s.temporary_stat_sources?.length||0),0)} temporary self stat buffs use assumed duration/cooldown uptime; ${skills.reduce((n,s)=>n+(s.periodic_budgets||[]).filter(p=>p.scored).length,0)} periodic damage paths use full-lifetime potential. ${skills.reduce((n,s)=>n+(s.conditional_effects?.length||0),0)} effect gates are retained separately; description rows give no damage credit. ${skills.filter(s=>s.finish_trigger).length} delayed damage paths require a completed source skill and an unlocked passive. ${skills.filter(s=>s.animation_limited).length} skill budgets are limited by bound clip durations; ${skills.filter(s=>Object.values(s.direct_hit_counts||{}).reduce((a,b)=>a+b,0)>1).length} use repeated immediate-hit potential. Timing assumes speed 1 and uninterrupted casting. Opening scenarios use known timeline dispatch offsets; unknown impacts keep a completion fallback. Projectile travel, target survival, reapplication timing, zones and death times remain uncertain.`;
+    const details=profile.comparisonBasis==='flat'?'Flat maximum configuration stats only. Saved stars, levels, skills, gear and ownership are ignored. Identical stats legitimately tie. Skill and synergy weights are excluded. Formation rankings still include faction health and any selected counter scenario.':`${esc(hero.estimate?.basis)} · low confidence · scenario range ${number(hero.estimate?.low)}–${number(hero.estimate?.high)}. Equal builds uses level 110, rank 3 step 6, capped skills and no gear for everyone. ONLY My builds uses your saved progression; unknown fields then use reference defaults. Equal development is not equal resource cost. Representative effects and inferred utility form a planning proxy, not a combat simulation. Scenario factors: damage 0.5–2.5×, utility 0.5–1.5×; not statistical confidence intervals. Fixed reference anchors allow scores above 100. Server overrides remain unverified.`;
+    return `<div class="section-head"><div><h2>${esc(hero.name)}</h2><p>${esc(hero.rarity)} · ${esc(hero.faction)} · ${esc(hero.role)} · ${esc(hero.has_ascension ? "Ascension available" : "Base form")}</p></div></div><details><summary>Estimate details</summary><p>${details}</p>${profile.comparisonBasis==='flat'?'':`<p>${esc(evidence)}</p>`}<p>Resource priorities independently use actual recorded builds of owned heroes.</p></details>`;
   }
 
   function renderDetail() {
@@ -297,10 +310,12 @@
     const results = complete ? [] : findTopSquads(heroes.filter(hero => matchesAccess(hero)));
     const planning = complete ? renderFormationGuide(selected) : `<div class="control-strip"><label>Battle focus<select id="mode"><option>Balanced</option><option>Offense</option><option>Survival</option><option>PvE farming</option></select></label><label>Hero access<select id="access"><option>All access</option><option>F2P confirmed</option><option>F2P + events</option><option>IAP-linked</option><option>Owned only</option></select></label><label class="check-label"><input id="role-coverage" type="checkbox"> All 3 roles</label></div>
       <h3>Top configurations</h3><p class="evidence">${results.length ? `${results.length} highest-scoring squads · click one to load it` : "No valid five-hero squad for this access filter."}</p>
-      <div class="result-list">${results.map((result,i) => `<button class="result" data-index="${i}"><span class="result-line"><span class="rank">#${i+1}</span><span>${result.heroes.map(h=>esc(h.name)).join(" · ")}</span><span class="score">${number(result.score)}</span></span><span class="synergy">+${number(result.synergy)} synergy · ${esc(result.summary)}</span></button>`).join("")}</div>`;
+      <div class="result-list">${results.map((result,i) => `<button class="result" data-index="${i}"><span class="result-line"><span class="rank">#${i+1}</span><span>${result.heroes.map(h=>esc(h.name)).join(" · ")}</span><span class="score">${number(result.score)}</span></span><span class="synergy">+${number(result.synergy)} synergy · +${number(result.faction)} faction · ${number(result.frontline)} frontline fit · ${esc(result.summary)}</span></button>`).join("")}</div>`;
     $("#detail-content").innerHTML = `<div class="section-head"><div><h2>Your squad</h2><p>${selected.length} / 5 selected · formation shown front-to-back</p></div><button class="button secondary" id="clear-squad">Clear</button></div>
       <div class="squad-slots">${[0,1,2,3,4].map(i => selected[i] ? `<div class="slot"><img src="${selected[i].portrait_data}" alt=""><b>${esc(selected[i].name)}</b><small>${esc(selected[i].role)} · position ${i+1}</small></div>` : '<div class="slot empty">Empty</div>').join("")}</div>
+      ${enemyPicker()}
       ${planning}`;
+    $("#enemy-faction").onchange = event => {profile.enemyFaction=FactionModel.normalize(event.target.value);optimizerCache.clear();saveProfile();renderDetail()};
     $("#clear-squad").onclick = () => {state.squad=[];renderCards();renderDetail()};
     UpgradeUI.bindPanel(profile,saveProfile,renderDetail);
     if (complete) $("#formation-mode").onchange = event => {profile.mode=event.target.value;optimizerCache.clear();saveProfile();renderDetail()};
@@ -316,11 +331,14 @@
   function renderFormationGuide(squad) {
     const base = squad.reduce((sum, hero) => sum + scoreHero(hero), 0) / 5;
     const synergy = evaluateSynergy(squad);
+    const faction = factionBonus(squad);
+    const factionSummary = FactionModel.summary(FactionModel.compose(squad.map(h=>h.faction)));
+    const frontline = formationEvaluation(squad).adjustment;
     const carries = FormationPriority.carries(squad);
     const sustain = squad.filter(hero => ["Healing","Shield","Damage reduction"].some(mechanic => hero.mechanics.has(mechanic)));
     const control = squad.filter(hero => hero.mechanics.has("Stun") || hero.mechanics.has("Slow"));
     const debuff = squad.filter(hero => hero.mechanics.has("ATK reduction") || hero.mechanics.has("DEF reduction"));
-    const positions = squad.map((hero,index) => `<li><strong>${index+1}. ${esc(hero.name)}</strong><span>${esc(hero.role)} · ${esc(positionJob(hero,carries))}</span></li>`).join("");
+    const positions = squad.map((hero,index) => `<li><strong>${index+1}. ${esc(hero.name)}</strong><span>${index<2?'Front':'Back'} · ${esc(hero.role)} · ${esc(positionJob(hero,carries,index))}</span></li>`).join("");
     const functionParts = [`Modeled damage core: ${carries.map(hero=>hero.name).join(" and ")}. This is not a measured DPS ranking.`];
     if (debuff.length) functionParts.push(`${debuff.slice(0,2).map(hero=>hero.name).join("/")} weakens targets before the main damage window.`);
     if (control.length) functionParts.push(`${control.slice(0,2).map(hero=>hero.name).join("/")} creates control windows.`);
@@ -329,20 +347,19 @@
     if (debuff.length) battle.push("Open on one priority target so every follow-up hit benefits from the debuffs");
     if (control.length) battle.push("commit burst while control is active instead of splitting damage");
     if (sustain.length) battle.push("keep the frontline together so protection covers the carries");
-    if (profile.mode === "PvE farming" && squad.some(hero=>hero.staminaReduction)) battle.push("use this formation for repeated PvE actions to exploit its Stamina reduction");
+    if (profile.mode === "PvE farming" && squad.some(hero=>hero.staminaReduction)) battle.push("Stamina savings are economy benefits; they do not increase this formation’s combat score");
     const gaps=[];
     ["Melee","Mid","Range"].forEach(role=>{if(!squad.some(hero=>hero.role===role))gaps.push(`no ${role.toLowerCase()} hero`)});
     if(!sustain.length)gaps.push("no extracted healing, shield, or damage-reduction layer");
     if(!control.length)gaps.push("no extracted stun or slow");
     if(!squad.some(hero=>hero.mechanics.has("DEF reduction")))gaps.push("no extracted defense break for burst damage");
-    if(profile.mode==="PvE farming"&&!squad.some(hero=>hero.staminaReduction))gaps.push("no extracted Stamina economy effect");
-    return `<section class="formation-guide"><div class="formation-banner"><span>Formation ready</span><strong>${esc(profile.mode)} formation</strong><small>Modeled score ${number(base+synergy.bonus)} · ${number(base)} base + ${number(synergy.bonus)} synergy</small><em>Click a selected hero on the left to revise the squad.</em></div>
+    return `<section class="formation-guide"><div class="formation-banner"><span>Formation ready</span><strong>${esc(profile.mode)} formation</strong><small>Modeled score ${number(base+synergy.bonus+faction+frontline)} · ${number(base)} base + ${number(synergy.bonus)} synergy + ${number(faction)} faction · ${number(frontline)} frontline fit</small><em>${profile.comparisonBasis==='flat'?'Flat stats: position adjustment excluded.':'Frontline fit uses a provisional survival weighting, not measured damage or win odds.'} Click a selected hero on the left to revise the squad.</em></div>
       <div class="control-strip"><label>Formation goal<select id="formation-mode">${["Balanced","Offense","Survival","PvE farming"].map(m=>`<option${m===profile.mode?' selected':''}>${m}</option>`).join("")}</select></label></div>
-      <div class="guide-grid"><article class="guide-card"><h3>Placement · front to back</h3><ol>${positions}</ol></article><article class="guide-card"><h3>How it functions</h3><p>${esc(functionParts.join(" "))}</p><small>${esc(synergy.summary)}</small></article><article class="guide-card"><h3>Battle guide</h3><p>${esc(battle.length ? `${battle.join("; then ")}.` : "Focus one target at a time and protect your damage core.")}</p></article>${UpgradeUI.panel(squad.map(h=>h.asset_slug),profile)}<article class="guide-card watch"><h3>Watch for</h3><p>${esc(gaps.length ? `Main modeled gaps: ${gaps.slice(0,3).join("; ")}.` : "No obvious structural gap in the extracted roles and mechanics. Exact cooldowns, targeting, gear, and live balance can still change performance.")}</p></article></div></section>`;
+      <div class="guide-grid"><article class="guide-card"><h3>Placement · front to back</h3><ol>${positions}</ol></article><article class="guide-card"><h3>How it functions</h3><p>${esc(functionParts.join(" "))}</p><small>${esc(synergy.summary)} · ${esc(factionSummary)}. ${esc(counterScenario())}</small></article><article class="guide-card"><h3>Battle guide</h3><p>${esc(battle.length ? `${battle.join("; then ")}.` : "Focus one target at a time and protect your damage core.")}</p></article>${UpgradeUI.panel(squad.map(h=>h.asset_slug),profile)}<article class="guide-card watch"><h3>Watch for</h3><p>${esc(gaps.length ? `Main modeled gaps: ${gaps.slice(0,3).join("; ")}.` : "No obvious structural gap in the extracted roles and mechanics. Exact cooldowns, targeting, gear, and live balance can still change performance.")}</p></article></div></section>`;
   }
 
-  function positionJob(hero,carries) {
-    if(hero.role==="Melee")return hero.mechanics.has("Shield")||hero.mechanics.has("Damage reduction")?"absorb pressure and protect the line":"hold the frontline";
+  function positionJob(hero,carries,index) {
+    if(index<2)return hero.mechanics.has("Shield")||hero.mechanics.has("Damage reduction")?"absorb pressure and protect the line":"hold the frontline";
     if(carries.includes(hero))return "priority damage carry";
     if(hero.mechanics.has("Healing"))return "sustain the squad";
     if(hero.mechanics.has("Stun")||hero.mechanics.has("Slow"))return "set up the damage window";
@@ -429,19 +446,24 @@
 
   let lastEstimateBuilds=null;
   function renderAll() {
-    const snapshot=profile.comparisonBasis+(profile.comparisonBasis==='recorded'?JSON.stringify(heroes.map(h=>profile.heroProgress?.[h.asset_slug]?.build||null)):'');
+    const snapshot=profile.comparisonBasis+profile.battleSeconds+(profile.comparisonBasis==='recorded'?JSON.stringify(heroes.map(h=>profile.heroProgress?.[h.asset_slug]?.build||null)):'');
     if(snapshot!==lastEstimateBuilds){
-      for(const hero of heroes){const result=EstimateModel.compare(hero.asset_slug,profile.heroProgress?.[hero.asset_slug]?.build,window.__UPGRADE_DATA__,window.__ESTIMATE_DATA__,profile.comparisonBasis,flatIndices.get(hero.asset_slug));
-        hero.estimate=result;hero.offense_index=result.offense;hero.durability_index=result.durability;hero.composite_index=result.score;}
+      for(const hero of heroes){const result=EstimateModel.compare(hero.asset_slug,profile.heroProgress?.[hero.asset_slug]?.build,window.__UPGRADE_DATA__,window.__ESTIMATE_DATA__,profile.comparisonBasis,flatIndices.get(hero.asset_slug),profile.battleSeconds);
+        hero.estimate=result;
+        const activeIds=result.activeSkillIds?new Set(result.activeSkillIds):null;
+        hero.mechanics=new Set(hero.skills.filter(skill=>!activeIds||activeIds.has(skill.internal_name)).flatMap(skill=>skill.mechanics));
+        hero.healthContribution=result.healthContribution;hero.offense_index=result.offense;hero.durability_index=result.durability;hero.composite_index=result.score;}
       heroes.sort((a,b)=>b.composite_index-a.composite_index||a.name.localeCompare(b.name));optimizerCache.clear();
-      lastEstimateBuilds=profile.comparisonBasis+(profile.comparisonBasis==='recorded'?JSON.stringify(heroes.map(h=>profile.heroProgress?.[h.asset_slug]?.build||null)):'');
+      lastEstimateBuilds=profile.comparisonBasis+profile.battleSeconds+(profile.comparisonBasis==='recorded'?JSON.stringify(heroes.map(h=>profile.heroProgress?.[h.asset_slug]?.build||null)):'');
     }
     document.documentElement.style.setProperty("--left", `${profile.leftWidth}%`);
     $('#comparison-basis').value=profile.comparisonBasis;
+    $('#battle-window').value=profile.battleSeconds;
     renderCards(); renderDetail(); saveProfile();
   }
 
   function wireShell() {
+    $('#battle-window').onchange=event=>{profile.battleSeconds=Number(event.target.value);renderAll();};
     $('#comparison-basis').onchange=event=>{profile.comparisonBasis=event.target.value;renderAll();};
     $$(".top-nav [data-tab]").forEach(button => button.onclick=()=>{state.tab=button.dataset.tab;if(state.tab==="release")state.releaseActive=null;renderDetail()});
     [["#faction-filter","faction"],["#role-filter","role"],["#rarity-filter","rarity"]].forEach(([selector,key]) => $(selector).onchange=event=>{state[key]=event.target.value;renderCards()});

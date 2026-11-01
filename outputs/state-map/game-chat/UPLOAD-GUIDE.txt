@@ -1,0 +1,20 @@
+UPLOAD GUIDE / КАК ЗАГРУЖАТЬ
+
+EN and RU each contain seven PNG images. Upload 01-Overview, then the relevant alliance close-up.
+В папках EN и RU по семь PNG. Загрузите 01-Overview, затем нужную карточку союза.
+
+1 Overview / Обзор
+2 VeD
+3 VAN
+4 ALL
+5 rus
+6 ECL (ECL captured base / база 668:828 захвачена ECL)
+7 TCE
+
+Use the separate PNGs, not a screenshot or collage of the set.
+Загружайте отдельные PNG, не снимок экрана или коллаж.
+
+Numbered pins refer to each card coordinate list, not an approved capture route.
+Номера соответствуют списку координат карточки, а не порядку захвата.
+
+Images are 960 x 1200. Reviewed with a simulated 640 x 800, JPEG quality 35 reduction. Actual game compression may differ.

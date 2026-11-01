@@ -1,0 +1,881 @@
+{
+  "date": "2026-10-11",
+  "scope": "Levels 1-30; BuildTimeD/ReqBuildingD branch; single queue minimum prerequisite route",
+  "pack_sha256": "53bc9fbb60ebab1719186eaeb3b24169c56d09273a5684ead0c4f11bb2329edc",
+  "tables_sha256": {
+    "buildings": "715e2defa5531f9e834e9f9226a703e1a27b0a472fe2fd0a915202774845be33",
+    "building_type": "e566fefd3c5dd8f501b2ec49b75c6861e7bf29b8ecd30c1ab1e1935662950f1b"
+  },
+  "rows": [
+    {
+      "step_base_seconds": 0,
+      "step_adjusted_seconds": 0,
+      "adjusted_cumulative_seconds": 0,
+      "research_speed_bonus": 0,
+      "help_count": 0,
+      "seconds_per_help": 0,
+      "new_upgrade_count": 1,
+      "level": 1,
+      "powerplant_seconds": 0,
+      "powerplant_cumulative_seconds": 0,
+      "all_required_work_seconds": 0,
+      "direct_prerequisites": [],
+      "required_nodes": 1
+    },
+    {
+      "step_base_seconds": 6,
+      "step_adjusted_seconds": 6,
+      "adjusted_cumulative_seconds": 6,
+      "research_speed_bonus": 0,
+      "help_count": 0,
+      "seconds_per_help": 0,
+      "new_upgrade_count": 2,
+      "level": 2,
+      "powerplant_seconds": 3,
+      "powerplant_cumulative_seconds": 3,
+      "all_required_work_seconds": 6,
+      "direct_prerequisites": [
+        {
+          "type": 800110,
+          "level": 1,
+          "last_upgrade_seconds": 3
+        }
+      ],
+      "required_nodes": 3
+    },
+    {
+      "step_base_seconds": 10,
+      "step_adjusted_seconds": 10,
+      "adjusted_cumulative_seconds": 16,
+      "research_speed_bonus": 0,
+      "help_count": 0,
+      "seconds_per_help": 0,
+      "new_upgrade_count": 3,
+      "level": 3,
+      "powerplant_seconds": 4,
+      "powerplant_cumulative_seconds": 7,
+      "all_required_work_seconds": 16,
+      "direct_prerequisites": [
+        {
+          "type": 800003,
+          "level": 2,
+          "last_upgrade_seconds": 3
+        }
+      ],
+      "required_nodes": 6
+    },
+    {
+      "step_base_seconds": 17,
+      "step_adjusted_seconds": 17,
+      "adjusted_cumulative_seconds": 33,
+      "research_speed_bonus": 0,
+      "help_count": 0,
+      "seconds_per_help": 0,
+      "new_upgrade_count": 5,
+      "level": 4,
+      "powerplant_seconds": 5,
+      "powerplant_cumulative_seconds": 12,
+      "all_required_work_seconds": 33,
+      "direct_prerequisites": [
+        {
+          "type": 800001,
+          "level": 3,
+          "last_upgrade_seconds": 3
+        },
+        {
+          "type": 800030,
+          "level": 1,
+          "last_upgrade_seconds": 3
+        }
+      ],
+      "required_nodes": 11
+    },
+    {
+      "step_base_seconds": 195,
+      "step_adjusted_seconds": 195,
+      "adjusted_cumulative_seconds": 228,
+      "research_speed_bonus": 0,
+      "help_count": 0,
+      "seconds_per_help": 0,
+      "new_upgrade_count": 6,
+      "level": 5,
+      "powerplant_seconds": 180,
+      "powerplant_cumulative_seconds": 192,
+      "all_required_work_seconds": 228,
+      "direct_prerequisites": [
+        {
+          "type": 800002,
+          "level": 3,
+          "last_upgrade_seconds": 3
+        },
+        {
+          "type": 800150,
+          "level": 2,
+          "last_upgrade_seconds": 3
+        }
+      ],
+      "required_nodes": 17
+    },
+    {
+      "step_base_seconds": 1212,
+      "step_adjusted_seconds": 1212,
+      "adjusted_cumulative_seconds": 1440,
+      "research_speed_bonus": 0,
+      "help_count": 0,
+      "seconds_per_help": 0,
+      "new_upgrade_count": 5,
+      "level": 6,
+      "powerplant_seconds": 1200,
+      "powerplant_cumulative_seconds": 1392,
+      "all_required_work_seconds": 1440,
+      "direct_prerequisites": [
+        {
+          "type": 800003,
+          "level": 5,
+          "last_upgrade_seconds": 3
+        },
+        {
+          "type": 800150,
+          "level": 3,
+          "last_upgrade_seconds": 3
+        }
+      ],
+      "required_nodes": 22
+    },
+    {
+      "step_base_seconds": 1809,
+      "step_adjusted_seconds": 1809,
+      "adjusted_cumulative_seconds": 3249,
+      "research_speed_bonus": 0,
+      "help_count": 0,
+      "seconds_per_help": 0,
+      "new_upgrade_count": 4,
+      "level": 7,
+      "powerplant_seconds": 1800,
+      "powerplant_cumulative_seconds": 3192,
+      "all_required_work_seconds": 3249,
+      "direct_prerequisites": [
+        {
+          "type": 800001,
+          "level": 5,
+          "last_upgrade_seconds": 3
+        },
+        {
+          "type": 800031,
+          "level": 1,
+          "last_upgrade_seconds": 3
+        }
+      ],
+      "required_nodes": 26
+    },
+    {
+      "step_base_seconds": 8176,
+      "step_adjusted_seconds": 8176,
+      "adjusted_cumulative_seconds": 11425,
+      "research_speed_bonus": 0,
+      "help_count": 0,
+      "seconds_per_help": 0,
+      "new_upgrade_count": 4,
+      "level": 8,
+      "powerplant_seconds": 8100,
+      "powerplant_cumulative_seconds": 11292,
+      "all_required_work_seconds": 11425,
+      "direct_prerequisites": [
+        {
+          "type": 800150,
+          "level": 5,
+          "last_upgrade_seconds": 70
+        },
+        {
+          "type": 800007,
+          "level": 1,
+          "last_upgrade_seconds": 3
+        }
+      ],
+      "required_nodes": 30
+    },
+    {
+      "step_base_seconds": 15603,
+      "step_adjusted_seconds": 15603,
+      "adjusted_cumulative_seconds": 27028,
+      "research_speed_bonus": 0,
+      "help_count": 0,
+      "seconds_per_help": 0,
+      "new_upgrade_count": 2,
+      "level": 9,
+      "powerplant_seconds": 15600,
+      "powerplant_cumulative_seconds": 26892,
+      "all_required_work_seconds": 27028,
+      "direct_prerequisites": [
+        {
+          "type": 800109,
+          "level": 1,
+          "last_upgrade_seconds": 3
+        }
+      ],
+      "required_nodes": 32
+    },
+    {
+      "step_base_seconds": 21603,
+      "step_adjusted_seconds": 21603,
+      "adjusted_cumulative_seconds": 48631,
+      "research_speed_bonus": 0,
+      "help_count": 0,
+      "seconds_per_help": 0,
+      "new_upgrade_count": 2,
+      "level": 10,
+      "powerplant_seconds": 21600,
+      "powerplant_cumulative_seconds": 48492,
+      "all_required_work_seconds": 48631,
+      "direct_prerequisites": [
+        {
+          "type": 800010,
+          "level": 1,
+          "last_upgrade_seconds": 3
+        }
+      ],
+      "required_nodes": 34
+    },
+    {
+      "step_base_seconds": 24941,
+      "step_adjusted_seconds": 24941,
+      "adjusted_cumulative_seconds": 73572,
+      "research_speed_bonus": 0,
+      "help_count": 0,
+      "seconds_per_help": 0,
+      "new_upgrade_count": 8,
+      "level": 11,
+      "powerplant_seconds": 24000,
+      "powerplant_cumulative_seconds": 72492,
+      "all_required_work_seconds": 73572,
+      "direct_prerequisites": [
+        {
+          "type": 800012,
+          "level": 5,
+          "last_upgrade_seconds": 600
+        },
+        {
+          "type": 800007,
+          "level": 3,
+          "last_upgrade_seconds": 45
+        }
+      ],
+      "required_nodes": 42
+    },
+    {
+      "step_base_seconds": 34316,
+      "step_adjusted_seconds": 33320,
+      "adjusted_cumulative_seconds": 106892,
+      "research_speed_bonus": 0.03,
+      "help_count": 0,
+      "seconds_per_help": 0,
+      "new_upgrade_count": 8,
+      "level": 12,
+      "powerplant_seconds": 32000,
+      "powerplant_cumulative_seconds": 104492,
+      "all_required_work_seconds": 107888,
+      "direct_prerequisites": [
+        {
+          "type": 800016,
+          "level": 5,
+          "last_upgrade_seconds": 1500
+        },
+        {
+          "type": 800007,
+          "level": 5,
+          "last_upgrade_seconds": 300
+        }
+      ],
+      "required_nodes": 50
+    },
+    {
+      "step_base_seconds": 55040,
+      "step_adjusted_seconds": 50186.0,
+      "adjusted_cumulative_seconds": 157078.0,
+      "research_speed_bonus": 0.03,
+      "help_count": 11,
+      "seconds_per_help": 62.0,
+      "new_upgrade_count": 5,
+      "level": 13,
+      "powerplant_seconds": 39600,
+      "powerplant_cumulative_seconds": 144092,
+      "all_required_work_seconds": 162928,
+      "direct_prerequisites": [
+        {
+          "type": 800016,
+          "level": 8,
+          "last_upgrade_seconds": 5450
+        },
+        {
+          "type": 800007,
+          "level": 6,
+          "last_upgrade_seconds": 540
+        }
+      ],
+      "required_nodes": 55
+    },
+    {
+      "step_base_seconds": 72760,
+      "step_adjusted_seconds": 63162.0,
+      "adjusted_cumulative_seconds": 220240.0,
+      "research_speed_bonus": 0.03,
+      "help_count": 14,
+      "seconds_per_help": 71.0,
+      "new_upgrade_count": 8,
+      "level": 14,
+      "powerplant_seconds": 50400,
+      "powerplant_cumulative_seconds": 194492,
+      "all_required_work_seconds": 235688,
+      "direct_prerequisites": [
+        {
+          "type": 800012,
+          "level": 8,
+          "last_upgrade_seconds": 1620
+        },
+        {
+          "type": 800007,
+          "level": 10,
+          "last_upgrade_seconds": 7780
+        }
+      ],
+      "required_nodes": 63
+    },
+    {
+      "step_base_seconds": 154342,
+      "step_adjusted_seconds": 136349.0,
+      "adjusted_cumulative_seconds": 356589.0,
+      "research_speed_bonus": 0.045,
+      "help_count": 14,
+      "seconds_per_help": 81.0,
+      "new_upgrade_count": 14,
+      "level": 15,
+      "powerplant_seconds": 69580,
+      "powerplant_cumulative_seconds": 264072,
+      "all_required_work_seconds": 390030,
+      "direct_prerequisites": [
+        {
+          "type": 800016,
+          "level": 13,
+          "last_upgrade_seconds": 10470
+        },
+        {
+          "type": 800007,
+          "level": 14,
+          "last_upgrade_seconds": 17820
+        },
+        {
+          "type": 800010,
+          "level": 5,
+          "last_upgrade_seconds": 3
+        }
+      ],
+      "required_nodes": 77
+    },
+    {
+      "step_base_seconds": 189259,
+      "step_adjusted_seconds": 168345.0,
+      "adjusted_cumulative_seconds": 524934.0,
+      "research_speed_bonus": 0.045,
+      "help_count": 19,
+      "seconds_per_help": 96.0,
+      "new_upgrade_count": 7,
+      "level": 16,
+      "powerplant_seconds": 109629,
+      "powerplant_cumulative_seconds": 373701,
+      "all_required_work_seconds": 579289,
+      "direct_prerequisites": [
+        {
+          "type": 800012,
+          "level": 13,
+          "last_upgrade_seconds": 14010
+        },
+        {
+          "type": 800007,
+          "level": 15,
+          "last_upgrade_seconds": 32080
+        }
+      ],
+      "required_nodes": 84
+    },
+    {
+      "step_base_seconds": 246600,
+      "step_adjusted_seconds": 220808.0,
+      "adjusted_cumulative_seconds": 745742.0,
+      "research_speed_bonus": 0.06,
+      "help_count": 19,
+      "seconds_per_help": 96.0,
+      "new_upgrade_count": 8,
+      "level": 17,
+      "powerplant_seconds": 138820,
+      "powerplant_cumulative_seconds": 512521,
+      "all_required_work_seconds": 825889,
+      "direct_prerequisites": [
+        {
+          "type": 800016,
+          "level": 16,
+          "last_upgrade_seconds": 20750
+        },
+        {
+          "type": 800007,
+          "level": 16,
+          "last_upgrade_seconds": 57750
+        },
+        {
+          "type": 800010,
+          "level": 8,
+          "last_upgrade_seconds": 1440
+        }
+      ],
+      "required_nodes": 92
+    },
+    {
+      "step_base_seconds": 376126,
+      "step_adjusted_seconds": 328489.0,
+      "adjusted_cumulative_seconds": 1074231.0,
+      "research_speed_bonus": 0.06,
+      "help_count": 22,
+      "seconds_per_help": 105.0,
+      "new_upgrade_count": 18,
+      "level": 18,
+      "powerplant_seconds": 220000,
+      "powerplant_cumulative_seconds": 732521,
+      "all_required_work_seconds": 1202015,
+      "direct_prerequisites": [
+        {
+          "type": 800012,
+          "level": 17,
+          "last_upgrade_seconds": 42660
+        },
+        {
+          "type": 800152,
+          "level": 13,
+          "last_upgrade_seconds": 19800
+        }
+      ],
+      "required_nodes": 110
+    },
+    {
+      "step_base_seconds": 690520,
+      "step_adjusted_seconds": 629055.0,
+      "adjusted_cumulative_seconds": 1703286.0,
+      "research_speed_bonus": 0.065,
+      "help_count": 22,
+      "seconds_per_help": 105.0,
+      "new_upgrade_count": 9,
+      "level": 19,
+      "powerplant_seconds": 450000,
+      "powerplant_cumulative_seconds": 1182521,
+      "all_required_work_seconds": 1892535,
+      "direct_prerequisites": [
+        {
+          "type": 800016,
+          "level": 18,
+          "last_upgrade_seconds": 46700
+        },
+        {
+          "type": 800007,
+          "level": 18,
+          "last_upgrade_seconds": 76230
+        },
+        {
+          "type": 800010,
+          "level": 12,
+          "last_upgrade_seconds": 9000
+        }
+      ],
+      "required_nodes": 119
+    },
+    {
+      "step_base_seconds": 1011398,
+      "step_adjusted_seconds": 933689.0,
+      "adjusted_cumulative_seconds": 2636975.0,
+      "research_speed_bonus": 0.065,
+      "help_count": 24,
+      "seconds_per_help": 111.0,
+      "new_upgrade_count": 6,
+      "level": 20,
+      "powerplant_seconds": 750000,
+      "powerplant_cumulative_seconds": 1932521,
+      "all_required_work_seconds": 2903933,
+      "direct_prerequisites": [
+        {
+          "type": 800012,
+          "level": 19,
+          "last_upgrade_seconds": 95990
+        },
+        {
+          "type": 800152,
+          "level": 16,
+          "last_upgrade_seconds": 51018
+        }
+      ],
+      "required_nodes": 125
+    },
+    {
+      "step_base_seconds": 1382740,
+      "step_adjusted_seconds": 1259007.0,
+      "adjusted_cumulative_seconds": 3895982.0,
+      "research_speed_bonus": 0.08,
+      "help_count": 24,
+      "seconds_per_help": 111.0,
+      "new_upgrade_count": 8,
+      "level": 21,
+      "powerplant_seconds": 972900,
+      "powerplant_cumulative_seconds": 2905421,
+      "all_required_work_seconds": 4286673,
+      "direct_prerequisites": [
+        {
+          "type": 800016,
+          "level": 20,
+          "last_upgrade_seconds": 112080
+        },
+        {
+          "type": 800007,
+          "level": 20,
+          "last_upgrade_seconds": 92250
+        },
+        {
+          "type": 800010,
+          "level": 15,
+          "last_upgrade_seconds": 20400
+        }
+      ],
+      "required_nodes": 133
+    },
+    {
+      "step_base_seconds": 1858983,
+      "step_adjusted_seconds": 1678087.0,
+      "adjusted_cumulative_seconds": 5574069.0,
+      "research_speed_bonus": 0.08,
+      "help_count": 26,
+      "seconds_per_help": 117.0,
+      "new_upgrade_count": 17,
+      "level": 22,
+      "powerplant_seconds": 1362000,
+      "powerplant_cumulative_seconds": 4267421,
+      "all_required_work_seconds": 6145656,
+      "direct_prerequisites": [
+        {
+          "type": 800012,
+          "level": 21,
+          "last_upgrade_seconds": 204200
+        },
+        {
+          "type": 800147,
+          "level": 14,
+          "last_upgrade_seconds": 31580
+        }
+      ],
+      "required_nodes": 150
+    },
+    {
+      "step_base_seconds": 2779810,
+      "step_adjusted_seconds": 2537704.0,
+      "adjusted_cumulative_seconds": 8111773.0,
+      "research_speed_bonus": 0.085,
+      "help_count": 26,
+      "seconds_per_help": 117.0,
+      "new_upgrade_count": 8,
+      "level": 23,
+      "powerplant_seconds": 1906800,
+      "powerplant_cumulative_seconds": 6174221,
+      "all_required_work_seconds": 8925466,
+      "direct_prerequisites": [
+        {
+          "type": 800016,
+          "level": 22,
+          "last_upgrade_seconds": 294300
+        },
+        {
+          "type": 800007,
+          "level": 22,
+          "last_upgrade_seconds": 111630
+        },
+        {
+          "type": 800010,
+          "level": 18,
+          "last_upgrade_seconds": 74100
+        }
+      ],
+      "required_nodes": 158
+    },
+    {
+      "step_base_seconds": 3336333,
+      "step_adjusted_seconds": 3017043.0,
+      "adjusted_cumulative_seconds": 11128816.0,
+      "research_speed_bonus": 0.085,
+      "help_count": 28,
+      "seconds_per_help": 123.0,
+      "new_upgrade_count": 21,
+      "level": 24,
+      "powerplant_seconds": 2002900,
+      "powerplant_cumulative_seconds": 8177121,
+      "all_required_work_seconds": 12261799,
+      "direct_prerequisites": [
+        {
+          "type": 800012,
+          "level": 23,
+          "last_upgrade_seconds": 687500
+        },
+        {
+          "type": 800142,
+          "level": 18,
+          "last_upgrade_seconds": 111100
+        }
+      ],
+      "required_nodes": 179
+    },
+    {
+      "step_base_seconds": 4270500,
+      "step_adjusted_seconds": 3893786.0,
+      "adjusted_cumulative_seconds": 15022602.0,
+      "research_speed_bonus": 0.09,
+      "help_count": 28,
+      "seconds_per_help": 123.0,
+      "new_upgrade_count": 7,
+      "level": 25,
+      "powerplant_seconds": 2369400,
+      "powerplant_cumulative_seconds": 10546521,
+      "all_required_work_seconds": 16532299,
+      "direct_prerequisites": [
+        {
+          "type": 800016,
+          "level": 24,
+          "last_upgrade_seconds": 822500
+        },
+        {
+          "type": 800007,
+          "level": 24,
+          "last_upgrade_seconds": 182800
+        },
+        {
+          "type": 800010,
+          "level": 20,
+          "last_upgrade_seconds": 166600
+        }
+      ],
+      "required_nodes": 186
+    },
+    {
+      "step_base_seconds": 5469993,
+      "step_adjusted_seconds": 4940756.0,
+      "adjusted_cumulative_seconds": 19963358.0,
+      "research_speed_bonus": 0.09,
+      "help_count": 30,
+      "seconds_per_help": 129.0,
+      "new_upgrade_count": 23,
+      "level": 26,
+      "powerplant_seconds": 2543800,
+      "powerplant_cumulative_seconds": 13090321,
+      "all_required_work_seconds": 22002292,
+      "direct_prerequisites": [
+        {
+          "type": 800012,
+          "level": 25,
+          "last_upgrade_seconds": 863600
+        },
+        {
+          "type": 800148,
+          "level": 20,
+          "last_upgrade_seconds": 416300
+        }
+      ],
+      "required_nodes": 209
+    },
+    {
+      "step_base_seconds": 6554900,
+      "step_adjusted_seconds": 5959123.0,
+      "adjusted_cumulative_seconds": 25922481.0,
+      "research_speed_bonus": 0.095,
+      "help_count": 30,
+      "seconds_per_help": 129.0,
+      "new_upgrade_count": 7,
+      "level": 27,
+      "powerplant_seconds": 3647400,
+      "powerplant_cumulative_seconds": 16737721,
+      "all_required_work_seconds": 28557192,
+      "direct_prerequisites": [
+        {
+          "type": 800016,
+          "level": 26,
+          "last_upgrade_seconds": 1122700
+        },
+        {
+          "type": 800007,
+          "level": 26,
+          "last_upgrade_seconds": 249500
+        },
+        {
+          "type": 800010,
+          "level": 22,
+          "last_upgrade_seconds": 279800
+        }
+      ],
+      "required_nodes": 216
+    },
+    {
+      "step_base_seconds": 9648393,
+      "step_adjusted_seconds": 8712241.0,
+      "adjusted_cumulative_seconds": 34634722.0,
+      "research_speed_bonus": 0.095,
+      "help_count": 32,
+      "seconds_per_help": 135.0,
+      "new_upgrade_count": 26,
+      "level": 28,
+      "powerplant_seconds": 3947400,
+      "powerplant_cumulative_seconds": 20685121,
+      "all_required_work_seconds": 38205585,
+      "direct_prerequisites": [
+        {
+          "type": 800012,
+          "level": 27,
+          "last_upgrade_seconds": 1160000
+        },
+        {
+          "type": 800149,
+          "level": 23,
+          "last_upgrade_seconds": 979200
+        }
+      ],
+      "required_nodes": 242
+    },
+    {
+      "step_base_seconds": 10635700,
+      "step_adjusted_seconds": 9629943.0,
+      "adjusted_cumulative_seconds": 44264665.0,
+      "research_speed_bonus": 0.1,
+      "help_count": 32,
+      "seconds_per_help": 135.0,
+      "new_upgrade_count": 9,
+      "level": 29,
+      "powerplant_seconds": 4336900,
+      "powerplant_cumulative_seconds": 25022021,
+      "all_required_work_seconds": 48841285,
+      "direct_prerequisites": [
+        {
+          "type": 800016,
+          "level": 28,
+          "last_upgrade_seconds": 1216300
+        },
+        {
+          "type": 800007,
+          "level": 28,
+          "last_upgrade_seconds": 270300
+        },
+        {
+          "type": 800148,
+          "level": 24,
+          "last_upgrade_seconds": 1224000
+        }
+      ],
+      "required_nodes": 251
+    },
+    {
+      "step_base_seconds": 15735920,
+      "step_adjusted_seconds": 14228686.0,
+      "adjusted_cumulative_seconds": 58493351.0,
+      "research_speed_bonus": 0.1,
+      "help_count": 34,
+      "seconds_per_help": 141.0,
+      "new_upgrade_count": 16,
+      "level": 30,
+      "powerplant_seconds": 5084300,
+      "powerplant_cumulative_seconds": 30106321,
+      "all_required_work_seconds": 64577205,
+      "direct_prerequisites": [
+        {
+          "type": 800012,
+          "level": 29,
+          "last_upgrade_seconds": 1459500
+        },
+        {
+          "type": 800007,
+          "level": 29,
+          "last_upgrade_seconds": 324400
+        },
+        {
+          "type": 800147,
+          "level": 26,
+          "last_upgrade_seconds": 1689120
+        }
+      ],
+      "required_nodes": 267
+    }
+  ],
+  "adjustment_assumptions": "All eligible new-development research completed before each PP step, gated by buildings in previous route closure. Full configured help at previous-route Comms level. No items, VIP, heroes, free finish or resource/research waiting. Fixed help approximation; server traces not observed.",
+  "f2p_estimate": {
+    "date": "2026-10-11",
+    "table_sha256": {
+      "itemlist": "f0a63d8d633e3439a23b521a3a4c6cbbcf57f66342ad7619dab9945766233a7f",
+      "drop_group": "0aa479cc23c7ef3732c21012cc8d2645b44929e2d96f5b2fdb8398cb513f9a32",
+      "drop_main": "a45d860b4915c724dd3560440c4c89dcf30292c4199a05ce7d4b062f02271311",
+      "daily_reward": "c95f12c5435749cac4854e14e4029a43ef8b91e4bf72003ab4738b8c3e3851b3",
+      "activity_alliance_1v1_duel_box": "c32eb6af4777eaefab3b2a656f081590364bc156a20ff574fc6d838ca85c3c4b",
+      "gve_new_reward": "a6c2b7de1445f1cbd3f07339c32fb49a48f7a7a05ae9a0a0af5b222d2dda14d4"
+    },
+    "daily_activity_seconds": 900,
+    "duel_full_nine_chests_seconds_per_eligible_day": 3000.0,
+    "fiend_level10_period_branch_seconds_per_eligible_personal_claim": 3600,
+    "fiend_branch_reward_rows": [
+      "gve_boss_new_period_10_1",
+      "gve_boss_new_period_10_2"
+    ],
+    "alliance_rally_chest_expected_seconds": 31.5,
+    "alliance_package_expected_seconds": {
+      "drop_group_item_alliance_package_chest_1": 67.5,
+      "drop_group_item_alliance_package_chest_2": 135.0,
+      "drop_group_item_alliance_package_chest_3": 225.0,
+      "drop_group_item_alliance_package_chest_4": 360.0,
+      "drop_group_item_alliance_package_chest_5": 562.5
+    },
+    "intel_dig_expected_seconds": {
+      "intel_daily_dig_drop_1": 389.655,
+      "intel_daily_dig_drop_2": 389.655,
+      "intel_daily_dig_drop_3": 389.655,
+      "intel_daily_dig_drop_4": 389.655,
+      "intel_daily_dig_drop_5": 389.655,
+      "intel_daily_dig_drop_6": 389.655,
+      "intel_daily_dig_drop_7": 389.655,
+      "intel_daily_dig_drop_8": 389.655,
+      "intel_daily_dig_drop_9": 442.79999999999995,
+      "intel_daily_dig_drop_10": 442.79999999999995,
+      "intel_daily_dig_drop_11": 495.9,
+      "intel_daily_dig_drop_12": 495.9,
+      "intel_daily_dig_drop_13": 522.48,
+      "intel_daily_dig_drop_14": 549.06,
+      "intel_daily_dig_drop_15": 602.175,
+      "intel_daily_dig_drop_16": 602.175,
+      "intel_daily_dig_drop_17": 628.725,
+      "intel_daily_dig_drop_18": 655.2750000000001,
+      "intel_daily_dig_drop_19": 681.9,
+      "intel_daily_dig_drop_20": 708.45,
+      "intel_daily_dig_drop_21": 735.0,
+      "intel_daily_dig_drop_22": 761.58,
+      "intel_daily_dig_drop_23": 788.1299999999999,
+      "intel_daily_dig_drop_24": 814.6800000000001,
+      "intel_daily_dig_drop_25": 841.3199999999999,
+      "intel_daily_dig_drop_26": 867.8700000000001,
+      "intel_daily_dig_drop_27": 885.5999999999999,
+      "intel_daily_dig_drop_28": 885.5999999999999,
+      "intel_daily_dig_drop_29": 885.5999999999999,
+      "intel_daily_dig_drop_30": 885.5999999999999,
+      "intel_daily_dig_drop_31": 885.5999999999999,
+      "intel_daily_dig_drop_32": 885.5999999999999,
+      "intel_daily_dig_drop_33": 885.5999999999999,
+      "intel_daily_dig_drop_34": 885.5999999999999,
+      "intel_daily_dig_drop_35": 885.5999999999999,
+      "intel_daily_dig_drop_36": 885.5999999999999,
+      "intel_daily_dig_drop_37": 885.5999999999999,
+      "intel_daily_dig_drop_38": 885.5999999999999,
+      "intel_daily_dig_drop_39": 885.5999999999999,
+      "intel_daily_dig_drop_40": 885.5999999999999
+    },
+    "random_reward_assumption": "Chance/10000; uniform MinValue..MaxValue; expectations, not guarantees",
+    "scenario": "3-5 eligible level-10 personal fiend claims; all daily activity; 20-60 alliance rally chests; 0-1 full duel ladder/day. Claim counts are planning assumptions, not observed F2P averages.",
+    "core_hours_per_day": [
+      3.425,
+      6.608333333333333
+    ],
+    "not_in_core": "Intel dig tables have not been linked to this account active reward path; paid-package gifts, other events and aid crates are separate additions."
+  }
+}

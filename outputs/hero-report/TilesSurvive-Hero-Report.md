@@ -1,6 +1,6 @@
 # Tiles Survive hero asset report
 
-Source: local installed client configuration pack, client `2.6.200.276`.
+Source: local installed client configuration pack, client `2.6.300.293`.
 
 This report contains 29 independently playable base heroes. Chief avatars, monsters, and six `_orange` awakening/rarity-up replacement records are excluded from the ranking. Account power is intentionally not used as a release or identity key because it changes frequently. Rarity labels use the verified in-game mapping: code 4 is SSR, 3 is SR, and 2 is R.
 

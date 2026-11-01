@@ -51,10 +51,17 @@ public sealed class Hero
     [JsonPropertyName("skills")] public List<HeroSkill> Skills { get; set; } = [];
 
     [JsonIgnore] public bool IsSelected { get; set; }
-    [JsonIgnore] public HeroEstimate? Estimate { get; set; }
+    private HeroEstimate? _estimate;
+    [JsonIgnore] public HeroEstimate? Estimate
+    {
+        get => _estimate;
+        set { _estimate = value; _mechanicCache = null; _mechanicFlags = null; }
+    }
+    [JsonIgnore] public double HealthContribution { get; set; }
+    [JsonIgnore] public string CombatEvidenceNote { get; set; } = "";
     [JsonIgnore] public string IndexPrefix => Estimate?.Basis == "Flat max stats" ? "Stats " : "Est. ";
     [JsonIgnore] public string EstimateHint => Estimate is null ? "Estimate unavailable" : $"{Estimate.Basis} · low confidence · scenario range {Estimate.Low:0.0}–{Estimate.High:0.0}. Not a measured combat rating.";
-    [JsonIgnore] public string EstimateDetails => Estimate?.Basis == "Flat max stats" ? "Flat maximum configuration stats only. Saved stars, levels, skills, gear and ownership are ignored. Heroes with identical configuration stats legitimately tie. Stat weights are a planning comparison, not combat strength; skill and synergy weights are excluded." : EstimateHint + "\nEqual builds use level 110, rank 3 step 6, capped skill levels and no gear for everyone. Saved values are used ONLY when My builds is selected; missing fields then use those reference defaults. Skill levels are capped by the selected rank. This is equal development, not equal resource cost.\nOne representative non-text damage effect is assumed per activation; passive cadence, hit count, utility weights and effectiveness are inferred. Conservative/optimistic scenarios vary damage pressure 0.5–2.5× and utility 0.5–1.5×. These are sensitivity ranges, not statistical confidence intervals. Healing, shields, control, debuffs and summons receive planning weights, not a full simulation.\nScores use fixed reference-roster anchors, so a developed build can exceed 100. Unknown effects use a generic prior, not zero. Server changes and live overrides remain unverified. Resource-priority percentages use actual recorded builds of owned heroes, independently of the comparator basis.";
+    [JsonIgnore] public string EstimateDetails => Estimate?.Basis == "Flat max stats" ? "Flat maximum configuration stats only. Saved stars, levels, skills, gear and ownership are ignored. Heroes with identical configuration stats legitimately tie. Stat weights are a planning comparison, not combat strength; skill and synergy weights are excluded. Formation rankings still include faction health and any selected counter scenario." : EstimateHint + "\nEqual builds use level 110, rank 3 step 6, capped skill levels and no gear for everyone. Saved values are used ONLY when My builds is selected; missing fields then use those reference defaults. Skill levels are capped by the selected rank. This is equal development, not equal resource cost.\nLinked permanent stat buffs and the checked Rosie/Tarzan second strikes are included. Other skills use representative effects; cadence, utility weights and effectiveness remain inferred. Conservative/optimistic scenarios vary damage pressure 0.5–2.5× and utility 0.5–1.5×. These are sensitivity ranges, not statistical confidence intervals. Healing, shields, control, debuffs and summons receive planning weights, not a full simulation.\nScores use fixed reference-roster anchors, so a developed build can exceed 100. Unknown effects use a generic prior, not zero. Server changes and live overrides remain unverified. Resource-priority percentages use actual recorded builds of owned heroes, independently of the comparator basis." + "\n" + CombatEvidenceNote;
     [JsonIgnore] public bool IsOwned { get; set; }
     [JsonIgnore] public HeroProgress Progress { get; set; } = new();
     [JsonIgnore] public string Portrait => $"pack://application:,,,/TilesSurviveHeroPlanner;component/Images/{AssetSlug}.png";
@@ -82,10 +89,12 @@ public sealed class Hero
 
     private HashSet<string>? _mechanicCache;
     private HeroMechanic? _mechanicFlags;
+    private IEnumerable<HeroSkill> ActiveSkills => Estimate?.ActiveSkillIds is { } ids
+        ? Skills.Where(skill => ids.Contains(skill.InternalName, StringComparer.Ordinal)) : Skills;
     [JsonIgnore] internal HeroMechanic MechanicFlags => _mechanicFlags ??= GetMechanicFlags();
     public bool HasMechanic(string mechanic)
     {
-        _mechanicCache ??= Skills.SelectMany(skill =>
+        _mechanicCache ??= ActiveSkills.SelectMany(skill =>
             skill.Mechanics.Split(" • ", StringSplitOptions.RemoveEmptyEntries)).ToHashSet(StringComparer.Ordinal);
         return _mechanicCache.Contains(mechanic);
     }
@@ -93,7 +102,7 @@ public sealed class Hero
     private HeroMechanic GetMechanicFlags()
     {
         HeroMechanic flags = HeroMechanic.None;
-        foreach (string mechanic in Skills.SelectMany(skill =>
+        foreach (string mechanic in ActiveSkills.SelectMany(skill =>
                      skill.Mechanics.Split(" • ", StringSplitOptions.RemoveEmptyEntries)))
         {
             flags |= mechanic switch
@@ -220,9 +229,11 @@ public sealed class SquadResult
     public required string Label { get; init; }
     public double BaseScore { get; init; }
     public double SynergyBonus { get; init; }
+    public double FactionBonus { get; init; }
+    public double FrontlineBonus { get; init; }
     public string SynergySummary { get; init; } = "No modeled cross-skill pairing";
     public string Names => string.Join(" • ", Heroes.Select(hero => hero.Name));
-    public string SynergyLabel => SynergyBonus > 0 ? $"+{SynergyBonus:0.0} synergy" : "No synergy bonus";
+    public string SynergyLabel => $"+{SynergyBonus:0.0} synergy · +{FactionBonus:0.0} faction · {FrontlineBonus:+0.0;-0.0;0.0} frontline fit";
 }
 
 public sealed class ReleaseScheduleItem
@@ -236,7 +247,9 @@ public sealed class ReleaseScheduleItem
 
 public sealed class PlannerProfile
 {
+    [JsonPropertyName("enemy_faction")] public string EnemyFaction { get; set; } = "Unknown";
     [JsonPropertyName("comparison_basis")] public string ComparisonBasis { get; set; } = "reference";
+    [JsonPropertyName("battle_seconds")] public int BattleSeconds { get; set; }
     [JsonPropertyName("hero_builds")] public Dictionary<string, HeroBuild> HeroBuilds { get; set; } = [];
     [JsonPropertyName("upgrade_settings")] public UpgradeSettings UpgradeSettings { get; set; } = new();
     [JsonPropertyName("hero_progress")] public Dictionary<string, HeroProgress> HeroProgress { get; set; } = [];

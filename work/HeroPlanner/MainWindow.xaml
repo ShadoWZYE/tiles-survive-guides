@@ -88,6 +88,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1.4*" />
@@ -101,6 +102,12 @@
                                 <ComboBoxItem Content="Flat max stats" Tag="flat" />
                                 <ComboBoxItem Content="My builds" Tag="recorded" />
                             </ComboBox>
+                        <ComboBox x:Name="BattleWindowPicker" Grid.Row="2" Grid.ColumnSpan="4" Height="30" Margin="0,7,0,0" SelectionChanged="BattleWindow_Changed" AutomationProperties.Name="Battle window" ToolTip="Game seconds at speed 1; one casting slot per hero, initial cooldowns, configured priority and known dispatch times; unresolved effects use completion. No interruptions or deaths. Flat max stats is unaffected.">
+                            <ComboBoxItem Content="Battle window: sustained" Tag="0" IsSelected="True" />
+                            <ComboBoxItem Content="Battle window: opening 10 game seconds" Tag="10" />
+                            <ComboBoxItem Content="Battle window: opening 20 game seconds" Tag="20" />
+                            <ComboBoxItem Content="Battle window: opening 30 game seconds" Tag="30" />
+                        </ComboBox>
                         <ComboBox x:Name="FactionFilter" Grid.Row="1" Grid.Column="1" MinWidth="0" Height="32" VerticalAlignment="Top" Margin="0,0,8,0" SelectionChanged="Filter_Changed" AutomationProperties.Name="Faction filter">
                             <ComboBoxItem Content="All factions" IsSelected="True" />
                             <ComboBoxItem Content="Mountain" />
@@ -263,7 +270,10 @@
                                 <Border x:Name="OptimizerPanel" Grid.Row="2" Background="#1D3558" CornerRadius="13" Padding="13" Margin="0,0,0,12">
                                     <StackPanel>
                                         <TextBlock Text="Optimize five-hero squads" FontWeight="Bold" FontSize="16" />
-                                        <TextBlock Text="Role coverage is a planner constraint, not an in-game bonus." TextWrapping="Wrap" Foreground="{StaticResource MutedInkBrush}" FontSize="12" Margin="0,3,0,10" />
+                                        <TextBlock Text="Enemy target faction (optional)" Margin="0,8,0,3" Foreground="{StaticResource MutedInkBrush}" />
+<ComboBox x:Name="EnemyFactionPicker" SelectionChanged="EnemyFaction_Changed" AutomationProperties.Name="Enemy target faction"><ComboBoxItem Content="Unknown" Tag="Unknown" IsSelected="True" /><ComboBoxItem Content="Stalwart / Mountain" Tag="Mountain" /><ComboBoxItem Content="Rover / Wasteland" Tag="Wasteland" /><ComboBoxItem Content="Aeronaut / Sky" Tag="Sky" /><ComboBoxItem Content="Mariner / Sea" Tag="Sea" /></ComboBox>
+<TextBlock Text="Unknown excludes counter damage; a selected faction assumes attacks land on that faction." TextWrapping="Wrap" FontSize="11" Foreground="{StaticResource MutedInkBrush}" Margin="0,3,0,5" />
+<TextBlock Text="Role coverage is a planner constraint, not an in-game bonus." TextWrapping="Wrap" Foreground="{StaticResource MutedInkBrush}" FontSize="12" Margin="0,3,0,10" />
                                         <Grid>
                                             <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
                                             <StackPanel Orientation="Horizontal">
@@ -326,7 +336,10 @@
                                                 <ComboBox x:Name="FormationModePicker" SelectedIndex="0" SelectionChanged="ModePicker_Changed" Margin="0,6,0,4" AutomationProperties.Name="Formation objective">
                                                     <ComboBoxItem Content="Balanced" /><ComboBoxItem Content="Offense" /><ComboBoxItem Content="Survival" /><ComboBoxItem Content="PvE farming" />
                                                 </ComboBox>
-                                                <TextBlock x:Name="FormationScoreLabel" Foreground="{StaticResource GoldBrush}" FontWeight="Bold" Margin="0,2,0,0" />
+                                                <TextBlock Text="Enemy target faction (optional)" Margin="0,8,0,3" Foreground="{StaticResource MutedInkBrush}" />
+<ComboBox x:Name="FormationEnemyFactionPicker" SelectionChanged="EnemyFaction_Changed" AutomationProperties.Name="Enemy target faction"><ComboBoxItem Content="Unknown" Tag="Unknown" IsSelected="True" /><ComboBoxItem Content="Stalwart / Mountain" Tag="Mountain" /><ComboBoxItem Content="Rover / Wasteland" Tag="Wasteland" /><ComboBoxItem Content="Aeronaut / Sky" Tag="Sky" /><ComboBoxItem Content="Mariner / Sea" Tag="Sea" /></ComboBox>
+<TextBlock Text="Unknown excludes counter damage; a selected faction assumes attacks land on that faction." TextWrapping="Wrap" FontSize="11" Foreground="{StaticResource MutedInkBrush}" Margin="0,3,0,5" />
+<TextBlock x:Name="FormationScoreLabel" Foreground="{StaticResource GoldBrush}" FontWeight="Bold" Margin="0,2,0,0" TextWrapping="Wrap" />
                                                 <TextBlock Text="Click a selected hero on the left to revise the squad." Foreground="{StaticResource MutedInkBrush}" FontSize="11" Margin="0,3,0,0" />
                                             </StackPanel>
                                         </Border>

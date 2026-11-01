@@ -26,6 +26,25 @@ STREAMS = (
     (0xAF46F47, 0x863D000, 903002, 1326592),
 )
 
+# Independently recovered on 2.6.300.293. These five streams cover the selected
+# combat methods and registration data; .pdata and the virtualized stub remain
+# outside the decoded scope. Never reuse either layout on an unknown hash.
+CURRENT_SHA256 = '6eb2faca25a7b21b3dc2ae53b98db41b9408906387af4f72d7bcd6b54274d37c'
+CURRENT_STREAMS = (
+    (0x8DADCEB, 0x574000, 29581775, 101944832),
+    (0xAE8DD60, 0x1000, 1192117, 5710848),
+    (0xAE854C9, 0x86A6000, 14, 512),
+    (0xAFC8EF8, 0x7846000, 1015440, 7238144),
+    (0xABB8C68, 0x66AD000, 2658250, 18451456),
+)
+CURRENT_DECODED_SHA256 = (
+    '507c884c57415d6615878013900138c9bad4de1681bf1652bcc5921973ebbd90',
+    'c320c61a0df1e2d769c62c473dcae417984ba76e3f1ce60a5886fad52fc190c9',
+    '076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560',
+    'cde6e076f5a47608d078afe860857b9d686d0d2216fb1860b47c78bfca189053',
+    '7eb967555e7cdc5d5781fefe30ac0a8ad7991b0f28287bafb215ccda83d64e80',
+)
+
 
 def decode_stream(payload: bytes, expected_size: int) -> bytes:
     if not 0 < expected_size <= 134217728:
@@ -41,8 +60,10 @@ def decode_stream(payload: bytes, expected_size: int) -> bytes:
 
 
 def unpack(data: bytes) -> tuple[bytearray, list[dict]]:
-    if hashlib.sha256(data).hexdigest() != VERIFIED_SHA256:
+    digest=hashlib.sha256(data).hexdigest()
+    if digest not in (VERIFIED_SHA256,CURRENT_SHA256):
         raise ValueError('Unverified client hash; do not reuse these RVAs on another build')
+    streams=CURRENT_STREAMS if digest==CURRENT_SHA256 else STREAMS
     sections = pe_sections(data)
     pe_offset = struct.unpack_from('<I', data, 0x3C)[0]
     optional = pe_offset + 24
@@ -59,13 +80,15 @@ def unpack(data: bytes) -> tuple[bytearray, list[dict]]:
             raise ValueError('Raw section outside RVA image')
         image[rva:rva + size] = data[offset:offset + size]
     report = []
-    for source, destination, compressed_size, decoded_size in STREAMS:
+    for index,(source, destination, compressed_size, decoded_size) in enumerate(streams):
         section = next((s for s in sections if s['rva'] <= source and
                         source + compressed_size <= s['rva'] + s['raw_size']), None)
         if section is None or destination + decoded_size > image_size:
             raise ValueError('Stream extends outside verified input or image')
         offset = section['raw_offset'] + source - section['rva']
         decoded = decode_stream(data[offset:offset + compressed_size], decoded_size)
+        if digest==CURRENT_SHA256 and hashlib.sha256(decoded).hexdigest()!=CURRENT_DECODED_SHA256[index]:
+            raise ValueError('Decoded stream fingerprint mismatch')
         image[destination:destination + decoded_size] = decoded
         report.append({'source_rva': hex(source), 'destination_rva': hex(destination),
                        'compressed_size': compressed_size, 'decoded_size': decoded_size,
@@ -82,10 +105,11 @@ def main() -> None:
         parser.error('Output must not replace the source client')
     if args.output.suffix.lower() in ('.dll', '.exe'):
         parser.error('Use .bin for the analysis image, not an executable extension')
-    image, streams = unpack(args.binary.read_bytes())
+    raw=args.binary.read_bytes()
+    image, streams = unpack(raw)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_bytes(image)
-    report = {'input_sha256': VERIFIED_SHA256, 'format': 'RVA-indexed analysis bytes',
+    report = {'input_sha256': hashlib.sha256(raw).hexdigest(), 'format': 'RVA-indexed analysis bytes',
               'runtime_fixups_applied': False, 'streams': streams}
     args.output.with_suffix('.report.json').write_text(json.dumps(report, indent=2) + '\n', encoding='utf8')
     print(json.dumps(report, indent=2))

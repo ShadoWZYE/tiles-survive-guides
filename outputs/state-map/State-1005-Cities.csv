@@ -1,0 +1,111 @@
+﻿Level,City,X,Y,Alliance claims,Confirmed owner,Ownership reported,Contested,Screenshot marker,Region ID,Buff group,Base-map bonus
+1,Village,228,88,,,,No,,1032,analysis_center_1_4,Gathering speed +5%
+1,Village,348,88,,,,No,,1031,analysis_center_1_3,Resource production +5%
+1,Village,448,88,,,,No,,1030,analysis_center_1_2,Gathering speed +5%
+1,Village,548,88,,,,No,,1029,analysis_center_1_1,Resource production +5%
+1,Village,648,88,,,,No,,1028,analysis_center_1_4,Gathering speed +5%
+1,Village,748,88,,,,No,,1027,analysis_center_1_3,Resource production +5%
+1,Village,828,88,,,,No,,1026,analysis_center_1_2,Gathering speed +5%
+1,Village,928,88,,,,No,,1025,analysis_center_1_1,Resource production +5%
+1,Village,1028,88,,,,No,,1024,analysis_center_1_4,Gathering speed +5%
+1,Village,1128,108,,,,No,,1023,analysis_center_1_3,Resource production +5%
+1,Village,128,128,,,,No,,1033,analysis_center_1_1,Resource production +5%
+1,Village,1208,168,,,,No,,1022,analysis_center_1_2,Gathering speed +5%
+1,Village,168,188,,,,No,,1048,analysis_center_1_4,Gathering speed +5%
+1,Village,1108,188,,,,No,,1047,analysis_center_1_3,Resource production +5%
+1,Village,68,228,,,,No,,1034,analysis_center_1_2,Gathering speed +5%
+1,Village,1208,248,,,,No,,1021,analysis_center_1_1,Resource production +5%
+1,Village,68,328,,,,No,,1035,analysis_center_1_3,Resource production +5%
+1,Village,1208,348,,,,No,,1020,analysis_center_1_4,Gathering speed +5%
+1,Village,88,408,,,,No,,1036,analysis_center_1_4,Gathering speed +5%
+1,Village,1208,448,,,,No,,1019,analysis_center_1_3,Resource production +5%
+1,Village,88,488,,,,No,,1037,analysis_center_1_1,Resource production +5%
+1,Village,1208,528,,,,No,,1018,analysis_center_1_2,Gathering speed +5%
+1,Village,88,588,,,,No,,1038,analysis_center_1_2,Gathering speed +5%
+1,Village,1208,628,,,,No,,1017,analysis_center_1_1,Resource production +5%
+1,Village,88,668,,,,No,,1039,analysis_center_1_3,Resource production +5%
+1,Village,1208,708,,,,No,,1016,analysis_center_1_4,Gathering speed +5%
+1,Village,88,748,,,,No,,1040,analysis_center_1_4,Gathering speed +5%
+1,Village,1208,808,,,,No,,1015,analysis_center_1_3,Resource production +5%
+1,Village,88,828,,,,No,,1041,analysis_center_1_1,Resource production +5%
+1,Village,1208,888,,,,No,,1014,analysis_center_1_2,Gathering speed +5%
+1,Village,88,908,,,,No,,1042,analysis_center_1_2,Gathering speed +5%
+1,Village,88,988,,,,No,,1043,analysis_center_1_3,Resource production +5%
+1,Village,1208,988,,,,No,,1013,analysis_center_1_1,Resource production +5%
+1,Village,88,1108,,,,No,,1044,analysis_center_1_4,Gathering speed +5%
+1,Village,1128,1108,,,,No,,1046,analysis_center_1_2,Gathering speed +5%
+1,Village,1208,1108,,,,No,,1012,analysis_center_1_4,Gathering speed +5%
+1,Village,148,1128,,,,No,,1045,analysis_center_1_1,Resource production +5%
+1,Village,1148,1188,,,,No,,1011,analysis_center_1_3,Resource production +5%
+1,Village,188,1208,,,,No,,1001,analysis_center_1_1,Resource production +5%
+1,Village,288,1208,,,,No,,1002,analysis_center_1_2,Gathering speed +5%
+1,Village,388,1208,,,,No,,1003,analysis_center_1_3,Resource production +5%
+1,Village,488,1208,,,,No,,1004,analysis_center_1_4,Gathering speed +5%
+1,Village,568,1208,,,,No,,1005,analysis_center_1_1,Resource production +5%
+1,Village,668,1208,,,,No,,1006,analysis_center_1_2,Gathering speed +5%
+1,Village,748,1208,,,,No,,1007,analysis_center_1_3,Resource production +5%
+1,Village,848,1208,,,,No,,1008,analysis_center_1_4,Gathering speed +5%
+1,Village,948,1208,,,,No,,1009,analysis_center_1_1,Resource production +5%
+1,Village,1048,1208,,,,No,,1010,analysis_center_1_2,Gathering speed +5%
+2,Factory,248,188,,,,No,,2022,analysis_center_2_1,Construction speed +5%
+2,Factory,328,188,VAN,VAN,2026-10-29,No,,2021,analysis_center_2_3,Training speed +5%
+2,Factory,448,188,,,,No,,2020,analysis_center_2_2,Research speed +5%
+2,Factory,568,188,,,,No,,2019,analysis_center_2_1,Construction speed +5%
+2,Factory,688,188,,,,No,,2018,analysis_center_2_3,Training speed +5%
+2,Factory,808,188,ALL,,,No,,2017,analysis_center_2_2,Research speed +5%
+2,Factory,948,188,ALL,,,No,,2016,analysis_center_2_1,Construction speed +5%
+2,Factory,1048,228,,,,No,,2015,analysis_center_2_3,Training speed +5%
+2,Factory,1108,328,,,,No,,2014,analysis_center_2_2,Research speed +5%
+2,Factory,168,348,TCE,,,No,,2023,analysis_center_2_2,Research speed +5%
+2,Factory,1108,468,VeD,,,No,2,2013,analysis_center_2_1,Construction speed +5%
+2,Factory,168,488,TCE,,,No,,2024,analysis_center_2_3,Training speed +5%
+2,Factory,1108,568,,,,No,,2012,analysis_center_2_3,Training speed +5%
+2,Factory,168,628,ECL,,,No,,2025,analysis_center_2_1,Construction speed +5%
+2,Factory,1108,708,,,,No,,2011,analysis_center_2_2,Research speed +5%
+2,Factory,168,788,,,,No,,2026,analysis_center_2_2,Research speed +5%
+2,Factory,1108,828,,,,No,,2010,analysis_center_2_1,Construction speed +5%
+2,Factory,168,948,,,,No,,2027,analysis_center_2_3,Training speed +5%
+2,Factory,1108,948,,,,No,,2009,analysis_center_2_3,Training speed +5%
+2,Factory,188,1068,,,,No,,2028,analysis_center_2_1,Construction speed +5%
+2,Factory,1068,1068,,,,No,,2008,analysis_center_2_2,Research speed +5%
+2,Factory,268,1128,,,,No,,2001,analysis_center_2_1,Construction speed +5%
+2,Factory,408,1128,,,,No,,2002,analysis_center_2_2,Research speed +5%
+2,Factory,528,1128,,,,No,,2003,analysis_center_2_3,Training speed +5%
+2,Factory,648,1128,,,,No,,2004,analysis_center_2_1,Construction speed +5%
+2,Factory,768,1128,,,,No,,2005,analysis_center_2_2,Research speed +5%
+2,Factory,888,1128,,,,No,,2006,analysis_center_2_3,Training speed +5%
+2,Factory,1008,1128,rus,,,No,,2007,analysis_center_2_1,Construction speed +5%
+3,Town,308,248,,,,No,,3012,analysis_center_3_3,Troop HP +2%
+3,Town,468,248,VAN,,,No,,3011,analysis_center_3_2,Troop DEF +2%
+3,Town,668,248,ALL,,,No,,3010,analysis_center_3_1,Troop ATK +2%
+3,Town,868,248,ALL,,,No,,3009,analysis_center_3_3,Troop HP +2%
+3,Town,1028,328,,,,No,,3008,analysis_center_3_2,Troop DEF +2%
+3,Town,248,348,TCE,,,No,,3013,analysis_center_3_1,Troop ATK +2%
+3,Town,248,488,TCE,,,No,,3014,analysis_center_3_2,Troop DEF +2%
+3,Town,1048,528,VeD,,,No,6,3007,analysis_center_3_1,Troop ATK +2%
+3,Town,248,668,ECL,,,No,,3015,analysis_center_3_3,Troop HP +2%
+3,Town,1048,748,,,,No,,3006,analysis_center_3_3,Troop HP +2%
+3,Town,248,848,ECL,,,No,,3016,analysis_center_3_1,Troop ATK +2%
+3,Town,1048,928,,,,No,,3005,analysis_center_3_2,Troop DEF +2%
+3,Town,288,1048,,,,No,,3001,analysis_center_3_1,Troop ATK +2%
+3,Town,508,1068,,,,No,,3002,analysis_center_3_2,Troop DEF +2%
+3,Town,728,1068,rus,,,No,,3003,analysis_center_3_3,Troop HP +2%
+3,Town,968,1068,rus,,,No,,3004,analysis_center_3_1,Troop ATK +2%
+4,Metropolis,428,328,VAN,,,No,,4007,analysis_center_4_1,Resource production +20%
+4,Metropolis,648,328,VAN,,,No,,4006,analysis_center_4_2,Gathering speed +20%
+4,Metropolis,848,328,ALL,,,No,,4005,analysis_center_4_1,Resource production +20%
+4,Metropolis,308,468,TCE,,,No,,4008,analysis_center_4_2,Gathering speed +20%
+4,Metropolis,968,488,VeD,,,No,5,4004,analysis_center_4_2,Gathering speed +20%
+4,Metropolis,328,748,ECL,,,No,,4009,analysis_center_4_1,Resource production +20%
+4,Metropolis,968,768,VeD,,,No,4,4003,analysis_center_4_1,Resource production +20%
+4,Metropolis,388,988,rus,,,No,,4001,analysis_center_4_1,Resource production +20%
+4,Metropolis,868,988,rus,,,No,,4002,analysis_center_4_2,Gathering speed +20%
+5,Research Center,548,408,VAN,,,No,,5004,analysis_center_5_2,Training speed +10%
+5,Research Center,908,508,ALL,,,No,,5003,analysis_center_5_1,Training speed +10%
+5,Research Center,408,528,TCE,,,No,,5005,analysis_center_5_1,Training speed +10%
+5,Research Center,908,768,VeD,,,No,3,5002,analysis_center_5_2,Training speed +10%
+5,Research Center,408,828,ECL,,,No,,5006,analysis_center_5_2,Training speed +10%
+5,Research Center,648,948,rus,,,No,,5001,analysis_center_5_1,Training speed +10%
+6,Military Base,508,588,VAN,,,No,,6003,analysis_center_6_3,Troop HP +5%
+6,Military Base,828,588,VeD,,,No,1,6002,analysis_center_6_2,Troop DEF +5%
+6,Military Base,668,828,ECL,ECL,2026-10-28,No,,6001,analysis_center_6_1,Troop ATK +5%

@@ -1,0 +1,644 @@
+{
+  "date": "2026-10-26",
+  "client_build": "2.6.300.293",
+  "native_sha256": "6eb2faca25a7b21b3dc2ae53b98db41b9408906387af4f72d7bcd6b54274d37c",
+  "config_pack_sha256": "de7e1b2059dc4dee30cf6a78b250f7d29d9d01a3caf11a95715c1539a8544475",
+  "manifest_sha256": "dfd4f00ad293d2ab7b7e64c829d0309c2a625ab397d262bf90128ada40d4be6e",
+  "table_sha256": {
+    "analysis_center": "322d8289dca60cef2d58b6fe5dc14bf63a43e88676e02c35882b2d3919edb6ad",
+    "analysis_center_position": "740d46a2dc7ea2632a9d2d8d03a4a9f44a0017a893efe873b13a8128940175ff",
+    "benefits": "755d06008f624b9f050132878b6cec55189bf7ff6b633a2930552a3c3196eec6",
+    "buff": "44bc6467f8504651d12fc1fa34cc7ef1e35e1ac0a7d167a318af7b2e941dacfb"
+  },
+  "base_map_cities": [
+    {
+      "id": "analysis_center_1_1",
+      "configuration_id": 45600001,
+      "level": 1,
+      "name": "Village",
+      "benefits": [
+        {
+          "id": 300300,
+          "name": "prop_basic_resource_generation_percent",
+          "value": 0.05
+        }
+      ],
+      "alternative_post_merge_buff": {
+        "Id": "analysis_center_buff_1_1",
+        "Benefit": 300300,
+        "Value": 0.05
+      }
+    },
+    {
+      "id": "analysis_center_1_2",
+      "configuration_id": 45600002,
+      "level": 1,
+      "name": "Village",
+      "benefits": [
+        {
+          "id": 300747,
+          "name": "prop_resource_gather_speed_percent",
+          "value": 0.05
+        }
+      ],
+      "alternative_post_merge_buff": {
+        "Id": "analysis_center_buff_1_2",
+        "Benefit": 300747,
+        "Value": 0.05
+      }
+    },
+    {
+      "id": "analysis_center_1_3",
+      "configuration_id": 45600003,
+      "level": 1,
+      "name": "Village",
+      "benefits": [
+        {
+          "id": 300300,
+          "name": "prop_basic_resource_generation_percent",
+          "value": 0.05
+        }
+      ],
+      "alternative_post_merge_buff": {
+        "Id": "analysis_center_buff_1_3",
+        "Benefit": 300314,
+        "Value": 0.05
+      }
+    },
+    {
+      "id": "analysis_center_1_4",
+      "configuration_id": 45600004,
+      "level": 1,
+      "name": "Village",
+      "benefits": [
+        {
+          "id": 300747,
+          "name": "prop_resource_gather_speed_percent",
+          "value": 0.05
+        }
+      ],
+      "alternative_post_merge_buff": {
+        "Id": "analysis_center_buff_1_4",
+        "Benefit": 300484,
+        "Value": 0.05
+      }
+    },
+    {
+      "id": "analysis_center_2_1",
+      "configuration_id": 45600005,
+      "level": 2,
+      "name": "Factory",
+      "benefits": [
+        {
+          "id": 300314,
+          "name": "prop_building_time_cost_percent",
+          "value": 0.05
+        }
+      ],
+      "alternative_post_merge_buff": {
+        "Id": "analysis_center_buff_2_1",
+        "Benefit": 300002,
+        "Value": 0.05
+      }
+    },
+    {
+      "id": "analysis_center_2_2",
+      "configuration_id": 45600006,
+      "level": 2,
+      "name": "Factory",
+      "benefits": [
+        {
+          "id": 300484,
+          "name": "prop_research_time_cost_percent",
+          "value": 0.05
+        }
+      ],
+      "alternative_post_merge_buff": {
+        "Id": "analysis_center_buff_2_2",
+        "Benefit": 300004,
+        "Value": 0.05
+      }
+    },
+    {
+      "id": "analysis_center_2_3",
+      "configuration_id": 45600007,
+      "level": 2,
+      "name": "Factory",
+      "benefits": [
+        {
+          "id": 300321,
+          "name": "prop_training_time_cost_percent",
+          "value": 0.05
+        }
+      ],
+      "alternative_post_merge_buff": {
+        "Id": "analysis_center_buff_2_3",
+        "Benefit": 300321,
+        "Value": 0.05
+      }
+    },
+    {
+      "id": "analysis_center_3_1",
+      "configuration_id": 45600008,
+      "level": 3,
+      "name": "Town",
+      "benefits": [
+        {
+          "id": 301835,
+          "name": "prop_troop_lite_attack_percent",
+          "value": 0.02
+        }
+      ],
+      "alternative_post_merge_buff": {
+        "Id": "analysis_center_buff_3_1",
+        "Benefit": 300314,
+        "Value": 0.08
+      }
+    },
+    {
+      "id": "analysis_center_3_2",
+      "configuration_id": 45600009,
+      "level": 3,
+      "name": "Town",
+      "benefits": [
+        {
+          "id": 301836,
+          "name": "prop_troop_lite_defense_percent",
+          "value": 0.02
+        }
+      ],
+      "alternative_post_merge_buff": {
+        "Id": "analysis_center_buff_3_2",
+        "Benefit": 300484,
+        "Value": 0.08
+      }
+    },
+    {
+      "id": "analysis_center_3_3",
+      "configuration_id": 45600010,
+      "level": 3,
+      "name": "Town",
+      "benefits": [
+        {
+          "id": 301837,
+          "name": "prop_troop_lite_life_percent",
+          "value": 0.02
+        }
+      ],
+      "alternative_post_merge_buff": {
+        "Id": "analysis_center_buff_3_3",
+        "Benefit": 300171,
+        "Value": 0.15
+      }
+    },
+    {
+      "id": "analysis_center_4_1",
+      "configuration_id": 45600011,
+      "level": 4,
+      "name": "Metropolis",
+      "benefits": [
+        {
+          "id": 300300,
+          "name": "prop_basic_resource_generation_percent",
+          "value": 0.2
+        }
+      ],
+      "alternative_post_merge_buff": {
+        "Id": "analysis_center_buff_4_1",
+        "Benefit": 300002,
+        "Value": 0.08
+      }
+    },
+    {
+      "id": "analysis_center_4_2",
+      "configuration_id": 45600012,
+      "level": 4,
+      "name": "Metropolis",
+      "benefits": [
+        {
+          "id": 300747,
+          "name": "prop_resource_gather_speed_percent",
+          "value": 0.2
+        }
+      ],
+      "alternative_post_merge_buff": {
+        "Id": "analysis_center_buff_4_2",
+        "Benefit": 300004,
+        "Value": 0.08
+      }
+    },
+    {
+      "id": "analysis_center_5_1",
+      "configuration_id": 45600015,
+      "level": 5,
+      "name": "Research Center",
+      "benefits": [
+        {
+          "id": 300321,
+          "name": "prop_training_time_cost_percent",
+          "value": 0.1
+        }
+      ],
+      "alternative_post_merge_buff": {
+        "Id": "analysis_center_buff_4_1",
+        "Benefit": 300002,
+        "Value": 0.08
+      }
+    },
+    {
+      "id": "analysis_center_5_2",
+      "configuration_id": 45600016,
+      "level": 5,
+      "name": "Research Center",
+      "benefits": [
+        {
+          "id": 300321,
+          "name": "prop_training_time_cost_percent",
+          "value": 0.1
+        }
+      ],
+      "alternative_post_merge_buff": {
+        "Id": "analysis_center_buff_4_2",
+        "Benefit": 300004,
+        "Value": 0.08
+      }
+    },
+    {
+      "id": "analysis_center_6_1",
+      "configuration_id": 45600017,
+      "level": 6,
+      "name": "Military Base",
+      "benefits": [
+        {
+          "id": 301835,
+          "name": "prop_troop_lite_attack_percent",
+          "value": 0.05
+        }
+      ],
+      "alternative_post_merge_buff": {
+        "Id": "analysis_center_buff_4_1",
+        "Benefit": 300002,
+        "Value": 0.08
+      }
+    },
+    {
+      "id": "analysis_center_6_2",
+      "configuration_id": 45600018,
+      "level": 6,
+      "name": "Military Base",
+      "benefits": [
+        {
+          "id": 301836,
+          "name": "prop_troop_lite_defense_percent",
+          "value": 0.05
+        }
+      ],
+      "alternative_post_merge_buff": {
+        "Id": "analysis_center_buff_4_2",
+        "Benefit": 300004,
+        "Value": 0.08
+      }
+    },
+    {
+      "id": "analysis_center_6_3",
+      "configuration_id": 45600019,
+      "level": 6,
+      "name": "Military Base",
+      "benefits": [
+        {
+          "id": 301837,
+          "name": "prop_troop_lite_life_percent",
+          "value": 0.05
+        }
+      ],
+      "alternative_post_merge_buff": {
+        "Id": "analysis_center_buff_4_1",
+        "Benefit": 300002,
+        "Value": 0.08
+      }
+    }
+  ],
+  "alliance_scope_localization": {
+    "key": "alliance_area_desc",
+    "value": "Occupying cities grants bonuses to the entire Alliance."
+  },
+  "stacking_conclusion": {
+    "distinct_stats": "Coexist as separate benefit IDs.",
+    "duplicate_same_configuration_id": "Only one copy contributes, regardless of the number of physical cities.",
+    "distinct_configuration_ids_same_stat": "Additive in the current city-specific calculator, including different levels; no highest-only selection.",
+    "same_level_and_same_stat": "Level and stat alone are not the deduplication key; different eligible configuration entries can still add.",
+    "generic_merge_adds_values": true,
+    "city_specific_rule_verified": true
+  },
+  "native_base_paths": [
+    {
+      "type": "AllianceBenefit",
+      "method": "Parse",
+      "rva": "0x1ee6b50"
+    },
+    {
+      "type": "AllianceExtDatabaseCell",
+      "method": "get_AllianceBenefitDict",
+      "rva": "0x1e11720"
+    },
+    {
+      "type": "BenefitUtils",
+      "method": "UdpateBenefits",
+      "rva": "0x38f9120"
+    },
+    {
+      "type": "BenefitItem",
+      "method": "Merge",
+      "rva": "0x38f09c0"
+    },
+    {
+      "type": "AnalysisCenterModule",
+      "method": "IsBenefitHad",
+      "rva": "0x38065b0"
+    }
+  ],
+  "evidence_boundary": "The current city-specific calculator is now traced, not just generic server benefit parsing. Server eligibility and unavailable live overrides remain outside this static proof.",
+  "live_check": {
+    "purpose": "Optional corroboration of the extracted rule, not a substitute for the now-recovered city calculator.",
+    "controls": "Identify actual configuration IDs, not just visible stat or city level; keep other sources constant and confirm city eligibility."
+  },
+  "city_specific_proof": {
+    "status": "confirmed_in_hash_gated_current_client_calculator",
+    "rule": "Count each eligible i_analysis_center configuration ID once; sum the retained Benefit lists by benefit_id. No highest-only selection across distinct configuration IDs.",
+    "duplicate_key": "AnalysisCenterDatabaseCell.i_analysis_center, not physical coordinates, city name, level or benefit_id",
+    "eligibility": "Owned/occupied alliance list. StrongholdPage.GetCurrentBenefit consults AllianceStatsInfo.analysis_center for each physical city; explicit zero entries are skipped. Server controls eligibility.",
+    "methods": [
+      {
+        "method": "StrongholdPage.GetCurrentBenefit",
+        "rva": "0x2858210",
+        "end_rva": "0x28586a0",
+        "sha256": "82df13afb2b21cc2006ee70a6d77d86143a231845f6604b485804a9b6f6ac7e7"
+      },
+      {
+        "method": "Benefit.MergeBenefit",
+        "rva": "0x1d93570",
+        "end_rva": "0x1d93760",
+        "sha256": "07d87e2b513291f2ae622c4a892125177efbad5869cf94169ff4940056ff922e"
+      },
+      {
+        "method": "AnalysisCenterModule.GetMyAnalysisCenter",
+        "rva": "0x3805130",
+        "end_rva": "0x38053b0",
+        "sha256": "24e83966893d287249290ffa6bec4699e2e1c1bdc22c8bb930dc062c64bf10bc"
+      },
+      {
+        "method": "StrongholdCellTipUIMediator.IsHaveSameAnalysis",
+        "rva": "0x2856e70",
+        "end_rva": "0x2857060",
+        "sha256": "0bb779eb5511006d034486ec2a7f1f93a96756965d76ad29152c9eedfcfe6d25"
+      }
+    ],
+    "instruction_anchors": {
+      "0x28584e3": "488b5750",
+      "0x28584ea": "e8c1ea6c02",
+      "0x28584f1": "0f85e9feffff",
+      "0x28584fe": "4c8b4648",
+      "0x2858509": "e8c2326e02",
+      "0x28585e4": "e887af53ff",
+      "0x1d93680": "3b7010",
+      "0x1d936c5": "f20f587018",
+      "0x1d936ce": "f20f117318"
+    },
+    "cached_patch_scan": [
+      {
+        "file": "2.6.0_4a",
+        "sha256": "858f39859e3fbd35cb335b553f242deaab3dacdf4b40d1a35405bd7ec7ca5e51",
+        "relevant_target_reference_found": false
+      },
+      {
+        "file": "2.6.0_6a",
+        "sha256": "51a206200791d0ac41b509910c6e890f017954fb3e1f0e288cefc9f3b644d639",
+        "relevant_target_reference_found": false
+      },
+      {
+        "file": "2.6.0_7a",
+        "sha256": "944083610f23fb6f11e8bea1dd6fc7e19876a323c6992768ced13106a13a4353",
+        "relevant_target_reference_found": false
+      },
+      {
+        "file": "2.6.100_10a",
+        "sha256": "40982f3b7f6fca9dd7d91a9d8c856e037fe9942e2faf15d9c9743fc89906004b",
+        "relevant_target_reference_found": false
+      },
+      {
+        "file": "2.6.100_4a",
+        "sha256": "a33a26cf0b805e58aaa0aea04dcae372d06329c765a782b84b2af824e100895a",
+        "relevant_target_reference_found": false
+      },
+      {
+        "file": "2.6.100_6a",
+        "sha256": "888a56cbe5c3018c3b57fa47d54922c85c181d99b84e4db56d72ef7baf4170bd",
+        "relevant_target_reference_found": false
+      },
+      {
+        "file": "2.6.100_7a",
+        "sha256": "fb67c594aeb23891e0cb9bf8b500849dee5493cc8aee0fd20ad0ecf6dde83c69",
+        "relevant_target_reference_found": false
+      },
+      {
+        "file": "2.6.100_8a",
+        "sha256": "86ececcaba09bd9cf53cd63cd953faf0db020af952054d869b835cb58083d2b5",
+        "relevant_target_reference_found": false
+      },
+      {
+        "file": "2.6.200_1b",
+        "sha256": "c507eeb8589c88425cea56f46143901b969795aed8167cb75ea521e68a0821dc",
+        "relevant_target_reference_found": false
+      },
+      {
+        "file": "2.6.200_2b",
+        "sha256": "926fddb325808d83887b5b7dfd8424fd797bfe2bb56c23d1c07b81ddc4e64374",
+        "relevant_target_reference_found": false
+      },
+      {
+        "file": "2.6.200_3a",
+        "sha256": "88e68e5a7cc227d66da835203dab6ff7266dac70183b08bfcc66160b5457e98b",
+        "relevant_target_reference_found": false
+      },
+      {
+        "file": "2.6.200_4a",
+        "sha256": "e22213efad436d2cd77055545e5647c10f52837ca48d1746382f40c8bffe0677",
+        "relevant_target_reference_found": false
+      },
+      {
+        "file": "2.6.300_1b",
+        "sha256": "360d544c64e224b698581ede0622f577671770d13373233a216b6c190c7ca983",
+        "relevant_target_reference_found": false
+      },
+      {
+        "file": "2.6.300_2a",
+        "sha256": "7aaf034268f422ac681b94175900c64fb957e41a59a9cccb3cf550df4f58da26",
+        "relevant_target_reference_found": false
+      },
+      {
+        "file": "2.6.300_2b",
+        "sha256": "360d544c64e224b698581ede0622f577671770d13373233a216b6c190c7ca983",
+        "relevant_target_reference_found": false
+      },
+      {
+        "file": "2.6.300_3b",
+        "sha256": "360d544c64e224b698581ede0622f577671770d13373233a216b6c190c7ca983",
+        "relevant_target_reference_found": false
+      },
+      {
+        "file": "2.6.300_4a",
+        "sha256": "3b507395c8aab03d9f853f8820d40f48ad59a26236fc85e94d81691ac55c3c0c",
+        "relevant_target_reference_found": false
+      },
+      {
+        "file": "2.6.300_5a",
+        "sha256": "f9ac620498c825a115f1d0aa9ff26472911efd9115da1e2bf7ed241edad0be56",
+        "relevant_target_reference_found": false
+      },
+      {
+        "file": "2.6.300_6a",
+        "sha256": "c2656e90d10f8e62a65e8744b4142b34098ef23db59bc6f035c1d666cb39516e",
+        "relevant_target_reference_found": false
+      }
+    ],
+    "patch_scan_scope": "All cached patch extern-type tables parsed; no relevant city-calculator/merge replacement references found. This is not proof about unavailable future or live server code.",
+    "reference_examples": [
+      {
+        "case": "Two physical copies of the same +5% Village entry",
+        "configuration_entries": [
+          "analysis_center_1_1",
+          "analysis_center_1_1"
+        ],
+        "benefit_totals": {
+          "300300": 0.05
+        }
+      },
+      {
+        "case": "Distinct +5% Village and +20% Metropolis entries",
+        "configuration_entries": [
+          "analysis_center_1_1",
+          "analysis_center_4_1"
+        ],
+        "benefit_totals": {
+          "300300": 0.25
+        }
+      },
+      {
+        "case": "Distinct +5% training Factory and +10% Research Center entries",
+        "configuration_entries": [
+          "analysis_center_2_3",
+          "analysis_center_5_1"
+        ],
+        "benefit_totals": {
+          "300321": 0.15
+        }
+      },
+      {
+        "case": "Distinct +2% ATK Town and +5% ATK Military Base entries",
+        "configuration_entries": [
+          "analysis_center_3_1",
+          "analysis_center_6_1"
+        ],
+        "benefit_totals": {
+          "301835": 0.07
+        }
+      },
+      {
+        "case": "One Lv.5 city from each configuration group",
+        "configuration_entries": [
+          "analysis_center_5_1",
+          "analysis_center_5_2"
+        ],
+        "benefit_totals": {
+          "300321": 0.2
+        }
+      },
+      {
+        "case": "All six base-map Lv.5 cities still count only two configuration groups",
+        "configuration_entries": [
+          "analysis_center_5_1",
+          "analysis_center_5_1",
+          "analysis_center_5_1",
+          "analysis_center_5_2",
+          "analysis_center_5_2",
+          "analysis_center_5_2"
+        ],
+        "benefit_totals": {
+          "300321": 0.2
+        }
+      },
+      {
+        "case": "Different entries may add even with the same level and stat, if both are eligible",
+        "configuration_entries": [
+          "analysis_center_1_1",
+          "analysis_center_1_3"
+        ],
+        "benefit_totals": {
+          "300300": 0.1
+        }
+      },
+      {
+        "case": "Different benefit IDs remain separate",
+        "configuration_entries": [
+          "analysis_center_1_1",
+          "analysis_center_1_2"
+        ],
+        "benefit_totals": {
+          "300300": 0.05,
+          "300747": 0.05
+        }
+      }
+    ],
+    "level5_groups": [
+      {
+        "configuration_entry": "analysis_center_5_1",
+        "training_speed_contribution": 0.1,
+        "base_map_S1_coordinates": [
+          {
+            "x": 908,
+            "y": 508
+          },
+          {
+            "x": 408,
+            "y": 528
+          },
+          {
+            "x": 648,
+            "y": 948
+          }
+        ]
+      },
+      {
+        "configuration_entry": "analysis_center_5_2",
+        "training_speed_contribution": 0.1,
+        "base_map_S1_coordinates": [
+          {
+            "x": 548,
+            "y": 408
+          },
+          {
+            "x": 908,
+            "y": 768
+          },
+          {
+            "x": 408,
+            "y": 828
+          }
+        ]
+      }
+    ],
+    "maximum_from_all_distinct_base_map_entries": {
+      "300300": 0.3,
+      "300747": 0.3,
+      "300314": 0.05,
+      "300484": 0.05,
+      "300321": 0.25,
+      "301835": 0.07,
+      "301836": 0.07,
+      "301837": 0.07
+    },
+    "scope": "Confirms the current client city-bonus calculation, including duplicate suppression and additive different entries. Coordinates are for the S1/base map, not seasonal replacement maps. It does not independently execute the server combat/economy implementation or establish every server-side eligibility condition."
+  },
+  "superseded_by": "outputs/City-Buff-Stacking-Audit-2026-10-29.json",
+  "superseded_reason": "Live six-city screenshot contradicts the all-eligible +20% Lv.5 training prediction. Conditional static examples do not prove effective stacking."
+}

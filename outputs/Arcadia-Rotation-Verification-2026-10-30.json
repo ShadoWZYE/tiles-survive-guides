@@ -1,0 +1,821 @@
+{
+  "date": "2026-10-30",
+  "scope": "Shareable proposal; no alliance identities or private roster data.",
+  "fact_status": "Verified local client 2.6.300.293 and manifest-verified tables; not a live event read. Live event screen takes priority.",
+  "local_native_sha256": "6eb2faca25a7b21b3dc2ae53b98db41b9408906387af4f72d7bcd6b54274d37c",
+  "manifest_sha256": "df08134c1035e7d9d0dbd8db5a3bc3f10c03ebe767fa73409fe75ecd4113d2dd",
+  "table_sha256": {
+    "buildings": "0a57cfcdec420f6b8a7a88eed6f5b74aed3ee4d7fef055a01c98e2666cf551de",
+    "kingdom_war_pvp_score": "71095e96d2c48356254349fd546c5e7aaf1b6e5a31e95c8fd20033f6ad4c2d90",
+    "kingdom_war_pvp_score_step": "44e7cc66c000a0790b0076d4cb641be82e3d71130902b875d5bcef5383a205fb",
+    "server_event_open_time": "95bc30dc0e5d5d17a306bd1b8ec9cc623a76df93c3eb0c9fb926b51ae7cfd591"
+  },
+  "native_methods": [
+    {
+      "method": "WonderModule.GetPersonalScoreStepStatus",
+      "rva": "0x112e1d0",
+      "end": "0x112e360",
+      "sha256": "2f1f19f65c780ef940f4bfd507e05fc739eebfd887105a5ef3f5853403f4a4eb"
+    },
+    {
+      "method": "KingdomWarPvpScoreStepConfig.GetScoreStepRewardListByLevel",
+      "rva": "0x1ce67e0",
+      "end": "0x1ce6d50",
+      "sha256": "b59cd9e5de294a0d69e28b56e351963909ec4c5293c547ec2f28dbcc53b37500"
+    }
+  ],
+  "native_instruction_anchors": {
+    "0x112e281": "e89ac72600",
+    "0x112e297": "e84485bb00",
+    "0x112e2dc": "4863481033c0483b4e780f9ec0"
+  },
+  "reward_selection": "Power Plant level -> reward list; threshold compared directly against WonderModule.PersonScore. Values are cumulative, not additive chest costs.",
+  "all_level_thresholds": [
+    {
+      "level": 1,
+      "cumulative_chest_thresholds": [
+        20000,
+        60000,
+        100000,
+        150000,
+        200000,
+        600000,
+        900000,
+        1620000,
+        2920000
+      ]
+    },
+    {
+      "level": 2,
+      "cumulative_chest_thresholds": [
+        20000,
+        60000,
+        100000,
+        150000,
+        200000,
+        600000,
+        900000,
+        1620000,
+        2920000
+      ]
+    },
+    {
+      "level": 3,
+      "cumulative_chest_thresholds": [
+        20000,
+        60000,
+        100000,
+        150000,
+        200000,
+        600000,
+        900000,
+        1620000,
+        2920000
+      ]
+    },
+    {
+      "level": 4,
+      "cumulative_chest_thresholds": [
+        20000,
+        60000,
+        100000,
+        150000,
+        200000,
+        600000,
+        900000,
+        1620000,
+        2920000
+      ]
+    },
+    {
+      "level": 5,
+      "cumulative_chest_thresholds": [
+        20000,
+        60000,
+        100000,
+        150000,
+        200000,
+        600000,
+        900000,
+        1620000,
+        2920000
+      ]
+    },
+    {
+      "level": 6,
+      "cumulative_chest_thresholds": [
+        20000,
+        60000,
+        100000,
+        150000,
+        200000,
+        600000,
+        900000,
+        1620000,
+        2920000
+      ]
+    },
+    {
+      "level": 7,
+      "cumulative_chest_thresholds": [
+        20000,
+        60000,
+        100000,
+        150000,
+        200000,
+        600000,
+        900000,
+        1620000,
+        2920000
+      ]
+    },
+    {
+      "level": 8,
+      "cumulative_chest_thresholds": [
+        20000,
+        60000,
+        100000,
+        150000,
+        200000,
+        600000,
+        900000,
+        1620000,
+        2920000
+      ]
+    },
+    {
+      "level": 9,
+      "cumulative_chest_thresholds": [
+        20000,
+        60000,
+        100000,
+        150000,
+        200000,
+        600000,
+        900000,
+        1620000,
+        2920000
+      ]
+    },
+    {
+      "level": 10,
+      "cumulative_chest_thresholds": [
+        20000,
+        60000,
+        100000,
+        150000,
+        200000,
+        600000,
+        900000,
+        1620000,
+        2920000
+      ]
+    },
+    {
+      "level": 11,
+      "cumulative_chest_thresholds": [
+        20000,
+        60000,
+        100000,
+        150000,
+        200000,
+        600000,
+        900000,
+        1620000,
+        2920000
+      ]
+    },
+    {
+      "level": 12,
+      "cumulative_chest_thresholds": [
+        20000,
+        60000,
+        100000,
+        150000,
+        200000,
+        600000,
+        900000,
+        1620000,
+        2920000
+      ]
+    },
+    {
+      "level": 13,
+      "cumulative_chest_thresholds": [
+        20000,
+        60000,
+        100000,
+        150000,
+        200000,
+        600000,
+        900000,
+        1620000,
+        2920000
+      ]
+    },
+    {
+      "level": 14,
+      "cumulative_chest_thresholds": [
+        20000,
+        60000,
+        100000,
+        150000,
+        200000,
+        600000,
+        900000,
+        1620000,
+        2920000
+      ]
+    },
+    {
+      "level": 15,
+      "cumulative_chest_thresholds": [
+        20000,
+        60000,
+        100000,
+        150000,
+        200000,
+        600000,
+        900000,
+        1620000,
+        2920000
+      ]
+    },
+    {
+      "level": 16,
+      "cumulative_chest_thresholds": [
+        20000,
+        60000,
+        100000,
+        150000,
+        200000,
+        600000,
+        900000,
+        1620000,
+        2920000
+      ]
+    },
+    {
+      "level": 17,
+      "cumulative_chest_thresholds": [
+        20000,
+        60000,
+        100000,
+        150000,
+        200000,
+        600000,
+        900000,
+        1620000,
+        2920000
+      ]
+    },
+    {
+      "level": 18,
+      "cumulative_chest_thresholds": [
+        20000,
+        60000,
+        100000,
+        150000,
+        200000,
+        600000,
+        900000,
+        1620000,
+        2920000
+      ]
+    },
+    {
+      "level": 19,
+      "cumulative_chest_thresholds": [
+        20000,
+        60000,
+        100000,
+        150000,
+        200000,
+        600000,
+        900000,
+        1620000,
+        2920000
+      ]
+    },
+    {
+      "level": 20,
+      "cumulative_chest_thresholds": [
+        20000,
+        60000,
+        100000,
+        150000,
+        200000,
+        600000,
+        900000,
+        1620000,
+        2920000
+      ]
+    },
+    {
+      "level": 21,
+      "cumulative_chest_thresholds": [
+        40000,
+        60000,
+        150000,
+        200000,
+        250000,
+        700000,
+        1050000,
+        1890000,
+        3410000
+      ]
+    },
+    {
+      "level": 22,
+      "cumulative_chest_thresholds": [
+        40000,
+        100000,
+        200000,
+        300000,
+        400000,
+        1000000,
+        1500000,
+        2400000,
+        3840000
+      ]
+    },
+    {
+      "level": 23,
+      "cumulative_chest_thresholds": [
+        60000,
+        120000,
+        250000,
+        350000,
+        450000,
+        1200000,
+        1800000,
+        2880000,
+        4610000
+      ]
+    },
+    {
+      "level": 24,
+      "cumulative_chest_thresholds": [
+        60000,
+        140000,
+        250000,
+        400000,
+        500000,
+        1400000,
+        2100000,
+        3570000,
+        6070000
+      ]
+    },
+    {
+      "level": 25,
+      "cumulative_chest_thresholds": [
+        60000,
+        160000,
+        300000,
+        450000,
+        600000,
+        1600000,
+        2400000,
+        4080000,
+        6940000
+      ]
+    },
+    {
+      "level": 26,
+      "cumulative_chest_thresholds": [
+        100000,
+        220000,
+        450000,
+        650000,
+        850000,
+        2200000,
+        3300000,
+        5280000,
+        8450000
+      ]
+    },
+    {
+      "level": 27,
+      "cumulative_chest_thresholds": [
+        100000,
+        240000,
+        500000,
+        750000,
+        950000,
+        2500000,
+        3750000,
+        6000000,
+        9600000
+      ]
+    },
+    {
+      "level": 28,
+      "cumulative_chest_thresholds": [
+        120000,
+        280000,
+        550000,
+        800000,
+        1100000,
+        2800000,
+        4200000,
+        6720000,
+        10000000
+      ]
+    },
+    {
+      "level": 29,
+      "cumulative_chest_thresholds": [
+        120000,
+        300000,
+        600000,
+        900000,
+        1200000,
+        3000000,
+        4500000,
+        7200000,
+        10000000
+      ]
+    },
+    {
+      "level": 30,
+      "cumulative_chest_thresholds": [
+        180000,
+        440000,
+        900000,
+        1300000,
+        1800000,
+        4500000,
+        5400000,
+        8100000,
+        10000000
+      ]
+    },
+    {
+      "level": 31,
+      "cumulative_chest_thresholds": [
+        180000,
+        440000,
+        900000,
+        1350000,
+        1800000,
+        4600000,
+        5520000,
+        8280000,
+        10000000
+      ]
+    },
+    {
+      "level": 32,
+      "cumulative_chest_thresholds": [
+        180000,
+        440000,
+        900000,
+        1350000,
+        1800000,
+        4600000,
+        5520000,
+        8280000,
+        10000000
+      ]
+    },
+    {
+      "level": 33,
+      "cumulative_chest_thresholds": [
+        180000,
+        440000,
+        900000,
+        1350000,
+        1800000,
+        4600000,
+        5520000,
+        8280000,
+        10000000
+      ]
+    },
+    {
+      "level": 34,
+      "cumulative_chest_thresholds": [
+        180000,
+        440000,
+        900000,
+        1350000,
+        1800000,
+        4600000,
+        5520000,
+        8280000,
+        10000000
+      ]
+    },
+    {
+      "level": 35,
+      "cumulative_chest_thresholds": [
+        180000,
+        440000,
+        900000,
+        1350000,
+        1800000,
+        4600000,
+        5520000,
+        8280000,
+        10000000
+      ]
+    },
+    {
+      "level": 36,
+      "cumulative_chest_thresholds": [
+        180000,
+        440000,
+        900000,
+        1350000,
+        1800000,
+        4600000,
+        5520000,
+        8280000,
+        10000000
+      ]
+    },
+    {
+      "level": 37,
+      "cumulative_chest_thresholds": [
+        180000,
+        440000,
+        900000,
+        1350000,
+        1800000,
+        4600000,
+        5520000,
+        8280000,
+        10000000
+      ]
+    },
+    {
+      "level": 38,
+      "cumulative_chest_thresholds": [
+        180000,
+        440000,
+        900000,
+        1350000,
+        1800000,
+        4600000,
+        5520000,
+        8280000,
+        10000000
+      ]
+    },
+    {
+      "level": 39,
+      "cumulative_chest_thresholds": [
+        180000,
+        440000,
+        900000,
+        1350000,
+        1800000,
+        4600000,
+        5520000,
+        8280000,
+        10000000
+      ]
+    },
+    {
+      "level": 40,
+      "cumulative_chest_thresholds": [
+        180000,
+        440000,
+        900000,
+        1350000,
+        1800000,
+        4600000,
+        5520000,
+        8280000,
+        10000000
+      ]
+    }
+  ],
+  "personal_policy": [
+    {
+      "power_plant_level": "10-20",
+      "final_chest_target": 2920000,
+      "proposed_1_5x_ceiling": 4380000
+    },
+    {
+      "power_plant_level": "21",
+      "final_chest_target": 3410000,
+      "proposed_1_5x_ceiling": 5115000
+    },
+    {
+      "power_plant_level": "22",
+      "final_chest_target": 3840000,
+      "proposed_1_5x_ceiling": 5760000
+    },
+    {
+      "power_plant_level": "23",
+      "final_chest_target": 4610000,
+      "proposed_1_5x_ceiling": 6915000
+    },
+    {
+      "power_plant_level": "24",
+      "final_chest_target": 6070000,
+      "proposed_1_5x_ceiling": 9105000
+    },
+    {
+      "power_plant_level": "25",
+      "final_chest_target": 6940000,
+      "proposed_1_5x_ceiling": 10410000
+    },
+    {
+      "power_plant_level": "26",
+      "final_chest_target": 8450000,
+      "proposed_1_5x_ceiling": 12675000
+    },
+    {
+      "power_plant_level": "27",
+      "final_chest_target": 9600000,
+      "proposed_1_5x_ceiling": 14400000
+    },
+    {
+      "power_plant_level": "28+",
+      "final_chest_target": 10000000,
+      "proposed_1_5x_ceiling": 15000000
+    }
+  ],
+  "maximum_local_final_chest_threshold": 10000000,
+  "maximum_proposed_ceiling": 15000000,
+  "occupation_reference": {
+    "points": 10000,
+    "interval_seconds": 60,
+    "ten_minutes_points": 100000,
+    "not_guaranteed_for_all_members": true
+  },
+  "current_local_event_rules": "1. The Alliance that occupies Arcadia for 1 consecutive hour in the battle that lasts 2 hours, or holds the longest occupation time at the end of the event, will claim victory in Arcadian Conquest.\n\n2. After securing victory in the Arcadian Conquest, the winning Alliance's Leader will automatically be appointed as the Governor. (If the Leader role is transferred, the Governor title is transferred as well.)\n\n3. Occupying the Arcadia Towers can help in the attack on Arcadia. The longer that the Towers are occupied, the higher the frequency of attacks.\n\n4. The Arcadian Conquest takes place weekly.\n\n5. One hour before the start of the event, the Settlements in the alert zone near Arcadia will be forcibly and randomly relocated. Starting 50 minutes before the event commences until the end of the event, you can relocate freely into the alert zone. However, the Peace Flares of the Settlements in the alert zone will be removed and cannot be activated again. If a Settlement within the alert zone is defeated by an enemy, it will immediately be relocated to a random location.\n\n6. In Arcadian Conquest battles, a very small number of wounded soldiers may die.",
+  "governor_succession_options": {
+    "3": [
+      1,
+      2,
+      3,
+      1
+    ],
+    "5": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      1
+    ],
+    "6": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      1
+    ]
+  },
+  "queue_notation": "Numbers are positions in the agreed ranking snapshot. A always means whichever alliance is next to take control, not a permanently privileged alliance.",
+  "rotation_policy": {
+    "A": "Incoming governor alliance and state-chat mediator through R5/R4",
+    "starts": "When the protection period ends and battle is available",
+    "visitor_main_building_limit_seconds": 600,
+    "limit_scope": "Cumulative for each visiting alliance over the entire battle, across all captures and members. Not a ten-minute turn.",
+    "A_exempt_from_visitor_limit": true,
+    "participation": "Attacks on Arcadia and towers remain permitted throughout the open battle, within occupation limits. Participation may not be prohibited.",
+    "tracking": "Every alliance tracks its own members and cumulative occupation; A mediates in state chat."
+  },
+  "power_plant_40": {
+    "building_configuration_present": true,
+    "building_id": "building_stronghold_40_1",
+    "gate_id": 54300010,
+    "gate_name": "city_40",
+    "live_availability": "NOT VERIFIED - configuration presence is not proof of a live unlock."
+  },
+  "healing_guidance": {
+    "suggested_starting_batch": [
+      5000,
+      7000
+    ],
+    "reported_example_help_cap": 44,
+    "guaranteed_batch_size": false,
+    "exact_help_cooldown": "UNVERIFIED - check the live request timer",
+    "seconds_removed_per_help": "UNVERIFIED for the player - measure live; do not substitute construction values.",
+    "practical_method": "Start a small batch, request help when available, watch actual helps received and remaining time, then adjust. Check request cooldown before expecting a new help round."
+  },
+  "reported_death_rate": {
+    "reported_by_user": 0.05,
+    "verified": false,
+    "denominator_verified": false,
+    "note": "Do not present as a proven loss of 5% of the entire attacking march on every hit."
+  },
+  "proposals_not_game_mechanics": [
+    "Governor succession: top-five default, optional three or six alliances",
+    "10-minute cumulative main-building occupation ceiling per visiting alliance",
+    "Incoming governor alliance A alone may permanently garrison",
+    "1.5x personal scoring ceiling",
+    "Each alliance tracks its own members; A mediates in state chat"
+  ],
+  "runtime_unknowns": [
+    "Active event reward overrides and player-specific live tier",
+    "Actual handover latency and occupation ledger",
+    "Tower-fire behavior in the current live event",
+    "Personal occupation point eligibility for a given garrison",
+    "Exact permanent-loss rate and denominator",
+    "Live Power Plant 40 availability"
+  ],
+  "sources": [
+    {
+      "url": "https://tilesurvivegame.com/en/blog/1055",
+      "use": "Official two-hour battle duration update, 9 July 2026."
+    },
+    {
+      "url": "https://tilesurvivegame.com/en/blog/828",
+      "use": "Official occupation scoring and tower attrition guidance only; its older duration is superseded."
+    }
+  ],
+  "anonymous_capture_comparison": {
+    "scope": "Only the six visible leading entries; rounded screenshot scores, not the entire event.",
+    "screenshot_scores_sum": 1268650000,
+    "same_entries_at_policy_ceiling": 90000000,
+    "score_gap": 1178650000,
+    "gap_share": 0.9290584479564892,
+    "public_presentation": "Qualitative and anonymous. No player names, alliance tags, exact scores, casualty totals or reward quantities.",
+    "casualty_conversion": "Not an actual death estimate. Scores also include own casualties, occupation and healing help; enemy defeated is not confirmed permanent death. Do not sum both sides as unique losses.",
+    "local_enemy_defeat_points_by_tier": {
+      "1": 3.0,
+      "2": 4.0,
+      "3": 6.0,
+      "4": 9.0,
+      "5": 13.0,
+      "6": 20.0,
+      "7": 28.0,
+      "8": 38.0,
+      "9": 50.0,
+      "10": 66.0
+    },
+    "conditional_enemy_defeat_only_equivalents": {
+      "7": 42094642.85714286,
+      "8": 31017105.263157893,
+      "9": 23573000.0,
+      "10": 17858333.333333332
+    },
+    "conditional_equivalent_warning": "Hypothetical points-to-defeated-troops conversion only; excludes other sources and does not measure unique troops or permanent deaths.",
+    "reward_observation": "Screenshot shows rank-dependent tokens, scrolls, speedups, food and wood. Higher rank offers more; incremental rank rewards are distinct from personal chests. No resource-cost break-even is proven."
+  },
+  "public_score_scenarios": {
+    "assumption": "All scenario points from enemy troop defeats only. Not an estimate of actual unique troops, hospital occupancy, or permanent deaths.",
+    "formula": "enemy defeat equivalents = scenario score / points per enemy troop defeated",
+    "rows": [
+      {
+        "score": 10000000,
+        "equivalents": {
+          "7": 357142.85714285716,
+          "8": 263157.8947368421,
+          "9": 200000.0,
+          "10": 151515.15151515152
+        },
+        "excess_above_15m": 0
+      },
+      {
+        "score": 15000000,
+        "equivalents": {
+          "7": 535714.2857142857,
+          "8": 394736.84210526315,
+          "9": 300000.0,
+          "10": 227272.72727272726
+        },
+        "excess_above_15m": 0
+      },
+      {
+        "score": 100000000,
+        "equivalents": {
+          "7": 3571428.5714285714,
+          "8": 2631578.947368421,
+          "9": 2000000.0,
+          "10": 1515151.5151515151
+        },
+        "excess_above_15m": 85000000
+      },
+      {
+        "score": 200000000,
+        "equivalents": {
+          "7": 7142857.142857143,
+          "8": 5263157.894736842,
+          "9": 4000000.0,
+          "10": 3030303.0303030303
+        },
+        "excess_above_15m": 185000000
+      },
+      {
+        "score": 300000000,
+        "equivalents": {
+          "7": 10714285.714285715,
+          "8": 7894736.842105263,
+          "9": 6000000.0,
+          "10": 4545454.545454546
+        },
+        "excess_above_15m": 285000000
+      }
+    ],
+    "privacy": "Generic score scenarios only; no identities or exact historical individual scores."
+  }
+}

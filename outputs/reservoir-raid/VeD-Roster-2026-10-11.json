@@ -1,0 +1,174 @@
+{
+  "date": "2026-10-11",
+  "source": "14 user-supplied screenshots; Arabic spelling confirmed by user",
+  "starters": [
+    {
+      "name": "ChaosGoblin",
+      "power_M": 17.2,
+      "group": "S"
+    },
+    {
+      "name": "Sattow",
+      "power_M": 16.73,
+      "group": "B"
+    },
+    {
+      "name": "Artur",
+      "power_M": 16.22,
+      "group": "S"
+    },
+    {
+      "name": "Yildiz",
+      "power_M": 14.79,
+      "group": "S"
+    },
+    {
+      "name": "LadyGroz",
+      "power_M": 14.18,
+      "group": "S"
+    },
+    {
+      "name": "Martyku",
+      "power_M": 12.75,
+      "group": "C"
+    },
+    {
+      "name": "Luke",
+      "power_M": 12.61,
+      "group": "A"
+    },
+    {
+      "name": "Hammy",
+      "power_M": 11.29,
+      "group": "B"
+    },
+    {
+      "name": "Баламут",
+      "power_M": 11.2,
+      "group": "D"
+    },
+    {
+      "name": "ryan",
+      "power_M": 11.16,
+      "group": "B"
+    },
+    {
+      "name": "BuBu",
+      "power_M": 10.54,
+      "group": "A"
+    },
+    {
+      "name": "hellolleh",
+      "power_M": 10.44,
+      "group": "A"
+    },
+    {
+      "name": "Shikiiigami",
+      "power_M": 10.43,
+      "group": "A"
+    },
+    {
+      "name": "HoloCrow",
+      "power_M": 10.31,
+      "group": "P3"
+    },
+    {
+      "name": "None",
+      "power_M": 10.09,
+      "group": "P2"
+    },
+    {
+      "name": "KayKat",
+      "power_M": 9.8,
+      "group": "P4"
+    },
+    {
+      "name": "Пятница",
+      "power_M": 9.73,
+      "group": "D"
+    },
+    {
+      "name": "Bruklin88",
+      "power_M": 9.49,
+      "group": "D"
+    },
+    {
+      "name": "TheShadowWZYE",
+      "power_M": 9.25,
+      "group": "HQ"
+    },
+    {
+      "name": "SaRSaLa",
+      "power_M": 9.07,
+      "group": "C"
+    },
+    {
+      "name": "Filin",
+      "power_M": 8.79,
+      "group": "C"
+    },
+    {
+      "name": "Александр",
+      "power_M": 8.69,
+      "group": "P2"
+    },
+    {
+      "name": "M1K3.Marius",
+      "power_M": 8.59,
+      "group": "P4"
+    },
+    {
+      "name": "الفدرالي",
+      "power_M": 8.0,
+      "group": "P3"
+    },
+    {
+      "name": "monika",
+      "power_M": 7.4,
+      "group": "P1"
+    },
+    {
+      "name": "Schari",
+      "power_M": 7.23,
+      "group": "P1"
+    },
+    {
+      "name": "Xaroth",
+      "power_M": 6.68,
+      "group": "G"
+    },
+    {
+      "name": "Bulik",
+      "power_M": 6.38,
+      "group": "G"
+    },
+    {
+      "name": "Андрей Ф",
+      "power_M": 5.51,
+      "group": "G"
+    },
+    {
+      "name": "Bartek",
+      "power_M": 5.47,
+      "group": "G"
+    }
+  ],
+  "reserves": [
+    {
+      "name": "Salman",
+      "power_M": 6.49
+    },
+    {
+      "name": "Joker",
+      "power_M": 6.96
+    },
+    {
+      "name": "Шампунь",
+      "power_M": 5.55
+    }
+  ],
+  "displayed_header_power_M": 287.96,
+  "sum_displayed_starter_power_M": 310.02,
+  "discrepancy_M": 22.06,
+  "mechanics": "Retained from earlier plan; not reverified this week"
+}

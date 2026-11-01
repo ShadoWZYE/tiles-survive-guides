@@ -32,6 +32,8 @@ def main() -> None:
                         + "\n" + (HERE / "upgrade-model.js").read_text(encoding="utf-8")
                         + "\n" + (HERE / "upgrade-ui.js").read_text(encoding="utf-8")
                         + "\n" + (HERE / "estimate-model.js").read_text(encoding="utf-8")
+                        + "\n" + (HERE / "faction-model.js").read_text(encoding="utf-8")
+                        + "\n" + (HERE / "formation-model.js").read_text(encoding="utf-8")
                         + "\n" + (HERE / "app.js").read_text(encoding="utf-8"))
     upgrades = json.loads((ROOT / "outputs/hero-report/TilesSurvive-Upgrade-Data.json").read_text(encoding="utf-8"))
     html = html.replace('__CLIENT_BUILD__', upgrades['client_build']).replace('__HERO_COUNT__', str(len(heroes)))

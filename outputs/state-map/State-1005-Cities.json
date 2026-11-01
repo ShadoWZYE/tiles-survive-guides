@@ -1,0 +1,3164 @@
+{
+  "client_build": "2.6.300.293",
+  "layout": "S1/base",
+  "state_label": "1005 (screenshots)",
+  "table_sha256": {
+    "analysis_center": "322d8289dca60cef2d58b6fe5dc14bf63a43e88676e02c35882b2d3919edb6ad",
+    "analysis_center_position": "740d46a2dc7ea2632a9d2d8d03a4a9f44a0017a893efe873b13a8128940175ff",
+    "map_area_id": "43c28a4198bb0a52fb9f32555ef0414cf5b2d63e1e2ad6ada01be34f4d5ce92a",
+    "map_piece_id": "a95a5a2e401cb0d8d915ef1f86f54cd541c65c6a37803f6506c08ccb7038b454"
+  },
+  "manifest_sha256": "df08134c1035e7d9d0dbd8db5a3bc3f10c03ebe767fa73409fe75ecd4113d2dd",
+  "geometry": "130 x 130 map pieces; each piece spans 10 x 10 world coordinates. Polygon edges from MapAreaId.",
+  "native_scale_proof": {
+    "method": "PieceTintManager..cctor",
+    "rva": "0x244b0d0",
+    "body_sha256": "aaf9a7cd3337b11362e5ff8a632985f49650d6e11295fe27cda917757e5c83ef",
+    "tiles_per_piece": 10,
+    "cell_width": 130
+  },
+  "updated": "2026-10-29",
+  "contested_regions": [],
+  "claim_counts": {
+    "VeD": 6,
+    "VAN": 6,
+    "ALL": 6,
+    "rus": 6,
+    "ECL": 6,
+    "TCE": 6
+  },
+  "city_count": 110,
+  "region_count": 110,
+  "mapped_region_pieces": 14200,
+  "target_identification": "Initial plans matched screenshot marker beams and annotated region circles. Current user corrections override the initial screenshot allocation. VeD target number 2 now marks the newly assigned Factory 1108:468, replacing transferred Research Center 908:508; numbers identify current targets, not a capture route.",
+  "allocation_changes_2026_10_29": [
+    {
+      "coordinates": [
+        408,
+        528
+      ],
+      "from": "VAN",
+      "to": null,
+      "reason": "Unclaimed Research Center removed from VAN plan"
+    },
+    {
+      "coordinates": [
+        908,
+        508
+      ],
+      "from": "VeD",
+      "to": "ALL",
+      "reason": "Explicit reassignment"
+    },
+    {
+      "coordinates": [
+        688,
+        188
+      ],
+      "from": "ALL",
+      "to": null,
+      "reason": "Replaced in ALL plan"
+    },
+    {
+      "coordinates": [
+        1108,
+        468
+      ],
+      "from": null,
+      "to": "VeD",
+      "reason": "Explicit addition"
+    },
+    {
+      "coordinates": [
+        328,
+        188
+      ],
+      "from": null,
+      "to": "VAN",
+      "reason": "Ownership confirmed by supplied city tooltip screenshot"
+    }
+  ],
+  "latest_assignment_update": {
+    "date": "2026-10-29",
+    "TCE": [
+      [
+        308,
+        468
+      ],
+      [
+        408,
+        528
+      ],
+      [
+        248,
+        488
+      ],
+      [
+        248,
+        348
+      ],
+      [
+        168,
+        348
+      ],
+      [
+        168,
+        488
+      ]
+    ],
+    "ECL": [
+      [
+        248,
+        848
+      ]
+    ],
+    "note": "Assignments replace previous claims at those coordinates; no competing claims retained for explicit transfers."
+  },
+  "ownership": "Planned claims except Military Base 668:828, reported captured by ECL by the user on 28 October. Factory 328:188 is confirmed owned by VAN in the 29 October screenshot. No live ownership feed.",
+  "projection": "Isometric diagram, X up/right, Y up/left; terrain textures and camera perspective are not reconstructed.",
+  "stacking": "Per-city configured bonuses are not guaranteed additions. Live 29 October observation: 908:508 and 908:768 together display only +10% training. Static addition depends on live eligibility and active mapping; effective stacking remains unresolved.",
+  "cities": [
+    {
+      "position_id": 45700004,
+      "area_id": 40400032,
+      "area_code": "1032",
+      "config_id": 45600004,
+      "config_key": "analysis_center_1_4",
+      "level": 1,
+      "name": "Village",
+      "ru": "Деревня",
+      "x": 228,
+      "y": 88,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300747,
+          "value": 0.05,
+          "en": "Gathering speed",
+          "ru": "Скорость сбора"
+        }
+      ],
+      "pieces": 112
+    },
+    {
+      "position_id": 45700003,
+      "area_id": 40400031,
+      "area_code": "1031",
+      "config_id": 45600003,
+      "config_key": "analysis_center_1_3",
+      "level": 1,
+      "name": "Village",
+      "ru": "Деревня",
+      "x": 348,
+      "y": 88,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300300,
+          "value": 0.05,
+          "en": "Resource production",
+          "ru": "Производство ресурсов"
+        }
+      ],
+      "pieces": 108
+    },
+    {
+      "position_id": 45700002,
+      "area_id": 40400030,
+      "area_code": "1030",
+      "config_id": 45600002,
+      "config_key": "analysis_center_1_2",
+      "level": 1,
+      "name": "Village",
+      "ru": "Деревня",
+      "x": 448,
+      "y": 88,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300747,
+          "value": 0.05,
+          "en": "Gathering speed",
+          "ru": "Скорость сбора"
+        }
+      ],
+      "pieces": 104
+    },
+    {
+      "position_id": 45700001,
+      "area_id": 40400029,
+      "area_code": "1029",
+      "config_id": 45600001,
+      "config_key": "analysis_center_1_1",
+      "level": 1,
+      "name": "Village",
+      "ru": "Деревня",
+      "x": 548,
+      "y": 88,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300300,
+          "value": 0.05,
+          "en": "Resource production",
+          "ru": "Производство ресурсов"
+        }
+      ],
+      "pieces": 112
+    },
+    {
+      "position_id": 45700024,
+      "area_id": 40400028,
+      "area_code": "1028",
+      "config_id": 45600004,
+      "config_key": "analysis_center_1_4",
+      "level": 1,
+      "name": "Village",
+      "ru": "Деревня",
+      "x": 648,
+      "y": 88,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300747,
+          "value": 0.05,
+          "en": "Gathering speed",
+          "ru": "Скорость сбора"
+        }
+      ],
+      "pieces": 88
+    },
+    {
+      "position_id": 45700019,
+      "area_id": 40400027,
+      "area_code": "1027",
+      "config_id": 45600003,
+      "config_key": "analysis_center_1_3",
+      "level": 1,
+      "name": "Village",
+      "ru": "Деревня",
+      "x": 748,
+      "y": 88,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300300,
+          "value": 0.05,
+          "en": "Resource production",
+          "ru": "Производство ресурсов"
+        }
+      ],
+      "pieces": 100
+    },
+    {
+      "position_id": 45700020,
+      "area_id": 40400026,
+      "area_code": "1026",
+      "config_id": 45600002,
+      "config_key": "analysis_center_1_2",
+      "level": 1,
+      "name": "Village",
+      "ru": "Деревня",
+      "x": 828,
+      "y": 88,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300747,
+          "value": 0.05,
+          "en": "Gathering speed",
+          "ru": "Скорость сбора"
+        }
+      ],
+      "pieces": 112
+    },
+    {
+      "position_id": 45700017,
+      "area_id": 40400025,
+      "area_code": "1025",
+      "config_id": 45600001,
+      "config_key": "analysis_center_1_1",
+      "level": 1,
+      "name": "Village",
+      "ru": "Деревня",
+      "x": 928,
+      "y": 88,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300300,
+          "value": 0.05,
+          "en": "Resource production",
+          "ru": "Производство ресурсов"
+        }
+      ],
+      "pieces": 104
+    },
+    {
+      "position_id": 45700027,
+      "area_id": 40400024,
+      "area_code": "1024",
+      "config_id": 45600004,
+      "config_key": "analysis_center_1_4",
+      "level": 1,
+      "name": "Village",
+      "ru": "Деревня",
+      "x": 1028,
+      "y": 88,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300747,
+          "value": 0.05,
+          "en": "Gathering speed",
+          "ru": "Скорость сбора"
+        }
+      ],
+      "pieces": 100
+    },
+    {
+      "position_id": 45700021,
+      "area_id": 40400023,
+      "area_code": "1023",
+      "config_id": 45600003,
+      "config_key": "analysis_center_1_3",
+      "level": 1,
+      "name": "Village",
+      "ru": "Деревня",
+      "x": 1128,
+      "y": 108,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300300,
+          "value": 0.05,
+          "en": "Resource production",
+          "ru": "Производство ресурсов"
+        }
+      ],
+      "pieces": 96
+    },
+    {
+      "position_id": 45700026,
+      "area_id": 40400033,
+      "area_code": "1033",
+      "config_id": 45600001,
+      "config_key": "analysis_center_1_1",
+      "level": 1,
+      "name": "Village",
+      "ru": "Деревня",
+      "x": 128,
+      "y": 128,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300300,
+          "value": 0.05,
+          "en": "Resource production",
+          "ru": "Производство ресурсов"
+        }
+      ],
+      "pieces": 92
+    },
+    {
+      "position_id": 45700030,
+      "area_id": 40400022,
+      "area_code": "1022",
+      "config_id": 45600002,
+      "config_key": "analysis_center_1_2",
+      "level": 1,
+      "name": "Village",
+      "ru": "Деревня",
+      "x": 1208,
+      "y": 168,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300747,
+          "value": 0.05,
+          "en": "Gathering speed",
+          "ru": "Скорость сбора"
+        }
+      ],
+      "pieces": 96
+    },
+    {
+      "position_id": 45700029,
+      "area_id": 40400105,
+      "area_code": "1048",
+      "config_id": 45600004,
+      "config_key": "analysis_center_1_4",
+      "level": 1,
+      "name": "Village",
+      "ru": "Деревня",
+      "x": 168,
+      "y": 188,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300747,
+          "value": 0.05,
+          "en": "Gathering speed",
+          "ru": "Скорость сбора"
+        }
+      ],
+      "pieces": 96
+    },
+    {
+      "position_id": 45700023,
+      "area_id": 40400104,
+      "area_code": "1047",
+      "config_id": 45600003,
+      "config_key": "analysis_center_1_3",
+      "level": 1,
+      "name": "Village",
+      "ru": "Деревня",
+      "x": 1108,
+      "y": 188,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300300,
+          "value": 0.05,
+          "en": "Resource production",
+          "ru": "Производство ресурсов"
+        }
+      ],
+      "pieces": 92
+    },
+    {
+      "position_id": 45700032,
+      "area_id": 40400034,
+      "area_code": "1034",
+      "config_id": 45600002,
+      "config_key": "analysis_center_1_2",
+      "level": 1,
+      "name": "Village",
+      "ru": "Деревня",
+      "x": 68,
+      "y": 228,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300747,
+          "value": 0.05,
+          "en": "Gathering speed",
+          "ru": "Скорость сбора"
+        }
+      ],
+      "pieces": 68
+    },
+    {
+      "position_id": 45700036,
+      "area_id": 40400021,
+      "area_code": "1021",
+      "config_id": 45600001,
+      "config_key": "analysis_center_1_1",
+      "level": 1,
+      "name": "Village",
+      "ru": "Деревня",
+      "x": 1208,
+      "y": 248,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300300,
+          "value": 0.05,
+          "en": "Resource production",
+          "ru": "Производство ресурсов"
+        }
+      ],
+      "pieces": 96
+    },
+    {
+      "position_id": 45700025,
+      "area_id": 40400035,
+      "area_code": "1035",
+      "config_id": 45600003,
+      "config_key": "analysis_center_1_3",
+      "level": 1,
+      "name": "Village",
+      "ru": "Деревня",
+      "x": 68,
+      "y": 328,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300300,
+          "value": 0.05,
+          "en": "Resource production",
+          "ru": "Производство ресурсов"
+        }
+      ],
+      "pieces": 96
+    },
+    {
+      "position_id": 45700091,
+      "area_id": 40400020,
+      "area_code": "1020",
+      "config_id": 45600004,
+      "config_key": "analysis_center_1_4",
+      "level": 1,
+      "name": "Village",
+      "ru": "Деревня",
+      "x": 1208,
+      "y": 348,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300747,
+          "value": 0.05,
+          "en": "Gathering speed",
+          "ru": "Скорость сбора"
+        }
+      ],
+      "pieces": 104
+    },
+    {
+      "position_id": 45700094,
+      "area_id": 40400036,
+      "area_code": "1036",
+      "config_id": 45600004,
+      "config_key": "analysis_center_1_4",
+      "level": 1,
+      "name": "Village",
+      "ru": "Деревня",
+      "x": 88,
+      "y": 408,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300747,
+          "value": 0.05,
+          "en": "Gathering speed",
+          "ru": "Скорость сбора"
+        }
+      ],
+      "pieces": 88
+    },
+    {
+      "position_id": 45700034,
+      "area_id": 40400019,
+      "area_code": "1019",
+      "config_id": 45600003,
+      "config_key": "analysis_center_1_3",
+      "level": 1,
+      "name": "Village",
+      "ru": "Деревня",
+      "x": 1208,
+      "y": 448,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300300,
+          "value": 0.05,
+          "en": "Resource production",
+          "ru": "Производство ресурсов"
+        }
+      ],
+      "pieces": 88
+    },
+    {
+      "position_id": 45700038,
+      "area_id": 40400037,
+      "area_code": "1037",
+      "config_id": 45600001,
+      "config_key": "analysis_center_1_1",
+      "level": 1,
+      "name": "Village",
+      "ru": "Деревня",
+      "x": 88,
+      "y": 488,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300300,
+          "value": 0.05,
+          "en": "Resource production",
+          "ru": "Производство ресурсов"
+        }
+      ],
+      "pieces": 88
+    },
+    {
+      "position_id": 45700043,
+      "area_id": 40400018,
+      "area_code": "1018",
+      "config_id": 45600002,
+      "config_key": "analysis_center_1_2",
+      "level": 1,
+      "name": "Village",
+      "ru": "Деревня",
+      "x": 1208,
+      "y": 528,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300747,
+          "value": 0.05,
+          "en": "Gathering speed",
+          "ru": "Скорость сбора"
+        }
+      ],
+      "pieces": 96
+    },
+    {
+      "position_id": 45700097,
+      "area_id": 40400038,
+      "area_code": "1038",
+      "config_id": 45600002,
+      "config_key": "analysis_center_1_2",
+      "level": 1,
+      "name": "Village",
+      "ru": "Деревня",
+      "x": 88,
+      "y": 588,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300747,
+          "value": 0.05,
+          "en": "Gathering speed",
+          "ru": "Скорость сбора"
+        }
+      ],
+      "pieces": 100
+    },
+    {
+      "position_id": 45700039,
+      "area_id": 40400017,
+      "area_code": "1017",
+      "config_id": 45600001,
+      "config_key": "analysis_center_1_1",
+      "level": 1,
+      "name": "Village",
+      "ru": "Деревня",
+      "x": 1208,
+      "y": 628,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300300,
+          "value": 0.05,
+          "en": "Resource production",
+          "ru": "Производство ресурсов"
+        }
+      ],
+      "pieces": 96
+    },
+    {
+      "position_id": 45700045,
+      "area_id": 40400096,
+      "area_code": "1039",
+      "config_id": 45600003,
+      "config_key": "analysis_center_1_3",
+      "level": 1,
+      "name": "Village",
+      "ru": "Деревня",
+      "x": 88,
+      "y": 668,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300300,
+          "value": 0.05,
+          "en": "Resource production",
+          "ru": "Производство ресурсов"
+        }
+      ],
+      "pieces": 88
+    },
+    {
+      "position_id": 45700096,
+      "area_id": 40400016,
+      "area_code": "1016",
+      "config_id": 45600004,
+      "config_key": "analysis_center_1_4",
+      "level": 1,
+      "name": "Village",
+      "ru": "Деревня",
+      "x": 1208,
+      "y": 708,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300747,
+          "value": 0.05,
+          "en": "Gathering speed",
+          "ru": "Скорость сбора"
+        }
+      ],
+      "pieces": 88
+    },
+    {
+      "position_id": 45700106,
+      "area_id": 40400097,
+      "area_code": "1040",
+      "config_id": 45600004,
+      "config_key": "analysis_center_1_4",
+      "level": 1,
+      "name": "Village",
+      "ru": "Деревня",
+      "x": 88,
+      "y": 748,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300747,
+          "value": 0.05,
+          "en": "Gathering speed",
+          "ru": "Скорость сбора"
+        }
+      ],
+      "pieces": 92
+    },
+    {
+      "position_id": 45700102,
+      "area_id": 40400015,
+      "area_code": "1015",
+      "config_id": 45600003,
+      "config_key": "analysis_center_1_3",
+      "level": 1,
+      "name": "Village",
+      "ru": "Деревня",
+      "x": 1208,
+      "y": 808,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300300,
+          "value": 0.05,
+          "en": "Resource production",
+          "ru": "Производство ресурсов"
+        }
+      ],
+      "pieces": 104
+    },
+    {
+      "position_id": 45700113,
+      "area_id": 40400098,
+      "area_code": "1041",
+      "config_id": 45600001,
+      "config_key": "analysis_center_1_1",
+      "level": 1,
+      "name": "Village",
+      "ru": "Деревня",
+      "x": 88,
+      "y": 828,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300300,
+          "value": 0.05,
+          "en": "Resource production",
+          "ru": "Производство ресурсов"
+        }
+      ],
+      "pieces": 88
+    },
+    {
+      "position_id": 45700109,
+      "area_id": 40400014,
+      "area_code": "1014",
+      "config_id": 45600002,
+      "config_key": "analysis_center_1_2",
+      "level": 1,
+      "name": "Village",
+      "ru": "Деревня",
+      "x": 1208,
+      "y": 888,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300747,
+          "value": 0.05,
+          "en": "Gathering speed",
+          "ru": "Скорость сбора"
+        }
+      ],
+      "pieces": 100
+    },
+    {
+      "position_id": 45700111,
+      "area_id": 40400099,
+      "area_code": "1042",
+      "config_id": 45600002,
+      "config_key": "analysis_center_1_2",
+      "level": 1,
+      "name": "Village",
+      "ru": "Деревня",
+      "x": 88,
+      "y": 908,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300747,
+          "value": 0.05,
+          "en": "Gathering speed",
+          "ru": "Скорость сбора"
+        }
+      ],
+      "pieces": 88
+    },
+    {
+      "position_id": 45700115,
+      "area_id": 40400100,
+      "area_code": "1043",
+      "config_id": 45600003,
+      "config_key": "analysis_center_1_3",
+      "level": 1,
+      "name": "Village",
+      "ru": "Деревня",
+      "x": 88,
+      "y": 988,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300300,
+          "value": 0.05,
+          "en": "Resource production",
+          "ru": "Производство ресурсов"
+        }
+      ],
+      "pieces": 84
+    },
+    {
+      "position_id": 45700114,
+      "area_id": 40400013,
+      "area_code": "1013",
+      "config_id": 45600001,
+      "config_key": "analysis_center_1_1",
+      "level": 1,
+      "name": "Village",
+      "ru": "Деревня",
+      "x": 1208,
+      "y": 988,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300300,
+          "value": 0.05,
+          "en": "Resource production",
+          "ru": "Производство ресурсов"
+        }
+      ],
+      "pieces": 92
+    },
+    {
+      "position_id": 45700108,
+      "area_id": 40400101,
+      "area_code": "1044",
+      "config_id": 45600004,
+      "config_key": "analysis_center_1_4",
+      "level": 1,
+      "name": "Village",
+      "ru": "Деревня",
+      "x": 88,
+      "y": 1108,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300747,
+          "value": 0.05,
+          "en": "Gathering speed",
+          "ru": "Скорость сбора"
+        }
+      ],
+      "pieces": 96
+    },
+    {
+      "position_id": 45700112,
+      "area_id": 40400103,
+      "area_code": "1046",
+      "config_id": 45600002,
+      "config_key": "analysis_center_1_2",
+      "level": 1,
+      "name": "Village",
+      "ru": "Деревня",
+      "x": 1128,
+      "y": 1108,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300747,
+          "value": 0.05,
+          "en": "Gathering speed",
+          "ru": "Скорость сбора"
+        }
+      ],
+      "pieces": 92
+    },
+    {
+      "position_id": 45700110,
+      "area_id": 40400012,
+      "area_code": "1012",
+      "config_id": 45600004,
+      "config_key": "analysis_center_1_4",
+      "level": 1,
+      "name": "Village",
+      "ru": "Деревня",
+      "x": 1208,
+      "y": 1108,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300747,
+          "value": 0.05,
+          "en": "Gathering speed",
+          "ru": "Скорость сбора"
+        }
+      ],
+      "pieces": 96
+    },
+    {
+      "position_id": 45700116,
+      "area_id": 40400102,
+      "area_code": "1045",
+      "config_id": 45600001,
+      "config_key": "analysis_center_1_1",
+      "level": 1,
+      "name": "Village",
+      "ru": "Деревня",
+      "x": 148,
+      "y": 1128,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300300,
+          "value": 0.05,
+          "en": "Resource production",
+          "ru": "Производство ресурсов"
+        }
+      ],
+      "pieces": 88
+    },
+    {
+      "position_id": 45700117,
+      "area_id": 40400011,
+      "area_code": "1011",
+      "config_id": 45600003,
+      "config_key": "analysis_center_1_3",
+      "level": 1,
+      "name": "Village",
+      "ru": "Деревня",
+      "x": 1148,
+      "y": 1188,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300300,
+          "value": 0.05,
+          "en": "Resource production",
+          "ru": "Производство ресурсов"
+        }
+      ],
+      "pieces": 80
+    },
+    {
+      "position_id": 45700119,
+      "area_id": 40400001,
+      "area_code": "1001",
+      "config_id": 45600001,
+      "config_key": "analysis_center_1_1",
+      "level": 1,
+      "name": "Village",
+      "ru": "Деревня",
+      "x": 188,
+      "y": 1208,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300300,
+          "value": 0.05,
+          "en": "Resource production",
+          "ru": "Производство ресурсов"
+        }
+      ],
+      "pieces": 96
+    },
+    {
+      "position_id": 45700124,
+      "area_id": 40400002,
+      "area_code": "1002",
+      "config_id": 45600002,
+      "config_key": "analysis_center_1_2",
+      "level": 1,
+      "name": "Village",
+      "ru": "Деревня",
+      "x": 288,
+      "y": 1208,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300747,
+          "value": 0.05,
+          "en": "Gathering speed",
+          "ru": "Скорость сбора"
+        }
+      ],
+      "pieces": 92
+    },
+    {
+      "position_id": 45700126,
+      "area_id": 40400003,
+      "area_code": "1003",
+      "config_id": 45600003,
+      "config_key": "analysis_center_1_3",
+      "level": 1,
+      "name": "Village",
+      "ru": "Деревня",
+      "x": 388,
+      "y": 1208,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300300,
+          "value": 0.05,
+          "en": "Resource production",
+          "ru": "Производство ресурсов"
+        }
+      ],
+      "pieces": 100
+    },
+    {
+      "position_id": 45700123,
+      "area_id": 40400004,
+      "area_code": "1004",
+      "config_id": 45600004,
+      "config_key": "analysis_center_1_4",
+      "level": 1,
+      "name": "Village",
+      "ru": "Деревня",
+      "x": 488,
+      "y": 1208,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300747,
+          "value": 0.05,
+          "en": "Gathering speed",
+          "ru": "Скорость сбора"
+        }
+      ],
+      "pieces": 96
+    },
+    {
+      "position_id": 45700121,
+      "area_id": 40400005,
+      "area_code": "1005",
+      "config_id": 45600001,
+      "config_key": "analysis_center_1_1",
+      "level": 1,
+      "name": "Village",
+      "ru": "Деревня",
+      "x": 568,
+      "y": 1208,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300300,
+          "value": 0.05,
+          "en": "Resource production",
+          "ru": "Производство ресурсов"
+        }
+      ],
+      "pieces": 96
+    },
+    {
+      "position_id": 45700128,
+      "area_id": 40400006,
+      "area_code": "1006",
+      "config_id": 45600002,
+      "config_key": "analysis_center_1_2",
+      "level": 1,
+      "name": "Village",
+      "ru": "Деревня",
+      "x": 668,
+      "y": 1208,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300747,
+          "value": 0.05,
+          "en": "Gathering speed",
+          "ru": "Скорость сбора"
+        }
+      ],
+      "pieces": 96
+    },
+    {
+      "position_id": 45700133,
+      "area_id": 40400007,
+      "area_code": "1007",
+      "config_id": 45600003,
+      "config_key": "analysis_center_1_3",
+      "level": 1,
+      "name": "Village",
+      "ru": "Деревня",
+      "x": 748,
+      "y": 1208,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300300,
+          "value": 0.05,
+          "en": "Resource production",
+          "ru": "Производство ресурсов"
+        }
+      ],
+      "pieces": 96
+    },
+    {
+      "position_id": 45700125,
+      "area_id": 40400008,
+      "area_code": "1008",
+      "config_id": 45600004,
+      "config_key": "analysis_center_1_4",
+      "level": 1,
+      "name": "Village",
+      "ru": "Деревня",
+      "x": 848,
+      "y": 1208,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300747,
+          "value": 0.05,
+          "en": "Gathering speed",
+          "ru": "Скорость сбора"
+        }
+      ],
+      "pieces": 96
+    },
+    {
+      "position_id": 45700122,
+      "area_id": 40400009,
+      "area_code": "1009",
+      "config_id": 45600001,
+      "config_key": "analysis_center_1_1",
+      "level": 1,
+      "name": "Village",
+      "ru": "Деревня",
+      "x": 948,
+      "y": 1208,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300300,
+          "value": 0.05,
+          "en": "Resource production",
+          "ru": "Производство ресурсов"
+        }
+      ],
+      "pieces": 96
+    },
+    {
+      "position_id": 45700132,
+      "area_id": 40400010,
+      "area_code": "1010",
+      "config_id": 45600002,
+      "config_key": "analysis_center_1_2",
+      "level": 1,
+      "name": "Village",
+      "ru": "Деревня",
+      "x": 1048,
+      "y": 1208,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300747,
+          "value": 0.05,
+          "en": "Gathering speed",
+          "ru": "Скорость сбора"
+        }
+      ],
+      "pieces": 108
+    },
+    {
+      "position_id": 45700005,
+      "area_id": 40400060,
+      "area_code": "2022",
+      "config_id": 45600005,
+      "config_key": "analysis_center_2_1",
+      "level": 2,
+      "name": "Factory",
+      "ru": "Фабрика",
+      "x": 248,
+      "y": 188,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300314,
+          "value": 0.05,
+          "en": "Construction speed",
+          "ru": "Скорость строительства"
+        }
+      ],
+      "pieces": 88
+    },
+    {
+      "position_id": 45700007,
+      "area_id": 40400059,
+      "area_code": "2021",
+      "config_id": 45600007,
+      "config_key": "analysis_center_2_3",
+      "level": 2,
+      "name": "Factory",
+      "ru": "Фабрика",
+      "x": 328,
+      "y": 188,
+      "confirmed_owner": "VAN",
+      "ownership_reported": "2026-10-29",
+      "plan": "VAN",
+      "claims": [
+        "VAN"
+      ],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300321,
+          "value": 0.05,
+          "en": "Training speed",
+          "ru": "Скорость обучения"
+        }
+      ],
+      "pieces": 96
+    },
+    {
+      "position_id": 45700006,
+      "area_id": 40400058,
+      "area_code": "2020",
+      "config_id": 45600006,
+      "config_key": "analysis_center_2_2",
+      "level": 2,
+      "name": "Factory",
+      "ru": "Фабрика",
+      "x": 448,
+      "y": 188,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300484,
+          "value": 0.05,
+          "en": "Research speed",
+          "ru": "Скорость исследований"
+        }
+      ],
+      "pieces": 96
+    },
+    {
+      "position_id": 45700022,
+      "area_id": 40400057,
+      "area_code": "2019",
+      "config_id": 45600005,
+      "config_key": "analysis_center_2_1",
+      "level": 2,
+      "name": "Factory",
+      "ru": "Фабрика",
+      "x": 568,
+      "y": 188,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300314,
+          "value": 0.05,
+          "en": "Construction speed",
+          "ru": "Скорость строительства"
+        }
+      ],
+      "pieces": 96
+    },
+    {
+      "position_id": 45700033,
+      "area_id": 40400056,
+      "area_code": "2018",
+      "config_id": 45600007,
+      "config_key": "analysis_center_2_3",
+      "level": 2,
+      "name": "Factory",
+      "ru": "Фабрика",
+      "x": 688,
+      "y": 188,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300321,
+          "value": 0.05,
+          "en": "Training speed",
+          "ru": "Скорость обучения"
+        }
+      ],
+      "pieces": 96
+    },
+    {
+      "position_id": 45700018,
+      "area_id": 40400055,
+      "area_code": "2017",
+      "config_id": 45600006,
+      "config_key": "analysis_center_2_2",
+      "level": 2,
+      "name": "Factory",
+      "ru": "Фабрика",
+      "x": 808,
+      "y": 188,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "ALL",
+      "claims": [
+        "ALL"
+      ],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300484,
+          "value": 0.05,
+          "en": "Research speed",
+          "ru": "Скорость исследований"
+        }
+      ],
+      "pieces": 96
+    },
+    {
+      "position_id": 45700028,
+      "area_id": 40400054,
+      "area_code": "2016",
+      "config_id": 45600005,
+      "config_key": "analysis_center_2_1",
+      "level": 2,
+      "name": "Factory",
+      "ru": "Фабрика",
+      "x": 948,
+      "y": 188,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "ALL",
+      "claims": [
+        "ALL"
+      ],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300314,
+          "value": 0.05,
+          "en": "Construction speed",
+          "ru": "Скорость строительства"
+        }
+      ],
+      "pieces": 96
+    },
+    {
+      "position_id": 45700037,
+      "area_id": 40400053,
+      "area_code": "2015",
+      "config_id": 45600007,
+      "config_key": "analysis_center_2_3",
+      "level": 2,
+      "name": "Factory",
+      "ru": "Фабрика",
+      "x": 1048,
+      "y": 228,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300321,
+          "value": 0.05,
+          "en": "Training speed",
+          "ru": "Скорость обучения"
+        }
+      ],
+      "pieces": 88
+    },
+    {
+      "position_id": 45700035,
+      "area_id": 40400052,
+      "area_code": "2014",
+      "config_id": 45600006,
+      "config_key": "analysis_center_2_2",
+      "level": 2,
+      "name": "Factory",
+      "ru": "Фабрика",
+      "x": 1108,
+      "y": 328,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300484,
+          "value": 0.05,
+          "en": "Research speed",
+          "ru": "Скорость исследований"
+        }
+      ],
+      "pieces": 104
+    },
+    {
+      "position_id": 45700056,
+      "area_id": 40400061,
+      "area_code": "2023",
+      "config_id": 45600006,
+      "config_key": "analysis_center_2_2",
+      "level": 2,
+      "name": "Factory",
+      "ru": "Фабрика",
+      "x": 168,
+      "y": 348,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "TCE",
+      "claims": [
+        "TCE"
+      ],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300484,
+          "value": 0.05,
+          "en": "Research speed",
+          "ru": "Скорость исследований"
+        }
+      ],
+      "pieces": 92
+    },
+    {
+      "position_id": 45700040,
+      "area_id": 40400051,
+      "area_code": "2013",
+      "config_id": 45600005,
+      "config_key": "analysis_center_2_1",
+      "level": 2,
+      "name": "Factory",
+      "ru": "Фабрика",
+      "x": 1108,
+      "y": 468,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "VeD",
+      "claims": [
+        "VeD"
+      ],
+      "contested": false,
+      "order": 2,
+      "benefits": [
+        {
+          "id": 300314,
+          "value": 0.05,
+          "en": "Construction speed",
+          "ru": "Скорость строительства"
+        }
+      ],
+      "pieces": 96
+    },
+    {
+      "position_id": 45700041,
+      "area_id": 40400062,
+      "area_code": "2024",
+      "config_id": 45600007,
+      "config_key": "analysis_center_2_3",
+      "level": 2,
+      "name": "Factory",
+      "ru": "Фабрика",
+      "x": 168,
+      "y": 488,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "TCE",
+      "claims": [
+        "TCE"
+      ],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300321,
+          "value": 0.05,
+          "en": "Training speed",
+          "ru": "Скорость обучения"
+        }
+      ],
+      "pieces": 96
+    },
+    {
+      "position_id": 45700057,
+      "area_id": 40400050,
+      "area_code": "2012",
+      "config_id": 45600007,
+      "config_key": "analysis_center_2_3",
+      "level": 2,
+      "name": "Factory",
+      "ru": "Фабрика",
+      "x": 1108,
+      "y": 568,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300321,
+          "value": 0.05,
+          "en": "Training speed",
+          "ru": "Скорость обучения"
+        }
+      ],
+      "pieces": 96
+    },
+    {
+      "position_id": 45700051,
+      "area_id": 40400106,
+      "area_code": "2025",
+      "config_id": 45600005,
+      "config_key": "analysis_center_2_1",
+      "level": 2,
+      "name": "Factory",
+      "ru": "Фабрика",
+      "x": 168,
+      "y": 628,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "ECL",
+      "claims": [
+        "ECL"
+      ],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300314,
+          "value": 0.05,
+          "en": "Construction speed",
+          "ru": "Скорость строительства"
+        }
+      ],
+      "pieces": 100
+    },
+    {
+      "position_id": 45700061,
+      "area_id": 40400049,
+      "area_code": "2011",
+      "config_id": 45600006,
+      "config_key": "analysis_center_2_2",
+      "level": 2,
+      "name": "Factory",
+      "ru": "Фабрика",
+      "x": 1108,
+      "y": 708,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300484,
+          "value": 0.05,
+          "en": "Research speed",
+          "ru": "Скорость исследований"
+        }
+      ],
+      "pieces": 96
+    },
+    {
+      "position_id": 45700086,
+      "area_id": 40400107,
+      "area_code": "2026",
+      "config_id": 45600006,
+      "config_key": "analysis_center_2_2",
+      "level": 2,
+      "name": "Factory",
+      "ru": "Фабрика",
+      "x": 168,
+      "y": 788,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300484,
+          "value": 0.05,
+          "en": "Research speed",
+          "ru": "Скорость исследований"
+        }
+      ],
+      "pieces": 84
+    },
+    {
+      "position_id": 45700067,
+      "area_id": 40400048,
+      "area_code": "2010",
+      "config_id": 45600005,
+      "config_key": "analysis_center_2_1",
+      "level": 2,
+      "name": "Factory",
+      "ru": "Фабрика",
+      "x": 1108,
+      "y": 828,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300314,
+          "value": 0.05,
+          "en": "Construction speed",
+          "ru": "Скорость строительства"
+        }
+      ],
+      "pieces": 96
+    },
+    {
+      "position_id": 45700062,
+      "area_id": 40400108,
+      "area_code": "2027",
+      "config_id": 45600007,
+      "config_key": "analysis_center_2_3",
+      "level": 2,
+      "name": "Factory",
+      "ru": "Фабрика",
+      "x": 168,
+      "y": 948,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300321,
+          "value": 0.05,
+          "en": "Training speed",
+          "ru": "Скорость обучения"
+        }
+      ],
+      "pieces": 92
+    },
+    {
+      "position_id": 45700099,
+      "area_id": 40400047,
+      "area_code": "2009",
+      "config_id": 45600007,
+      "config_key": "analysis_center_2_3",
+      "level": 2,
+      "name": "Factory",
+      "ru": "Фабрика",
+      "x": 1108,
+      "y": 948,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300321,
+          "value": 0.05,
+          "en": "Training speed",
+          "ru": "Скорость обучения"
+        }
+      ],
+      "pieces": 96
+    },
+    {
+      "position_id": 45700105,
+      "area_id": 40400109,
+      "area_code": "2028",
+      "config_id": 45600005,
+      "config_key": "analysis_center_2_1",
+      "level": 2,
+      "name": "Factory",
+      "ru": "Фабрика",
+      "x": 188,
+      "y": 1068,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300314,
+          "value": 0.05,
+          "en": "Construction speed",
+          "ru": "Скорость строительства"
+        }
+      ],
+      "pieces": 76
+    },
+    {
+      "position_id": 45700101,
+      "area_id": 40400046,
+      "area_code": "2008",
+      "config_id": 45600006,
+      "config_key": "analysis_center_2_2",
+      "level": 2,
+      "name": "Factory",
+      "ru": "Фабрика",
+      "x": 1068,
+      "y": 1068,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300484,
+          "value": 0.05,
+          "en": "Research speed",
+          "ru": "Скорость исследований"
+        }
+      ],
+      "pieces": 76
+    },
+    {
+      "position_id": 45700107,
+      "area_id": 40400039,
+      "area_code": "2001",
+      "config_id": 45600005,
+      "config_key": "analysis_center_2_1",
+      "level": 2,
+      "name": "Factory",
+      "ru": "Фабрика",
+      "x": 268,
+      "y": 1128,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300314,
+          "value": 0.05,
+          "en": "Construction speed",
+          "ru": "Скорость строительства"
+        }
+      ],
+      "pieces": 76
+    },
+    {
+      "position_id": 45700103,
+      "area_id": 40400040,
+      "area_code": "2002",
+      "config_id": 45600006,
+      "config_key": "analysis_center_2_2",
+      "level": 2,
+      "name": "Factory",
+      "ru": "Фабрика",
+      "x": 408,
+      "y": 1128,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300484,
+          "value": 0.05,
+          "en": "Research speed",
+          "ru": "Скорость исследований"
+        }
+      ],
+      "pieces": 72
+    },
+    {
+      "position_id": 45700104,
+      "area_id": 40400041,
+      "area_code": "2003",
+      "config_id": 45600007,
+      "config_key": "analysis_center_2_3",
+      "level": 2,
+      "name": "Factory",
+      "ru": "Фабрика",
+      "x": 528,
+      "y": 1128,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300321,
+          "value": 0.05,
+          "en": "Training speed",
+          "ru": "Скорость обучения"
+        }
+      ],
+      "pieces": 72
+    },
+    {
+      "position_id": 45700136,
+      "area_id": 40400042,
+      "area_code": "2004",
+      "config_id": 45600005,
+      "config_key": "analysis_center_2_1",
+      "level": 2,
+      "name": "Factory",
+      "ru": "Фабрика",
+      "x": 648,
+      "y": 1128,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300314,
+          "value": 0.05,
+          "en": "Construction speed",
+          "ru": "Скорость строительства"
+        }
+      ],
+      "pieces": 72
+    },
+    {
+      "position_id": 45700293,
+      "area_id": 40400043,
+      "area_code": "2005",
+      "config_id": 45600006,
+      "config_key": "analysis_center_2_2",
+      "level": 2,
+      "name": "Factory",
+      "ru": "Фабрика",
+      "x": 768,
+      "y": 1128,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300484,
+          "value": 0.05,
+          "en": "Research speed",
+          "ru": "Скорость исследований"
+        }
+      ],
+      "pieces": 72
+    },
+    {
+      "position_id": 45700140,
+      "area_id": 40400044,
+      "area_code": "2006",
+      "config_id": 45600007,
+      "config_key": "analysis_center_2_3",
+      "level": 2,
+      "name": "Factory",
+      "ru": "Фабрика",
+      "x": 888,
+      "y": 1128,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300321,
+          "value": 0.05,
+          "en": "Training speed",
+          "ru": "Скорость обучения"
+        }
+      ],
+      "pieces": 72
+    },
+    {
+      "position_id": 45700143,
+      "area_id": 40400045,
+      "area_code": "2007",
+      "config_id": 45600005,
+      "config_key": "analysis_center_2_1",
+      "level": 2,
+      "name": "Factory",
+      "ru": "Фабрика",
+      "x": 1008,
+      "y": 1128,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "rus",
+      "claims": [
+        "rus"
+      ],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300314,
+          "value": 0.05,
+          "en": "Construction speed",
+          "ru": "Скорость строительства"
+        }
+      ],
+      "pieces": 80
+    },
+    {
+      "position_id": 45700010,
+      "area_id": 40400074,
+      "area_code": "3012",
+      "config_id": 45600010,
+      "config_key": "analysis_center_3_3",
+      "level": 3,
+      "name": "Town",
+      "ru": "Город",
+      "x": 308,
+      "y": 248,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 301837,
+          "value": 0.02,
+          "en": "Troop HP",
+          "ru": "Здоровье войск"
+        }
+      ],
+      "pieces": 108
+    },
+    {
+      "position_id": 45700009,
+      "area_id": 40400073,
+      "area_code": "3011",
+      "config_id": 45600009,
+      "config_key": "analysis_center_3_2",
+      "level": 3,
+      "name": "Town",
+      "ru": "Город",
+      "x": 468,
+      "y": 248,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "VAN",
+      "claims": [
+        "VAN"
+      ],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 301836,
+          "value": 0.02,
+          "en": "Troop DEF",
+          "ru": "Защита войск"
+        }
+      ],
+      "pieces": 120
+    },
+    {
+      "position_id": 45700008,
+      "area_id": 40400072,
+      "area_code": "3010",
+      "config_id": 45600008,
+      "config_key": "analysis_center_3_1",
+      "level": 3,
+      "name": "Town",
+      "ru": "Город",
+      "x": 668,
+      "y": 248,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "ALL",
+      "claims": [
+        "ALL"
+      ],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 301835,
+          "value": 0.02,
+          "en": "Troop ATK",
+          "ru": "Атака войск"
+        }
+      ],
+      "pieces": 120
+    },
+    {
+      "position_id": 45700052,
+      "area_id": 40400071,
+      "area_code": "3009",
+      "config_id": 45600010,
+      "config_key": "analysis_center_3_3",
+      "level": 3,
+      "name": "Town",
+      "ru": "Город",
+      "x": 868,
+      "y": 248,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "ALL",
+      "claims": [
+        "ALL"
+      ],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 301837,
+          "value": 0.02,
+          "en": "Troop HP",
+          "ru": "Здоровье войск"
+        }
+      ],
+      "pieces": 120
+    },
+    {
+      "position_id": 45700049,
+      "area_id": 40400070,
+      "area_code": "3008",
+      "config_id": 45600009,
+      "config_key": "analysis_center_3_2",
+      "level": 3,
+      "name": "Town",
+      "ru": "Город",
+      "x": 1028,
+      "y": 328,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 301836,
+          "value": 0.02,
+          "en": "Troop DEF",
+          "ru": "Защита войск"
+        }
+      ],
+      "pieces": 140
+    },
+    {
+      "position_id": 45700044,
+      "area_id": 40400075,
+      "area_code": "3013",
+      "config_id": 45600008,
+      "config_key": "analysis_center_3_1",
+      "level": 3,
+      "name": "Town",
+      "ru": "Город",
+      "x": 248,
+      "y": 348,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "TCE",
+      "claims": [
+        "TCE"
+      ],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 301835,
+          "value": 0.02,
+          "en": "Troop ATK",
+          "ru": "Атака войск"
+        }
+      ],
+      "pieces": 104
+    },
+    {
+      "position_id": 45700058,
+      "area_id": 40400076,
+      "area_code": "3014",
+      "config_id": 45600009,
+      "config_key": "analysis_center_3_2",
+      "level": 3,
+      "name": "Town",
+      "ru": "Город",
+      "x": 248,
+      "y": 488,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "TCE",
+      "claims": [
+        "TCE"
+      ],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 301836,
+          "value": 0.02,
+          "en": "Troop DEF",
+          "ru": "Защита войск"
+        }
+      ],
+      "pieces": 128
+    },
+    {
+      "position_id": 45700064,
+      "area_id": 40400069,
+      "area_code": "3007",
+      "config_id": 45600008,
+      "config_key": "analysis_center_3_1",
+      "level": 3,
+      "name": "Town",
+      "ru": "Город",
+      "x": 1048,
+      "y": 528,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "VeD",
+      "claims": [
+        "VeD"
+      ],
+      "contested": false,
+      "order": 6,
+      "benefits": [
+        {
+          "id": 301835,
+          "value": 0.02,
+          "en": "Troop ATK",
+          "ru": "Атака войск"
+        }
+      ],
+      "pieces": 124
+    },
+    {
+      "position_id": 45700092,
+      "area_id": 40400077,
+      "area_code": "3015",
+      "config_id": 45600010,
+      "config_key": "analysis_center_3_3",
+      "level": 3,
+      "name": "Town",
+      "ru": "Город",
+      "x": 248,
+      "y": 668,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "ECL",
+      "claims": [
+        "ECL"
+      ],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 301837,
+          "value": 0.02,
+          "en": "Troop HP",
+          "ru": "Здоровье войск"
+        }
+      ],
+      "pieces": 144
+    },
+    {
+      "position_id": 45700093,
+      "area_id": 40400068,
+      "area_code": "3006",
+      "config_id": 45600010,
+      "config_key": "analysis_center_3_3",
+      "level": 3,
+      "name": "Town",
+      "ru": "Город",
+      "x": 1048,
+      "y": 748,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 301837,
+          "value": 0.02,
+          "en": "Troop HP",
+          "ru": "Здоровье войск"
+        }
+      ],
+      "pieces": 144
+    },
+    {
+      "position_id": 45700065,
+      "area_id": 40400110,
+      "area_code": "3016",
+      "config_id": 45600008,
+      "config_key": "analysis_center_3_1",
+      "level": 3,
+      "name": "Town",
+      "ru": "Город",
+      "x": 248,
+      "y": 848,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "ECL",
+      "claims": [
+        "ECL"
+      ],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 301835,
+          "value": 0.02,
+          "en": "Troop ATK",
+          "ru": "Атака войск"
+        }
+      ],
+      "pieces": 176
+    },
+    {
+      "position_id": 45700071,
+      "area_id": 40400067,
+      "area_code": "3005",
+      "config_id": 45600009,
+      "config_key": "analysis_center_3_2",
+      "level": 3,
+      "name": "Town",
+      "ru": "Город",
+      "x": 1048,
+      "y": 928,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 301836,
+          "value": 0.02,
+          "en": "Troop DEF",
+          "ru": "Защита войск"
+        }
+      ],
+      "pieces": 120
+    },
+    {
+      "position_id": 45700098,
+      "area_id": 40400063,
+      "area_code": "3001",
+      "config_id": 45600008,
+      "config_key": "analysis_center_3_1",
+      "level": 3,
+      "name": "Town",
+      "ru": "Город",
+      "x": 288,
+      "y": 1048,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 301835,
+          "value": 0.02,
+          "en": "Troop ATK",
+          "ru": "Атака войск"
+        }
+      ],
+      "pieces": 140
+    },
+    {
+      "position_id": 45700100,
+      "area_id": 40400064,
+      "area_code": "3002",
+      "config_id": 45600009,
+      "config_key": "analysis_center_3_2",
+      "level": 3,
+      "name": "Town",
+      "ru": "Город",
+      "x": 508,
+      "y": 1068,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "",
+      "claims": [],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 301836,
+          "value": 0.02,
+          "en": "Troop DEF",
+          "ru": "Защита войск"
+        }
+      ],
+      "pieces": 132
+    },
+    {
+      "position_id": 45700095,
+      "area_id": 40400065,
+      "area_code": "3003",
+      "config_id": 45600010,
+      "config_key": "analysis_center_3_3",
+      "level": 3,
+      "name": "Town",
+      "ru": "Город",
+      "x": 728,
+      "y": 1068,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "rus",
+      "claims": [
+        "rus"
+      ],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 301837,
+          "value": 0.02,
+          "en": "Troop HP",
+          "ru": "Здоровье войск"
+        }
+      ],
+      "pieces": 144
+    },
+    {
+      "position_id": 45700292,
+      "area_id": 40400066,
+      "area_code": "3004",
+      "config_id": 45600008,
+      "config_key": "analysis_center_3_1",
+      "level": 3,
+      "name": "Town",
+      "ru": "Город",
+      "x": 968,
+      "y": 1068,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "rus",
+      "claims": [
+        "rus"
+      ],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 301835,
+          "value": 0.02,
+          "en": "Troop ATK",
+          "ru": "Атака войск"
+        }
+      ],
+      "pieces": 136
+    },
+    {
+      "position_id": 45700011,
+      "area_id": 40400084,
+      "area_code": "4007",
+      "config_id": 45600011,
+      "config_key": "analysis_center_4_1",
+      "level": 4,
+      "name": "Metropolis",
+      "ru": "Метрополис",
+      "x": 428,
+      "y": 328,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "VAN",
+      "claims": [
+        "VAN"
+      ],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300300,
+          "value": 0.2,
+          "en": "Resource production",
+          "ru": "Производство ресурсов"
+        }
+      ],
+      "pieces": 212
+    },
+    {
+      "position_id": 45700012,
+      "area_id": 40400083,
+      "area_code": "4006",
+      "config_id": 45600012,
+      "config_key": "analysis_center_4_2",
+      "level": 4,
+      "name": "Metropolis",
+      "ru": "Метрополис",
+      "x": 648,
+      "y": 328,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "VAN",
+      "claims": [
+        "VAN"
+      ],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300747,
+          "value": 0.2,
+          "en": "Gathering speed",
+          "ru": "Скорость сбора"
+        }
+      ],
+      "pieces": 220
+    },
+    {
+      "position_id": 45700013,
+      "area_id": 40400082,
+      "area_code": "4005",
+      "config_id": 45600011,
+      "config_key": "analysis_center_4_1",
+      "level": 4,
+      "name": "Metropolis",
+      "ru": "Метрополис",
+      "x": 848,
+      "y": 328,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "ALL",
+      "claims": [
+        "ALL"
+      ],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300300,
+          "value": 0.2,
+          "en": "Resource production",
+          "ru": "Производство ресурсов"
+        }
+      ],
+      "pieces": 208
+    },
+    {
+      "position_id": 45700014,
+      "area_id": 40400085,
+      "area_code": "4008",
+      "config_id": 45600012,
+      "config_key": "analysis_center_4_2",
+      "level": 4,
+      "name": "Metropolis",
+      "ru": "Метрополис",
+      "x": 308,
+      "y": 468,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "TCE",
+      "claims": [
+        "TCE"
+      ],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300747,
+          "value": 0.2,
+          "en": "Gathering speed",
+          "ru": "Скорость сбора"
+        }
+      ],
+      "pieces": 208
+    },
+    {
+      "position_id": 45700120,
+      "area_id": 40400081,
+      "area_code": "4004",
+      "config_id": 45600012,
+      "config_key": "analysis_center_4_2",
+      "level": 4,
+      "name": "Metropolis",
+      "ru": "Метрополис",
+      "x": 968,
+      "y": 488,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "VeD",
+      "claims": [
+        "VeD"
+      ],
+      "contested": false,
+      "order": 5,
+      "benefits": [
+        {
+          "id": 300747,
+          "value": 0.2,
+          "en": "Gathering speed",
+          "ru": "Скорость сбора"
+        }
+      ],
+      "pieces": 236
+    },
+    {
+      "position_id": 45700118,
+      "area_id": 40400086,
+      "area_code": "4009",
+      "config_id": 45600011,
+      "config_key": "analysis_center_4_1",
+      "level": 4,
+      "name": "Metropolis",
+      "ru": "Метрополис",
+      "x": 328,
+      "y": 748,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "ECL",
+      "claims": [
+        "ECL"
+      ],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300300,
+          "value": 0.2,
+          "en": "Resource production",
+          "ru": "Производство ресурсов"
+        }
+      ],
+      "pieces": 260
+    },
+    {
+      "position_id": 45700260,
+      "area_id": 40400080,
+      "area_code": "4003",
+      "config_id": 45600011,
+      "config_key": "analysis_center_4_1",
+      "level": 4,
+      "name": "Metropolis",
+      "ru": "Метрополис",
+      "x": 968,
+      "y": 768,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "VeD",
+      "claims": [
+        "VeD"
+      ],
+      "contested": false,
+      "order": 4,
+      "benefits": [
+        {
+          "id": 300300,
+          "value": 0.2,
+          "en": "Resource production",
+          "ru": "Производство ресурсов"
+        }
+      ],
+      "pieces": 256
+    },
+    {
+      "position_id": 45700264,
+      "area_id": 40400078,
+      "area_code": "4001",
+      "config_id": 45600011,
+      "config_key": "analysis_center_4_1",
+      "level": 4,
+      "name": "Metropolis",
+      "ru": "Метрополис",
+      "x": 388,
+      "y": 988,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "rus",
+      "claims": [
+        "rus"
+      ],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300300,
+          "value": 0.2,
+          "en": "Resource production",
+          "ru": "Производство ресурсов"
+        }
+      ],
+      "pieces": 268
+    },
+    {
+      "position_id": 45700265,
+      "area_id": 40400079,
+      "area_code": "4002",
+      "config_id": 45600012,
+      "config_key": "analysis_center_4_2",
+      "level": 4,
+      "name": "Metropolis",
+      "ru": "Метрополис",
+      "x": 868,
+      "y": 988,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "rus",
+      "claims": [
+        "rus"
+      ],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300747,
+          "value": 0.2,
+          "en": "Gathering speed",
+          "ru": "Скорость сбора"
+        }
+      ],
+      "pieces": 256
+    },
+    {
+      "position_id": 45700254,
+      "area_id": 40400090,
+      "area_code": "5004",
+      "config_id": 45600016,
+      "config_key": "analysis_center_5_2",
+      "level": 5,
+      "name": "Research Center",
+      "ru": "Научный центр",
+      "x": 548,
+      "y": 408,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "VAN",
+      "claims": [
+        "VAN"
+      ],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300321,
+          "value": 0.1,
+          "en": "Training speed",
+          "ru": "Скорость обучения"
+        }
+      ],
+      "pieces": 240
+    },
+    {
+      "position_id": 45700255,
+      "area_id": 40400089,
+      "area_code": "5003",
+      "config_id": 45600015,
+      "config_key": "analysis_center_5_1",
+      "level": 5,
+      "name": "Research Center",
+      "ru": "Научный центр",
+      "x": 908,
+      "y": 508,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "ALL",
+      "claims": [
+        "ALL"
+      ],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300321,
+          "value": 0.1,
+          "en": "Training speed",
+          "ru": "Скорость обучения"
+        }
+      ],
+      "pieces": 236
+    },
+    {
+      "position_id": 45700256,
+      "area_id": 40400091,
+      "area_code": "5005",
+      "config_id": 45600015,
+      "config_key": "analysis_center_5_1",
+      "level": 5,
+      "name": "Research Center",
+      "ru": "Научный центр",
+      "x": 408,
+      "y": 528,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "TCE",
+      "claims": [
+        "TCE"
+      ],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300321,
+          "value": 0.1,
+          "en": "Training speed",
+          "ru": "Скорость обучения"
+        }
+      ],
+      "pieces": 212
+    },
+    {
+      "position_id": 45700259,
+      "area_id": 40400088,
+      "area_code": "5002",
+      "config_id": 45600016,
+      "config_key": "analysis_center_5_2",
+      "level": 5,
+      "name": "Research Center",
+      "ru": "Научный центр",
+      "x": 908,
+      "y": 768,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "VeD",
+      "claims": [
+        "VeD"
+      ],
+      "contested": false,
+      "order": 3,
+      "benefits": [
+        {
+          "id": 300321,
+          "value": 0.1,
+          "en": "Training speed",
+          "ru": "Скорость обучения"
+        }
+      ],
+      "pieces": 256
+    },
+    {
+      "position_id": 45700261,
+      "area_id": 40400092,
+      "area_code": "5006",
+      "config_id": 45600016,
+      "config_key": "analysis_center_5_2",
+      "level": 5,
+      "name": "Research Center",
+      "ru": "Научный центр",
+      "x": 408,
+      "y": 828,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "ECL",
+      "claims": [
+        "ECL"
+      ],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300321,
+          "value": 0.1,
+          "en": "Training speed",
+          "ru": "Скорость обучения"
+        }
+      ],
+      "pieces": 208
+    },
+    {
+      "position_id": 45700263,
+      "area_id": 40400087,
+      "area_code": "5001",
+      "config_id": 45600015,
+      "config_key": "analysis_center_5_1",
+      "level": 5,
+      "name": "Research Center",
+      "ru": "Научный центр",
+      "x": 648,
+      "y": 948,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "rus",
+      "claims": [
+        "rus"
+      ],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 300321,
+          "value": 0.1,
+          "en": "Training speed",
+          "ru": "Скорость обучения"
+        }
+      ],
+      "pieces": 272
+    },
+    {
+      "position_id": 45700257,
+      "area_id": 40400095,
+      "area_code": "6003",
+      "config_id": 45600019,
+      "config_key": "analysis_center_6_3",
+      "level": 6,
+      "name": "Military Base",
+      "ru": "Военная база",
+      "x": 508,
+      "y": 588,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "VAN",
+      "claims": [
+        "VAN"
+      ],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 301837,
+          "value": 0.05,
+          "en": "Troop HP",
+          "ru": "Здоровье войск"
+        }
+      ],
+      "pieces": 480
+    },
+    {
+      "position_id": 45700258,
+      "area_id": 40400094,
+      "area_code": "6002",
+      "config_id": 45600018,
+      "config_key": "analysis_center_6_2",
+      "level": 6,
+      "name": "Military Base",
+      "ru": "Военная база",
+      "x": 828,
+      "y": 588,
+      "confirmed_owner": null,
+      "ownership_reported": null,
+      "plan": "VeD",
+      "claims": [
+        "VeD"
+      ],
+      "contested": false,
+      "order": 1,
+      "benefits": [
+        {
+          "id": 301836,
+          "value": 0.05,
+          "en": "Troop DEF",
+          "ru": "Защита войск"
+        }
+      ],
+      "pieces": 488
+    },
+    {
+      "position_id": 45700262,
+      "area_id": 40400093,
+      "area_code": "6001",
+      "config_id": 45600017,
+      "config_key": "analysis_center_6_1",
+      "level": 6,
+      "name": "Military Base",
+      "ru": "Военная база",
+      "x": 668,
+      "y": 828,
+      "confirmed_owner": "ECL",
+      "ownership_reported": "2026-10-28",
+      "plan": "ECL",
+      "claims": [
+        "ECL"
+      ],
+      "contested": false,
+      "order": null,
+      "benefits": [
+        {
+          "id": 301835,
+          "value": 0.05,
+          "en": "Troop ATK",
+          "ru": "Атака войск"
+        }
+      ],
+      "pieces": 536
+    }
+  ]
+}

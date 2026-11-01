@@ -1,0 +1,59 @@
+[VeD] Reservoir Raid | 11 October 2026
+30 selected starters; 3 registered reserves.
+Individual row total: 310.02M. Header: 287.96M. Difference: 22.06M; cause unverified.
+
+PLAYERS / УЧАСТНИКИ
+^ 1. ChaosGoblin - 17.20M - S
+^ 2. Sattow - 16.73M - B
+^ 3. Artur - 16.22M - S
+^ 4. Yildiz - 14.79M - S
+^ 5. LadyGroz - 14.18M - S
+^ 6. Martyku - 12.75M - C
+^ 7. Luke - 12.61M - A
+^ 8. Hammy - 11.29M - B
+^ 9. Баламут - 11.20M - D
+^ 10. ryan - 11.16M - B
+^ 11. BuBu - 10.54M - A
+^ 12. hellolleh - 10.44M - A
+^ 13. Shikiiigami - 10.43M - A
+^ 14. HoloCrow - 10.31M - P3
+^ 15. None - 10.09M - P2
+^ 16. KayKat - 9.80M - P4
+^ 17. Пятница - 9.73M - D
+^ 18. Bruklin88 - 9.49M - D
+^ 19. TheShadowWZYE - 9.25M - HQ
+^ 20. SaRSaLa - 9.07M - C
+^ 21. Filin - 8.79M - C
+^ 22. Александр - 8.69M - P2
+^ 23. M1K3.Marius - 8.59M - P4
+^ 24. الفدرالي - 8.00M - P3
+^ 25. monika - 7.40M - P1
+^ 26. Schari - 7.23M - P1
+^ 27. Xaroth - 6.68M - G
+^ 28. Bulik - 6.38M - G
+^ 29. Андрей Ф - 5.51M - G
+^ 30. Bartek - 5.47M - G
+
+RESERVES / ЗАПАСНЫЕ
+^ Salman - 6.49M
+^ Joker - 6.96M
+Шампунь - 5.55M
+
+ALLOCATION / РАСПРЕДЕЛЕНИЕ
+S: ChaosGoblin, Artur, Yildiz, LadyGroz -> Strike / central / Ударная / центр
+A: Luke, BuBu, hellolleh, Shikiiigami -> Treatment 1 / SW / Центр 1 / ЮЗ
+B: Sattow, ryan, Hammy -> Treatment 2 / NE / Центр 2 / СВ
+C: Martyku, Filin, SaRSaLa -> Solar / NW / Солнечная / СЗ
+D: Баламут, Bruklin88, Пятница -> Helipad / SE / Площадка / ЮВ
+P1: monika, Schari -> Plant 1 / SW / Завод 1 / ЮЗ
+P2: None, Александр -> Plant 2 / NE / Завод 2 / СВ
+P3: HoloCrow, الفدرالي -> Plant 3 / NW / Завод 3 / СЗ
+P4: KayKat, M1K3.Marius -> Plant 4 / SE / Завод 4 / ЮВ
+G: Андрей Ф, Xaroth, Bartek, Bulik -> Collection / support / Сбор / поддержка
+HQ: TheShadowWZYE -> Commander / Командир
+
+Short EN summary (under 1,000 characters)
+[VeD] RR 11 Oct. HQ TheShadowWZYE; 2IC Shikiiigami. S ChaosGoblin/Artur/Yildiz/LadyGroz: mobile help, Central T+15. A Luke/BuBu/hellolleh/Shikiiigami: Treatment 1. B Sattow/Hammy/ryan: Treatment 2. C Martyku/Filin/SaRSaLa: Solar; Martyku+Filin to Dev T+15, SaRSaLa stays. D Баламут/Bruklin88/Пятница: Helipad; first two to Munitions T+15, Пятница stays. P1 monika/Schari; P2 None/Александр; P3 HoloCrow/الفدرالي; P4 KayKat/M1K3.Marius. G Андрей Ф NW, Xaroth NE, Bartek SW, Bulik SE: safe spills now, tanks T+25/35/45. First named anchors each group. Move only with safe cover; report. Heal constantly. Reserves Salman/Joker/Шампунь: enter only on HQ call after T+5 with a free seat. Blockbuster opted out. T starts with preparation; live countdown wins.
+
+Краткое RU сообщение (менее 1,000 символов)
+[VeD] RR 11.10. HQ TheShadowWZYE; зам Shikiiigami. S ChaosGoblin/Artur/Yildiz/LadyGroz: помощь, центр T+15. A Luke/BuBu/hellolleh/Shikiiigami: центр 1. B Sattow/Hammy/ryan: центр 2. C Martyku/Filin/SaRSaLa: солнечная; Martyku+Filin в комплекс T+15, SaRSaLa остается. D Баламут/Bruklin88/Пятница: площадка; первые двое на военный T+15, Пятница остается. P1 monika/Schari; P2 None/Александр; P3 HoloCrow/الفدرالي; P4 KayKat/M1K3.Marius. G Андрей Ф СЗ, Xaroth СВ, Bartek ЮЗ, Bulik ЮВ: безопасные лужи сразу, волны T+25/35/45. Первый в группе держит объект. Переходить при безопасном прикрытии; сообщать. Лечить постоянно. Запас Salman/Joker/Шампунь: вход по вызову HQ после T+5 при свободном месте. Blockbuster отказался. T от начала подготовки; таймер игры важнее.

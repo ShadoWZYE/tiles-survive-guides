@@ -31,7 +31,59 @@ internal static class Program
         var heroes = (List<Hero>)typeof(MainWindow).GetField("_heroes", BindingFlags.Instance | BindingFlags.NonPublic)!.GetValue(window)!;
         var becca = heroes.Single(h => h.Name == "Becca");
         Check(heroes.All(h => h.Estimate is not null && double.IsFinite(h.Estimate.Score)), "Missing default hero estimate");
+        Check(heroes.Single(h=>h.AssetSlug=="ken").CombatEvidenceNote.Contains("x caster HP"),"Chef raw healing source is not inspectable");
+        Check(heroes.Single(h=>h.AssetSlug=="maddie").CombatEvidenceNote.Contains("x recipient HP"),"Frank recipient-based raw healing source is not inspectable");
+        Check(heroes.Single(h=>h.AssetSlug=="maddie").CombatEvidenceNote.Contains("before modifiers and overheal; informational only"),"Raw healing scope is not explicit");
+        var timingPicker = Field<ComboBox>(window,"BattleWindowPicker");
+        var sustainedNikola = heroes.Single(h=>h.AssetSlug=="nikola").OffenseIndex;
+        timingPicker.SelectedItem=timingPicker.Items.Cast<ComboBoxItem>().Single(i=>(string)i.Tag=="10");
+        Check(heroes.Single(h=>h.AssetSlug=="nikola").OffenseIndex<sustainedNikola,"Opening window did not recompute estimates");
+        Check(heroes.Single(h=>h.AssetSlug=="nikola").CombatEvidenceNote.Contains("Completed casts:"),"Opening cast counts are not inspectable");
+        using(var timingSave=JsonDocument.Parse(File.ReadAllText(profilePath)))
+            Check(timingSave.RootElement.GetProperty("battle_seconds").GetInt32()==10,"Opening window did not persist");
+        timingPicker.SelectedItem=timingPicker.Items.Cast<ComboBoxItem>().Single(i=>(string)i.Tag=="0");
+        Check(Math.Abs(heroes.Single(h=>h.AssetSlug=="nikola").OffenseIndex-sustainedNikola)<1e-8,"Sustained scores did not restore");
         Check(heroes.Where(h => h.Rarity == "SSR").Select(h => Math.Round(h.CompositeIndex, 3)).Distinct().Count() > 5, "SSR reference estimates collapsed into ties");
+        var synergyMethod = typeof(MainWindow).GetMethod("EvaluateSynergy", BindingFlags.Static | BindingFlags.NonPublic)!;
+        var healer = new Hero { Name="Healer", Skills=[new() { InternalName="heal", GameDescription="heal" }],
+            Estimate=new(100,100,100,100,100,"Recorded build",ActiveSkillIds:["heal"]) };
+        var protector = new Hero { Name="Protector", Skills=[new() { InternalName="shield", GameDescription="shield" }],
+            Estimate=new(100,100,100,100,100,"Recorded build",ActiveSkillIds:["shield"]) };
+        (double Bonus,string Summary) Synergy() => ((double,string))synergyMethod.Invoke(null,[new List<Hero>{healer,protector},PlannerMode.Balanced,true])!;
+        Check(healer.HasMechanic("Healing") && Synergy().Bonus>0,"Unlocked support pairing not recognized");
+        healer.Estimate=healer.Estimate! with { ActiveSkillIds=[] };
+        Check(!healer.HasMechanic("Healing") && Synergy().Bonus==0,"Locked healing still receives synergy or stale cached tags");
+        healer.Estimate=healer.Estimate! with { ActiveSkillIds=["heal"] };
+        Check(healer.HasMechanic("Healing") && Synergy().Bonus>0,"Re-unlocked healing did not refresh synergy");
+        var economyHero = new Hero { OffenseIndex=100,DurabilityIndex=100,CompositeIndex=100,
+            Skills=[new() { MaxLevelOverallBenefits=[new() { Name="prop_intel_stamina_reduce_percent",Value=-.3 }] }] };
+        var scoreMethod=typeof(MainWindow).GetMethod("ScoreHero",BindingFlags.Static|BindingFlags.NonPublic)!;
+        Check(Math.Abs((double)scoreMethod.Invoke(null,[economyHero,PlannerMode.Pve])!-100)<1e-9,
+            "Stamina economy inflated PvE combat strength");
+        var synthetic = new[] { "Mountain", "Mountain", "Mountain", "Mountain", "Sea", "Wasteland" }
+            .Select((f, i) => new Hero { Name = $"Test{i}", AssetSlug = $"test{i}", Faction = f,
+                OffenseIndex = 100, DurabilityIndex = 100, CompositeIndex = 100, HealthContribution = 80,
+                Estimate = new(100, 100, 100, 100, 100, "Reference build") }).ToList();
+        var optimize = typeof(MainWindow).GetMethod("FindTopSquads", BindingFlags.Static | BindingFlags.NonPublic)!;
+        var ranked = (List<SquadResult>)optimize.Invoke(null, [synthetic, PlannerMode.Balanced, false, 6, "Unknown"])!;
+        Check(ranked[0].Heroes.Any(h => h.Faction == "Sea") && ranked[0].Heroes.Count(h => h.Faction == "Mountain") == 4,
+            "Optimizer failed to prefer the Mariner's five-faction bonus over four-faction bonus");
+        Check(Math.Abs(ranked[0].Score - 107) < 1e-9 && Math.Abs(ranked[0].FactionBonus - 7) < 1e-9,
+            "Faction health is not included in the actual optimizer score");
+        Check(ranked.All(r => Math.Abs(r.Score - r.BaseScore - r.SynergyBonus - r.FactionBonus - r.FrontlineBonus) < 1e-9), "Score breakdown disagrees with ranking");
+        for (int i = 0; i < synthetic.Count; i++)
+        {
+            synthetic[i].Role = i == 0 ? "Melee" : i == 1 ? "Mid" : "Range";
+            synthetic[i].DurabilityIndex = i == 0 ? 180 : i == 1 ? 20 : 100;
+        }
+        var positionRanked = (List<SquadResult>)optimize.Invoke(null, [synthetic, PlannerMode.Survival, false, 6, "Unknown"])!;
+        Check(positionRanked.Any(r => Math.Abs(r.FrontlineBonus) > .01), "Position fit is missing from actual squad search");
+        Check(positionRanked.All(r => Math.Abs(r.Score - r.BaseScore - r.SynergyBonus - r.FactionBonus - r.FrontlineBonus) < 1e-9), "Position score breakdown disagrees with ranking");
+        var enemyPicker = (ComboBox)window.FindName("EnemyFactionPicker");
+        enemyPicker.SelectedIndex = 3; // Sky target scenario.
+        Check(((ComboBox)window.FindName("FormationEnemyFactionPicker")).SelectedIndex == 3, "Enemy faction selectors are not synchronized");
+        Check(JsonSerializer.Deserialize<PlannerProfile>(File.ReadAllText(profilePath))!.EnemyFaction == "Sky", "Enemy scenario was not saved");
+        enemyPicker.SelectedIndex = 0;
         Check(!((Expander)window.FindName("EstimateDetailsExpander")).IsExpanded, "Estimate details should be tucked away by default");
         Check(new HeroSkill { RaidLevelParameters = ["pve_effect|damage_heal_text|effect_param2|99"] }.DamageLabel.Contains("not simulated"), "Modifier falsely displayed as ATK damage");
         var legacySettings = new UpgradeSettings { Goal = "direct" }; legacySettings.Clean();
@@ -282,6 +334,15 @@ internal static class Program
             Directory.CreateDirectory(Path.GetDirectoryName(headerScreenshot)!); using var output = File.Create(headerScreenshot); previewEncoder.Save(output);
         }
         var priorityScreenshot = Environment.GetEnvironmentVariable("PLANNER_PRIORITY_SCREENSHOT");
+        var factionScreenshot = Environment.GetEnvironmentVariable("PLANNER_FACTION_SCREENSHOT");
+        if (!string.IsNullOrWhiteSpace(factionScreenshot))
+        {
+            var guide = (ScrollViewer)window.FindName("FormationGuidePanel");
+            guide.ScrollToTop(); captured.UpdateLayout();
+            var preview = new RenderTargetBitmap(1500, 920, 96, 96, PixelFormats.Pbgra32); preview.Render(captured);
+            var previewEncoder = new PngBitmapEncoder(); previewEncoder.Frames.Add(BitmapFrame.Create(preview));
+            Directory.CreateDirectory(Path.GetDirectoryName(factionScreenshot)!); using var output = File.Create(factionScreenshot); previewEncoder.Save(output);
+        }
         if (!string.IsNullOrWhiteSpace(priorityScreenshot))
         {
             resourceFilter.SelectedIndex = 3;

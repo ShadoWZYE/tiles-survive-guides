@@ -93,7 +93,7 @@ def clean_game_text(value: str) -> str:
     return re.sub(r"</?color(?:=[^>]+)?>", "", value).strip()
 
 
-def build(source: Path, language_pack: Path | None = DEFAULT_LANGUAGE_PACK) -> list[dict[str, Any]]:
+def build(source: Path, language_pack: Path | None = DEFAULT_LANGUAGE_PACK, supported_slugs: set[str] | None = None) -> list[dict[str, Any]]:
     decoded = {}
     for name, filename in TABLE_FILES.items():
         table_name = filename.split('_', 1)[1]
@@ -129,6 +129,7 @@ def build(source: Path, language_pack: Path | None = DEFAULT_LANGUAGE_PACK) -> l
     for hero in filter(is_base_playable, rows(decoded["heroes"])):
         hero_id = hero["InternalId"]
         slug = base_slug(hero)
+        if supported_slugs is not None and slug not in supported_slugs:continue
         hero_levels = levels_by_hero[hero_id]
         chip_ids = {int(item_id) for item_id in hero.get("ChipNumber", {})}
         recruitable = any(

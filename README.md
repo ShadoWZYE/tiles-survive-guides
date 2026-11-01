@@ -16,6 +16,7 @@ The Hero Planner supports:
 - Balanced, Offense, Survival, and PvE squad scoring
 - Fair all-hero Equal builds comparison by default; Flat max stats and opt-in My builds modes. Resource priorities use actual owned builds; details stay collapsed ([model](docs/research/HERO-REFERENCE-ESTIMATES.md))
 - Five-position front-to-back formation guidance
+- Front pair survival fit in squad rankings, with protected ranged carries and a separate signed score component; corrected direct-hit skill evidence ([combat report](docs/research/COMBAT-MODEL-IMPROVEMENTS-2026-10-10.md))
 - Modeled skill synergy (separate from build-specific upgrade comparisons)
 - Exact rank-step, level, skill and optional universal-gear recording
 - Native rank-step slider with game star art and partial progress; every valid edit autosaves
@@ -29,6 +30,8 @@ The Hero Planner supports:
 - Persistent server-opening date and release timeline
 - Resizable panes, click-drag roster scrolling, and responsive browser layout
 
+The 11 October guide/code cross-check adds skill-level permanent stat buffs, recipient-aware team support and Rosie/Tarzan's checked second basic strikes to both editions. Locked skills are excluded from synergy, and Stamina economy is separate from PvE combat scores. Model v11 traces periodic buffs, includes Lucky's nominal tick budget and averages Nikola's temporary ATK buff by duration/cooldown. It removes description-row damage credit, retains nested effect gates and distinguishes buff replacement from lifetime refresh. All 29 base heroes have bound animation-clip audits. Skill budgets account for uninterrupted cast duration at speed 1, and six multi-hit paths count explicit immediate-hit dispatches. Checked basic chains include their root and child animation occupancy, without treating child cooldowns as serial animation costs. The Battle window selector adds opening 10/20/30 game-second scenarios with one casting slot per hero, configured priority, initial delays and eligible timeline dispatches, including partial-cast hits; sustained remains the default. Configuration/progression and animation/timeline assets were refreshed on 25 October; 44 selected current native base paths are now audited offline, including delayed-buff and skill-finish handling. Ray’s delayed eagle damage depends on completed active casts and disappears when the source active is locked. Nine raw healing effect formulas now distinguish caster ATK, caster HP and recipient HP, with skill-level scaling and conditional/summon labels in Estimate details. These are informational per-dispatch amounts, not effective healing or new ranking credit. Full-engine behavior and live patches remain unverified. A separate evidence-validation report records countdown consistency and unresolved paths without inventing a predictive accuracy percentage. Scores remain low-confidence estimates; [sources, native evidence and unresolved mechanics](docs/research/HERO-GUIDE-CROSSCHECK-2026-10-11.md) explain the boundaries.
+
 Source locations:
 
 - `work/HeroPlanner/` - .NET 8 WPF desktop application
@@ -36,11 +39,19 @@ Source locations:
 - `outputs/hero-report/` - normalized hero data, ranking CSV, and methodology
 - `outputs/hero-tool/images/` - hero portraits and skill icons used by the planners
 
+### Faction-aware formations
+
+Both planners include faction Final Health bonuses in squad rankings: 2 matching heroes +2%, 2+2 +4%, 3 +8%, 3+2 +12%, 4 +18%, and 5 +25%. Mariners (`Sea` in the extracted data) occupy one wildcard slot each; the planner selects the strongest valid composition without counting a Mariner twice. The faction contribution is separate from skill synergy and also affects recommendations for additional heroes.
+
+**Enemy target faction** is optional and saved in the profile. Unknown excludes counter damage. Selecting a faction models attacks landing on that faction, with the standard 20% counter plus the applicable composition counter bonus. Mariners remain neutral for counter relationships. This is a target scenario, not a simulation of a mixed enemy lineup, targeting or incoming damage. Final Health changes only the HP component of the durability index, not DEF or all scores. Flat individual stats remain unchanged; formation scores include the weighted faction contribution.
+
+Evidence and model scope: [faction audit](docs/research/FACTION-FORMATION-AUDIT-2026-10-06.md). Regression: build `work/HeroPlanner.Tests`, then run `node --test work/HeroPlannerWeb/test_faction_model.cjs`; it checks 1,024 faction combinations and 40,960 native/browser scoring cases.
+
 ### Data-driven upgrade comparisons
 
 Investment recommendations no longer impose a role-based hero order. Select five heroes, record their builds under **My roster → My build**, and choose a return metric. The calculator recomputes each adjacent rank, level, skill or recorded gear upgrade from the installed client tables. All five exact ranks/levels are required; blank skill levels remain unknown, not maximum. Gear can be explicitly absent or unknown/excluded. Invalid caps and duplicate gear slots are rejected.
 
-**Data provenance:** roster and progression were checked on **5 October 2026** against the installed **2.6.200.276** client's downloaded configuration cache, with all 20 source tables matching `BinVersionList_Realtime.json`. The refreshed dataset covers **29 base heroes**, including Lava, and 18 universal gear types. All 28 previously included heroes had identical exported progression, stats and skills, including Ray; no unverified nerf multiplier is applied. Audit evidence is in `outputs/hero-report/Hero-Config-Audit.json`, with table hashes in `TilesSurvive-Upgrade-Data.json`. This verifies local configuration, not unobserved server overrides or a full battle simulation. Raw tables remain private.
+**Data provenance:** roster and progression were checked on **25 October 2026** against the installed **2.6.300.293** client's downloaded configuration cache, with all 20 source tables matching `BinVersionList_Realtime.json`. The refreshed dataset covers **29 base heroes**, including Lava, and 18 universal gear types. All 29 supported heroes retained identical exported progression, stats and skills during this refresh, including Ray; no unverified nerf multiplier is applied. Audit evidence is in `outputs/hero-report/Hero-Config-Audit.json`, with table hashes in `TilesSurvive-Upgrade-Data.json`. This verifies local configuration, not unobserved server overrides or a full battle simulation. The refreshed config also lists Alita and Furiosa, which remain outside the 29-hero supported scope pending full validation. Raw tables remain private.
 
 **How returns are calculated:** each candidate changes one recorded build while holding the other four constant. Gain is the percentage change in the selected formation total; efficiency is that gain per 100 units of the exact listed resource. Rankings compare only the same resource ID. Hero-specific shards are not treated as a shared currency; mixed/unlisted costs have no efficiency ranking. Configured power contributions and ATK/DEF/HP totals are not win-rate, survival or live-damage predictions. Rank unlocks raise caps but do not automatically grant skill upgrades. Skill costs use the configured `SlgItemReq` field; verify the applicable expense in-game.
 
@@ -122,7 +133,7 @@ Current bilingual PDFs place English first and Russian second in the same file:
 
 - [Collections Guide - EN/RU](docs/Tiles-Survive-Collections-Guide-EN-RU.pdf)
 - [Hero Gear Upgrade Guide - EN/RU](docs/Tiles-Survive-Hero-Gear-Upgrade-Guide-EN-RU.pdf)
-- [VeD Reservoir Raid battle plan - EN/RU](docs/reports/Tiles-Survive-Reservoir-Raid-VeD-Battle-Plan-EN-RU.pdf): named assignments for 30 starters and 8 confirmed substitutes, R4 calls, rotations, and the Blockbuster entry contingency. [Copy-paste alliance messages](docs/reports/Tiles-Survive-Reservoir-Raid-VeD-Battle-Plan-EN-RU.txt). Rebuild with `python work/ReservoirRaid/build_battle_plan.py` (requires ReportLab).
+- [VeD Reservoir Raid battle plan - EN/RU](docs/reports/Tiles-Survive-Reservoir-Raid-VeD-Battle-Plan-EN-RU.pdf): updated 11 October 2026 with 30 starters and 3 registered reserves, R4 calls and rotations. [Player list and allocation summary](docs/reports/VeD-Reservoir-Raid-Roster-2026-10-11.txt). [Copy-paste alliance messages](docs/reports/Tiles-Survive-Reservoir-Raid-VeD-Battle-Plan-EN-RU.txt). Rebuild with `python work/ReservoirRaid/build_battle_plan.py` (requires ReportLab).
 
 Additional earlier reports are under `docs/reports/`. New PDFs should continue using the combined English/Russian format.
 
@@ -132,7 +143,10 @@ Standalone Reservoir Raid quick-reference images: [English PNG](outputs/reservoi
 - Troop Load report
 - Reservoir Raid guides
 - Stalwart Battlefield leaderboard explanation
-- Metropolis alliance-attack guide
+- [Arcadia state rotation agreement - English/Russian](docs/reports/Tiles-Survive-Arcadia-State-Rotation-EN-RU.pdf). Governor succession based on the opening ranking snapshot: top-five default, optional three or six. Ten minutes is cumulative main-building occupation per visiting alliance for the whole battle; A is the incoming governor alliance and sole permanent garrison. Open participation, alliance-owned tracking, mediation by A, 1.5x personal ceilings and help-based healing tips. Local data and live unknowns are clearly separated. [Verification audit](outputs/Arcadia-Rotation-Verification-2026-10-30.json). Rebuild with `python scripts/build_arcadia_rotation_pdf.py`.
+- [Metropolis capture guide and city-buff report - English/Russian](docs/reports/Tiles-Survive-Metropolis-Alliance-Attack-Guide.pdf). Corrected 29 October 2026: VeD owns Lv.5 cities 908:508 and 908:768, but the live bonus panel shows only +10% training combined. The former +20% guarantee and +25% maximum are withdrawn. Local arithmetic is conditional on server eligibility; the exact live eligibility/cap rule is unresolved. [Corrected audit](outputs/City-Buff-Stacking-Audit-2026-10-29.json). Rebuild with `python scripts/build_city_buff_report.py`.
+- [State 1005 interactive city map - English/Russian](outputs/state-map/State-1005-Interactive-Map.html), with all 110 cities and their actual client region borders. Screenshot-based capture intentions: VeD blue, VAN purple, ALL amber, rus green, ECL teal; overlapping claims use red hatching and retain both alliance names; colours represent plans. [English PNG](outputs/state-map/State-1005-Capture-Map-EN.png), [Russian PNG](outputs/state-map/State-1005-Capture-Map-RU.png), [city list](outputs/state-map/State-1005-Cities.csv). Rebuild geometry with `python scripts/build_state_map.py`, then render PNGs with `node scripts/render_state_map.cjs` using Playwright and Edge.
+- Game-chat upload cards: [English pack](outputs/state-map/game-chat/State-1005-Game-Chat-EN.zip) / [Russian pack](outputs/state-map/game-chat/State-1005-Game-Chat-RU.zip). Seven separate 960 x 1200 PNGs per language: overview, VeD, VAN, ALL, rus, ECL and TCE. Large numbered pins and coordinate lists were visually checked after simulated 640 x 800 JPEG compression. Generate sources with `python scripts/build_map_chat_cards.py`, then render with `node scripts/render_map_chat_cards.cjs`.
 - Ghoulion Pursuit preliminary alliance analysis
 
 Rebuild the current bilingual PDFs with:
@@ -144,6 +158,11 @@ python scripts\build_hero_gear_guide.py
 ```
 
 ## Hero-data extraction
+
+For a Windows x64 extraction package with its own Python runtime, see the
+[standalone extraction kit](work/extraction-kit/README.md). It includes a launcher,
+explicit input discovery, config/language/asset extraction, native audits and
+checksummed run reports. Rebuild it with `python work/extraction-kit/build.py --output outputs/Tiles-Survive-Extraction-Kit-Windows-x64.zip`.
 
 The scripts under `work/hero-extraction/` decode the relevant client configuration and build the normalized report consumed by both planners. Extracted temporary client tables are deliberately excluded from this public repository.
 

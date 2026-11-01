@@ -1,0 +1,276 @@
+{
+  "date": "2026-10-25",
+  "source": "16 supplied screenshots; 6 and 12 duplicate; green=starter; yellow=reserve",
+  "starters": [
+    {
+      "name": "Addalicious",
+      "power_M": 48.87,
+      "group": "S",
+      "screenshot": 2
+    },
+    {
+      "name": "Adam Kedavra",
+      "power_M": 46.53,
+      "group": "S",
+      "screenshot": 3
+    },
+    {
+      "name": "ChaosGoblin",
+      "power_M": 22.26,
+      "group": "S",
+      "screenshot": 1
+    },
+    {
+      "name": "Paradise flower",
+      "power_M": 24.57,
+      "group": "S",
+      "screenshot": 3
+    },
+    {
+      "name": "Blockbuster",
+      "power_M": 19.07,
+      "group": "A",
+      "screenshot": 1
+    },
+    {
+      "name": "Yildiz",
+      "power_M": 18.98,
+      "group": "A",
+      "screenshot": 1
+    },
+    {
+      "name": "LadyGroz",
+      "power_M": 17.94,
+      "group": "A",
+      "screenshot": 2
+    },
+    {
+      "name": "Shikiiigami",
+      "power_M": 13.59,
+      "group": "A",
+      "screenshot": 2
+    },
+    {
+      "name": "Sattow",
+      "power_M": 27.83,
+      "group": "B",
+      "screenshot": 1
+    },
+    {
+      "name": "ryan",
+      "power_M": 14.66,
+      "group": "B",
+      "screenshot": 9
+    },
+    {
+      "name": "Artur",
+      "power_M": 21.51,
+      "group": "B",
+      "screenshot": 3
+    },
+    {
+      "name": "Martyku",
+      "power_M": 18.32,
+      "group": "C",
+      "screenshot": 4
+    },
+    {
+      "name": "табакошка",
+      "power_M": 20.28,
+      "group": "C",
+      "screenshot": 5
+    },
+    {
+      "name": "SaRSaLa",
+      "power_M": 14.87,
+      "group": "C",
+      "screenshot": 16
+    },
+    {
+      "name": "Roronoa zoro",
+      "power_M": 21.52,
+      "group": "D",
+      "screenshot": 4
+    },
+    {
+      "name": "creative",
+      "power_M": 22.42,
+      "group": "D",
+      "screenshot": 3
+    },
+    {
+      "name": "Пятница",
+      "power_M": 14.5,
+      "group": "D",
+      "screenshot": 14
+    },
+    {
+      "name": "Peacheybites!",
+      "power_M": 12.59,
+      "group": "P1",
+      "screenshot": 6
+    },
+    {
+      "name": "Filin",
+      "power_M": 11.44,
+      "group": "P1",
+      "screenshot": 6
+    },
+    {
+      "name": "MenInPantyhose",
+      "power_M": 15.54,
+      "group": "P2",
+      "screenshot": 9
+    },
+    {
+      "name": "None",
+      "power_M": 14.34,
+      "group": "P2",
+      "screenshot": 6
+    },
+    {
+      "name": "HoloCrow",
+      "power_M": 14.29,
+      "group": "P3",
+      "screenshot": 5
+    },
+    {
+      "name": "IT-Nerd01",
+      "power_M": 16.85,
+      "group": "P3",
+      "screenshot": 5
+    },
+    {
+      "name": "Wild berry777",
+      "power_M": 12.44,
+      "group": "P4",
+      "screenshot": 10
+    },
+    {
+      "name": "Bruklin88",
+      "power_M": 13.94,
+      "group": "P4",
+      "screenshot": 7
+    },
+    {
+      "name": "Luke",
+      "power_M": 15.49,
+      "group": "G",
+      "screenshot": 4
+    },
+    {
+      "name": "The goodfather",
+      "power_M": 14.68,
+      "group": "G",
+      "screenshot": 4
+    },
+    {
+      "name": "Wróżka Nerwuska1",
+      "power_M": 10.62,
+      "group": "G",
+      "screenshot": 11
+    },
+    {
+      "name": "Баламут",
+      "power_M": 14.34,
+      "group": "G",
+      "screenshot": 7
+    },
+    {
+      "name": "TheShadoWZYE",
+      "power_M": 10.5,
+      "group": "HQ",
+      "screenshot": 2
+    }
+  ],
+  "reserves": [
+    {
+      "name": "IBRAHIM Zain",
+      "power_M": 10.47,
+      "screenshot": 7
+    },
+    {
+      "name": "Эрджей",
+      "power_M": 10.64,
+      "screenshot": 8
+    },
+    {
+      "name": "Schari",
+      "power_M": 10.08,
+      "screenshot": 9
+    },
+    {
+      "name": "Xaroth",
+      "power_M": 9.15,
+      "screenshot": 13
+    },
+    {
+      "name": "الفدرالي",
+      "power_M": 9.99,
+      "screenshot": 13
+    },
+    {
+      "name": "Lunar",
+      "power_M": 8.7,
+      "screenshot": 14
+    },
+    {
+      "name": "Андрей Ф",
+      "power_M": 7.09,
+      "screenshot": 15
+    },
+    {
+      "name": "Bulik",
+      "power_M": 8.38,
+      "screenshot": 15
+    },
+    {
+      "name": "black beard",
+      "power_M": 9.37,
+      "screenshot": 15
+    }
+  ],
+  "excluded": [
+    {
+      "name": "Monika",
+      "power_M": 9.43,
+      "screenshot": 11,
+      "reason": "Selected reserve / Opt Out in screenshot; user explicitly confirmed unavailable and requested exclusion"
+    }
+  ],
+  "selected_reserve_count": 10,
+  "available_reserve_count": 9,
+  "sum_displayed_starter_power_M": 564.78,
+  "displayed_header_power_M": null,
+  "group_chat_remove": [
+    "Azrael",
+    "Bartek",
+    "BrianJohan-",
+    "BuBu",
+    "ELiveR",
+    "Elisabett",
+    "GRANDAL",
+    "KayKat",
+    "M1K3.Marius",
+    "Monika",
+    "Salman",
+    "nikkita",
+    "Александр"
+  ],
+  "group_chat_add": [
+    "Adam Kedavra",
+    "Addalicious",
+    "Bulik",
+    "Filin",
+    "IT-Nerd01",
+    "Lunar",
+    "None",
+    "Roronoa zoro",
+    "The goodfather",
+    "Wróżka Nerwuska1",
+    "Xaroth",
+    "creative"
+  ],
+  "comparison": "18 October registered roster versus 25 October available roster; actual chat membership not inspected",
+  "name_notes": "Decorative skulls omitted around Roronoa zoro"
+}

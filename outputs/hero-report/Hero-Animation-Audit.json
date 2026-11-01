@@ -1,0 +1,3548 @@
+{
+  "version": 1,
+  "client_build": "2.6.300.293",
+  "scope": "Base model override-clip durations at unit speed; no battle scheduling or live-patch verification.",
+  "provenance": {
+    "config_pack_sha256": "de7e1b2059dc4dee30cf6a78b250f7d29d9d01a3caf11a95715c1539a8544475",
+    "manifest_sha256": "dfd4f00ad293d2ab7b7e64c829d0309c2a625ab397d262bf90128ada40d4be6e",
+    "asset_index_sha256": "b712de90406a39d97c52ba159dec1c8209e5e0c5b8cdd8d945a9c40c1f213d92",
+    "bundle_list_sha256": "c8c83bf3c0db192416bead5aab98524a66d0600537cef32e288773616765ae8c",
+    "bundles": {
+      "200458": {
+        "name": "ota+normal_animation@exploration@template",
+        "digest": "b5379aa35b453459131c7d040cb1dcf9",
+        "sha256": "57d84fe482f4eb15df1c08569d1dbb6c9ebea18a21598b09857b23b69651b96c"
+      },
+      "203310": {
+        "name": "ota+normal_model@exploration@character@cartoon@hero@herobeccakt",
+        "digest": "64d5bd6176b86a5ba099bd58b64c32e0",
+        "sha256": "ddd4b978eb652e69e2716ec4fcf2e42116cc2fc6c036b9aa479e1b2b456d45ce"
+      },
+      "203311": {
+        "name": "ota+normal_model@exploration@character@cartoon@hero@herocandykt",
+        "digest": "3785c75f63ab9a6ef9b5b540c568f1c3",
+        "sha256": "8cf899fde78b2b71b20a3a31ea5425e60174846cd3678d8fee8676929eca7ec8"
+      },
+      "203312": {
+        "name": "ota+normal_model@exploration@character@cartoon@hero@herochironkt",
+        "digest": "8656f59efbc8f179d6239a4a658d252a",
+        "sha256": "637d36c7aaa1c493e87b67bd01095263fde33deb56a59ccd6e65fdfb97b9b639"
+      },
+      "203313": {
+        "name": "ota+normal_model@exploration@character@cartoon@hero@herodavekt",
+        "digest": "d27db24eb44c42f1f558f9dbc7106acf",
+        "sha256": "e7f4cf39c8962abba46c4664f32f5a0f8f95d51c321dedc9aa09a83f28c38794"
+      },
+      "203314": {
+        "name": "ota+normal_model@exploration@character@cartoon@hero@heroevakt",
+        "digest": "a670e97f0d91f78c92eb0432927e6958",
+        "sha256": "fde9a4129430e7d68e52ec99b4afc1bc03290e6e0873dbe44fa946ad5ad653fe"
+      },
+      "203315": {
+        "name": "ota+normal_model@exploration@character@cartoon@hero@herofrejakt",
+        "digest": "a44b1edcf7a751dd9f8f281d20f66a76",
+        "sha256": "5b7c6054ad86429f606c69263186af375da0413277f3b3973a13d820c6c4b207"
+      },
+      "203317": {
+        "name": "ota+normal_model@exploration@character@cartoon@hero@herojacobkt",
+        "digest": "544d91990a624de304dc51f57efbbab0",
+        "sha256": "28cd4305b40ce0f75bf2034a633ea335c94fb7642f3cf95fc8cf26116d7e49c3"
+      },
+      "203320": {
+        "name": "ota+normal_model@exploration@character@cartoon@hero@heroknotty",
+        "digest": "2a1050ccf43174e416795968dfce3d0d",
+        "sha256": "c603beb9f7827e41f389f08a210c0b93546368a96564f4e6ca485d757dd21b33"
+      },
+      "203321": {
+        "name": "ota+normal_model@exploration@character@cartoon@hero@herolavase",
+        "digest": "5c3f500b0b07d1edbf6fe7f58900a777",
+        "sha256": "cef5024ffa8c5a722862c76a8476819f7493c3b2e47dad64eb3e6dd855492912"
+      },
+      "203322": {
+        "name": "ota+normal_model@exploration@character@cartoon@hero@herolaylakt",
+        "digest": "6985ee701a7d31fd82d31c1cef1e62cb",
+        "sha256": "585f382ce89e759cd22e97227f01a3a444ad72a0bd59c0c1e84a9cfb750b107f"
+      },
+      "203327": {
+        "name": "ota+normal_model@exploration@character@cartoon@hero@heromikekt_new",
+        "digest": "80c917ab4b629ab29881413549c5655d",
+        "sha256": "03a24586ad6db676c21a7e4c8c95f0d021c0c6c4ac8aa4fb8fbb8d9bbee314e3"
+      },
+      "203329": {
+        "name": "ota+normal_model@exploration@character@cartoon@hero@heronikola",
+        "digest": "aeaff588bb0d5c0942f8fb372720d859",
+        "sha256": "43cfd2669f31554f72de57adf07f380d36096340fe8c085c5b2e80cfb06e0068"
+      },
+      "203330": {
+        "name": "ota+normal_model@exploration@character@cartoon@hero@heroragnar",
+        "digest": "a4fc33ffb2e35ff42d2059cc93f03b55",
+        "sha256": "4849aaaba9d73814eaf9e5d0c38e4ee1e90e8d7ca74c5280b561ab1a8115ee6e"
+      },
+      "203331": {
+        "name": "ota+normal_model@exploration@character@cartoon@hero@heroray",
+        "digest": "cd054c387d486c528f13dfe373beefb9",
+        "sha256": "a6c3808ad3f816a3ed2e96085ce5de8a932b43151675f43c10727ba3f32e819a"
+      },
+      "203335": {
+        "name": "ota+normal_model@exploration@character@cartoon@hero@herosharkkt",
+        "digest": "3ade7a254fd954fc37ef810217d2b482",
+        "sha256": "77cf216e6a62b6ebf97a0a2a8b80aafc51bcf964c12a59b98d4371cdbabb2749"
+      },
+      "203336": {
+        "name": "ota+normal_model@exploration@character@cartoon@hero@herotarakt",
+        "digest": "4787bcfbab142e28b6e7b01cdfce619c",
+        "sha256": "772b742551f85424c43283332f4870504b995ea6f866cdee8adda056f9eb10df"
+      },
+      "203337": {
+        "name": "ota+normal_model@exploration@character@cartoon@hero@herotarzankt",
+        "digest": "d91fdf814b1038eae89c01599917a4b8",
+        "sha256": "7eb47dbc310f6a4cedec902d9c098553482adf0ee39cd25bbe38510b9d307e69"
+      },
+      "203339": {
+        "name": "ota+normal_model@exploration@character@cartoon@hero@herotithikt",
+        "digest": "70e1c5644955c21c7f7a77d616c9eb63",
+        "sha256": "0315dad069d5228732a2046b565b49322082f29a9322781e5f724bf9542fb8cf"
+      },
+      "203340": {
+        "name": "ota+normal_model@exploration@character@cartoon@hero@herotonykt",
+        "digest": "7750f477e92c4044ab01119874184cb6",
+        "sha256": "0092a7c9c0bbee7917fdd91562f40949014db929634d01f88cb6bfb421bcba65"
+      },
+      "203341": {
+        "name": "ota+normal_model@exploration@character@cartoon@hero@herotraviskt",
+        "digest": "3f5fa0548ac302a2bb03cfbde8d09d2a",
+        "sha256": "a5fb6f0ff3f9c230a73b3c50657367dcd97ef410b621f894bae3c089e09a74af"
+      },
+      "203342": {
+        "name": "ota+normal_model@exploration@character@cartoon@hero@heroundinekt",
+        "digest": "7f2f58e37eb3213a26ab45a75920a798",
+        "sha256": "ccd4840a27cf9b0fa3b3947661345e83061f4004db6bdf8142cbe0ad800be09f"
+      },
+      "203343": {
+        "name": "ota+normal_model@exploration@character@cartoon@hero@herowright",
+        "digest": "ac26bb6bf8c3d1acacf63f82df086b33",
+        "sha256": "8f7779afa8fd868b2fcc57a76c9a031697b071b7966bbac26a8618b92e36d089"
+      },
+      "203467": {
+        "name": "ota+normal_model@exploration@character@herofreja",
+        "digest": "cdd5a2b7f60686dadbbabbc534c7d899",
+        "sha256": "fd5ec26451cf7ef99871c04a1885c3822dd273e0f5fe1359aae46e2a3a669ac1"
+      },
+      "203479": {
+        "name": "ota+normal_model@exploration@character@heronewbecca",
+        "digest": "6fcbf45e00c5cec743b91e3136ee7b11",
+        "sha256": "b01c96283d6233f9e831d717011054ec449650c9e1a6a27909d84dc4915fed0c"
+      },
+      "203884": {
+        "name": "ota+normal_model_survivor_becca",
+        "digest": "1ddd016bee6b86d5cff2c9c4f19ad7e5",
+        "sha256": "a19a3915470ed3da809be2354680964593e4792d8ddc172a52bfe0d763b7526e"
+      },
+      "203885": {
+        "name": "ota+normal_model_survivor_candy",
+        "digest": "ca1dfce84539cd2eac5ee7409aa9d1f3",
+        "sha256": "7814526e16b836f29b15a23f0554c557a31c83f5c1cd81820a71dfb71d87d7da"
+      },
+      "203886": {
+        "name": "ota+normal_model_survivor_chiron",
+        "digest": "88ed79e23ffea07613e98ba23f6245eb",
+        "sha256": "94878e654d6425d27d4fab9554db8cdc48bcfc6bf01fa02bd58cae9434638468"
+      },
+      "203887": {
+        "name": "ota+normal_model_survivor_dave",
+        "digest": "05beac31b45b48e1e59458fdc3f33816",
+        "sha256": "057937ff61d4408a6b552c6b07889779a254e2448697a2fb00f76bbfd1de15d7"
+      },
+      "203888": {
+        "name": "ota+normal_model_survivor_eva",
+        "digest": "3274fd30e189b743f8bdd723d79e9f1b",
+        "sha256": "b8d4b2b1b1979d484e59bb5d315afdac87b804377aa9b6696c9e56c2b214a9f8"
+      },
+      "203889": {
+        "name": "ota+normal_model_survivor_freja[builtin_b]",
+        "digest": "875e42d0719e489dabe7f9f1a4918f1c",
+        "sha256": "b5e6f11cbf1e501da9d1320391f5f903e46bec7155dfcd3547f31eb82d1e4371"
+      },
+      "203891": {
+        "name": "ota+normal_model_survivor_jacob",
+        "digest": "a96fdccae42bfc6c0a30c317e5ead163",
+        "sha256": "9939abadc86043fdaf0598ce8aa62ae06fe93433da729c63d21fb43d93a27533"
+      },
+      "203894": {
+        "name": "ota+normal_model_survivor_knotty",
+        "digest": "af4cb36c70b977e19b806bb184a7f7b8",
+        "sha256": "36b78dffd99d33240d23fdaddbe4d0bbd385d519ca479e62f503d2a93e5c9fc4"
+      },
+      "203895": {
+        "name": "ota+normal_model_survivor_lava",
+        "digest": "2d9b589ec63d3a9e3413353fc51a6106",
+        "sha256": "278d12d85f01c63171b65d69f739bbf3e09a9fe9979a29b8e6d6d30ced909613"
+      },
+      "203896": {
+        "name": "ota+normal_model_survivor_layla",
+        "digest": "a38b9ca07d1c55ee88038cd406589d1c",
+        "sha256": "c866c3a1706f85b842cfbd8488945af83d83fb9a9b742045f9afdd6992a69501"
+      },
+      "203898": {
+        "name": "ota+normal_model_survivor_mike",
+        "digest": "72d2398e0926e4d62d066beeedef8072",
+        "sha256": "a916af651efaf179796891cad3305040abd52474f26382f15db7c23565a69944"
+      },
+      "203901": {
+        "name": "ota+normal_model_survivor_nikola",
+        "digest": "ea82f91033b35bbf0a67d520ece1dd27",
+        "sha256": "e5ed27c13b0915787e4f50e96bca0b98c2b3ec90640b0ffaaea3c90e47f6eff3"
+      },
+      "203902": {
+        "name": "ota+normal_model_survivor_ragnar",
+        "digest": "44ddea6bc27fe735dc3c05bbf78cbabc",
+        "sha256": "15f702f196a11f4aa3b9e0ef8b9df374a8ddb055f2b779de4fdc99c40b438b25"
+      },
+      "203903": {
+        "name": "ota+normal_model_survivor_ray",
+        "digest": "1a0b567b1af18b7ce0543c1f55db6c22",
+        "sha256": "89a72291da8dd9f2b340ea9a8ca9806237e9daa903f4e91f5d3aaaf48e5bb33c"
+      },
+      "203905": {
+        "name": "ota+normal_model_survivor_shark",
+        "digest": "0f1fa2f233ce777e496b34f8dbea29a6",
+        "sha256": "ed8b9a49e97c86bee299178247a9fd02635992aa126a40fec3ccd06337554523"
+      },
+      "203907": {
+        "name": "ota+normal_model_survivor_tara",
+        "digest": "c71f9e989cf1d85512ff961319e329c2",
+        "sha256": "3032f9c0b3a818381acda2ed0496f1e5308558af2cb9c7e3ab0bdd0bc2fb3ce1"
+      },
+      "203908": {
+        "name": "ota+normal_model_survivor_tarzan",
+        "digest": "b6960a2dfd472f99bf9f48a47252c5ed",
+        "sha256": "1100407786842bdf24a21cac2b2faddbcf850f349032310b962bbf4b1eb5f584"
+      },
+      "203910": {
+        "name": "ota+normal_model_survivor_tithi",
+        "digest": "a8cfbc5c68c112549a39f5a963c1b08d",
+        "sha256": "53e72863132f6a2665425a4558ba147863d0cda1ed9ca22500bff38fe27fec20"
+      },
+      "203911": {
+        "name": "ota+normal_model_survivor_tony",
+        "digest": "19d1c6f27469770d9b00c1acaefbd063",
+        "sha256": "b79259dca2cbca35e83d279128a3f8b9dbeb829f22d9e564aec0ac26c2379b8a"
+      },
+      "203912": {
+        "name": "ota+normal_model_survivor_travis[builtin_b]",
+        "digest": "c77da35c6b3cd538af52d7ba17eb5c43",
+        "sha256": "0c11befd304e8d3028274cf3aed3c71346a3fab7baee1c078e4630dd447598a2"
+      },
+      "203913": {
+        "name": "ota+normal_model_survivor_undine",
+        "digest": "ea60c354d654fb698c08f13b536e2c0f",
+        "sha256": "b2dbdee0856942b771b5b5beb4073f8efc986e19db9b751bd982507d68352845"
+      },
+      "203914": {
+        "name": "ota+normal_model_survivor_wright",
+        "digest": "ab24b564ff8829900579de7deafe01c5",
+        "sha256": "0a024fe5ea409744fcc03d324c8fd579e53ce900afc31a1ddc701ec1d200ddfc"
+      },
+      "204003": {
+        "name": "ota+normal_pre4_animation@exploration@template",
+        "digest": "8bec6f696a57f42f50f987b1b6257f83",
+        "sha256": "27cb749677daefd024bc15af3a9d7c6b8560fa5524a069ddeec00a30f95e2366"
+      },
+      "204027": {
+        "name": "ota+normal_pre4_ep0_animation@exploration@template",
+        "digest": "c6ed1f0e80c01968e6056209b2a5c5fe",
+        "sha256": "0930ff9e36f5f567d82713aa29031b1e5c59dc88c7d5b28042754fa90db6c476"
+      },
+      "204170": {
+        "name": "ota+normal_pre4_ep0_model@exploration@character@cartoon@hero@herolucky",
+        "digest": "5b5b427be59319ee9c325443abfa3a87",
+        "sha256": "a1ad218276350f2fca79792aa206bad718f13d6584aee9a2e9b5b1a6182b073c"
+      },
+      "204171": {
+        "name": "ota+normal_pre4_ep0_model@exploration@character@cartoon@hero@heromaddiekt",
+        "digest": "68aae693b66c4de1fc90bb6a78174947",
+        "sha256": "db8ba0eda71122ad45b048c14cc7cc6e37975addda34636f1800b9ef6666ff22"
+      },
+      "204173": {
+        "name": "ota+normal_pre4_ep0_model@exploration@character@cartoon@hero@herorosiekt",
+        "digest": "ea55c9bdc3b3dd0a027e520fa7a3e3fa",
+        "sha256": "58bb4b6ec32a5078130bff2aea58ecf2f2bde5cd73545abea18172307402a857"
+      },
+      "204174": {
+        "name": "ota+normal_pre4_ep0_model@exploration@character@cartoon@hero@herorustykt_new",
+        "digest": "beac8c0bb727127fe2ef2ef2a6364b2d",
+        "sha256": "d4abe1c2e72d5bb4574f8cb04a5c4d5d33318e52d1e2464dd4e7df1a2f593cc3"
+      },
+      "204175": {
+        "name": "ota+normal_pre4_ep0_model@exploration@character@cartoon@hero@herotimkt",
+        "digest": "119d7a1afbf0ee832f421e4e7d37303d",
+        "sha256": "9ab3ab31fa35aed6ba50a21678ab59b4b9fe03634bc97bfcfcb49f3929550a6d"
+      },
+      "204176": {
+        "name": "ota+normal_pre4_ep0_model@exploration@character@cartoon@herosargekt",
+        "digest": "1643c98cc31fc8ce851b39b639b3994e",
+        "sha256": "a6bce5162ce95da10fbb9d927395574b06bb954d7365df1422d4f0ffd11f1fed"
+      },
+      "204245": {
+        "name": "ota+normal_pre4_ep0_model_survivor_lucky",
+        "digest": "e5d1bb32dedd82cd2b07aa1e63113985",
+        "sha256": "417c23663df40e60da2598363a1f0251a8db0a0ebb0e84e671d83e7e48b70183"
+      },
+      "204247": {
+        "name": "ota+normal_pre4_ep0_model_survivor_maddie",
+        "digest": "add9745d94df959df9c1913e03c30e19",
+        "sha256": "88c08282b39a7e3b2fdcce74b728a0b01dcf634c18ff1497316a83a722266f32"
+      },
+      "204248": {
+        "name": "ota+normal_pre4_ep0_model_survivor_rosie",
+        "digest": "cbcb0dd7326edc7aec0f117fdcd0908f",
+        "sha256": "81072995a89bd5813e24541223d09efb47a447c191b72cf0da4bc085e38bfa9e"
+      },
+      "204249": {
+        "name": "ota+normal_pre4_ep0_model_survivor_rusty",
+        "digest": "cb1e22ee37b89e685428b4bb1e83541d",
+        "sha256": "3660f99190f02ef1007ecf702baee203b19ef3a53b4c00f1a6913412a38eb71c"
+      },
+      "204250": {
+        "name": "ota+normal_pre4_ep0_model_survivor_tim",
+        "digest": "3e2635361904e6ded241c071f4098b46",
+        "sha256": "2551325dc57657e224c1512edb2913dd2574f45215451c7472b5d350c4f7ae04"
+      },
+      "204328": {
+        "name": "ota+normal_pre4_ep0_prefab@model",
+        "digest": "4f2455b5306868681019505890df6f6f",
+        "sha256": "afbbcd84c25302ec6f6d37e0aa423d089196a10e7b9f51d64d7df52ce80ee49c"
+      },
+      "204467": {
+        "name": "ota+normal_pre4_model@exploration@character@cartoon@hero@herokenkt",
+        "digest": "5d3f7f6287f70cd71649f413b83dcbb1",
+        "sha256": "16334a5771c4d5377fe4dc99ad7a8756bd4f9bd6d9b16e08cbf1ac452c66aaa7"
+      },
+      "204528": {
+        "name": "ota+normal_pre4_model_survivor_ken",
+        "digest": "0bd445c92c8f62527a6703c3335d7ecf",
+        "sha256": "cfb4ae46bb22230a12cf1b5384da9159d6fe1f1b42e01e9fe0535ac27f01e168"
+      }
+    }
+  },
+  "heroes": {
+    "tony": {
+      "model_asset": "model_survivor_tony",
+      "controller": "ctl_se_survivor_tony_kt",
+      "model_bundle_id": 203911,
+      "takes": {
+        "run": {
+          "clip_name": "ani_se_survivor_tony_kt_run",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 203340
+        },
+        "turn_left_run": {
+          "clip_name": "ani_se_survivor_tony_kt_turn_left_run",
+          "duration_seconds": 0.13333334028720856,
+          "bundle_id": 203340
+        },
+        "skill02": {
+          "clip_name": "ani_se_survivor_tony_kt_skill02",
+          "duration_seconds": 1.2000000476837158,
+          "bundle_id": 203340
+        },
+        "turn_left_90": {
+          "clip_name": "ani_se_survivor_tony_kt_turn_left_90",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 203340
+        },
+        "turn_left_180": {
+          "clip_name": "ani_se_survivor_tony_kt_turn_left_180",
+          "duration_seconds": 1.0,
+          "bundle_id": 203340
+        },
+        "turn_right_90": {
+          "clip_name": "ani_se_survivor_tony_kt_turn_right_90",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 203340
+        },
+        "turn_right_180": {
+          "clip_name": "ani_se_survivor_tony_kt_turn_right_180",
+          "duration_seconds": 1.0,
+          "bundle_id": 203340
+        },
+        "vertigo": {
+          "clip_name": "ani_se_survivor_tony_kt_vertigo",
+          "duration_seconds": 2.0,
+          "bundle_id": 203340
+        },
+        "attack_left": {
+          "clip_name": "ani_se_survivor_tony_kt_idle_left",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203340
+        },
+        "attack_middle": {
+          "clip_name": "ani_se_survivor_tony_kt_idle_middle",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203340
+        },
+        "attack_right": {
+          "clip_name": "ani_se_survivor_tony_kt_idle_right",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203340
+        },
+        "death": {
+          "clip_name": "ani_se_survivor_tony_kt_death",
+          "duration_seconds": 2.0,
+          "bundle_id": 203340
+        },
+        "turn_middle_run": {
+          "clip_name": "ani_se_survivor_tony_kt_turn_middle_run",
+          "duration_seconds": 0.13333334028720856,
+          "bundle_id": 203340
+        },
+        "turn_right_run": {
+          "clip_name": "ani_se_survivor_tony_kt_turn_right_run",
+          "duration_seconds": 0.13333334028720856,
+          "bundle_id": 203340
+        },
+        "hit": {
+          "clip_name": "ani_se_survivor_tony_kt_hit",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 203340
+        },
+        "idle": {
+          "clip_name": "ani_se_survivor_tony_kt_idle",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 203340
+        },
+        "lookaround": {
+          "clip_name": "ani_se_survivor_tony_kt_lookaround",
+          "duration_seconds": 2.3333334922790527,
+          "bundle_id": 203340
+        },
+        "victory": {
+          "clip_name": "ani_se_survivor_tony_kt_victory",
+          "duration_seconds": 2.2333333492279053,
+          "bundle_id": 203340
+        },
+        "skill03": {
+          "clip_name": "ani_se_survivor_tony_kt_skill03",
+          "duration_seconds": 1.100000023841858,
+          "bundle_id": 203340
+        },
+        "attack": {
+          "clip_name": "ani_se_survivor_tony_kt_attack",
+          "duration_seconds": 1.0,
+          "bundle_id": 203340
+        },
+        "walk": {
+          "clip_name": "ani_se_survivor_tony_kt_walk",
+          "duration_seconds": 1.0,
+          "bundle_id": 203340
+        },
+        "skill02_1": {
+          "clip_name": "ani_se_survivor_tony_kt_skill_new_01_start",
+          "duration_seconds": 0.23333334922790527,
+          "bundle_id": 203340
+        },
+        "skill02_2": {
+          "clip_name": "ani_se_survivor_tony_kt_skill_new_01_loop",
+          "duration_seconds": 0.20000000298023224,
+          "bundle_id": 203340
+        },
+        "skill02_3": {
+          "clip_name": "ani_se_survivor_tony_kt_skill_new_01_end",
+          "duration_seconds": 0.6666667461395264,
+          "bundle_id": 203340
+        }
+      }
+    },
+    "maddie": {
+      "model_asset": "model_survivor_maddie",
+      "controller": "ctl_se_survivor_maddie_kt",
+      "model_bundle_id": 204247,
+      "takes": {
+        "attack": {
+          "clip_name": "ani_se_survivor_maddie_kt_cartoon_attack",
+          "duration_seconds": 1.0,
+          "bundle_id": 204171
+        },
+        "death": {
+          "clip_name": "ani_se_survivor_maddie_kt_cartoon_death",
+          "duration_seconds": 1.9000000953674316,
+          "bundle_id": 204171
+        },
+        "hit": {
+          "clip_name": "ani_se_survivor_maddie_kt_cartoon_hit",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 204171
+        },
+        "idle": {
+          "clip_name": "ani_se_survivor_maddie_kt_cartoon_idle",
+          "duration_seconds": 1.0,
+          "bundle_id": 204171
+        },
+        "lookaround": {
+          "clip_name": "ani_se_survivor_maddie_kt_cartoon_lookaround",
+          "duration_seconds": 3.1000001430511475,
+          "bundle_id": 204171
+        },
+        "run": {
+          "clip_name": "ani_se_survivor_maddie_kt_cartoon_run",
+          "duration_seconds": 0.8000000715255737,
+          "bundle_id": 204171
+        },
+        "skill": {
+          "clip_name": "ani_se_survivor_maddie_kt_cartoon_skill",
+          "duration_seconds": 1.7333334684371948,
+          "bundle_id": 204171
+        },
+        "skill02": {
+          "clip_name": "ani_se_survivor_maddie_kt_cartoon_skill02",
+          "duration_seconds": 1.3666667938232422,
+          "bundle_id": 204171
+        },
+        "vertigo": {
+          "clip_name": "ani_se_survivor_maddie_kt_cartoon_vertigo",
+          "duration_seconds": 1.6666667461395264,
+          "bundle_id": 204171
+        },
+        "victory": {
+          "clip_name": "ani_se_survivor_maddie_kt_cartoon_victory",
+          "duration_seconds": 2.6666667461395264,
+          "bundle_id": 204171
+        },
+        "turn_right_run": {
+          "clip_name": "ani_se_survivor_maddie_kt_cartoon_turn_right_run",
+          "duration_seconds": 0.03333333879709244,
+          "bundle_id": 204171
+        },
+        "turn_middle_run": {
+          "clip_name": "ani_se_survivor_maddie_kt_cartoon_turn_middle_run",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 204171
+        },
+        "turn_left_180": {
+          "clip_name": "ani_se_survivor_maddie_kt_cartoon_turn_left_180",
+          "duration_seconds": 1.0,
+          "bundle_id": 204171
+        },
+        "attack_left": {
+          "clip_name": "ani_se_survivor_maddie_kt_cartoon_idle_left",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 204171
+        },
+        "attack_middle": {
+          "clip_name": "ani_se_survivor_maddie_kt_cartoon_idle_middle",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 204171
+        },
+        "attack_right": {
+          "clip_name": "ani_se_survivor_maddie_kt_cartoon_idle_right",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 204171
+        },
+        "turn_left_run": {
+          "clip_name": "ani_se_survivor_maddie_kt_cartoon_turn_left_run",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 204171
+        },
+        "turn_left_90": {
+          "clip_name": "ani_se_survivor_maddie_kt_cartoon_turn_left_90",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 204171
+        },
+        "turn_right_90": {
+          "clip_name": "ani_se_survivor_maddie_kt_cartoon_turn_right_90",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 204171
+        },
+        "turn_right_180": {
+          "clip_name": "ani_se_survivor_maddie_kt_cartoon_turn_right_180",
+          "duration_seconds": 1.0,
+          "bundle_id": 204171
+        },
+        "walk": {
+          "clip_name": "ani_se_survivor_maddie_kt_cartoon_walk",
+          "duration_seconds": 1.0666667222976685,
+          "bundle_id": 204171
+        }
+      }
+    },
+    "rosie": {
+      "model_asset": "model_survivor_rosie",
+      "controller": "ctl_se_survivor_rosie_kt",
+      "model_bundle_id": 204248,
+      "takes": {
+        "attack": {
+          "clip_name": "ani_se_survivor_rosie_kt_cartoon_attack",
+          "duration_seconds": 1.4000000953674316,
+          "bundle_id": 204173
+        },
+        "death": {
+          "clip_name": "ani_se_survivor_rosie_kt_cartoon_death",
+          "duration_seconds": 2.133333444595337,
+          "bundle_id": 204173
+        },
+        "hit": {
+          "clip_name": "ani_se_survivor_rosie_kt_cartoon_hit",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 204173
+        },
+        "idle": {
+          "clip_name": "ani_se_survivor_rosie_kt_cartoon_idle",
+          "duration_seconds": 0.9333333969116211,
+          "bundle_id": 204173
+        },
+        "run": {
+          "clip_name": "ani_se_survivor_rosie_kt_cartoon_run",
+          "duration_seconds": 0.8000000715255737,
+          "bundle_id": 204173
+        },
+        "skill": {
+          "clip_name": "ani_se_survivor_rosie_kt_cartoon_skill",
+          "duration_seconds": 2.866666793823242,
+          "bundle_id": 204173
+        },
+        "turn_left_90": {
+          "clip_name": "ani_se_survivor_rosie_kt_cartoon_turn_left_90",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 204173
+        },
+        "vertigo": {
+          "clip_name": "ani_se_survivor_rosie_kt_cartoon_vertigo",
+          "duration_seconds": 1.6666667461395264,
+          "bundle_id": 204173
+        },
+        "victory": {
+          "clip_name": "ani_se_survivor_rosie_kt_cartoon_victory",
+          "duration_seconds": 3.4000000953674316,
+          "bundle_id": 204173
+        },
+        "attack_left": {
+          "clip_name": "ani_se_survivor_rosie_kt_cartoon_idle_left",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 204173
+        },
+        "attack_middle": {
+          "clip_name": "ani_se_survivor_rosie_kt_cartoon_idle_middle",
+          "duration_seconds": 0.9333333969116211,
+          "bundle_id": 204173
+        },
+        "attack_right": {
+          "clip_name": "ani_se_survivor_rosie_kt_cartoon_idle_right",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 204173
+        },
+        "turn_left_run": {
+          "clip_name": "ani_se_survivor_rosie_kt_cartoon_turn_left_run",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 204173
+        },
+        "turn_middle_run": {
+          "clip_name": "ani_se_survivor_rosie_kt_cartoon_turn_middle_run",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 204173
+        },
+        "turn_right_run": {
+          "clip_name": "ani_se_survivor_rosie_kt_cartoon_turn_right_run",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 204173
+        },
+        "lookaround": {
+          "clip_name": "ani_se_survivor_rosie_kt_cartoon_lookaround",
+          "duration_seconds": 4.300000190734863,
+          "bundle_id": 204173
+        },
+        "turn_left_180": {
+          "clip_name": "ani_se_survivor_rosie_kt_cartoon_turn_left_180",
+          "duration_seconds": 1.0,
+          "bundle_id": 204173
+        },
+        "turn_right_180": {
+          "clip_name": "ani_se_survivor_rosie_kt_cartoon_turn_right_180",
+          "duration_seconds": 1.0,
+          "bundle_id": 204173
+        },
+        "turn_right_90": {
+          "clip_name": "ani_se_survivor_rosie_kt_cartoon_turn_right_90",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 204173
+        },
+        "walk": {
+          "clip_name": "ani_se_survivor_rosie_kt_cartoon_walk",
+          "duration_seconds": 1.3333333730697632,
+          "bundle_id": 204173
+        },
+        "attack02": {
+          "clip_name": "ani_se_survivor_rosie_kt_cartoon_attack02",
+          "duration_seconds": 1.7333333492279053,
+          "bundle_id": 204173
+        }
+      }
+    },
+    "nikola": {
+      "model_asset": "model_survivor_nikola",
+      "controller": "ctl_se_survivor_nikola_kt",
+      "model_bundle_id": 203901,
+      "takes": {
+        "attack": {
+          "clip_name": "ani_se_survivor_nikola_kt_cartoon_attack",
+          "duration_seconds": 1.100000023841858,
+          "bundle_id": 203329
+        },
+        "death": {
+          "clip_name": "ani_se_survivor_nikola_kt_cartoon_death",
+          "duration_seconds": 1.6666667461395264,
+          "bundle_id": 203329
+        },
+        "hit": {
+          "clip_name": "ani_se_survivor_nikola_kt_cartoon_hit",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 203329
+        },
+        "lookaround": {
+          "clip_name": "ani_se_survivor_nikola_kt_cartoon_lookaround",
+          "duration_seconds": 3.000000238418579,
+          "bundle_id": 203329
+        },
+        "run": {
+          "clip_name": "ani_se_survivor_nikola_kt_cartoon_run",
+          "duration_seconds": 0.8000000715255737,
+          "bundle_id": 203329
+        },
+        "vertigo": {
+          "clip_name": "ani_se_survivor_nikola_kt_cartoon_vertigo",
+          "duration_seconds": 1.6000001430511475,
+          "bundle_id": 203329
+        },
+        "victory": {
+          "clip_name": "ani_se_survivor_nikola_kt_cartoon_victory",
+          "duration_seconds": 2.4666666984558105,
+          "bundle_id": 203329
+        },
+        "turn_left_180": {
+          "clip_name": "ani_se_survivor_nikola_kt_cartoon_turn_left_180",
+          "duration_seconds": 1.0,
+          "bundle_id": 203329
+        },
+        "turn_middle_run": {
+          "clip_name": "ani_se_survivor_nikola_kt_cartoon_turn_middle_run",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203329
+        },
+        "turn_left_run": {
+          "clip_name": "ani_se_survivor_nikola_kt_cartoon_turn_left_run",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203329
+        },
+        "turn_right_run": {
+          "clip_name": "ani_se_survivor_nikola_kt_cartoon_turn_right_run",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203329
+        },
+        "turn_left_90": {
+          "clip_name": "ani_se_survivor_nikola_kt_cartoon_turn_left_90",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 203329
+        },
+        "turn_right_180": {
+          "clip_name": "ani_se_survivor_nikola_kt_cartoon_turn_right_180",
+          "duration_seconds": 1.0,
+          "bundle_id": 203329
+        },
+        "turn_right_90": {
+          "clip_name": "ani_se_survivor_nikola_kt_cartoon_turn_right_90",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 203329
+        },
+        "death02": {
+          "clip_name": "ani_se_survivor_nikola_kt_cartoon_death",
+          "duration_seconds": 1.6666667461395264,
+          "bundle_id": 203329
+        },
+        "skill": {
+          "clip_name": "ani_se_survivor_nikola_kt_cartoon_skill",
+          "duration_seconds": 1.3000000715255737,
+          "bundle_id": 203329
+        },
+        "walk": {
+          "clip_name": "ani_se_survivor_nikola_kt_cartoon_walk",
+          "duration_seconds": 1.0666667222976685,
+          "bundle_id": 203329
+        },
+        "idle": {
+          "clip_name": "ani_se_survivor_nikola_kt_cartoon_idle",
+          "duration_seconds": 1.0,
+          "bundle_id": 203329
+        },
+        "attack_middle": {
+          "clip_name": "ani_se_survivor_nikola_kt_cartoon_idle_middle",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203329
+        },
+        "attack_right": {
+          "clip_name": "ani_se_survivor_nikola_kt_cartoon_idle_left",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203329
+        },
+        "attack_left": {
+          "clip_name": "ani_se_survivor_nikola_kt_cartoon_idle_right",
+          "duration_seconds": 0.06666667014360428,
+          "bundle_id": 203329
+        },
+        "skill02": {
+          "clip_name": "ani_se_survivor_nikola_kt_cartoon_skill02",
+          "duration_seconds": 1.2666667699813843,
+          "bundle_id": 203329
+        }
+      }
+    },
+    "ray": {
+      "model_asset": "model_survivor_ray",
+      "controller": "ctl_se_survivor_ray_kt",
+      "model_bundle_id": 203903,
+      "takes": {
+        "attack": {
+          "clip_name": "ani_se_survivor_ray_kt_cartoon_attack",
+          "duration_seconds": 0.9000000357627869,
+          "bundle_id": 203331
+        },
+        "death": {
+          "clip_name": "ani_se_survivor_ray_kt_cartoon_death",
+          "duration_seconds": 2.9000000953674316,
+          "bundle_id": 203331
+        },
+        "hit": {
+          "clip_name": "ani_se_survivor_ray_kt_cartoon_hit",
+          "duration_seconds": 0.5333333611488342,
+          "bundle_id": 203331
+        },
+        "lookaround": {
+          "clip_name": "ani_se_survivor_ray_kt_cartoon_lookaround",
+          "duration_seconds": 1.6666667461395264,
+          "bundle_id": 203331
+        },
+        "run": {
+          "clip_name": "ani_se_survivor_ray_kt_cartoon_run",
+          "duration_seconds": 0.7333333492279053,
+          "bundle_id": 203331
+        },
+        "vertigo": {
+          "clip_name": "ani_se_survivor_ray_kt_cartoon_vertigo",
+          "duration_seconds": 1.6666667461395264,
+          "bundle_id": 203331
+        },
+        "victory": {
+          "clip_name": "ani_se_survivor_ray_kt_cartoon_victory",
+          "duration_seconds": 2.5333335399627686,
+          "bundle_id": 203331
+        },
+        "turn_left_180": {
+          "clip_name": "ani_se_survivor_ray_kt_cartoon_turn_left_180",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 203331
+        },
+        "turn_middle_run": {
+          "clip_name": "ani_se_survivor_ray_kt_cartoon_turn_middle_run",
+          "duration_seconds": 0.06666667014360428,
+          "bundle_id": 203331
+        },
+        "turn_left_run": {
+          "clip_name": "ani_se_survivor_ray_kt_cartoon_turn_left_run",
+          "duration_seconds": 0.06666667014360428,
+          "bundle_id": 203331
+        },
+        "turn_right_run": {
+          "clip_name": "ani_se_survivor_ray_kt_cartoon_turn_right_run",
+          "duration_seconds": 0.06666667014360428,
+          "bundle_id": 203331
+        },
+        "turn_left_90": {
+          "clip_name": "ani_se_survivor_ray_kt_cartoon_turn_left_90",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 203331
+        },
+        "turn_right_180": {
+          "clip_name": "ani_se_survivor_ray_kt_cartoon_turn_right_180",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 203331
+        },
+        "turn_right_90": {
+          "clip_name": "ani_se_survivor_ray_kt_cartoon_turn_right_90",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 203331
+        },
+        "skill": {
+          "clip_name": "ani_se_survivor_ray_kt_cartoon_skill",
+          "duration_seconds": 2.2333333492279053,
+          "bundle_id": 203331
+        },
+        "walk": {
+          "clip_name": "ani_se_survivor_ray_kt_cartoon_walk",
+          "duration_seconds": 1.100000023841858,
+          "bundle_id": 203331
+        },
+        "idle": {
+          "clip_name": "ani_se_survivor_ray_kt_cartoon_idle",
+          "duration_seconds": 0.5,
+          "bundle_id": 203331
+        },
+        "attack_middle": {
+          "clip_name": "ani_se_survivor_ray_kt_cartoon_idle_middle",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203331
+        },
+        "attack_right": {
+          "clip_name": "ani_se_survivor_ray_kt_cartoon_idle_right",
+          "duration_seconds": 0.06666667014360428,
+          "bundle_id": 203331
+        },
+        "attack_left": {
+          "clip_name": "ani_se_survivor_ray_kt_cartoon_idle_left",
+          "duration_seconds": 0.06666667014360428,
+          "bundle_id": 203331
+        },
+        "skill02": {
+          "clip_name": "ani_se_survivor_ray_kt_cartoon_skill02",
+          "duration_seconds": 2.366666793823242,
+          "bundle_id": 203331
+        }
+      }
+    },
+    "becca": {
+      "model_asset": "model_survivor_becca",
+      "controller": "ctl_se_survivor_becca_kt",
+      "model_bundle_id": 203884,
+      "takes": {
+        "attack": {
+          "clip_name": "ani_se_survivor_becca_kt_attack",
+          "duration_seconds": 0.6333333849906921,
+          "bundle_id": 203310
+        },
+        "hit": {
+          "clip_name": "ani_se_survivor_becca_kt_hit",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 203310
+        },
+        "attack_left": {
+          "clip_name": "ani_se_survivor_becca_kt_idle_left",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203310
+        },
+        "run": {
+          "clip_name": "ani_se_survivor_becca_kt_run",
+          "duration_seconds": 0.8000000715255737,
+          "bundle_id": 203310
+        },
+        "turn_left_run": {
+          "clip_name": "ani_se_survivor_becca_kt_turn_left_run",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203310
+        },
+        "turn_middle_run": {
+          "clip_name": "ani_se_survivor_becca_kt_turn_middle_run",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203310
+        },
+        "turn_right_run": {
+          "clip_name": "ani_se_survivor_becca_kt_turn_right_run",
+          "duration_seconds": 0.03333333879709244,
+          "bundle_id": 203310
+        },
+        "death": {
+          "clip_name": "ani_se_survivor_becca_kt_death",
+          "duration_seconds": 1.5666667222976685,
+          "bundle_id": 203310
+        },
+        "open": {
+          "clip_name": "ani_explore_survivor_newbecca_cartoon_open",
+          "duration_seconds": 1.2666667699813843,
+          "bundle_id": 203479
+        },
+        "pickup": {
+          "clip_name": "ani_explore_survivor_newbecca_cartoon_pickup",
+          "duration_seconds": 1.2666667699813843,
+          "bundle_id": 203479
+        },
+        "vertigo": {
+          "clip_name": "ani_se_survivor_becca_kt_vertigo",
+          "duration_seconds": 3.000000238418579,
+          "bundle_id": 203310
+        },
+        "victory": {
+          "clip_name": "ani_se_survivor_becca_kt_victory",
+          "duration_seconds": 1.3333333730697632,
+          "bundle_id": 203310
+        },
+        "lookaround": {
+          "clip_name": "ani_se_survivor_becca_kt_lookaround",
+          "duration_seconds": 2.8333334922790527,
+          "bundle_id": 203310
+        },
+        "idle": {
+          "clip_name": "ani_se_survivor_becca_kt_idle",
+          "duration_seconds": 1.3333333730697632,
+          "bundle_id": 203310
+        },
+        "turn_left_90": {
+          "clip_name": "ani_se_survivor_becca_kt_turn_left_90",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 203310
+        },
+        "turn_left_180": {
+          "clip_name": "ani_se_survivor_becca_kt_turn_left_180",
+          "duration_seconds": 1.0,
+          "bundle_id": 203310
+        },
+        "turn_right_90": {
+          "clip_name": "ani_se_survivor_becca_kt_turn_right_90",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 203310
+        },
+        "turn_right_180": {
+          "clip_name": "ani_se_survivor_becca_kt_turn_right_180",
+          "duration_seconds": 1.0,
+          "bundle_id": 203310
+        },
+        "attack_middle": {
+          "clip_name": "ani_se_survivor_becca_kt_idle_middle",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203310
+        },
+        "attack_right": {
+          "clip_name": "ani_se_survivor_becca_kt_idle_right",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203310
+        },
+        "skill": {
+          "clip_name": "ani_se_survivor_becca_kt_skill",
+          "duration_seconds": 1.5000001192092896,
+          "bundle_id": 203310
+        }
+      }
+    },
+    "layla": {
+      "model_asset": "model_survivor_layla",
+      "controller": "ctl_se_survivor_layla_kt",
+      "model_bundle_id": 203896,
+      "takes": {
+        "attack": {
+          "clip_name": "ani_se_survivor_layla_kt_cartoon_attack",
+          "duration_seconds": 0.5,
+          "bundle_id": 203322
+        },
+        "death": {
+          "clip_name": "ani_se_survivor_layla_kt_cartoon_death",
+          "duration_seconds": 1.6000001430511475,
+          "bundle_id": 203322
+        },
+        "hit": {
+          "clip_name": "ani_se_survivor_layla_kt_cartoon_hit",
+          "duration_seconds": 0.6333333849906921,
+          "bundle_id": 203322
+        },
+        "idle": {
+          "clip_name": "ani_se_survivor_layla_kt_cartoon_idle",
+          "duration_seconds": 1.3000000715255737,
+          "bundle_id": 203322
+        },
+        "lookaround": {
+          "clip_name": "ani_se_survivor_layla_kt_cartoon_lookaround",
+          "duration_seconds": 1.4000000953674316,
+          "bundle_id": 203322
+        },
+        "run": {
+          "clip_name": "ani_se_survivor_layla_kt_cartoon_run",
+          "duration_seconds": 0.8000000715255737,
+          "bundle_id": 203322
+        },
+        "skill": {
+          "clip_name": "ani_se_survivor_layla_kt_cartoon_skill",
+          "duration_seconds": 2.1000001430511475,
+          "bundle_id": 203322
+        },
+        "vertigo": {
+          "clip_name": "ani_se_survivor_layla_kt_cartoon_vertigo",
+          "duration_seconds": 1.9000000953674316,
+          "bundle_id": 203322
+        },
+        "victory": {
+          "clip_name": "ani_se_survivor_layla_kt_cartoon_victory",
+          "duration_seconds": 2.066666841506958,
+          "bundle_id": 203322
+        },
+        "turn_right_run": {
+          "clip_name": "ani_se_survivor_layla_kt_cartoon_turn_right_run",
+          "duration_seconds": 0.06666667014360428,
+          "bundle_id": 203322
+        },
+        "turn_middle_run": {
+          "clip_name": "ani_se_survivor_layla_kt_cartoon_turn_middle_run",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203322
+        },
+        "turn_left_180": {
+          "clip_name": "ani_se_survivor_layla_kt_cartoon_turn_left_180",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 203322
+        },
+        "attack_left": {
+          "clip_name": "ani_se_survivor_layla_kt_cartoon_idle_left",
+          "duration_seconds": 0.06666667014360428,
+          "bundle_id": 203322
+        },
+        "attack_middle": {
+          "clip_name": "ani_se_survivor_layla_kt_cartoon_idle_middle",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203322
+        },
+        "attack_right": {
+          "clip_name": "ani_se_survivor_layla_kt_cartoon_idle_right",
+          "duration_seconds": 0.06666667014360428,
+          "bundle_id": 203322
+        },
+        "turn_left_run": {
+          "clip_name": "ani_se_survivor_layla_kt_cartoon_turn_left_run",
+          "duration_seconds": 0.06666667014360428,
+          "bundle_id": 203322
+        },
+        "turn_left_90": {
+          "clip_name": "ani_se_survivor_layla_kt_cartoon_turn_left_90",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 203322
+        },
+        "turn_right_90": {
+          "clip_name": "ani_se_survivor_layla_kt_cartoon_turn_right_90",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 203322
+        },
+        "turn_right_180": {
+          "clip_name": "ani_se_survivor_layla_kt_cartoon_turn_right_180",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 203322
+        },
+        "walk": {
+          "clip_name": "ani_se_survivor_layla_kt_cartoon_walk",
+          "duration_seconds": 1.0666667222976685,
+          "bundle_id": 203322
+        },
+        "skill03": {
+          "clip_name": "ani_se_survivor_layla_kt_cartoon_skill_03",
+          "duration_seconds": 1.2000000476837158,
+          "bundle_id": 203322
+        }
+      }
+    },
+    "candy": {
+      "model_asset": "model_survivor_candy",
+      "controller": "ctl_se_survivor_candy_kt",
+      "model_bundle_id": 203885,
+      "takes": {
+        "attack": {
+          "clip_name": "ani_se_survivor_candy_kt_attack",
+          "duration_seconds": 0.6333333849906921,
+          "bundle_id": 203311
+        },
+        "death": {
+          "clip_name": "ani_se_survivor_candy_kt_death",
+          "duration_seconds": 1.7000000476837158,
+          "bundle_id": 203311
+        },
+        "hit": {
+          "clip_name": "ani_se_survivor_candy_kt_hit",
+          "duration_seconds": 0.7333333492279053,
+          "bundle_id": 203311
+        },
+        "idle": {
+          "clip_name": "ani_se_survivor_candy_kt_idle",
+          "duration_seconds": 1.1333333253860474,
+          "bundle_id": 203311
+        },
+        "attack_left": {
+          "clip_name": "ani_se_survivor_candy_kt_idle_left",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203311
+        },
+        "lookaround": {
+          "clip_name": "ani_se_survivor_candy_kt_lookaround",
+          "duration_seconds": 3.3333334922790527,
+          "bundle_id": 203311
+        },
+        "run": {
+          "clip_name": "ani_se_survivor_candy_kt_run",
+          "duration_seconds": 0.8000000715255737,
+          "bundle_id": 203311
+        },
+        "turn_left_run": {
+          "clip_name": "ani_se_survivor_candy_kt_turn_left_run",
+          "duration_seconds": 0.03333333879709244,
+          "bundle_id": 203311
+        },
+        "skill": {
+          "clip_name": "ani_se_survivor_candy_kt_skill01",
+          "duration_seconds": 4.900000095367432,
+          "bundle_id": 203311
+        },
+        "turn_left_90": {
+          "clip_name": "ani_se_survivor_candy_kt_turn_left_90",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 203311
+        },
+        "turn_left_180": {
+          "clip_name": "ani_se_survivor_candy_kt_turn_left_180",
+          "duration_seconds": 1.0,
+          "bundle_id": 203311
+        },
+        "turn_right_90": {
+          "clip_name": "ani_se_survivor_candy_kt_turn_right_90",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 203311
+        },
+        "turn_right_180": {
+          "clip_name": "ani_se_survivor_candy_kt_turn_right_180",
+          "duration_seconds": 1.0,
+          "bundle_id": 203311
+        },
+        "vertigo": {
+          "clip_name": "ani_se_survivor_candy_kt_vertigo",
+          "duration_seconds": 2.3333334922790527,
+          "bundle_id": 203311
+        },
+        "victory": {
+          "clip_name": "ani_se_survivor_candy_kt_victory",
+          "duration_seconds": 2.066666841506958,
+          "bundle_id": 203311
+        },
+        "attack_middle": {
+          "clip_name": "ani_se_survivor_candy_kt_idle_middle",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203311
+        },
+        "attack_right": {
+          "clip_name": "ani_se_survivor_candy_kt_idle_right",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203311
+        },
+        "turn_middle_run": {
+          "clip_name": "ani_se_survivor_candy_kt_turn_middle_run",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203311
+        },
+        "turn_right_run": {
+          "clip_name": "ani_se_survivor_candy_kt_turn_right_run",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203311
+        },
+        "skill02": {
+          "clip_name": "ani_se_survivor_candy_kt_skill02",
+          "duration_seconds": 1.5666667222976685,
+          "bundle_id": 203311
+        },
+        "walk": {
+          "clip_name": "ani_se_survivor_candy_kt_walk",
+          "duration_seconds": 1.0666667222976685,
+          "bundle_id": 203311
+        }
+      }
+    },
+    "mike": {
+      "model_asset": "model_survivor_mike",
+      "controller": "ctl_se_survivor_mike_new_kt",
+      "model_bundle_id": 203898,
+      "takes": {
+        "attack": {
+          "clip_name": "ani_se_survivor_mike_new_kt_cartoon_attack01",
+          "duration_seconds": 1.0,
+          "bundle_id": 203327
+        },
+        "death": {
+          "clip_name": "ani_se_survivor_mike_new_kt_cartoon_death",
+          "duration_seconds": 3.000000238418579,
+          "bundle_id": 203327
+        },
+        "hit": {
+          "clip_name": "ani_se_survivor_mike_new_kt_cartoon_hit",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 203327
+        },
+        "idle": {
+          "clip_name": "ani_se_survivor_mike_new_kt_cartoon_idle",
+          "duration_seconds": 2.0,
+          "bundle_id": 203327
+        },
+        "lookaround": {
+          "clip_name": "ani_se_survivor_mike_new_kt_cartoon_lookaround",
+          "duration_seconds": 3.0333335399627686,
+          "bundle_id": 203327
+        },
+        "run": {
+          "clip_name": "ani_se_survivor_mike_new_kt_cartoon_run",
+          "duration_seconds": 1.0,
+          "bundle_id": 203327
+        },
+        "skill": {
+          "clip_name": "ani_se_survivor_mike_new_kt_cartoon_skill",
+          "duration_seconds": 1.1666667461395264,
+          "bundle_id": 203327
+        },
+        "vertigo": {
+          "clip_name": "ani_se_survivor_mike_new_kt_cartoon_vertigo",
+          "duration_seconds": 2.0,
+          "bundle_id": 203327
+        },
+        "attack_left": {
+          "clip_name": "ani_se_survivor_mike_new_kt_cartoon_idle_left",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203327
+        },
+        "attack_middle": {
+          "clip_name": "ani_se_survivor_mike_new_kt_cartoon_idle_middle",
+          "duration_seconds": 0.13333334028720856,
+          "bundle_id": 203327
+        },
+        "attack_right": {
+          "clip_name": "ani_se_survivor_mike_new_kt_cartoon_idle_right",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203327
+        },
+        "turn_left_run": {
+          "clip_name": "ani_se_survivor_mike_new_kt_cartoon_turn_left_run",
+          "duration_seconds": 0.03333333879709244,
+          "bundle_id": 203327
+        },
+        "turn_middle_run": {
+          "clip_name": "ani_se_survivor_mike_new_kt_cartoon_turn_middle_run",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203327
+        },
+        "turn_right_run": {
+          "clip_name": "ani_se_survivor_mike_new_kt_cartoon_turn_right_run",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203327
+        },
+        "turn_left_90": {
+          "clip_name": "ani_se_survivor_mike_new_kt_cartoon_turn_left_90",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 203327
+        },
+        "turn_left_180": {
+          "clip_name": "ani_se_survivor_mike_new_kt_cartoon_turn_left_180",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 203327
+        },
+        "turn_right_90": {
+          "clip_name": "ani_se_survivor_mike_new_kt_cartoon_turn_right_90",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 203327
+        },
+        "turn_right_180": {
+          "clip_name": "ani_se_survivor_mike_new_kt_cartoon_turn_right_180",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 203327
+        },
+        "walk": {
+          "clip_name": "ani_se_survivor_mike_new_kt_cartoon_walk",
+          "duration_seconds": 1.0,
+          "bundle_id": 203327
+        },
+        "victory": {
+          "clip_name": "ani_se_survivor_mike_new_kt_cartoon_victory",
+          "duration_seconds": 2.366666793823242,
+          "bundle_id": 203327
+        },
+        "attack02": {
+          "clip_name": "ani_se_survivor_mike_new_kt_cartoon_attack02",
+          "duration_seconds": 1.0,
+          "bundle_id": 203327
+        }
+      }
+    },
+    "wright": {
+      "model_asset": "model_survivor_wright",
+      "controller": "ctl_se_survivor_wright_kt",
+      "model_bundle_id": 203914,
+      "takes": {
+        "attack": {
+          "clip_name": "ani_se_survivor_wright_kt_attack",
+          "duration_seconds": 1.0,
+          "bundle_id": 203343
+        },
+        "death": {
+          "clip_name": "ani_se_survivor_wright_kt_death",
+          "duration_seconds": 1.4000000953674316,
+          "bundle_id": 203343
+        },
+        "hit": {
+          "clip_name": "ani_se_survivor_wright_kt_hit",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 203343
+        },
+        "idle": {
+          "clip_name": "ani_se_survivor_wright_kt_idle",
+          "duration_seconds": 2.0,
+          "bundle_id": 203343
+        },
+        "attack_left": {
+          "clip_name": "ani_se_survivor_wright_kt_idle_left",
+          "duration_seconds": 0.03333333879709244,
+          "bundle_id": 203343
+        },
+        "lookaround": {
+          "clip_name": "ani_se_survivor_wright_kt_lookaround",
+          "duration_seconds": 3.1666667461395264,
+          "bundle_id": 203343
+        },
+        "run": {
+          "clip_name": "ani_se_survivor_wright_kt_run",
+          "duration_seconds": 1.3333333730697632,
+          "bundle_id": 203343
+        },
+        "turn_left_run": {
+          "clip_name": "ani_se_survivor_wright_kt_turn_left_run",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203343
+        },
+        "skill": {
+          "clip_name": "ani_se_survivor_wright_kt_skill",
+          "duration_seconds": 1.3333333730697632,
+          "bundle_id": 203343
+        },
+        "turn_left_90": {
+          "clip_name": "ani_se_survivor_wright_kt_turn_left_90",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 203343
+        },
+        "turn_left_180": {
+          "clip_name": "ani_se_survivor_wright_kt_turn_left_180",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 203343
+        },
+        "turn_right_90": {
+          "clip_name": "ani_se_survivor_wright_kt_turn_right_90",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 203343
+        },
+        "turn_right_180": {
+          "clip_name": "ani_se_survivor_wright_kt_turn_right_180",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 203343
+        },
+        "vertigo": {
+          "clip_name": "ani_se_survivor_wright_kt_vertigo",
+          "duration_seconds": 2.0,
+          "bundle_id": 203343
+        },
+        "victory": {
+          "clip_name": "ani_se_survivor_wright_kt_victory",
+          "duration_seconds": 2.3333334922790527,
+          "bundle_id": 203343
+        },
+        "attack_middle": {
+          "clip_name": "ani_se_survivor_wright_kt_idle_middle",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203343
+        },
+        "attack_right": {
+          "clip_name": "ani_se_survivor_wright_kt_idle_right",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203343
+        },
+        "turn_middle_run": {
+          "clip_name": "ani_se_survivor_wright_kt_turn_middle_run",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203343
+        },
+        "turn_right_run": {
+          "clip_name": "ani_se_survivor_wright_kt_turn_right_run",
+          "duration_seconds": 0.03333333879709244,
+          "bundle_id": 203343
+        },
+        "walk": {
+          "clip_name": "ani_se_survivor_wright_kt_walk",
+          "duration_seconds": 1.3333333730697632,
+          "bundle_id": 203343
+        }
+      }
+    },
+    "tithi": {
+      "model_asset": "model_survivor_tithi",
+      "controller": "ctl_se_survivor_tithi_kt",
+      "model_bundle_id": 203910,
+      "takes": {
+        "run": {
+          "clip_name": "ani_se_survivor_tithi_kt_run",
+          "duration_seconds": 1.0,
+          "bundle_id": 203339
+        },
+        "turn_left_run": {
+          "clip_name": "ani_se_survivor_tithi_kt_turn_left_run",
+          "duration_seconds": 0.03333333879709244,
+          "bundle_id": 203339
+        },
+        "turn_left_90": {
+          "clip_name": "ani_se_survivor_tithi_kt_turn_left_90",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 203339
+        },
+        "turn_left_180": {
+          "clip_name": "ani_se_survivor_tithi_kt_turn_left_180",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 203339
+        },
+        "turn_right_90": {
+          "clip_name": "ani_se_survivor_tithi_kt_turn_right_90",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 203339
+        },
+        "turn_right_180": {
+          "clip_name": "ani_se_survivor_tithi_kt_turn_right_180",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 203339
+        },
+        "vertigo": {
+          "clip_name": "ani_se_survivor_tithi_kt_vertigo",
+          "duration_seconds": 2.0,
+          "bundle_id": 203339
+        },
+        "attack_left": {
+          "clip_name": "ani_se_survivor_tithi_kt_idle_left",
+          "duration_seconds": 0.03333333879709244,
+          "bundle_id": 203339
+        },
+        "attack_middle": {
+          "clip_name": "ani_se_survivor_tithi_kt_idle_middle",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203339
+        },
+        "attack_right": {
+          "clip_name": "ani_se_survivor_tithi_kt_idle_right",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203339
+        },
+        "death": {
+          "clip_name": "ani_se_survivor_tony_kt_death",
+          "duration_seconds": 2.0,
+          "bundle_id": 203340
+        },
+        "turn_middle_run": {
+          "clip_name": "ani_se_survivor_tithi_kt_turn_middle_run",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203339
+        },
+        "turn_right_run": {
+          "clip_name": "ani_se_survivor_tithi_kt_turn_right_run",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203339
+        },
+        "hit": {
+          "clip_name": "ani_se_survivor_tithi_kt_hit",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 203339
+        },
+        "idle": {
+          "clip_name": "ani_se_survivor_tithi_kt_idle",
+          "duration_seconds": 1.3333333730697632,
+          "bundle_id": 203339
+        },
+        "lookaround": {
+          "clip_name": "ani_se_survivor_tithi_kt_lookaround",
+          "duration_seconds": 3.866666793823242,
+          "bundle_id": 203339
+        },
+        "victory": {
+          "clip_name": "ani_se_survivor_tithi_kt_victory",
+          "duration_seconds": 3.1666667461395264,
+          "bundle_id": 203339
+        },
+        "skill": {
+          "clip_name": "ani_se_survivor_tithi_kt_skill",
+          "duration_seconds": 2.0,
+          "bundle_id": 203339
+        },
+        "attack": {
+          "clip_name": "ani_se_survivor_tithi_kt_attack",
+          "duration_seconds": 1.2000000476837158,
+          "bundle_id": 203339
+        },
+        "walk": {
+          "clip_name": "ani_se_survivor_tithi_kt_walk",
+          "duration_seconds": 1.7666667699813843,
+          "bundle_id": 203339
+        }
+      }
+    },
+    "tara": {
+      "model_asset": "model_survivor_tara",
+      "controller": "ctl_se_survivor_tara_kt_cartoon",
+      "model_bundle_id": 203907,
+      "takes": {
+        "death": {
+          "clip_name": "ani_se_survivor_tara_kt_death",
+          "duration_seconds": 1.7333334684371948,
+          "bundle_id": 203336
+        },
+        "hit": {
+          "clip_name": "ani_se_survivor_tara_kt_hit",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 203336
+        },
+        "idle": {
+          "clip_name": "ani_se_survivor_tara_kt_idle",
+          "duration_seconds": 1.6666667461395264,
+          "bundle_id": 203336
+        },
+        "run": {
+          "clip_name": "ani_se_survivor_tara_kt_run",
+          "duration_seconds": 0.6000000238418579,
+          "bundle_id": 203336
+        },
+        "skill": {
+          "clip_name": "ani_se_survivor_tara_kt_skill",
+          "duration_seconds": 1.5666667222976685,
+          "bundle_id": 203336
+        },
+        "vertigo": {
+          "clip_name": "ani_se_survivor_tara_kt_vertigo",
+          "duration_seconds": 1.6666667461395264,
+          "bundle_id": 203336
+        },
+        "victory": {
+          "clip_name": "ani_se_survivor_tara_kt_victory",
+          "duration_seconds": 3.1666667461395264,
+          "bundle_id": 203336
+        },
+        "attack_left": {
+          "clip_name": "ani_se_survivor_tara_kt_idle_left",
+          "duration_seconds": 0.03333333879709244,
+          "bundle_id": 203336
+        },
+        "attack_middle": {
+          "clip_name": "ani_se_survivor_tara_kt_idle_middle",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203336
+        },
+        "attack_right": {
+          "clip_name": "ani_se_survivor_tara_kt_idle_right",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203336
+        },
+        "turn_left_run": {
+          "clip_name": "ani_se_survivor_tara_kt_turn_left_run",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203336
+        },
+        "turn_middle_run": {
+          "clip_name": "ani_se_survivor_tara_kt_turn_middle_run",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203336
+        },
+        "turn_right_run": {
+          "clip_name": "ani_se_survivor_tara_kt_turn_right_run",
+          "duration_seconds": 0.03333333879709244,
+          "bundle_id": 203336
+        },
+        "turn_left_90": {
+          "clip_name": "ani_se_survivor_tara_kt_turn_left_90",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 203336
+        },
+        "turn_left_180": {
+          "clip_name": "ani_se_survivor_tara_kt_turn_left_180",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 203336
+        },
+        "turn_right_90": {
+          "clip_name": "ani_se_survivor_tara_kt_turn_right_90",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 203336
+        },
+        "turn_right_180": {
+          "clip_name": "ani_se_survivor_tara_kt_turn_right_180",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 203336
+        },
+        "attack": {
+          "clip_name": "ani_se_survivor_tala_kt_cartoon_attack",
+          "duration_seconds": 1.533333420753479,
+          "bundle_id": 203336
+        },
+        "walk": {
+          "clip_name": "ani_se_survivor_tara_kt_walk",
+          "duration_seconds": 0.9333333969116211,
+          "bundle_id": 203336
+        },
+        "lookaround": {
+          "clip_name": "ani_se_survivor_tara_kt_lookaround",
+          "duration_seconds": 5.000000476837158,
+          "bundle_id": 203336
+        }
+      }
+    },
+    "jacob": {
+      "model_asset": "model_survivor_jacob",
+      "controller": "ctl_se_survivor_jacob_kt",
+      "model_bundle_id": 203891,
+      "takes": {
+        "attack": {
+          "clip_name": "ani_se_survivor_jacob_kt_cartoon_attack",
+          "duration_seconds": 2.200000047683716,
+          "bundle_id": 203317
+        },
+        "death": {
+          "clip_name": "ani_se_survivor_jacob_kt_death",
+          "duration_seconds": 1.9666668176651,
+          "bundle_id": 203317
+        },
+        "hit": {
+          "clip_name": "ani_se_survivor_jacob_kt_hit",
+          "duration_seconds": 0.4333333671092987,
+          "bundle_id": 203317
+        },
+        "idle": {
+          "clip_name": "ani_se_survivor_jacob_kt_idle",
+          "duration_seconds": 1.033333420753479,
+          "bundle_id": 203317
+        },
+        "attack_left": {
+          "clip_name": "ani_se_survivor_jacob_kt_idle_left",
+          "duration_seconds": 0.06666667014360428,
+          "bundle_id": 203317
+        },
+        "lookaround": {
+          "clip_name": "ani_se_survivor_jacob_kt_lookaround",
+          "duration_seconds": 1.533333420753479,
+          "bundle_id": 203317
+        },
+        "run": {
+          "clip_name": "ani_se_survivor_jacob_kt_run",
+          "duration_seconds": 0.7333333492279053,
+          "bundle_id": 203317
+        },
+        "turn_left_run": {
+          "clip_name": "ani_se_survivor_jacob_kt_turn_left_run",
+          "duration_seconds": 0.06666667014360428,
+          "bundle_id": 203317
+        },
+        "skill": {
+          "clip_name": "ani_se_survivor_jacob_kt_skill",
+          "duration_seconds": 1.3333333730697632,
+          "bundle_id": 203317
+        },
+        "turn_left_90": {
+          "clip_name": "ani_se_survivor_jacob_kt_turn_left_90",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 203317
+        },
+        "turn_left_180": {
+          "clip_name": "ani_se_survivor_jacob_kt_turn_left_180",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 203317
+        },
+        "turn_right_90": {
+          "clip_name": "ani_se_survivor_jacob_kt_turn_right_90",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 203317
+        },
+        "turn_right_180": {
+          "clip_name": "ani_se_survivor_jacob_kt_turn_right_180",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 203317
+        },
+        "vertigo": {
+          "clip_name": "ani_se_survivor_jacob_kt_vertigo",
+          "duration_seconds": 3.3333334922790527,
+          "bundle_id": 203317
+        },
+        "victory": {
+          "clip_name": "ani_se_survivor_jacob_kt_victory",
+          "duration_seconds": 1.8000000715255737,
+          "bundle_id": 203317
+        },
+        "attack_middle": {
+          "clip_name": "ani_se_survivor_jacob_kt_idle_middle",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203317
+        },
+        "attack_right": {
+          "clip_name": "ani_se_survivor_jacob_kt_idle_right",
+          "duration_seconds": 0.06666667014360428,
+          "bundle_id": 203317
+        },
+        "turn_middle_run": {
+          "clip_name": "ani_se_survivor_jacob_kt_turn_middle_run",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203317
+        },
+        "turn_right_run": {
+          "clip_name": "ani_se_survivor_jacob_kt_turn_right_run",
+          "duration_seconds": 0.06666667014360428,
+          "bundle_id": 203317
+        },
+        "walk": {
+          "clip_name": "ani_se_survivor_jacob_kt_walk",
+          "duration_seconds": 1.100000023841858,
+          "bundle_id": 203317
+        }
+      }
+    },
+    "tarzan": {
+      "model_asset": "model_survivor_tarzan",
+      "controller": "ctl_se_survivor_tarzan_kt_cartoon",
+      "model_bundle_id": 203908,
+      "takes": {
+        "death": {
+          "clip_name": "ani_se_survivor_tarzan_kt_cartoon_death",
+          "duration_seconds": 2.3333334922790527,
+          "bundle_id": 203337
+        },
+        "hit": {
+          "clip_name": "ani_se_survivor_tarzan_kt_cartoon_hit",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 203337
+        },
+        "idle": {
+          "clip_name": "ani_se_survivor_tarzan_kt_cartoon_idle",
+          "duration_seconds": 1.3333333730697632,
+          "bundle_id": 203337
+        },
+        "run": {
+          "clip_name": "ani_se_survivor_tarzan_kt_cartoon_run",
+          "duration_seconds": 0.8000000715255737,
+          "bundle_id": 203337
+        },
+        "skill": {
+          "clip_name": "ani_se_survivor_tarzan_kt_cartoon_skill",
+          "duration_seconds": 1.0,
+          "bundle_id": 203337
+        },
+        "vertigo": {
+          "clip_name": "ani_se_survivor_tarzan_kt_cartoon_vertigo",
+          "duration_seconds": 2.0,
+          "bundle_id": 203337
+        },
+        "victory": {
+          "clip_name": "ani_se_survivor_tarzan_kt_cartoon_victory",
+          "duration_seconds": 2.4000000953674316,
+          "bundle_id": 203337
+        },
+        "attack_left": {
+          "clip_name": "ani_se_survivor_tarzan_kt_cartoon_idle_left",
+          "duration_seconds": 0.03333333879709244,
+          "bundle_id": 203337
+        },
+        "attack_middle": {
+          "clip_name": "ani_se_survivor_tarzan_kt_cartoon_idle_middle",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203337
+        },
+        "attack_right": {
+          "clip_name": "ani_se_survivor_tarzan_kt_cartoon_idle_right",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203337
+        },
+        "turn_left_run": {
+          "clip_name": "ani_se_survivor_tarzan_kt_cartoon_turn_left_run",
+          "duration_seconds": 0.03333333879709244,
+          "bundle_id": 203337
+        },
+        "turn_middle_run": {
+          "clip_name": "ani_se_survivor_tarzan_kt_cartoon_turn_middle_run",
+          "duration_seconds": 0.13333334028720856,
+          "bundle_id": 203337
+        },
+        "turn_right_run": {
+          "clip_name": "ani_se_survivor_tarzan_kt_cartoon_vertigo",
+          "duration_seconds": 2.0,
+          "bundle_id": 203337
+        },
+        "turn_left_90": {
+          "clip_name": "ani_se_survivor_tarzan_kt_cartoon_turn_left_90",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 203337
+        },
+        "turn_left_180": {
+          "clip_name": "ani_se_survivor_tarzan_kt_cartoon_turn_left_180",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 203337
+        },
+        "turn_right_90": {
+          "clip_name": "ani_se_survivor_tarzan_kt_cartoon_turn_right_90",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 203337
+        },
+        "turn_right_180": {
+          "clip_name": "ani_se_survivor_tarzan_kt_cartoon_turn_right_180",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 203337
+        },
+        "attack": {
+          "clip_name": "ani_se_survivor_tarzan_kt_cartoon_attack01",
+          "duration_seconds": 0.8000000715255737,
+          "bundle_id": 203337
+        },
+        "walk": {
+          "clip_name": "ani_se_survivor_tarzan_kt_cartoon_walk",
+          "duration_seconds": 1.0,
+          "bundle_id": 203337
+        },
+        "lookaround": {
+          "clip_name": "ani_se_survivor_tarzan_kt_cartoon_lookaround",
+          "duration_seconds": 3.000000238418579,
+          "bundle_id": 203337
+        },
+        "attack02": {
+          "clip_name": "ani_se_survivor_tarzan_kt_cartoon_attack02",
+          "duration_seconds": 0.8000000715255737,
+          "bundle_id": 203337
+        }
+      }
+    },
+    "chiron": {
+      "model_asset": "model_survivor_chiron",
+      "controller": "ctl_se_survivor_chiron_kt",
+      "model_bundle_id": 203886,
+      "takes": {
+        "attack": {
+          "clip_name": "ani_se_survivor_chiron_kt_cartoon_attack",
+          "duration_seconds": 1.3333333730697632,
+          "bundle_id": 203312
+        },
+        "death": {
+          "clip_name": "ani_se_survivor_chiron_kt_cartoon_death",
+          "duration_seconds": 1.7666667699813843,
+          "bundle_id": 203312
+        },
+        "hit": {
+          "clip_name": "ani_se_survivor_chiron_kt_cartoon_hit",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 203312
+        },
+        "idle": {
+          "clip_name": "ani_se_survivor_chiron_kt_cartoon_idle",
+          "duration_seconds": 1.3333333730697632,
+          "bundle_id": 203312
+        },
+        "attack_left": {
+          "clip_name": "ani_se_survivor_chiron_kt_cartoon_idle_left",
+          "duration_seconds": 0.03333333879709244,
+          "bundle_id": 203312
+        },
+        "lookaround": {
+          "clip_name": "ani_se_survivor_chiron_kt_cartoon_lookaround",
+          "duration_seconds": 3.066666841506958,
+          "bundle_id": 203312
+        },
+        "run": {
+          "clip_name": "ani_se_survivor_chiron_kt_cartoon_run",
+          "duration_seconds": 0.8000000715255737,
+          "bundle_id": 203312
+        },
+        "turn_left_run": {
+          "clip_name": "ani_se_survivor_chiron_kt_cartoon_turn_left_run",
+          "duration_seconds": 0.03333333879709244,
+          "bundle_id": 203312
+        },
+        "skill": {
+          "clip_name": "ani_se_survivor_chiron_kt_cartoon_skill",
+          "duration_seconds": 1.533333420753479,
+          "bundle_id": 203312
+        },
+        "turn_left_90": {
+          "clip_name": "ani_se_survivor_chiron_kt_cartoon_turn_left_90",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 203312
+        },
+        "turn_left_180": {
+          "clip_name": "ani_se_survivor_chiron_kt_cartoon_turn_left_180",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 203312
+        },
+        "turn_right_90": {
+          "clip_name": "ani_se_survivor_chiron_kt_cartoon_turn_right_90",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 203312
+        },
+        "turn_right_180": {
+          "clip_name": "ani_se_survivor_chiron_kt_cartoon_turn_right_180",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 203312
+        },
+        "vertigo": {
+          "clip_name": "ani_se_survivor_chiron_kt_cartoon_vertigo",
+          "duration_seconds": 2.6666667461395264,
+          "bundle_id": 203312
+        },
+        "victory": {
+          "clip_name": "ani_se_survivor_chiron_kt_cartoon_victory",
+          "duration_seconds": 1.4666666984558105,
+          "bundle_id": 203312
+        },
+        "attack_middle": {
+          "clip_name": "ani_se_survivor_chiron_kt_cartoon_idle_middle",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203312
+        },
+        "attack_right": {
+          "clip_name": "ani_se_survivor_chiron_kt_cartoon_idle_right",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203312
+        },
+        "turn_middle_run": {
+          "clip_name": "ani_se_survivor_chiron_kt_cartoon_turn_middle_run",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203312
+        },
+        "turn_right_run": {
+          "clip_name": "ani_se_survivor_chiron_kt_cartoon_turn_right_run",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203312
+        },
+        "walk": {
+          "clip_name": "ani_se_survivor_chiron_kt_cartoon_walk",
+          "duration_seconds": 0.9333333969116211,
+          "bundle_id": 203312
+        }
+      }
+    },
+    "shark": {
+      "model_asset": "model_survivor_shark",
+      "controller": "ctl_se_survivor_shark_kt_cartoon",
+      "model_bundle_id": 203905,
+      "takes": {
+        "death": {
+          "clip_name": "ani_se_survivor_shark_kt_cartoon_death",
+          "duration_seconds": 1.9666668176651,
+          "bundle_id": 203335
+        },
+        "hit": {
+          "clip_name": "ani_se_survivor_shark_kt_cartoon_hit",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 203335
+        },
+        "idle": {
+          "clip_name": "ani_se_survivor_shark_kt_cartoon_idle",
+          "duration_seconds": 2.0,
+          "bundle_id": 203335
+        },
+        "run": {
+          "clip_name": "ani_se_survivor_shark_kt_cartoon_run",
+          "duration_seconds": 0.8666667342185974,
+          "bundle_id": 203335
+        },
+        "skill": {
+          "clip_name": "ani_se_survivor_shark_kt_cartoon_skill",
+          "duration_seconds": 1.0,
+          "bundle_id": 203335
+        },
+        "vertigo": {
+          "clip_name": "ani_se_survivor_shark_kt_cartoon_vertigo",
+          "duration_seconds": 2.0,
+          "bundle_id": 203335
+        },
+        "victory": {
+          "clip_name": "ani_se_survivor_shark_kt_cartoon_skill",
+          "duration_seconds": 1.0,
+          "bundle_id": 203335
+        },
+        "attack_left": {
+          "clip_name": "ani_se_survivor_shark_kt_cartoon_idle_left",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203335
+        },
+        "attack_middle": {
+          "clip_name": "ani_se_survivor_shark_kt_cartoon_idle_middle",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203335
+        },
+        "attack_right": {
+          "clip_name": "ani_se_survivor_shark_kt_cartoon_idle_right",
+          "duration_seconds": 0.03333333879709244,
+          "bundle_id": 203335
+        },
+        "turn_left_run": {
+          "clip_name": "ani_se_survivor_shark_kt_cartoon_turn_left_run",
+          "duration_seconds": 0.03333333879709244,
+          "bundle_id": 203335
+        },
+        "turn_middle_run": {
+          "clip_name": "ani_se_survivor_shark_kt_cartoon_turn_middle_run",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203335
+        },
+        "turn_right_run": {
+          "clip_name": "ani_se_survivor_shark_kt_cartoon_turn_right_run",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203335
+        },
+        "turn_left_90": {
+          "clip_name": "ani_se_survivor_shark_kt_cartoon_turn_left_90",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 203335
+        },
+        "turn_left_180": {
+          "clip_name": "ani_se_survivor_shark_kt_cartoon_turn_left_180",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 203335
+        },
+        "turn_right_90": {
+          "clip_name": "ani_se_survivor_shark_kt_cartoon_turn_right_90",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 203335
+        },
+        "turn_right_180": {
+          "clip_name": "ani_se_survivor_shark_kt_cartoon_turn_right_180",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 203335
+        },
+        "attack": {
+          "clip_name": "ani_se_survivor_shark_kt_cartoon_attack",
+          "duration_seconds": 1.5000001192092896,
+          "bundle_id": 203335
+        },
+        "walk": {
+          "clip_name": "ani_se_survivor_shark_kt_cartoon_walk",
+          "duration_seconds": 1.0,
+          "bundle_id": 203335
+        },
+        "lookaround": {
+          "clip_name": "ani_se_survivor_shark_kt_cartoon_lookaround",
+          "duration_seconds": 3.8000001907348633,
+          "bundle_id": 203335
+        }
+      }
+    },
+    "ragnar": {
+      "model_asset": "model_survivor_ragnar",
+      "controller": "ctl_se_survivor_ragnar_kt",
+      "model_bundle_id": 203902,
+      "takes": {
+        "attack": {
+          "clip_name": "ani_se_survior_ragnar_kt_cartoon_attack01",
+          "duration_seconds": 1.0,
+          "bundle_id": 203330
+        },
+        "attack02": {
+          "clip_name": "ani_se_survior_ragnar_kt_attack2",
+          "duration_seconds": 1.433333396911621,
+          "bundle_id": 203330
+        },
+        "death": {
+          "clip_name": "ani_se_survior_ragnar_kt_death",
+          "duration_seconds": 1.533333420753479,
+          "bundle_id": 203330
+        },
+        "hit": {
+          "clip_name": "ani_se_survior_ragnar_kt_hit",
+          "duration_seconds": 1.0,
+          "bundle_id": 203330
+        },
+        "idle": {
+          "clip_name": "ani_se_survior_ragnar_kt_idle",
+          "duration_seconds": 1.3333333730697632,
+          "bundle_id": 203330
+        },
+        "lookaround": {
+          "clip_name": "ani_se_survior_ragnar_kt_lookaround",
+          "duration_seconds": 4.1666669845581055,
+          "bundle_id": 203330
+        },
+        "run": {
+          "clip_name": "ani_se_survior_ragnar_kt_run",
+          "duration_seconds": 0.8000000715255737,
+          "bundle_id": 203330
+        },
+        "skill": {
+          "clip_name": "ani_se_survior_ragnar_kt_skill",
+          "duration_seconds": 1.1666667461395264,
+          "bundle_id": 203330
+        },
+        "turn_left_90": {
+          "clip_name": "ani_se_survior_ragnar_kt_turn_left_90",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 203330
+        },
+        "turn_left_180": {
+          "clip_name": "ani_se_survior_ragnar_kt_turn_left_180",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 203330
+        },
+        "turn_left_run": {
+          "clip_name": "ani_se_survior_ragnar_kt_turn_left_run",
+          "duration_seconds": 0.03333333879709244,
+          "bundle_id": 203330
+        },
+        "turn_middle_run": {
+          "clip_name": "ani_se_survior_ragnar_kt_turn_middle_run",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203330
+        },
+        "turn_right_90": {
+          "clip_name": "ani_se_survior_ragnar_kt_turn_right_90",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 203330
+        },
+        "turn_right_180": {
+          "clip_name": "ani_se_survior_ragnar_kt_turn_right_180",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 203330
+        },
+        "turn_right_run": {
+          "clip_name": "ani_se_survior_ragnar_kt_turn_right_run",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203330
+        },
+        "vertigo": {
+          "clip_name": "ani_se_survior_ragnar_kt_vertigo",
+          "duration_seconds": 2.0,
+          "bundle_id": 203330
+        },
+        "victory": {
+          "clip_name": "ani_se_survior_ragnar_kt_victory",
+          "duration_seconds": 2.1666667461395264,
+          "bundle_id": 203330
+        },
+        "walk": {
+          "clip_name": "ani_se_survior_ragnar_kt_walk",
+          "duration_seconds": 1.2000000476837158,
+          "bundle_id": 203330
+        },
+        "attack_middle": {
+          "clip_name": "ani_se_survior_ragnar_kt_idle",
+          "duration_seconds": 1.3333333730697632,
+          "bundle_id": 203330
+        },
+        "attack_left": {
+          "clip_name": "ani_se_survior_ragnar_kt_idle_left",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203330
+        },
+        "attack_right": {
+          "clip_name": "ani_se_survior_ragnar_kt_idle_right",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203330
+        },
+        "attack03": {
+          "clip_name": "ani_se_survior_ragnar_kt_cartoon_attack03",
+          "duration_seconds": 1.0,
+          "bundle_id": 203330
+        }
+      }
+    },
+    "knotty": {
+      "model_asset": "model_survivor_knotty",
+      "controller": "ctl_se_survivor_knotty_kt_kt",
+      "model_bundle_id": 203894,
+      "takes": {
+        "attack": {
+          "clip_name": "ani_se_survivor_knotty_kt_attack",
+          "duration_seconds": 1.3333333730697632,
+          "bundle_id": 203320
+        },
+        "death": {
+          "clip_name": "ani_se_survivor_knotty_kt_cartoon_death",
+          "duration_seconds": 2.1666667461395264,
+          "bundle_id": 203320
+        },
+        "hit": {
+          "clip_name": "ani_se_survivor_knotty_kt_cartoon_hit",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 203320
+        },
+        "idle": {
+          "clip_name": "ani_se_survivor_knotty_kt_cartoon_idle",
+          "duration_seconds": 2.0,
+          "bundle_id": 203320
+        },
+        "lookaround": {
+          "clip_name": "ani_se_survivor_knotty_kt_cartoon_lookaround",
+          "duration_seconds": 4.933333396911621,
+          "bundle_id": 203320
+        },
+        "run": {
+          "clip_name": "ani_se_survivor_knotty_kt_cartoon_run",
+          "duration_seconds": 0.8000000715255737,
+          "bundle_id": 203320
+        },
+        "skill": {
+          "clip_name": "ani_se_survivor_knotty_kt_cartoon_skill",
+          "duration_seconds": 1.7333334684371948,
+          "bundle_id": 203320
+        },
+        "vertigo": {
+          "clip_name": "ani_se_survivor_knotty_kt_cartoon_vertigo",
+          "duration_seconds": 2.0,
+          "bundle_id": 203320
+        },
+        "victory": {
+          "clip_name": "ani_se_survivor_knotty_kt_cartoon_victory",
+          "duration_seconds": 2.266666889190674,
+          "bundle_id": 203320
+        },
+        "turn_right_run": {
+          "clip_name": "ani_se_survivor_knotty_kt_cartoon_turn_right_run",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203320
+        },
+        "turn_middle_run": {
+          "clip_name": "ani_se_survivor_knotty_kt_cartoon_turn_middle_run",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203320
+        },
+        "turn_left_180": {
+          "clip_name": "ani_se_survivor_knotty_kt_cartoon_turn_left_180",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 203320
+        },
+        "attack_left": {
+          "clip_name": "ani_se_survivor_knotty_kt_cartoon_idle_left",
+          "duration_seconds": 0.03333333879709244,
+          "bundle_id": 203320
+        },
+        "attack_middle": {
+          "clip_name": "ani_se_survivor_knotty_kt_cartoon_idle_middle",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203320
+        },
+        "attack_right": {
+          "clip_name": "ani_se_survivor_knotty_kt_cartoon_idle_right",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203320
+        },
+        "turn_left_run": {
+          "clip_name": "ani_se_survivor_knotty_kt_cartoon_turn_left_run",
+          "duration_seconds": 0.03333333879709244,
+          "bundle_id": 203320
+        },
+        "turn_left_90": {
+          "clip_name": "ani_se_survivor_knotty_kt_cartoon_turn_left_90",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 203320
+        },
+        "turn_right_90": {
+          "clip_name": "ani_se_survivor_knotty_kt_cartoon_turn_right_90",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 203320
+        },
+        "turn_right_180": {
+          "clip_name": "ani_se_survivor_knotty_kt_cartoon_turn_right_180",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 203320
+        },
+        "walk": {
+          "clip_name": "ani_se_survivor_knotty_kt_cartoon_walk",
+          "duration_seconds": 2.0,
+          "bundle_id": 203320
+        }
+      }
+    },
+    "undine": {
+      "model_asset": "model_survivor_undine",
+      "controller": "ctl_se_survivor_undine_kt_cartoon",
+      "model_bundle_id": 203913,
+      "takes": {
+        "death": {
+          "clip_name": "ani_se_survivor_undine_kt_cartoon_death",
+          "duration_seconds": 2.066666841506958,
+          "bundle_id": 203342
+        },
+        "hit": {
+          "clip_name": "ani_se_survivor_undine_kt_cartoon_hit",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 203342
+        },
+        "idle": {
+          "clip_name": "ani_se_survivor_undine_kt_cartoon_idle",
+          "duration_seconds": 2.0,
+          "bundle_id": 203342
+        },
+        "run": {
+          "clip_name": "ani_se_survivor_undine_kt_cartoon_run",
+          "duration_seconds": 1.0,
+          "bundle_id": 203342
+        },
+        "skill": {
+          "clip_name": "ani_se_survivor_undine_kt_cartoon_skill",
+          "duration_seconds": 1.8000000715255737,
+          "bundle_id": 203342
+        },
+        "vertigo": {
+          "clip_name": "ani_se_survivor_undine_kt_cartoon_vertigo",
+          "duration_seconds": 2.0,
+          "bundle_id": 203342
+        },
+        "victory": {
+          "clip_name": "ani_se_survivor_undine_kt_cartoon_victory",
+          "duration_seconds": 1.6000001430511475,
+          "bundle_id": 203342
+        },
+        "attack_left": {
+          "clip_name": "ani_se_survivor_undine_kt_cartoon_idle_left",
+          "duration_seconds": 0.03333333879709244,
+          "bundle_id": 203342
+        },
+        "attack_middle": {
+          "clip_name": "ani_se_survivor_undine_kt_cartoon_idle_middle",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203342
+        },
+        "attack_right": {
+          "clip_name": "ani_se_survivor_undine_kt_cartoon_idle_right",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203342
+        },
+        "turn_left_run": {
+          "clip_name": "ani_se_survivor_undine_kt_cartoon_turn_left_run",
+          "duration_seconds": 0.03333333879709244,
+          "bundle_id": 203342
+        },
+        "turn_middle_run": {
+          "clip_name": "ani_se_survivor_undine_kt_cartoon_turn_middle_run",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203342
+        },
+        "turn_right_run": {
+          "clip_name": "ani_se_survivor_undine_kt_cartoon_turn_right_run",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203342
+        },
+        "turn_left_90": {
+          "clip_name": "ani_se_survivor_undine_kt_cartoon_turn_left_90",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 203342
+        },
+        "turn_left_180": {
+          "clip_name": "ani_se_survivor_undine_kt_cartoon_turn_left_180",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 203342
+        },
+        "turn_right_90": {
+          "clip_name": "ani_se_survivor_undine_kt_cartoon_turn_right_90",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 203342
+        },
+        "turn_right_180": {
+          "clip_name": "ani_se_survivor_undine_kt_cartoon_turn_right_180",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 203342
+        },
+        "attack": {
+          "clip_name": "ani_se_survivor_undine_kt_cartoon_attack",
+          "duration_seconds": 1.3666667938232422,
+          "bundle_id": 203342
+        },
+        "walk": {
+          "clip_name": "ani_se_survivor_undine_kt_cartoon_walk",
+          "duration_seconds": 1.4000000953674316,
+          "bundle_id": 203342
+        },
+        "lookaround": {
+          "clip_name": "ani_se_survivor_undine_kt_cartoon_lookaround",
+          "duration_seconds": 2.9666669368743896,
+          "bundle_id": 203342
+        }
+      }
+    },
+    "dave": {
+      "model_asset": "model_survivor_dave",
+      "controller": "ctl_se_survivor_dave_kt",
+      "model_bundle_id": 203887,
+      "takes": {
+        "attack": {
+          "clip_name": "ani_se_survior_dave_kt_attack",
+          "duration_seconds": 2.266666889190674,
+          "bundle_id": 203313
+        },
+        "death": {
+          "clip_name": "ani_se_survior_dave_kt_death",
+          "duration_seconds": 1.2666667699813843,
+          "bundle_id": 203313
+        },
+        "hit": {
+          "clip_name": "ani_se_survior_dave_kt_hit",
+          "duration_seconds": 0.5666667222976685,
+          "bundle_id": 203313
+        },
+        "idle": {
+          "clip_name": "ani_se_survior_dave_kt_idle",
+          "duration_seconds": 2.0,
+          "bundle_id": 203313
+        },
+        "lookaround": {
+          "clip_name": "ani_se_survior_dave_kt_lookaround",
+          "duration_seconds": 3.1000001430511475,
+          "bundle_id": 203313
+        },
+        "run": {
+          "clip_name": "ani_se_survior_dave_kt_run",
+          "duration_seconds": 0.5333333611488342,
+          "bundle_id": 203313
+        },
+        "skill": {
+          "clip_name": "ani_se_survior_dave_kt_skill",
+          "duration_seconds": 2.4000000953674316,
+          "bundle_id": 203313
+        },
+        "turn_left_90": {
+          "clip_name": "ani_se_survior_dave_kt_turn_left_90",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 203313
+        },
+        "turn_left_180": {
+          "clip_name": "ani_se_survior_dave_kt_turn_left_180",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 203313
+        },
+        "turn_right_90": {
+          "clip_name": "ani_se_survior_dave_kt_turn_right_90",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 203313
+        },
+        "turn_right_180": {
+          "clip_name": "ani_se_survior_dave_kt_turn_right_180",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 203313
+        },
+        "vertigo": {
+          "clip_name": "ani_se_survior_dave_kt_vertigo",
+          "duration_seconds": 2.0,
+          "bundle_id": 203313
+        },
+        "victory": {
+          "clip_name": "ani_se_survior_dave_kt_victory",
+          "duration_seconds": 3.000000238418579,
+          "bundle_id": 203313
+        },
+        "walk": {
+          "clip_name": "ani_se_survior_dave_kt_walk",
+          "duration_seconds": 1.3333333730697632,
+          "bundle_id": 203313
+        },
+        "attack_left": {
+          "clip_name": "ani_se_survior_dave_kt_idle_left",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203313
+        },
+        "attack_middle": {
+          "clip_name": "ani_se_survior_dave_kt_idle_middle",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203313
+        },
+        "attack_right": {
+          "clip_name": "ani_se_survior_dave_kt_idle_right",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203313
+        },
+        "turn_middle_run": {
+          "clip_name": "ani_se_survior_dave_kt_turn_middle_run",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203313
+        },
+        "turn_left_run": {
+          "clip_name": "ani_se_survior_dave_kt_turn_left_run",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203313
+        },
+        "turn_right_run": {
+          "clip_name": "ani_se_survior_dave_kt_turn_right_run",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203313
+        }
+      }
+    },
+    "lava": {
+      "model_asset": "model_survivor_lava",
+      "controller": "ctl_se_survivor_lava_se_cartoon",
+      "model_bundle_id": 203895,
+      "takes": {
+        "death": {
+          "clip_name": "ani_se_survivor_lava_se_cartoon_death",
+          "duration_seconds": 2.200000047683716,
+          "bundle_id": 203321
+        },
+        "idle": {
+          "clip_name": "ani_se_survivor_lava_se_cartoon_idle",
+          "duration_seconds": 1.6666667461395264,
+          "bundle_id": 203321
+        },
+        "run": {
+          "clip_name": "ani_se_survivor_lava_se_cartoon_run",
+          "duration_seconds": 0.8000000715255737,
+          "bundle_id": 203321
+        },
+        "skill": {
+          "clip_name": "ani_se_survivor_lava_se_cartoon_skill",
+          "duration_seconds": 1.2333333492279053,
+          "bundle_id": 203321
+        },
+        "vertigo": {
+          "clip_name": "ani_se_survivor_lava_se_cartoon_vertigo",
+          "duration_seconds": 1.6666667461395264,
+          "bundle_id": 203321
+        },
+        "victory": {
+          "clip_name": "ani_se_survivor_lava_se_cartoon_victory",
+          "duration_seconds": 1.8333333730697632,
+          "bundle_id": 203321
+        },
+        "attack": {
+          "clip_name": "ani_se_survivor_lava_se_cartoon_attack",
+          "duration_seconds": 0.9333333969116211,
+          "bundle_id": 203321
+        },
+        "walk": {
+          "clip_name": "ani_se_survivor_lava_se_cartoon_walk",
+          "duration_seconds": 1.0,
+          "bundle_id": 203321
+        },
+        "lookaround": {
+          "clip_name": "ani_se_survivor_lava_se_cartoon_lookaround",
+          "duration_seconds": 1.7000000476837158,
+          "bundle_id": 203321
+        },
+        "attack_left": {
+          "clip_name": "ani_se_survivor_lava_se_cartoon_idle_left",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203321
+        },
+        "attack_middle": {
+          "clip_name": "ani_se_survivor_lava_se_cartoon_idle_middle",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203321
+        },
+        "attack_right": {
+          "clip_name": "ani_se_survivor_lava_se_cartoon_idle_right",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203321
+        },
+        "turn_left_run": {
+          "clip_name": "ani_se_survivor_lava_se_cartoon_turn_left_run",
+          "duration_seconds": 0.03333333879709244,
+          "bundle_id": 203321
+        },
+        "turn_middle_run": {
+          "clip_name": "ani_se_survivor_lava_se_cartoon_turn_middle_run",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203321
+        },
+        "turn_right_run": {
+          "clip_name": "ani_se_survivor_lava_se_cartoon_turn_right_run",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203321
+        }
+      }
+    },
+    "lucky": {
+      "model_asset": "model_survivor_lucky",
+      "controller": "ctl_se_survivor_lucky_kt",
+      "model_bundle_id": 204245,
+      "takes": {
+        "attack": {
+          "clip_name": "ani_se_survivor_lucky_kt_cartoon_attack",
+          "duration_seconds": 1.2000000476837158,
+          "bundle_id": 204170
+        },
+        "death": {
+          "clip_name": "ani_se_survivor_lucky_kt_cartoon_death",
+          "duration_seconds": 2.3333334922790527,
+          "bundle_id": 204170
+        },
+        "hit": {
+          "clip_name": "ani_se_survivor_lucky_kt_cartoon_hit",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 204170
+        },
+        "idle": {
+          "clip_name": "ani_se_survivor_lucky_kt_cartoon_idle",
+          "duration_seconds": 0.36666667461395264,
+          "bundle_id": 204170
+        },
+        "lookaround": {
+          "clip_name": "ani_se_survivor_lucky_kt_cartoon_lookaround",
+          "duration_seconds": 3.200000286102295,
+          "bundle_id": 204170
+        },
+        "run": {
+          "clip_name": "ani_se_survivor_lucky_kt_cartoon_run",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 204170
+        },
+        "vertigo": {
+          "clip_name": "ani_se_survivor_lucky_kt_cartoon_vertigo",
+          "duration_seconds": 1.0,
+          "bundle_id": 204170
+        },
+        "victory": {
+          "clip_name": "ani_se_survivor_lucky_kt_cartoon_victory",
+          "duration_seconds": 3.2333335876464844,
+          "bundle_id": 204170
+        },
+        "turn_right_run": {
+          "clip_name": "ani_se_survivor_lucky_kt_cartoon_turn_right_run",
+          "duration_seconds": 0.06666667014360428,
+          "bundle_id": 204170
+        },
+        "turn_middle_run": {
+          "clip_name": "ani_se_survivor_lucky_kt_cartoon_turn_middle_run",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 204170
+        },
+        "turn_left_180": {
+          "clip_name": "ani_se_survivor_lucky_kt_cartoon_turn_left_180",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 204170
+        },
+        "attack_left": {
+          "clip_name": "ani_se_survivor_lucky_kt_cartoon_idle_left",
+          "duration_seconds": 0.06666667014360428,
+          "bundle_id": 204170
+        },
+        "attack_middle": {
+          "clip_name": "ani_se_survivor_lucky_kt_cartoon_idle_middle",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 204170
+        },
+        "attack_right": {
+          "clip_name": "ani_se_survivor_lucky_kt_cartoon_idle_right",
+          "duration_seconds": 0.06666667014360428,
+          "bundle_id": 204170
+        },
+        "turn_left_run": {
+          "clip_name": "ani_se_survivor_lucky_kt_cartoon_turn_left_run",
+          "duration_seconds": 0.06666667014360428,
+          "bundle_id": 204170
+        },
+        "turn_left_90": {
+          "clip_name": "ani_se_survivor_lucky_kt_cartoon_turn_left_90",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 204170
+        },
+        "turn_right_90": {
+          "clip_name": "ani_se_survivor_lucky_kt_cartoon_turn_right_90",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 204170
+        },
+        "turn_right_180": {
+          "clip_name": "ani_se_survivor_lucky_kt_cartoon_turn_right_180",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 204170
+        },
+        "walk": {
+          "clip_name": "ani_se_survivor_lucky_kt_cartoon_walk",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 204170
+        },
+        "skill02": {
+          "clip_name": "ani_se_survivor_lucky_kt_cartoon_skill02",
+          "duration_seconds": 1.2666667699813843,
+          "bundle_id": 204170
+        },
+        "skill": {
+          "clip_name": "ani_se_survivor_lucky_kt_cartoon_skill",
+          "duration_seconds": 1.2000000476837158,
+          "bundle_id": 204170
+        }
+      }
+    },
+    "sarge": {
+      "model_asset": "model_survivor_sarge",
+      "controller": "ctl_se_survivor_sarge_kt",
+      "model_bundle_id": 204328,
+      "takes": {
+        "attack": {
+          "clip_name": "ani_se_survivor_sarge_kt_attack",
+          "duration_seconds": 0.8000000715255737,
+          "bundle_id": 204176
+        },
+        "death": {
+          "clip_name": "ani_se_survivor_sarge_kt_death",
+          "duration_seconds": 2.1000001430511475,
+          "bundle_id": 204176
+        },
+        "hit": {
+          "clip_name": "ani_se_survivor_sarge_kt_hit",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 204176
+        },
+        "lookaround": {
+          "clip_name": "ani_se_survivor_sarge_kt_lookaround",
+          "duration_seconds": 2.1000001430511475,
+          "bundle_id": 204176
+        },
+        "open": {
+          "clip_name": "ani_se_survivor_sarge_kt_open",
+          "duration_seconds": 1.4666666984558105,
+          "bundle_id": 204176
+        },
+        "pickup": {
+          "clip_name": "ani_se_survivor_sarge_kt_pickup",
+          "duration_seconds": 1.100000023841858,
+          "bundle_id": 204176
+        },
+        "run": {
+          "clip_name": "ani_se_survivor_sarge_kt_run",
+          "duration_seconds": 0.8000000715255737,
+          "bundle_id": 204176
+        },
+        "vertigo": {
+          "clip_name": "ani_se_survivor_sarge_kt_vertigo",
+          "duration_seconds": 2.0,
+          "bundle_id": 204176
+        },
+        "victory": {
+          "clip_name": "ani_se_survivor_sarge_kt_victory",
+          "duration_seconds": 2.0333335399627686,
+          "bundle_id": 204176
+        },
+        "turn_left_180": {
+          "clip_name": "ani_se_survivor_sarge_kt_turn_left_180",
+          "duration_seconds": 1.0,
+          "bundle_id": 204176
+        },
+        "turn_middle_run": {
+          "clip_name": "ani_se_survivor_sarge_kt_turn_middle_run",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 204176
+        },
+        "turn_left_run": {
+          "clip_name": "ani_se_survivor_sarge_kt_turn_left_run",
+          "duration_seconds": 0.03333333879709244,
+          "bundle_id": 204176
+        },
+        "turn_right_run": {
+          "clip_name": "ani_se_survivor_sarge_kt_turn_right_run",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 204176
+        },
+        "turn_left_90": {
+          "clip_name": "ani_se_survivor_sarge_kt_turn_left_90",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 204176
+        },
+        "turn_right_180": {
+          "clip_name": "ani_se_survivor_sarge_kt_turn_right_180",
+          "duration_seconds": 1.0,
+          "bundle_id": 204176
+        },
+        "turn_right_90": {
+          "clip_name": "ani_se_survivor_sarge_kt_turn_right_90",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 204176
+        },
+        "death02": {
+          "clip_name": "ani_se_survivor_sarge_kt_death",
+          "duration_seconds": 2.1000001430511475,
+          "bundle_id": 204176
+        },
+        "skill": {
+          "clip_name": "ani_se_survivor_sarge_kt_skill",
+          "duration_seconds": 1.2666667699813843,
+          "bundle_id": 204176
+        },
+        "walk": {
+          "clip_name": "ani_se_survivor_sarge_kt_gunwalk",
+          "duration_seconds": 1.100000023841858,
+          "bundle_id": 204176
+        },
+        "idle": {
+          "clip_name": "ani_se_survivor_sarge_kt_idle",
+          "duration_seconds": 2.0,
+          "bundle_id": 204176
+        },
+        "attack_middle": {
+          "clip_name": "ani_se_survivor_sarge_kt_idle_middle",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 204176
+        },
+        "attack_right": {
+          "clip_name": "ani_se_survivor_sarge_kt_idle_right",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 204176
+        },
+        "attack_left": {
+          "clip_name": "ani_se_survivor_sarge_kt_idle_left",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 204176
+        }
+      }
+    },
+    "ken": {
+      "model_asset": "model_survivor_ken",
+      "controller": "ctl_se_survivor_ken_kt",
+      "model_bundle_id": 204528,
+      "takes": {
+        "attack": {
+          "clip_name": "ani_se_survivor_ken_kt_attack",
+          "duration_seconds": 1.2333333492279053,
+          "bundle_id": 204467
+        },
+        "attack_middle": {
+          "clip_name": "ani_se_survivor_ken_kt_idle_middle",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 204467
+        },
+        "death": {
+          "clip_name": "ani_se_survivor_ken_kt_death",
+          "duration_seconds": 2.1000001430511475,
+          "bundle_id": 204467
+        },
+        "hit": {
+          "clip_name": "ani_se_survivor_ken_kt_hit",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 204467
+        },
+        "lookaround": {
+          "clip_name": "ani_se_survivor_ken_kt_lookaround",
+          "duration_seconds": 3.1666667461395264,
+          "bundle_id": 204467
+        },
+        "run": {
+          "clip_name": "ani_se_survivor_ken_kt_run",
+          "duration_seconds": 0.6000000238418579,
+          "bundle_id": 204467
+        },
+        "skill": {
+          "clip_name": "ani_se_survivor_ken_kt_skill",
+          "duration_seconds": 2.0,
+          "bundle_id": 204467
+        },
+        "skill02": {
+          "clip_name": "ani_se_survivor_ken_kt_skill02",
+          "duration_seconds": 1.8666667938232422,
+          "bundle_id": 204467
+        },
+        "turn_left_90": {
+          "clip_name": "ani_se_survivor_ken_kt_turn_left_90",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 204467
+        },
+        "turn_left_180": {
+          "clip_name": "ani_se_survivor_ken_kt_turn_left_180",
+          "duration_seconds": 1.0,
+          "bundle_id": 204467
+        },
+        "turn_left_run": {
+          "clip_name": "ani_se_survivor_ken_kt_turn_left_run",
+          "duration_seconds": 0.03333333879709244,
+          "bundle_id": 204467
+        },
+        "turn_middle_run": {
+          "clip_name": "ani_se_survivor_ken_kt_turn_middle_run",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 204467
+        },
+        "turn_right_180": {
+          "clip_name": "ani_se_survivor_ken_kt_turn_right_180",
+          "duration_seconds": 1.0,
+          "bundle_id": 204467
+        },
+        "turn_right_90": {
+          "clip_name": "ani_se_survivor_ken_kt_turn_right_90",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 204467
+        },
+        "turn_right_run": {
+          "clip_name": "ani_se_survivor_ken_kt_turn_right_run",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 204467
+        },
+        "vertigo": {
+          "clip_name": "ani_se_survivor_ken_kt_vertigo",
+          "duration_seconds": 2.0,
+          "bundle_id": 204467
+        },
+        "victory": {
+          "clip_name": "ani_se_survivor_ken_kt_victory",
+          "duration_seconds": 2.4000000953674316,
+          "bundle_id": 204467
+        },
+        "walk": {
+          "clip_name": "ani_se_survivor_ken_kt_walk",
+          "duration_seconds": 1.3333333730697632,
+          "bundle_id": 204467
+        },
+        "skill03": {
+          "clip_name": "ani_se_survivor_ken_kt_skill03",
+          "duration_seconds": 2.5333335399627686,
+          "bundle_id": 204467
+        },
+        "idle": {
+          "clip_name": "ani_se_survivor_ken_kt_idle",
+          "duration_seconds": 1.3333333730697632,
+          "bundle_id": 204467
+        },
+        "attack_left": {
+          "clip_name": "ani_se_survivor_ken_kt_idle_left",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 204467
+        },
+        "attack_right": {
+          "clip_name": "ani_se_survivor_ken_kt_idle_right",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 204467
+        }
+      }
+    },
+    "freja": {
+      "model_asset": "model_survivor_freja",
+      "controller": "ctl_se_survivor_freja_kt",
+      "model_bundle_id": 203889,
+      "takes": {
+        "attack": {
+          "clip_name": "ani_se_survivor_freja_kt_cartoon_attack",
+          "duration_seconds": 0.8666667342185974,
+          "bundle_id": 203315
+        },
+        "hit": {
+          "clip_name": "ani_se_survivor_freja_kt_cartoon_hit",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 203315
+        },
+        "attack_left": {
+          "clip_name": "ani_se_survivor_freja_kt_cartoon_idle_left",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203315
+        },
+        "run": {
+          "clip_name": "ani_explore_survivor_freja_run",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 203467
+        },
+        "turn_left_run": {
+          "clip_name": "ani_se_survivor_freja_kt_cartoon_turn_left_run",
+          "duration_seconds": 0.03333333879709244,
+          "bundle_id": 203315
+        },
+        "turn_middle_run": {
+          "clip_name": "ani_se_survivor_freja_kt_cartoon_turn_middle_run",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203315
+        },
+        "turn_right_run": {
+          "clip_name": "ani_se_survivor_freja_kt_cartoon_turn_right_run",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203315
+        },
+        "death": {
+          "clip_name": "ani_se_survivor_freja_kt_cartoon_death",
+          "duration_seconds": 2.766666889190674,
+          "bundle_id": 203315
+        },
+        "vertigo": {
+          "clip_name": "ani_se_survivor_freja_kt_cartoon_vertigo",
+          "duration_seconds": 1.6666667461395264,
+          "bundle_id": 203315
+        },
+        "victory": {
+          "clip_name": "ani_se_survivor_freja_kt_cartoon_victory",
+          "duration_seconds": 3.3333334922790527,
+          "bundle_id": 203315
+        },
+        "walk": {
+          "clip_name": "ani_se_survivor_freja_kt_cartoon_walk",
+          "duration_seconds": 1.133333444595337,
+          "bundle_id": 203315
+        },
+        "attack02": {
+          "clip_name": "ani_se_survivor_freja_kt_cartoon_attack02",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 203315
+        },
+        "lookaround": {
+          "clip_name": "ani_se_survivor_freja_kt_cartoon_victory",
+          "duration_seconds": 3.3333334922790527,
+          "bundle_id": 203315
+        },
+        "idle": {
+          "clip_name": "ani_se_survivor_freja_kt_cartoon_idle",
+          "duration_seconds": 1.0,
+          "bundle_id": 203315
+        },
+        "turn_left_90": {
+          "clip_name": "ani_se_survivor_freja_kt_cartoon_turn_left_90",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 203315
+        },
+        "turn_left_180": {
+          "clip_name": "ani_se_survivor_freja_kt_cartoon_turn_left_180",
+          "duration_seconds": 1.0,
+          "bundle_id": 203315
+        },
+        "turn_right_90": {
+          "clip_name": "ani_se_survivor_freja_kt_cartoon_turn_right_90",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 203315
+        },
+        "turn_right_180": {
+          "clip_name": "ani_se_survivor_freja_kt_cartoon_turn_right_180",
+          "duration_seconds": 1.0,
+          "bundle_id": 203315
+        },
+        "attack_middle": {
+          "clip_name": "ani_se_survivor_freja_kt_cartoon_idle_middle",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203315
+        },
+        "attack_right": {
+          "clip_name": "ani_se_survivor_freja_kt_cartoon_idle_right",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203315
+        },
+        "skill": {
+          "clip_name": "ani_se_survivor_freja_kt_cartoon_skill",
+          "duration_seconds": 1.100000023841858,
+          "bundle_id": 203315
+        },
+        "skill02": {
+          "clip_name": "ani_se_survivor_freja_kt_cartoon_skill02",
+          "duration_seconds": 1.3666667938232422,
+          "bundle_id": 203315
+        }
+      }
+    },
+    "travis": {
+      "model_asset": "model_survivor_travis",
+      "controller": "ctl_se_survivor_travis_kt",
+      "model_bundle_id": 203912,
+      "takes": {
+        "attack": {
+          "clip_name": "ani_se_survivor_travis_kt_cartoon_attack",
+          "duration_seconds": 1.7333334684371948,
+          "bundle_id": 203341
+        },
+        "death": {
+          "clip_name": "ani_se_survivor_travis_kt_cartoon_death",
+          "duration_seconds": 1.9000000953674316,
+          "bundle_id": 203341
+        },
+        "hit": {
+          "clip_name": "ani_se_survivor_travis_kt_cartoon_hit",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 203341
+        },
+        "idle": {
+          "clip_name": "ani_se_survivor_travis_kt_cartoon_idle",
+          "duration_seconds": 1.3333333730697632,
+          "bundle_id": 203341
+        },
+        "attack_left": {
+          "clip_name": "ani_se_survivor_travis_kt_cartoon_idle_left",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203341
+        },
+        "lookaround": {
+          "clip_name": "ani_se_survivor_travis_kt_cartoon_lookaround",
+          "duration_seconds": 3.6000001430511475,
+          "bundle_id": 203341
+        },
+        "run": {
+          "clip_name": "ani_se_survivor_travis_kt_cartoon_run",
+          "duration_seconds": 0.8000000715255737,
+          "bundle_id": 203341
+        },
+        "turn_left_run": {
+          "clip_name": "ani_se_survivor_travis_kt_cartoon_turn_left_run",
+          "duration_seconds": 0.03333333879709244,
+          "bundle_id": 203341
+        },
+        "skill": {
+          "clip_name": "ani_se_survivor_travis_kt_cartoon_skill",
+          "duration_seconds": 1.7666667699813843,
+          "bundle_id": 203341
+        },
+        "skill02": {
+          "clip_name": "ani_se_survivor_travis_kt_cartoon_skill02",
+          "duration_seconds": 0.7666667103767395,
+          "bundle_id": 203341
+        },
+        "turn_left_90": {
+          "clip_name": "ani_se_survivor_travis_kt_cartoon_turn_left_90",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 203341
+        },
+        "turn_left_180": {
+          "clip_name": "ani_se_survivor_travis_kt_cartoon_turn_left_180",
+          "duration_seconds": 1.0,
+          "bundle_id": 203341
+        },
+        "turn_right_90": {
+          "clip_name": "ani_se_survivor_travis_kt_cartoon_turn_right_90",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 203341
+        },
+        "turn_right_180": {
+          "clip_name": "ani_se_survivor_travis_kt_cartoon_turn_right_180",
+          "duration_seconds": 1.0,
+          "bundle_id": 203341
+        },
+        "vertigo": {
+          "clip_name": "ani_se_survivor_travis_kt_cartoon_vertigo",
+          "duration_seconds": 2.0,
+          "bundle_id": 203341
+        },
+        "victory": {
+          "clip_name": "ani_se_survivor_travis_kt_cartoon_victory",
+          "duration_seconds": 2.8333334922790527,
+          "bundle_id": 203341
+        },
+        "attack_middle": {
+          "clip_name": "ani_se_survivor_travis_kt_cartoon_idle_middle",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203341
+        },
+        "attack_right": {
+          "clip_name": "ani_se_survivor_travis_kt_cartoon_idle_right",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203341
+        },
+        "turn_middle_run": {
+          "clip_name": "ani_se_survivor_travis_kt_cartoon_turn_middle_run",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203341
+        },
+        "turn_right_run": {
+          "clip_name": "ani_se_survivor_travis_kt_cartoon_turn_right_run",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203341
+        },
+        "attack02": {
+          "clip_name": "ani_se_survivor_travis_kt_cartoon_attack",
+          "duration_seconds": 1.7333334684371948,
+          "bundle_id": 203341
+        },
+        "walk": {
+          "clip_name": "ani_se_survivor_travis_kt_cartoon_run",
+          "duration_seconds": 0.8000000715255737,
+          "bundle_id": 203341
+        }
+      }
+    },
+    "eva": {
+      "model_asset": "model_survivor_eva",
+      "controller": "ctl_se_survivor_eva_kt",
+      "model_bundle_id": 203888,
+      "takes": {
+        "attack": {
+          "clip_name": "ani_se_survivor_eva_kt_attack",
+          "duration_seconds": 0.8000000715255737,
+          "bundle_id": 203314
+        },
+        "death": {
+          "clip_name": "ani_se_survivor_eva_kt_death",
+          "duration_seconds": 2.2333333492279053,
+          "bundle_id": 203314
+        },
+        "hit": {
+          "clip_name": "ani_se_survivor_eva_kt_hit",
+          "duration_seconds": 0.7333333492279053,
+          "bundle_id": 203314
+        },
+        "idle": {
+          "clip_name": "ani_se_survivor_eva_kt_idle",
+          "duration_seconds": 1.0,
+          "bundle_id": 203314
+        },
+        "lookaround": {
+          "clip_name": "ani_se_survivor_eva_kt_lookaround",
+          "duration_seconds": 4.100000381469727,
+          "bundle_id": 203314
+        },
+        "run": {
+          "clip_name": "ani_se_survivor_eva_kt_run",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 203314
+        },
+        "skill02": {
+          "clip_name": "ani_se_survivor_eva_kt_skill02",
+          "duration_seconds": 1.3333333730697632,
+          "bundle_id": 203314
+        },
+        "vertigo": {
+          "clip_name": "ani_se_survivor_eva_kt_vertigo",
+          "duration_seconds": 2.0,
+          "bundle_id": 203314
+        },
+        "skill": {
+          "clip_name": "ani_se_survivor_eva_kt_skill",
+          "duration_seconds": 2.7333335876464844,
+          "bundle_id": 203314
+        },
+        "attack_left": {
+          "clip_name": "ani_se_survivor_eva_kt_idle_left",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203314
+        },
+        "attack_middle": {
+          "clip_name": "ani_se_survivor_eva_kt_idle_middle",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203314
+        },
+        "attack_right": {
+          "clip_name": "ani_se_survivor_eva_kt_idle_right",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203314
+        },
+        "turn_left_run": {
+          "clip_name": "ani_se_survivor_eva_kt_turn_left_run",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203314
+        },
+        "turn_middle_run": {
+          "clip_name": "ani_se_survivor_eva_kt_turn_middle_run",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 203314
+        },
+        "turn_right_run": {
+          "clip_name": "ani_se_survivor_eva_kt_turn_right_run",
+          "duration_seconds": 0.03333333879709244,
+          "bundle_id": 203314
+        },
+        "turn_right_180": {
+          "clip_name": "ani_se_survivor_eva_kt_turn_right_180",
+          "duration_seconds": 1.0,
+          "bundle_id": 203314
+        },
+        "turn_right_90": {
+          "clip_name": "ani_se_survivor_eva_kt_turn_right_90",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 203314
+        },
+        "turn_left_90": {
+          "clip_name": "ani_se_survivor_eva_kt_turn_left_90",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 203314
+        },
+        "turn_left_180": {
+          "clip_name": "ani_se_survivor_eva_kt_turn_left_180",
+          "duration_seconds": 1.0,
+          "bundle_id": 203314
+        },
+        "walk": {
+          "clip_name": "ani_se_survivor_eva_kt_walk",
+          "duration_seconds": 1.0666667222976685,
+          "bundle_id": 203314
+        },
+        "victory": {
+          "clip_name": "ani_se_survivor_eva_kt_victory",
+          "duration_seconds": 4.733333587646484,
+          "bundle_id": 203314
+        }
+      }
+    },
+    "rusty": {
+      "model_asset": "model_survivor_rusty",
+      "controller": "ctl_se_survivor_rusty_kt_new",
+      "model_bundle_id": 204249,
+      "takes": {
+        "death": {
+          "clip_name": "ani_se_survivor_rusty_new_kt_deatn",
+          "duration_seconds": 2.366666793823242,
+          "bundle_id": 204174
+        },
+        "hit": {
+          "clip_name": "ani_se_survivor_rusty_new_kt_hit",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 204174
+        },
+        "idle": {
+          "clip_name": "ani_se_survivor_rusty_new_kt_idle",
+          "duration_seconds": 1.6666667461395264,
+          "bundle_id": 204174
+        },
+        "run": {
+          "clip_name": "ani_se_survivor_rusty_new_kt_run",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 204174
+        },
+        "skill": {
+          "clip_name": "ani_se_survivor_rusty_new_kt_skill",
+          "duration_seconds": 1.7666667699813843,
+          "bundle_id": 204174
+        },
+        "attack": {
+          "clip_name": "ani_se_survivor_rusty_new_kt_attack",
+          "duration_seconds": 1.0,
+          "bundle_id": 204174
+        },
+        "lookaround": {
+          "clip_name": "ani_se_survivor_rusty_new_kt_lookaround",
+          "duration_seconds": 3.1666667461395264,
+          "bundle_id": 204174
+        },
+        "vertigo": {
+          "clip_name": "ani_se_survivor_rusty_new_kt_vertigo",
+          "duration_seconds": 2.0,
+          "bundle_id": 204174
+        },
+        "victory": {
+          "clip_name": "ani_se_survivor_rusty_new_kt_victory",
+          "duration_seconds": 2.133333444595337,
+          "bundle_id": 204174
+        },
+        "turn_left_90": {
+          "clip_name": "ani_se_survivor_rusty_new_kt_turn_left_90",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 204174
+        },
+        "turn_middle_run": {
+          "clip_name": "ani_se_survivor_rusty_new_kt_turn_middle_run",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 204174
+        },
+        "turn_right_90": {
+          "clip_name": "ani_se_survivor_rusty_new_kt_turn_right_90",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 204174
+        },
+        "turn_right_180": {
+          "clip_name": "ani_se_survivor_rusty_new_kt_turn_right_180",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 204174
+        },
+        "turn_right_run": {
+          "clip_name": "ani_se_survivor_rusty_new_kt_turn_right_run",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 204174
+        },
+        "turn_left_run": {
+          "clip_name": "ani_se_survivor_rusty_new_kt_turn_left_run",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 204174
+        },
+        "turn_left_180": {
+          "clip_name": "ani_se_survivor_rusty_new_kt_turn_left_180",
+          "duration_seconds": 0.8333333730697632,
+          "bundle_id": 204174
+        },
+        "attack_left": {
+          "clip_name": "ani_se_survivor_rusty_new_kt_idle_left",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 204174
+        },
+        "attack_middle": {
+          "clip_name": "ani_se_survivor_rusty_new_kt_idle_middle",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 204174
+        },
+        "attack_right": {
+          "clip_name": "ani_se_survivor_rusty_new_kt_idle_right",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 204174
+        },
+        "walk": {
+          "clip_name": "ani_se_survivor_rusty_new_kt_walk",
+          "duration_seconds": 1.0,
+          "bundle_id": 204174
+        }
+      }
+    },
+    "tim": {
+      "model_asset": "model_survivor_tim",
+      "controller": "ctl_se_survivor_tim_kt_cartoon",
+      "model_bundle_id": 204250,
+      "takes": {
+        "death": {
+          "clip_name": "ani_se_survivor_tim_kt_cartoon_death",
+          "duration_seconds": 2.200000047683716,
+          "bundle_id": 204175
+        },
+        "hit": {
+          "clip_name": "ani_se_survivor_tim_kt_cartoon_hit",
+          "duration_seconds": 0.6666666865348816,
+          "bundle_id": 204175
+        },
+        "idle": {
+          "clip_name": "ani_se_survivor_tim_kt_cartoon_idle",
+          "duration_seconds": 1.6666667461395264,
+          "bundle_id": 204175
+        },
+        "run": {
+          "clip_name": "ani_se_survivor_tim_kt_cartoon_run",
+          "duration_seconds": 0.7333333492279053,
+          "bundle_id": 204175
+        },
+        "skill": {
+          "clip_name": "ani_se_survivor_tim_kt_cartoon_skill01",
+          "duration_seconds": 1.5666667222976685,
+          "bundle_id": 204175
+        },
+        "vertigo": {
+          "clip_name": "ani_se_survivor_tim_kt_cartoon_vertigo",
+          "duration_seconds": 2.0,
+          "bundle_id": 204175
+        },
+        "victory": {
+          "clip_name": "ani_se_survivor_tim_kt_cartoon_victory",
+          "duration_seconds": 3.5333335399627686,
+          "bundle_id": 204175
+        },
+        "skill02": {
+          "clip_name": "ani_se_survivor_tim_kt_cartoon_skill02",
+          "duration_seconds": 1.1666667461395264,
+          "bundle_id": 204175
+        },
+        "attack_left": {
+          "clip_name": "ani_se_survivor_tim_kt_cartoon_idle_left",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 204175
+        },
+        "attack_middle": {
+          "clip_name": "ani_se_survivor_tim_kt_cartoon_idle_middle",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 204175
+        },
+        "attack_right": {
+          "clip_name": "ani_se_survivor_tim_kt_cartoon_idle_right",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 204175
+        },
+        "turn_left_run": {
+          "clip_name": "ani_se_survivor_tim_kt_cartoon_turn_left_run",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 204175
+        },
+        "turn_middle_run": {
+          "clip_name": "ani_se_survivor_tim_kt_cartoon_turn_middle_run",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 204175
+        },
+        "turn_right_run": {
+          "clip_name": "ani_se_survivor_tim_kt_cartoon_turn_right_run",
+          "duration_seconds": 0.03333333507180214,
+          "bundle_id": 204175
+        },
+        "turn_left_90": {
+          "clip_name": "ani_se_survivor_tim_kt_cartoon_turn_left_90",
+          "duration_seconds": 0.8000000715255737,
+          "bundle_id": 204175
+        },
+        "turn_left_180": {
+          "clip_name": "ani_se_survivor_tim_kt_cartoon_turn_left_180",
+          "duration_seconds": 1.0,
+          "bundle_id": 204175
+        },
+        "turn_right_90": {
+          "clip_name": "ani_se_survivor_tim_kt_cartoon_turn_right_90",
+          "duration_seconds": 0.8000000715255737,
+          "bundle_id": 204175
+        },
+        "turn_right_180": {
+          "clip_name": "ani_se_survivor_tim_kt_cartoon_turn_right_180",
+          "duration_seconds": 1.0,
+          "bundle_id": 204175
+        },
+        "attack": {
+          "clip_name": "ani_se_survivor_tim_kt_cartoon_attack",
+          "duration_seconds": 2.8333334922790527,
+          "bundle_id": 204175
+        },
+        "walk": {
+          "clip_name": "ani_se_survivor_tim_kt_cartoon_walk",
+          "duration_seconds": 1.0666667222976685,
+          "bundle_id": 204175
+        },
+        "lookaround": {
+          "clip_name": "ani_se_survivor_tim_kt_cartoon_victory",
+          "duration_seconds": 3.5333335399627686,
+          "bundle_id": 204175
+        }
+      }
+    }
+  }
+}

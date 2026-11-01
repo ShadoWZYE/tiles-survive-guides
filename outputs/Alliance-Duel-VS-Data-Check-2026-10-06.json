@@ -1,0 +1,957 @@
+{
+  "checked_date": "2026-10-06",
+  "scope": "Local downloaded configuration, verified against current manifest; live server overrides not observed",
+  "tables": {
+    "activity_alliance_1v1_duel_box": {
+      "manifest_match": true,
+      "sha256": "c32eb6af4777eaefab3b2a656f081590364bc156a20ff574fc6d838ca85c3c4b"
+    },
+    "activity_alliance_1v1_duel_box_group": {
+      "manifest_match": true,
+      "sha256": "cff33251fba99122b3c3cd911aadfc690ec3fbc5241f597a8ffcc797b66a46ce"
+    },
+    "activity_alliance_1v1_duel_task": {
+      "manifest_match": true,
+      "sha256": "9f25d1830321698ba77c681cee17d561369c0cf046a737c9874d8fa7b774d2b4"
+    },
+    "activity_alliance_1v1_duel_theme": {
+      "manifest_match": true,
+      "sha256": "544fbbcbcd5f24af6229c790eb27755ba4c9ca92b831aa6c68b5f4119b0256f9"
+    }
+  },
+  "chests": [
+    {
+      "chest": 1,
+      "personal_daily_points": 50000,
+      "rewards": {
+        "208593": 50,
+        "200467": 100,
+        "200480": 20,
+        "200481": 20,
+        "200479": 4,
+        "200478": 1
+      }
+    },
+    {
+      "chest": 2,
+      "personal_daily_points": 150000,
+      "rewards": {
+        "208593": 50,
+        "200467": 200,
+        "200480": 20,
+        "200481": 20,
+        "200479": 4,
+        "200478": 1
+      }
+    },
+    {
+      "chest": 3,
+      "personal_daily_points": 500000,
+      "rewards": {
+        "208593": 100,
+        "210312": 1,
+        "202058": 3,
+        "206386": 1,
+        "201725": 10,
+        "200520": 5,
+        "201526": 10,
+        "208012": 5
+      }
+    },
+    {
+      "chest": 4,
+      "personal_daily_points": 650000,
+      "rewards": {
+        "208593": 50,
+        "200467": 300,
+        "200480": 100,
+        "200481": 100,
+        "200479": 20,
+        "200478": 5
+      }
+    },
+    {
+      "chest": 5,
+      "personal_daily_points": 900000,
+      "rewards": {
+        "208593": 50,
+        "200467": 400,
+        "200480": 100,
+        "200481": 100,
+        "200479": 20,
+        "200478": 5
+      }
+    },
+    {
+      "chest": 6,
+      "personal_daily_points": 1500000,
+      "rewards": {
+        "208593": 100,
+        "202059": 2,
+        "206386": 2,
+        "201725": 20,
+        "200522": 5,
+        "201526": 10,
+        "208012": 5
+      }
+    },
+    {
+      "chest": 7,
+      "personal_daily_points": 2000000,
+      "rewards": {
+        "208593": 200,
+        "200467": 500,
+        "200480": 200,
+        "200481": 200,
+        "200479": 40,
+        "200478": 10
+      }
+    },
+    {
+      "chest": 8,
+      "personal_daily_points": 3000000,
+      "rewards": {
+        "208593": 200,
+        "202060": 1,
+        "206386": 3,
+        "201725": 30,
+        "200516": 5,
+        "201526": 20,
+        "208012": 5
+      }
+    },
+    {
+      "chest": 9,
+      "personal_daily_points": 5000000,
+      "rewards": {
+        "208593": 400,
+        "202060": 1,
+        "206386": 3,
+        "201725": 30,
+        "201981": 5,
+        "201526": 20,
+        "208012": 5
+      }
+    }
+  ],
+  "tasks": [
+    {
+      "id": "task_s1_day1_1",
+      "action": "Consume {0} Chief Stamina.",
+      "base_points": 300,
+      "parameters": [
+        1
+      ]
+    },
+    {
+      "id": "task_s1_day1_2",
+      "action": "Complete {0} Intel Mission(s)",
+      "base_points": 37500,
+      "parameters": [
+        1
+      ]
+    },
+    {
+      "id": "task_s1_day1_3",
+      "action": "Use {0} Gear Scraps worth 100 EXP",
+      "base_points": 2900,
+      "parameters": [
+        1
+      ]
+    },
+    {
+      "id": "task_s1_day1_4",
+      "action": "Use {0} Gear Scraps worth 400 EXP",
+      "base_points": 11500,
+      "parameters": [
+        1
+      ]
+    },
+    {
+      "id": "task_s1_day1_5",
+      "action": "Use {0} Gear Scraps worth 2,000 EXP",
+      "base_points": 57200,
+      "parameters": [
+        1
+      ]
+    },
+    {
+      "id": "task_s1_day1_6",
+      "action": "Use {0} Gear Scraps worth 10,000 EXP",
+      "base_points": 285800,
+      "parameters": [
+        1
+      ]
+    },
+    {
+      "id": "task_s1_day1_7",
+      "action": "Earn {0} Diamond(s) through bundle purchases.",
+      "base_points": 20,
+      "parameters": [
+        1
+      ]
+    },
+    {
+      "id": "task_s1_day1_8",
+      "action": "Gather {0} Food.",
+      "base_points": 1,
+      "parameters": [
+        100
+      ]
+    },
+    {
+      "id": "task_s1_day1_9",
+      "action": "Gather {0} Wood.",
+      "base_points": 1,
+      "parameters": [
+        100
+      ]
+    },
+    {
+      "id": "task_s1_day1_10",
+      "action": "Gather {0} Metal.",
+      "base_points": 1,
+      "parameters": [
+        20
+      ]
+    },
+    {
+      "id": "task_s1_day1_11",
+      "action": "Gather {0} Gas.",
+      "base_points": 1,
+      "parameters": [
+        5
+      ]
+    },
+    {
+      "id": "task_s1_day2_0_1",
+      "action": "Use 1 Legendary Pet Mark.",
+      "base_points": 30000,
+      "parameters": [
+        1
+      ]
+    },
+    {
+      "id": "task_s1_day2_0_2",
+      "action": "Use 1 Epic Pet Mark.",
+      "base_points": 2500,
+      "parameters": [
+        1
+      ]
+    },
+    {
+      "id": "task_s1_day2_0_3",
+      "action": "Use 1 Rare Pet Mark.",
+      "base_points": 300,
+      "parameters": [
+        1
+      ]
+    },
+    {
+      "id": "task_s1_day2_0_4",
+      "action": "Use Honeyberries ×{0}",
+      "base_points": 5000,
+      "parameters": [
+        1
+      ]
+    },
+    {
+      "id": "task_s1_day2_0_5",
+      "action": "Use Fruit Medleys ×{0}",
+      "base_points": 10000,
+      "parameters": [
+        1
+      ]
+    },
+    {
+      "id": "task_s1_day2_0_6",
+      "action": "Use Cloud Puddings ×{0}",
+      "base_points": 20000,
+      "parameters": [
+        1
+      ]
+    },
+    {
+      "id": "task_s1_day2_0_7",
+      "action": "Use Deluxe Pet Feasts ×{0}",
+      "base_points": 50000,
+      "parameters": [
+        1
+      ]
+    },
+    {
+      "id": "task_s1_day2_1",
+      "action": "Use {0} min(s) of Speedups on Construction.",
+      "base_points": 250,
+      "parameters": [
+        1
+      ]
+    },
+    {
+      "id": "task_s1_day2_2",
+      "action": "Increase Power by {0} through Construction.",
+      "base_points": 9,
+      "parameters": [
+        1
+      ]
+    },
+    {
+      "id": "task_s1_day2_3",
+      "action": "Dispatch {0} A-class truck(s)",
+      "base_points": 50000,
+      "parameters": [
+        1
+      ]
+    },
+    {
+      "id": "task_s1_day2_4",
+      "action": "Perform {0} S-tier task(s) in Dire Dispatch",
+      "base_points": 75000,
+      "parameters": [
+        1
+      ]
+    },
+    {
+      "id": "task_s1_day2_5",
+      "action": "Earn {0} Diamond(s) through bundle purchases.",
+      "base_points": 20,
+      "parameters": [
+        1
+      ]
+    },
+    {
+      "id": "task_s1_day3_1",
+      "action": "Use {0} min(s) of Speedups on Research",
+      "base_points": 250,
+      "parameters": [
+        1
+      ]
+    },
+    {
+      "id": "task_s1_day3_2",
+      "action": "Increase Power by {0} through Research.",
+      "base_points": 4,
+      "parameters": [
+        1
+      ]
+    },
+    {
+      "id": "task_s1_day3_3",
+      "action": "Spend {0} Clash Medal(s)",
+      "base_points": 2500,
+      "parameters": [
+        1
+      ]
+    },
+    {
+      "id": "task_s1_day3_4",
+      "action": "Complete {0} Intel Mission(s)",
+      "base_points": 30000,
+      "parameters": [
+        1
+      ]
+    },
+    {
+      "id": "task_s1_day3_5",
+      "action": "Earn {0} Diamond(s) through bundle purchases.",
+      "base_points": 20,
+      "parameters": [
+        1
+      ]
+    },
+    {
+      "id": "task_s1_day3_6",
+      "action": "Every {0} Behemoth EXP gained in a single attempt",
+      "base_points": 1000,
+      "parameters": [
+        100
+      ]
+    },
+    {
+      "id": "task_s1_day3_7",
+      "action": "Use {0} Behemoth Cell(s)",
+      "base_points": 12000,
+      "parameters": [
+        1
+      ]
+    },
+    {
+      "id": "task_s1_day3_8",
+      "action": "Use {0} Biogenic Protein (excluding Exclusive ones)",
+      "base_points": 10000,
+      "parameters": [
+        1
+      ]
+    },
+    {
+      "id": "task_s1_day4_1",
+      "action": "Perform {0} Targeted Draft(s)",
+      "base_points": 13400,
+      "parameters": [
+        1
+      ]
+    },
+    {
+      "id": "task_s1_day4_2",
+      "action": "Perform {0} Advanced Recruitment(s)",
+      "base_points": 3000,
+      "parameters": [
+        1
+      ]
+    },
+    {
+      "id": "task_s1_day4_3",
+      "action": "Perform {0} Standard Recruitment(s)",
+      "base_points": 500,
+      "parameters": [
+        1
+      ]
+    },
+    {
+      "id": "task_s1_day4_4",
+      "action": "Use a Legendary Hero Fragment",
+      "base_points": 15200,
+      "parameters": [
+        1
+      ]
+    },
+    {
+      "id": "task_s1_day4_5",
+      "action": "Use an Epic Hero Fragment",
+      "base_points": 1600,
+      "parameters": [
+        1
+      ]
+    },
+    {
+      "id": "task_s1_day4_6",
+      "action": "Use a Rare Hero Fragment",
+      "base_points": 160,
+      "parameters": [
+        1
+      ]
+    },
+    {
+      "id": "task_s1_day4_7",
+      "action": "Use {0} Hero Skill Manual(s)",
+      "base_points": 2500,
+      "parameters": [
+        1
+      ]
+    },
+    {
+      "id": "task_s1_day4_8",
+      "action": "Earn {0} Diamond(s) through bundle purchases.",
+      "base_points": 20,
+      "parameters": [
+        1
+      ]
+    },
+    {
+      "id": "task_s1_day5_1",
+      "action": "Complete {0} Intel Mission(s)",
+      "base_points": 37500,
+      "parameters": [
+        1
+      ]
+    },
+    {
+      "id": "task_s1_day5_2",
+      "action": "Use {0} min(s) of Speedups on Construction.",
+      "base_points": 250,
+      "parameters": [
+        1
+      ]
+    },
+    {
+      "id": "task_s1_day5_3",
+      "action": "Increase Power by {0} through Construction.",
+      "base_points": 9,
+      "parameters": [
+        1
+      ]
+    },
+    {
+      "id": "task_s1_day5_4",
+      "action": "Use {0} min(s) of Speedups on Research",
+      "base_points": 250,
+      "parameters": [
+        1
+      ]
+    },
+    {
+      "id": "task_s1_day5_5",
+      "action": "Increase Power by {0} through Research.",
+      "base_points": 4,
+      "parameters": [
+        1
+      ]
+    },
+    {
+      "id": "task_s1_day5_6",
+      "action": "Use {0} min(s) of Speedups on Troop Training/Upgrading",
+      "base_points": 250,
+      "parameters": [
+        1
+      ]
+    },
+    {
+      "id": "task_s1_day5_7",
+      "action": "Train a Lv. {0} Soldier.",
+      "base_points": 6,
+      "parameters": [
+        1
+      ]
+    },
+    {
+      "id": "task_s1_day5_8",
+      "action": "Train a Lv. {0} Soldier.",
+      "base_points": 11,
+      "parameters": [
+        2
+      ]
+    },
+    {
+      "id": "task_s1_day5_9",
+      "action": "Train a Lv. {0} Soldier.",
+      "base_points": 17,
+      "parameters": [
+        3
+      ]
+    },
+    {
+      "id": "task_s1_day5_10",
+      "action": "Train a Lv. {0} Soldier.",
+      "base_points": 22,
+      "parameters": [
+        4
+      ]
+    },
+    {
+      "id": "task_s1_day5_11",
+      "action": "Train a Lv. {0} Soldier.",
+      "base_points": 26,
+      "parameters": [
+        5
+      ]
+    },
+    {
+      "id": "task_s1_day5_12",
+      "action": "Train a Lv. {0} Soldier.",
+      "base_points": 33,
+      "parameters": [
+        6
+      ]
+    },
+    {
+      "id": "task_s1_day5_13",
+      "action": "Train a Lv. {0} Soldier.",
+      "base_points": 37,
+      "parameters": [
+        7
+      ]
+    },
+    {
+      "id": "task_s1_day5_14",
+      "action": "Train a Lv. {0} Soldier.",
+      "base_points": 44,
+      "parameters": [
+        8
+      ]
+    },
+    {
+      "id": "task_s1_day5_15",
+      "action": "Train a Lv. {0} Soldier.",
+      "base_points": 52,
+      "parameters": [
+        9
+      ]
+    },
+    {
+      "id": "task_s1_day5_16",
+      "action": "Train a Lv. {0} Soldier.",
+      "base_points": 60,
+      "parameters": [
+        10
+      ]
+    },
+    {
+      "id": "task_s1_day5_17",
+      "action": "Earn {0} Diamond(s) through bundle purchases.",
+      "base_points": 20,
+      "parameters": [
+        1
+      ]
+    },
+    {
+      "id": "task_s1_day6_1",
+      "action": "Dispatch {0} A-class truck(s)",
+      "base_points": 50000,
+      "parameters": [
+        1
+      ]
+    },
+    {
+      "id": "task_s1_day6_2",
+      "action": "Perform {0} S-tier task(s) in Dire Dispatch",
+      "base_points": 75000,
+      "parameters": [
+        1
+      ]
+    },
+    {
+      "id": "task_s1_day6_3",
+      "action": "Use {0} min(s) of Speedups on Construction.",
+      "base_points": 250,
+      "parameters": [
+        1
+      ]
+    },
+    {
+      "id": "task_s1_day6_4",
+      "action": "Use {0} min(s) of Speedups on Research",
+      "base_points": 250,
+      "parameters": [
+        1
+      ]
+    },
+    {
+      "id": "task_s1_day6_5",
+      "action": "Use {0} min(s) of Speedups on Troop Training/Upgrading",
+      "base_points": 250,
+      "parameters": [
+        1
+      ]
+    },
+    {
+      "id": "task_s1_day6_6",
+      "action": "Use {0} minute(s) of Healing Speedups",
+      "base_points": 250,
+      "parameters": [
+        1
+      ]
+    },
+    {
+      "id": "task_s1_day6_7",
+      "action": "For every {0} Lvl {1} enemy Troops defeated (matched Alliance battles)",
+      "base_points": 6,
+      "parameters": [
+        1,
+        1,
+        3
+      ]
+    },
+    {
+      "id": "task_s1_day6_8",
+      "action": "For every {0} Lvl {1} enemy Troops defeated (matched Alliance battles)",
+      "base_points": 12,
+      "parameters": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "id": "task_s1_day6_9",
+      "action": "For every {0} Lvl {1} enemy Troops defeated (matched Alliance battles)",
+      "base_points": 18,
+      "parameters": [
+        1,
+        3,
+        3
+      ]
+    },
+    {
+      "id": "task_s1_day6_10",
+      "action": "For every {0} Lvl {1} enemy Troops defeated (matched Alliance battles)",
+      "base_points": 24,
+      "parameters": [
+        1,
+        4,
+        3
+      ]
+    },
+    {
+      "id": "task_s1_day6_11",
+      "action": "For every {0} Lvl {1} enemy Troops defeated (matched Alliance battles)",
+      "base_points": 30,
+      "parameters": [
+        1,
+        5,
+        3
+      ]
+    },
+    {
+      "id": "task_s1_day6_12",
+      "action": "For every {0} Lvl {1} enemy Troops defeated (matched Alliance battles)",
+      "base_points": 36,
+      "parameters": [
+        1,
+        6,
+        3
+      ]
+    },
+    {
+      "id": "task_s1_day6_13",
+      "action": "For every {0} Lvl {1} enemy Troops defeated (matched Alliance battles)",
+      "base_points": 42,
+      "parameters": [
+        1,
+        7,
+        3
+      ]
+    },
+    {
+      "id": "task_s1_day6_14",
+      "action": "For every {0} Lvl {1} enemy Troops defeated (matched Alliance battles)",
+      "base_points": 48,
+      "parameters": [
+        1,
+        8,
+        3
+      ]
+    },
+    {
+      "id": "task_s1_day6_15",
+      "action": "For every {0} Lvl {1} enemy Troops defeated (matched Alliance battles)",
+      "base_points": 54,
+      "parameters": [
+        1,
+        9,
+        3
+      ]
+    },
+    {
+      "id": "task_s1_day6_16",
+      "action": "For every {0} Lvl {1} enemy Troops defeated (matched Alliance battles)",
+      "base_points": 60,
+      "parameters": [
+        1,
+        10,
+        3
+      ]
+    },
+    {
+      "id": "task_s1_day6_17",
+      "action": "For every {0} Lvl {1} enemy Troops defeated (random Alliance battles)",
+      "base_points": 1,
+      "parameters": [
+        1,
+        1,
+        3
+      ]
+    },
+    {
+      "id": "task_s1_day6_18",
+      "action": "For every {0} Lvl {1} enemy Troops defeated (random Alliance battles)",
+      "base_points": 2,
+      "parameters": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "id": "task_s1_day6_19",
+      "action": "For every {0} Lvl {1} enemy Troops defeated (random Alliance battles)",
+      "base_points": 4,
+      "parameters": [
+        1,
+        3,
+        3
+      ]
+    },
+    {
+      "id": "task_s1_day6_20",
+      "action": "For every {0} Lvl {1} enemy Troops defeated (random Alliance battles)",
+      "base_points": 5,
+      "parameters": [
+        1,
+        4,
+        3
+      ]
+    },
+    {
+      "id": "task_s1_day6_21",
+      "action": "For every {0} Lvl {1} enemy Troops defeated (random Alliance battles)",
+      "base_points": 6,
+      "parameters": [
+        1,
+        5,
+        3
+      ]
+    },
+    {
+      "id": "task_s1_day6_22",
+      "action": "For every {0} Lvl {1} enemy Troops defeated (random Alliance battles)",
+      "base_points": 7,
+      "parameters": [
+        1,
+        6,
+        3
+      ]
+    },
+    {
+      "id": "task_s1_day6_23",
+      "action": "For every {0} Lvl {1} enemy Troops defeated (random Alliance battles)",
+      "base_points": 8,
+      "parameters": [
+        1,
+        7,
+        3
+      ]
+    },
+    {
+      "id": "task_s1_day6_24",
+      "action": "For every {0} Lvl {1} enemy Troops defeated (random Alliance battles)",
+      "base_points": 10,
+      "parameters": [
+        1,
+        8,
+        3
+      ]
+    },
+    {
+      "id": "task_s1_day6_25",
+      "action": "For every {0} Lvl {1} enemy Troops defeated (random Alliance battles)",
+      "base_points": 11,
+      "parameters": [
+        1,
+        9,
+        3
+      ]
+    },
+    {
+      "id": "task_s1_day6_26",
+      "action": "For every {0} Lvl {1} enemy Troops defeated (random Alliance battles)",
+      "base_points": 12,
+      "parameters": [
+        1,
+        10,
+        3
+      ]
+    },
+    {
+      "id": "task_s1_day6_37",
+      "action": "For every {0} Lvl {1} ally Troop casualties (PvP)",
+      "base_points": 1,
+      "parameters": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "task_s1_day6_38",
+      "action": "For every {0} Lvl {1} ally Troop casualties (PvP)",
+      "base_points": 2,
+      "parameters": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "task_s1_day6_39",
+      "action": "For every {0} Lvl {1} ally Troop casualties (PvP)",
+      "base_points": 3,
+      "parameters": [
+        1,
+        3
+      ]
+    },
+    {
+      "id": "task_s1_day6_40",
+      "action": "For every {0} Lvl {1} ally Troop casualties (PvP)",
+      "base_points": 4,
+      "parameters": [
+        1,
+        4
+      ]
+    },
+    {
+      "id": "task_s1_day6_41",
+      "action": "For every {0} Lvl {1} ally Troop casualties (PvP)",
+      "base_points": 5,
+      "parameters": [
+        1,
+        5
+      ]
+    },
+    {
+      "id": "task_s1_day6_42",
+      "action": "For every {0} Lvl {1} ally Troop casualties (PvP)",
+      "base_points": 6,
+      "parameters": [
+        1,
+        6
+      ]
+    },
+    {
+      "id": "task_s1_day6_43",
+      "action": "For every {0} Lvl {1} ally Troop casualties (PvP)",
+      "base_points": 7,
+      "parameters": [
+        1,
+        7
+      ]
+    },
+    {
+      "id": "task_s1_day6_44",
+      "action": "For every {0} Lvl {1} ally Troop casualties (PvP)",
+      "base_points": 8,
+      "parameters": [
+        1,
+        8
+      ]
+    },
+    {
+      "id": "task_s1_day6_45",
+      "action": "For every {0} Lvl {1} ally Troop casualties (PvP)",
+      "base_points": 9,
+      "parameters": [
+        1,
+        9
+      ]
+    },
+    {
+      "id": "task_s1_day6_46",
+      "action": "For every {0} Lvl {1} ally Troop casualties (PvP)",
+      "base_points": 10,
+      "parameters": [
+        1,
+        10
+      ]
+    },
+    {
+      "id": "task_s1_day6_47",
+      "action": "Earn {0} Diamond(s) through bundle purchases.",
+      "base_points": 20,
+      "parameters": [
+        1
+      ]
+    },
+    {
+      "id": "task_s1_day6_48",
+      "action": "Collect 1 Flawed Sandworm Egg in Burrow Conquest",
+      "base_points": 5000,
+      "parameters": [
+        1
+      ]
+    },
+    {
+      "id": "task_s1_day6_49",
+      "action": "Collect 1 Fresh Sandworm Egg in Burrow Conquest",
+      "base_points": 50000,
+      "parameters": [
+        2
+      ]
+    },
+    {
+      "id": "task_s1_day6_50",
+      "action": "Collect 1 Perfect Sandworm Egg in Burrow Conquest",
+      "base_points": 500000,
+      "parameters": [
+        3
+      ]
+    }
+  ]
+}

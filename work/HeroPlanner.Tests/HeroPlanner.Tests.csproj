@@ -10,5 +10,7 @@
     <Compile Include="../HeroPlanner/FormationPriority.cs" Link="FormationPriority.cs" />
     <Compile Include="../HeroPlanner/UpgradeModel.cs" Link="UpgradeModel.cs" />
     <Compile Include="../HeroPlanner/EstimateModel.cs" Link="EstimateModel.cs" />
+    <Compile Include="../HeroPlanner/FactionModel.cs" Link="FactionModel.cs" />
+    <Compile Include="../HeroPlanner/FormationModel.cs" Link="FormationModel.cs" />
   </ItemGroup>
 </Project>

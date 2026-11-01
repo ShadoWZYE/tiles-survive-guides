@@ -1,17 +1,89 @@
 using System.Text.Json;
 using TilesSurviveHeroPlanner;
 
+if (args.Contains("--formation-fit"))
+{
+    var fitCases = new List<object>();
+    for (int n = 0; n < 64; n++)
+    foreach (bool flat in new[] { false, true })
+    foreach (var mode in Enum.GetValues<PlannerMode>())
+    foreach (double health in new[] { 0.0, .12, .25 })
+    {
+        var fitHeroes = Enumerable.Range(0, 5).Select(i => new Hero {
+            AssetSlug = $"hero-{i}", Name = $"Hero {i}",
+            Role = n % 4 == 0 ? "Range" : new[] { "Melee", "Mid", "Range" }[(n + i) % 3],
+            OffenseIndex = 40 + (n * 3 + i * 13) % 110,
+            DurabilityIndex = n == 0 ? 0 : n == 1 ? 100 : 20 + (n * 11 + i * 31) % 130,
+            HealthContribution = n == 1 ? 60 : 10 + i * 7,
+            Estimate = new(0, 0, 0, 0, 0, flat ? "Flat max stats" : "Reference build",0,
+                [40+i*3,12+i*2,20+i*4],[i==0 ? .12 : 0,i==1 ? .1 : 0,i==2 ? .04 : 0])
+        }).ToArray();
+        var result = FormationModel.Evaluate(fitHeroes, mode, health);
+        fitCases.Add(new { heroes = fitHeroes.Select(h => new { asset_slug = h.AssetSlug, role = h.Role, offense_index = h.OffenseIndex, durability_index = h.DurabilityIndex, healthContribution = h.HealthContribution,estimate = h.Estimate }), flat, mode = mode == PlannerMode.Pve ? "PvE farming" : mode.ToString(), health,
+            order = result.Heroes.Select(h => h.AssetSlug), result.Adjustment, result.FrontDurability,passiveBonus=FormationModel.PassiveBonus(fitHeroes,mode) });
+    }
+    Console.WriteLine(JsonSerializer.Serialize(fitCases, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }));
+    return;
+}
+
+if (args.Contains("--factions"))
+{
+    string[] factions = ["Mountain", "Wasteland", "Sky", "Sea"];
+    string[] enemies = ["Unknown", "Mountain", "Wasteland", "Sky", "Sea"];
+    var factionCases = new List<object>();
+    for (int n = 0; n < 1024; n++)
+    {
+        int code = n;
+        var lineup = new List<Hero>();
+        for (int i = 0; i < 5; i++, code /= 4)
+            lineup.Add(new Hero { Faction = factions[code % 4], HealthContribution = 80 + i, OffenseIndex = 100 + i });
+        var effect = FactionModel.Compose(lineup.Select(h => h.Faction));
+        var scores = new List<double>();
+        foreach (bool flat in new[] { false, true })
+        {
+            foreach (var h in lineup) h.Estimate = new(100, 100, 100, 100, 100, flat ? "Flat max stats" : "Reference build");
+            foreach (var mode in Enum.GetValues<PlannerMode>())
+            foreach (string enemy in enemies) scores.Add(FactionModel.ScoreBonus(lineup, mode, enemy));
+        }
+        factionCases.Add(new { factions = lineup.Select(h => h.Faction), effect, scores });
+    }
+    Console.WriteLine(JsonSerializer.Serialize(factionCases, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }));
+    return;
+}
+
 if (args.Length > 2 && args[1] == "--estimates")
 {
+    var basicScenario=new EstimateSkill {Id="basic",Slot=0,Priority=0,QueueEligible=true,CastDurationAtUnitSpeedSeconds=2,CadenceAssumedSeconds=2};
+    var activeScenario=new EstimateSkill {Id="active",Slot=1,Priority=3,QueueEligible=true,BasePreCooldownMs=1000,CastDurationAtUnitSpeedSeconds=3,CadenceAssumedSeconds=6};
+    var scheduleScenario=EstimateModel.OpeningSchedule([basicScenario,activeScenario],8);
+    if(!scheduleScenario["basic"].SequenceEqual(new double[]{2,7}) || !scheduleScenario["active"].SequenceEqual(new double[]{5}) || EstimateModel.CoveredTime([2,4,8],4,10)!=8)
+        throw new Exception("Shared casting slot failed the hand-calculated scenario");
+    var timedBudget=new EstimateCastBudget {DirectCoefficient=6,DirectEvents=[new(){OffsetSeconds=.5,Coefficient=2},new(){OffsetSeconds=1.5,Coefficient=4}]};
+    if(EstimateModel.OpeningDamage(timedBudget,[2],2,1)!=2 || EstimateModel.OpeningSchedule([basicScenario],1,true)["basic"].Single()!=2)
+        throw new Exception("Partial-cast dispatch timing failed the hand-calculated scenario");
     var root = args[2]; var upgrades = UpgradeData.Parse(File.ReadAllText(Path.Combine(root, "TilesSurvive-Upgrade-Data.json")));
     var estimates = EstimateData.Parse(File.ReadAllText(Path.Combine(root, "Hero-Estimate-Model.json")));
+    var finishScenario=new EstimateFinishTrigger {SourceSkillId="active",CooldownSeconds=5,DelaySeconds=0};
+    if(!EstimateModel.FinishTriggers(finishScenario,[2,4,8,10],10).SequenceEqual(new double[]{2,8}))
+        throw new Exception("Finish trigger cooldown and final-update boundary failed");
+    foreach(int window in new[]{0,10,20,30})
+    {
+        var parentLocked=new HeroBuild {Skills=new() {{"survivor_ray_skill_1",0}}};
+        var bothLocked=new HeroBuild {Skills=new() {{"survivor_ray_skill_1",0},{"survivor_ray_skill_2",0}}};
+        if(Math.Abs(EstimateModel.Evaluate("ray",parentLocked,upgrades,estimates,window).Score-EstimateModel.Evaluate("ray",bothLocked,upgrades,estimates,window).Score)>1e-9)
+            throw new Exception("Ray passive contributed with its source active locked");
+        if(!EstimateModel.Evaluate("ray",parentLocked,upgrades,estimates,window).ActiveSkillIds!.SequenceEqual(EstimateModel.Evaluate("ray",bothLocked,upgrades,estimates,window).ActiveSkillIds!))
+            throw new Exception("Ray passive supplied squad synergy with its source active locked");
+    }
     var estimateCases = new List<object>();
     foreach (var slug in estimates.Heroes.Keys)
     {
         var h = upgrades.Heroes[slug]; var model = estimates.Heroes[slug];
         HeroBuild?[] builds = [null, new() { Stage = model.ReferenceStage, Level = model.ReferenceLevel, Gear = [], Skills = model.Skills.ToDictionary(s => s.Id, s => s.ReferenceLevel) },
             new() { Stage = h.Stages[0].Id, Level = 1, Skills = h.Skills.ToDictionary(s => s.Id, s => 0) }, new() { Level = 55 }];
-        foreach (var saved in builds) estimateCases.Add(new { slug, saved, result = EstimateModel.Evaluate(slug, saved, upgrades, estimates) });
+        foreach (var saved in builds)
+        foreach (int battleSeconds in new[] {0,10,20,30})
+            estimateCases.Add(new { slug, saved, battleSeconds, result = EstimateModel.Evaluate(slug, saved, upgrades, estimates, battleSeconds) });
     }
     Console.WriteLine(JsonSerializer.Serialize(estimateCases, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }));
     return;
@@ -78,14 +150,11 @@ var heroes = JsonSerializer.Deserialize<List<Hero>>(File.ReadAllText(args[0]))!;
 var example = new[] { "Rosie", "Layla", "Becca", "Ray", "Maddie" }.Select(name => heroes.Single(h => h.Name == name)).ToList();
 void Check(bool condition, string message) { if (!condition) throw new Exception(message); }
 Check(example.Single(h => h.Name == "Becca").HasMechanic("DEF reduction"), "Becca DEF break not detected");
-var expected = new Dictionary<PlannerMode, string[]> {
-    [PlannerMode.Balanced] = ["Becca", "Rosie", "Ray", "Layla", "Maddie"],
-    [PlannerMode.Pve] = ["Becca", "Rosie", "Ray", "Layla", "Maddie"],
-    [PlannerMode.Offense] = ["Becca", "Ray", "Rosie", "Layla", "Maddie"],
-    [PlannerMode.Survival] = ["Rosie", "Layla", "Becca", "Ray", "Maddie"],
-};
-foreach (var (mode, names) in expected)
-    Check(FormationPriority.Rank(example, mode).Select(x => x.Hero.Name).SequenceEqual(names), $"Unexpected {mode} example order");
+var legacyCarries = FormationPriority.Carries(example);
+Check(FormationPriority.Rank(example, PlannerMode.Balanced)[0].Hero == legacyCarries[0], "Primary damage core was ignored");
+Check(FormationPriority.Rank(example, PlannerMode.Balanced)[1].Hero.Role == "Melee", "Frontline priority was ignored");
+Check(FormationPriority.Rank(example, PlannerMode.Offense).Take(2).Select(x => x.Hero).SequenceEqual(legacyCarries), "Offense core order disagrees");
+Check(FormationPriority.Rank(example, PlannerMode.Survival)[0].Hero.Role == "Melee", "Survival must start with frontline priority");
 var progress = new HeroProgress { Current = 4, Target = 4 };
 Check(progress.Status == "reached", "Reached star target");
 progress.Target = 5;

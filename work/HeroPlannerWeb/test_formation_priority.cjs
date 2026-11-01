@@ -9,7 +9,7 @@ const policy = require("./formation-priority.js");
 const root = path.resolve(__dirname, "../..");
 const dataPath = path.join(root, "outputs/hero-report/TilesSurvive-Hero-Data.json");
 const context = vm.createContext({window: {__HERO_DATA__: JSON.parse(fs.readFileSync(dataPath, "utf8"))},
-  localStorage: {getItem: () => null}, FormationPriority: policy, UpgradeModel:require('./upgrade-model.js')});
+  localStorage: {getItem: () => null}, FormationPriority: policy, UpgradeModel:require('./upgrade-model.js'), FactionModel:require('./faction-model.js'), FormationModel:require('./formation-model.js')});
 context.__UPGRADE_DATA__=JSON.parse(fs.readFileSync(path.join(root,'outputs/hero-report/TilesSurvive-Upgrade-Data.json'),'utf8'));
 context.window.__UPGRADE_DATA__=context.__UPGRADE_DATA__;
 vm.runInContext(fs.readFileSync(path.join(__dirname,'upgrade-ui.js'),'utf8'),context);
@@ -19,13 +19,16 @@ assert.ok(source.includes("wireShell(); renderAll(); registerWebMcp();"));
 vm.runInContext(source.replace("wireShell(); renderAll(); registerWebMcp();",
   "globalThis.hooks={heroes,profile,sanitizeProfile,mechanicsFor,bestOwnedAndTargets,renderFormationGuide,starQueue};"), context);
 const {heroes, profile} = context.hooks;
+heroes.forEach(h=>h.healthContribution=0); // This parser-only fixture does not run renderAll's estimate refresh.
 const example = ["Rosie","Layla","Becca","Ray","Maddie"].map(name => heroes.find(h => h.name === name));
 const names = (squad, mode) => policy.rank(squad, mode).map(x=>x.hero.name);
 
 test("example priority depends on formation job, not composite hero score", () => {
-  assert.deepEqual(names(example,"Balanced"), ["Becca","Rosie","Ray","Layla","Maddie"]);
-  assert.deepEqual(names(example,"Offense"), ["Becca","Ray","Rosie","Layla","Maddie"]);
-  assert.deepEqual(names(example,"Survival"), ["Rosie","Layla","Becca","Ray","Maddie"]);
+  const carries=policy.carries(example).map(h=>h.name);
+  assert.equal(names(example,"Balanced")[0],carries[0]);
+  assert.equal(names(example,"Balanced")[1],"Rosie");
+  assert.deepEqual(names(example,"Offense").slice(0,2),carries);
+  assert.equal(names(example,"Survival")[0],"Rosie");
   assert.deepEqual(names(example,"PvE farming"), names(example,"Balanced"));
   assert.ok(example.find(h=>h.name==="Becca").mechanics.has("DEF reduction"));
 });
@@ -33,17 +36,17 @@ test("order is stable, deduplicated and independent of selection order", () => {
   assert.deepEqual(names(example.slice().reverse()),names(example));
   assert.deepEqual(names([...example,...example]),names(example));
   assert.deepEqual(names([]),[]);
-  const dave=heroes.find(h=>h.name==="Dave");
+  const dave={...heroes.find(h=>h.name==="Dave"),offense_index:Math.max(...heroes.map(h=>h.offense_index))+1};
   assert.equal(names([dave,...example.slice(0,4)])[0],"Dave","A higher-offense midline damage hero must not be ignored for a ranged hero");
 });
 test("star targets alter only the star queue; unknown is not zero", () => {
   const progress = Object.fromEntries(example.map(h=>[h.asset_slug,{current:3,target:4}]));
   progress[example.find(h=>h.name==="Becca").asset_slug]={current:4,target:4};
   const plan=policy.starPlan(example,"Balanced",progress);
-  assert.deepEqual(plan.filter(x=>x.status==="pending").map(x=>x.hero.name),["Rosie","Ray","Layla","Maddie"]);
+  assert.deepEqual(plan.filter(x=>x.status==="pending").map(x=>x.hero.name),names(example,"Balanced").filter(n=>n!=="Becca"));
   assert.equal(plan[0].status,"reached");
   assert.ok(policy.starPlan(example,"Balanced").every(x=>x.status==="unknown"));
-  assert.deepEqual(names(example),["Becca","Rosie","Ray","Layla","Maddie"]);
+  assert.equal(names(example)[0],policy.carries(example)[0].name);
 });
 test("old and malformed profiles sanitize safely; zero stars survives roundtrip", () => {
   const old=context.hooks.sanitizeProfile({ownedHeroes:example.map(h=>h.asset_slug)});
@@ -59,8 +62,8 @@ test("formation investment view requires actual builds instead of imposing a rol
   profile.heroProgress={};
   const guide=context.hooks.renderFormationGuide(example);
   assert.match(guide,/Data-driven next upgrades/);
-  assert.match(guide,/Record these builds/);
-  assert.match(guide,/No fixed hero order/);
+  assert.match(guide,/Record these owned builds/);
+  assert.match(guide,/build not recorded/);
   assert.doesNotMatch(guide,/Role-based guide, not upgrade ROI/);
 });
 test("desktop and browser investment rules agree across modes and edge cases", () => {

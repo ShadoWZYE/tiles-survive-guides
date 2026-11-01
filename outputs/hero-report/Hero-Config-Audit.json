@@ -1,16 +1,18 @@
 {
-  "audited_date": "2026-10-05",
-  "native_build": "2.6.200.276",
-  "config_pack_sha256": "53bc9fbb60ebab1719186eaeb3b24169c56d09273a5684ead0c4f11bb2329edc",
-  "manifest_sha256": "e7978f2a438f800c7ec52f818a451d549ea1693d68523036e33ae3396c74e8a3",
-  "language_sha256": "193c0acd9551f47713c8c53faddbc377778266d5b7569d22025ee3c18827edc5",
+  "audited_date": "2026-10-25",
+  "native_build": "2.6.300.293",
+  "config_pack_sha256": "de7e1b2059dc4dee30cf6a78b250f7d29d9d01a3caf11a95715c1539a8544475",
+  "manifest_sha256": "dfd4f00ad293d2ab7b7e64c829d0309c2a625ab397d262bf90128ada40d4be6e",
+  "language_sha256": "2c249121da56f4a3a73ebb2875b7a63d56990ea96fe81d2bb89db8ac4e8a441c",
   "tables_verified": 20,
   "heroes_verified": 29,
-  "previous_heroes_compared": 28,
+  "previous_heroes_compared": 29,
   "progression_changes": {},
   "roster_stat_skill_changes": {},
-  "added_heroes": [
-    "lava"
+  "added_heroes": [],
+  "additional_config_heroes_not_in_roster": [
+    "alita",
+    "furiosa"
   ],
   "scope": "Current local cache matched to BinVersionList_Realtime; no server overrides or full battle runtime simulated."
 }

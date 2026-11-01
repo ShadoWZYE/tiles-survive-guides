@@ -17,7 +17,7 @@ TABLES = {name.split('_', 1)[1].removesuffix('.cfg') for name in TABLE_FILES.val
     'survivor_equipment_level_npp', 'itemlist', 'survival_card_pool',
     'survival_up_card_pool', 'survival_up_drop_contrast'}
 
-def verified_tables(pack: bytes, manifest: dict, wanted: set[str]) -> dict[str, tuple[int, bytes]]:
+def verified_tables(pack: bytes, manifest: dict, wanted: set[str], loose_directory: Path | None = None) -> dict[str, tuple[int, bytes]]:
     tables = {}
     for entry in read_entries(pack):
         if entry.name not in wanted:
@@ -25,6 +25,9 @@ def verified_tables(pack: bytes, manifest: dict, wanted: set[str]) -> dict[str, 
         if entry.name in tables:
             raise ValueError(f'Duplicate active table: {entry.name}')
         raw = pack[entry.offset:entry.offset + entry.size]
+        # Realtime patches may supersede packed rows. Never silently use stale packed data.
+        loose = loose_directory / f'{entry.name}.bin' if loose_directory else None
+        if loose and loose.is_file(): raw = loose.read_bytes()
         # MD5 is the game's content identity, not a security guarantee.
         if hashlib.md5(raw).hexdigest() != manifest.get(entry.name):
             raise ValueError(f'Cache/manifest mismatch: {entry.name}')
@@ -42,15 +45,21 @@ def main():
     parser.add_argument('--audited-date', required=True)
     parser.add_argument('--private-output', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--roster-scope', type=Path, help='Existing roster JSON: refresh these identities without adding unvalidated heroes')
     args = parser.parse_args()
     pack = args.pack.read_bytes(); manifest_bytes = args.manifest.read_bytes()
-    tables = verified_tables(pack, json.loads(manifest_bytes), TABLES)
+    tables = verified_tables(pack, json.loads(manifest_bytes), TABLES, args.manifest.parent)
     args.private_output.mkdir(parents=True, exist_ok=True)
     if list(args.private_output.glob('*.cfg')):
         raise ValueError('Use a fresh private output directory; stale extracts are not accepted.')
     for name, (index, raw) in tables.items():
         (args.private_output / f'{index:04}_{name}.cfg').write_bytes(raw)
     heroes = build(args.private_output, args.language)
+    available = {h['asset_slug'] for h in heroes}
+    if args.roster_scope:
+        supported = {h['asset_slug'] for h in json.loads(args.roster_scope.read_text(encoding='utf-8'))}
+        if supported - available:raise ValueError('Scoped heroes missing from refreshed config')
+        heroes = build(args.private_output, args.language, supported)
     data = export(args.private_output, heroes, args.client_build, decode_language_pack(args.language))
     data['targeted_draft'] = export_targeted(args.private_output, args.private_output, heroes, data['source_hashes'])
     old_path = args.output / 'TilesSurvive-Upgrade-Data.json'
@@ -74,6 +83,7 @@ def main():
         'previous_heroes_compared': len(common), 'progression_changes': changes,
         'roster_stat_skill_changes': roster_changes,
         'added_heroes': sorted(data['heroes'].keys() - old['heroes'].keys()),
+        'additional_config_heroes_not_in_roster':sorted(available-data['heroes'].keys()),
         'scope': 'Current local cache matched to BinVersionList_Realtime; no server overrides or full battle runtime simulated.'}
     data['provenance'] = provenance
     write_outputs(heroes, args.output, args.client_build)

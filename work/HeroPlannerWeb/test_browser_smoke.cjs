@@ -10,6 +10,22 @@ const assert = require("node:assert/strict");
     const page = await browser.newPage({viewport:{width:1440,height:1080}});
     const errors=[];page.on("pageerror",error=>errors.push(error.message));
     await page.goto(pathToFileURL(path.resolve(__dirname,"../../outputs/Tiles-Survive-Hero-Planner-Offline.html")).href);
+    await page.locator('#battle-window').selectOption('10');
+    await page.reload();
+    assert.equal(await page.locator('#battle-window').inputValue(),'10','Opening window must persist');
+    await page.locator('[data-tab="skills"]').click();
+    await page.locator('.hero-card[data-slug="rosie"]').click();
+    await page.getByText('Estimate details',{exact:true}).click();
+    assert.match(await page.locator('#detail-content').innerText(),/Completed casts:/,'Queued cast counts must be inspectable');
+    assert.match(await page.locator('#detail-content').innerText(),/One casting slot per hero/,'Queue assumptions must be visible');
+    for(const [slug,pattern] of [['ken',/x caster HP/],['maddie',/x recipient HP/]]){
+      await page.locator(`.hero-card[data-slug="${slug}"]`).click();
+      await page.getByText('Estimate details',{exact:true}).click();
+      const details=await page.locator('#detail-content').innerText();
+      assert.match(details,/Raw healing per dispatch/);assert.match(details,pattern);
+      assert.match(details,/before modifiers and overheal; informational only/);
+    }
+    await page.locator('#battle-window').selectOption('0');
     const names=["Rosie","Layla","Becca","Ray","Maddie"];
     const slugs=await page.evaluate(names=>names.map(n=>window.__HERO_DATA__.find(h=>h.name===n).asset_slug),names);
     await page.locator('[data-tab="roster"]').click();
@@ -43,6 +59,22 @@ const assert = require("node:assert/strict");
     await page.locator('[data-tab="squad"]').click();
     for(const slug of slugs) await page.locator(`.hero-card[data-slug="${slug}"]`).click();
     const priorities=page.locator('.guide-card.resource');
+    assert.match(await page.locator('.formation-banner').innerText(),/faction/);
+    assert.match(await page.locator('.formation-guide').innerText(),/Final Health/);
+    assert.match(await page.locator('.formation-guide').innerText(),/frontline fit/);
+    assert.equal(await page.locator('.formation-guide ol li').filter({hasText:'Front ·'}).count(),2);
+    assert.equal(await page.locator('.formation-guide ol li').filter({hasText:'Back ·'}).count(),3);
+    assert.equal(await page.locator('#enemy-faction').inputValue(),'Unknown');
+    const defaultScore=await page.locator('.formation-banner').innerText();
+    await page.locator('#enemy-faction').selectOption('Sky');
+    assert.match(await page.locator('.formation-guide').innerText(),/attacks land on Sky targets/);
+    assert.notEqual(await page.locator('.formation-banner').innerText(),defaultScore,'Counter scenario did not affect formation score');
+    await page.locator('#enemy-faction').selectOption('Unknown');
+    assert.equal(await page.locator('.formation-banner').innerText(),defaultScore,'Unknown target retained counter damage');
+    if(process.env.PLANNER_SCREENSHOT_DIR) {
+      await page.locator('#enemy-faction').scrollIntoViewIfNeeded();
+      await page.screenshot({path:path.join(process.env.PLANNER_SCREENSHOT_DIR,"faction.png")});
+    }
     assert.match(await priorities.innerText(),/Data-driven next upgrades/i);
     assert.match(await priorities.innerText(),/gain per 100 resource units/);
     assert.doesNotMatch(await priorities.innerText(),/Record these builds/);
@@ -59,6 +91,18 @@ const assert = require("node:assert/strict");
     await page.locator('[data-tab="roster"]').click();
     assert.ok(await page.locator('#current-stars').isVisible());
     if(process.env.PLANNER_SCREENSHOT_DIR) await page.screenshot({path:path.join(process.env.PLANNER_SCREENSHOT_DIR,"mobile.png"),fullPage:true});
+    // Every explicitly locked skill must disappear from actual formation synergy.
+    await page.evaluate(({slugs})=>{
+      const key='tiles-survive-hero-planner-profile-v1',p=JSON.parse(localStorage.getItem(key));
+      p.comparisonBasis='recorded';
+      for(const slug of slugs)p.heroProgress[slug].build.skills=Object.fromEntries(window.__UPGRADE_DATA__.heroes[slug].skills.map(s=>[s.id,0]));
+      localStorage.setItem(key,JSON.stringify(p));
+    },{slugs});
+    await page.setViewportSize({width:1440,height:1080});await page.reload();
+    await page.locator('[data-tab="squad"]').click();
+    for(const slug of slugs)await page.locator(`.hero-card[data-slug="${slug}"]`).click();
+    assert.match(await page.locator('.formation-guide').innerText(),/No modeled cross-skill pairing/);
+    assert.doesNotMatch(await page.locator('.formation-guide').innerText(),/healing \+|DEF break →|control →|Permanent team stat buffs/);
     assert.deepEqual(errors,[]);
     console.log("Browser smoke passed: actual builds, data-driven returns, metric switching, saved profile, ownership preservation, mobile layout.");
   } finally { await browser.close(); }
