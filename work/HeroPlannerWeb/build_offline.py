@@ -31,6 +31,8 @@ def main() -> None:
     html = html.replace("__APP_JS__", (HERE / "formation-priority.js").read_text(encoding="utf-8")
                         + "\n" + (HERE / "upgrade-model.js").read_text(encoding="utf-8")
                         + "\n" + (HERE / "upgrade-ui.js").read_text(encoding="utf-8")
+                        + "\n" + (HERE / "army-context-model.js").read_text(encoding="utf-8")
+                        + "\n" + (HERE / "army-context-ui.js").read_text(encoding="utf-8")
                         + "\n" + (HERE / "estimate-model.js").read_text(encoding="utf-8")
                         + "\n" + (HERE / "faction-model.js").read_text(encoding="utf-8")
                         + "\n" + (HERE / "formation-model.js").read_text(encoding="utf-8")
@@ -38,6 +40,14 @@ def main() -> None:
     upgrades = json.loads((ROOT / "outputs/hero-report/TilesSurvive-Upgrade-Data.json").read_text(encoding="utf-8"))
     html = html.replace('__CLIENT_BUILD__', upgrades['client_build']).replace('__HERO_COUNT__', str(len(heroes)))
     estimates = json.loads((ROOT / 'outputs/hero-report/Hero-Estimate-Model.json').read_text(encoding='utf-8'))
+    context = json.loads((ROOT / 'outputs/hero-report/Hero-Army-Context.json').read_text(encoding='utf-8'))
+    for group in ['signature','behemoths']:
+        for row in context[group].values():
+            for key in ['icon_asset','skill_icon_asset']:
+                if row.get(key):
+                    icon = IMAGE_ROOT / 'context-icons' / (row[key] + '.png')
+                    row[key.replace('_asset','_data')] = 'data:image/png;base64,' + png_data(icon)
+    html = html.replace('__EMBEDDED_CONTEXT_JSON__',json.dumps(context,ensure_ascii=False,separators=(',',':')).replace('</','<\\/'))
     html = html.replace('__EMBEDDED_ESTIMATE_JSON__', json.dumps(estimates, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/'))
     html = html.replace("__EMBEDDED_UPGRADE_JSON__", json.dumps(upgrades, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/"))
     html = html.replace("__APP_ICON__", png_data(ICON_PATH))

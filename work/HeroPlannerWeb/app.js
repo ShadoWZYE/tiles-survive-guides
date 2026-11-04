@@ -105,6 +105,7 @@
       heroProgress,
       enemyFaction: FactionModel.normalize(candidate.enemyFaction),
       upgradeSettings: UpgradeModel.sanitizeSettings(candidate.upgradeSettings),
+      armyContext: ArmyContextModel.sanitize(candidate.armyContext,window.__ARMY_CONTEXT_DATA__),
       serverOpenDate: /^\d{4}-\d{2}-\d{2}$/.test(candidate.serverOpenDate || "") ? candidate.serverOpenDate : DEFAULT_PROFILE.serverOpenDate,
       mode: allowedModes.includes(candidate.mode) ? candidate.mode : DEFAULT_PROFILE.mode,
       access: allowedAccess.includes(candidate.access) ? candidate.access : DEFAULT_PROFILE.access,
@@ -288,7 +289,8 @@
     const skills=window.__ESTIMATE_DATA__?.heroes?.[hero.asset_slug]?.skills||[];
     const castNote=profile.battleSeconds&&Object.keys(hero.estimate?.openingCastCounts||{}).length?`Completed casts: ${Object.entries(hero.estimate.openingCastCounts).map(([id,n])=>`${hero.skills.find(s=>s.internal_name===id)?.display_name||"Skill"}: ${n}`).join("; ")}. `:"";
     const healingNote=hero.estimate?.rawHealingPotential?.length?`Raw healing per dispatch (one recipient; before modifiers and overheal; informational only): ${hero.estimate.rawHealingPotential.map(x=>`${hero.skills.find(s=>s.internal_name===x.skillId)?.display_name||"Skill"}: ${x.formula} [${x.execution}]`).join("; ")}. `:"";
-    const evidence=`${healingNote}${castNote}${profile.battleSeconds?`Opening ${profile.battleSeconds} game seconds: initial delays, a shared casting slot and remaining periodic ticks. Known immediate hits and buffs use their timeline offsets, including in-progress casts. Other effects keep the completion fallback. One casting slot per hero, configured priority, speed 1 and no interruptions or deaths; utility weights unchanged. Unresolved cast paths retain their sustained proxy. `:"Sustained comparison. "}Skill evidence: ${skills.filter(s=>s.damage_selection_basis==='direct_hit_reference').length} skills have linked direct damage effects; ${skills.filter(s=>s.has_damage_zone).length} have damage zones; ${skills.filter(s=>s.has_summon_dependency).length} have summon dependencies. ${skills.reduce((n,s)=>n+(s.permanent_stat_sources?.length||0),0)} permanent stat buffs are modeled; ${skills.reduce((n,s)=>n+(s.sequence_effect_ids?.length||0),0)} checked child strikes are included. ${skills.reduce((n,s)=>n+(s.temporary_stat_sources?.length||0),0)} temporary self stat buffs use assumed duration/cooldown uptime; ${skills.reduce((n,s)=>n+(s.periodic_budgets||[]).filter(p=>p.scored).length,0)} periodic damage paths use full-lifetime potential. ${skills.reduce((n,s)=>n+(s.conditional_effects?.length||0),0)} effect gates are retained separately; description rows give no damage credit. ${skills.filter(s=>s.finish_trigger).length} delayed damage paths require a completed source skill and an unlocked passive. ${skills.filter(s=>s.animation_limited).length} skill budgets are limited by bound clip durations; ${skills.filter(s=>Object.values(s.direct_hit_counts||{}).reduce((a,b)=>a+b,0)>1).length} use repeated immediate-hit potential. Timing assumes speed 1 and uninterrupted casting. Opening scenarios use known timeline dispatch offsets; unknown impacts keep a completion fallback. Projectile travel, target survival, reapplication timing, zones and death times remain uncertain.`;
+    const contextNote=profile.armyContext?.enabled&&profile.comparisonBasis!=='flat'?`Stat context applied (partial). ${(hero.estimate?.contextNotes||[]).join('; ')}. `:'';
+    const evidence=`${contextNote}${healingNote}${castNote}${profile.battleSeconds?`Opening ${profile.battleSeconds} game seconds: initial delays, a shared casting slot and remaining periodic ticks. Known immediate hits and buffs use their timeline offsets, including in-progress casts. Other effects keep the completion fallback. One casting slot per hero, configured priority, speed 1 and no interruptions or deaths; utility weights unchanged. Unresolved cast paths retain their sustained proxy. `:"Sustained comparison. "}Skill evidence: ${skills.filter(s=>s.damage_selection_basis==='direct_hit_reference').length} skills have linked direct damage effects; ${skills.filter(s=>s.has_damage_zone).length} have damage zones; ${skills.filter(s=>s.has_summon_dependency).length} have summon dependencies. ${skills.reduce((n,s)=>n+(s.permanent_stat_sources?.length||0),0)} permanent stat buffs are modeled; ${skills.reduce((n,s)=>n+(s.sequence_effect_ids?.length||0),0)} checked child strikes are included. ${skills.reduce((n,s)=>n+(s.temporary_stat_sources?.length||0),0)} temporary self stat buffs use assumed duration/cooldown uptime; ${skills.reduce((n,s)=>n+(s.periodic_budgets||[]).filter(p=>p.scored).length,0)} periodic damage paths use full-lifetime potential. ${skills.reduce((n,s)=>n+(s.conditional_effects?.length||0),0)} effect gates are retained separately; description rows give no damage credit. ${skills.filter(s=>s.finish_trigger).length} delayed damage paths require a completed source skill and an unlocked passive. ${skills.filter(s=>s.animation_limited).length} skill budgets are limited by bound clip durations; ${skills.filter(s=>Object.values(s.direct_hit_counts||{}).reduce((a,b)=>a+b,0)>1).length} use repeated immediate-hit potential. Timing assumes speed 1 and uninterrupted casting. Opening scenarios use known timeline dispatch offsets; unknown impacts keep a completion fallback. Projectile travel, target survival, reapplication timing, zones and death times remain uncertain.`;
     const details=profile.comparisonBasis==='flat'?'Flat maximum configuration stats only. Saved stars, levels, skills, gear and ownership are ignored. Identical stats legitimately tie. Skill and synergy weights are excluded. Formation rankings still include faction health and any selected counter scenario.':`${esc(hero.estimate?.basis)} · low confidence · scenario range ${number(hero.estimate?.low)}–${number(hero.estimate?.high)}. Equal builds uses level 110, rank 3 step 6, capped skills and no gear for everyone. ONLY My builds uses your saved progression; unknown fields then use reference defaults. Equal development is not equal resource cost. Representative effects and inferred utility form a planning proxy, not a combat simulation. Scenario factors: damage 0.5–2.5×, utility 0.5–1.5×; not statistical confidence intervals. Fixed reference anchors allow scores above 100. Server overrides remain unverified.`;
     return `<div class="section-head"><div><h2>${esc(hero.name)}</h2><p>${esc(hero.rarity)} · ${esc(hero.faction)} · ${esc(hero.role)} · ${esc(hero.has_ascension ? "Ascension available" : "Base form")}</p></div></div><details><summary>Estimate details</summary><p>${details}</p>${profile.comparisonBasis==='flat'?'':`<p>${esc(evidence)}</p>`}<p>Resource priorities independently use actual recorded builds of owned heroes.</p></details>`;
   }
@@ -296,8 +298,10 @@
   function renderDetail() {
     $$(".top-nav [data-tab]").forEach(button => button.classList.toggle("active", button.dataset.tab === state.tab));
     const titles = {squad:["Hero roster","Click heroes to build a five-hero formation."],stats:["Choose a hero","Click a card to inspect extracted maximum stats."],skills:["Choose a hero","Click a card to inspect skills, icons, and modeled payoff."],roster:["My roster","Select a hero to record its build; use its owned button to change ownership."],release:["Release roster","Click a hero for its release and access evidence."]};
-    $("#roster-title").textContent = titles[state.tab][0]; $("#roster-hint").textContent = titles[state.tab][1];
-    if (state.tab === "squad") renderSquad();
+    $("#roster-title").textContent = (titles[state.tab]||["Behemoths",""])[0]; $("#roster-hint").textContent = (titles[state.tab]||["Behemoths",""])[1];
+    $("#workspace").classList.toggle("behemoth-view",state.tab==="behemoths");
+    if (state.tab === "behemoths") {$("#detail-content").innerHTML=ArmyContextUI.behemoths(profile.armyContext,window.__ARMY_CONTEXT_DATA__);ArmyContextUI.bindBehemoths(profile.armyContext,window.__ARMY_CONTEXT_DATA__,next=>setProfile({...profile,armyContext:next}));}
+    else if (state.tab === "squad") renderSquad();
     else if (state.tab === "stats") renderStats();
     else if (state.tab === "skills") renderSkills();
     else if (state.tab === "roster") renderRoster();
@@ -379,11 +383,23 @@
   }
 
   function renderStats() {
+    renderStatsContent();
+    $("#detail-content").insertAdjacentHTML("beforeend",ArmyContextUI.signature(activeHero().asset_slug,profile.armyContext,window.__ARMY_CONTEXT_DATA__));
+    ArmyContextUI.bindSignature(activeHero().asset_slug,profile.armyContext,window.__ARMY_CONTEXT_DATA__,next=>setProfile({...profile,armyContext:next}));
+  }
+
+  function renderStatsContent() {
     const hero = activeHero();
     $("#detail-content").innerHTML = `${heroHeader(hero)}<div class="hero-detail"><img class="portrait-large" src="${hero.portrait_data}" alt="${esc(hero.name)}"><div><div class="stat-grid"><div class="stat wide"><small>Max-level battle power</small><strong>${number(hero.max_level_battle_power)}</strong></div><div class="stat"><small>Attack</small><strong>${number(hero.max_level_attack)}</strong></div><div class="stat"><small>Defense</small><strong>${number(hero.max_level_defense)}</strong></div><div class="stat"><small>Health</small><strong>${number(hero.max_level_health)}</strong></div><div class="stat"><small>March capacity</small><strong>${number(hero.max_level_march_capacity)}</strong></div><div class="stat"><small>Estimated offense</small><strong>${number(hero.offense_index)}</strong></div><div class="stat"><small>Estimated durability</small><strong>${number(hero.durability_index)}</strong></div></div><p class="evidence">ATK/DEF/HP and power above are maximum configuration values. Estimated components use recorded builds plus reference assumptions.</p></div></div>`;
   }
 
   function renderSkills() {
+    renderSkillsContent();
+    $("#detail-content").insertAdjacentHTML("beforeend",ArmyContextUI.signature(activeHero().asset_slug,profile.armyContext,window.__ARMY_CONTEXT_DATA__));
+    ArmyContextUI.bindSignature(activeHero().asset_slug,profile.armyContext,window.__ARMY_CONTEXT_DATA__,next=>setProfile({...profile,armyContext:next}));
+  }
+
+  function renderSkillsContent() {
     const hero = activeHero();
     $("#detail-content").innerHTML = `${heroHeader(hero)}<div class="skill-list">${hero.skills.map(skill => `<article class="skill-card">${skill.icon_data ? `<img src="${skill.icon_data}" alt="">` : '<div></div>'}<div><h3>${esc(skill.display_name || (skill.normal_attack ? "Basic attack" : `Skill ${skill.slot}`))}</h3><span class="tags">${esc(skill.mechanics.join(" · "))} · ${skill.configured_max_level ? `Level ${skill.configured_max_level}` : "Level data unavailable"}</span><p>${esc((skill.game_description || "The English client has no squad description for this skill.").replace(/\{(\d+)\}/g,"[runtime value $1]"))}</p><p class="payoff"><strong>Expected payoff:</strong> ${esc(skill.payoff)}</p><p class="evidence">Runtime damage not simulated. Skill-level parameters are modifiers, not multiples of ATK.</p></div></article>`).join("")}</div>`;
   }
@@ -401,6 +417,12 @@
   }
 
   function renderRoster() {
+    renderRosterContent();
+    $("#detail-content").insertAdjacentHTML("beforeend",ArmyContextUI.signature(activeHero().asset_slug,profile.armyContext,window.__ARMY_CONTEXT_DATA__));
+    ArmyContextUI.bindSignature(activeHero().asset_slug,profile.armyContext,window.__ARMY_CONTEXT_DATA__,next=>setProfile({...profile,armyContext:next}));
+  }
+
+  function renderRosterContent() {
     const hero=activeHero(), recommendation=bestOwnedAndTargets(), progress=profile.heroProgress[hero.asset_slug] || {};
     $("#detail-content").innerHTML = `<div class="section-head"><div><h2>My roster</h2><p>${profile.ownedHeroes.length} / ${heroes.length} marked as owned</p></div><div class="roster-actions"><button class="button secondary" id="all-owned">Mark all</button><button class="button danger" id="none-owned">Clear</button></div></div>
       <div class="release-hero"><img src="${hero.portrait_data}" alt=""><div><h3>${esc(hero.name)} ${owned(hero)?'<span style="color:var(--good)">✓ Owned</span>':''}</h3><p>${esc(hero.rarity)} · ${esc(hero.faction)} · ${esc(hero.role)}</p><button class="button" id="toggle-owned">${owned(hero)?"Remove owned check":"Mark as owned"}</button></div></div>
@@ -446,23 +468,27 @@
 
   let lastEstimateBuilds=null;
   function renderAll() {
-    const snapshot=profile.comparisonBasis+profile.battleSeconds+(profile.comparisonBasis==='recorded'?JSON.stringify(heroes.map(h=>profile.heroProgress?.[h.asset_slug]?.build||null)):'');
+    const snapshot=profile.comparisonBasis+profile.battleSeconds+JSON.stringify(profile.armyContext)+(profile.comparisonBasis==='recorded'?JSON.stringify(heroes.map(h=>profile.heroProgress?.[h.asset_slug]?.build||null)):'');
     if(snapshot!==lastEstimateBuilds){
-      for(const hero of heroes){const result=EstimateModel.compare(hero.asset_slug,profile.heroProgress?.[hero.asset_slug]?.build,window.__UPGRADE_DATA__,window.__ESTIMATE_DATA__,profile.comparisonBasis,flatIndices.get(hero.asset_slug),profile.battleSeconds);
+      for(const hero of heroes){const context=ArmyContextModel.resolve(hero.asset_slug,profile.armyContext,window.__ARMY_CONTEXT_DATA__,profile.comparisonBasis);
+        const result=EstimateModel.compare(hero.asset_slug,profile.heroProgress?.[hero.asset_slug]?.build,window.__UPGRADE_DATA__,window.__ESTIMATE_DATA__,profile.comparisonBasis,flatIndices.get(hero.asset_slug),profile.battleSeconds,context.flat);
+        result.contextNotes=context.notes;
         hero.estimate=result;
         const activeIds=result.activeSkillIds?new Set(result.activeSkillIds):null;
         hero.mechanics=new Set(hero.skills.filter(skill=>!activeIds||activeIds.has(skill.internal_name)).flatMap(skill=>skill.mechanics));
         hero.healthContribution=result.healthContribution;hero.offense_index=result.offense;hero.durability_index=result.durability;hero.composite_index=result.score;}
       heroes.sort((a,b)=>b.composite_index-a.composite_index||a.name.localeCompare(b.name));optimizerCache.clear();
-      lastEstimateBuilds=profile.comparisonBasis+profile.battleSeconds+(profile.comparisonBasis==='recorded'?JSON.stringify(heroes.map(h=>profile.heroProgress?.[h.asset_slug]?.build||null)):'');
+      lastEstimateBuilds=profile.comparisonBasis+profile.battleSeconds+JSON.stringify(profile.armyContext)+(profile.comparisonBasis==='recorded'?JSON.stringify(heroes.map(h=>profile.heroProgress?.[h.asset_slug]?.build||null)):'');
     }
     document.documentElement.style.setProperty("--left", `${profile.leftWidth}%`);
     $('#comparison-basis').value=profile.comparisonBasis;
     $('#battle-window').value=profile.battleSeconds;
+    $('#army-context').textContent=profile.armyContext?.enabled?'Army stat context: ON (partial)':'Army stat context';
     renderCards(); renderDetail(); saveProfile();
   }
 
   function wireShell() {
+    $('#army-context').onclick=()=>ArmyContextUI.open(profile.armyContext,window.__ARMY_CONTEXT_DATA__,heroes,next=>{profile.armyContext=next;renderAll();});
     $('#battle-window').onchange=event=>{profile.battleSeconds=Number(event.target.value);renderAll();};
     $('#comparison-basis').onchange=event=>{profile.comparisonBasis=event.target.value;renderAll();};
     $$(".top-nav [data-tab]").forEach(button => button.onclick=()=>{state.tab=button.dataset.tab;if(state.tab==="release")state.releaseActive=null;renderDetail()});

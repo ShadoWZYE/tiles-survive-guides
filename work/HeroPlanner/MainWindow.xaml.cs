@@ -38,6 +38,7 @@ public partial class MainWindow : Window
         LoadHeroes();
         LoadUpgradeData();
         LoadEstimates();
+        LoadArmyContextData();
         LoadProfile();
         SyncEnemyPickers();
         RefreshEstimates();
@@ -93,17 +94,19 @@ public partial class MainWindow : Window
     private string? _lastEstimateBuilds;
     private bool RefreshEstimates()
     {
-        string snapshot = _comparisonBasis + _battleSeconds + (_comparisonBasis == "recorded" ? JsonSerializer.Serialize(_heroBuilds) : "");
+        string snapshot = _comparisonBasis + _battleSeconds + JsonSerializer.Serialize(_armyContext) + (_comparisonBasis == "recorded" ? JsonSerializer.Serialize(_heroBuilds) : "");
         if (snapshot == _lastEstimateBuilds) return false;
         foreach (var hero in _heroes)
         {
             var flat = _flatIndices[hero.AssetSlug];
+            var context=ArmyContextModel.Resolve(hero.AssetSlug,_armyContext,_armyContextData,_comparisonBasis);
             var result = _comparisonBasis == "flat" ? new HeroEstimate(flat.Offense, flat.Durability, flat.Score, flat.Score, flat.Score, "Flat max stats") :
-                EstimateModel.Evaluate(hero.AssetSlug, _comparisonBasis == "recorded" ? _heroBuilds.GetValueOrDefault(hero.AssetSlug) : null, _upgradeData, _estimates, _battleSeconds);
+                EstimateModel.Evaluate(hero.AssetSlug, _comparisonBasis == "recorded" ? _heroBuilds.GetValueOrDefault(hero.AssetSlug) : null, _upgradeData, _estimates, _battleSeconds,context.Flat);
             hero.Estimate = result;
             hero.CombatEvidenceNote = (_battleSeconds == 0 ? "Sustained comparison. " : $"Opening {_battleSeconds} game seconds: initial delays, a shared casting slot and remaining periodic ticks. Known immediate hits and buffs use their timeline offsets, including in-progress casts. Other effects keep the completion fallback. One casting slot per hero, configured priority, speed 1 and no interruptions or deaths; utility weights unchanged. Unresolved cast paths retain their sustained proxy. ") + EstimateModel.EvidenceSummary(_estimates.Heroes[hero.AssetSlug]);
             if(result.RawHealingPotential is {Count:>0})
                 hero.CombatEvidenceNote += " Raw healing per dispatch (one recipient; before modifiers and overheal; informational only): " + string.Join("; ",result.RawHealingPotential.Select(x=>$"{hero.Skills.FirstOrDefault(s=>s.InternalName==x.SkillId)?.DisplayName ?? "Skill"}: {x.Formula} [{x.Execution}]")) + ".";
+            if(context.Active)hero.CombatEvidenceNote += " Stat context applied (partial): +"+string.Join(" / +",context.Flat.Select(v=>v.ToString("0.##")))+" ATK / DEF / HP. "+string.Join("; ",context.Notes);
             if (_battleSeconds > 0 && result.OpeningCastCounts is {Count:>0})
                 hero.CombatEvidenceNote += " Completed casts: " + string.Join("; ",result.OpeningCastCounts.Select(x=>$"{hero.Skills.FirstOrDefault(s=>s.InternalName==x.Key)?.DisplayName ?? "Skill"}: {x.Value}")) + ".";
             double hpRange = _heroes.Max(h => h.Health) - _heroes.Min(h => h.Health);
@@ -113,6 +116,7 @@ public partial class MainWindow : Window
         _heroes.Sort((a, b) => { int score = b.CompositeIndex.CompareTo(a.CompositeIndex); return score != 0 ? score : StringComparer.Ordinal.Compare(a.Name, b.Name); });
         HeroRoster.Items.Refresh();
         if (_activeHero is not null) { StatsPanel.DataContext = null; StatsPanel.DataContext = _activeHero; }
+        ArmyContextButton.Content=_armyContext.Enabled&&_comparisonBasis!="flat"?"Army stats: ON (partial)":"Army stat context";
         _lastEstimateBuilds = snapshot;
         return true;
     }
@@ -140,6 +144,7 @@ public partial class MainWindow : Window
                     progress = profile.HeroProgress ?? [];
                     _heroBuilds = (profile.HeroBuilds ?? []).Where(x => _heroes.Any(h => h.AssetSlug == x.Key) && x.Value is not null).ToDictionary();
                     _upgradeSettings = profile.UpgradeSettings ?? new();
+                    _armyContext=ArmyContextModel.Clean(profile.ArmyContext,_armyContextData);
                     _upgradeSettings.Clean();
                     _comparisonBasis = profile.ComparisonBasis is "recorded" or "flat" ? profile.ComparisonBasis : "reference";
                     _battleSeconds = profile.BattleSeconds is 10 or 20 or 30 ? profile.BattleSeconds : 0;
@@ -176,6 +181,7 @@ public partial class MainWindow : Window
             OwnedHeroes = _heroes.Where(hero => hero.IsOwned).Select(hero => hero.AssetSlug).ToHashSet(),
             HeroBuilds = _heroBuilds,
             UpgradeSettings = _upgradeSettings,
+            ArmyContext = _armyContext,
             ComparisonBasis = _comparisonBasis,
             BattleSeconds = _battleSeconds,
             EnemyFaction = _enemyFaction,
@@ -249,7 +255,8 @@ public partial class MainWindow : Window
 
     private void HeroRosterScroll_MouseMove(object sender, MouseEventArgs e)
     {
-        if (!_rosterDragPending || e.LeftButton != MouseButtonState.Pressed) return;
+        if (e.LeftButton != MouseButtonState.Pressed) { if (_rosterDragPending || _rosterDragging) EndRosterDrag(); return; }
+        if (!_rosterDragPending) return;
         Point current = e.GetPosition(HeroRosterScroll);
         double delta = current.Y - _rosterDragStart.Y;
         if (!_rosterDragging && Math.Abs(delta) < SystemParameters.MinimumVerticalDragDistance) return;
@@ -308,6 +315,9 @@ public partial class MainWindow : Window
     {
         if (sender is not Button { Tag: string tabText } || !int.TryParse(tabText, out int tabIndex)) return;
         InspectorTabs.SelectedIndex = tabIndex;
+        bool beasts = tabIndex == 5;
+        RosterArea.Visibility = RosterSplitter.Visibility = beasts ? Visibility.Collapsed : Visibility.Visible;
+        Grid.SetColumn(InspectorPanel, beasts ? 0 : 2); Grid.SetColumnSpan(InspectorPanel, beasts ? 3 : 1);
         UpdateNavigationState(tabIndex);
         RosterTitle.Text = tabIndex == 3 ? "My roster — select a hero to edit" : "Hero roster";
         if (tabIndex == 4)
@@ -318,12 +328,13 @@ public partial class MainWindow : Window
             ReleaseSelectionHint.Visibility = Visibility.Visible;
             UpdateReleaseSchedule(ServerOpenDate.SelectedDate);
         }
+        if(tabIndex==5) RenderBehemoths();
         HeroRoster.Items.Refresh();
     }
 
     private void UpdateNavigationState(int selectedIndex)
     {
-        Button[] buttons = [SquadNav, StatsNav, SkillsNav, RosterNav, ReleaseNav];
+        Button[] buttons = [SquadNav, StatsNav, SkillsNav, RosterNav, ReleaseNav, BehemothsNav];
         for (int index = 0; index < buttons.Length; index++)
         {
             bool selected = index == selectedIndex;
@@ -339,6 +350,7 @@ public partial class MainWindow : Window
     private void SetActiveHero(Hero hero)
     {
         _activeHero = hero;
+        RefreshSignaturePanels(hero);
         StatsPanel.DataContext = hero;
         SkillsHeader.DataContext = hero;
         SkillsList.ItemsSource = hero.Skills.OrderBy(skill => skill.NormalAttack ? -1 : skill.Slot);

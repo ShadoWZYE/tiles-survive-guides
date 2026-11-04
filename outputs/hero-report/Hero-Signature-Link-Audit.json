@@ -1,0 +1,536 @@
+{
+  "coverage": {
+    "configured_levels": 360,
+    "levels_with_gear_skill_addition": 0,
+    "levels_with_explicit_slg_skill_benefits": 0,
+    "levels_with_legacy_se_overall_benefits": 15
+  },
+  "audited_date": "2026-11-04",
+  "scope": "Configuration links, not verified combat outcomes or buff formulas.",
+  "source_hashes": {
+    "survivor_exclusive_gear_main": "21aaf73969f5b63aeb6432523927c2a200ba353bd022cca6e20cc71adc938eb9",
+    "survivor_skill_main": "aa333bf9fe8c22d07aa602ba4ff209c2ead77d0a7a92e1271f68232601c7d934",
+    "survivor_skill_type": "1c91aabb69917c7e4105e0790a4585aa0078aaf3f8b110b9b24379a5d375c3e5",
+    "survivor_slg_skill_new": "a0779e42174fcc220c88ef5b80bd18c537ff67ad2ac079bc44dc225d73442839",
+    "survivor_slg_effect_new": "e5e175d2784d3329e1035be1a323a87687e93fadad2bfa23e174ba58cead9bc3",
+    "effect_buff": "398b00bf619af1719fd9d3a25de76ba198838c1a786cbb71bb87d14905500f8a"
+  },
+  "level_one_links": [
+    {
+      "gear": "rosie_gear_1",
+      "skill": "rosie_gear_skill_1_1",
+      "skill_type": "rosie_gear_skill_1",
+      "raid_new_skill": null,
+      "lite_skill": "rosie_gear_skill_lite_1",
+      "effects": [
+        {
+          "id": "rosie_gear_skill_lite_1",
+          "type": 11100
+        }
+      ],
+      "legacy_se_overall_benefits": [
+        {
+          "benefit_id": 301455,
+          "benefit_value": 0.1
+        },
+        {
+          "benefit_id": 301456,
+          "benefit_value": 0.1
+        }
+      ],
+      "explicit_slg_skill_benefits": [],
+      "gear_skill_addition": {},
+      "score_status": "excluded_pending_runtime_semantics"
+    },
+    {
+      "gear": "maddie_gear_1",
+      "skill": "maddie_gear_skill_1_1",
+      "skill_type": "maddie_gear_skill_1",
+      "raid_new_skill": null,
+      "lite_skill": "maddie_gear_skill_lite_1",
+      "effects": [
+        {
+          "id": "maddie_gear_skill_lite_1",
+          "type": 11100
+        }
+      ],
+      "legacy_se_overall_benefits": [],
+      "explicit_slg_skill_benefits": [],
+      "gear_skill_addition": {},
+      "score_status": "excluded_pending_runtime_semantics"
+    },
+    {
+      "gear": "ray_gear_1",
+      "skill": "ray_gear_skill_1_1",
+      "skill_type": "ray_gear_skill_1",
+      "raid_new_skill": null,
+      "lite_skill": "ray_gear_skill_lite_1",
+      "effects": [
+        {
+          "id": "ray_gear_skill_lite_1",
+          "type": 11100
+        }
+      ],
+      "legacy_se_overall_benefits": [],
+      "explicit_slg_skill_benefits": [],
+      "gear_skill_addition": {},
+      "score_status": "excluded_pending_runtime_semantics"
+    },
+    {
+      "gear": "layla_gear_1",
+      "skill": "layla_gear_skill_1_1",
+      "skill_type": "layla_gear_skill_1",
+      "raid_new_skill": null,
+      "lite_skill": "layla_gear_skill_lite_1",
+      "effects": [
+        {
+          "id": "layla_gear_skill_lite_1",
+          "type": 11100
+        }
+      ],
+      "legacy_se_overall_benefits": [],
+      "explicit_slg_skill_benefits": [],
+      "gear_skill_addition": {},
+      "score_status": "excluded_pending_runtime_semantics"
+    },
+    {
+      "gear": "nikola_gear_1",
+      "skill": "nikola_gear_skill_1_1",
+      "skill_type": "nikola_gear_skill_1",
+      "raid_new_skill": null,
+      "lite_skill": "nikola_gear_skill_lite_1",
+      "effects": [
+        {
+          "id": "nikola_gear_skill_lite_1",
+          "type": 11100
+        }
+      ],
+      "legacy_se_overall_benefits": [],
+      "explicit_slg_skill_benefits": [],
+      "gear_skill_addition": {},
+      "score_status": "excluded_pending_runtime_semantics"
+    },
+    {
+      "gear": "becca_gear_1",
+      "skill": "becca_gear_skill_1_1",
+      "skill_type": "becca_gear_skill_1",
+      "raid_new_skill": null,
+      "lite_skill": "becca_gear_skill_lite_1",
+      "effects": [
+        {
+          "id": "becca_gear_skill_lite_1",
+          "type": 11100
+        }
+      ],
+      "legacy_se_overall_benefits": [],
+      "explicit_slg_skill_benefits": [],
+      "gear_skill_addition": {},
+      "score_status": "excluded_pending_runtime_semantics"
+    },
+    {
+      "gear": "tony_gear_1",
+      "skill": "tony_gear_skill_1_1",
+      "skill_type": "tony_gear_skill_1",
+      "raid_new_skill": null,
+      "lite_skill": "tony_gear_skill_lite_1",
+      "effects": [
+        {
+          "id": "tony_gear_skill_lite_1",
+          "type": 11100
+        }
+      ],
+      "legacy_se_overall_benefits": [],
+      "explicit_slg_skill_benefits": [],
+      "gear_skill_addition": {},
+      "score_status": "excluded_pending_runtime_semantics"
+    },
+    {
+      "gear": "mike_gear_1",
+      "skill": "mike_gear_skill_1_1",
+      "skill_type": "mike_gear_skill_1",
+      "raid_new_skill": null,
+      "lite_skill": "mike_gear_skill_lite_1",
+      "effects": [
+        {
+          "id": "mike_gear_skill_lite_1",
+          "type": 11100
+        }
+      ],
+      "legacy_se_overall_benefits": [],
+      "explicit_slg_skill_benefits": [],
+      "gear_skill_addition": {},
+      "score_status": "excluded_pending_runtime_semantics"
+    },
+    {
+      "gear": "candy_gear_1",
+      "skill": "candy_gear_skill_1_1",
+      "skill_type": "candy_gear_skill_1",
+      "raid_new_skill": null,
+      "lite_skill": "candy_gear_skill_lite_1",
+      "effects": [
+        {
+          "id": "candy_gear_skill_lite_1",
+          "type": 11100
+        }
+      ],
+      "legacy_se_overall_benefits": [],
+      "explicit_slg_skill_benefits": [],
+      "gear_skill_addition": {},
+      "score_status": "excluded_pending_runtime_semantics"
+    },
+    {
+      "gear": "wright_gear_1",
+      "skill": "wright_gear_skill_1_1",
+      "skill_type": "wright_gear_skill_1",
+      "raid_new_skill": null,
+      "lite_skill": "wright_gear_skill_lite_1",
+      "effects": [
+        {
+          "id": "wright_gear_skill_lite_1",
+          "type": 11100
+        }
+      ],
+      "legacy_se_overall_benefits": [],
+      "explicit_slg_skill_benefits": [],
+      "gear_skill_addition": {},
+      "score_status": "excluded_pending_runtime_semantics"
+    },
+    {
+      "gear": "tithi_gear_1",
+      "skill": "tithi_gear_skill_1_1",
+      "skill_type": "tithi_gear_skill_1",
+      "raid_new_skill": null,
+      "lite_skill": "tithi_gear_skill_lite_1",
+      "effects": [
+        {
+          "id": "tithi_gear_skill_lite_1",
+          "type": 11100
+        }
+      ],
+      "legacy_se_overall_benefits": [],
+      "explicit_slg_skill_benefits": [],
+      "gear_skill_addition": {},
+      "score_status": "excluded_pending_runtime_semantics"
+    },
+    {
+      "gear": "tara_gear_1",
+      "skill": "tara_gear_skill_1_1",
+      "skill_type": "tara_gear_skill_1",
+      "raid_new_skill": null,
+      "lite_skill": "tara_gear_skill_lite_1",
+      "effects": [
+        {
+          "id": "tara_gear_skill_lite_1",
+          "type": 11100
+        }
+      ],
+      "legacy_se_overall_benefits": [],
+      "explicit_slg_skill_benefits": [],
+      "gear_skill_addition": {},
+      "score_status": "excluded_pending_runtime_semantics"
+    },
+    {
+      "gear": "jacob_gear_1",
+      "skill": "jacob_gear_skill_1_1",
+      "skill_type": "jacob_gear_skill_1",
+      "raid_new_skill": null,
+      "lite_skill": "jacob_gear_skill_lite_1",
+      "effects": [
+        {
+          "id": "jacob_gear_skill_lite_1",
+          "type": 11100
+        }
+      ],
+      "legacy_se_overall_benefits": [],
+      "explicit_slg_skill_benefits": [],
+      "gear_skill_addition": {},
+      "score_status": "excluded_pending_runtime_semantics"
+    },
+    {
+      "gear": "tarzan_gear_1",
+      "skill": "tarzan_gear_skill_1_1",
+      "skill_type": "tarzan_gear_skill_1",
+      "raid_new_skill": null,
+      "lite_skill": "tarzan_gear_skill_lite_1",
+      "effects": [
+        {
+          "id": "tarzan_gear_skill_lite_1",
+          "type": 11100
+        }
+      ],
+      "legacy_se_overall_benefits": [],
+      "explicit_slg_skill_benefits": [],
+      "gear_skill_addition": {},
+      "score_status": "excluded_pending_runtime_semantics"
+    },
+    {
+      "gear": "chiron_gear_1",
+      "skill": "chiron_gear_skill_1_1",
+      "skill_type": "chiron_gear_skill_1",
+      "raid_new_skill": null,
+      "lite_skill": "jacob_gear_skill_lite_1",
+      "effects": [
+        {
+          "id": "jacob_gear_skill_lite_1",
+          "type": 11100
+        }
+      ],
+      "legacy_se_overall_benefits": [],
+      "explicit_slg_skill_benefits": [],
+      "gear_skill_addition": {},
+      "score_status": "excluded_pending_runtime_semantics"
+    },
+    {
+      "gear": "shark_gear_1",
+      "skill": "shark_gear_skill_1_1",
+      "skill_type": "shark_gear_skill_1",
+      "raid_new_skill": null,
+      "lite_skill": "shark_gear_skill_lite_1",
+      "effects": [
+        {
+          "id": "shark_gear_skill_lite_1",
+          "type": 11100
+        }
+      ],
+      "legacy_se_overall_benefits": [],
+      "explicit_slg_skill_benefits": [],
+      "gear_skill_addition": {},
+      "score_status": "excluded_pending_runtime_semantics"
+    },
+    {
+      "gear": "ragnar_gear_1",
+      "skill": "ragnar_gear_skill_1_1",
+      "skill_type": "ragnar_gear_skill_1",
+      "raid_new_skill": null,
+      "lite_skill": "ragnar_gear_skill_lite_1",
+      "effects": [
+        {
+          "id": "ragnar_gear_skill_lite_1",
+          "type": 11100
+        }
+      ],
+      "legacy_se_overall_benefits": [],
+      "explicit_slg_skill_benefits": [],
+      "gear_skill_addition": {},
+      "score_status": "excluded_pending_runtime_semantics"
+    },
+    {
+      "gear": "knotty_gear_1",
+      "skill": "knotty_gear_skill_1_1",
+      "skill_type": "knotty_gear_skill_1",
+      "raid_new_skill": null,
+      "lite_skill": "ragnar_gear_skill_lite_1",
+      "effects": [
+        {
+          "id": "ragnar_gear_skill_lite_1",
+          "type": 11100
+        }
+      ],
+      "legacy_se_overall_benefits": [],
+      "explicit_slg_skill_benefits": [],
+      "gear_skill_addition": {},
+      "score_status": "excluded_pending_runtime_semantics"
+    },
+    {
+      "gear": "undine_gear_1",
+      "skill": "undine_gear_skill_1_1",
+      "skill_type": "undine_gear_skill_1",
+      "raid_new_skill": null,
+      "lite_skill": "undine_gear_skill_lite_1",
+      "effects": [
+        {
+          "id": "undine_gear_skill_lite_1",
+          "type": 11100
+        }
+      ],
+      "legacy_se_overall_benefits": [],
+      "explicit_slg_skill_benefits": [],
+      "gear_skill_addition": {},
+      "score_status": "excluded_pending_runtime_semantics"
+    },
+    {
+      "gear": "dave_gear_1",
+      "skill": "dave_gear_skill_1_1",
+      "skill_type": "dave_gear_skill_1",
+      "raid_new_skill": null,
+      "lite_skill": "ragnar_gear_skill_lite_1",
+      "effects": [
+        {
+          "id": "ragnar_gear_skill_lite_1",
+          "type": 11100
+        }
+      ],
+      "legacy_se_overall_benefits": [],
+      "explicit_slg_skill_benefits": [],
+      "gear_skill_addition": {},
+      "score_status": "excluded_pending_runtime_semantics"
+    },
+    {
+      "gear": "lava_gear_1",
+      "skill": "lava_gear_skill_1_1",
+      "skill_type": "lava_gear_skill_1",
+      "raid_new_skill": null,
+      "lite_skill": "lava_gear_skill_lite_1",
+      "effects": [
+        {
+          "id": "lava_gear_skill_lite_1",
+          "type": 11100
+        }
+      ],
+      "legacy_se_overall_benefits": [],
+      "explicit_slg_skill_benefits": [],
+      "gear_skill_addition": {},
+      "score_status": "excluded_pending_runtime_semantics"
+    },
+    {
+      "gear": "furiosa_gear_1",
+      "skill": "furiosa_gear_skill_1_1",
+      "skill_type": "furiosa_gear_skill_1",
+      "raid_new_skill": null,
+      "lite_skill": "furiosa_gear_skill_lite_1",
+      "effects": [
+        {
+          "id": "furiosa_gear_skill_lite_1",
+          "type": 11100
+        }
+      ],
+      "legacy_se_overall_benefits": [],
+      "explicit_slg_skill_benefits": [],
+      "gear_skill_addition": {},
+      "score_status": "excluded_pending_runtime_semantics"
+    },
+    {
+      "gear": "alita_gear_1",
+      "skill": "alita_gear_skill_1_1",
+      "skill_type": "alita_gear_skill_1",
+      "raid_new_skill": null,
+      "lite_skill": "alita_gear_skill_lite_1",
+      "effects": [
+        {
+          "id": "alita_gear_skill_lite_1",
+          "type": 11100
+        }
+      ],
+      "legacy_se_overall_benefits": [],
+      "explicit_slg_skill_benefits": [],
+      "gear_skill_addition": {},
+      "score_status": "excluded_pending_runtime_semantics"
+    }
+  ],
+  "gear_named_buff_rows": [
+    {
+      "Id": "benefits_chiron_gear_1_buff_1",
+      "TypeLite": 1,
+      "AdditonTypeLite": 1,
+      "ParamLite": "PhysicalDamageIncrease;0.005;0.001"
+    },
+    {
+      "Id": "benefits_chiron_gear_1_buff_2",
+      "TypeLite": 1,
+      "AdditonTypeLite": 1,
+      "ParamLite": "PhysicalDamageReduce;0.005;0.001"
+    },
+    {
+      "Id": "benefits_tarzan_gear_1_buff_1",
+      "TypeLite": 1,
+      "AdditonTypeLite": 1,
+      "ParamLite": "PhysicalDamageIncrease;0;0"
+    },
+    {
+      "Id": "benefits_tarzan_gear_1_buff_2",
+      "TypeLite": 1,
+      "AdditonTypeLite": 1,
+      "ParamLite": "PhysicalDamageReduce;0.005;0.001"
+    },
+    {
+      "Id": "benefits_rosie_gear_1_buff_1",
+      "TypeLite": 1,
+      "AdditonTypeLite": 1,
+      "ParamLite": "PhysicalDamageIncrease;0.005;0.001"
+    },
+    {
+      "Id": "benefits_rosie_gear_1_buff_2",
+      "TypeLite": 1,
+      "AdditonTypeLite": 1,
+      "ParamLite": "PhysicalDamageReduce;0.005;0.001"
+    },
+    {
+      "Id": "benefits_candy_gear_1_buff_1",
+      "TypeLite": 1,
+      "AdditonTypeLite": 1,
+      "ParamLite": "PhysicalDamageIncrease;0.005;0.001"
+    },
+    {
+      "Id": "benefits_candy_gear_1_buff_2",
+      "TypeLite": 1,
+      "AdditonTypeLite": 1,
+      "ParamLite": "PhysicalDamageReduce;0.005;0.001"
+    },
+    {
+      "Id": "benefits_tara_gear_1_buff_1",
+      "TypeLite": 1,
+      "AdditonTypeLite": 1,
+      "ParamLite": "PhysicalDamageIncrease;0;0"
+    },
+    {
+      "Id": "benefits_tara_gear_1_buff_2",
+      "TypeLite": 1,
+      "AdditonTypeLite": 1,
+      "ParamLite": "PhysicalDamageReduce;0.005;0.001"
+    },
+    {
+      "Id": "benefits_undine_gear_1_buff_1",
+      "TypeLite": 1,
+      "AdditonTypeLite": 1,
+      "ParamLite": "PhysicalDamageIncrease;0.005;0.001"
+    },
+    {
+      "Id": "benefits_undine_gear_1_buff_2",
+      "TypeLite": 1,
+      "AdditonTypeLite": 1,
+      "ParamLite": "PhysicalDamageReduce;0.005;0.001"
+    },
+    {
+      "Id": "benefits_wright_gear_1_buff_1",
+      "TypeLite": 1,
+      "AdditonTypeLite": 1,
+      "ParamLite": "PhysicalDamageIncrease;0.005;0.001"
+    },
+    {
+      "Id": "benefits_wright_gear_1_buff_2",
+      "TypeLite": 1,
+      "AdditonTypeLite": 1,
+      "ParamLite": "PhysicalDamageReduce;0;0"
+    },
+    {
+      "Id": "benefits_tithi_gear_1_buff_1",
+      "TypeLite": 1,
+      "AdditonTypeLite": 1,
+      "ParamLite": "PhysicalDamageIncrease;0.005;0.001"
+    },
+    {
+      "Id": "benefits_tithi_gear_1_buff_2",
+      "TypeLite": 1,
+      "AdditonTypeLite": 1,
+      "ParamLite": "PhysicalDamageReduce;0;0"
+    },
+    {
+      "Id": "benefits_jacob_gear_1_buff_1",
+      "TypeLite": 1,
+      "AdditonTypeLite": 1,
+      "ParamLite": "PhysicalDamageIncrease;0.005;0.001"
+    },
+    {
+      "Id": "benefits_jacob_gear_1_buff_2",
+      "TypeLite": 1,
+      "AdditonTypeLite": 1,
+      "ParamLite": "PhysicalDamageReduce;0.005;0.001"
+    }
+  ],
+  "unavailable": [
+    "Legacy SE-only overall percentages cannot establish the field Lite skill formula. Runtime resolution of Type 11100 and gear benefit markers into buff applications.",
+    "Meaning of the two numeric ParamLite operands, level interpolation and stacking rules.",
+    "Recipients, uptime and equivalence between field Lite effects and raid comparison model."
+  ],
+  "conclusion": "Gear-named PhysicalDamageIncrease/Reduce rows exist. Their presence does not justify treating tooltip ATK/DEF percentages as field damage multipliers. No server override is established by this evidence."
+}

@@ -366,8 +366,71 @@ internal static class Program
             var previewEncoder = new PngBitmapEncoder(); previewEncoder.Frames.Add(BitmapFrame.Create(preview));
             Directory.CreateDirectory(Path.GetDirectoryName(targetedScreenshot)!); using var output = File.Create(targetedScreenshot); previewEncoder.Save(output);
         }
+        window.Left=-5000;window.Top=-5000;window.ShowActivated=false;window.Show();
+        window.UpdateLayout();
+        var ownedControl=Walk(window).OfType<CheckBox>().First(c=>c.Name=="OwnedCheck");
+        bool captureOwnedBefore=ownedControl.IsChecked==true;
+        var selectedBefore=Field<System.Collections.ObjectModel.ObservableCollection<Hero>>(window,"_selected").Select(h=>h.AssetSlug).ToArray();
+        void ReleaseCheckboxThroughRoutedEvents()
+        {
+            Check(ownedControl.CaptureMouse(),"Could not establish checkbox click capture");
+            var setPressed=typeof(System.Windows.Controls.Primitives.ButtonBase).GetMethod("SetIsPressed",BindingFlags.Instance|BindingFlags.NonPublic)!;
+            setPressed.Invoke(ownedControl,[true]);
+            var up=new System.Windows.Input.MouseButtonEventArgs(System.Windows.Input.Mouse.PrimaryDevice,Environment.TickCount,System.Windows.Input.MouseButton.Left){RoutedEvent=UIElement.PreviewMouseLeftButtonUpEvent};
+            ownedControl.RaiseEvent(up);
+            if(!up.Handled){up.RoutedEvent=UIElement.MouseLeftButtonUpEvent;ownedControl.RaiseEvent(up);}
+            Check(!ReferenceEquals(System.Windows.Input.Mouse.Captured,ownedControl),"Ownership checkbox trapped mouse capture after release");
+        }
+        ReleaseCheckboxThroughRoutedEvents();
+        Check((ownedControl.IsChecked==true)!=captureOwnedBefore,"Normal ownership click failed to toggle exactly once");
+        Check(selectedBefore.SequenceEqual(Field<System.Collections.ObjectModel.ObservableCollection<Hero>>(window,"_selected").Select(h=>h.AssetSlug)),"Ownership checkbox also changed squad selection");
+        ReleaseCheckboxThroughRoutedEvents();
+        Check((ownedControl.IsChecked==true)==captureOwnedBefore,"Second ownership click failed to restore state without Tab");
+        Exception? contextError=null;
+        window.Dispatcher.BeginInvoke(new Action(()=>{
+            var modal=Application.Current.Windows.OfType<Window>().Single(w=>w!=window&&w.Title=="Signature Gear, Behemoth & Research");
+            try{
+                modal.UpdateLayout();
+                var elements=Walk(modal).ToList();
+                elements.OfType<CheckBox>().Single(x=>x.Content?.ToString()=="Apply recorded stat context").IsChecked=true;
+                var stats=elements.OfType<TextBox>().Where(x=>x.Width==150).ToArray();Check(stats.Length==3,"Behemoth bonus fields missing");stats[0].Text="348";stats[1].Text="70";stats[2].Text="23184";
+                foreach(var expander in elements.OfType<Expander>())expander.IsExpanded=true;
+                modal.UpdateLayout();elements=Walk(modal).ToList();
+                var source=elements.OfType<ComboBox>().Single(x=>x.Items.OfType<ComboBoxItem>().Any(i=>i.Tag?.ToString()=="configured"));source.SelectedIndex=1;
+                foreach(string kind in new[]{"behemoth-level","behemoth-star"})elements.OfType<ComboBox>().Single(x=>System.Windows.Automation.AutomationProperties.GetName(x)==kind+" caser").SelectedIndex=1;
+                var signature=elements.OfType<ComboBox>().Single(x=>System.Windows.Automation.AutomationProperties.GetName(x)=="signature rosie");signature.SelectedIndex=1;
+                var research=elements.OfType<ComboBox>().Single(x=>System.Windows.Automation.AutomationProperties.GetName(x)=="research research_group_troop_attack_percent_1");research.SelectedIndex=2;
+                elements.OfType<Button>().Single(x=>x.Content?.ToString()=="Apply").RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+            }catch(Exception ex){contextError=ex;modal.Close();}
+        }),System.Windows.Threading.DispatcherPriority.Loaded);
+        Invoke(window,"ArmyContext_Click",new Button(),new RoutedEventArgs());
+        if(contextError is not null)throw contextError;
+        var contextSaved=JsonSerializer.Deserialize<PlannerProfile>(File.ReadAllText(profilePath))!.ArmyContext;
+        Check(contextSaved.Enabled&&contextSaved.Signature["rosie"]==1&&contextSaved.Research["research_group_troop_attack_percent_1"]==2&&contextSaved.Behemoth[0]==348&&contextSaved.BehemothSource=="configured"&&contextSaved.BehemothBuilds["caser"].Level==1&&contextSaved.BehemothBuilds["caser"].Star==1,"Army stat context did not save through the native dialog");
+        Check(Walk((StackPanel)window.FindName("StatsSignaturePanel")).OfType<CheckBox>().All(x=>x.IsChecked==true),"Hero Signature UI was stale after context dialog Apply");
+        Invoke(window,"SetActiveHero",heroes.Single(h=>h.AssetSlug=="rosie"));
+        Invoke(window,"Navigation_Click",(Button)window.FindName("StatsNav"),new RoutedEventArgs());window.UpdateLayout();
+        var signatureView=(StackPanel)window.FindName("StatsSignaturePanel");
+        var localSignature=Walk(signatureView).OfType<ComboBox>().Single();localSignature.SelectedIndex=2;
+        Walk(signatureView).OfType<Button>().Single(x=>x.Content?.ToString()=="Save Signature Gear").RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+        Check(Field<ArmyContextSettings>(window,"_armyContext").Signature["rosie"]==2,"Hero-local Signature save failed");
+        Invoke(window,"Navigation_Click",(Button)window.FindName("BehemothsNav"),new RoutedEventArgs());window.UpdateLayout();
+        var beastView=(StackPanel)window.FindName("BehemothsPanel");
+        Check(Walk(beastView).OfType<Image>().Count()==4,"Behemoth icons missing");
+        Walk(beastView).OfType<ComboBox>().Single(x=>System.Windows.Automation.AutomationProperties.GetName(x)=="Behemoth caser star").SelectedIndex=2;
+        Walk(beastView).OfType<Button>().Single(x=>x.Content?.ToString()=="Save Behemoths").RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+        var screenshotDir=Environment.GetEnvironmentVariable("PLANNER_SCREENSHOT_DIR");
+        if(!string.IsNullOrEmpty(screenshotDir)){
+            void Capture(string name){window.UpdateLayout();var bitmap=new RenderTargetBitmap((int)window.ActualWidth,(int)window.ActualHeight,96,96,PixelFormats.Pbgra32);bitmap.Render(window);var encoder=new PngBitmapEncoder();encoder.Frames.Add(BitmapFrame.Create(bitmap));using var stream=File.Create(Path.Combine(screenshotDir,name));encoder.Save(stream);}
+            Capture("native-behemoths.png");
+            Invoke(window,"Navigation_Click",(Button)window.FindName("StatsNav"),new RoutedEventArgs());Capture("native-signature.png");
+        }
+        var afterBeast=Field<ArmyContextSettings>(window,"_armyContext");
+        Check(afterBeast.Signature["rosie"]==2&&afterBeast.Research["research_group_troop_attack_percent_1"]==2&&afterBeast.BehemothBuilds["caser"].Star==2,"Behemoth tab overwrote other context sources");
         window.Close();
         var reopened = Create();
+        Check(Field<ArmyContextSettings>(reopened,"_armyContext").Enabled&&Field<ArmyContextSettings>(reopened,"_armyContext").BehemothBuilds["caser"].Star==2,"Army context missing after reopen");
+
         Invoke(reopened, "SetActiveHero", ((List<Hero>)typeof(MainWindow).GetField("_heroes", BindingFlags.Instance | BindingFlags.NonPublic)!.GetValue(reopened)!).Single(h => h.Name == "Becca"));
         Check(((TextBox)reopened.FindName("CurrentStars")).Text == "4", "Stars missing after reopen");
         Check(Field<Dictionary<string, HeroBuild>>(reopened, "_heroBuilds").Count == 5, "Native builds missing after reopen");

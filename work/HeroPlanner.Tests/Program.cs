@@ -1,6 +1,22 @@
 using System.Text.Json;
 using TilesSurviveHeroPlanner;
 
+if(args.Length==2 && args[0]=="--army-context")
+{
+ var root=args[1];var data=ArmyContextData.Parse(File.ReadAllText(Path.Combine(root,"Hero-Army-Context.json")));
+ var estimates=EstimateData.Parse(File.ReadAllText(Path.Combine(root,"Hero-Estimate-Model.json")));
+ var upgrades=UpgradeData.Parse(File.ReadAllText(Path.Combine(root,"TilesSurvive-Upgrade-Data.json")));
+ var armyCases=new List<object>();
+ var contexts=new ArmyContextSettings[]{new(){Enabled=true,BehemothSource="configured",Behemoth=[999,999,999],BehemothBuilds=new(){{"caser",new(){Level=1,Star=1}}}},new(){Enabled=true,BehemothSource="configured",BehemothBuilds=new(){{"caser",new(){Level=99999,Star=1}},{"missing",new(){Level=1,Star=1}}}},new(),new(){Enabled=true},new(){Enabled=true,Behemoth=[348,70,23184]},new(){Enabled=true,Scene="pve",Research=data.Research.ToDictionary(x=>x.Key,x=>x.Value.Levels.Last().Level)},new(){Enabled=true,Signature=data.Signature.ToDictionary(x=>x.Key,x=>x.Value.Levels.First().Level)},new(){Enabled=true,Scene="gve",Behemoth=[null,200,5000],Research=data.Research.Take(5).ToDictionary(x=>x.Key,x=>x.Value.Levels.Last().Level),Signature=new(){{"rosie",1},{"missing",999}}}};
+ foreach(var settings in contexts)foreach(string basis in new[]{"reference","recorded","flat"})foreach(var slug in estimates.Heroes.Keys)
+ {
+  var context=ArmyContextModel.Resolve(slug,settings,data,basis);
+  var result=EstimateModel.Evaluate(slug,null,upgrades,estimates,20,context.Flat);
+  armyCases.Add(new{slug,basis,settings,context,result=new{result.Offense,result.Durability,result.Score,result.HealthContribution,result.PassiveContributions}});
+ }
+ Console.WriteLine(JsonSerializer.Serialize(armyCases,new JsonSerializerOptions{PropertyNamingPolicy=JsonNamingPolicy.CamelCase}));return;
+}
+
 if (args.Contains("--formation-fit"))
 {
     var fitCases = new List<object>();

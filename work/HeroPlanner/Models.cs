@@ -247,6 +247,7 @@ public sealed class ReleaseScheduleItem
 
 public sealed class PlannerProfile
 {
+    [JsonPropertyName("army_context")] public ArmyContextSettings ArmyContext { get; set; } = new();
     [JsonPropertyName("enemy_faction")] public string EnemyFaction { get; set; } = "Unknown";
     [JsonPropertyName("comparison_basis")] public string ComparisonBasis { get; set; } = "reference";
     [JsonPropertyName("battle_seconds")] public int BattleSeconds { get; set; }

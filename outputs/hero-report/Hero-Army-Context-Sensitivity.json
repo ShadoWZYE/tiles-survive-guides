@@ -1,0 +1,2697 @@
+{
+  "audited_date": "2026-11-04",
+  "scope": "Individual Balanced estimate sensitivity, controlled reference builds under My builds context; not full-squad rankings, live outcomes, or win probabilities.",
+  "weights_changed": false,
+  "weights": {
+    "offense": 0.55,
+    "durability": 0.35,
+    "utility": 0.1
+  },
+  "formula": "flat source bonuses added to ATK/DEF/HP before modeled in-battle passive modifiers; fixed normalization anchors retained",
+  "sources": {
+    "survivor_exclusive_gear": "04541c031a995cc9cea9ad8815a3e1a0d589333fe9fc20adc730bea0dfb3778d",
+    "survivor_exclusive_gear_main": "21aaf73969f5b63aeb6432523927c2a200ba353bd022cca6e20cc71adc938eb9",
+    "research_main": "aa3c8a898ccaadb7d3096c4646785fe53c7ad532a43ad40859bd5b03bfd90d5e",
+    "research_group": "7fac4350425d369567560f1f30d46867194d31dccc6a2f7d70f1ceb8e74273eb",
+    "benefits": "755d06008f624b9f050132878b6cec55189bf7ff6b633a2930552a3c3196eec6",
+    "benefits_map": "78e3cca9579c57dfb89e0fa4a6c7549dfac3961651d6b8927285d14e2bbea420",
+    "benefit_calc": "eb3e770a1879a83a47fa2059b453cefe535b38efea56f4d3904a8d22e1173787",
+    "behemoth_base": "f11b6128be98b80ac5b9057fe07f8b1cf71d727e62264a1e6102177c79821617",
+    "behemoth_level": "4edb39ae8101db06e7f8325aee6d8982b23f7a5d3684644e20657a64bde8a3d6",
+    "behemoth_star_level": "dc9203f5f90bf75c2d2cec40505138ea12b0f8226cec9d5d704891486bff67bf",
+    "behemoth_base_data": "4c258ede2f29b57e679838e45e6995952c0d2b3cf74f6c5f2e880811b62a5030",
+    "survivor_skill_main": "aa333bf9fe8c22d07aa602ba4ff209c2ead77d0a7a92e1271f68232601c7d934",
+    "survivor_skill_type": "1c91aabb69917c7e4105e0790a4585aa0078aaf3f8b110b9b24379a5d375c3e5",
+    "survivor_slg_skill_new": "a0779e42174fcc220c88ef5b80bd18c537ff67ad2ac079bc44dc225d73442839",
+    "survivor_slg_effect_new": "e5e175d2784d3329e1035be1a323a87687e93fadad2bfa23e174ba58cead9bc3",
+    "effect_buff": "398b00bf619af1719fd9d3a25de76ba198838c1a786cbb71bb87d14905500f8a"
+  },
+  "scenarios": [
+    {
+      "name": "excluded",
+      "settings": {
+        "enabled": false
+      },
+      "top_five": [
+        "lava",
+        "mike",
+        "nikola",
+        "maddie",
+        "tithi"
+      ],
+      "heroes_changing_rank": 0,
+      "rows": [
+        {
+          "slug": "lava",
+          "score": 87.52246386353939,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 1,
+          "baseline_rank": 1
+        },
+        {
+          "slug": "mike",
+          "score": 84.48455215255254,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 2,
+          "baseline_rank": 2
+        },
+        {
+          "slug": "nikola",
+          "score": 82.11686065697458,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 3,
+          "baseline_rank": 3
+        },
+        {
+          "slug": "maddie",
+          "score": 78.07622675201986,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 4,
+          "baseline_rank": 4
+        },
+        {
+          "slug": "tithi",
+          "score": 75.69840795747179,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 5,
+          "baseline_rank": 5
+        },
+        {
+          "slug": "ray",
+          "score": 75.19200956011015,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 6,
+          "baseline_rank": 6
+        },
+        {
+          "slug": "ragnar",
+          "score": 74.67979450229055,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 7,
+          "baseline_rank": 7
+        },
+        {
+          "slug": "becca",
+          "score": 74.38770056861607,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 8,
+          "baseline_rank": 8
+        },
+        {
+          "slug": "layla",
+          "score": 74.3023602786659,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 9,
+          "baseline_rank": 9
+        },
+        {
+          "slug": "tara",
+          "score": 73.46373364601966,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 10,
+          "baseline_rank": 10
+        },
+        {
+          "slug": "chiron",
+          "score": 73.06423489035815,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 11,
+          "baseline_rank": 11
+        },
+        {
+          "slug": "rosie",
+          "score": 72.2911197647218,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 12,
+          "baseline_rank": 12
+        },
+        {
+          "slug": "wright",
+          "score": 71.90592750532367,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 13,
+          "baseline_rank": 13
+        },
+        {
+          "slug": "tarzan",
+          "score": 70.44994381207816,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 14,
+          "baseline_rank": 14
+        },
+        {
+          "slug": "shark",
+          "score": 70.04524106063869,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 15,
+          "baseline_rank": 15
+        },
+        {
+          "slug": "knotty",
+          "score": 68.97001278150049,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 16,
+          "baseline_rank": 16
+        },
+        {
+          "slug": "candy",
+          "score": 67.81415271377305,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 17,
+          "baseline_rank": 17
+        },
+        {
+          "slug": "undine",
+          "score": 67.7286949354934,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 18,
+          "baseline_rank": 18
+        },
+        {
+          "slug": "dave",
+          "score": 66.37654551196594,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 19,
+          "baseline_rank": 19
+        },
+        {
+          "slug": "jacob",
+          "score": 64.44669900712151,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 20,
+          "baseline_rank": 20
+        },
+        {
+          "slug": "tony",
+          "score": 64.0601489178533,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 21,
+          "baseline_rank": 21
+        },
+        {
+          "slug": "freja",
+          "score": 54.903800604916874,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 22,
+          "baseline_rank": 22
+        },
+        {
+          "slug": "lucky",
+          "score": 50.47523499697842,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 23,
+          "baseline_rank": 23
+        },
+        {
+          "slug": "travis",
+          "score": 49.32878555259858,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 24,
+          "baseline_rank": 24
+        },
+        {
+          "slug": "ken",
+          "score": 48.15791913263145,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 25,
+          "baseline_rank": 25
+        },
+        {
+          "slug": "sarge",
+          "score": 45.87870548180252,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 26,
+          "baseline_rank": 26
+        },
+        {
+          "slug": "eva",
+          "score": 45.029915900532856,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 27,
+          "baseline_rank": 27
+        },
+        {
+          "slug": "rusty",
+          "score": 40.9722225952512,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 28,
+          "baseline_rank": 28
+        },
+        {
+          "slug": "tim",
+          "score": 34.3607211043778,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 29,
+          "baseline_rank": 29
+        }
+      ]
+    },
+    {
+      "name": "behemoth_hero_bonus_sample",
+      "settings": {
+        "enabled": true,
+        "behemoth": [
+          348,
+          70,
+          23184
+        ]
+      },
+      "top_five": [
+        "lava",
+        "mike",
+        "nikola",
+        "maddie",
+        "tithi"
+      ],
+      "heroes_changing_rank": 0,
+      "rows": [
+        {
+          "slug": "lava",
+          "score": 89.34482079857345,
+          "flat": [
+            348,
+            70,
+            23184
+          ],
+          "notes": [],
+          "rank": 1,
+          "baseline_rank": 1
+        },
+        {
+          "slug": "mike",
+          "score": 86.40647060780933,
+          "flat": [
+            348,
+            70,
+            23184
+          ],
+          "notes": [],
+          "rank": 2,
+          "baseline_rank": 2
+        },
+        {
+          "slug": "nikola",
+          "score": 84.04915445808045,
+          "flat": [
+            348,
+            70,
+            23184
+          ],
+          "notes": [],
+          "rank": 3,
+          "baseline_rank": 3
+        },
+        {
+          "slug": "maddie",
+          "score": 79.97763037442968,
+          "flat": [
+            348,
+            70,
+            23184
+          ],
+          "notes": [],
+          "rank": 4,
+          "baseline_rank": 4
+        },
+        {
+          "slug": "tithi",
+          "score": 77.6159024389356,
+          "flat": [
+            348,
+            70,
+            23184
+          ],
+          "notes": [],
+          "rank": 5,
+          "baseline_rank": 5
+        },
+        {
+          "slug": "ray",
+          "score": 77.04344906918853,
+          "flat": [
+            348,
+            70,
+            23184
+          ],
+          "notes": [],
+          "rank": 6,
+          "baseline_rank": 6
+        },
+        {
+          "slug": "ragnar",
+          "score": 76.57105004442998,
+          "flat": [
+            348,
+            70,
+            23184
+          ],
+          "notes": [],
+          "rank": 7,
+          "baseline_rank": 7
+        },
+        {
+          "slug": "becca",
+          "score": 76.27137535916854,
+          "flat": [
+            348,
+            70,
+            23184
+          ],
+          "notes": [],
+          "rank": 8,
+          "baseline_rank": 8
+        },
+        {
+          "slug": "layla",
+          "score": 76.07780640035112,
+          "flat": [
+            348,
+            70,
+            23184
+          ],
+          "notes": [],
+          "rank": 9,
+          "baseline_rank": 9
+        },
+        {
+          "slug": "tara",
+          "score": 75.25025006121469,
+          "flat": [
+            348,
+            70,
+            23184
+          ],
+          "notes": [],
+          "rank": 10,
+          "baseline_rank": 10
+        },
+        {
+          "slug": "chiron",
+          "score": 74.91376958493028,
+          "flat": [
+            348,
+            70,
+            23184
+          ],
+          "notes": [],
+          "rank": 11,
+          "baseline_rank": 11
+        },
+        {
+          "slug": "rosie",
+          "score": 74.07421607054745,
+          "flat": [
+            348,
+            70,
+            23184
+          ],
+          "notes": [],
+          "rank": 12,
+          "baseline_rank": 12
+        },
+        {
+          "slug": "wright",
+          "score": 73.72556603680995,
+          "flat": [
+            348,
+            70,
+            23184
+          ],
+          "notes": [],
+          "rank": 13,
+          "baseline_rank": 13
+        },
+        {
+          "slug": "tarzan",
+          "score": 72.23204051954066,
+          "flat": [
+            348,
+            70,
+            23184
+          ],
+          "notes": [],
+          "rank": 14,
+          "baseline_rank": 14
+        },
+        {
+          "slug": "shark",
+          "score": 71.73170254326693,
+          "flat": [
+            348,
+            70,
+            23184
+          ],
+          "notes": [],
+          "rank": 15,
+          "baseline_rank": 15
+        },
+        {
+          "slug": "knotty",
+          "score": 70.71389700707066,
+          "flat": [
+            348,
+            70,
+            23184
+          ],
+          "notes": [],
+          "rank": 16,
+          "baseline_rank": 16
+        },
+        {
+          "slug": "candy",
+          "score": 69.47522415118796,
+          "flat": [
+            348,
+            70,
+            23184
+          ],
+          "notes": [],
+          "rank": 17,
+          "baseline_rank": 17
+        },
+        {
+          "slug": "undine",
+          "score": 69.44054990248786,
+          "flat": [
+            348,
+            70,
+            23184
+          ],
+          "notes": [],
+          "rank": 18,
+          "baseline_rank": 18
+        },
+        {
+          "slug": "dave",
+          "score": 68.05351147477954,
+          "flat": [
+            348,
+            70,
+            23184
+          ],
+          "notes": [],
+          "rank": 19,
+          "baseline_rank": 19
+        },
+        {
+          "slug": "jacob",
+          "score": 66.0273886677596,
+          "flat": [
+            348,
+            70,
+            23184
+          ],
+          "notes": [],
+          "rank": 20,
+          "baseline_rank": 20
+        },
+        {
+          "slug": "tony",
+          "score": 65.67738973000206,
+          "flat": [
+            348,
+            70,
+            23184
+          ],
+          "notes": [],
+          "rank": 21,
+          "baseline_rank": 21
+        },
+        {
+          "slug": "freja",
+          "score": 56.768335188586484,
+          "flat": [
+            348,
+            70,
+            23184
+          ],
+          "notes": [],
+          "rank": 22,
+          "baseline_rank": 22
+        },
+        {
+          "slug": "lucky",
+          "score": 52.21644140655271,
+          "flat": [
+            348,
+            70,
+            23184
+          ],
+          "notes": [],
+          "rank": 23,
+          "baseline_rank": 23
+        },
+        {
+          "slug": "travis",
+          "score": 51.109769992342684,
+          "flat": [
+            348,
+            70,
+            23184
+          ],
+          "notes": [],
+          "rank": 24,
+          "baseline_rank": 24
+        },
+        {
+          "slug": "ken",
+          "score": 49.81909464378664,
+          "flat": [
+            348,
+            70,
+            23184
+          ],
+          "notes": [],
+          "rank": 25,
+          "baseline_rank": 25
+        },
+        {
+          "slug": "sarge",
+          "score": 47.53152725452728,
+          "flat": [
+            348,
+            70,
+            23184
+          ],
+          "notes": [],
+          "rank": 26,
+          "baseline_rank": 26
+        },
+        {
+          "slug": "eva",
+          "score": 46.65120706114384,
+          "flat": [
+            348,
+            70,
+            23184
+          ],
+          "notes": [],
+          "rank": 27,
+          "baseline_rank": 27
+        },
+        {
+          "slug": "rusty",
+          "score": 42.78299629368469,
+          "flat": [
+            348,
+            70,
+            23184
+          ],
+          "notes": [],
+          "rank": 28,
+          "baseline_rank": 28
+        },
+        {
+          "slug": "tim",
+          "score": 35.98942390634451,
+          "flat": [
+            348,
+            70,
+            23184
+          ],
+          "notes": [],
+          "rank": 29,
+          "baseline_rank": 29
+        }
+      ]
+    },
+    {
+      "name": "configured_griffin_level_1_star_step_1",
+      "settings": {
+        "enabled": true,
+        "behemothSource": "configured",
+        "behemothBuilds": {
+          "caser": {
+            "level": 1,
+            "star": 1
+          }
+        }
+      },
+      "top_five": [
+        "lava",
+        "mike",
+        "nikola",
+        "maddie",
+        "tithi"
+      ],
+      "heroes_changing_rank": 2,
+      "rows": [
+        {
+          "slug": "lava",
+          "score": 94.10507803292731,
+          "flat": [
+            1257,
+            252,
+            83784
+          ],
+          "notes": [
+            "Legendary Griffin (caser): additional effects excluded",
+            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+          ],
+          "rank": 1,
+          "baseline_rank": 1
+        },
+        {
+          "slug": "mike",
+          "score": 91.42691579341158,
+          "flat": [
+            1257,
+            252,
+            83784
+          ],
+          "notes": [
+            "Legendary Griffin (caser): additional effects excluded",
+            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+          ],
+          "rank": 2,
+          "baseline_rank": 2
+        },
+        {
+          "slug": "nikola",
+          "score": 89.09660296492089,
+          "flat": [
+            1257,
+            252,
+            83784
+          ],
+          "notes": [
+            "Legendary Griffin (caser): additional effects excluded",
+            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+          ],
+          "rank": 3,
+          "baseline_rank": 3
+        },
+        {
+          "slug": "maddie",
+          "score": 84.94437149452075,
+          "flat": [
+            1257,
+            252,
+            83784
+          ],
+          "notes": [
+            "Legendary Griffin (caser): additional effects excluded",
+            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+          ],
+          "rank": 4,
+          "baseline_rank": 4
+        },
+        {
+          "slug": "tithi",
+          "score": 82.62465276575001,
+          "flat": [
+            1257,
+            252,
+            83784
+          ],
+          "notes": [
+            "Legendary Griffin (caser): additional effects excluded",
+            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+          ],
+          "rank": 5,
+          "baseline_rank": 5
+        },
+        {
+          "slug": "ray",
+          "score": 81.87967377624429,
+          "flat": [
+            1257,
+            252,
+            83784
+          ],
+          "notes": [
+            "Legendary Griffin (caser): additional effects excluded",
+            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+          ],
+          "rank": 6,
+          "baseline_rank": 6
+        },
+        {
+          "slug": "ragnar",
+          "score": 81.51117193808656,
+          "flat": [
+            1257,
+            252,
+            83784
+          ],
+          "notes": [
+            "Legendary Griffin (caser): additional effects excluded",
+            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+          ],
+          "rank": 7,
+          "baseline_rank": 7
+        },
+        {
+          "slug": "becca",
+          "score": 81.19178632092994,
+          "flat": [
+            1257,
+            252,
+            83784
+          ],
+          "notes": [
+            "Legendary Griffin (caser): additional effects excluded",
+            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+          ],
+          "rank": 8,
+          "baseline_rank": 8
+        },
+        {
+          "slug": "layla",
+          "score": 80.71567491540813,
+          "flat": [
+            1257,
+            252,
+            83784
+          ],
+          "notes": [
+            "Legendary Griffin (caser): additional effects excluded",
+            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+          ],
+          "rank": 9,
+          "baseline_rank": 9
+        },
+        {
+          "slug": "tara",
+          "score": 79.91679138275441,
+          "flat": [
+            1257,
+            252,
+            83784
+          ],
+          "notes": [
+            "Legendary Griffin (caser): additional effects excluded",
+            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+          ],
+          "rank": 10,
+          "baseline_rank": 10
+        },
+        {
+          "slug": "chiron",
+          "score": 79.74498615868956,
+          "flat": [
+            1257,
+            252,
+            83784
+          ],
+          "notes": [
+            "Legendary Griffin (caser): additional effects excluded",
+            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+          ],
+          "rank": 11,
+          "baseline_rank": 11
+        },
+        {
+          "slug": "rosie",
+          "score": 78.73192183377935,
+          "flat": [
+            1257,
+            252,
+            83784
+          ],
+          "notes": [
+            "Legendary Griffin (caser): additional effects excluded",
+            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+          ],
+          "rank": 12,
+          "baseline_rank": 12
+        },
+        {
+          "slug": "wright",
+          "score": 78.47870987359671,
+          "flat": [
+            1257,
+            252,
+            83784
+          ],
+          "notes": [
+            "Legendary Griffin (caser): additional effects excluded",
+            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+          ],
+          "rank": 13,
+          "baseline_rank": 13
+        },
+        {
+          "slug": "tarzan",
+          "score": 76.88706821444976,
+          "flat": [
+            1257,
+            252,
+            83784
+          ],
+          "notes": [
+            "Legendary Griffin (caser): additional effects excluded",
+            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+          ],
+          "rank": 14,
+          "baseline_rank": 14
+        },
+        {
+          "slug": "shark",
+          "score": 76.13700707531731,
+          "flat": [
+            1257,
+            252,
+            83784
+          ],
+          "notes": [
+            "Legendary Griffin (caser): additional effects excluded",
+            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+          ],
+          "rank": 15,
+          "baseline_rank": 15
+        },
+        {
+          "slug": "knotty",
+          "score": 75.26916537236967,
+          "flat": [
+            1257,
+            252,
+            83784
+          ],
+          "notes": [
+            "Legendary Griffin (caser): additional effects excluded",
+            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+          ],
+          "rank": 16,
+          "baseline_rank": 16
+        },
+        {
+          "slug": "undine",
+          "score": 73.91215563547276,
+          "flat": [
+            1257,
+            252,
+            83784
+          ],
+          "notes": [
+            "Legendary Griffin (caser): additional effects excluded",
+            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+          ],
+          "rank": 17,
+          "baseline_rank": 18
+        },
+        {
+          "slug": "candy",
+          "score": 73.81419432622617,
+          "flat": [
+            1257,
+            252,
+            83784
+          ],
+          "notes": [
+            "Legendary Griffin (caser): additional effects excluded",
+            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+          ],
+          "rank": 18,
+          "baseline_rank": 17
+        },
+        {
+          "slug": "dave",
+          "score": 72.43398472270576,
+          "flat": [
+            1257,
+            252,
+            83784
+          ],
+          "notes": [
+            "Legendary Griffin (caser): additional effects excluded",
+            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+          ],
+          "rank": 19,
+          "baseline_rank": 19
+        },
+        {
+          "slug": "jacob",
+          "score": 70.15639431468254,
+          "flat": [
+            1257,
+            252,
+            83784
+          ],
+          "notes": [
+            "Legendary Griffin (caser): additional effects excluded",
+            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+          ],
+          "rank": 20,
+          "baseline_rank": 20
+        },
+        {
+          "slug": "tony",
+          "score": 69.90176625135543,
+          "flat": [
+            1257,
+            252,
+            83784
+          ],
+          "notes": [
+            "Legendary Griffin (caser): additional effects excluded",
+            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+          ],
+          "rank": 21,
+          "baseline_rank": 21
+        },
+        {
+          "slug": "freja",
+          "score": 61.63877413000016,
+          "flat": [
+            1257,
+            252,
+            83784
+          ],
+          "notes": [
+            "Legendary Griffin (caser): additional effects excluded",
+            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+          ],
+          "rank": 22,
+          "baseline_rank": 22
+        },
+        {
+          "slug": "lucky",
+          "score": 56.764730811823206,
+          "flat": [
+            1257,
+            252,
+            83784
+          ],
+          "notes": [
+            "Legendary Griffin (caser): additional effects excluded",
+            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+          ],
+          "rank": 23,
+          "baseline_rank": 23
+        },
+        {
+          "slug": "travis",
+          "score": 55.761946675699456,
+          "flat": [
+            1257,
+            252,
+            83784
+          ],
+          "notes": [
+            "Legendary Griffin (caser): additional effects excluded",
+            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+          ],
+          "rank": 24,
+          "baseline_rank": 24
+        },
+        {
+          "slug": "ken",
+          "score": 54.158395099675715,
+          "flat": [
+            1257,
+            252,
+            83784
+          ],
+          "notes": [
+            "Legendary Griffin (caser): additional effects excluded",
+            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+          ],
+          "rank": 25,
+          "baseline_rank": 25
+        },
+        {
+          "slug": "sarge",
+          "score": 51.84893421282496,
+          "flat": [
+            1257,
+            252,
+            83784
+          ],
+          "notes": [
+            "Legendary Griffin (caser): additional effects excluded",
+            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+          ],
+          "rank": 26,
+          "baseline_rank": 26
+        },
+        {
+          "slug": "eva",
+          "score": 50.88625388607537,
+          "flat": [
+            1257,
+            252,
+            83784
+          ],
+          "notes": [
+            "Legendary Griffin (caser): additional effects excluded",
+            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+          ],
+          "rank": 27,
+          "baseline_rank": 27
+        },
+        {
+          "slug": "rusty",
+          "score": 47.51300907521621,
+          "flat": [
+            1257,
+            252,
+            83784
+          ],
+          "notes": [
+            "Legendary Griffin (caser): additional effects excluded",
+            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+          ],
+          "rank": 28,
+          "baseline_rank": 28
+        },
+        {
+          "slug": "tim",
+          "score": 40.24383387965133,
+          "flat": [
+            1257,
+            252,
+            83784
+          ],
+          "notes": [
+            "Legendary Griffin (caser): additional effects excluded",
+            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+          ],
+          "rank": 29,
+          "baseline_rank": 29
+        }
+      ]
+    },
+    {
+      "name": "general_research_level_2",
+      "settings": {
+        "enabled": true,
+        "research": {
+          "research_group_troop_attack_percent_1": 2
+        }
+      },
+      "top_five": [
+        "lava",
+        "mike",
+        "nikola",
+        "maddie",
+        "tithi"
+      ],
+      "heroes_changing_rank": 0,
+      "rows": [
+        {
+          "slug": "lava",
+          "score": 87.56686001380328,
+          "flat": [
+            13,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 1,
+          "baseline_rank": 1
+        },
+        {
+          "slug": "mike",
+          "score": 84.5226109631096,
+          "flat": [
+            13,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 2,
+          "baseline_rank": 2
+        },
+        {
+          "slug": "nikola",
+          "score": 82.16035644036593,
+          "flat": [
+            13,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 3,
+          "baseline_rank": 3
+        },
+        {
+          "slug": "maddie",
+          "score": 78.12208976475947,
+          "flat": [
+            13,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 4,
+          "baseline_rank": 4
+        },
+        {
+          "slug": "tithi",
+          "score": 75.74858885903755,
+          "flat": [
+            13,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 5,
+          "baseline_rank": 5
+        },
+        {
+          "slug": "ray",
+          "score": 75.23717982162017,
+          "flat": [
+            13,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 6,
+          "baseline_rank": 6
+        },
+        {
+          "slug": "ragnar",
+          "score": 74.72871505102631,
+          "flat": [
+            13,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 7,
+          "baseline_rank": 7
+        },
+        {
+          "slug": "becca",
+          "score": 74.43661809092366,
+          "flat": [
+            13,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 8,
+          "baseline_rank": 8
+        },
+        {
+          "slug": "layla",
+          "score": 74.33947015352537,
+          "flat": [
+            13,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 9,
+          "baseline_rank": 9
+        },
+        {
+          "slug": "tara",
+          "score": 73.50517436192773,
+          "flat": [
+            13,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 10,
+          "baseline_rank": 10
+        },
+        {
+          "slug": "chiron",
+          "score": 73.11182103173911,
+          "flat": [
+            13,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 11,
+          "baseline_rank": 11
+        },
+        {
+          "slug": "rosie",
+          "score": 72.33404928228538,
+          "flat": [
+            13,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 12,
+          "baseline_rank": 12
+        },
+        {
+          "slug": "wright",
+          "score": 71.95245286852823,
+          "flat": [
+            13,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 13,
+          "baseline_rank": 13
+        },
+        {
+          "slug": "tarzan",
+          "score": 70.49489865328133,
+          "flat": [
+            13,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 14,
+          "baseline_rank": 14
+        },
+        {
+          "slug": "shark",
+          "score": 70.0818306076307,
+          "flat": [
+            13,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 15,
+          "baseline_rank": 15
+        },
+        {
+          "slug": "knotty",
+          "score": 69.01370824247253,
+          "flat": [
+            13,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 16,
+          "baseline_rank": 16
+        },
+        {
+          "slug": "candy",
+          "score": 67.85221152433013,
+          "flat": [
+            13,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 17,
+          "baseline_rank": 17
+        },
+        {
+          "slug": "undine",
+          "score": 67.77119390117383,
+          "flat": [
+            13,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 18,
+          "baseline_rank": 18
+        },
+        {
+          "slug": "dave",
+          "score": 66.41774115277757,
+          "flat": [
+            13,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 19,
+          "baseline_rank": 19
+        },
+        {
+          "slug": "jacob",
+          "score": 64.48206735690509,
+          "flat": [
+            13,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 20,
+          "baseline_rank": 20
+        },
+        {
+          "slug": "tony",
+          "score": 64.09883328414689,
+          "flat": [
+            13,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 21,
+          "baseline_rank": 21
+        },
+        {
+          "slug": "freja",
+          "score": 54.94788478872967,
+          "flat": [
+            13,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 22,
+          "baseline_rank": 22
+        },
+        {
+          "slug": "lucky",
+          "score": 50.516084870750035,
+          "flat": [
+            13,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 23,
+          "baseline_rank": 23
+        },
+        {
+          "slug": "travis",
+          "score": 49.373866941111615,
+          "flat": [
+            13,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 24,
+          "baseline_rank": 24
+        },
+        {
+          "slug": "ken",
+          "score": 48.19477093592819,
+          "flat": [
+            13,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 25,
+          "baseline_rank": 25
+        },
+        {
+          "slug": "sarge",
+          "score": 45.918999184478615,
+          "flat": [
+            13,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 26,
+          "baseline_rank": 26
+        },
+        {
+          "slug": "eva",
+          "score": 45.06903173551505,
+          "flat": [
+            13,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 27,
+          "baseline_rank": 27
+        },
+        {
+          "slug": "rusty",
+          "score": 41.014126873017496,
+          "flat": [
+            13,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 28,
+          "baseline_rank": 28
+        },
+        {
+          "slug": "tim",
+          "score": 34.39951322111641,
+          "flat": [
+            13,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 29,
+          "baseline_rank": 29
+        }
+      ]
+    },
+    {
+      "name": "mountain_research_sample",
+      "settings": {
+        "enabled": true,
+        "research": {
+          "new_tree_faction_hero_mountain_attack_common_1": 10
+        }
+      },
+      "top_five": [
+        "lava",
+        "nikola",
+        "ray",
+        "tarzan",
+        "rosie"
+      ],
+      "heroes_changing_rank": 27,
+      "rows": [
+        {
+          "slug": "lava",
+          "score": 128.5035256455946,
+          "flat": [
+            12000,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 1,
+          "baseline_rank": 1
+        },
+        {
+          "slug": "nikola",
+          "score": 122.26681455667747,
+          "flat": [
+            12000,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 2,
+          "baseline_rank": 3
+        },
+        {
+          "slug": "ray",
+          "score": 116.88763556935427,
+          "flat": [
+            12000,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 3,
+          "baseline_rank": 6
+        },
+        {
+          "slug": "tarzan",
+          "score": 111.94672030730042,
+          "flat": [
+            12000,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 4,
+          "baseline_rank": 14
+        },
+        {
+          "slug": "rosie",
+          "score": 111.91836674648712,
+          "flat": [
+            12000,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 5,
+          "baseline_rank": 12
+        },
+        {
+          "slug": "tara",
+          "score": 111.71670217653363,
+          "flat": [
+            12000,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 6,
+          "baseline_rank": 10
+        },
+        {
+          "slug": "freja",
+          "score": 95.59689335518945,
+          "flat": [
+            12000,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 7,
+          "baseline_rank": 22
+        },
+        {
+          "slug": "mike",
+          "score": 84.48455215255254,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 8,
+          "baseline_rank": 2
+        },
+        {
+          "slug": "ken",
+          "score": 82.17496832962635,
+          "flat": [
+            12000,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 9,
+          "baseline_rank": 25
+        },
+        {
+          "slug": "rusty",
+          "score": 79.6530943795218,
+          "flat": [
+            12000,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 10,
+          "baseline_rank": 28
+        },
+        {
+          "slug": "maddie",
+          "score": 78.07622675201986,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 11,
+          "baseline_rank": 4
+        },
+        {
+          "slug": "tithi",
+          "score": 75.69840795747179,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 12,
+          "baseline_rank": 5
+        },
+        {
+          "slug": "ragnar",
+          "score": 74.67979450229055,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 13,
+          "baseline_rank": 7
+        },
+        {
+          "slug": "becca",
+          "score": 74.38770056861607,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 14,
+          "baseline_rank": 8
+        },
+        {
+          "slug": "layla",
+          "score": 74.3023602786659,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 15,
+          "baseline_rank": 9
+        },
+        {
+          "slug": "chiron",
+          "score": 73.06423489035815,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 16,
+          "baseline_rank": 11
+        },
+        {
+          "slug": "wright",
+          "score": 71.90592750532367,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 17,
+          "baseline_rank": 13
+        },
+        {
+          "slug": "shark",
+          "score": 70.04524106063869,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 18,
+          "baseline_rank": 15
+        },
+        {
+          "slug": "knotty",
+          "score": 68.97001278150049,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 19,
+          "baseline_rank": 16
+        },
+        {
+          "slug": "candy",
+          "score": 67.81415271377305,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 20,
+          "baseline_rank": 17
+        },
+        {
+          "slug": "undine",
+          "score": 67.7286949354934,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 21,
+          "baseline_rank": 18
+        },
+        {
+          "slug": "dave",
+          "score": 66.37654551196594,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 22,
+          "baseline_rank": 19
+        },
+        {
+          "slug": "jacob",
+          "score": 64.44669900712151,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 23,
+          "baseline_rank": 20
+        },
+        {
+          "slug": "tony",
+          "score": 64.0601489178533,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 24,
+          "baseline_rank": 21
+        },
+        {
+          "slug": "lucky",
+          "score": 50.47523499697842,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 25,
+          "baseline_rank": 23
+        },
+        {
+          "slug": "travis",
+          "score": 49.32878555259858,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 26,
+          "baseline_rank": 24
+        },
+        {
+          "slug": "sarge",
+          "score": 45.87870548180252,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 27,
+          "baseline_rank": 26
+        },
+        {
+          "slug": "eva",
+          "score": 45.029915900532856,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 28,
+          "baseline_rank": 27
+        },
+        {
+          "slug": "tim",
+          "score": 34.3607211043778,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 29,
+          "baseline_rank": 29
+        }
+      ]
+    },
+    {
+      "name": "rosie_signature_1",
+      "settings": {
+        "enabled": true,
+        "signature": {
+          "rosie": 1
+        }
+      },
+      "top_five": [
+        "rosie",
+        "lava",
+        "mike",
+        "nikola",
+        "maddie"
+      ],
+      "heroes_changing_rank": 12,
+      "rows": [
+        {
+          "slug": "rosie",
+          "score": 90.73665739532613,
+          "flat": [
+            3600,
+            720,
+            240000
+          ],
+          "notes": [
+            "Signature Gear: linked skill excluded",
+            "Signature Gear: additional effects excluded"
+          ],
+          "rank": 1,
+          "baseline_rank": 12
+        },
+        {
+          "slug": "lava",
+          "score": 87.52246386353939,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 2,
+          "baseline_rank": 1
+        },
+        {
+          "slug": "mike",
+          "score": 84.48455215255254,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 3,
+          "baseline_rank": 2
+        },
+        {
+          "slug": "nikola",
+          "score": 82.11686065697458,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 4,
+          "baseline_rank": 3
+        },
+        {
+          "slug": "maddie",
+          "score": 78.07622675201986,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 5,
+          "baseline_rank": 4
+        },
+        {
+          "slug": "tithi",
+          "score": 75.69840795747179,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 6,
+          "baseline_rank": 5
+        },
+        {
+          "slug": "ray",
+          "score": 75.19200956011015,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 7,
+          "baseline_rank": 6
+        },
+        {
+          "slug": "ragnar",
+          "score": 74.67979450229055,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 8,
+          "baseline_rank": 7
+        },
+        {
+          "slug": "becca",
+          "score": 74.38770056861607,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 9,
+          "baseline_rank": 8
+        },
+        {
+          "slug": "layla",
+          "score": 74.3023602786659,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 10,
+          "baseline_rank": 9
+        },
+        {
+          "slug": "tara",
+          "score": 73.46373364601966,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 11,
+          "baseline_rank": 10
+        },
+        {
+          "slug": "chiron",
+          "score": 73.06423489035815,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 12,
+          "baseline_rank": 11
+        },
+        {
+          "slug": "wright",
+          "score": 71.90592750532367,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 13,
+          "baseline_rank": 13
+        },
+        {
+          "slug": "tarzan",
+          "score": 70.44994381207816,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 14,
+          "baseline_rank": 14
+        },
+        {
+          "slug": "shark",
+          "score": 70.04524106063869,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 15,
+          "baseline_rank": 15
+        },
+        {
+          "slug": "knotty",
+          "score": 68.97001278150049,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 16,
+          "baseline_rank": 16
+        },
+        {
+          "slug": "candy",
+          "score": 67.81415271377305,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 17,
+          "baseline_rank": 17
+        },
+        {
+          "slug": "undine",
+          "score": 67.7286949354934,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 18,
+          "baseline_rank": 18
+        },
+        {
+          "slug": "dave",
+          "score": 66.37654551196594,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 19,
+          "baseline_rank": 19
+        },
+        {
+          "slug": "jacob",
+          "score": 64.44669900712151,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 20,
+          "baseline_rank": 20
+        },
+        {
+          "slug": "tony",
+          "score": 64.0601489178533,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 21,
+          "baseline_rank": 21
+        },
+        {
+          "slug": "freja",
+          "score": 54.903800604916874,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 22,
+          "baseline_rank": 22
+        },
+        {
+          "slug": "lucky",
+          "score": 50.47523499697842,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 23,
+          "baseline_rank": 23
+        },
+        {
+          "slug": "travis",
+          "score": 49.32878555259858,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 24,
+          "baseline_rank": 24
+        },
+        {
+          "slug": "ken",
+          "score": 48.15791913263145,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 25,
+          "baseline_rank": 25
+        },
+        {
+          "slug": "sarge",
+          "score": 45.87870548180252,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 26,
+          "baseline_rank": 26
+        },
+        {
+          "slug": "eva",
+          "score": 45.029915900532856,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 27,
+          "baseline_rank": 27
+        },
+        {
+          "slug": "rusty",
+          "score": 40.9722225952512,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 28,
+          "baseline_rank": 28
+        },
+        {
+          "slug": "tim",
+          "score": 34.3607211043778,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 29,
+          "baseline_rank": 29
+        }
+      ]
+    },
+    {
+      "name": "rosie_signature_max_configured",
+      "settings": {
+        "enabled": true,
+        "signature": {
+          "rosie": 15
+        }
+      },
+      "top_five": [
+        "rosie",
+        "lava",
+        "mike",
+        "nikola",
+        "maddie"
+      ],
+      "heroes_changing_rank": 12,
+      "rows": [
+        {
+          "slug": "rosie",
+          "score": 194.02959301166737,
+          "flat": [
+            23760,
+            4750,
+            1584000
+          ],
+          "notes": [
+            "Signature Gear: linked skill excluded",
+            "Signature Gear: additional effects excluded"
+          ],
+          "rank": 1,
+          "baseline_rank": 12
+        },
+        {
+          "slug": "lava",
+          "score": 87.52246386353939,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 2,
+          "baseline_rank": 1
+        },
+        {
+          "slug": "mike",
+          "score": 84.48455215255254,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 3,
+          "baseline_rank": 2
+        },
+        {
+          "slug": "nikola",
+          "score": 82.11686065697458,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 4,
+          "baseline_rank": 3
+        },
+        {
+          "slug": "maddie",
+          "score": 78.07622675201986,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 5,
+          "baseline_rank": 4
+        },
+        {
+          "slug": "tithi",
+          "score": 75.69840795747179,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 6,
+          "baseline_rank": 5
+        },
+        {
+          "slug": "ray",
+          "score": 75.19200956011015,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 7,
+          "baseline_rank": 6
+        },
+        {
+          "slug": "ragnar",
+          "score": 74.67979450229055,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 8,
+          "baseline_rank": 7
+        },
+        {
+          "slug": "becca",
+          "score": 74.38770056861607,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 9,
+          "baseline_rank": 8
+        },
+        {
+          "slug": "layla",
+          "score": 74.3023602786659,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 10,
+          "baseline_rank": 9
+        },
+        {
+          "slug": "tara",
+          "score": 73.46373364601966,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 11,
+          "baseline_rank": 10
+        },
+        {
+          "slug": "chiron",
+          "score": 73.06423489035815,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 12,
+          "baseline_rank": 11
+        },
+        {
+          "slug": "wright",
+          "score": 71.90592750532367,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 13,
+          "baseline_rank": 13
+        },
+        {
+          "slug": "tarzan",
+          "score": 70.44994381207816,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 14,
+          "baseline_rank": 14
+        },
+        {
+          "slug": "shark",
+          "score": 70.04524106063869,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 15,
+          "baseline_rank": 15
+        },
+        {
+          "slug": "knotty",
+          "score": 68.97001278150049,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 16,
+          "baseline_rank": 16
+        },
+        {
+          "slug": "candy",
+          "score": 67.81415271377305,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 17,
+          "baseline_rank": 17
+        },
+        {
+          "slug": "undine",
+          "score": 67.7286949354934,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 18,
+          "baseline_rank": 18
+        },
+        {
+          "slug": "dave",
+          "score": 66.37654551196594,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 19,
+          "baseline_rank": 19
+        },
+        {
+          "slug": "jacob",
+          "score": 64.44669900712151,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 20,
+          "baseline_rank": 20
+        },
+        {
+          "slug": "tony",
+          "score": 64.0601489178533,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 21,
+          "baseline_rank": 21
+        },
+        {
+          "slug": "freja",
+          "score": 54.903800604916874,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 22,
+          "baseline_rank": 22
+        },
+        {
+          "slug": "lucky",
+          "score": 50.47523499697842,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 23,
+          "baseline_rank": 23
+        },
+        {
+          "slug": "travis",
+          "score": 49.32878555259858,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 24,
+          "baseline_rank": 24
+        },
+        {
+          "slug": "ken",
+          "score": 48.15791913263145,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 25,
+          "baseline_rank": 25
+        },
+        {
+          "slug": "sarge",
+          "score": 45.87870548180252,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 26,
+          "baseline_rank": 26
+        },
+        {
+          "slug": "eva",
+          "score": 45.029915900532856,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 27,
+          "baseline_rank": 27
+        },
+        {
+          "slug": "rusty",
+          "score": 40.9722225952512,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 28,
+          "baseline_rank": 28
+        },
+        {
+          "slug": "tim",
+          "score": 34.3607211043778,
+          "flat": [
+            0,
+            0,
+            0
+          ],
+          "notes": [],
+          "rank": 29,
+          "baseline_rank": 29
+        }
+      ]
+    }
+  ],
+  "limits": "Stat-only context. Signature linked skills, troop multipliers, Behemoth battle skills and own combat stats are excluded. Behemoth source is either a manual combined hero-bonus snapshot or configured current level/star front-row benefits. Sources never stack with one another; skills/talents/full-skill bonuses remain separate. Own Behemoth ATK/DEF/HP is not hero stats. Blank sources are excluded, not proven absent."
+}

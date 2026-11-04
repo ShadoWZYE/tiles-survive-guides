@@ -25,10 +25,12 @@
     <button data-tab="stats">Hero Stats</button>
     <button data-tab="skills">Skills</button>
     <button data-tab="roster">My Roster</button>
+    <button data-tab="behemoths">Behemoths</button>
     <button data-tab="release">Release &amp; Access</button>
     <div class="save-tools">
       <span id="save-status" title="State is stored in this browser for this exact file location.">Saving locally…</span>
       <button id="export-profile" class="quiet">Export profile</button>
+      <button id="army-context" class="quiet">Army stat context</button>
       <button id="import-profile" class="quiet">Import profile</button>
       <input id="profile-file" type="file" accept="application/json,.json" hidden>
     </div>
@@ -61,6 +63,7 @@
   <script>window.__HERO_DATA__=__EMBEDDED_HERO_JSON__;</script>
   <script>window.__UPGRADE_DATA__=__EMBEDDED_UPGRADE_JSON__;</script>
   <script>window.__ESTIMATE_DATA__=__EMBEDDED_ESTIMATE_JSON__;</script>
+  <script>window.__ARMY_CONTEXT_DATA__=__EMBEDDED_CONTEXT_JSON__;</script>
   <script>__APP_JS__</script>
 </body>
 </html>

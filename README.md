@@ -39,6 +39,14 @@ Source locations:
 - `outputs/hero-report/` - normalized hero data, ranking CSV, and methodology
 - `outputs/hero-tool/images/` - hero portraits and skill icons used by the planners
 
+### Signature Gear, Behemoth and Research
+
+Both editions now expose **Army stat context**, an optional stat-only extension. Record Signature Gear levels for 21 supported heroes (My builds only), current levels for 147 Research nodes with traced hero-stat effects, and either combined Behemoth flat bonuses or configured current level/star base bonuses granted to heroes. The two Behemoth sources never stack; star steps use the exact configuration progression index, not displayed stars. Role/faction and PvE/GVE restrictions apply. Blank sources stay excluded/unknown; Flat max stats ignores context. Selections persist in profiles. Existing raw upgrade-return panels exclude this context.
+
+Signature Gear now has its own game-icon card and level selector in Hero Stats, Skills, My Roster and the desktop build editor. A separate **Behemoths** top tab shows the matching creature icons and saved level/star/source controls. Entries gated in the client are labeled as unconfirmed for live availability. The Army stat context dialog remains available for Research and shared settings.
+
+These systems are not universally ranking-neutral. Controlled individual-ranking tests found changes from faction Research and hero-specific Signature Gear while small shared-bonus examples preserved order. Main scoring weights remain unchanged. Signature linked skills, Behemoth battle skills/own damage and troop multipliers are explicitly excluded, so this does not claim full combat support. See the [scope and evidence](docs/research/HERO-ARMY-CONTEXT-2026-11-04.md) and [sensitivity report](outputs/hero-report/Hero-Army-Context-Sensitivity.json).
+
 ### Faction-aware formations
 
 Both planners include faction Final Health bonuses in squad rankings: 2 matching heroes +2%, 2+2 +4%, 3 +8%, 3+2 +12%, 4 +18%, and 5 +25%. Mariners (`Sea` in the extracted data) occupy one wildcard slot each; the planner selects the strongest valid composition without counting a Mariner twice. The faction contribution is separate from skill synergy and also affects recommendations for additional heroes.

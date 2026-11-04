@@ -30,7 +30,7 @@
   function finishTriggers(trigger,ends,window,initialDelay=0){let ready=initialDelay;const result=[];
     for(const end of ends){if(end<ready-1e-9||end+trigger.delay_seconds>=window-1e-9)continue;
       result.push(end+trigger.delay_seconds);ready=end+trigger.cooldown_seconds;}return result;}
-  function evaluate(slug,saved,upgrades,estimates,battleSeconds=0){
+  function evaluate(slug,saved,upgrades,estimates,battleSeconds=0,externalFlat=null){
     const model=estimates.heroes[slug],data=upgrades.heroes[slug];
     const stage=data.stages.find(s=>s.id===saved?.stage)||data.stages.find(s=>s.id===model.reference_stage);
     const levelNumber=Math.min(Number.isInteger(saved?.level)&&data.levels.some(l=>l.level===saved.level)?saved.level:model.reference_level,stage.level_max);
@@ -63,6 +63,7 @@
       const rate=!parent?0:finite?finishTriggers(trigger,schedule[parent.skill.id]??[],battleSeconds,skill.base_pre_cooldown_ms/1000).length*row.cast_budget.direct_coefficient/battleSeconds:row.damage;
       damage+=rate-old;if(!parent){utility-=row.utility;activeSkillIds.splice(activeSkillIds.indexOf(skill.id),1);}
     }
+    for(let i=0;i<3;i++){const v=externalFlat?.[i];if(Number.isFinite(v)&&v>=0)stats[i]+=v;}
     const baseStats=[...stats],factors=stats.map((_,i)=>1+selfPercent[i]+teamPercent[i]);
     stats.forEach((_,i)=>stats[i]*=factors[i]);
     function calculate(df,uf){const offense=100*stats[0]*(1+.5*Math.log1p(damage*df))/estimates.scales[0],
@@ -75,9 +76,9 @@
       rawHealingPotential:selected.filter(x=>activeSkillIds.includes(x.skill.id)).flatMap(({skill,row})=>(row.healing_budgets??[]).map(b=>({skillId:skill.id,formula:healingFormula(b),execution:b.execution}))),
       basis:known===0?'Reference build':known===model.skills.length+3?'Recorded build':'Recorded + assumed'};
   }
-  function compare(slug,saved,upgrades,estimates,basis,flat,battleSeconds=0){
+  function compare(slug,saved,upgrades,estimates,basis,flat,battleSeconds=0,externalFlat=null){
     return basis==='flat'?{...flat,low:flat.score,high:flat.score,basis:'Flat max stats'}:
-      evaluate(slug,basis==='recorded'?saved:null,upgrades,estimates,battleSeconds);
+      evaluate(slug,basis==='recorded'?saved:null,upgrades,estimates,battleSeconds,externalFlat);
   }
   const api={evaluate,compare,openingSchedule,openingDamage,coveredTime,finishTriggers,healingFormula};if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.EstimateModel=api;
 })(globalThis);

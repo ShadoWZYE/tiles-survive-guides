@@ -160,7 +160,7 @@ public static class EstimateModel
         $"{model.Skills.Count(s => s.FinishTrigger is not null)} delayed damage paths require a completed source skill and an unlocked passive. " +
         $"{model.Skills.Count(s => s.AnimationLimited)} skill budgets are limited by bound clip durations; {model.Skills.Count(s => s.DirectHitCounts.Values.Sum() > 1)} use repeated immediate-hit potential. " +
         "Timing assumes speed 1 and uninterrupted casting. Opening scenarios use known timeline dispatch offsets; unknown impacts keep a completion fallback. Projectile travel, target survival, reapplication timing, zones and death times remain uncertain.";
-    public static HeroEstimate Evaluate(string slug, HeroBuild? saved, UpgradeData upgrades, EstimateData estimates, int battleSeconds = 0)
+    public static HeroEstimate Evaluate(string slug, HeroBuild? saved, UpgradeData upgrades, EstimateData estimates, int battleSeconds = 0, double[]? externalFlat = null)
     {
         var model = estimates.Heroes[slug]; var data = upgrades.Heroes[slug];
         var stage = data.Stages.Find(s => s.Id == saved?.Stage) ?? data.Stages.Find(s => s.Id == model.ReferenceStage)!;
@@ -214,6 +214,8 @@ public static class EstimateModel
             double rate=!parent?0:finite?FinishTriggers(trigger,schedule.GetValueOrDefault(trigger.SourceSkillId)??[],battleSeconds,skill.BasePreCooldownMs/1000.0).Count*row.CastBudget!.DirectCoefficient/battleSeconds:row.Damage;
             damage+=rate-old;if(!parent){utility-=row.Utility;activeSkills.Remove(skill.Id);}
         }
+        // External flat hero stats enter before in-battle passive stat modifiers.
+        for(int i=0;i<3;i++) if(externalFlat?.ElementAtOrDefault(i) is double v && double.IsFinite(v) && v>=0)stats[i]+=v;
         var baseStats = stats.ToArray();
         var factors = Enumerable.Range(0,3).Select(i => 1+selfPercent[i]+teamPercent[i]).ToArray();
         for(int i=0;i<3;i++) stats[i] *= factors[i];

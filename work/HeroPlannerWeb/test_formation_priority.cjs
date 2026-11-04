@@ -12,6 +12,8 @@ const context = vm.createContext({window: {__HERO_DATA__: JSON.parse(fs.readFile
   localStorage: {getItem: () => null}, FormationPriority: policy, UpgradeModel:require('./upgrade-model.js'), FactionModel:require('./faction-model.js'), FormationModel:require('./formation-model.js')});
 context.__UPGRADE_DATA__=JSON.parse(fs.readFileSync(path.join(root,'outputs/hero-report/TilesSurvive-Upgrade-Data.json'),'utf8'));
 context.window.__UPGRADE_DATA__=context.__UPGRADE_DATA__;
+context.ArmyContextModel=require('./army-context-model.js');
+context.window.__ARMY_CONTEXT_DATA__=require('../../outputs/hero-report/Hero-Army-Context.json');
 vm.runInContext(fs.readFileSync(path.join(__dirname,'upgrade-ui.js'),'utf8'),context);
 // Use the production parser and recommendation functions without mounting the browser shell.
 const source = fs.readFileSync(path.join(__dirname, "app.js"), "utf8");

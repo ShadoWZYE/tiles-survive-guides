@@ -53,19 +53,20 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <UniformGrid Rows="1">
+                <WrapPanel>
                     <Button x:Name="SquadNav" Content="SQUAD BUILDER" Tag="0" Click="Navigation_Click"
-                            Background="#168C87" BorderBrush="#3DE0D4" Padding="22,10" Margin="0,0,6,0" FontWeight="Bold" />
+                            Background="#168C87" BorderBrush="#3DE0D4" Padding="14,10" Margin="0,0,6,0" FontWeight="Bold" />
                     <Button x:Name="StatsNav" Content="HERO STATS" Tag="1" Click="Navigation_Click"
-                            Padding="22,10" Margin="0,0,6,0" FontWeight="Bold" />
+                            Padding="14,10" Margin="0,0,6,0" FontWeight="Bold" />
                     <Button x:Name="SkillsNav" Content="SKILLS" Tag="2" Click="Navigation_Click"
-                            Padding="22,10" Margin="0,0,6,0" FontWeight="Bold" />
+                            Padding="14,10" Margin="0,0,6,0" FontWeight="Bold" />
                     <Button x:Name="RosterNav" Content="MY ROSTER" Tag="3" Click="Navigation_Click"
-                            Padding="22,10" Margin="0,0,6,0" FontWeight="Bold" />
+                            Padding="14,10" Margin="0,0,6,0" FontWeight="Bold" />
                     <Button x:Name="ReleaseNav" Content="RELEASE &amp; ACCESS" Tag="4" Click="Navigation_Click"
-                            Padding="22,10" FontWeight="Bold" />
-                </UniformGrid>
-                <TextBlock Grid.Column="1" Text="Select a section, then inspect any hero from the roster."
+                            Padding="14,10" FontWeight="Bold" />
+                    <Button x:Name="BehemothsNav" Content="BEHEMOTHS" Tag="5" Click="Navigation_Click" Padding="14,10" FontWeight="Bold" />
+                </WrapPanel>
+                <TextBlock Visibility="Collapsed" Grid.Column="1" Text="Select a section, then inspect any hero from the roster."
                            HorizontalAlignment="Right" VerticalAlignment="Center" Margin="18,0,10,0"
                            Foreground="{StaticResource MutedInkBrush}" />
             </Grid>
@@ -78,7 +79,7 @@
                 <ColumnDefinition Width="1*" MinWidth="390" />
             </Grid.ColumnDefinitions>
 
-            <Border Background="#D9142744" CornerRadius="18" BorderBrush="#294A72" BorderThickness="1" Padding="18">
+            <Border x:Name="RosterArea" Background="#D9142744" CornerRadius="18" BorderBrush="#294A72" BorderThickness="1" Padding="18">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
@@ -97,6 +98,7 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock x:Name="RosterTitle" Grid.ColumnSpan="4" Text="Hero roster" FontSize="21" FontWeight="Bold" Margin="0,0,0,8" />
+                        <Button x:Name="ArmyContextButton" Grid.Column="2" Grid.ColumnSpan="2" HorizontalAlignment="Right" VerticalAlignment="Top" Content="Army stat context" Click="ArmyContext_Click" Padding="8,3" AutomationProperties.Name="Army stat context" />
                             <ComboBox x:Name="ComparisonBasisPicker" Grid.Row="1" MinWidth="0" Height="32" VerticalAlignment="Top" Margin="0,0,8,0" SelectionChanged="ComparisonBasis_Changed" AutomationProperties.Name="Comparison basis">
                                 <ComboBoxItem Content="Equal builds" Tag="reference" IsSelected="True" />
                                 <ComboBoxItem Content="Flat max stats" Tag="flat" />
@@ -162,7 +164,7 @@
                                                 </Border>
                                                 <StackPanel x:Name="CardControls" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="7,36,7,0">
                                                     <CheckBox x:Name="OwnedCheck" IsChecked="{Binding IsOwned, Mode=TwoWay}" Checked="Ownership_Changed" Unchecked="Ownership_Changed"
-                                                              PreviewMouseLeftButtonDown="CardControl_MouseDown" PreviewMouseLeftButtonUp="CardOwned_MouseUp"
+                                                              PreviewMouseLeftButtonDown="CardControl_MouseDown" Click="CardOwned_Click"
                                                               Width="31" Height="31" HorizontalAlignment="Center" ToolTip="Toggle owned / unowned" AutomationProperties.Name="Owned hero">
                                                         <CheckBox.Template>
                                                             <ControlTemplate TargetType="CheckBox">
@@ -215,7 +217,7 @@
                 </Grid>
             </Border>
 
-            <GridSplitter Grid.Column="1" Width="7" HorizontalAlignment="Center" VerticalAlignment="Stretch"
+            <GridSplitter x:Name="RosterSplitter" Grid.Column="1" Width="7" HorizontalAlignment="Center" VerticalAlignment="Stretch"
                           Background="#3A638D" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext"
                           ShowsPreview="True" Cursor="SizeWE" />
 
@@ -391,6 +393,7 @@
                             <ScrollViewer VerticalScrollBarVisibility="Auto">
                                 <Grid x:Name="StatsPanel" Margin="8,16">
                                     <Grid.ColumnDefinitions><ColumnDefinition Width="170" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
                                     <Border CornerRadius="14" BorderThickness="3" BorderBrush="{Binding Rarity, Converter={StaticResource RarityBrush}}" ClipToBounds="True" Height="232" VerticalAlignment="Top">
                                         <Image Source="{Binding Portrait}" Stretch="UniformToFill" />
                                     </Border>
@@ -409,6 +412,7 @@
                                             <TextBox Text="{Binding EstimateDetails, Mode=OneWay}" IsReadOnly="True" TextWrapping="Wrap" Background="Transparent" BorderThickness="0" Foreground="{StaticResource MutedInkBrush}" Padding="0,8" />
                                         </Expander>
                                     </StackPanel>
+                                    <StackPanel x:Name="StatsSignaturePanel" Grid.Row="1" Grid.ColumnSpan="2" />
                                 </Grid>
                             </ScrollViewer>
                         </TabItem>
@@ -421,7 +425,7 @@
                                     <StackPanel Margin="12,7,0,0"><TextBlock Text="{Binding Name}" FontSize="24" FontWeight="Bold" /><TextBlock Text="Decoded client mechanics" Foreground="{StaticResource MutedInkBrush}" /></StackPanel>
                                 </StackPanel>
                                 <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-                                    <ItemsControl x:Name="SkillsList">
+                                    <StackPanel><StackPanel x:Name="SkillsSignaturePanel" /><ItemsControl x:Name="SkillsList">
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
                                                 <Border Background="#1B3456" BorderBrush="#31577E" BorderThickness="1" CornerRadius="12" Padding="14" Margin="0,0,0,9">
@@ -444,7 +448,7 @@
                                                 </Border>
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>
-                                    </ItemsControl>
+                                    </ItemsControl></StackPanel>
                                 </ScrollViewer>
                             </Grid>
                         </TabItem>
@@ -479,6 +483,7 @@
                                         <TextBlock x:Name="StarSaveStatus" TextWrapping="Wrap" FontSize="11" Foreground="{StaticResource MutedInkBrush}" />
                                     </StackPanel>
                                 </Border>
+                                <StackPanel x:Name="RosterSignaturePanel" />
                                 <StackPanel>
                                     <Border Background="#1D3558" CornerRadius="11" Padding="13" Margin="0,0,0,7">
                                         <StackPanel><TextBlock Text="WHAT TO GET NEXT" Foreground="{StaticResource AccentBrush}" FontWeight="Bold" FontSize="11" /><TextBlock x:Name="UnlockRecommendation" TextWrapping="Wrap" Margin="0,4,0,0" /></StackPanel>
@@ -544,6 +549,7 @@
                                 </StackPanel>
                             </ScrollViewer>
                         </TabItem>
+                        <TabItem Header="BEHEMOTHS"><ScrollViewer VerticalScrollBarVisibility="Auto"><StackPanel x:Name="BehemothsPanel" Margin="10,16" /></ScrollViewer></TabItem>
                     </TabControl>
                 </Grid>
             </Border>

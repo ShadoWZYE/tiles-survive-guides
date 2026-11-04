@@ -55,15 +55,13 @@ public partial class MainWindow
     }
     private void CardControl_MouseDown(object sender, MouseButtonEventArgs e)
     {
-        // The card's scroll gesture must not capture a checkbox/edit-button gesture.
-        _rosterDragPending = false; _rosterDragging = false;
+        // Cancel only the roster gesture; let ButtonBase own and release its click capture.
+        EndRosterDrag();
     }
-    private void CardOwned_MouseUp(object sender, MouseButtonEventArgs e)
+    private void CardOwned_Click(object sender, RoutedEventArgs e)
     {
-        if (sender is not CheckBox check || check.DataContext is not Hero hero) return;
-        hero.IsOwned = !hero.IsOwned;
-        check.SetCurrentValue(CheckBox.IsCheckedProperty, hero.IsOwned);
-        if (!check.IsLoaded) { SaveProfile(); RefreshOwnedState(); }
+        // The normal CheckBox click toggles ownership and releases capture on mouse-up.
+        // Stop the nested Click from also selecting the enclosing hero card.
         e.Handled = true;
     }
     private void EditBuild_Click(object sender, RoutedEventArgs e)
@@ -162,6 +160,7 @@ public partial class MainWindow
             var level = NumberEditor(recorded?.Level); _gearEditors[slot] = (type, level);
             Field(row, $"Gear slot {slot}", type); Field(row, $"Slot {slot} level", level);
         }
+        BuildFields.Children.Add(CreateSignaturePanel(hero.AssetSlug));
         var comparison = new StackPanel();
         BuildFields.Children.Add(new Expander { Header = "Upgrade comparison · metric, balances and results", Content = comparison, Foreground = Brushes.White, Margin = new Thickness(0, 10, 0, 10) });
         comparison.Children.Add(CopyText("Results use the saved builds of your selected five-hero formation."));
