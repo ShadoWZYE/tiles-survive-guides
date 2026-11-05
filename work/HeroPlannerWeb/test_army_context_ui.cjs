@@ -16,8 +16,14 @@ const {pathToFileURL}=require("node:url"),path=require("node:path"),assert=requi
   await page.locator('[data-tab="behemoths"]').click();
   assert.equal(await page.locator('#roster-pane').isVisible(),false);
   await page.locator('#beast-source').selectOption('configured');
-  await page.locator('[data-beast-tab="caser"][data-part="level"]').selectOption('2');
-  await page.locator('[data-beast-tab="caser"][data-part="star"]').selectOption('1');
+  await page.locator('[data-beast-tab="caser"][data-part="level"]').fill('2');
+  await page.locator('[data-beast-card="caser"] .beast-color').selectOption('1');
+  const beastCard=page.locator('[data-beast-card="caser"]');
+  await beastCard.locator('.beast-color').selectOption('2');await beastCard.locator('.beast-slot').selectOption('3');await beastCard.locator('.beast-step').selectOption('4');
+  assert.equal(await beastCard.locator('[data-part="star"]').inputValue(),'46');assert.match(await beastCard.locator('.beast-star-label').innerText(),/Blue.*star 3.*4\/6/);
+  assert.equal(await beastCard.locator('.beast-star-preview span').count(),5);
+  await beastCard.locator('.beast-star-clear').click();assert.equal(await beastCard.locator('[data-part="star"]').inputValue(),'0');
+  await beastCard.locator('.beast-color').selectOption('1');
   assert.ok(await page.locator('#beast-manual-0').isDisabled());
   await page.locator('#save-behemoths').click();await page.reload();await page.locator('[data-tab="behemoths"]').click();
   assert.equal(await page.locator('#beast-source').inputValue(),'configured');

@@ -103,7 +103,7 @@ public partial class MainWindow
             Field(manualPanel, new[] { "ATK bonus", "DEF bonus", "HP bonus" }[i], input); inputs.Add(input);
         }
         panel.Children.Add(CopyText("The selected source is used once. Manual and configured bonuses never stack. Manual fields are hero bonuses, not the Behemoth’s own stats."));
-        var levels = new Dictionary<string, ComboBox>(); var stars = new Dictionary<string, ComboBox>();
+        var levels = new Dictionary<string, TextBox>(); var stars = new Dictionary<string, Slider>(); var starPanels = new List<FrameworkElement>();
         var cards = new System.Windows.Controls.Primitives.UniformGrid { Columns = 2 }; panel.Children.Add(cards);
         foreach (var (key, entry) in _armyContextData.Behemoths)
         {
@@ -112,21 +112,16 @@ public partial class MainWindow
             var header = new DockPanel(); body.Children.Add(header); header.Children.Add(ContextIcon(entry.IconAsset, 76)); header.Children.Add(CopyText(entry.Name, true));
             body.Children.Add(CopyText(entry.AvailabilityNote));
             var pickers = new WrapPanel(); body.Children.Add(pickers);
-            ComboBox Picker(string part, List<ArmyContextLevel> rows, int current)
-            {
-                var picker = new ComboBox { Width = 180 }; picker.Items.Add(new ComboBoxItem { Content = "Unknown / excluded", Tag = 0 }); picker.SelectedIndex = 0;
-                foreach (var row in rows) { var item = new ComboBoxItem { Content = (part == "star" ? "Config step " : "Level ") + row.Level, Tag = row.Level }; picker.Items.Add(item); if (current == row.Level) picker.SelectedItem = item; }
-                Field(pickers, part == "star" ? "Exact star step" : "Level", picker);
-                System.Windows.Automation.AutomationProperties.SetName(picker, "Behemoth " + key + " " + part); return picker;
-            }
             var build = _armyContext.BehemothBuilds.GetValueOrDefault(key) ?? new();
-            levels[key] = Picker("level", entry.Levels, build.Level); stars[key] = Picker("star", entry.Stars, build.Star);
-            var summary = CopyText(""); body.Children.Add(summary);
-            void Describe() => summary.Text = ContextStats(entry.Levels.Find(r => r.Level == (int)((ComboBoxItem)levels[key].SelectedItem).Tag)) + "\n" + ContextStats(entry.Stars.Find(r => r.Level == (int)((ComboBoxItem)stars[key].SelectedItem).Tag));
-            levels[key].SelectionChanged += (_, _) => Describe(); stars[key].SelectionChanged += (_, _) => Describe(); Describe();
-            body.Children.Add(CopyText("Star step is the exact configuration progression index, not the displayed star count. Leave unknown if it cannot be matched."));
+            var level = new TextBox { Width = 110, Height = 32, Padding = new Thickness(5), Text = build.Level > 0 ? build.Level.ToString(CultureInfo.InvariantCulture) : "", ToolTip = $"Level {entry.Levels.First().Level}–{entry.Levels.Last().Level}; blank = unknown" }; Field(pickers, "Level", level);
+            System.Windows.Automation.AutomationProperties.SetName(level,"Behemoth "+key+" level");levels[key]=level;
+            var starPanel=CreateBehemothStarEditor(key,entry,build.Star,out var slider);body.Children.Add(starPanel);stars[key]=slider;starPanels.Add(starPanel);
+            var summary=CopyText("");body.Children.Add(summary);
+            void Describe(){int.TryParse(level.Text,out int n);summary.Text=ContextStats(entry.Levels.Find(r=>r.Level==n))+"\n"+ContextStats(entry.Stars.Find(r=>r.Level==(int)slider.Value));}
+            level.TextChanged+=(_,_)=>Describe();slider.ValueChanged+=(_,_)=>Describe();Describe();
+            body.Children.Add(CopyText("Five coloured stars; six steps complete a star. Drag the slider or choose colour, star and progress. Blank level or cleared stars stays unknown."));
         }
-        void SourceState() { bool manual = source.SelectedIndex == 0; foreach (var input in inputs) input.IsEnabled = manual; foreach (var picker in levels.Values.Concat(stars.Values)) picker.IsEnabled = !manual; }
+        void SourceState() { bool manual = source.SelectedIndex == 0; foreach (var input in inputs) input.IsEnabled = manual; foreach (var input in levels.Values) input.IsEnabled=!manual;foreach(var starPanel in starPanels)starPanel.IsEnabled=!manual; }
         source.SelectionChanged += (_, _) => SourceState(); SourceState();
         var save = new Button { Content = "Save Behemoths", HorizontalAlignment = HorizontalAlignment.Left, Padding = new Thickness(14, 8, 14, 8), Margin = new Thickness(0, 12, 0, 4) }; panel.Children.Add(save);
         var status = CopyText(""); panel.Children.Add(status);
@@ -139,7 +134,9 @@ public partial class MainWindow
                 if (!double.TryParse(inputs[i].Text, NumberStyles.Float, CultureInfo.InvariantCulture, out double v) || !double.IsFinite(v) || v < 0 || v > 1e12) { status.Text = "Enter finite, non-negative bonuses or leave blank. Nothing saved."; return; }
                 next.Behemoth[i] = v;
             }
-            next.BehemothBuilds = levels.ToDictionary(x => x.Key, x => new ArmyBehemothBuild { Level = (int)((ComboBoxItem)x.Value.SelectedItem).Tag, Star = (int)((ComboBoxItem)stars[x.Key].SelectedItem).Tag });
+            if(next.BehemothSource=="configured"){
+                var builds=new Dictionary<string,ArmyBehemothBuild>();foreach(var (key,input) in levels){int n=0;if(!string.IsNullOrWhiteSpace(input.Text)&&(!int.TryParse(input.Text,out n)||!_armyContextData.Behemoths[key].Levels.Any(r=>r.Level==n))){status.Text="Enter a valid whole Behemoth level, or leave it blank. Nothing saved.";return;}builds[key]=new(){Level=n,Star=(int)stars[key].Value};}next.BehemothBuilds=builds;
+            }
             SaveContextSelection(next, status);
         };
     }

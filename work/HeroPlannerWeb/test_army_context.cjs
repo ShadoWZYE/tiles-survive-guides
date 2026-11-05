@@ -48,3 +48,13 @@ test('configured Behemoth uses current level and exact star step, never the manu
  assert.deepEqual(context.resolve('rosie',{...raw,behemothBuilds:{caser:{level:current.level,star:0}}},data).flat,expected);
  assert.deepEqual(context.sanitize({...raw,behemothBuilds:{caser:{level:99999,star:1},missing:{level:1,star:1}}},data).behemothBuilds,{caser:{level:0,star:1}});
 });
+
+test('Behemoth star display follows client six-sector fills and thirty-step colour changes',()=>{
+ const one=context.starView(1);assert.equal(one.phase,1);assert.equal(one.star,1);assert.equal(one.step,1);assert.deepEqual(one.slots.map(s=>s.steps),[1,0,0,0,0]);
+ assert.deepEqual(context.starView(6).slots.map(s=>s.steps),[6,0,0,0,0]);
+ assert.deepEqual(context.starView(30).slots.map(s=>[s.base,s.steps]),Array(5).fill([1,0]));
+ assert.equal(context.starView(31).slots[0].overlay,2);assert.equal(context.starView(31).slots[0].steps,1);
+ assert.equal(context.starView(31).phase,2);assert.equal(context.starView(31).star,1);assert.equal(context.starView(31).step,1);
+ assert.ok(context.starView(360).slots.every(s=>s.overlay===12&&s.steps===6));assert.ok(context.starView(900).slots.every(s=>s.overlay===12&&s.steps===6));
+ for(const beast of Object.values(data.behemoths))for(const row of beast.stars){const v=context.starView(row.level);assert.equal((v.phase-1)*30+(v.star-1)*6+v.step,row.level);}
+});

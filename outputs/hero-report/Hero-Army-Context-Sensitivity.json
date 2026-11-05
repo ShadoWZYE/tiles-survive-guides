@@ -25,7 +25,8 @@
     "survivor_skill_type": "1c91aabb69917c7e4105e0790a4585aa0078aaf3f8b110b9b24379a5d375c3e5",
     "survivor_slg_skill_new": "a0779e42174fcc220c88ef5b80bd18c537ff67ad2ac079bc44dc225d73442839",
     "survivor_slg_effect_new": "e5e175d2784d3329e1035be1a323a87687e93fadad2bfa23e174ba58cead9bc3",
-    "effect_buff": "398b00bf619af1719fd9d3a25de76ba198838c1a786cbb71bb87d14905500f8a"
+    "effect_buff": "398b00bf619af1719fd9d3a25de76ba198838c1a786cbb71bb87d14905500f8a",
+    "game_configs": "7297bc64868b0f61ea14388ce63f5d6153a8240ac6ab1982b650c12e29b83242"
   },
   "scenarios": [
     {

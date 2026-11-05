@@ -31,5 +31,12 @@ function resolve(slug,raw,data,basis='reference'){
  if(basis==='recorded'&&s.signature[slug])apply(data.signature[slug].levels.find(r=>r.level===s.signature[slug]),'Signature Gear');
  return {flat,notes,active:true};
 }
-const api={sanitize,resolve};if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.ArmyContextModel=api;
+const colors=['Green','Blue','Purple','Gold','Red','Red+','Orange','Orange+','Platinum','Platinum+','Rainbow','Rainbow+'];
+function starView(count,tiers=12){
+ const tier=Math.min(Math.floor(count/30)+1,tiers),full=Math.floor(count/30)+1>tiers;let n=count%30;
+ const slots=Array.from({length:5},()=>{const steps=full?6:Math.min(6,n);n=Math.max(0,n-6);return {base:tier-1,overlay:tier,steps};});
+ const phase=count>0?Math.floor((count-1)/30)+1:0,star=count>0?Math.floor(((count-1)%30)/6)+1:1,step=count>0?(count-1)%6+1:1;
+ return {slots,phase,star,step,label:count===0?'Stars unknown':`${colors[phase-1]||'Advanced phase '+phase} · star ${star} · step ${step}/6`};
+}
+const api={sanitize,resolve,starView,colors};if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.ArmyContextModel=api;
 })(globalThis);

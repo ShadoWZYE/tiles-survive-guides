@@ -41,9 +41,9 @@ Source locations:
 
 ### Signature Gear, Behemoth and Research
 
-Both editions expose **Army Setup**, an optional stat-only extension. Record Signature Gear levels for 21 supported heroes (My builds only), current levels for 147 Research nodes with traced hero-stat effects, and either combined Behemoth flat bonuses or configured current level/star base bonuses granted to heroes. The two Behemoth sources never stack; star steps use the exact configuration progression index, not displayed stars. Role/faction and PvE/GVE restrictions apply. Blank sources stay excluded/unknown; Flat max stats ignores context. Selections persist in profiles. Existing raw upgrade-return panels exclude this context.
+Both editions expose **Army Setup**, an optional stat-only extension. Record Signature Gear levels for 21 supported heroes (My builds only), current levels for 147 Research nodes with traced hero-stat effects, and either combined Behemoth flat bonuses or configured current level/star base bonuses granted to heroes. The two Behemoth sources never stack; the Behemoth tab translates star progress into the game’s coloured five-star display, with six steps per star. Role/faction and PvE/GVE restrictions apply. Blank sources stay excluded/unknown; Flat max stats ignores context. Selections persist in profiles. Existing raw upgrade-return panels exclude this context.
 
-Signature Gear now has its own game-icon card and level selector in Hero Stats, Skills, My Roster and the desktop build editor. A separate **Behemoths** top tab shows the matching creature icons and saved level/star/source controls. Entries gated in the client are labeled as unconfirmed for live availability. The original detailed context editor remains available through Army Setup.
+Signature Gear now has its own game-icon card and level selector in Hero Stats, Skills, My Roster and the desktop build editor. A separate **Behemoths** top tab shows the matching creature icons, a simple level number box, coloured star previews, a slider and colour/star/progress selectors. Entries gated in the client are labeled as unconfirmed for live availability. The original detailed context editor remains available through Army Setup.
 
 **Research** now has a full-width top tab with 35 matching game icons, seven branch groups, tier ordering, search, recorded/changed filters, level stepping and bonus previews. Save multiple edits together or discard them; edits remain when changing tabs. **Army Setup** in the top bar provides recorded-source counts, encounter controls and direct configuration links. The original detailed editor remains available from that overview.
 
@@ -189,3 +189,7 @@ Raw packet captures, session material, certificates, local browser profiles, per
 The planner uses transparent comparison heuristics; it is not a frame-by-frame combat simulator. Client configuration can describe future or inactive content and should not be treated as guaranteed live scheduling.
 
 This is an unofficial community project and is not affiliated with or endorsed by the game publisher. Tiles Survive names, images, and visual identity belong to their respective owners.
+
+Hero build autosaves keep immediate profile persistence while coalescing expensive comparison refreshes after a 450 ms pause. Collapsed comparisons are generated when opened; full squad optimisation is deferred until the editor closes. Repeated input no longer launches the complete view/optimiser refresh inline.
+
+Windows dropdowns, text/number inputs and sliders now share a dark theme, rounded borders, teal focus/selection accents and consistent disabled states.

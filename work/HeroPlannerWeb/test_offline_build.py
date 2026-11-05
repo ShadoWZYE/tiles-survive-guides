@@ -22,6 +22,7 @@ class OfflineBuildTests(unittest.TestCase):
         expected_images = 2 + len(self.heroes) + sum(len(hero.get("skills", [])) for hero in self.heroes)
         context = json.loads((ROOT / 'outputs/hero-report/Hero-Army-Context.json').read_text(encoding='utf-8'))
         expected_images += sum(bool(row.get(key)) for group in ['signature','behemoths','research'] for row in context[group].values() for key in ['icon_asset','skill_icon_asset'])
+        expected_images += len(context["behemoth_star_display"]["sprites"])
         self.assertEqual(self.html.count("data:image/png;base64,"), expected_images)
 
     def test_no_build_placeholders_or_network_dependencies_remain(self) -> None:

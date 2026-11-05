@@ -2,6 +2,7 @@ using System.Text.Json;
 namespace TilesSurviveHeroPlanner;
 public sealed class ArmyContextData
 {
+ public BehemothStarDisplay BehemothStarDisplay {get;set;}=new();
  public Dictionary<string,ArmyResearchTree> ResearchTrees {get;set;}=[];
  public Dictionary<string,ArmyContextEntry> Signature {get;set;}=[];
  public Dictionary<string,ArmyContextEntry> Research {get;set;}=[];
@@ -9,6 +10,7 @@ public sealed class ArmyContextData
  public Dictionary<string,ArmyHeroScope> Heroes {get;set;}=[];
  public static ArmyContextData Parse(string json)=>JsonSerializer.Deserialize<ArmyContextData>(json,new JsonSerializerOptions{PropertyNamingPolicy=JsonNamingPolicy.SnakeCaseLower})!;
 }
+public sealed class BehemothStarDisplay {public int Tiers {get;set;}=12;public int Slots {get;set;}=5;public int StepsPerStar {get;set;}=6;public int StepsPerTier {get;set;}=30;}
 public sealed class ArmyResearchTree {public string Name {get;set;}="";public bool Legacy {get;set;} public int Order {get;set;}}
 public sealed class ArmyHeroScope {public string Role {get;set;}="";public string Faction {get;set;}="";}
 public sealed class ArmyContextEntry {public string Tree {get;set;}=""; public int Tier {get;set;} public int Row {get;set;} public string AvailabilityNote {get;set;}=""; public string IconAsset {get;set;}=""; public string SkillIconAsset {get;set;}=""; public string SkillName {get;set;}=""; public string Name {get;set;}="";public List<ArmyContextLevel> Levels {get;set;}=[];public List<ArmyContextLevel> Stars {get;set;}=[];}
@@ -52,4 +54,13 @@ public static class ArmyContextModel
   if(basis=="recorded"&&s.Signature.TryGetValue(slug,out int level))Apply(data.Signature[slug].Levels.First(r=>r.Level==level),"Signature Gear");
   return new(flat,notes,true);
  }
+}
+
+public sealed record BehemothStarSlot(int Base,int Overlay,int Steps);
+public static class BehemothStarProgress
+{
+ public static readonly string[] Colors=["Green","Blue","Purple","Gold","Red","Red+","Orange","Orange+","Platinum","Platinum+","Rainbow","Rainbow+"];
+ public static List<BehemothStarSlot> Slots(int count,int tiers=12){int tier=Math.Min(count/30+1,tiers),n=count%30;bool full=count/30+1>tiers;List<BehemothStarSlot> slots=[];for(int i=0;i<5;i++){slots.Add(new(tier-1,tier,full?6:Math.Min(6,n)));n=Math.Max(0,n-6);}return slots;}
+ public static string Color(int phase)=>phase<=Colors.Length?Colors[phase-1]:"Advanced phase "+phase;
+ public static string Label(int count)=>count==0?"Stars unknown":$"{Color((count-1)/30+1)} · star {((count-1)%30)/6+1} · step {(count-1)%6+1}/6";
 }

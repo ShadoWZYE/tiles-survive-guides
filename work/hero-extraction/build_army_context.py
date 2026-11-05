@@ -8,7 +8,7 @@ from decode_language_pack import decode_language_pack
 ROOT=Path(__file__).resolve().parents[2]
 
 def export(source,language):
-    names=['survivor_exclusive_gear','survivor_exclusive_gear_main','research_main','research_group','research_tree','benefits','benefits_map','benefit_calc','behemoth_base','behemoth_level','behemoth_star_level','behemoth_base_data','survivor_skill_main','survivor_skill_type','survivor_slg_skill_new','survivor_slg_effect_new','effect_buff']
+    names=['survivor_exclusive_gear','survivor_exclusive_gear_main','research_main','research_group','research_tree','benefits','benefits_map','benefit_calc','behemoth_base','behemoth_level','behemoth_star_level','behemoth_base_data','survivor_skill_main','survivor_skill_type','survivor_slg_skill_new','survivor_slg_effect_new','effect_buff','game_configs']
     tables={n:decode_table(source/(n+'.cfg'))['rows'] for n in names}
     lang=decode_language_pack(language);benefits={r['InternalId']:r['Id'] for r in tables['benefits']}
     heroes=json.loads((ROOT/'outputs/hero-report/TilesSurvive-Hero-Data.json').read_text(encoding='utf-8'))
@@ -78,7 +78,7 @@ def export(source,language):
         if not any(row['effects'] for row in entries['levels']+entries['stars']):continue
         assert all(len({row['level'] for row in entries[k]})==len(entries[k]) for k in ['levels','stars'])
         behemoths[beast['Id']]={'name':lang.get(beast['ArticleName'],beast['Id'])+' ('+beast['Id']+')','icon_asset':beast['PhotoIcon'],'availability_note':('Gated client entry; live availability is unconfirmed.' if beast['ServerOpenDays']>=99999 else 'Confirm availability and applicability in-game.'),**entries}
-    return {'version':4,'audited_date':'2026-11-04','signature':signature,'research':research,'behemoths':behemoths,'research_trees':{str(i):{'name':lang.get(t['Name'],t['Name']),'legacy':bool(t['IsOld']),'order':t['Position']} for i,t in trees.items() if any(g['tree']==str(i) for g in research.values())},
+    return {'version':5,'audited_date':'2026-11-04','signature':signature,'research':research,'behemoths':behemoths,'behemoth_star_display':{'tiers':int(next(r['Value'] for r in tables['game_configs'] if r['Id']=='behemoth_show_graduate_star'))//5,'slots':5,'steps_per_star':6,'steps_per_tier':30,'sprites':['sp_base_titan_star_'+str(i) for i in range(13)]},'research_trees':{str(i):{'name':lang.get(t['Name'],t['Name']),'legacy':bool(t['IsOld']),'order':t['Position']} for i,t in trees.items() if any(g['tree']==str(i) for g in research.values())},
 
       'heroes':{r['asset_slug']:{'role':r['role'],'faction':r['faction']} for r in heroes},
       'source_hashes':{n:hashlib.sha256((source/(n+'.cfg')).read_bytes()).hexdigest() for n in names},

@@ -48,6 +48,7 @@ def main() -> None:
                 if row.get(key):
                     icon = IMAGE_ROOT / 'context-icons' / (row[key] + '.png')
                     row[key.replace('_asset','_data')] = 'data:image/png;base64,' + png_data(icon)
+    context['behemoth_star_display']['images'] = ['data:image/png;base64,' + png_data(IMAGE_ROOT / 'context-icons' / (name + '.png')) for name in context['behemoth_star_display']['sprites']]
     html = html.replace('__EMBEDDED_CONTEXT_JSON__',json.dumps(context,ensure_ascii=False,separators=(',',':')).replace('</','<\\/'))
     html = html.replace('__EMBEDDED_ESTIMATE_JSON__', json.dumps(estimates, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/'))
     html = html.replace("__EMBEDDED_UPGRADE_JSON__", json.dumps(upgrades, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/"))

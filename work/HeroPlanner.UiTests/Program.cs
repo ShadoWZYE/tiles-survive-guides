@@ -233,6 +233,7 @@ internal static class Program
         Invoke(window, "EditBuild_Click", new Button { Tag = becca }, new RoutedEventArgs());
         Field<TextBox>(window, "_levelEditor").Text = "2";
         Field<ComboBox>(window, "_targetedPoolEditor").SelectedIndex = 1;
+        Field<Expander>(window,"_buildComparison").IsExpanded=true; Invoke(window,"FlushBuildRefresh");
         var targetedText = (TextBox)window.FindName("TargetedResourceText");
         Check(targetedText.Text.Contains("TARGETED DRAFT") && targetedText.Text.Contains("Provisional target"), "Targeted recommendation missing");
         var draftCards = (StackPanel)window.FindName("TargetedDraftCards");
@@ -241,6 +242,11 @@ internal static class Program
         Check(draftCards.Children.OfType<Expander>().Any(e => e.Header.ToString()!.Contains("Pool rates") && !e.IsExpanded), "Pool/model notes must be collapsed by default");
         Check(Field<StackPanel>(window, "_overlayResults").Children.OfType<Expander>().Any(), "Overlay comparison must use structured resource groups");
         Check(Field<UpgradeSettings>(window, "_upgradeSettings").TargetedPool == "newbie_recuit_up_1", "Pool choice not autosaved");
+        var refreshBefore=Field<int>(window,"_buildRefreshPasses");var burstTimer=System.Diagnostics.Stopwatch.StartNew();
+        for(int burst=0;burst<20;burst++)Field<TextBox>(window,"_levelEditor").Text=(burst%2+1).ToString();
+        burstTimer.Stop();Check(Field<int>(window,"_buildRefreshPasses")==refreshBefore,"Editing ran expensive refresh inline");
+        Invoke(window,"FlushBuildRefresh");Check(Field<int>(window,"_buildRefreshPasses")==refreshBefore+1,"Burst edits did not coalesce to one refresh");
+        Console.WriteLine($"Hero edit burst: 20 valid edits in {burstTimer.Elapsed.TotalMilliseconds:F1} ms; one queued refresh; profile writes remained immediate.");
         Field<Slider>(window, "_starSlider").Value = 5;
         Check(Field<Dictionary<string, HeroBuild>>(window, "_heroBuilds")[becca.AssetSlug].Stage == data.Heroes[becca.AssetSlug].Stages[5].Id, "Star slider did not autosave exact partial rank");
         Check(Field<TextBlock>(window, "_starSliderLabel").Text.Contains("step 5/6"), "Partial-rank label missing");
@@ -410,14 +416,31 @@ internal static class Program
         Check(Walk((StackPanel)window.FindName("StatsSignaturePanel")).OfType<CheckBox>().All(x=>x.IsChecked==true),"Hero Signature UI was stale after context dialog Apply");
         Invoke(window,"SetActiveHero",heroes.Single(h=>h.AssetSlug=="rosie"));
         Invoke(window,"Navigation_Click",(Button)window.FindName("StatsNav"),new RoutedEventArgs());window.UpdateLayout();
+        var themedCombo=(ComboBox)window.FindName("FactionFilter");themedCombo.ApplyTemplate();
+        var themedToggle=Walk(themedCombo).OfType<System.Windows.Controls.Primitives.ToggleButton>().First();
+        typeof(System.Windows.Controls.Primitives.ToggleButton).GetMethod("OnClick",BindingFlags.Instance|BindingFlags.NonPublic)!.Invoke(themedToggle,null);
+        window.UpdateLayout();Check(themedCombo.IsDropDownOpen,"Styled ComboBox did not open on toggle click");
+        var themedPopup=(System.Windows.Controls.Primitives.Popup)themedCombo.Template.FindName("PART_Popup",themedCombo);
+        Check(themedPopup.IsOpen&&themedPopup.Child is Border,"Styled ComboBox popup missing");
+        themedCombo.SelectedIndex=1;Check(((ComboBoxItem)themedCombo.SelectedItem).Content?.ToString()=="Mountain","Styled dropdown selection failed");
+        themedCombo.IsDropDownOpen=false;themedCombo.SelectedIndex=0;
         var signatureView=(StackPanel)window.FindName("StatsSignaturePanel");
         var localSignature=Walk(signatureView).OfType<ComboBox>().Single();localSignature.SelectedIndex=2;
         Walk(signatureView).OfType<Button>().Single(x=>x.Content?.ToString()=="Save Signature Gear").RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
         Check(Field<ArmyContextSettings>(window,"_armyContext").Signature["rosie"]==2,"Hero-local Signature save failed");
         Invoke(window,"Navigation_Click",(Button)window.FindName("BehemothsNav"),new RoutedEventArgs());window.UpdateLayout();
         var beastView=(StackPanel)window.FindName("BehemothsPanel");
-        Check(Walk(beastView).OfType<Image>().Count()==4,"Behemoth icons missing");
-        Walk(beastView).OfType<ComboBox>().Single(x=>System.Windows.Automation.AutomationProperties.GetName(x)=="Behemoth caser star").SelectedIndex=2;
+        Check(Walk(beastView).OfType<Image>().Count(x=>x.Width==76)==4,"Behemoth icons missing");
+        var beastLevel=Walk(beastView).OfType<TextBox>().Single(x=>System.Windows.Automation.AutomationProperties.GetName(x)=="Behemoth caser level");
+        beastLevel.Text="2";window.UpdateLayout();var levelCaret=beastLevel.GetRectFromCharacterIndex(0);Check(levelCaret.Top>=0&&levelCaret.Bottom<=beastLevel.ActualHeight-1,"Styled level input clips its text");
+        foreach(int n in new[]{1,6,30,31,360,900}){var slots=BehemothStarProgress.Slots(n);Check(slots.Count==5&&slots.All(x=>x.Steps>=0&&x.Steps<=6&&x.Overlay<=12),"Behemoth star display out of bounds");}
+        var themedStarSlider=Walk(beastView).OfType<Slider>().Single(x=>System.Windows.Automation.AutomationProperties.GetName(x)=="Behemoth caser star");themedStarSlider.ApplyTemplate();
+        var themedTrack=(System.Windows.Controls.Primitives.Track)themedStarSlider.Template.FindName("PART_Track",themedStarSlider);double dragBefore=themedStarSlider.Value;
+        themedTrack.Thumb.RaiseEvent(new System.Windows.Controls.Primitives.DragStartedEventArgs(0,0){RoutedEvent=System.Windows.Controls.Primitives.Thumb.DragStartedEvent});
+        themedTrack.Thumb.RaiseEvent(new System.Windows.Controls.Primitives.DragDeltaEventArgs(30,0){RoutedEvent=System.Windows.Controls.Primitives.Thumb.DragDeltaEvent});
+        Check(themedStarSlider.Value>dragBefore,"Styled star slider did not respond to thumb drag");
+        themedTrack.Thumb.RaiseEvent(new System.Windows.Controls.Primitives.DragCompletedEventArgs(30,0,false){RoutedEvent=System.Windows.Controls.Primitives.Thumb.DragCompletedEvent});
+        Walk(beastView).OfType<Slider>().Single(x=>System.Windows.Automation.AutomationProperties.GetName(x)=="Behemoth caser star").Value=2;
         Walk(beastView).OfType<Button>().Single(x=>x.Content?.ToString()=="Save Behemoths").RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
         var screenshotDir=Environment.GetEnvironmentVariable("PLANNER_SCREENSHOT_DIR");
         if(!string.IsNullOrEmpty(screenshotDir)){

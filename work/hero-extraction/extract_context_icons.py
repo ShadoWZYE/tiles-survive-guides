@@ -14,12 +14,14 @@ def main():
     parser.add_argument('--asset-index', type=Path, required=True)
     parser.add_argument('--bundle-list', type=Path, required=True)
     parser.add_argument('--root', type=Path, action='append', required=True)
+    parser.add_argument('--stars-only', action='store_true')
     args = parser.parse_args()
     sys.path.insert(0, str(ROOT / 'work/tools/unitypy'))
     import UnityPy
     catalog = json.loads((ROOT / 'outputs/hero-report/Hero-Army-Context.json').read_text(encoding='utf-8'))
     wanted = {row[key] for group in ['signature', 'behemoths', 'research']
               for row in catalog[group].values() for key in ['icon_asset', 'skill_icon_asset'] if row.get(key)}
+    if args.stars_only: wanted = set(catalog['behemoth_star_display']['sprites'])
     ids = asset_bundle_ids(args.asset_index, wanted)
     hashes = bundle_hashes(args.bundle_list, set(ids.values()))
     if wanted - ids.keys():

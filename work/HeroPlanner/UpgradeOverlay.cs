@@ -25,6 +25,18 @@ public partial class MainWindow
     private StackPanel _overlayResults = new();
     private IInputElement? _focusBeforeOverlay;
     private bool _populatingEditor;
+    private System.Windows.Threading.DispatcherTimer? _buildRefreshTimer;
+    private Expander _buildComparison = new();
+    private bool _buildViewsDirty;
+    private int _buildRefreshPasses;
+    private void QueueBuildRefresh()
+    {
+        _buildViewsDirty = true;
+        if (_buildRefreshTimer is null) { _buildRefreshTimer = new(System.Windows.Threading.DispatcherPriority.Background) { Interval = TimeSpan.FromMilliseconds(450) }; _buildRefreshTimer.Tick += (_, _) => FlushBuildRefresh(); }
+        _buildRefreshTimer.Stop(); _buildRefreshTimer.Start();
+    }
+    private void FlushBuildRefresh() { _buildRefreshTimer?.Stop(); _buildRefreshPasses++; RefreshUpgradeViews(); }
+
     private Slider _starSlider = new();
     private StackPanel _starPreview = new();
     private TextBlock _starSliderLabel = new();
@@ -68,6 +80,7 @@ public partial class MainWindow
     {
         e.Handled = true;
         if (sender is not Button { Tag: Hero hero } || !_upgradeData.Heroes.TryGetValue(hero.AssetSlug, out var h)) return;
+        _buildRefreshTimer?.Stop();
         _populatingEditor = true;
         EndRosterDrag(); _editingHero = hero; _focusBeforeOverlay = Keyboard.FocusedElement;
         BuildTitle.Text = $"Edit build · {hero.Name}"; BuildFields.Children.Clear(); BuildError.Text = "";
@@ -162,7 +175,8 @@ public partial class MainWindow
         }
         BuildFields.Children.Add(CreateSignaturePanel(hero.AssetSlug));
         var comparison = new StackPanel();
-        BuildFields.Children.Add(new Expander { Header = "Upgrade comparison · metric, balances and results", Content = comparison, Foreground = Brushes.White, Margin = new Thickness(0, 10, 0, 10) });
+        _buildComparison = new Expander { Header = "Upgrade comparison · metric, balances and results", Content = comparison, Foreground = Brushes.White, Margin = new Thickness(0, 10, 0, 10) };
+        _buildComparison.Expanded += (_, _) => QueueBuildRefresh(); BuildFields.Children.Add(_buildComparison);
         comparison.Children.Add(CopyText("Results use the saved builds of your selected five-hero formation."));
         var metric = new WrapPanel(); comparison.Children.Add(metric);
         _goalEditor = new ComboBox { Width = 300 };
@@ -189,7 +203,7 @@ public partial class MainWindow
             _budgetEditors[id] = input; Field(budgetPanel, $"{_upgradeData.Items.GetValueOrDefault(id) ?? id} [{id}]", input);
         }
         comparison.Children.Add(new Expander { Header = "Resource balances · blank means unknown", Content = budgetPanel, Foreground = Brushes.White, Margin = new Thickness(0, 10, 0, 10) });
-        comparison.Children.Add(CopyText("Metric and balances also save automatically. Invalid entries keep the last valid value."));
+        comparison.Children.Add(CopyText("Metric and balances save automatically. Comparison refresh waits until you pause editing. Invalid entries keep the last valid value."));
         comparison.Children.Add(new Expander { Header = "Model limits / assumptions", Content = CopyText(UpgradeCaveats), Foreground = Brushes.White });
         _overlayResults = new StackPanel(); comparison.Children.Add(_overlayResults);
         _levelEditor.TextChanged += (_, _) => SaveBuildOnEdit();
@@ -293,7 +307,7 @@ public partial class MainWindow
         var slug = _editingHero.AssetSlug; var previous = _heroBuilds.GetValueOrDefault(slug);
         try
         {
-            _heroBuilds[slug] = build; SaveProfile(); RefreshUpgradeViews();
+            _heroBuilds[slug] = build; SaveProfile(); QueueBuildRefresh();
             BuildError.Text = "Saved automatically."; BuildError.Foreground = Brushes.LightGreen;
         }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
@@ -307,13 +321,15 @@ public partial class MainWindow
         if (_populatingEditor || _editingHero is null) return;
         var previous = _upgradeSettings; BuildError.Foreground = Brushes.Gold;
         if (!ReadSettings()) { BuildError.Text = "Not saved: " + BuildError.Text; return; }
-        try { SaveProfile(); RefreshUpgradeViews(); BuildError.Text = "Saved automatically."; BuildError.Foreground = Brushes.LightGreen; }
+        try { SaveProfile(); QueueBuildRefresh(); BuildError.Text = "Saved automatically."; BuildError.Foreground = Brushes.LightGreen; }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
         { _upgradeSettings = previous; BuildError.Text = "Could not save: " + ex.Message; }
     }
     private void CloseBuild_Click(object sender, RoutedEventArgs e)
     {
+        _buildRefreshTimer?.Stop();
         BuildOverlay.Visibility = Visibility.Collapsed; _editingHero = null;
+        if (_buildViewsDirty) RefreshUpgradeViews();
         if (_focusBeforeOverlay is not null) Keyboard.Focus(_focusBeforeOverlay);
     }
     private void BuildOverlay_KeyDown(object sender, KeyEventArgs e)
@@ -323,12 +339,15 @@ public partial class MainWindow
     private bool _refreshingEstimateViews;
     private void RefreshUpgradeViews()
     {
-        if (!_refreshingEstimateViews && RefreshEstimates())
+        bool editing = BuildOverlay.Visibility == Visibility.Visible;
+        if(editing && !_buildComparison.IsExpanded) { _buildViewsDirty=true; return; }
+        if (!editing && !_refreshingEstimateViews && RefreshEstimates())
         {
             _refreshingEstimateViews = true;
-            try { RebuildOptimizer(); UpdateSquadPresentation(); }
+            try { RebuildOptimizer(); UpdateSquadPresentation(); _buildViewsDirty=false; }
             finally { _refreshingEstimateViews = false; }
         }
+        if(!editing) _buildViewsDirty=false;
         RefreshResourcePriority();
         if (ResourceRecommendation is not null) ResourceRecommendation.Text = "Choose five heroes, then use their small edit buttons to record current builds and compare data-driven next upgrades. No fixed hero order.";
         if (BuildOverlay.Visibility == Visibility.Visible)
