@@ -34,6 +34,7 @@ public partial class MainWindow : Window
     private MainWindow(string profilePath)
     {
         ProfilePath = profilePath;
+        Closing += ResearchEdits_Closing;
         InitializeComponent();
         LoadHeroes();
         LoadUpgradeData();
@@ -116,7 +117,7 @@ public partial class MainWindow : Window
         _heroes.Sort((a, b) => { int score = b.CompositeIndex.CompareTo(a.CompositeIndex); return score != 0 ? score : StringComparer.Ordinal.Compare(a.Name, b.Name); });
         HeroRoster.Items.Refresh();
         if (_activeHero is not null) { StatsPanel.DataContext = null; StatsPanel.DataContext = _activeHero; }
-        ArmyContextButton.Content=_armyContext.Enabled&&_comparisonBasis!="flat"?"Army stats: ON (partial)":"Army stat context";
+        ArmyContextButton.Content=_armyContext.Enabled&&_comparisonBasis!="flat"?"Army Setup: ON (partial)":"Army Setup";
         _lastEstimateBuilds = snapshot;
         return true;
     }
@@ -315,7 +316,7 @@ public partial class MainWindow : Window
     {
         if (sender is not Button { Tag: string tabText } || !int.TryParse(tabText, out int tabIndex)) return;
         InspectorTabs.SelectedIndex = tabIndex;
-        bool beasts = tabIndex == 5;
+        bool beasts = tabIndex is 5 or 6;
         RosterArea.Visibility = RosterSplitter.Visibility = beasts ? Visibility.Collapsed : Visibility.Visible;
         Grid.SetColumn(InspectorPanel, beasts ? 0 : 2); Grid.SetColumnSpan(InspectorPanel, beasts ? 3 : 1);
         UpdateNavigationState(tabIndex);
@@ -329,12 +330,13 @@ public partial class MainWindow : Window
             UpdateReleaseSchedule(ServerOpenDate.SelectedDate);
         }
         if(tabIndex==5) RenderBehemoths();
+        if(tabIndex==6) RenderResearch();
         HeroRoster.Items.Refresh();
     }
 
     private void UpdateNavigationState(int selectedIndex)
     {
-        Button[] buttons = [SquadNav, StatsNav, SkillsNav, RosterNav, ReleaseNav, BehemothsNav];
+        Button[] buttons = [SquadNav, StatsNav, SkillsNav, RosterNav, ReleaseNav, BehemothsNav, ResearchNav];
         for (int index = 0; index < buttons.Length; index++)
         {
             bool selected = index == selectedIndex;

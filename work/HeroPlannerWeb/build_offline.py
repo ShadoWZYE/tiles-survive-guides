@@ -33,6 +33,7 @@ def main() -> None:
                         + "\n" + (HERE / "upgrade-ui.js").read_text(encoding="utf-8")
                         + "\n" + (HERE / "army-context-model.js").read_text(encoding="utf-8")
                         + "\n" + (HERE / "army-context-ui.js").read_text(encoding="utf-8")
+                        + "\n" + (HERE / "research-ui.js").read_text(encoding="utf-8")
                         + "\n" + (HERE / "estimate-model.js").read_text(encoding="utf-8")
                         + "\n" + (HERE / "faction-model.js").read_text(encoding="utf-8")
                         + "\n" + (HERE / "formation-model.js").read_text(encoding="utf-8")
@@ -41,7 +42,7 @@ def main() -> None:
     html = html.replace('__CLIENT_BUILD__', upgrades['client_build']).replace('__HERO_COUNT__', str(len(heroes)))
     estimates = json.loads((ROOT / 'outputs/hero-report/Hero-Estimate-Model.json').read_text(encoding='utf-8'))
     context = json.loads((ROOT / 'outputs/hero-report/Hero-Army-Context.json').read_text(encoding='utf-8'))
-    for group in ['signature','behemoths']:
+    for group in ['signature','behemoths','research']:
         for row in context[group].values():
             for key in ['icon_asset','skill_icon_asset']:
                 if row.get(key):
@@ -52,7 +53,9 @@ def main() -> None:
     html = html.replace("__EMBEDDED_UPGRADE_JSON__", json.dumps(upgrades, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/"))
     html = html.replace("__APP_ICON__", png_data(ICON_PATH))
     html = html.replace("__EMBEDDED_HERO_JSON__", json.dumps(heroes, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/"))
-    OUTPUT_PATH.write_text(html, encoding="utf-8")
+    temporary = OUTPUT_PATH.with_suffix(".html.tmp")
+    temporary.write_text(html, encoding="utf-8")
+    temporary.replace(OUTPUT_PATH)
     print(f"Built {OUTPUT_PATH} ({OUTPUT_PATH.stat().st_size / 1024 / 1024:.1f} MiB)")
 
 

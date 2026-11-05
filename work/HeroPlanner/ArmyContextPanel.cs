@@ -60,7 +60,7 @@ public partial class MainWindow
    Dictionary<string,int> Values(string kind)=>selectors[kind].ToDictionary(x=>x.Key,x=>(int)((ComboBoxItem)x.Value.SelectedItem).Tag).Where(x=>x.Value>0).ToDictionary();
    var old=_armyContext;_armyContext=ArmyContextModel.Clean(new(){Enabled=enabled.IsChecked==true,Scene=(string)((ComboBoxItem)scene.SelectedItem).Tag,Behemoth=stats,BehemothSource=(string)((ComboBoxItem)sourcePicker.SelectedItem).Tag,BehemothBuilds=_armyContextData.Behemoths.Keys.ToDictionary(key=>key,key=>new ArmyBehemothBuild{Level=Values("behemoth-level").GetValueOrDefault(key),Star=Values("behemoth-star").GetValueOrDefault(key)}),Research=Values("research"),Signature=Values("signature")},_armyContextData);
    try{SaveProfile();}catch(Exception ex){_armyContext=old;error.Text="Settings were not saved: "+ex.Message;return;}
-   RefreshEstimates();RebuildOptimizer();UpdateSquadPresentation();if(_activeHero is not null)RefreshSignaturePanels(_activeHero);if(InspectorTabs.SelectedIndex==5)RenderBehemoths();window.Close();
+   RefreshEstimates();RebuildOptimizer();UpdateSquadPresentation();if(_activeHero is not null)RefreshSignaturePanels(_activeHero);if(InspectorTabs.SelectedIndex==5)RenderBehemoths();_researchEdits.Clear();if(InspectorTabs.SelectedIndex==6)RenderResearch();window.Close();
   };
   window.ShowDialog();
  }

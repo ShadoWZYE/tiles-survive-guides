@@ -8,7 +8,7 @@ from decode_language_pack import decode_language_pack
 ROOT=Path(__file__).resolve().parents[2]
 
 def export(source,language):
-    names=['survivor_exclusive_gear','survivor_exclusive_gear_main','research_main','research_group','benefits','benefits_map','benefit_calc','behemoth_base','behemoth_level','behemoth_star_level','behemoth_base_data','survivor_skill_main','survivor_skill_type','survivor_slg_skill_new','survivor_slg_effect_new','effect_buff']
+    names=['survivor_exclusive_gear','survivor_exclusive_gear_main','research_main','research_group','research_tree','benefits','benefits_map','benefit_calc','behemoth_base','behemoth_level','behemoth_star_level','behemoth_base_data','survivor_skill_main','survivor_skill_type','survivor_slg_skill_new','survivor_slg_effect_new','effect_buff']
     tables={n:decode_table(source/(n+'.cfg'))['rows'] for n in names}
     lang=decode_language_pack(language);benefits={r['InternalId']:r['Id'] for r in tables['benefits']}
     heroes=json.loads((ROOT/'outputs/hero-report/TilesSurvive-Hero-Data.json').read_text(encoding='utf-8'))
@@ -50,12 +50,12 @@ def export(source,language):
             description=re.sub(r'<[^>]+>','',description)
             levels.append({'level':r['Level'],'effects':fx,'unmodeled':excluded,'linked_skill':bool(r['GearSkillSlg']),'description':description,'skill_evidence':skill_evidence(r)})
         signature[hero['asset_slug']]={'name':lang.get(gear['GearName'],hero['name']+' Signature Gear'),'levels':levels,'icon_asset':gear['Icon'],'skill_icon_asset':gear['GearSkillIcon'],'skill_name':lang.get(gear['GearSkillName'],gear['GearSkillName'])}
-    research={};groups={r['InternalId']:r for r in tables['research_group']}
+    research={};groups={r['InternalId']:r for r in tables['research_group']};trees={r['InternalId']:r for r in tables['research_tree']}
     for r in tables['research_main']:
         fx,excluded=effects(r['Benefits'])
         if not fx:continue
         g=groups[r['Group']];key=g['Id']
-        entry=research.setdefault(key,{'name':lang.get(g['Name'],key)+' · '+g['LevelRoman'].replace('roman_numeral_',''),'levels':[]})
+        entry=research.setdefault(key,{'name':lang.get(g['Name'],key)+' · '+lang.get(g['LevelRoman'],g['LevelRoman'].replace('roman_numeral_','')),'levels':[],'icon_asset':g['Image'],'tree':str(g['Tree']),'tier':g['Tier'],'row':g['Row']})
         entry['levels'].append({'level':r['Level'],'effects':fx,'unmodeled':excluded,'linked_skill':False})
     for entry in research.values():
         entry['levels'].sort(key=lambda r:r['level']);assert len({r['level'] for r in entry['levels']})==len(entry['levels'])
@@ -78,7 +78,7 @@ def export(source,language):
         if not any(row['effects'] for row in entries['levels']+entries['stars']):continue
         assert all(len({row['level'] for row in entries[k]})==len(entries[k]) for k in ['levels','stars'])
         behemoths[beast['Id']]={'name':lang.get(beast['ArticleName'],beast['Id'])+' ('+beast['Id']+')','icon_asset':beast['PhotoIcon'],'availability_note':('Gated client entry; live availability is unconfirmed.' if beast['ServerOpenDays']>=99999 else 'Confirm availability and applicability in-game.'),**entries}
-    return {'version':3,'audited_date':'2026-11-04','signature':signature,'research':research,'behemoths':behemoths,
+    return {'version':4,'audited_date':'2026-11-04','signature':signature,'research':research,'behemoths':behemoths,'research_trees':{str(i):{'name':lang.get(t['Name'],t['Name']),'legacy':bool(t['IsOld']),'order':t['Position']} for i,t in trees.items() if any(g['tree']==str(i) for g in research.values())},
 
       'heroes':{r['asset_slug']:{'role':r['role'],'faction':r['faction']} for r in heroes},
       'source_hashes':{n:hashlib.sha256((source/(n+'.cfg')).read_bytes()).hexdigest() for n in names},

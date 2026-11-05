@@ -427,6 +427,30 @@ internal static class Program
         }
         var afterBeast=Field<ArmyContextSettings>(window,"_armyContext");
         Check(afterBeast.Signature["rosie"]==2&&afterBeast.Research["research_group_troop_attack_percent_1"]==2&&afterBeast.BehemothBuilds["caser"].Star==2,"Behemoth tab overwrote other context sources");
+        Invoke(window,"Navigation_Click",(Button)window.FindName("ResearchNav"),new RoutedEventArgs());window.UpdateLayout();
+        var researchHeader=(StackPanel)window.FindName("ResearchPanel");
+        var treePicker=Walk(researchHeader).OfType<ComboBox>().Single();treePicker.SelectedItem=treePicker.Items.OfType<ComboBoxItem>().Single(i=>i.Tag?.ToString()=="4300002");window.UpdateLayout();
+        ComboBox ResearchPicker()=>Walk((StackPanel)window.FindName("ResearchCardsPanel")).OfType<ComboBox>().Single(x=>System.Windows.Automation.AutomationProperties.GetName(x)=="Research node research_group_troop_attack_percent_1");
+        ResearchPicker().SelectedIndex=3;
+        Check(Field<ArmyContextSettings>(window,"_armyContext").Research["research_group_troop_attack_percent_1"]==2,"Research draft saved prematurely");
+        Invoke(window,"Navigation_Click",(Button)window.FindName("BehemothsNav"),new RoutedEventArgs());
+        Invoke(window,"Navigation_Click",(Button)window.FindName("ResearchNav"),new RoutedEventArgs());window.UpdateLayout();
+        Check(ResearchPicker().SelectedIndex==3,"Research draft lost on tab switch");
+        Walk((StackPanel)window.FindName("ResearchPanel")).OfType<Button>().Single(x=>x.Content?.ToString()=="Discard edits").RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+        window.UpdateLayout();Check(ResearchPicker().SelectedIndex==2,"Research discard changed saved level");
+        ResearchPicker().SelectedIndex=3;
+        Walk((StackPanel)window.FindName("ResearchPanel")).OfType<Button>().Single(x=>x.Content?.ToString()=="Save Research").RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+        Check(Field<ArmyContextSettings>(window,"_armyContext").Research["research_group_troop_attack_percent_1"]==3,"Research save failed");
+        Check(Field<ArmyContextSettings>(window,"_armyContext").Signature["rosie"]==2&&Field<ArmyContextSettings>(window,"_armyContext").BehemothBuilds["caser"].Star==2,"Research save overwrote other sources");
+        if(!string.IsNullOrEmpty(screenshotDir)){window.UpdateLayout();var bitmap=new RenderTargetBitmap((int)window.ActualWidth,(int)window.ActualHeight,96,96,PixelFormats.Pbgra32);bitmap.Render(window);var researchEncoder=new PngBitmapEncoder();researchEncoder.Frames.Add(BitmapFrame.Create(bitmap));using var researchStream=File.Create(Path.Combine(screenshotDir,"native-research.png"));researchEncoder.Save(researchStream);}
+        Exception? setupError=null;
+        window.Dispatcher.BeginInvoke(new Action(()=>{
+            var setup=Application.Current.Windows.OfType<Window>().Single(w=>w!=window&&w.Title=="Army Setup");
+            try{setup.UpdateLayout();var elements=Walk(setup).ToList();elements.OfType<ComboBox>().Single().SelectedIndex=1;elements.OfType<Button>().Single(x=>x.Content?.ToString()=="Configure Research").RaiseEvent(new RoutedEventArgs(Button.ClickEvent));}
+            catch(Exception ex){setupError=ex;setup.Close();}
+        }),System.Windows.Threading.DispatcherPriority.Loaded);
+        Invoke(window,"ArmySetup_Click",new Button(),new RoutedEventArgs());if(setupError is not null)throw setupError;
+        Check(Field<ArmyContextSettings>(window,"_armyContext").Scene=="pve"&&((TabControl)window.FindName("InspectorTabs")).SelectedIndex==6,"Army Setup failed to save settings and open Research");
         window.Close();
         var reopened = Create();
         Check(Field<ArmyContextSettings>(reopened,"_armyContext").Enabled&&Field<ArmyContextSettings>(reopened,"_armyContext").BehemothBuilds["caser"].Star==2,"Army context missing after reopen");

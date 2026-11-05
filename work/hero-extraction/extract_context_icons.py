@@ -1,4 +1,4 @@
-"""Extract the exact Signature/Behemoth sprites referenced by the context catalog."""
+"""Extract the exact Signature/Behemoth/Research sprites referenced by the context catalog."""
 import argparse
 import json
 import sys
@@ -18,7 +18,7 @@ def main():
     sys.path.insert(0, str(ROOT / 'work/tools/unitypy'))
     import UnityPy
     catalog = json.loads((ROOT / 'outputs/hero-report/Hero-Army-Context.json').read_text(encoding='utf-8'))
-    wanted = {row[key] for group in ['signature', 'behemoths']
+    wanted = {row[key] for group in ['signature', 'behemoths', 'research']
               for row in catalog[group].values() for key in ['icon_asset', 'skill_icon_asset'] if row.get(key)}
     ids = asset_bundle_ids(args.asset_index, wanted)
     hashes = bundle_hashes(args.bundle_list, set(ids.values()))

@@ -64,7 +64,9 @@
                             Padding="14,10" Margin="0,0,6,0" FontWeight="Bold" />
                     <Button x:Name="ReleaseNav" Content="RELEASE &amp; ACCESS" Tag="4" Click="Navigation_Click"
                             Padding="14,10" FontWeight="Bold" />
+                    <Button x:Name="ResearchNav" Content="RESEARCH" Tag="6" Click="Navigation_Click" Padding="14,10" FontWeight="Bold" />
                     <Button x:Name="BehemothsNav" Content="BEHEMOTHS" Tag="5" Click="Navigation_Click" Padding="14,10" FontWeight="Bold" />
+                    <Button x:Name="ArmyContextButton" Content="Army Setup" Click="ArmySetup_Click" Padding="14,10" FontWeight="Bold" AutomationProperties.Name="Army Setup" />
                 </WrapPanel>
                 <TextBlock Visibility="Collapsed" Grid.Column="1" Text="Select a section, then inspect any hero from the roster."
                            HorizontalAlignment="Right" VerticalAlignment="Center" Margin="18,0,10,0"
@@ -98,7 +100,6 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock x:Name="RosterTitle" Grid.ColumnSpan="4" Text="Hero roster" FontSize="21" FontWeight="Bold" Margin="0,0,0,8" />
-                        <Button x:Name="ArmyContextButton" Grid.Column="2" Grid.ColumnSpan="2" HorizontalAlignment="Right" VerticalAlignment="Top" Content="Army stat context" Click="ArmyContext_Click" Padding="8,3" AutomationProperties.Name="Army stat context" />
                             <ComboBox x:Name="ComparisonBasisPicker" Grid.Row="1" MinWidth="0" Height="32" VerticalAlignment="Top" Margin="0,0,8,0" SelectionChanged="ComparisonBasis_Changed" AutomationProperties.Name="Comparison basis">
                                 <ComboBoxItem Content="Equal builds" Tag="reference" IsSelected="True" />
                                 <ComboBoxItem Content="Flat max stats" Tag="flat" />
@@ -550,6 +551,7 @@
                             </ScrollViewer>
                         </TabItem>
                         <TabItem Header="BEHEMOTHS"><ScrollViewer VerticalScrollBarVisibility="Auto"><StackPanel x:Name="BehemothsPanel" Margin="10,16" /></ScrollViewer></TabItem>
+                        <TabItem Header="RESEARCH"><Grid Margin="10,16"><Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /></Grid.RowDefinitions><StackPanel x:Name="ResearchPanel" /><ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto"><StackPanel x:Name="ResearchCardsPanel" /></ScrollViewer></Grid></TabItem>
                     </TabControl>
                 </Grid>
             </Border>

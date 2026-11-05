@@ -151,7 +151,7 @@
       try {
         const parsed = JSON.parse(String(reader.result));
         if (!parsed || typeof parsed !== "object" || !Array.isArray(parsed.ownedHeroes)) throw new Error("Not a planner profile");
-        setProfile(parsed);
+        ResearchUI.reset();setProfile(parsed);
         alert("Profile imported.");
       } catch (error) {
         alert(`That file is not a valid Hero Planner profile.\n\n${error.message}`);
@@ -299,8 +299,9 @@
     $$(".top-nav [data-tab]").forEach(button => button.classList.toggle("active", button.dataset.tab === state.tab));
     const titles = {squad:["Hero roster","Click heroes to build a five-hero formation."],stats:["Choose a hero","Click a card to inspect extracted maximum stats."],skills:["Choose a hero","Click a card to inspect skills, icons, and modeled payoff."],roster:["My roster","Select a hero to record its build; use its owned button to change ownership."],release:["Release roster","Click a hero for its release and access evidence."]};
     $("#roster-title").textContent = (titles[state.tab]||["Behemoths",""])[0]; $("#roster-hint").textContent = (titles[state.tab]||["Behemoths",""])[1];
-    $("#workspace").classList.toggle("behemoth-view",state.tab==="behemoths");
-    if (state.tab === "behemoths") {$("#detail-content").innerHTML=ArmyContextUI.behemoths(profile.armyContext,window.__ARMY_CONTEXT_DATA__);ArmyContextUI.bindBehemoths(profile.armyContext,window.__ARMY_CONTEXT_DATA__,next=>setProfile({...profile,armyContext:next}));}
+    $("#workspace").classList.toggle("behemoth-view",["behemoths","research"].includes(state.tab));
+    if (state.tab === "research") ResearchUI.mount($("#detail-content"),window.__ARMY_CONTEXT_DATA__,()=>profile.armyContext,next=>setProfile({...profile,armyContext:next}));
+    else if (state.tab === "behemoths") {$("#detail-content").innerHTML=ArmyContextUI.behemoths(profile.armyContext,window.__ARMY_CONTEXT_DATA__);ArmyContextUI.bindBehemoths(profile.armyContext,window.__ARMY_CONTEXT_DATA__,next=>setProfile({...profile,armyContext:next}));}
     else if (state.tab === "squad") renderSquad();
     else if (state.tab === "stats") renderStats();
     else if (state.tab === "skills") renderSkills();
@@ -483,12 +484,12 @@
     document.documentElement.style.setProperty("--left", `${profile.leftWidth}%`);
     $('#comparison-basis').value=profile.comparisonBasis;
     $('#battle-window').value=profile.battleSeconds;
-    $('#army-context').textContent=profile.armyContext?.enabled?'Army stat context: ON (partial)':'Army stat context';
+    $('#army-context').textContent=profile.armyContext?.enabled?'Army Setup: ON (partial)':'Army Setup';
     renderCards(); renderDetail(); saveProfile();
   }
 
   function wireShell() {
-    $('#army-context').onclick=()=>ArmyContextUI.open(profile.armyContext,window.__ARMY_CONTEXT_DATA__,heroes,next=>{profile.armyContext=next;renderAll();});
+    $('#army-context').onclick=()=>ResearchUI.setup(profile.armyContext,window.__ARMY_CONTEXT_DATA__,heroes,next=>setProfile({...profile,armyContext:next}),tab=>{state.tab=tab;renderDetail();},()=>ArmyContextUI.open(profile.armyContext,window.__ARMY_CONTEXT_DATA__,heroes,next=>{ResearchUI.reset();setProfile({...profile,armyContext:next});}));
     $('#battle-window').onchange=event=>{profile.battleSeconds=Number(event.target.value);renderAll();};
     $('#comparison-basis').onchange=event=>{profile.comparisonBasis=event.target.value;renderAll();};
     $$(".top-nav [data-tab]").forEach(button => button.onclick=()=>{state.tab=button.dataset.tab;if(state.tab==="release")state.releaseActive=null;renderDetail()});
