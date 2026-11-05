@@ -82,7 +82,7 @@ public sealed class EstimateOpeningWindow
 }
 public sealed record HeroEstimate(double Offense, double Durability, double Score, double Low, double High, string Basis, double HealthContribution = 0,
     double[]? PassiveContributions = null, double[]? TeamPercent = null, double[]? SelfPercent = null, string[]? ActiveSkillIds = null,
-    Dictionary<string,int>? OpeningCastCounts = null,List<HealingPreview>? RawHealingPotential = null);
+    Dictionary<string,int>? OpeningCastCounts = null,List<HealingPreview>? RawHealingPotential = null, bool Comparable = true, string[]? MissingFields = null);
 
 public static class EstimateModel
 {
@@ -160,8 +160,19 @@ public static class EstimateModel
         $"{model.Skills.Count(s => s.FinishTrigger is not null)} delayed damage paths require a completed source skill and an unlocked passive. " +
         $"{model.Skills.Count(s => s.AnimationLimited)} skill budgets are limited by bound clip durations; {model.Skills.Count(s => s.DirectHitCounts.Values.Sum() > 1)} use repeated immediate-hit potential. " +
         "Timing assumes speed 1 and uninterrupted casting. Opening scenarios use known timeline dispatch offsets; unknown impacts keep a completion fallback. Projectile travel, target survival, reapplication timing, zones and death times remain uncertain.";
-    public static HeroEstimate Evaluate(string slug, HeroBuild? saved, UpgradeData upgrades, EstimateData estimates, int battleSeconds = 0, double[]? externalFlat = null)
+    public static List<string> MissingBuild(string slug, HeroBuild? saved, UpgradeData data)
     {
+        var h=data.Heroes[slug];List<string> missing=[];var stage=h.Stages.Find(s=>s.Id==saved?.Stage);
+        if(stage is null)missing.Add("exact rank / step");
+        var level=h.Levels.Find(l=>l.Level==saved?.Level);if(level is null||stage is not null&&level.Level>stage.LevelMax)missing.Add("valid hero level");
+        if(saved?.Gear is null)missing.Add("gear (record equipped items or explicitly none)");
+        else{HashSet<int> slots=[];foreach(var g in saved.Gear)if(g is null||!data.Gear.TryGetValue(g.Id,out var type)||!type.Levels.Any(r=>r.Level==g.Level)||level is null||type.HeroLevelRequired>level.Level||!slots.Add(type.Slot)){missing.Add("valid gear slots / levels");break;}}
+        if(stage is not null)foreach(var skill in h.Skills){int cap=stage.SkillCaps.ElementAtOrDefault(skill.Slot);if(cap==0)continue;if(saved?.Skills is null||!saved.Skills.TryGetValue(skill.Id,out int n)||n<0||n>cap||n>0&&!skill.Levels.Any(r=>r.Level==n))missing.Add(skill.Name+" level");}
+        return missing;
+    }
+    public static HeroEstimate Evaluate(string slug, HeroBuild? saved, UpgradeData upgrades, EstimateData estimates, int battleSeconds = 0, double[]? externalFlat = null, bool requireRecorded = false)
+    {
+        if(requireRecorded){var missing=MissingBuild(slug,saved,upgrades);if(missing.Count>0)return new(0,0,0,0,0,"Incomplete build",Comparable:false,MissingFields:missing.ToArray());saved=saved!.Copy();var lockedStage=upgrades.Heroes[slug].Stages.Single(s=>s.Id==saved.Stage);foreach(var skill in upgrades.Heroes[slug].Skills)if(lockedStage.SkillCaps.ElementAtOrDefault(skill.Slot)==0)saved.Skills[skill.Id]=0;}
         var model = estimates.Heroes[slug]; var data = upgrades.Heroes[slug];
         var stage = data.Stages.Find(s => s.Id == saved?.Stage) ?? data.Stages.Find(s => s.Id == model.ReferenceStage)!;
         int levelNumber = Math.Min(saved?.Level is int n && data.Levels.Any(l => l.Level == n) ? n : model.ReferenceLevel, stage.LevelMax);
@@ -222,7 +233,7 @@ public static class EstimateModel
         (double offense, double durability, double score) Calculate(double damageFactor, double utilityFactor)
         {
             double o = 100 * stats[0] * (1 + .5 * Math.Log(1 + damage * damageFactor)) / estimates.Scales[0];
-            double d = 100 * (.7 * stats[2] + 30 * stats[1]) * (1 + .08 * utility * utilityFactor) / estimates.Scales[1];
+            double d = 100 * (.7 * stats[2] + 30 * stats[1]) / estimates.Scales[1];
             double u = 100 * (1 + utility * utilityFactor) / estimates.Scales[2];
             return (o, d, .55 * o + .35 * d + .1 * u);
         }

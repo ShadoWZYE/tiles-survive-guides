@@ -102,7 +102,7 @@ public partial class MainWindow : Window
             var flat = _flatIndices[hero.AssetSlug];
             var context=ArmyContextModel.Resolve(hero.AssetSlug,_armyContext,_armyContextData,_comparisonBasis);
             var result = _comparisonBasis == "flat" ? new HeroEstimate(flat.Offense, flat.Durability, flat.Score, flat.Score, flat.Score, "Flat max stats") :
-                EstimateModel.Evaluate(hero.AssetSlug, _comparisonBasis == "recorded" ? _heroBuilds.GetValueOrDefault(hero.AssetSlug) : null, _upgradeData, _estimates, _battleSeconds,context.Flat);
+                EstimateModel.Evaluate(hero.AssetSlug, _comparisonBasis == "recorded" ? _heroBuilds.GetValueOrDefault(hero.AssetSlug) : null, _upgradeData, _estimates, _battleSeconds,context.Flat,_comparisonBasis=="recorded");
             hero.Estimate = result;
             hero.CombatEvidenceNote = (_battleSeconds == 0 ? "Sustained comparison. " : $"Opening {_battleSeconds} game seconds: initial delays, a shared casting slot and remaining periodic ticks. Known immediate hits and buffs use their timeline offsets, including in-progress casts. Other effects keep the completion fallback. One casting slot per hero, configured priority, speed 1 and no interruptions or deaths; utility weights unchanged. Unresolved cast paths retain their sustained proxy. ") + EstimateModel.EvidenceSummary(_estimates.Heroes[hero.AssetSlug]);
             if(result.RawHealingPotential is {Count:>0})
@@ -467,7 +467,7 @@ public partial class MainWindow : Window
     private void UpdateSquadPresentation()
     {
         if (OptimizerPanel is null || TopConfigurationsPanel is null || FormationGuidePanel is null) return;
-        bool complete = _selected.Count == 5;
+        bool complete = _selected.Count == 5 && _selected.All(h=>h.Estimate?.Comparable!=false);
         OptimizerPanel.Visibility = complete ? Visibility.Collapsed : Visibility.Visible;
         TopConfigurationsPanel.Visibility = complete ? Visibility.Collapsed : Visibility.Visible;
         FormationGuidePanel.Visibility = complete ? Visibility.Visible : Visibility.Collapsed;
@@ -554,7 +554,7 @@ public partial class MainWindow : Window
     private void RebuildOptimizer()
     {
         if (TopSquads is null || RoleCoverage is null || ModePicker is null || AccessPicker is null) return;
-        var pool = _heroes.Where(MatchesAccess).ToList();
+        var pool = _heroes.Where(MatchesAccess).Where(h=>h.Estimate?.Comparable!=false).ToList();
         var results = FindTopSquads(pool, CurrentMode, RoleCoverage.IsChecked == true, 20, _enemyFaction);
         _topSquads.Clear();
         for (int i = 0; i < results.Count; i++)
@@ -573,12 +573,13 @@ public partial class MainWindow : Window
             });
         }
         TopConfigurationsStatus.Text = results.Count == 0
-            ? CurrentAccess == "Owned only" ? "Mark at least five compatible owned heroes in ROSTER." : $"No valid five-hero squad in {CurrentAccess}."
+            ? _comparisonBasis=="recorded" ? "Record complete rank, level, skills and gear for at least five compatible heroes in MY ROSTER." : CurrentAccess == "Owned only" ? "Mark at least five compatible owned heroes in ROSTER." : $"No valid five-hero squad in {CurrentAccess}."
             : $"{results.Count} highest-scoring configurations • {CurrentMode switch { PlannerMode.Pve => "PvE farming", _ => CurrentMode.ToString() }} • {CurrentAccess} • shown front-to-back";
     }
 
     private static List<SquadResult> FindTopSquads(IReadOnlyList<Hero> pool, PlannerMode mode, bool requireRoleCoverage, int limit, string enemyFaction = "Unknown")
     {
+        pool=pool.Where(h=>h.Estimate?.Comparable!=false).ToList();
         var best = new PriorityQueue<SquadResult, double>();
         int count = pool.Count;
         if (count < 5 || limit <= 0) return [];
@@ -730,7 +731,7 @@ public partial class MainWindow : Window
                 interactions?.Insert(0, $"{staminaHero.Name}: maximum configured Stamina economy −{staminaHero.StaminaReductionPercent:0.#}% (excluded from combat score)");
         }
 
-        double capped = passiveBonus + Math.Min(6.0, bonus);
+        double capped = passiveBonus; // No uncalibrated trait-presence score on top of individual utility.
         if (!includeSummary) return (capped, "");
         string summary = interactions!.Count == 0
             ? "No modeled cross-skill pairing"
@@ -790,6 +791,11 @@ public partial class MainWindow : Window
             return;
         }
 
+        if (_comparisonBasis=="recorded")
+        {
+            owned=owned.Where(h=>h.Estimate?.Comparable!=false).ToList();unowned=unowned.Where(h=>h.Estimate?.Comparable!=false).ToList();
+            if(owned.Count<5){UnlockRecommendation.Text="Record complete rank, level, unlocked skills and equipped gear (or none) for five owned heroes before comparing your current squad.";ResourceRecommendation.Text="Unrecorded heroes are excluded from My builds; switch to Equal builds for hypothetical unlock comparisons.";return;}
+        }
         bool coverage = RoleCoverage?.IsChecked == true;
         var current = FindTopSquads(owned, CurrentMode, coverage, 1, _enemyFaction).FirstOrDefault()
             ?? FindTopSquads(owned, CurrentMode, false, 1, _enemyFaction).First();

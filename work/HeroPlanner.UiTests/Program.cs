@@ -50,11 +50,11 @@ internal static class Program
         var protector = new Hero { Name="Protector", Skills=[new() { InternalName="shield", GameDescription="shield" }],
             Estimate=new(100,100,100,100,100,"Recorded build",ActiveSkillIds:["shield"]) };
         (double Bonus,string Summary) Synergy() => ((double,string))synergyMethod.Invoke(null,[new List<Hero>{healer,protector},PlannerMode.Balanced,true])!;
-        Check(healer.HasMechanic("Healing") && Synergy().Bonus>0,"Unlocked support pairing not recognized");
+        Check(healer.HasMechanic("Healing") && Synergy().Bonus==0,"Trait presence added duplicate utility credit");
         healer.Estimate=healer.Estimate! with { ActiveSkillIds=[] };
         Check(!healer.HasMechanic("Healing") && Synergy().Bonus==0,"Locked healing still receives synergy or stale cached tags");
         healer.Estimate=healer.Estimate! with { ActiveSkillIds=["heal"] };
-        Check(healer.HasMechanic("Healing") && Synergy().Bonus>0,"Re-unlocked healing did not refresh synergy");
+        Check(healer.HasMechanic("Healing") && Synergy().Bonus==0,"Re-unlocked healing added duplicate utility credit");
         var economyHero = new Hero { OffenseIndex=100,DurabilityIndex=100,CompositeIndex=100,
             Skills=[new() { MaxLevelOverallBenefits=[new() { Name="prop_intel_stamina_reduce_percent",Value=-.3 }] }] };
         var scoreMethod=typeof(MainWindow).GetMethod("ScoreHero",BindingFlags.Static|BindingFlags.NonPublic)!;
@@ -184,8 +184,16 @@ internal static class Program
         var topCandidates = xpCards.Children.OfType<Border>().Select(b => ((StackPanel)b.Child).Children.OfType<WrapPanel>().Single().Children.OfType<Button>().First()).Select(b => (UpgradeCandidate)b.Tag).ToList();
         var expectedTop = UpgradeModel.Evaluate(new[] { "rosie", "layla", "becca", "ray", "maddie" },
             Field<Dictionary<string, HeroBuild>>(window, "_heroBuilds"), data, settings).Candidates.Where(c => c.Group == "hero-xp" && c.Blocked is null && c.Gain is not null)
-            .OrderByDescending(c => c.Gain).ThenByDescending(c => c.Efficiency).ThenBy(c => c.Label, StringComparer.Ordinal).Take(3).Select(c => c.Label);
-        Check(topCandidates.Select(c => c.Label).SequenceEqual(expectedTop), "Top three are not ordered by percentage increase");
+            .OrderByDescending(c => c.Efficiency).ThenByDescending(c => c.Gain).ThenBy(c => c.Label, StringComparer.Ordinal).Take(3).Select(c => c.Label);
+        Check(topCandidates.Select(c => c.Label).SequenceEqual(expectedTop), "XP top three are not ordered by gain per XP");
+        var gearChoices = new UpgradeResult { Candidates = [
+            new("becca", "Costly gain", "gear", new() {{"gear-xp",1000}}, "gear-xp",8,.8,"unknown","",null,false,null),
+            new("rosie", "Cheaper efficient gain", "gear", new() {{"gear-xp",100}}, "gear-xp",4,4,"unknown","",null,false,null)] };
+        var gearPanel = new StackPanel();
+        Invoke(window,"RenderUpgradeGroups",gearPanel,gearChoices,"all",true);
+        var gearContent=(StackPanel)gearPanel.Children.OfType<Expander>().Single().Content;
+        var bestGear=(UpgradeCandidate)((StackPanel)gearContent.Children.OfType<Border>().First().Child).Children.OfType<WrapPanel>().Single().Children.OfType<Button>().First().Tag;
+        Check(bestGear.Label=="Cheaper efficient gain","Gear XP cards preferred larger raw gain over better XP value");
         Check(xpCards.Children.OfType<Border>().All(b => ((StackPanel)b.Child).Children.OfType<TextBox>().All(t => t.IsReadOnly)), "Priority card text is not selectable read-only text");
         settings.Inventory["hero-xp"] = 0;
         Invoke(window, "RecordUpgrade_Click", new Button { Tag = candidate }, new RoutedEventArgs());

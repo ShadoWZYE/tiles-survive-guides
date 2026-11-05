@@ -12,11 +12,12 @@ from export_client_asset import locate_bundle
 parser=argparse.ArgumentParser(description=__doc__)
 for name in ['packaged-assets','downloaded-assets','asset-index','bundle-list','upgrade-data','hero-data','output']:
  parser.add_argument('--'+name,type=Path,required=True)
+parser.add_argument('--asset-build',help='Explicit cache revision when newer than the installed executable')
 args=parser.parse_args();pkg=args.packaged_assets;dl=args.downloaded_assets
 roster=json.loads(args.hero_data.read_text(encoding='utf-8'))
 progression=json.loads(args.upgrade_data.read_text(encoding='utf-8'))
 index=args.asset_index;lst=args.bundle_list
-if not index.name.endswith('_'+progression['client_build']+'.json'):
+if not index.name.endswith('_'+(args.asset_build or progression['client_build'])+'.json'):
  raise ValueError('Asset index must identify the progression native build')
 am=asset_bundle_ids(index,{'model_survivor_'+h['asset_slug'] for h in roster})
 if len(am)!=len(roster):raise ValueError('Missing hero model asset indices')
@@ -64,6 +65,6 @@ for hero in roster:
  if 'attack' not in takes:raise ValueError('Missing bound attack clip: '+slug)
  print('MAPPED',slug,{k:round(v['duration_seconds'],4) for k,v in takes.items() if k in ['attack','attack02','skill']},flush=True)
 used={h['model_bundle_id'] for h in heroes.values()}|{v['bundle_id'] for h in heroes.values() for v in h['takes'].values()}|templates
-result={'version':1,'client_build':progression['client_build'],'scope':'Base model override-clip durations at unit speed; no battle scheduling or live-patch verification.','provenance':{'config_pack_sha256':progression['provenance']['config_pack_sha256'],'manifest_sha256':progression['provenance']['manifest_sha256'],'asset_index_sha256':hashlib.sha256(index.read_bytes()).hexdigest(),'bundle_list_sha256':hashlib.sha256(lst.read_bytes()).hexdigest(),'bundles':{str(k):v for k,v in provenance.items() if k in used}},'heroes':heroes}
+result={'version':1,'client_build':progression['client_build'],'scope':'Base model override-clip durations at unit speed; no battle scheduling or live-patch verification.','provenance':{'config_pack_sha256':progression['provenance']['config_pack_sha256'],'manifest_sha256':progression['provenance']['manifest_sha256'],'asset_build':args.asset_build or progression['client_build'],'asset_index_sha256':hashlib.sha256(index.read_bytes()).hexdigest(),'bundle_list_sha256':hashlib.sha256(lst.read_bytes()).hexdigest(),'bundles':{str(k):v for k,v in provenance.items() if k in used}},'heroes':heroes}
 args.output.write_text(json.dumps(result,indent=2)+'\n',encoding='utf-8')
 print('Mapped',len(heroes),'heroes')

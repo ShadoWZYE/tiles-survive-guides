@@ -1,19 +1,19 @@
 {
   "coverage": {
-    "configured_levels": 360,
+    "configured_levels": 380,
     "levels_with_gear_skill_addition": 0,
     "levels_with_explicit_slg_skill_benefits": 0,
     "levels_with_legacy_se_overall_benefits": 15
   },
-  "audited_date": "2026-11-04",
+  "audited_date": "2026-11-05",
   "scope": "Configuration links, not verified combat outcomes or buff formulas.",
   "source_hashes": {
-    "survivor_exclusive_gear_main": "21aaf73969f5b63aeb6432523927c2a200ba353bd022cca6e20cc71adc938eb9",
-    "survivor_skill_main": "aa333bf9fe8c22d07aa602ba4ff209c2ead77d0a7a92e1271f68232601c7d934",
-    "survivor_skill_type": "1c91aabb69917c7e4105e0790a4585aa0078aaf3f8b110b9b24379a5d375c3e5",
-    "survivor_slg_skill_new": "a0779e42174fcc220c88ef5b80bd18c537ff67ad2ac079bc44dc225d73442839",
-    "survivor_slg_effect_new": "e5e175d2784d3329e1035be1a323a87687e93fadad2bfa23e174ba58cead9bc3",
-    "effect_buff": "398b00bf619af1719fd9d3a25de76ba198838c1a786cbb71bb87d14905500f8a"
+    "survivor_exclusive_gear_main": "272dc34ca70e5c9b0a5f206dd55eb50259f699609584e60407174c638e96d16a",
+    "survivor_skill_main": "fb1354684941eacf65f3a2c0ce1d2bf3ac60fb7c0ca02f03c8f3bedc72e6a9a9",
+    "survivor_skill_type": "2e77c65f30354614116c4fb60be1683a64daa073246c23434e7c4d54f9f7510b",
+    "survivor_slg_skill_new": "92947c757a5fdfa048545d875cae80d8295a66888ffcbc1a750432fbbb71d5ac",
+    "survivor_slg_effect_new": "9d2275515446c1fdf3348b1f25b6c353ce42b66e9bf19f1aae28e78d33806662",
+    "effect_buff": "92a3445a69af56e9bedbae93cf262faf1959273c8470f960ab6c7b7be88d932a"
   },
   "level_one_links": [
     {
@@ -408,6 +408,23 @@
       "effects": [
         {
           "id": "alita_gear_skill_lite_1",
+          "type": 11100
+        }
+      ],
+      "legacy_se_overall_benefits": [],
+      "explicit_slg_skill_benefits": [],
+      "gear_skill_addition": {},
+      "score_status": "excluded_pending_runtime_semantics"
+    },
+    {
+      "gear": "mitch_gear_1",
+      "skill": "mitch_gear_skill_1_1",
+      "skill_type": "mitch_gear_skill_1",
+      "raid_new_skill": null,
+      "lite_skill": "mitch_gear_skill_lite_1",
+      "effects": [
+        {
+          "id": "mitch_gear_skill_lite_1",
           "type": 11100
         }
       ],

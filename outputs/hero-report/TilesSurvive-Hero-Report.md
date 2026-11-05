@@ -1,6 +1,6 @@
 # Tiles Survive hero asset report
 
-Source: local installed client configuration pack, client `2.6.300.293`.
+Source: local installed client configuration pack, client `2.6.400.304`.
 
 This report contains 29 independently playable base heroes. Chief avatars, monsters, and six `_orange` awakening/rarity-up replacement records are excluded from the ranking. Account power is intentionally not used as a release or identity key because it changes frequently. Rarity labels use the verified in-game mapping: code 4 is SSR, 3 is SR, and 2 is R.
 
@@ -35,12 +35,12 @@ The composite index uses max-level values from this client: 40% configured battl
 | 1 | Undine | Sea | Mid | SSR | 100.0 | 1 | 1 | 32-34 | 2.4.500 |
 | 1 | Dave | Sea | Mid | SSR | 100.0 | 1 | 1 | 34-36 | 2.5.500 |
 | 1 | Lava | Mountain | Melee | SSR | 100.0 | 1 | 1 | 36-38 | 2.6.200 |
-| 22 | Lucky | Sky | Range | SR | 60.47 | 22 | 22 | - | - |
-| 22 | Sarge | Sky | Range | SR | 60.47 | 22 | 22 | - | - |
-| 22 | Chef | Mountain | Melee | SR | 60.47 | 22 | 22 | - | - |
-| 22 | Freja | Mountain | Mid | SR | 60.47 | 22 | 22 | - | - |
-| 22 | Travis | Wasteland | Mid | SR | 60.47 | 22 | 22 | - | - |
-| 22 | Eva | Wasteland | Melee | SR | 60.47 | 22 | 22 | - | - |
+| 22 | Lucky | Sky | Range | SR | 66.06 | 22 | 22 | - | - |
+| 22 | Sarge | Sky | Range | SR | 66.06 | 22 | 22 | - | - |
+| 22 | Chef | Mountain | Melee | SR | 66.06 | 22 | 22 | - | - |
+| 22 | Freja | Mountain | Mid | SR | 66.06 | 22 | 22 | - | - |
+| 22 | Travis | Wasteland | Mid | SR | 66.06 | 22 | 22 | - | - |
+| 22 | Eva | Wasteland | Melee | SR | 66.06 | 22 | 22 | - | - |
 | 28 | Rusty | Mountain | Melee | R | 0.0 | 28 | 28 | - | - |
 | 28 | Ghost | Wasteland | Mid | R | 0.0 | 28 | 28 | - | - |
 

@@ -1,5 +1,5 @@
 {
-  "audited_date": "2026-11-04",
+  "audited_date": "2026-11-05",
   "scope": "Individual Balanced estimate sensitivity, controlled reference builds under My builds context; not full-squad rankings, live outcomes, or win probabilities.",
   "weights_changed": false,
   "weights": {
@@ -9,23 +9,23 @@
   },
   "formula": "flat source bonuses added to ATK/DEF/HP before modeled in-battle passive modifiers; fixed normalization anchors retained",
   "sources": {
-    "survivor_exclusive_gear": "04541c031a995cc9cea9ad8815a3e1a0d589333fe9fc20adc730bea0dfb3778d",
-    "survivor_exclusive_gear_main": "21aaf73969f5b63aeb6432523927c2a200ba353bd022cca6e20cc71adc938eb9",
-    "research_main": "aa3c8a898ccaadb7d3096c4646785fe53c7ad532a43ad40859bd5b03bfd90d5e",
+    "survivor_exclusive_gear": "8f8383ce027fb7af1d5295270b28874802eb0a84af6eb2c4eb24d1cfb7bead72",
+    "survivor_exclusive_gear_main": "272dc34ca70e5c9b0a5f206dd55eb50259f699609584e60407174c638e96d16a",
+    "research_main": "a05047cb2662ba4a7857c2bcfffd8c5d78f6f875f688ad1abe709d785c59c87b",
     "research_group": "7fac4350425d369567560f1f30d46867194d31dccc6a2f7d70f1ceb8e74273eb",
     "research_tree": "4590f66afd93823dc2740abd2fcdc45fbb828901a18b6c0f3f4248fff7a086fc",
-    "benefits": "755d06008f624b9f050132878b6cec55189bf7ff6b633a2930552a3c3196eec6",
+    "benefits": "27aff0b4cf8166cb0785bbe692ce0c6f859eb5849653b4725ba10add1c85bf86",
     "benefits_map": "78e3cca9579c57dfb89e0fa4a6c7549dfac3961651d6b8927285d14e2bbea420",
-    "benefit_calc": "eb3e770a1879a83a47fa2059b453cefe535b38efea56f4d3904a8d22e1173787",
+    "benefit_calc": "daafbe5cc9bea8278262bd9c4affb87aa969d64f580a855f826df4675ac71e63",
     "behemoth_base": "f11b6128be98b80ac5b9057fe07f8b1cf71d727e62264a1e6102177c79821617",
     "behemoth_level": "4edb39ae8101db06e7f8325aee6d8982b23f7a5d3684644e20657a64bde8a3d6",
     "behemoth_star_level": "dc9203f5f90bf75c2d2cec40505138ea12b0f8226cec9d5d704891486bff67bf",
     "behemoth_base_data": "4c258ede2f29b57e679838e45e6995952c0d2b3cf74f6c5f2e880811b62a5030",
-    "survivor_skill_main": "aa333bf9fe8c22d07aa602ba4ff209c2ead77d0a7a92e1271f68232601c7d934",
-    "survivor_skill_type": "1c91aabb69917c7e4105e0790a4585aa0078aaf3f8b110b9b24379a5d375c3e5",
-    "survivor_slg_skill_new": "a0779e42174fcc220c88ef5b80bd18c537ff67ad2ac079bc44dc225d73442839",
-    "survivor_slg_effect_new": "e5e175d2784d3329e1035be1a323a87687e93fadad2bfa23e174ba58cead9bc3",
-    "effect_buff": "398b00bf619af1719fd9d3a25de76ba198838c1a786cbb71bb87d14905500f8a",
+    "survivor_skill_main": "fb1354684941eacf65f3a2c0ce1d2bf3ac60fb7c0ca02f03c8f3bedc72e6a9a9",
+    "survivor_skill_type": "2e77c65f30354614116c4fb60be1683a64daa073246c23434e7c4d54f9f7510b",
+    "survivor_slg_skill_new": "92947c757a5fdfa048545d875cae80d8295a66888ffcbc1a750432fbbb71d5ac",
+    "survivor_slg_effect_new": "9d2275515446c1fdf3348b1f25b6c353ce42b66e9bf19f1aae28e78d33806662",
+    "effect_buff": "92a3445a69af56e9bedbae93cf262faf1959273c8470f960ab6c7b7be88d932a",
     "game_configs": "7297bc64868b0f61ea14388ce63f5d6153a8240ac6ab1982b650c12e29b83242"
   },
   "scenarios": [
@@ -36,16 +36,16 @@
       },
       "top_five": [
         "lava",
-        "mike",
+        "tithi",
+        "ragnar",
         "nikola",
-        "maddie",
-        "tithi"
+        "becca"
       ],
       "heroes_changing_rank": 0,
       "rows": [
         {
           "slug": "lava",
-          "score": 87.52246386353939,
+          "score": 93.18736141906874,
           "flat": [
             0,
             0,
@@ -56,8 +56,8 @@
           "baseline_rank": 1
         },
         {
-          "slug": "mike",
-          "score": 84.48455215255254,
+          "slug": "tithi",
+          "score": 82.75654326709751,
           "flat": [
             0,
             0,
@@ -68,8 +68,8 @@
           "baseline_rank": 2
         },
         {
-          "slug": "nikola",
-          "score": 82.11686065697458,
+          "slug": "ragnar",
+          "score": 81.82958412234065,
           "flat": [
             0,
             0,
@@ -80,8 +80,8 @@
           "baseline_rank": 3
         },
         {
-          "slug": "maddie",
-          "score": 78.07622675201986,
+          "slug": "nikola",
+          "score": 81.66633396175786,
           "flat": [
             0,
             0,
@@ -92,8 +92,8 @@
           "baseline_rank": 4
         },
         {
-          "slug": "tithi",
-          "score": 75.69840795747179,
+          "slug": "becca",
+          "score": 81.44583587824181,
           "flat": [
             0,
             0,
@@ -104,8 +104,8 @@
           "baseline_rank": 5
         },
         {
-          "slug": "ray",
-          "score": 75.19200956011015,
+          "slug": "maddie",
+          "score": 81.27856265375353,
           "flat": [
             0,
             0,
@@ -116,8 +116,8 @@
           "baseline_rank": 6
         },
         {
-          "slug": "ragnar",
-          "score": 74.67979450229055,
+          "slug": "mike",
+          "score": 80.27489532758653,
           "flat": [
             0,
             0,
@@ -128,8 +128,8 @@
           "baseline_rank": 7
         },
         {
-          "slug": "becca",
-          "score": 74.38770056861607,
+          "slug": "chiron",
+          "score": 80.14070106206874,
           "flat": [
             0,
             0,
@@ -140,8 +140,8 @@
           "baseline_rank": 8
         },
         {
-          "slug": "layla",
-          "score": 74.3023602786659,
+          "slug": "ray",
+          "score": 79.61196632749395,
           "flat": [
             0,
             0,
@@ -152,8 +152,8 @@
           "baseline_rank": 9
         },
         {
-          "slug": "tara",
-          "score": 73.46373364601966,
+          "slug": "wright",
+          "score": 78.9640628149494,
           "flat": [
             0,
             0,
@@ -164,8 +164,8 @@
           "baseline_rank": 10
         },
         {
-          "slug": "chiron",
-          "score": 73.06423489035815,
+          "slug": "tarzan",
+          "score": 77.56307170795851,
           "flat": [
             0,
             0,
@@ -177,7 +177,7 @@
         },
         {
           "slug": "rosie",
-          "score": 72.2911197647218,
+          "score": 77.03506337062652,
           "flat": [
             0,
             0,
@@ -188,8 +188,8 @@
           "baseline_rank": 12
         },
         {
-          "slug": "wright",
-          "score": 71.90592750532367,
+          "slug": "tara",
+          "score": 76.91322595899958,
           "flat": [
             0,
             0,
@@ -200,8 +200,8 @@
           "baseline_rank": 13
         },
         {
-          "slug": "tarzan",
-          "score": 70.44994381207816,
+          "slug": "layla",
+          "score": 76.26412371455594,
           "flat": [
             0,
             0,
@@ -212,8 +212,8 @@
           "baseline_rank": 14
         },
         {
-          "slug": "shark",
-          "score": 70.04524106063869,
+          "slug": "knotty",
+          "score": 76.02814809112621,
           "flat": [
             0,
             0,
@@ -224,8 +224,8 @@
           "baseline_rank": 15
         },
         {
-          "slug": "knotty",
-          "score": 68.97001278150049,
+          "slug": "dave",
+          "score": 73.43468082159168,
           "flat": [
             0,
             0,
@@ -236,8 +236,8 @@
           "baseline_rank": 16
         },
         {
-          "slug": "candy",
-          "score": 67.81415271377305,
+          "slug": "shark",
+          "score": 72.95943469255205,
           "flat": [
             0,
             0,
@@ -248,8 +248,8 @@
           "baseline_rank": 17
         },
         {
-          "slug": "undine",
-          "score": 67.7286949354934,
+          "slug": "candy",
+          "score": 72.23410948115685,
           "flat": [
             0,
             0,
@@ -260,8 +260,8 @@
           "baseline_rank": 18
         },
         {
-          "slug": "dave",
-          "score": 66.37654551196594,
+          "slug": "undine",
+          "score": 71.96407912705416,
           "flat": [
             0,
             0,
@@ -272,8 +272,8 @@
           "baseline_rank": 19
         },
         {
-          "slug": "jacob",
-          "score": 64.44669900712151,
+          "slug": "tony",
+          "score": 71.2099385379034,
           "flat": [
             0,
             0,
@@ -284,8 +284,8 @@
           "baseline_rank": 20
         },
         {
-          "slug": "tony",
-          "score": 64.0601489178533,
+          "slug": "jacob",
+          "score": 69.19064261302623,
           "flat": [
             0,
             0,
@@ -297,7 +297,7 @@
         },
         {
           "slug": "freja",
-          "score": 54.903800604916874,
+          "score": 56.83886742904607,
           "flat": [
             0,
             0,
@@ -308,8 +308,8 @@
           "baseline_rank": 22
         },
         {
-          "slug": "lucky",
-          "score": 50.47523499697842,
+          "slug": "travis",
+          "score": 54.231526127315625,
           "flat": [
             0,
             0,
@@ -320,8 +320,8 @@
           "baseline_rank": 23
         },
         {
-          "slug": "travis",
-          "score": 49.32878555259858,
+          "slug": "lucky",
+          "score": 53.399526404636894,
           "flat": [
             0,
             0,
@@ -333,7 +333,7 @@
         },
         {
           "slug": "ken",
-          "score": 48.15791913263145,
+          "score": 51.383182019908226,
           "flat": [
             0,
             0,
@@ -345,7 +345,7 @@
         },
         {
           "slug": "sarge",
-          "score": 45.87870548180252,
+          "score": 50.78144605651956,
           "flat": [
             0,
             0,
@@ -357,7 +357,7 @@
         },
         {
           "slug": "eva",
-          "score": 45.029915900532856,
+          "score": 49.9326564752499,
           "flat": [
             0,
             0,
@@ -369,7 +369,7 @@
         },
         {
           "slug": "rusty",
-          "score": 40.9722225952512,
+          "score": 42.31457458567604,
           "flat": [
             0,
             0,
@@ -381,7 +381,7 @@
         },
         {
           "slug": "tim",
-          "score": 34.3607211043778,
+          "score": 37.6731905747162,
           "flat": [
             0,
             0,
@@ -405,16 +405,16 @@
       },
       "top_five": [
         "lava",
-        "mike",
+        "tithi",
+        "ragnar",
         "nikola",
-        "maddie",
-        "tithi"
+        "becca"
       ],
-      "heroes_changing_rank": 0,
+      "heroes_changing_rank": 2,
       "rows": [
         {
           "slug": "lava",
-          "score": 89.34482079857345,
+          "score": 95.13213188133426,
           "flat": [
             348,
             70,
@@ -425,8 +425,8 @@
           "baseline_rank": 1
         },
         {
-          "slug": "mike",
-          "score": 86.40647060780933,
+          "slug": "tithi",
+          "score": 84.8561670719059,
           "flat": [
             348,
             70,
@@ -437,8 +437,8 @@
           "baseline_rank": 2
         },
         {
-          "slug": "nikola",
-          "score": 84.04915445808045,
+          "slug": "ragnar",
+          "score": 83.90534785387199,
           "flat": [
             348,
             70,
@@ -449,8 +449,8 @@
           "baseline_rank": 3
         },
         {
-          "slug": "maddie",
-          "score": 79.97763037442968,
+          "slug": "nikola",
+          "score": 83.58700229543517,
           "flat": [
             348,
             70,
@@ -461,8 +461,8 @@
           "baseline_rank": 4
         },
         {
-          "slug": "tithi",
-          "score": 77.6159024389356,
+          "slug": "becca",
+          "score": 83.51163999213883,
           "flat": [
             348,
             70,
@@ -473,8 +473,8 @@
           "baseline_rank": 5
         },
         {
-          "slug": "ray",
-          "score": 77.04344906918853,
+          "slug": "maddie",
+          "score": 83.26259989613793,
           "flat": [
             348,
             70,
@@ -485,8 +485,8 @@
           "baseline_rank": 6
         },
         {
-          "slug": "ragnar",
-          "score": 76.57105004442998,
+          "slug": "chiron",
+          "score": 82.17284085319491,
           "flat": [
             348,
             70,
@@ -494,11 +494,11 @@
           ],
           "notes": [],
           "rank": 7,
-          "baseline_rank": 7
+          "baseline_rank": 8
         },
         {
-          "slug": "becca",
-          "score": 76.27137535916854,
+          "slug": "mike",
+          "score": 82.08819100076039,
           "flat": [
             348,
             70,
@@ -506,11 +506,11 @@
           ],
           "notes": [],
           "rank": 8,
-          "baseline_rank": 8
+          "baseline_rank": 7
         },
         {
-          "slug": "layla",
-          "score": 76.07780640035112,
+          "slug": "ray",
+          "score": 81.57745915234794,
           "flat": [
             348,
             70,
@@ -521,8 +521,8 @@
           "baseline_rank": 9
         },
         {
-          "slug": "tara",
-          "score": 75.25025006121469,
+          "slug": "wright",
+          "score": 80.96583066978023,
           "flat": [
             348,
             70,
@@ -533,8 +533,8 @@
           "baseline_rank": 10
         },
         {
-          "slug": "chiron",
-          "score": 74.91376958493028,
+          "slug": "tarzan",
+          "score": 79.52872505839397,
           "flat": [
             348,
             70,
@@ -546,7 +546,7 @@
         },
         {
           "slug": "rosie",
-          "score": 74.07421607054745,
+          "score": 78.94057320368364,
           "flat": [
             348,
             70,
@@ -557,8 +557,8 @@
           "baseline_rank": 12
         },
         {
-          "slug": "wright",
-          "score": 73.72556603680995,
+          "slug": "tara",
+          "score": 78.78876031945057,
           "flat": [
             348,
             70,
@@ -569,8 +569,8 @@
           "baseline_rank": 13
         },
         {
-          "slug": "tarzan",
-          "score": 72.23204051954066,
+          "slug": "layla",
+          "score": 78.090188029039,
           "flat": [
             348,
             70,
@@ -581,8 +581,8 @@
           "baseline_rank": 14
         },
         {
-          "slug": "shark",
-          "score": 71.73170254326693,
+          "slug": "knotty",
+          "score": 77.95416164004095,
           "flat": [
             348,
             70,
@@ -593,8 +593,8 @@
           "baseline_rank": 15
         },
         {
-          "slug": "knotty",
-          "score": 70.71389700707066,
+          "slug": "dave",
+          "score": 75.29377610774982,
           "flat": [
             348,
             70,
@@ -605,8 +605,8 @@
           "baseline_rank": 16
         },
         {
-          "slug": "candy",
-          "score": 69.47522415118796,
+          "slug": "shark",
+          "score": 74.72109452304304,
           "flat": [
             348,
             70,
@@ -617,8 +617,8 @@
           "baseline_rank": 17
         },
         {
-          "slug": "undine",
-          "score": 69.44054990248786,
+          "slug": "candy",
+          "score": 74.00923423434737,
           "flat": [
             348,
             70,
@@ -629,8 +629,8 @@
           "baseline_rank": 18
         },
         {
-          "slug": "dave",
-          "score": 68.05351147477954,
+          "slug": "undine",
+          "score": 73.78522902953179,
           "flat": [
             348,
             70,
@@ -641,8 +641,8 @@
           "baseline_rank": 19
         },
         {
-          "slug": "jacob",
-          "score": 66.0273886677596,
+          "slug": "tony",
+          "score": 73.01168753944407,
           "flat": [
             348,
             70,
@@ -653,8 +653,8 @@
           "baseline_rank": 20
         },
         {
-          "slug": "tony",
-          "score": 65.67738973000206,
+          "slug": "jacob",
+          "score": 70.89374580089577,
           "flat": [
             348,
             70,
@@ -666,7 +666,7 @@
         },
         {
           "slug": "freja",
-          "score": 56.768335188586484,
+          "score": 58.77528678938989,
           "flat": [
             348,
             70,
@@ -677,8 +677,8 @@
           "baseline_rank": 22
         },
         {
-          "slug": "lucky",
-          "score": 52.21644140655271,
+          "slug": "travis",
+          "score": 56.19463989040428,
           "flat": [
             348,
             70,
@@ -689,8 +689,8 @@
           "baseline_rank": 23
         },
         {
-          "slug": "travis",
-          "score": 51.109769992342684,
+          "slug": "lucky",
+          "score": 55.24936577310884,
           "flat": [
             348,
             70,
@@ -702,7 +702,7 @@
         },
         {
           "slug": "ken",
-          "score": 49.81909464378664,
+          "score": 53.16416703719032,
           "flat": [
             348,
             70,
@@ -714,7 +714,7 @@
         },
         {
           "slug": "sarge",
-          "score": 47.53152725452728,
+          "score": 52.61639715258888,
           "flat": [
             348,
             70,
@@ -726,7 +726,7 @@
         },
         {
           "slug": "eva",
-          "score": 46.65120706114384,
+          "score": 51.73607695920545,
           "flat": [
             348,
             70,
@@ -738,7 +738,7 @@
         },
         {
           "slug": "rusty",
-          "score": 42.78299629368469,
+          "score": 44.19263953800581,
           "flat": [
             348,
             70,
@@ -750,7 +750,7 @@
         },
         {
           "slug": "tim",
-          "score": 35.98942390634451,
+          "score": 39.46794537030472,
           "flat": [
             348,
             70,
@@ -776,16 +776,16 @@
       },
       "top_five": [
         "lava",
-        "mike",
-        "nikola",
-        "maddie",
-        "tithi"
+        "tithi",
+        "ragnar",
+        "becca",
+        "nikola"
       ],
-      "heroes_changing_rank": 2,
+      "heroes_changing_rank": 6,
       "rows": [
         {
           "slug": "lava",
-          "score": 94.10507803292731,
+          "score": 100.212167807356,
           "flat": [
             1257,
             252,
@@ -799,8 +799,8 @@
           "baseline_rank": 1
         },
         {
-          "slug": "mike",
-          "score": 91.42691579341158,
+          "slug": "tithi",
+          "score": 90.34069060819051,
           "flat": [
             1257,
             252,
@@ -814,8 +814,8 @@
           "baseline_rank": 2
         },
         {
-          "slug": "nikola",
-          "score": 89.09660296492089,
+          "slug": "ragnar",
+          "score": 89.32742800872188,
           "flat": [
             1257,
             252,
@@ -829,8 +829,8 @@
           "baseline_rank": 3
         },
         {
-          "slug": "maddie",
-          "score": 84.94437149452075,
+          "slug": "becca",
+          "score": 88.90782416337044,
           "flat": [
             1257,
             252,
@@ -841,11 +841,11 @@
             "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
           ],
           "rank": 4,
-          "baseline_rank": 4
+          "baseline_rank": 5
         },
         {
-          "slug": "tithi",
-          "score": 82.62465276575001,
+          "slug": "nikola",
+          "score": 88.60408179936873,
           "flat": [
             1257,
             252,
@@ -856,11 +856,11 @@
             "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
           ],
           "rank": 5,
-          "baseline_rank": 5
+          "baseline_rank": 4
         },
         {
-          "slug": "ray",
-          "score": 81.87967377624429,
+          "slug": "maddie",
+          "score": 88.44520335988393,
           "flat": [
             1257,
             252,
@@ -874,8 +874,8 @@
           "baseline_rank": 6
         },
         {
-          "slug": "ragnar",
-          "score": 81.51117193808656,
+          "slug": "chiron",
+          "score": 87.48106764676902,
           "flat": [
             1257,
             252,
@@ -886,11 +886,11 @@
             "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
           ],
           "rank": 7,
-          "baseline_rank": 7
+          "baseline_rank": 8
         },
         {
-          "slug": "becca",
-          "score": 81.19178632092994,
+          "slug": "mike",
+          "score": 86.82487452002371,
           "flat": [
             1257,
             252,
@@ -901,11 +901,11 @@
             "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
           ],
           "rank": 8,
-          "baseline_rank": 8
+          "baseline_rank": 7
         },
         {
-          "slug": "layla",
-          "score": 80.71567491540813,
+          "slug": "ray",
+          "score": 86.71162331857926,
           "flat": [
             1257,
             252,
@@ -919,8 +919,8 @@
           "baseline_rank": 9
         },
         {
-          "slug": "tara",
-          "score": 79.91679138275441,
+          "slug": "wright",
+          "score": 86.19474771603721,
           "flat": [
             1257,
             252,
@@ -934,8 +934,8 @@
           "baseline_rank": 10
         },
         {
-          "slug": "chiron",
-          "score": 79.74498615868956,
+          "slug": "tarzan",
+          "score": 84.66323699380715,
           "flat": [
             1257,
             252,
@@ -950,7 +950,7 @@
         },
         {
           "slug": "rosie",
-          "score": 78.73192183377935,
+          "score": 83.91805765858342,
           "flat": [
             1257,
             252,
@@ -964,8 +964,8 @@
           "baseline_rank": 12
         },
         {
-          "slug": "wright",
-          "score": 78.47870987359671,
+          "slug": "tara",
+          "score": 83.68782754811646,
           "flat": [
             1257,
             252,
@@ -979,8 +979,8 @@
           "baseline_rank": 13
         },
         {
-          "slug": "tarzan",
-          "score": 76.88706821444976,
+          "slug": "knotty",
+          "score": 82.98520321481017,
           "flat": [
             1257,
             252,
@@ -991,11 +991,11 @@
             "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
           ],
           "rank": 14,
-          "baseline_rank": 14
+          "baseline_rank": 15
         },
         {
-          "slug": "shark",
-          "score": 76.13700707531731,
+          "slug": "layla",
+          "score": 82.86029292957386,
           "flat": [
             1257,
             252,
@@ -1006,11 +1006,11 @@
             "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
           ],
           "rank": 15,
-          "baseline_rank": 15
+          "baseline_rank": 14
         },
         {
-          "slug": "knotty",
-          "score": 75.26916537236967,
+          "slug": "dave",
+          "score": 80.15002256514626,
           "flat": [
             1257,
             252,
@@ -1024,8 +1024,8 @@
           "baseline_rank": 16
         },
         {
-          "slug": "undine",
-          "score": 73.91215563547276,
+          "slug": "shark",
+          "score": 79.32283836894194,
           "flat": [
             1257,
             252,
@@ -1036,11 +1036,11 @@
             "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
           ],
           "rank": 17,
-          "baseline_rank": 18
+          "baseline_rank": 17
         },
         {
           "slug": "candy",
-          "score": 73.81419432622617,
+          "score": 78.64614386856114,
           "flat": [
             1257,
             252,
@@ -1051,11 +1051,11 @@
             "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
           ],
           "rank": 18,
-          "baseline_rank": 17
+          "baseline_rank": 18
         },
         {
-          "slug": "dave",
-          "score": 72.43398472270576,
+          "slug": "undine",
+          "score": 78.54235952783172,
           "flat": [
             1257,
             252,
@@ -1069,8 +1069,8 @@
           "baseline_rank": 19
         },
         {
-          "slug": "jacob",
-          "score": 70.15639431468254,
+          "slug": "tony",
+          "score": 77.71802232199074,
           "flat": [
             1257,
             252,
@@ -1084,8 +1084,8 @@
           "baseline_rank": 20
         },
         {
-          "slug": "tony",
-          "score": 69.90176625135543,
+          "slug": "jacob",
+          "score": 75.34253013948661,
           "flat": [
             1257,
             252,
@@ -1100,7 +1100,7 @@
         },
         {
           "slug": "freja",
-          "score": 61.63877413000016,
+          "score": 63.833509061254084,
           "flat": [
             1257,
             252,
@@ -1114,8 +1114,8 @@
           "baseline_rank": 22
         },
         {
-          "slug": "lucky",
-          "score": 56.764730811823206,
+          "slug": "travis",
+          "score": 61.32258978323126,
           "flat": [
             1257,
             252,
@@ -1129,8 +1129,8 @@
           "baseline_rank": 23
         },
         {
-          "slug": "travis",
-          "score": 55.761946675699456,
+          "slug": "lucky",
+          "score": 60.08143513516976,
           "flat": [
             1257,
             252,
@@ -1145,7 +1145,7 @@
         },
         {
           "slug": "ken",
-          "score": 54.158395099675715,
+          "score": 57.816452894943296,
           "flat": [
             1257,
             252,
@@ -1160,7 +1160,7 @@
         },
         {
           "slug": "sarge",
-          "score": 51.84893421282496,
+          "score": 57.40957732035677,
           "flat": [
             1257,
             252,
@@ -1175,7 +1175,7 @@
         },
         {
           "slug": "eva",
-          "score": 50.88625388607537,
+          "score": 56.44689699360718,
           "flat": [
             1257,
             252,
@@ -1190,7 +1190,7 @@
         },
         {
           "slug": "rusty",
-          "score": 47.51300907521621,
+          "score": 49.09843607169536,
           "flat": [
             1257,
             252,
@@ -1205,7 +1205,7 @@
         },
         {
           "slug": "tim",
-          "score": 40.24383387965133,
+          "score": 44.15613002905803,
           "flat": [
             1257,
             252,
@@ -1230,16 +1230,16 @@
       },
       "top_five": [
         "lava",
-        "mike",
+        "tithi",
+        "ragnar",
         "nikola",
-        "maddie",
-        "tithi"
+        "becca"
       ],
       "heroes_changing_rank": 0,
       "rows": [
         {
           "slug": "lava",
-          "score": 87.56686001380328,
+          "score": 93.23175756933264,
           "flat": [
             13,
             0,
@@ -1250,8 +1250,8 @@
           "baseline_rank": 1
         },
         {
-          "slug": "mike",
-          "score": 84.5226109631096,
+          "slug": "tithi",
+          "score": 82.80672416866328,
           "flat": [
             13,
             0,
@@ -1262,8 +1262,8 @@
           "baseline_rank": 2
         },
         {
-          "slug": "nikola",
-          "score": 82.16035644036593,
+          "slug": "ragnar",
+          "score": 81.87850467107641,
           "flat": [
             13,
             0,
@@ -1274,8 +1274,8 @@
           "baseline_rank": 3
         },
         {
-          "slug": "maddie",
-          "score": 78.12208976475947,
+          "slug": "nikola",
+          "score": 81.70982974514921,
           "flat": [
             13,
             0,
@@ -1286,8 +1286,8 @@
           "baseline_rank": 4
         },
         {
-          "slug": "tithi",
-          "score": 75.74858885903755,
+          "slug": "becca",
+          "score": 81.4947534005494,
           "flat": [
             13,
             0,
@@ -1298,8 +1298,8 @@
           "baseline_rank": 5
         },
         {
-          "slug": "ray",
-          "score": 75.23717982162017,
+          "slug": "maddie",
+          "score": 81.32442566649313,
           "flat": [
             13,
             0,
@@ -1310,8 +1310,8 @@
           "baseline_rank": 6
         },
         {
-          "slug": "ragnar",
-          "score": 74.72871505102631,
+          "slug": "mike",
+          "score": 80.31295413814361,
           "flat": [
             13,
             0,
@@ -1322,8 +1322,8 @@
           "baseline_rank": 7
         },
         {
-          "slug": "becca",
-          "score": 74.43661809092366,
+          "slug": "chiron",
+          "score": 80.18828720344972,
           "flat": [
             13,
             0,
@@ -1334,8 +1334,8 @@
           "baseline_rank": 8
         },
         {
-          "slug": "layla",
-          "score": 74.33947015352537,
+          "slug": "ray",
+          "score": 79.65713658900395,
           "flat": [
             13,
             0,
@@ -1346,8 +1346,8 @@
           "baseline_rank": 9
         },
         {
-          "slug": "tara",
-          "score": 73.50517436192773,
+          "slug": "wright",
+          "score": 79.01058817815395,
           "flat": [
             13,
             0,
@@ -1358,8 +1358,8 @@
           "baseline_rank": 10
         },
         {
-          "slug": "chiron",
-          "score": 73.11182103173911,
+          "slug": "tarzan",
+          "score": 77.60802654916168,
           "flat": [
             13,
             0,
@@ -1371,7 +1371,7 @@
         },
         {
           "slug": "rosie",
-          "score": 72.33404928228538,
+          "score": 77.07799288819011,
           "flat": [
             13,
             0,
@@ -1382,8 +1382,8 @@
           "baseline_rank": 12
         },
         {
-          "slug": "wright",
-          "score": 71.95245286852823,
+          "slug": "tara",
+          "score": 76.95466667490764,
           "flat": [
             13,
             0,
@@ -1394,8 +1394,8 @@
           "baseline_rank": 13
         },
         {
-          "slug": "tarzan",
-          "score": 70.49489865328133,
+          "slug": "layla",
+          "score": 76.3012335894154,
           "flat": [
             13,
             0,
@@ -1406,8 +1406,8 @@
           "baseline_rank": 14
         },
         {
-          "slug": "shark",
-          "score": 70.0818306076307,
+          "slug": "knotty",
+          "score": 76.07184355209827,
           "flat": [
             13,
             0,
@@ -1418,8 +1418,8 @@
           "baseline_rank": 15
         },
         {
-          "slug": "knotty",
-          "score": 69.01370824247253,
+          "slug": "dave",
+          "score": 73.47587646240329,
           "flat": [
             13,
             0,
@@ -1430,8 +1430,8 @@
           "baseline_rank": 16
         },
         {
-          "slug": "candy",
-          "score": 67.85221152433013,
+          "slug": "shark",
+          "score": 72.99602423954407,
           "flat": [
             13,
             0,
@@ -1442,8 +1442,8 @@
           "baseline_rank": 17
         },
         {
-          "slug": "undine",
-          "score": 67.77119390117383,
+          "slug": "candy",
+          "score": 72.27216829171391,
           "flat": [
             13,
             0,
@@ -1454,8 +1454,8 @@
           "baseline_rank": 18
         },
         {
-          "slug": "dave",
-          "score": 66.41774115277757,
+          "slug": "undine",
+          "score": 72.00385726790068,
           "flat": [
             13,
             0,
@@ -1466,8 +1466,8 @@
           "baseline_rank": 19
         },
         {
-          "slug": "jacob",
-          "score": 64.48206735690509,
+          "slug": "tony",
+          "score": 71.24862290419698,
           "flat": [
             13,
             0,
@@ -1478,8 +1478,8 @@
           "baseline_rank": 20
         },
         {
-          "slug": "tony",
-          "score": 64.09883328414689,
+          "slug": "jacob",
+          "score": 69.22601096280982,
           "flat": [
             13,
             0,
@@ -1491,7 +1491,7 @@
         },
         {
           "slug": "freja",
-          "score": 54.94788478872967,
+          "score": 56.88295161285886,
           "flat": [
             13,
             0,
@@ -1502,8 +1502,8 @@
           "baseline_rank": 22
         },
         {
-          "slug": "lucky",
-          "score": 50.516084870750035,
+          "slug": "travis",
+          "score": 54.27660751582866,
           "flat": [
             13,
             0,
@@ -1514,8 +1514,8 @@
           "baseline_rank": 23
         },
         {
-          "slug": "travis",
-          "score": 49.373866941111615,
+          "slug": "lucky",
+          "score": 53.44037627840851,
           "flat": [
             13,
             0,
@@ -1527,7 +1527,7 @@
         },
         {
           "slug": "ken",
-          "score": 48.19477093592819,
+          "score": 51.420033823204975,
           "flat": [
             13,
             0,
@@ -1539,7 +1539,7 @@
         },
         {
           "slug": "sarge",
-          "score": 45.918999184478615,
+          "score": 50.82173975919566,
           "flat": [
             13,
             0,
@@ -1551,7 +1551,7 @@
         },
         {
           "slug": "eva",
-          "score": 45.06903173551505,
+          "score": 49.97177231023209,
           "flat": [
             13,
             0,
@@ -1563,7 +1563,7 @@
         },
         {
           "slug": "rusty",
-          "score": 41.014126873017496,
+          "score": 42.356478863442334,
           "flat": [
             13,
             0,
@@ -1575,7 +1575,7 @@
         },
         {
           "slug": "tim",
-          "score": 34.39951322111641,
+          "score": 37.71198269145481,
           "flat": [
             13,
             0,
@@ -1606,7 +1606,7 @@
       "rows": [
         {
           "slug": "lava",
-          "score": 128.5035256455946,
+          "score": 134.16842320112397,
           "flat": [
             12000,
             0,
@@ -1618,7 +1618,7 @@
         },
         {
           "slug": "nikola",
-          "score": 122.26681455667747,
+          "score": 121.81628786146076,
           "flat": [
             12000,
             0,
@@ -1626,11 +1626,11 @@
           ],
           "notes": [],
           "rank": 2,
-          "baseline_rank": 3
+          "baseline_rank": 4
         },
         {
           "slug": "ray",
-          "score": 116.88763556935427,
+          "score": 121.30759233673807,
           "flat": [
             12000,
             0,
@@ -1638,11 +1638,11 @@
           ],
           "notes": [],
           "rank": 3,
-          "baseline_rank": 6
+          "baseline_rank": 9
         },
         {
           "slug": "tarzan",
-          "score": 111.94672030730042,
+          "score": 119.05984820318078,
           "flat": [
             12000,
             0,
@@ -1650,11 +1650,11 @@
           ],
           "notes": [],
           "rank": 4,
-          "baseline_rank": 14
+          "baseline_rank": 11
         },
         {
           "slug": "rosie",
-          "score": 111.91836674648712,
+          "score": 116.66231035239186,
           "flat": [
             12000,
             0,
@@ -1666,7 +1666,7 @@
         },
         {
           "slug": "tara",
-          "score": 111.71670217653363,
+          "score": 115.16619448951356,
           "flat": [
             12000,
             0,
@@ -1674,11 +1674,11 @@
           ],
           "notes": [],
           "rank": 6,
-          "baseline_rank": 10
+          "baseline_rank": 13
         },
         {
           "slug": "freja",
-          "score": 95.59689335518945,
+          "score": 97.53196017931865,
           "flat": [
             12000,
             0,
@@ -1689,44 +1689,44 @@
           "baseline_rank": 22
         },
         {
-          "slug": "mike",
-          "score": 84.48455215255254,
+          "slug": "ken",
+          "score": 85.40023121690314,
           "flat": [
-            0,
+            12000,
             0,
             0
           ],
           "notes": [],
           "rank": 8,
-          "baseline_rank": 2
+          "baseline_rank": 25
         },
         {
-          "slug": "ken",
-          "score": 82.17496832962635,
+          "slug": "tithi",
+          "score": 82.75654326709751,
           "flat": [
-            12000,
+            0,
             0,
             0
           ],
           "notes": [],
           "rank": 9,
-          "baseline_rank": 25
+          "baseline_rank": 2
         },
         {
-          "slug": "rusty",
-          "score": 79.6530943795218,
+          "slug": "ragnar",
+          "score": 81.82958412234065,
           "flat": [
-            12000,
+            0,
             0,
             0
           ],
           "notes": [],
           "rank": 10,
-          "baseline_rank": 28
+          "baseline_rank": 3
         },
         {
-          "slug": "maddie",
-          "score": 78.07622675201986,
+          "slug": "becca",
+          "score": 81.44583587824181,
           "flat": [
             0,
             0,
@@ -1734,11 +1734,11 @@
           ],
           "notes": [],
           "rank": 11,
-          "baseline_rank": 4
+          "baseline_rank": 5
         },
         {
-          "slug": "tithi",
-          "score": 75.69840795747179,
+          "slug": "maddie",
+          "score": 81.27856265375353,
           "flat": [
             0,
             0,
@@ -1746,23 +1746,23 @@
           ],
           "notes": [],
           "rank": 12,
-          "baseline_rank": 5
+          "baseline_rank": 6
         },
         {
-          "slug": "ragnar",
-          "score": 74.67979450229055,
+          "slug": "rusty",
+          "score": 80.99544636994665,
           "flat": [
-            0,
+            12000,
             0,
             0
           ],
           "notes": [],
           "rank": 13,
-          "baseline_rank": 7
+          "baseline_rank": 28
         },
         {
-          "slug": "becca",
-          "score": 74.38770056861607,
+          "slug": "mike",
+          "score": 80.27489532758653,
           "flat": [
             0,
             0,
@@ -1770,11 +1770,11 @@
           ],
           "notes": [],
           "rank": 14,
-          "baseline_rank": 8
+          "baseline_rank": 7
         },
         {
-          "slug": "layla",
-          "score": 74.3023602786659,
+          "slug": "chiron",
+          "score": 80.14070106206874,
           "flat": [
             0,
             0,
@@ -1782,11 +1782,11 @@
           ],
           "notes": [],
           "rank": 15,
-          "baseline_rank": 9
+          "baseline_rank": 8
         },
         {
-          "slug": "chiron",
-          "score": 73.06423489035815,
+          "slug": "wright",
+          "score": 78.9640628149494,
           "flat": [
             0,
             0,
@@ -1794,11 +1794,11 @@
           ],
           "notes": [],
           "rank": 16,
-          "baseline_rank": 11
+          "baseline_rank": 10
         },
         {
-          "slug": "wright",
-          "score": 71.90592750532367,
+          "slug": "layla",
+          "score": 76.26412371455594,
           "flat": [
             0,
             0,
@@ -1806,11 +1806,11 @@
           ],
           "notes": [],
           "rank": 17,
-          "baseline_rank": 13
+          "baseline_rank": 14
         },
         {
-          "slug": "shark",
-          "score": 70.04524106063869,
+          "slug": "knotty",
+          "score": 76.02814809112621,
           "flat": [
             0,
             0,
@@ -1821,8 +1821,8 @@
           "baseline_rank": 15
         },
         {
-          "slug": "knotty",
-          "score": 68.97001278150049,
+          "slug": "dave",
+          "score": 73.43468082159168,
           "flat": [
             0,
             0,
@@ -1833,8 +1833,8 @@
           "baseline_rank": 16
         },
         {
-          "slug": "candy",
-          "score": 67.81415271377305,
+          "slug": "shark",
+          "score": 72.95943469255205,
           "flat": [
             0,
             0,
@@ -1845,8 +1845,8 @@
           "baseline_rank": 17
         },
         {
-          "slug": "undine",
-          "score": 67.7286949354934,
+          "slug": "candy",
+          "score": 72.23410948115685,
           "flat": [
             0,
             0,
@@ -1857,8 +1857,8 @@
           "baseline_rank": 18
         },
         {
-          "slug": "dave",
-          "score": 66.37654551196594,
+          "slug": "undine",
+          "score": 71.96407912705416,
           "flat": [
             0,
             0,
@@ -1869,8 +1869,8 @@
           "baseline_rank": 19
         },
         {
-          "slug": "jacob",
-          "score": 64.44669900712151,
+          "slug": "tony",
+          "score": 71.2099385379034,
           "flat": [
             0,
             0,
@@ -1881,8 +1881,8 @@
           "baseline_rank": 20
         },
         {
-          "slug": "tony",
-          "score": 64.0601489178533,
+          "slug": "jacob",
+          "score": 69.19064261302623,
           "flat": [
             0,
             0,
@@ -1893,8 +1893,8 @@
           "baseline_rank": 21
         },
         {
-          "slug": "lucky",
-          "score": 50.47523499697842,
+          "slug": "travis",
+          "score": 54.231526127315625,
           "flat": [
             0,
             0,
@@ -1905,8 +1905,8 @@
           "baseline_rank": 23
         },
         {
-          "slug": "travis",
-          "score": 49.32878555259858,
+          "slug": "lucky",
+          "score": 53.399526404636894,
           "flat": [
             0,
             0,
@@ -1918,7 +1918,7 @@
         },
         {
           "slug": "sarge",
-          "score": 45.87870548180252,
+          "score": 50.78144605651956,
           "flat": [
             0,
             0,
@@ -1930,7 +1930,7 @@
         },
         {
           "slug": "eva",
-          "score": 45.029915900532856,
+          "score": 49.9326564752499,
           "flat": [
             0,
             0,
@@ -1942,7 +1942,7 @@
         },
         {
           "slug": "tim",
-          "score": 34.3607211043778,
+          "score": 37.6731905747162,
           "flat": [
             0,
             0,
@@ -1965,15 +1965,15 @@
       "top_five": [
         "rosie",
         "lava",
-        "mike",
-        "nikola",
-        "maddie"
+        "tithi",
+        "ragnar",
+        "nikola"
       ],
       "heroes_changing_rank": 12,
       "rows": [
         {
           "slug": "rosie",
-          "score": 90.73665739532613,
+          "score": 96.74689256222143,
           "flat": [
             3600,
             720,
@@ -1988,7 +1988,7 @@
         },
         {
           "slug": "lava",
-          "score": 87.52246386353939,
+          "score": 93.18736141906874,
           "flat": [
             0,
             0,
@@ -1999,8 +1999,8 @@
           "baseline_rank": 1
         },
         {
-          "slug": "mike",
-          "score": 84.48455215255254,
+          "slug": "tithi",
+          "score": 82.75654326709751,
           "flat": [
             0,
             0,
@@ -2011,8 +2011,8 @@
           "baseline_rank": 2
         },
         {
-          "slug": "nikola",
-          "score": 82.11686065697458,
+          "slug": "ragnar",
+          "score": 81.82958412234065,
           "flat": [
             0,
             0,
@@ -2023,8 +2023,8 @@
           "baseline_rank": 3
         },
         {
-          "slug": "maddie",
-          "score": 78.07622675201986,
+          "slug": "nikola",
+          "score": 81.66633396175786,
           "flat": [
             0,
             0,
@@ -2035,8 +2035,8 @@
           "baseline_rank": 4
         },
         {
-          "slug": "tithi",
-          "score": 75.69840795747179,
+          "slug": "becca",
+          "score": 81.44583587824181,
           "flat": [
             0,
             0,
@@ -2047,8 +2047,8 @@
           "baseline_rank": 5
         },
         {
-          "slug": "ray",
-          "score": 75.19200956011015,
+          "slug": "maddie",
+          "score": 81.27856265375353,
           "flat": [
             0,
             0,
@@ -2059,8 +2059,8 @@
           "baseline_rank": 6
         },
         {
-          "slug": "ragnar",
-          "score": 74.67979450229055,
+          "slug": "mike",
+          "score": 80.27489532758653,
           "flat": [
             0,
             0,
@@ -2071,8 +2071,8 @@
           "baseline_rank": 7
         },
         {
-          "slug": "becca",
-          "score": 74.38770056861607,
+          "slug": "chiron",
+          "score": 80.14070106206874,
           "flat": [
             0,
             0,
@@ -2083,8 +2083,8 @@
           "baseline_rank": 8
         },
         {
-          "slug": "layla",
-          "score": 74.3023602786659,
+          "slug": "ray",
+          "score": 79.61196632749395,
           "flat": [
             0,
             0,
@@ -2095,8 +2095,8 @@
           "baseline_rank": 9
         },
         {
-          "slug": "tara",
-          "score": 73.46373364601966,
+          "slug": "wright",
+          "score": 78.9640628149494,
           "flat": [
             0,
             0,
@@ -2107,8 +2107,8 @@
           "baseline_rank": 10
         },
         {
-          "slug": "chiron",
-          "score": 73.06423489035815,
+          "slug": "tarzan",
+          "score": 77.56307170795851,
           "flat": [
             0,
             0,
@@ -2119,8 +2119,8 @@
           "baseline_rank": 11
         },
         {
-          "slug": "wright",
-          "score": 71.90592750532367,
+          "slug": "tara",
+          "score": 76.91322595899958,
           "flat": [
             0,
             0,
@@ -2131,8 +2131,8 @@
           "baseline_rank": 13
         },
         {
-          "slug": "tarzan",
-          "score": 70.44994381207816,
+          "slug": "layla",
+          "score": 76.26412371455594,
           "flat": [
             0,
             0,
@@ -2143,8 +2143,8 @@
           "baseline_rank": 14
         },
         {
-          "slug": "shark",
-          "score": 70.04524106063869,
+          "slug": "knotty",
+          "score": 76.02814809112621,
           "flat": [
             0,
             0,
@@ -2155,8 +2155,8 @@
           "baseline_rank": 15
         },
         {
-          "slug": "knotty",
-          "score": 68.97001278150049,
+          "slug": "dave",
+          "score": 73.43468082159168,
           "flat": [
             0,
             0,
@@ -2167,8 +2167,8 @@
           "baseline_rank": 16
         },
         {
-          "slug": "candy",
-          "score": 67.81415271377305,
+          "slug": "shark",
+          "score": 72.95943469255205,
           "flat": [
             0,
             0,
@@ -2179,8 +2179,8 @@
           "baseline_rank": 17
         },
         {
-          "slug": "undine",
-          "score": 67.7286949354934,
+          "slug": "candy",
+          "score": 72.23410948115685,
           "flat": [
             0,
             0,
@@ -2191,8 +2191,8 @@
           "baseline_rank": 18
         },
         {
-          "slug": "dave",
-          "score": 66.37654551196594,
+          "slug": "undine",
+          "score": 71.96407912705416,
           "flat": [
             0,
             0,
@@ -2203,8 +2203,8 @@
           "baseline_rank": 19
         },
         {
-          "slug": "jacob",
-          "score": 64.44669900712151,
+          "slug": "tony",
+          "score": 71.2099385379034,
           "flat": [
             0,
             0,
@@ -2215,8 +2215,8 @@
           "baseline_rank": 20
         },
         {
-          "slug": "tony",
-          "score": 64.0601489178533,
+          "slug": "jacob",
+          "score": 69.19064261302623,
           "flat": [
             0,
             0,
@@ -2228,7 +2228,7 @@
         },
         {
           "slug": "freja",
-          "score": 54.903800604916874,
+          "score": 56.83886742904607,
           "flat": [
             0,
             0,
@@ -2239,8 +2239,8 @@
           "baseline_rank": 22
         },
         {
-          "slug": "lucky",
-          "score": 50.47523499697842,
+          "slug": "travis",
+          "score": 54.231526127315625,
           "flat": [
             0,
             0,
@@ -2251,8 +2251,8 @@
           "baseline_rank": 23
         },
         {
-          "slug": "travis",
-          "score": 49.32878555259858,
+          "slug": "lucky",
+          "score": 53.399526404636894,
           "flat": [
             0,
             0,
@@ -2264,7 +2264,7 @@
         },
         {
           "slug": "ken",
-          "score": 48.15791913263145,
+          "score": 51.383182019908226,
           "flat": [
             0,
             0,
@@ -2276,7 +2276,7 @@
         },
         {
           "slug": "sarge",
-          "score": 45.87870548180252,
+          "score": 50.78144605651956,
           "flat": [
             0,
             0,
@@ -2288,7 +2288,7 @@
         },
         {
           "slug": "eva",
-          "score": 45.029915900532856,
+          "score": 49.9326564752499,
           "flat": [
             0,
             0,
@@ -2300,7 +2300,7 @@
         },
         {
           "slug": "rusty",
-          "score": 40.9722225952512,
+          "score": 42.31457458567604,
           "flat": [
             0,
             0,
@@ -2312,7 +2312,7 @@
         },
         {
           "slug": "tim",
-          "score": 34.3607211043778,
+          "score": 37.6731905747162,
           "flat": [
             0,
             0,
@@ -2335,15 +2335,15 @@
       "top_five": [
         "rosie",
         "lava",
-        "mike",
-        "nikola",
-        "maddie"
+        "tithi",
+        "ragnar",
+        "nikola"
       ],
       "heroes_changing_rank": 12,
       "rows": [
         {
           "slug": "rosie",
-          "score": 194.02959301166737,
+          "score": 207.13066019493237,
           "flat": [
             23760,
             4750,
@@ -2358,7 +2358,7 @@
         },
         {
           "slug": "lava",
-          "score": 87.52246386353939,
+          "score": 93.18736141906874,
           "flat": [
             0,
             0,
@@ -2369,8 +2369,8 @@
           "baseline_rank": 1
         },
         {
-          "slug": "mike",
-          "score": 84.48455215255254,
+          "slug": "tithi",
+          "score": 82.75654326709751,
           "flat": [
             0,
             0,
@@ -2381,8 +2381,8 @@
           "baseline_rank": 2
         },
         {
-          "slug": "nikola",
-          "score": 82.11686065697458,
+          "slug": "ragnar",
+          "score": 81.82958412234065,
           "flat": [
             0,
             0,
@@ -2393,8 +2393,8 @@
           "baseline_rank": 3
         },
         {
-          "slug": "maddie",
-          "score": 78.07622675201986,
+          "slug": "nikola",
+          "score": 81.66633396175786,
           "flat": [
             0,
             0,
@@ -2405,8 +2405,8 @@
           "baseline_rank": 4
         },
         {
-          "slug": "tithi",
-          "score": 75.69840795747179,
+          "slug": "becca",
+          "score": 81.44583587824181,
           "flat": [
             0,
             0,
@@ -2417,8 +2417,8 @@
           "baseline_rank": 5
         },
         {
-          "slug": "ray",
-          "score": 75.19200956011015,
+          "slug": "maddie",
+          "score": 81.27856265375353,
           "flat": [
             0,
             0,
@@ -2429,8 +2429,8 @@
           "baseline_rank": 6
         },
         {
-          "slug": "ragnar",
-          "score": 74.67979450229055,
+          "slug": "mike",
+          "score": 80.27489532758653,
           "flat": [
             0,
             0,
@@ -2441,8 +2441,8 @@
           "baseline_rank": 7
         },
         {
-          "slug": "becca",
-          "score": 74.38770056861607,
+          "slug": "chiron",
+          "score": 80.14070106206874,
           "flat": [
             0,
             0,
@@ -2453,8 +2453,8 @@
           "baseline_rank": 8
         },
         {
-          "slug": "layla",
-          "score": 74.3023602786659,
+          "slug": "ray",
+          "score": 79.61196632749395,
           "flat": [
             0,
             0,
@@ -2465,8 +2465,8 @@
           "baseline_rank": 9
         },
         {
-          "slug": "tara",
-          "score": 73.46373364601966,
+          "slug": "wright",
+          "score": 78.9640628149494,
           "flat": [
             0,
             0,
@@ -2477,8 +2477,8 @@
           "baseline_rank": 10
         },
         {
-          "slug": "chiron",
-          "score": 73.06423489035815,
+          "slug": "tarzan",
+          "score": 77.56307170795851,
           "flat": [
             0,
             0,
@@ -2489,8 +2489,8 @@
           "baseline_rank": 11
         },
         {
-          "slug": "wright",
-          "score": 71.90592750532367,
+          "slug": "tara",
+          "score": 76.91322595899958,
           "flat": [
             0,
             0,
@@ -2501,8 +2501,8 @@
           "baseline_rank": 13
         },
         {
-          "slug": "tarzan",
-          "score": 70.44994381207816,
+          "slug": "layla",
+          "score": 76.26412371455594,
           "flat": [
             0,
             0,
@@ -2513,8 +2513,8 @@
           "baseline_rank": 14
         },
         {
-          "slug": "shark",
-          "score": 70.04524106063869,
+          "slug": "knotty",
+          "score": 76.02814809112621,
           "flat": [
             0,
             0,
@@ -2525,8 +2525,8 @@
           "baseline_rank": 15
         },
         {
-          "slug": "knotty",
-          "score": 68.97001278150049,
+          "slug": "dave",
+          "score": 73.43468082159168,
           "flat": [
             0,
             0,
@@ -2537,8 +2537,8 @@
           "baseline_rank": 16
         },
         {
-          "slug": "candy",
-          "score": 67.81415271377305,
+          "slug": "shark",
+          "score": 72.95943469255205,
           "flat": [
             0,
             0,
@@ -2549,8 +2549,8 @@
           "baseline_rank": 17
         },
         {
-          "slug": "undine",
-          "score": 67.7286949354934,
+          "slug": "candy",
+          "score": 72.23410948115685,
           "flat": [
             0,
             0,
@@ -2561,8 +2561,8 @@
           "baseline_rank": 18
         },
         {
-          "slug": "dave",
-          "score": 66.37654551196594,
+          "slug": "undine",
+          "score": 71.96407912705416,
           "flat": [
             0,
             0,
@@ -2573,8 +2573,8 @@
           "baseline_rank": 19
         },
         {
-          "slug": "jacob",
-          "score": 64.44669900712151,
+          "slug": "tony",
+          "score": 71.2099385379034,
           "flat": [
             0,
             0,
@@ -2585,8 +2585,8 @@
           "baseline_rank": 20
         },
         {
-          "slug": "tony",
-          "score": 64.0601489178533,
+          "slug": "jacob",
+          "score": 69.19064261302623,
           "flat": [
             0,
             0,
@@ -2598,7 +2598,7 @@
         },
         {
           "slug": "freja",
-          "score": 54.903800604916874,
+          "score": 56.83886742904607,
           "flat": [
             0,
             0,
@@ -2609,8 +2609,8 @@
           "baseline_rank": 22
         },
         {
-          "slug": "lucky",
-          "score": 50.47523499697842,
+          "slug": "travis",
+          "score": 54.231526127315625,
           "flat": [
             0,
             0,
@@ -2621,8 +2621,8 @@
           "baseline_rank": 23
         },
         {
-          "slug": "travis",
-          "score": 49.32878555259858,
+          "slug": "lucky",
+          "score": 53.399526404636894,
           "flat": [
             0,
             0,
@@ -2634,7 +2634,7 @@
         },
         {
           "slug": "ken",
-          "score": 48.15791913263145,
+          "score": 51.383182019908226,
           "flat": [
             0,
             0,
@@ -2646,7 +2646,7 @@
         },
         {
           "slug": "sarge",
-          "score": 45.87870548180252,
+          "score": 50.78144605651956,
           "flat": [
             0,
             0,
@@ -2658,7 +2658,7 @@
         },
         {
           "slug": "eva",
-          "score": 45.029915900532856,
+          "score": 49.9326564752499,
           "flat": [
             0,
             0,
@@ -2670,7 +2670,7 @@
         },
         {
           "slug": "rusty",
-          "score": 40.9722225952512,
+          "score": 42.31457458567604,
           "flat": [
             0,
             0,
@@ -2682,7 +2682,7 @@
         },
         {
           "slug": "tim",
-          "score": 34.3607211043778,
+          "score": 37.6731905747162,
           "flat": [
             0,
             0,

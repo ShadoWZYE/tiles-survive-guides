@@ -182,7 +182,7 @@
       return `<button class="hero-card${selected ? " selected" : ""}" data-slug="${esc(hero.asset_slug)}" data-rarity="${esc(hero.rarity)}" aria-label="${esc(hero.name)}${own ? ", owned" : ""}">
         <img src="${hero.portrait_data}" alt="${esc(hero.name)}" draggable="false">
         <span class="rarity">${esc(hero.rarity)}</span>${hero.has_ascension ? '<span class="asc">ASC</span>' : ''}${own ? '<span class="owned-badge" title="Owned">✓</span>' : ''}
-        <span class="card-copy"><strong>${esc(hero.name)}</strong><small>${esc(hero.faction)} · ${esc(hero.role)}</small><small class="index" title="${esc(hero.estimate?.basis)}">${profile.comparisonBasis==='flat'?'Stats':'Est.'} ${number(hero.composite_index)}</small></span>
+        <span class="card-copy"><strong>${esc(hero.name)}</strong><small>${esc(hero.faction)} · ${esc(hero.role)}</small><small class="index" title="${esc(hero.estimate?.basis)}">${profile.comparisonBasis==='flat'?'Stats':'Est.'} ${hero.estimate?.comparable===false?'Record build':number(hero.composite_index)}</small></span>
       </button>`;
     }).join("") || '<div class="empty-state">No heroes match these filters.</div>';
     $$(".hero-card").forEach(card => card.addEventListener("click", () => {
@@ -254,7 +254,7 @@
       const stamina = [...squad].sort((a,b) => b.staminaReduction - a.staminaReduction)[0];
       if (stamina?.staminaReduction) interactions.unshift(`${stamina.name}: maximum configured Stamina economy −${number(stamina.staminaReduction)}% (excluded from combat score)`);
     }
-    bonus = passiveBonus + Math.min(6, bonus);
+    bonus = passiveBonus; // Trait pairings are descriptive; only numeric passive effects score here.
     return {bonus, summary: !includeSummary ? "" : interactions.length ? interactions.slice(0,3).join(" · ") + (interactions.length > 3 ? ` · +${interactions.length - 3} more` : "") : "No modeled cross-skill pairing"};
   }
 
@@ -263,6 +263,7 @@
   function enemyPicker(){return `<div class="control-strip"><label>Enemy target faction (optional)<select id="enemy-faction">${['Unknown','Mountain','Wasteland','Sky','Sea'].map(f=>`<option${profile.enemyFaction===f?' selected':''}>${f}</option>`).join('')}</select></label></div><p class="evidence">Unknown excludes counter damage; a selected faction assumes attacks land on that faction.</p>`;}
 
   function findTopSquads(pool, limit = 20, roleCoverage = profile.requireRoleCoverage) {
+    pool=pool.filter(h=>h.estimate?.comparable!==false);
     const key = `${pool.map(hero => hero.asset_slug).join(",")}|${profile.mode}|${roleCoverage}|${limit}|${profile.enemyFaction}`;
     if (optimizerCache.has(key)) return optimizerCache.get(key);
     const best = [];
@@ -286,6 +287,7 @@
   }
 
   function heroHeader(hero) {
+    if(hero.estimate?.comparable===false)return `<div class="hero-title"><h2>${esc(hero.name)}</h2><p>${esc(hero.faction)} · ${esc(hero.role)}</p></div><p class="notice">Not ranked in My builds. Record: ${esc(hero.estimate.missingFields.join(', '))}. Incomplete heroes are excluded from squad recommendations.</p>`;
     const skills=window.__ESTIMATE_DATA__?.heroes?.[hero.asset_slug]?.skills||[];
     const castNote=profile.battleSeconds&&Object.keys(hero.estimate?.openingCastCounts||{}).length?`Completed casts: ${Object.entries(hero.estimate.openingCastCounts).map(([id,n])=>`${hero.skills.find(s=>s.internal_name===id)?.display_name||"Skill"}: ${n}`).join("; ")}. `:"";
     const healingNote=hero.estimate?.rawHealingPotential?.length?`Raw healing per dispatch (one recipient; before modifiers and overheal; informational only): ${hero.estimate.rawHealingPotential.map(x=>`${hero.skills.find(s=>s.internal_name===x.skillId)?.display_name||"Skill"}: ${x.formula} [${x.execution}]`).join("; ")}. `:"";
@@ -311,10 +313,10 @@
 
   function renderSquad() {
     const selected = state.squad.map(slug => bySlug.get(slug));
-    const complete = selected.length === 5;
+    const complete = selected.length === 5 && selected.every(h=>h.estimate?.comparable!==false);
     const results = complete ? [] : findTopSquads(heroes.filter(hero => matchesAccess(hero)));
     const planning = complete ? renderFormationGuide(selected) : `<div class="control-strip"><label>Battle focus<select id="mode"><option>Balanced</option><option>Offense</option><option>Survival</option><option>PvE farming</option></select></label><label>Hero access<select id="access"><option>All access</option><option>F2P confirmed</option><option>F2P + events</option><option>IAP-linked</option><option>Owned only</option></select></label><label class="check-label"><input id="role-coverage" type="checkbox"> All 3 roles</label></div>
-      <h3>Top configurations</h3><p class="evidence">${results.length ? `${results.length} highest-scoring squads · click one to load it` : "No valid five-hero squad for this access filter."}</p>
+      <h3>Top configurations</h3><p class="evidence">${results.length ? `${results.length} highest-scoring squads · click one to load it` : (profile.comparisonBasis==='recorded'?"Record complete rank, level, skills and gear for five compatible heroes in My Roster.":"No valid five-hero squad for this access filter.")}</p>
       <div class="result-list">${results.map((result,i) => `<button class="result" data-index="${i}"><span class="result-line"><span class="rank">#${i+1}</span><span>${result.heroes.map(h=>esc(h.name)).join(" · ")}</span><span class="score">${number(result.score)}</span></span><span class="synergy">+${number(result.synergy)} synergy · +${number(result.faction)} faction · ${number(result.frontline)} frontline fit · ${esc(result.summary)}</span></button>`).join("")}</div>`;
     $("#detail-content").innerHTML = `<div class="section-head"><div><h2>Your squad</h2><p>${selected.length} / 5 selected · formation shown front-to-back</p></div><button class="button secondary" id="clear-squad">Clear</button></div>
       <div class="squad-slots">${[0,1,2,3,4].map(i => selected[i] ? `<div class="slot"><img src="${selected[i].portrait_data}" alt=""><b>${esc(selected[i].name)}</b><small>${esc(selected[i].role)} · position ${i+1}</small></div>` : '<div class="slot empty">Empty</div>').join("")}</div>
@@ -391,7 +393,7 @@
 
   function renderStatsContent() {
     const hero = activeHero();
-    $("#detail-content").innerHTML = `${heroHeader(hero)}<div class="hero-detail"><img class="portrait-large" src="${hero.portrait_data}" alt="${esc(hero.name)}"><div><div class="stat-grid"><div class="stat wide"><small>Max-level battle power</small><strong>${number(hero.max_level_battle_power)}</strong></div><div class="stat"><small>Attack</small><strong>${number(hero.max_level_attack)}</strong></div><div class="stat"><small>Defense</small><strong>${number(hero.max_level_defense)}</strong></div><div class="stat"><small>Health</small><strong>${number(hero.max_level_health)}</strong></div><div class="stat"><small>March capacity</small><strong>${number(hero.max_level_march_capacity)}</strong></div><div class="stat"><small>Estimated offense</small><strong>${number(hero.offense_index)}</strong></div><div class="stat"><small>Estimated durability</small><strong>${number(hero.durability_index)}</strong></div></div><p class="evidence">ATK/DEF/HP and power above are maximum configuration values. Estimated components use recorded builds plus reference assumptions.</p></div></div>`;
+    $("#detail-content").innerHTML = `${heroHeader(hero)}<div class="hero-detail"><img class="portrait-large" src="${hero.portrait_data}" alt="${esc(hero.name)}"><div><div class="stat-grid"><div class="stat wide"><small>Max-level battle power</small><strong>${number(hero.max_level_battle_power)}</strong></div><div class="stat"><small>Attack</small><strong>${number(hero.max_level_attack)}</strong></div><div class="stat"><small>Defense</small><strong>${number(hero.max_level_defense)}</strong></div><div class="stat"><small>Health</small><strong>${number(hero.max_level_health)}</strong></div><div class="stat"><small>March capacity</small><strong>${number(hero.max_level_march_capacity)}</strong></div><div class="stat"><small>Estimated offense</small><strong>${number(hero.offense_index)}</strong></div><div class="stat"><small>Estimated durability</small><strong>${number(hero.durability_index)}</strong></div></div><p class="evidence">ATK/DEF/HP and power above are maximum configuration values. Estimates use the selected comparison basis; incomplete My builds are excluded.</p></div></div>`;
   }
 
   function renderSkills() {
@@ -406,7 +408,7 @@
   }
 
   function bestOwnedAndTargets() {
-    const ownedHeroes = heroes.filter(owned);
+    const ownedHeroes = heroes.filter(owned).filter(h=>h.estimate?.comparable!==false);
     const unowned = heroes.filter(hero => !owned(hero) && matchesAccess(hero, profile.access === "Owned only" ? "All access" : profile.access));
     if (ownedHeroes.length < 5) return {unlock:`Mark your remaining heroes. Strongest current candidates: ${unowned.sort((a,b)=>scoreHero(b)-scoreHero(a)).slice(0,Math.max(3,5-ownedHeroes.length)).map(h=>h.name).join(", ") || "none"}.`};
     const current = findTopSquads(ownedHeroes,1)[0] || findTopSquads(ownedHeroes,1,false)[0];

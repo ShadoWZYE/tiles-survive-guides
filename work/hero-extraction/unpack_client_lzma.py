@@ -46,6 +46,15 @@ CURRENT_DECODED_SHA256 = (
 )
 
 
+# Independently recovered 2.6.400.304 disk streams. Sizes, end markers and
+# decompressed fingerprints are checked before any metadata/method audit.
+LATEST_SHA256 = '54b80f6a283cfbb7e8c7ab5698038132d6e9c439620f108bcd668fa7d568de2c'
+LATEST_STREAMS = tuple((142716928 + offset - 1024, destination, compressed, size) for offset,destination,compressed,size in [
+    (35528322,4096,1193731,5712896), (5859547,5718016,29640560,102105600),
+    (46600,107827200,2664950,18473472), (2883040,126304256,1016927,7248896)])
+LATEST_DECODED_SHA256 = ('748be08f5f0b3f81493b2113c7d9d1b567330a91e6d4b7786cdf82949f9dfb0e','e38ea519ca5897a96434286cb8322a11e935291df137cfe8760ba8e0d91c459d','2da2765aa5e33bcffd83e54387edd5728bb199ee7cf42fd902c4eea7758927d9','eecc47ecc304508e0c040346adecd57bffaa9c2d973bf1bf425f502c176867c4')
+
+
 def decode_stream(payload: bytes, expected_size: int) -> bytes:
     if not 0 < expected_size <= 134217728:
         raise ValueError('Decompressed size outside private image budget')
@@ -61,9 +70,9 @@ def decode_stream(payload: bytes, expected_size: int) -> bytes:
 
 def unpack(data: bytes) -> tuple[bytearray, list[dict]]:
     digest=hashlib.sha256(data).hexdigest()
-    if digest not in (VERIFIED_SHA256,CURRENT_SHA256):
+    if digest not in (VERIFIED_SHA256,CURRENT_SHA256,LATEST_SHA256):
         raise ValueError('Unverified client hash; do not reuse these RVAs on another build')
-    streams=CURRENT_STREAMS if digest==CURRENT_SHA256 else STREAMS
+    streams=LATEST_STREAMS if digest==LATEST_SHA256 else CURRENT_STREAMS if digest==CURRENT_SHA256 else STREAMS
     sections = pe_sections(data)
     pe_offset = struct.unpack_from('<I', data, 0x3C)[0]
     optional = pe_offset + 24
@@ -87,6 +96,7 @@ def unpack(data: bytes) -> tuple[bytearray, list[dict]]:
             raise ValueError('Stream extends outside verified input or image')
         offset = section['raw_offset'] + source - section['rva']
         decoded = decode_stream(data[offset:offset + compressed_size], decoded_size)
+        if digest==LATEST_SHA256 and hashlib.sha256(decoded).hexdigest()!=LATEST_DECODED_SHA256[index]:raise ValueError('Current decoded fingerprint mismatch')
         if digest==CURRENT_SHA256 and hashlib.sha256(decoded).hexdigest()!=CURRENT_DECODED_SHA256[index]:
             raise ValueError('Decoded stream fingerprint mismatch')
         image[destination:destination + decoded_size] = decoded

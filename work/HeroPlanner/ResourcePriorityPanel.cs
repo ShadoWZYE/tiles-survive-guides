@@ -42,7 +42,7 @@ public partial class MainWindow
         if (owned.Count == 0) { FormationResourceFocus.Text = "Mark the heroes you own before prioritising resources. Comparator assumptions are never used here."; return; }
         var result = UpgradeModel.Evaluate(owned, _heroBuilds, _upgradeData, _upgradeSettings);
         if (result.Missing.Count > 0) { FormationResourceFocus.Text = "Record these builds first:\n" + string.Join("\n", result.Missing); return; }
-        FormationResourceFocus.Text = $"Metric: {_upgradeSettings.Goal} · Client {_upgradeData.ClientBuild}\nOwned heroes only; actual recorded builds. Top 3 by % increase across these owned heroes in each resource group. Hero fragments are compared together. Efficiency per 100 resource units is separate. Select and copy any text.";
+        FormationResourceFocus.Text = $"Metric: {_upgradeSettings.Goal} · Client {_upgradeData.ClientBuild}\nOwned heroes only; actual recorded builds. Top 3 by gain per XP for shared XP; by % increase for other resource groups. Hero fragments are compared together. Efficiency per 100 resource units is separate. Select and copy any text.";
         string filter = (ResourceClassFilter.SelectedItem as ComboBoxItem)?.Tag as string ?? "all";
         RenderUpgradeGroups(ResourcePriorityCards, result, filter, true);
     }
@@ -56,7 +56,9 @@ public partial class MainWindow
         {
             groups++;
             var content = new StackPanel();
-            var ordered = group.OrderByDescending(c => c.Gain ?? double.NegativeInfinity).ThenByDescending(c => c.Efficiency ?? double.NegativeInfinity).ThenBy(c => c.Label, StringComparer.Ordinal).ToList();
+            bool sharedXp = group.Key is "gear-xp" or "hero-xp";
+            var ordered = group.OrderByDescending(c => (sharedXp ? c.Efficiency : c.Gain) ?? double.NegativeInfinity).ThenByDescending(c => sharedXp ? c.Gain : c.Efficiency).ThenBy(c => c.Label, StringComparer.Ordinal).ToList();
+            if(sharedXp)content.Children.Add(Selectable("Best marginal return per XP: next-level gain divided by the XP needed for that level. Lower-cost upgrades can outrank larger raw gains."));
             var top = ordered.Where(c => c.Blocked is null && c.Gain is not null).Take(3).ToList();
             string resourceName = group.Key == "hero-fragments" ? "Hero fragments · all heroes" : group.Key.StartsWith("mixed:", StringComparison.Ordinal) ?
                 (group.First().Cost.Count == 0 ? "Unlisted costs" : "Mixed: " + string.Join(" + ", group.First().Cost.Keys.Order().Select(id => _upgradeData.Items.GetValueOrDefault(id) ?? id))) :

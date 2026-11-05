@@ -1,18 +1,340 @@
 {
-  "audited_date": "2026-10-25",
-  "native_build": "2.6.300.293",
-  "config_pack_sha256": "de7e1b2059dc4dee30cf6a78b250f7d29d9d01a3caf11a95715c1539a8544475",
-  "manifest_sha256": "dfd4f00ad293d2ab7b7e64c829d0309c2a625ab397d262bf90128ada40d4be6e",
-  "language_sha256": "2c249121da56f4a3a73ebb2875b7a63d56990ea96fe81d2bb89db8ac4e8a441c",
+  "audited_date": "2026-11-05",
+  "native_build": "2.6.400.304",
+  "config_pack_sha256": "f7c6944491f8bad652c95d10a1ec15f9fb1ca45e776c9163e0162203db714b71",
+  "manifest_sha256": "df61d5b516732e190df3686493585efd15ba30da930b8eb9c837fbfea1e2b8e0",
+  "language_sha256": "6e47fe799f4f46d524733e286b88d32e0cf93d30b7ef3b25f2af49d58b575528",
   "tables_verified": 20,
   "heroes_verified": 29,
   "previous_heroes_compared": 29,
-  "progression_changes": {},
-  "roster_stat_skill_changes": {},
+  "progression_changes": {
+    "becca": [
+      "stages",
+      "levels"
+    ],
+    "candy": [
+      "stages",
+      "levels"
+    ],
+    "chiron": [
+      "stages",
+      "levels"
+    ],
+    "dave": [
+      "stages",
+      "levels"
+    ],
+    "eva": [
+      "stages",
+      "levels"
+    ],
+    "freja": [
+      "stages",
+      "levels"
+    ],
+    "jacob": [
+      "stages",
+      "levels"
+    ],
+    "ken": [
+      "stages",
+      "levels"
+    ],
+    "knotty": [
+      "stages",
+      "levels"
+    ],
+    "lava": [
+      "stages",
+      "levels"
+    ],
+    "layla": [
+      "stages",
+      "levels"
+    ],
+    "lucky": [
+      "stages",
+      "levels"
+    ],
+    "maddie": [
+      "stages",
+      "levels"
+    ],
+    "mike": [
+      "stages",
+      "levels"
+    ],
+    "nikola": [
+      "stages",
+      "levels"
+    ],
+    "ragnar": [
+      "stages",
+      "levels"
+    ],
+    "ray": [
+      "stages",
+      "levels"
+    ],
+    "rosie": [
+      "stages",
+      "levels"
+    ],
+    "rusty": [
+      "stages",
+      "levels"
+    ],
+    "sarge": [
+      "stages",
+      "levels"
+    ],
+    "shark": [
+      "stages",
+      "levels"
+    ],
+    "tara": [
+      "stages",
+      "levels"
+    ],
+    "tarzan": [
+      "stages",
+      "levels"
+    ],
+    "tim": [
+      "stages",
+      "levels"
+    ],
+    "tithi": [
+      "stages",
+      "levels"
+    ],
+    "tony": [
+      "stages",
+      "levels"
+    ],
+    "travis": [
+      "stages",
+      "levels"
+    ],
+    "undine": [
+      "stages",
+      "levels"
+    ],
+    "wright": [
+      "stages",
+      "levels"
+    ]
+  },
+  "roster_stat_skill_changes": {
+    "becca": [
+      "max_level",
+      "max_level_attack",
+      "max_level_defense",
+      "max_level_health",
+      "max_level_battle_power"
+    ],
+    "candy": [
+      "max_level",
+      "max_level_attack",
+      "max_level_defense",
+      "max_level_health",
+      "max_level_battle_power"
+    ],
+    "chiron": [
+      "max_level",
+      "max_level_attack",
+      "max_level_defense",
+      "max_level_health",
+      "max_level_battle_power"
+    ],
+    "dave": [
+      "max_level",
+      "max_level_attack",
+      "max_level_defense",
+      "max_level_health",
+      "max_level_battle_power"
+    ],
+    "eva": [
+      "max_level",
+      "max_level_attack",
+      "max_level_defense",
+      "max_level_health",
+      "max_level_battle_power"
+    ],
+    "freja": [
+      "max_level",
+      "max_level_attack",
+      "max_level_defense",
+      "max_level_health",
+      "max_level_battle_power"
+    ],
+    "jacob": [
+      "max_level",
+      "max_level_attack",
+      "max_level_defense",
+      "max_level_health",
+      "max_level_battle_power"
+    ],
+    "ken": [
+      "max_level",
+      "max_level_attack",
+      "max_level_defense",
+      "max_level_health",
+      "max_level_battle_power"
+    ],
+    "knotty": [
+      "max_level",
+      "max_level_attack",
+      "max_level_defense",
+      "max_level_health",
+      "max_level_battle_power"
+    ],
+    "lava": [
+      "max_level",
+      "max_level_attack",
+      "max_level_defense",
+      "max_level_health",
+      "max_level_battle_power"
+    ],
+    "layla": [
+      "max_level",
+      "max_level_attack",
+      "max_level_defense",
+      "max_level_health",
+      "max_level_battle_power"
+    ],
+    "lucky": [
+      "max_level",
+      "max_level_attack",
+      "max_level_defense",
+      "max_level_health",
+      "max_level_battle_power"
+    ],
+    "maddie": [
+      "max_level",
+      "max_level_attack",
+      "max_level_defense",
+      "max_level_health",
+      "max_level_battle_power"
+    ],
+    "mike": [
+      "max_level",
+      "max_level_attack",
+      "max_level_defense",
+      "max_level_health",
+      "max_level_battle_power"
+    ],
+    "nikola": [
+      "max_level",
+      "max_level_attack",
+      "max_level_defense",
+      "max_level_health",
+      "max_level_battle_power"
+    ],
+    "ragnar": [
+      "max_level",
+      "max_level_attack",
+      "max_level_defense",
+      "max_level_health",
+      "max_level_battle_power"
+    ],
+    "ray": [
+      "max_level",
+      "max_level_attack",
+      "max_level_defense",
+      "max_level_health",
+      "max_level_battle_power"
+    ],
+    "rosie": [
+      "max_level",
+      "max_level_attack",
+      "max_level_defense",
+      "max_level_health",
+      "max_level_battle_power"
+    ],
+    "rusty": [
+      "max_level",
+      "max_level_attack",
+      "max_level_defense",
+      "max_level_health",
+      "max_level_battle_power"
+    ],
+    "sarge": [
+      "max_level",
+      "max_level_attack",
+      "max_level_defense",
+      "max_level_health",
+      "max_level_battle_power"
+    ],
+    "shark": [
+      "max_level",
+      "max_level_attack",
+      "max_level_defense",
+      "max_level_health",
+      "max_level_battle_power"
+    ],
+    "tara": [
+      "max_level",
+      "max_level_attack",
+      "max_level_defense",
+      "max_level_health",
+      "max_level_battle_power"
+    ],
+    "tarzan": [
+      "max_level",
+      "max_level_attack",
+      "max_level_defense",
+      "max_level_health",
+      "max_level_battle_power"
+    ],
+    "tim": [
+      "max_level",
+      "max_level_attack",
+      "max_level_defense",
+      "max_level_health",
+      "max_level_battle_power"
+    ],
+    "tithi": [
+      "max_level",
+      "max_level_attack",
+      "max_level_defense",
+      "max_level_health",
+      "max_level_battle_power"
+    ],
+    "tony": [
+      "max_level",
+      "max_level_attack",
+      "max_level_defense",
+      "max_level_health",
+      "max_level_battle_power"
+    ],
+    "travis": [
+      "max_level",
+      "max_level_attack",
+      "max_level_defense",
+      "max_level_health",
+      "max_level_battle_power"
+    ],
+    "undine": [
+      "max_level",
+      "max_level_attack",
+      "max_level_defense",
+      "max_level_health",
+      "max_level_battle_power"
+    ],
+    "wright": [
+      "max_level",
+      "max_level_attack",
+      "max_level_defense",
+      "max_level_health",
+      "max_level_battle_power"
+    ]
+  },
   "added_heroes": [],
   "additional_config_heroes_not_in_roster": [
     "alita",
-    "furiosa"
+    "furiosa",
+    "mitch"
   ],
   "scope": "Current local cache matched to BinVersionList_Realtime; no server overrides or full battle runtime simulated."
 }

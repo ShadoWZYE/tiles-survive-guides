@@ -129,3 +129,13 @@ test('recorded passive levels affect stats; explicit zero removes its benefit',(
   const tara=model.evaluate('tara',{skills:{survivor_tara_skill_2:0}},upgrades,estimates);
   assert.deepEqual(tara.teamPercent,[0,0,0]);
 });
+
+test('My builds never borrows reference strength and matches native eligibility decisions',()=>{
+ const root=path.resolve(__dirname,'../..'),cases=JSON.parse(execFileSync('dotnet',['run','--no-build','--project',path.join(root,'work/HeroPlanner.Tests'),'--','--recorded-scores',path.join(root,'outputs/hero-report')],{encoding:'utf8',maxBuffer:4*1024*1024}));
+ assert.equal(cases.length,145);for(const c of cases){const r=model.evaluate(c.slug,c.saved,upgrades,estimates,0,null,true);assert.equal(r.comparable!==false,c.result.comparable);assert.deepEqual(r.missingFields||[],c.result.missingFields||[]);assert.ok(Math.abs(r.score-c.result.score)<1e-7);if(r.comparable===false)assert.equal(r.score,0);}
+ const partial=model.compare('rosie',{level:1},upgrades,estimates,'recorded',{});assert.equal(partial.comparable,false);assert.ok(partial.missingFields.length);
+});
+test('utility receives a single score channel and cannot inflate physical durability',()=>{
+ const altered=structuredClone(estimates);for(const skill of altered.heroes.rosie.skills)for(const row of skill.levels)row.utility*=10;
+ const a=model.evaluate('rosie',null,upgrades,estimates),b=model.evaluate('rosie',null,upgrades,altered);assert.equal(a.durability,b.durability);assert.equal(a.offense,b.offense);assert.ok(b.score>a.score);
+});

@@ -59,3 +59,10 @@ test('duplicate gear slots and level gates are blocked instead of counted twice'
   d.gear.helmet.hero_level_required=2;
   assert.match(model.state('a',{...builds.a,gear:[{id:'helmet',level:1}]},d,30).error,/level-gated/);
 });
+
+test('shared gear XP ranks marginal gain per XP and favours the cheaper efficient step',()=>{
+ const data={heroes:{a:make('A',20,10),b:make('B',30,100)},gear:{cheap:{name:'Cheap',slot:1,hero_level_required:0,levels:[{level:1,stats:[0,0,0],power:0,xp_next:100},{level:2,stats:[4,0,0],power:4,xp_next:200}]},expensive:{name:'Expensive',slot:1,hero_level_required:0,levels:[{level:1,stats:[0,0,0],power:0,xp_next:1000},{level:2,stats:[8,0,0],power:8,xp_next:2000}]}}};
+ const saved={a:{...builds.a,gear:[{id:'cheap',level:1}]},b:{...builds.b,gear:[{id:'expensive',level:1}]}};
+ const gear=model.evaluate(['a','b'],saved,data,{goal:'attack'}).candidates.filter(c=>c.kind==='gear');assert.equal(gear[0].slug,'a');assert.ok(gear[0].gain<gear[1].gain);assert.ok(gear[0].efficiency>gear[1].efficiency);assert.deepEqual(gear.map(c=>c.cost['gear-xp']),[100,1000]);
+ assert.ok(real.gear_xp_cost_checks>0);
+});

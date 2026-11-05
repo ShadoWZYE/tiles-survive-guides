@@ -7,7 +7,7 @@ from decode_cfg import decode_table
 from decode_language_pack import decode_language_pack
 ROOT=Path(__file__).resolve().parents[2]
 
-def export(source,language):
+def export(source,language,audited_date="2026-11-04"):
     names=['survivor_exclusive_gear','survivor_exclusive_gear_main','research_main','research_group','research_tree','benefits','benefits_map','benefit_calc','behemoth_base','behemoth_level','behemoth_star_level','behemoth_base_data','survivor_skill_main','survivor_skill_type','survivor_slg_skill_new','survivor_slg_effect_new','effect_buff','game_configs']
     tables={n:decode_table(source/(n+'.cfg'))['rows'] for n in names}
     lang=decode_language_pack(language);benefits={r['InternalId']:r['Id'] for r in tables['benefits']}
@@ -78,12 +78,12 @@ def export(source,language):
         if not any(row['effects'] for row in entries['levels']+entries['stars']):continue
         assert all(len({row['level'] for row in entries[k]})==len(entries[k]) for k in ['levels','stars'])
         behemoths[beast['Id']]={'name':lang.get(beast['ArticleName'],beast['Id'])+' ('+beast['Id']+')','icon_asset':beast['PhotoIcon'],'availability_note':('Gated client entry; live availability is unconfirmed.' if beast['ServerOpenDays']>=99999 else 'Confirm availability and applicability in-game.'),**entries}
-    return {'version':5,'audited_date':'2026-11-04','signature':signature,'research':research,'behemoths':behemoths,'behemoth_star_display':{'tiers':int(next(r['Value'] for r in tables['game_configs'] if r['Id']=='behemoth_show_graduate_star'))//5,'slots':5,'steps_per_star':6,'steps_per_tier':30,'sprites':['sp_base_titan_star_'+str(i) for i in range(13)]},'research_trees':{str(i):{'name':lang.get(t['Name'],t['Name']),'legacy':bool(t['IsOld']),'order':t['Position']} for i,t in trees.items() if any(g['tree']==str(i) for g in research.values())},
+    return {'version':5,'audited_date':audited_date,'signature':signature,'research':research,'behemoths':behemoths,'behemoth_star_display':{'tiers':int(next(r['Value'] for r in tables['game_configs'] if r['Id']=='behemoth_show_graduate_star'))//5,'slots':5,'steps_per_star':6,'steps_per_tier':30,'sprites':['sp_base_titan_star_'+str(i) for i in range(13)]},'research_trees':{str(i):{'name':lang.get(t['Name'],t['Name']),'legacy':bool(t['IsOld']),'order':t['Position']} for i,t in trees.items() if any(g['tree']==str(i) for g in research.values())},
 
       'heroes':{r['asset_slug']:{'role':r['role'],'faction':r['faction']} for r in heroes},
       'source_hashes':{n:hashlib.sha256((source/(n+'.cfg')).read_bytes()).hexdigest() for n in names},
       'limits':'Stat-only context. Signature linked skills, troop multipliers, Behemoth battle skills and own combat stats are excluded. Behemoth source is either a manual combined hero-bonus snapshot or configured current level/star front-row benefits. Sources never stack with one another; skills/talents/full-skill bonuses remain separate. Own Behemoth ATK/DEF/HP is not hero stats. Blank sources are excluded, not proven absent.'}
 
 if __name__=='__main__':
-    parser=argparse.ArgumentParser();parser.add_argument('source',type=Path);parser.add_argument('--language',type=Path,required=True);args=parser.parse_args()
-    data=export(args.source,args.language);out=ROOT/'outputs/hero-report/Hero-Army-Context.json';out.write_text(json.dumps(data,ensure_ascii=False,separators=(',',':'))+'\n',encoding='utf-8');print(out,len(data['signature']),len(data['research']))
+    parser=argparse.ArgumentParser();parser.add_argument('source',type=Path);parser.add_argument('--language',type=Path,required=True);parser.add_argument("--audited-date",default="2026-11-04");args=parser.parse_args()
+    data=export(args.source,args.language,args.audited_date);out=ROOT/'outputs/hero-report/Hero-Army-Context.json';out.write_text(json.dumps(data,ensure_ascii=False,separators=(',',':'))+'\n',encoding='utf-8');print(out,len(data['signature']),len(data['research']))

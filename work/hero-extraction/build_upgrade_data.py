@@ -75,10 +75,17 @@ def export(source: Path, roster: list, version: str, localized: dict) -> dict:
                          "hero_level_required": r["SurvivorLevel"],
                          "levels": [{"level": g["Level"], "stats": stats(g["BenefitSlg"]), "power": g["Power"], "xp_next": g["ExpNeed"]} for g in rows]}
     used_items = {key for hero in result.values() for stage in hero["stages"] for key in stage["cost"]}
+    xp_checks=0
+    for rows in [[g for g in gear_levels if g["SurvivorEquipmentId"]==r["InternalId"]] for r in gear_types if r["Arms"]==0]:
+        rows.sort(key=lambda r:r["Level"])
+        for current,next_row in zip(rows,rows[1:]):
+            if next_row["Level"]==current["Level"]+1:
+                if next_row["ExpProvide"]-current["ExpProvide"]!=current["ExpNeed"]:raise ValueError("Gear XP marginal cost failed refund-curve cross-check")
+                xp_checks+=1
     used_items.update(key for hero in result.values() for skill in hero["skills"] for level in skill["levels"] for key in level["cost"])
-    return {"schema": 1, "client_build": version, "source_hashes": files, "heroes": result, "gear": gear,
+    return {"gear_xp_cost_checks":xp_checks,"gear_xp_cost_basis":"Current ExpNeed; cross-checked against adjacent ExpProvide differences. Zero partial XP progress assumed.","schema": 1, "client_build": version, "source_hashes": files, "heroes": result, "gear": gear,
             "items": {**{key: items.get(key, key) for key in sorted(used_items)}, "hero-xp": "Hero XP", "gear-xp": "Gear XP"},
-            "model_notes": "BenefitTroop + BenefitsTroops + recorded BenefitSlg gear. Rank costs use destination ItemReqNew; skill costs use destination SlgItemReq. Direct-output estimates use affine DamageParam growth and configured cooldowns; runtime formula/animation semantics are not verified. Not a win-rate or live damage simulator."}
+            "model_notes": "BenefitTroop + BenefitsTroops + recorded BenefitSlg gear. Rank costs use destination ItemReqNew; skill costs use destination SlgItemReq. Runtime damage/utility return is not scored in upgrade-cost comparisons. Not a win-rate or live damage simulator."}
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)

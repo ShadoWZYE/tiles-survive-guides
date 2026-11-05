@@ -1,6 +1,13 @@
 using System.Text.Json;
 using TilesSurviveHeroPlanner;
 
+if(args.Length==2 && args[0]=="--recorded-scores")
+{
+ var root=args[1];var data=UpgradeData.Parse(File.ReadAllText(Path.Combine(root,"TilesSurvive-Upgrade-Data.json")));var model=EstimateData.Parse(File.ReadAllText(Path.Combine(root,"Hero-Estimate-Model.json")));var recordedCases=new List<object>();
+ foreach(var (slug,h) in data.Heroes){var stage=h.Stages.First();var complete=new HeroBuild{Stage=stage.Id,Level=1,Gear=[],Skills=h.Skills.ToDictionary(s=>s.Id,s=>stage.SkillCaps.ElementAtOrDefault(s.Slot)>0?1:0)};var unknownGear=complete.Copy();unknownGear.Gear=null;var missingLevel=complete.Copy();missingLevel.Level=null;var missingSkill=complete.Copy();missingSkill.Skills.Clear();foreach(var saved in new HeroBuild?[]{null,complete,unknownGear,missingLevel,missingSkill})recordedCases.Add(new{slug,saved,result=EstimateModel.Evaluate(slug,saved,data,model,0,null,true)});}
+ Console.WriteLine(JsonSerializer.Serialize(recordedCases,new JsonSerializerOptions{PropertyNamingPolicy=JsonNamingPolicy.CamelCase}));return;
+}
+
 if(args.Length==2 && args[0]=="--army-context")
 {
  var root=args[1];var data=ArmyContextData.Parse(File.ReadAllText(Path.Combine(root,"Hero-Army-Context.json")));

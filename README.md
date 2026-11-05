@@ -193,3 +193,11 @@ This is an unofficial community project and is not affiliated with or endorsed b
 Hero build autosaves keep immediate profile persistence while coalescing expensive comparison refreshes after a 450 ms pause. Collapsed comparisons are generated when opened; full squad optimisation is deferred until the editor closes. Repeated input no longer launches the complete view/optimiser refresh inline.
 
 Windows dropdowns, text/number inputs and sliders now share a dark theme, rounded borders, teal focus/selection accents and consistent disabled states.
+
+### Scoring and XP recommendations — 5 November 2026
+
+Windows XP recommendation cards now sort by marginal gain per XP, matching the calculation engine and browser version. A cheaper gear level can outrank a larger raw gain when it offers better value for the selected goal. Costs assume zero XP already invested toward the next level. The current gear table passes 1,782 adjacent cumulative-XP checks. These are stat/power returns, not predicted battle win rates.
+
+My builds now requires a valid recorded rank, level, unlocked skill levels and gear (including an explicit no-gear choice). Incomplete builds are excluded from squad recommendations instead of borrowing reference strength. Equal builds remains available for comparing heroes before recording them.
+
+Support utility receives its dedicated score contribution once: the additional utility-based durability multiplier and generic trait-pair bonus have been removed. Numeric permanent team stat buffs remain modeled. Configuration, animation and timeline inputs were refreshed against the installed 2.6.400.304 client and matching downloaded assets; all 44 selected native base-path instruction shapes and selected field layouts match the prior audit. This verifies selected static paths, not the complete combat engine, active patches or live outcomes. No overall accuracy percentage is established.

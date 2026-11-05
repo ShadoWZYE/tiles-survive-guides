@@ -103,6 +103,14 @@ const assert = require("node:assert/strict");
     for(const slug of slugs)await page.locator(`.hero-card[data-slug="${slug}"]`).click();
     assert.match(await page.locator('.formation-guide').innerText(),/No modeled cross-skill pairing/);
     assert.doesNotMatch(await page.locator('.formation-guide').innerText(),/healing \+|DEF break →|control →|Permanent team stat buffs/);
+    await page.evaluate(({slugs})=>{
+      const key='tiles-survive-hero-planner-profile-v1',p=JSON.parse(localStorage.getItem(key));
+      for(const slug of slugs)p.heroProgress[slug].build.gear=null;
+      localStorage.setItem(key,JSON.stringify(p));
+    },{slugs});
+    await page.reload();await page.locator('[data-tab="squad"]').click();
+    assert.match(await page.locator(`.hero-card[data-slug="${slugs[0]}"]`).innerText(),/Record build/,'Unknown gear cannot borrow reference gear strength');
+    assert.equal(await page.locator('.formation-guide').count(),0,'Incomplete builds cannot produce a finished formation');
     assert.deepEqual(errors,[]);
     console.log("Browser smoke passed: actual builds, data-driven returns, metric switching, saved profile, ownership preservation, mobile layout.");
   } finally { await browser.close(); }

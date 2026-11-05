@@ -1,49 +1,42 @@
 {
   "version": 2,
-  "client_build": "2.6.300.293",
-  "binary_sha256": "6eb2faca25a7b21b3dc2ae53b98db41b9408906387af4f72d7bcd6b54274d37c",
-  "metadata_sha256": "7849ac7844a3cd47966f99d0e476f8f7edc04bd921b06112ff42f9d5d24c3f3f",
-  "decoded_metadata_sha256": "f0ad392d0fce8141d05f7b4d053ffdb389a9d7fab5ea42f03b61e2fc162303ba",
+  "client_build": "2.6.400.304",
+  "binary_sha256": "54b80f6a283cfbb7e8c7ab5698038132d6e9c439620f108bcd668fa7d568de2c",
+  "metadata_sha256": "9a5f4a19ce4f3f9f8c60e8402a253da9feddc901e01f27b4af654e93fc92be26",
+  "decoded_metadata_sha256": "1af8d51d9fbda243f06033505e98dd1edba6ac4070b57584fb5c6d7aa01c81cb",
   "decoded_streams": [
     {
-      "source_rva": "0x8dadceb",
-      "destination_rva": "0x574000",
-      "compressed_size": 29581775,
-      "decoded_size": 101944832,
-      "decoded_sha256": "507c884c57415d6615878013900138c9bad4de1681bf1652bcc5921973ebbd90"
-    },
-    {
-      "source_rva": "0xae8dd60",
+      "source_rva": "0xa9fca82",
       "destination_rva": "0x1000",
-      "compressed_size": 1192117,
-      "decoded_size": 5710848,
-      "decoded_sha256": "c320c61a0df1e2d769c62c473dcae417984ba76e3f1ce60a5886fad52fc190c9"
+      "compressed_size": 1193731,
+      "decoded_size": 5712896,
+      "decoded_sha256": "748be08f5f0b3f81493b2113c7d9d1b567330a91e6d4b7786cdf82949f9dfb0e"
     },
     {
-      "source_rva": "0xae854c9",
-      "destination_rva": "0x86a6000",
-      "compressed_size": 14,
-      "decoded_size": 512,
-      "decoded_sha256": "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560"
+      "source_rva": "0x8db14db",
+      "destination_rva": "0x574000",
+      "compressed_size": 29640560,
+      "decoded_size": 102105600,
+      "decoded_sha256": "e38ea519ca5897a96434286cb8322a11e935291df137cfe8760ba8e0d91c459d"
     },
     {
-      "source_rva": "0xafc8ef8",
-      "destination_rva": "0x7846000",
-      "compressed_size": 1015440,
-      "decoded_size": 7238144,
-      "decoded_sha256": "cde6e076f5a47608d078afe860857b9d686d0d2216fb1860b47c78bfca189053"
+      "source_rva": "0x8826208",
+      "destination_rva": "0x66d5000",
+      "compressed_size": 2664950,
+      "decoded_size": 18473472,
+      "decoded_sha256": "2da2765aa5e33bcffd83e54387edd5728bb199ee7cf42fd902c4eea7758927d9"
     },
     {
-      "source_rva": "0xabb8c68",
-      "destination_rva": "0x66ad000",
-      "compressed_size": 2658250,
-      "decoded_size": 18451456,
-      "decoded_sha256": "7eb967555e7cdc5d5781fefe30ac0a8ad7991b0f28287bafb215ccda83d64e80"
+      "source_rva": "0x8ada9e0",
+      "destination_rva": "0x7874000",
+      "compressed_size": 1016927,
+      "decoded_size": 7248896,
+      "decoded_sha256": "eecc47ecc304508e0c040346adecd57bffaa9c2d973bf1bf425f502c176867c4"
     }
   ],
   "selected_types": {
     "RBT_UseSkill": {
-      "index": 163,
+      "index": 164,
       "namespace": "",
       "fields": [
         [
@@ -61,7 +54,7 @@
       ]
     },
     "ConditionRandomProbabilityChecker": {
-      "index": 22051,
+      "index": 22092,
       "namespace": "GamePlay.Raid",
       "fields": [
         [
@@ -71,7 +64,7 @@
       ]
     },
     "ConditionSkillFinishChecker": {
-      "index": 22052,
+      "index": 22093,
       "namespace": "GamePlay.Raid",
       "fields": [
         [
@@ -93,12 +86,12 @@
       ]
     },
     "RaidEffectSystem": {
-      "index": 22066,
+      "index": 22107,
       "namespace": "GamePlay.Raid",
       "fields": []
     },
     "RaidBuffBase": {
-      "index": 22184,
+      "index": 22225,
       "namespace": "GamePlay.Raid",
       "fields": [
         [
@@ -192,7 +185,7 @@
       ]
     },
     "RaidBuffDelayEffect": {
-      "index": 22189,
+      "index": 22230,
       "namespace": "GamePlay.Raid",
       "fields": [
         [
@@ -214,7 +207,7 @@
       ]
     },
     "RaidBuffDotEffect": {
-      "index": 22192,
+      "index": 22233,
       "namespace": "GamePlay.Raid",
       "fields": [
         [
@@ -236,7 +229,7 @@
       ]
     },
     "RaidBuffPropertyModify": {
-      "index": 22203,
+      "index": 22244,
       "namespace": "GamePlay.Raid",
       "fields": [
         [
@@ -246,7 +239,7 @@
       ]
     },
     "RaidBuffComponent": {
-      "index": 22207,
+      "index": 22248,
       "namespace": "GamePlay.Raid",
       "fields": [
         [
@@ -280,12 +273,12 @@
       ]
     },
     "RaidPropertyUtils": {
-      "index": 22245,
+      "index": 22286,
       "namespace": "GamePlay.Raid",
       "fields": []
     },
     "SkillBase": {
-      "index": 22284,
+      "index": 22325,
       "namespace": "GamePlay.Raid",
       "fields": [
         [
@@ -383,7 +376,7 @@
       ]
     },
     "SkillComponent": {
-      "index": 22289,
+      "index": 22330,
       "namespace": "GamePlay.Raid",
       "fields": [
         [
@@ -433,7 +426,7 @@
       ]
     },
     "SkillDamageCalSystem": {
-      "index": 22293,
+      "index": 22334,
       "namespace": "GamePlay.Raid",
       "fields": [
         [
@@ -507,7 +500,7 @@
       ]
     },
     "SkillRelease": {
-      "index": 22309,
+      "index": 22350,
       "namespace": "GamePlay.Raid",
       "fields": [
         [
@@ -581,7 +574,7 @@
       ]
     },
     "RaidModelActor": {
-      "index": 22333,
+      "index": 22374,
       "namespace": "GamePlay.Raid",
       "fields": [
         [
@@ -683,7 +676,7 @@
       ]
     },
     "SummonPropertyComponent": {
-      "index": 22382,
+      "index": 22423,
       "namespace": "GamePlay.Raid",
       "fields": []
     }
@@ -692,148 +685,148 @@
     {
       "type": "RBT_UseSkill",
       "name": "OnUpdate",
-      "rva": 23479616,
-      "token": "0x60003f3",
+      "rva": 23525840,
+      "token": "0x60003f4",
       "parameter_count": 0,
       "byte_count": 256,
       "instruction_count": 69,
-      "code_sha256": "95a259754991620138bb5667b8351b33de941870bd148a9b1184a45401247987",
-      "normalized_sha256": "097d5b1b146415863276de4dccc8784db3f983a17ce472ea6e10de8a255d11f9",
+      "code_sha256": "b5155588cc1d413dd65bf257d23de64edfadfde6722627efeeb855fe017b53d5",
+      "normalized_sha256": "b89a4241b3fe1c5a4535bc6e6577576db232c62638a4df47e28990b85123ac9f",
       "base_path_sha256": "0794d10cb309de565b159785f2793ede5e187b5fdaba6a69a568e8135f31b40f",
       "patch_dispatch_ids": [
-        4263
+        4249
       ]
     },
     {
       "type": "ConditionRandomProbabilityChecker",
       "name": "IsConditionSatisfied",
-      "rva": 42803712,
-      "token": "0x60204e5",
+      "rva": 42883216,
+      "token": "0x6020613",
       "parameter_count": 0,
       "byte_count": 112,
       "instruction_count": 30,
-      "code_sha256": "c63cf033955f18b23372d90be5255d85f2f4c2f0076e85afbf9f25fa25f67779",
-      "normalized_sha256": "967b9766d6e0cfe9b624d4b6f8ce651f3852d12d7757db5656a464470a2dbc36",
+      "code_sha256": "5a3fa1015009ef64967935e9fc99308eb05833868f0e3a71c94b8be22519383e",
+      "normalized_sha256": "917812cb9babe6342c397430e9f87f3bc894777a21151f7e89c42733795d89b8",
       "base_path_sha256": "f28d438e1ff7f822bb4d2be1f8eaa5ea18811411d4c2dec6485dd247527c08ed",
       "patch_dispatch_ids": [
-        98195
+        98416
       ]
     },
     {
       "type": "ConditionSkillFinishChecker",
       "name": "OnTargetEntitySkillFinish",
-      "rva": 42804864,
-      "token": "0x60204ef",
+      "rva": 42884368,
+      "token": "0x602061d",
       "parameter_count": 2,
       "byte_count": 224,
       "instruction_count": 64,
-      "code_sha256": "1a8e06dc66b4d0eed9eb189aeac759d04741a9338fc492b4fce047ab0d3fc906",
-      "normalized_sha256": "e1f3a9bb48b829457f6a2ef59636e5f32bedf3ac58e2a7198b22a9bd95bf5cd5",
+      "code_sha256": "d8f17a3f312e7a6b26d78e69b55a854be5b14622280807ca65d9bc9e1dc72e71",
+      "normalized_sha256": "97642e06c7520f9be3fa3ef1071a02110254f75c23f7dd4da49623d2eb4f2817",
       "base_path_sha256": "2a0f26fce057208189447f3af875cce971fca3959158e1998c6bfa5629582e18",
       "patch_dispatch_ids": [
-        98203
+        98424
       ]
     },
     {
       "type": "RaidEffectSystem",
       "name": "ProcessEffectDamage",
-      "rva": 42872800,
-      "token": "0x6020571",
+      "rva": 42952304,
+      "token": "0x602069f",
       "parameter_count": 5,
       "byte_count": 1264,
       "instruction_count": 263,
-      "code_sha256": "e0046d858a206cee2820bb941cb036018cbcf543cf952c3822fd0437cfb39ac3",
-      "normalized_sha256": "712221e1c97e3283220bcfd6342625b9a0cd7828a43d9da0ffa58ff3844029d9",
+      "code_sha256": "90b011aebb03a224eb8cdf9dfcce1590c43fb0d52d2e1a43cda351140d8d26e4",
+      "normalized_sha256": "51a05ec321c48afc16785505fb04bbe3c370872e1c892144150b7935365021ef",
       "base_path_sha256": "3e91136317fab94cce18f05fec92cc30aa47107b4e4b82d0e84b1eef91478808",
       "patch_dispatch_ids": [
-        1130
+        1128
       ]
     },
     {
       "type": "RaidEffectSystem",
       "name": "ProcessEffectRecoverHp",
-      "rva": 42879936,
-      "token": "0x6020574",
+      "rva": 42959440,
+      "token": "0x60206a2",
       "parameter_count": 4,
       "byte_count": 560,
       "instruction_count": 124,
-      "code_sha256": "a3e8883e3d2f3fb442c0e52e38c667a5b7126ecc445eb637353b95ac48d27091",
-      "normalized_sha256": "659577970d41b58dadd009e5cb1e663548a3f1610e06d942e45603d5a73fd6b3",
+      "code_sha256": "05f56a0cdea2669a754fd4ebb18296341d155e53dbde0b5def462fd51a495de5",
+      "normalized_sha256": "cd89b83a2d7a0f13a9e7a71314465c8c767ff89a74da7a1dd9e7900ec3b30635",
       "base_path_sha256": "2d4972fda59fd614630130c74ee1f65d53fa7bab4fdefdde267c69e2a6997903",
       "patch_dispatch_ids": [
-        1240
+        1238
       ]
     },
     {
       "type": "RaidEffectSystem",
       "name": "ProcessEffectSummon",
-      "rva": 42882240,
-      "token": "0x6020577",
+      "rva": 42961744,
+      "token": "0x60206a5",
       "parameter_count": 5,
       "byte_count": 2752,
       "instruction_count": 636,
-      "code_sha256": "3243252de7329e2401fb07e7c29b00b062b46ff32d6c9d9d1408fd851ccd3708",
-      "normalized_sha256": "65fd3e8faf7013a05240b6b6bdc14c2b883433fbc24a5d475c360321e8b95ce8",
+      "code_sha256": "9e06766bb43d1a32d05d942404fbf06e0caf2f4d7f7a625ce43b0a9087ca0e80",
+      "normalized_sha256": "e574368f8261d64b21ec8733fc32af5ef222a81672623d63fb23761db8eeedad",
       "base_path_sha256": "2bbc2c865140ea86cef80fafe5862070c6f121d12523c5b6f3a3b667da2aa734",
       "patch_dispatch_ids": [
-        877,
-        878
+        874,
+        875
       ]
     },
     {
       "type": "RaidBuffBase",
       "name": "RefreshBuff",
-      "rva": 42835392,
-      "token": "0x6020698",
+      "rva": 42914896,
+      "token": "0x60207c6",
       "parameter_count": 0,
       "byte_count": 96,
       "instruction_count": 26,
-      "code_sha256": "96049d91950ce436c00b0abea29b345a5eaba5b5c44ab636849f06948b8b7a57",
-      "normalized_sha256": "0837126ea990fae17307e2e357087aed2ccc203e840c674d8eac33ffa8c867f6",
+      "code_sha256": "4c004e11949a0eb5c60fdca6d120bcd567993bc69b79f55ec2c73e18e8fc2204",
+      "normalized_sha256": "db491b0c51da17a3496954f5a9b62a59382752324d098f64f57c252c91abb8b6",
       "base_path_sha256": "cf599be416d1cd89ce857025e2c19d5cde4455d0195a0294be38f27495cf2e93",
       "patch_dispatch_ids": [
-        1250
+        1248
       ]
     },
     {
       "type": "RaidBuffBase",
       "name": "OnUpdate",
-      "rva": 42835200,
-      "token": "0x6020699",
+      "rva": 42914704,
+      "token": "0x60207c7",
       "parameter_count": 1,
       "byte_count": 192,
       "instruction_count": 53,
-      "code_sha256": "175a55b0e946ecd538723d10769cc1c99986633f9647f86e7f6b3f9b6c847c76",
-      "normalized_sha256": "50e49869d589b22e77e4debdb487a4924d94fd995048b9ab0b3802bb909ff310",
+      "code_sha256": "fd67f5ab4bc6875fcd90df1f5ecc5708967ea5f2e331b202b514b4024432cbc6",
+      "normalized_sha256": "eaf22f8ac28c9289d9221c8f83a05f480a728e313fe134848cca879e11a6ef5c",
       "base_path_sha256": "430d048c06a642e1ce3a500f2cfbe0b7b47ab80a0ecad9cb1d3654c0b159ced6",
       "patch_dispatch_ids": [
-        98374
+        98595
       ]
     },
     {
       "type": "RaidBuffBase",
       "name": "RemoveEffect",
-      "rva": 42835664,
-      "token": "0x602069d",
+      "rva": 42915168,
+      "token": "0x60207cb",
       "parameter_count": 0,
       "byte_count": 112,
       "instruction_count": 28,
-      "code_sha256": "44b48ca2c05d1d6f72390b2dad440f8d91dc80a010d91ab3e4de125551e8feda",
-      "normalized_sha256": "2fa4a8d60f1204dfac78ef9e5ebb33e44cfa07d67bf1e14e6588e01bf679f524",
+      "code_sha256": "423e800e930b7d380104afc30f555f3bca451b67936f1fcaecbd8587495b692e",
+      "normalized_sha256": "32de3cac463cc159c7d1c0c13ae5fb28597c6f53287a84a3c3501d3f8694144b",
       "base_path_sha256": "7656032ba5edc396327f169885527d561eb2db265b878ba42152cf9f821b2109",
       "patch_dispatch_ids": [
-        1194
+        1192
       ]
     },
     {
       "type": "RaidBuffDelayEffect",
       "name": ".ctor",
-      "rva": 42842832,
-      "token": "0x60206bd",
+      "rva": 42922336,
+      "token": "0x60207eb",
       "parameter_count": 0,
       "byte_count": 144,
       "instruction_count": 28,
-      "code_sha256": "54f229e8b2fe09cf3697119feeedba6dbf1faf7c129e16b66dbc1ccf716f034c",
+      "code_sha256": "3fbb341507012e9441eb9644fcbee16fe51d311f4577c8e50ae8600364cc21ab",
       "normalized_sha256": "42f777e9ff15eb993c6419258744bb652d80c687b202ebfb433cad3b3404a8dd",
       "base_path_sha256": "42f777e9ff15eb993c6419258744bb652d80c687b202ebfb433cad3b3404a8dd",
       "patch_dispatch_ids": []
@@ -841,530 +834,530 @@
     {
       "type": "RaidBuffDelayEffect",
       "name": "AddEffect",
-      "rva": 42840768,
-      "token": "0x60206bf",
+      "rva": 42920272,
+      "token": "0x60207ed",
       "parameter_count": 0,
       "byte_count": 592,
       "instruction_count": 142,
-      "code_sha256": "8298682ffeda79a9bbae23fd88c3a374f5a8b8ffc8c4041472a8ab4c038e4f10",
-      "normalized_sha256": "1c073b8e4a365c5c752d5383a6cf39010c1dfbece6e2a8ddfd2468d3cd73fe40",
+      "code_sha256": "0321959635d3e7441eb693a1eb06b73d88bf4fba2a51bbb2333474376a7ce682",
+      "normalized_sha256": "0b508eb3737603955fe69d00b1ef1057d5ae85827d18fb4ad013b6084cd56684",
       "base_path_sha256": "a3b2bacfe2f6b5ea7829a9842796fe0a566f4e0482ea15fc4909881a5a84296a",
       "patch_dispatch_ids": [
-        1264,
-        98394
+        1262,
+        98615
       ]
     },
     {
       "type": "RaidBuffDelayEffect",
       "name": "OnUpdate",
-      "rva": 42842656,
-      "token": "0x60206c0",
+      "rva": 42922160,
+      "token": "0x60207ee",
       "parameter_count": 1,
       "byte_count": 160,
       "instruction_count": 43,
-      "code_sha256": "4e34ea59c96325bbf71e7043feb1e7454fbffe16336769da2a3d7733044ddfc8",
-      "normalized_sha256": "5bd326ea5bcec7be1afe027b1fda75d9cb5daa286cfb464f3997ea6b9a232a1a",
+      "code_sha256": "f69ca93dd25988ccc57175ab8c28789f4d1cec62652837481bb423534d27b663",
+      "normalized_sha256": "a29a5c1a32da261d381c72bc7994b9b1e4773eddbf3f038d44652f8d0323a173",
       "base_path_sha256": "4e506e67e5ccf58093957982e42c60dd348e37236de0106742b09e9d40be6477",
       "patch_dispatch_ids": [
-        98395
+        98616
       ]
     },
     {
       "type": "RaidBuffDelayEffect",
       "name": "OnEffectTriggered",
-      "rva": 42841536,
-      "token": "0x60206c1",
+      "rva": 42921040,
+      "token": "0x60207ef",
       "parameter_count": 0,
       "byte_count": 1120,
       "instruction_count": 233,
-      "code_sha256": "675b7d81d99e1bf7d95053fb24fd4ee2988526302dca92bcbdde32e72bdc97c0",
-      "normalized_sha256": "77fac8c23da0659cf6eda922dd50c795462759bce4f5b132d5fce7bb607baed4",
+      "code_sha256": "38ea6cf2d6d821eb906cdca3bf4912540ea50feeae54c56e9bb32d7839447e13",
+      "normalized_sha256": "a729829c0dab3bbf015c5fc02e78efa1019e484d4fef4a9babf68759a03e72e3",
       "base_path_sha256": "960ecbb5566cabc3615ffb72ca095242e21e4ae8422119058d0cd86f49b97659",
       "patch_dispatch_ids": [
-        98396
+        98617
       ]
     },
     {
       "type": "RaidBuffDotEffect",
       "name": "AddEffect",
-      "rva": 42979888,
-      "token": "0x60206df",
+      "rva": 43059392,
+      "token": "0x602080d",
       "parameter_count": 0,
       "byte_count": 704,
       "instruction_count": 162,
-      "code_sha256": "a0e25f2f452de004d9259ae5fa2d2e63178fe1e20844aed991fd2b7cc2540c04",
-      "normalized_sha256": "b243acb17f2620f60ee6daf63c8b7c5d9468cc5c9bd1dc4da4ad9c475a0981f4",
+      "code_sha256": "0e9fa8b56e973ac528af7bf4291cf6acf46a03bc0b350a913d3c6f20add93127",
+      "normalized_sha256": "a24e4860820df81501a1459f3ce9522faef028103194bc6bb685837b9b313ed7",
       "base_path_sha256": "179192b08df9c98bf162222aef97f941f30a62f301681566d709db9a107d0677",
       "patch_dispatch_ids": [
-        98414
+        98635
       ]
     },
     {
       "type": "RaidBuffDotEffect",
       "name": "OnUpdate",
-      "rva": 42982128,
-      "token": "0x60206e0",
+      "rva": 43061632,
+      "token": "0x602080e",
       "parameter_count": 1,
       "byte_count": 176,
       "instruction_count": 43,
-      "code_sha256": "2efeb849c83d1ba032eb91be4ca2ecd619f7e3c86ffb5af0e03c28006f3e677d",
-      "normalized_sha256": "4639ab5bfe95cdc8aa0548493cf63c37a1b98dae10ff1589638e2621d55000e6",
+      "code_sha256": "1da9cd9dd3977e269bb40f89549c9611239e1dc65e94502a1ca255931e37e9ff",
+      "normalized_sha256": "b44bdbe616caffd20b27d75c95799c84f8899c318e497f82ceea97060be94023",
       "base_path_sha256": "8133fb308535fee6e577c462ca4ae0e3a336ff38d7a8248a4b398cdbb80611e9",
       "patch_dispatch_ids": [
-        98415
+        98636
       ]
     },
     {
       "type": "RaidBuffDotEffect",
       "name": "OnEffectTriggered",
-      "rva": 42980832,
-      "token": "0x60206e1",
+      "rva": 43060336,
+      "token": "0x602080f",
       "parameter_count": 0,
       "byte_count": 1296,
       "instruction_count": 263,
-      "code_sha256": "8e42259b2a1bc9c71f0f11cbba78e8808340bcd85b90d4432755c88ca926b9b3",
-      "normalized_sha256": "a028207b031ade52dfe4fddac6047ada14ce23a780e41b1e141d0c8eff3466d7",
+      "code_sha256": "585cc3e3146ba0e286552c9a5311ac67f6fbc2c1e2dc141b1c2629216bfbe0c1",
+      "normalized_sha256": "0e14927f1284dbab6202ca7e93525dddbb84eea11e97df3d5245b02426b714ae",
       "base_path_sha256": "8c2948e36471262d3019d9d29d12757e2b4c52c2f2c6b75dc64639fa6cdbea33",
       "patch_dispatch_ids": [
-        98416
+        98637
       ]
     },
     {
       "type": "RaidBuffPropertyModify",
       "name": "Init",
-      "rva": 42990848,
-      "token": "0x6020715",
+      "rva": 43070352,
+      "token": "0x6020843",
       "parameter_count": 6,
       "byte_count": 1504,
       "instruction_count": 338,
-      "code_sha256": "1144bab24a633b57d327606cfef6beb0ab17c3c10feaca83162ccb14c94ce1f3",
-      "normalized_sha256": "dd58e2e39c0a4e0376c0f297456d4d16de6a69c1c9b6db736dda9b56fbea60d0",
+      "code_sha256": "9f6a45a60514d19b7d0f9e3850af28d6a649a3145c8e99f79201798d2d31b6ac",
+      "normalized_sha256": "67f70c86cd38d968d6a61de5fd762880e3a94e1518187291bc28cdb99a57682e",
       "base_path_sha256": "df707fc52acf372283af8f5cc1cfbae857a538a83e8dcac33278c5f1f5363bbb",
       "patch_dispatch_ids": [
-        98436
+        98657
       ]
     },
     {
       "type": "RaidBuffComponent",
       "name": "AddBuff",
-      "rva": 42956240,
-      "token": "0x602072a",
+      "rva": 43035744,
+      "token": "0x6020858",
       "parameter_count": 4,
       "byte_count": 2592,
       "instruction_count": 594,
-      "code_sha256": "463bbaf25ec3463604350507c92d5c817be3a3ca4d0db9e043e1c5a441704a68",
-      "normalized_sha256": "5c51a59c22f849ff019321bec26923cd328810456c41ca474af7bd332af09a64",
+      "code_sha256": "10b4c2db018533fc557c84c4a5e763a480bf31f0cd92062771577113f27d3ec0",
+      "normalized_sha256": "1c3a24fd15b4ee028425fe9d8de899db625d46554a8c4d3fcbd1c2ab0fcb63c4",
       "base_path_sha256": "c95ee372db5003b5a89949069cad19e0f5b588ba49d289f2d1fc500d367976be",
       "patch_dispatch_ids": [
-        1248,
-        1252,
-        1266
+        1246,
+        1250,
+        1264
       ]
     },
     {
       "type": "RaidPropertyUtils",
       "name": "CalculateFinalPropertyValue",
-      "rva": 43053232,
-      "token": "0x60208bc",
+      "rva": 43132736,
+      "token": "0x60209ea",
       "parameter_count": 3,
       "byte_count": 800,
       "instruction_count": 188,
-      "code_sha256": "f7981a4d45128b05d7e9ab31357862a47d953957b36125d345b96e76fb328929",
-      "normalized_sha256": "1dd0ba48b0714e47b1d344d862a525a5aec573bcfbf87d1d9f7dfdee4f082659",
+      "code_sha256": "96190f4cd99185169577561878eab2f4d656f653878b6f0c121fa2e9779c1d81",
+      "normalized_sha256": "0c1556e24d190aeb6cfa6f3ff040a4dc3e74bec46e1b3447ef1289ee2c28db38",
       "base_path_sha256": "05e0f4e61516536eccd8f0627d6fcb4e7050e4969004b07a7897628ccb5320d9",
       "patch_dispatch_ids": [
-        1040,
-        1141
+        1038,
+        1139
       ]
     },
     {
       "type": "SkillBase",
       "name": "CanUseSkill",
-      "rva": 43078656,
-      "token": "0x6020a47",
+      "rva": 43158128,
+      "token": "0x6020b75",
       "parameter_count": 0,
       "byte_count": 576,
       "instruction_count": 159,
-      "code_sha256": "427004f6264565a41273e3d8954fe323b8f45ea9c15be03ce2c7c5762c12ba05",
-      "normalized_sha256": "9a7a195db64c9f80a85c07e26d10e08d2d90c9556dd5c133dc3a7946811ce390",
+      "code_sha256": "215b7db2276c35a2ddb9ff29dd01cd4e4055fc64fa5d089761746e047680d71e",
+      "normalized_sha256": "9e040a595f89fd9bcb22d789ef76c34d138a2792f0e1897726c74c17121823f6",
       "base_path_sha256": "7702320c36ec57b9ed956751f6463e54c41508c521a0e1ce3e06c8eb6a916592",
       "patch_dispatch_ids": [
-        1012,
+        1009,
+        1041,
+        1042,
         1043,
-        1044,
-        1045,
-        1046
+        1044
       ]
     },
     {
       "type": "SkillBase",
       "name": "OnUseSkill",
-      "rva": 43083456,
-      "token": "0x6020a4b",
+      "rva": 43162928,
+      "token": "0x6020b79",
       "parameter_count": 0,
       "byte_count": 576,
       "instruction_count": 147,
-      "code_sha256": "f9db2418a43841fc31813f3ffd9d22b9f31b0f2f3daf828802637149253ba7f6",
-      "normalized_sha256": "a330106a500e25233fe4400252c1bf82b35d08e016cb26ce467770f97b2be6b5",
+      "code_sha256": "597826f8d4363c59747e7f23bbf8385c6057d229074c54098a5ea5746c0d06b2",
+      "normalized_sha256": "5e029c412408c0b61e1770e35a5bc399f589a1a7d79edf273c33c9db4d932bf0",
       "base_path_sha256": "7b881e42fd78675f3d93a09d3c2660f9b352932b8a1e40d69ffbd6a2a07f2c64",
       "patch_dispatch_ids": [
-        1012,
-        1067
+        1009,
+        1065
       ]
     },
     {
       "type": "SkillBase",
       "name": "ReleaseFinished",
-      "rva": 43084032,
-      "token": "0x6020a4c",
+      "rva": 43163504,
+      "token": "0x6020b7a",
       "parameter_count": 1,
       "byte_count": 400,
       "instruction_count": 108,
-      "code_sha256": "6202a689afa876a18a0f0ee127e1dfe54a27505095d2a4e88ac920c7fc76b848",
-      "normalized_sha256": "c1c1b91d4f91cf92acaacd92ee25ccd71d2c7a60b40b58897f928827f8316a17",
+      "code_sha256": "ddeb086669d879881fa9d52a0312e40546de0a75394705505b4d2cce598d47b3",
+      "normalized_sha256": "922ce42b647d05d63d0761c7af7e5b0ed0145d7f3fac2841b01bfedcbe4148fe",
       "base_path_sha256": "89c86bef1cd91ba4e235a3a8061307641d25df01800c41ffb5c2174145bdbd1d",
       "patch_dispatch_ids": [
-        98779
+        99000
       ]
     },
     {
       "type": "SkillBase",
       "name": "CanInterruptSkill",
-      "rva": 43078400,
-      "token": "0x6020a4d",
+      "rva": 43157872,
+      "token": "0x6020b7b",
       "parameter_count": 0,
       "byte_count": 256,
       "instruction_count": 70,
-      "code_sha256": "26be5b3c8845c896ddde6a99c20eb2fb68bc201083ccb6abbeae0fe69124f50d",
-      "normalized_sha256": "86c00749332848807912b7cd9285180643735ee6effa47867042aa57abf42656",
+      "code_sha256": "c197dcd24c6cb3ce85f915c81a2cb3f86c8a824a3dc4aa0d79cc0758cebbb298",
+      "normalized_sha256": "fe901636504e15b80d536ab1a7cc2193061e6d64c7d924f5aa5ef9fcb482b232",
       "base_path_sha256": "ff3be0a4b6803ab809dfde26bdbc96167833bfe5307a97093d5b3359aa9d3ec8",
       "patch_dispatch_ids": [
-        1012,
-        1050
+        1009,
+        1048
       ]
     },
     {
       "type": "SkillBase",
       "name": "InterruptSkill",
-      "rva": 43082272,
-      "token": "0x6020a4e",
+      "rva": 43161744,
+      "token": "0x6020b7c",
       "parameter_count": 1,
       "byte_count": 576,
       "instruction_count": 140,
-      "code_sha256": "a8fea2ef84f458418c52946b3a66d5407b9590782c40174fe595f793e20358df",
-      "normalized_sha256": "502e4eb26bfeb5b297720394ea83a42aefdc25c44bf682d7fa7b2411161b5260",
+      "code_sha256": "9dd556206cfdb7f3d5dcc7dffdabe72ff163a09602e5c767d47890c8aadfd424",
+      "normalized_sha256": "2e62151d100a3c7bd0545c1fa88b99fc2b9ed484852a1038bd8c85427b05da52",
       "base_path_sha256": "4e89ece6e1b189f595b488c96d92c1b935cd660c75d61a8cd9c33b2e8eefaebb",
       "patch_dispatch_ids": [
-        1012,
-        1051
+        1009,
+        1049
       ]
     },
     {
       "type": "SkillBase",
       "name": "Update",
-      "rva": 43084960,
-      "token": "0x6020a50",
+      "rva": 43164432,
+      "token": "0x6020b7e",
       "parameter_count": 1,
       "byte_count": 576,
       "instruction_count": 139,
-      "code_sha256": "d026900ad0ac394eeadfbada6b2a0f972cf7be32f60887d85f34a0c6662d1db3",
-      "normalized_sha256": "61486876f5700095331281d2563eda58e1e01795e1b639d93d125e97e6277104",
+      "code_sha256": "aaa7d5fb702099e75c2a347a57ebdbcb305b7c4c083d4ffdda4997108f4621a2",
+      "normalized_sha256": "723d7095bdf85d70e95ea055751b3fcfebaed08765fff41fc768eea94ab1e800",
       "base_path_sha256": "b9b47aebfc2656deb3e1f8e6fc3b6795cc3e7b2d949b6bc240e9c4cb10f63d35",
       "patch_dispatch_ids": [
-        1012,
-        98799
+        1009,
+        99020
       ]
     },
     {
       "type": "SkillBase",
       "name": "IsSkillEnd",
-      "rva": 43082848,
-      "token": "0x6020a51",
+      "rva": 43162320,
+      "token": "0x6020b7f",
       "parameter_count": 0,
       "byte_count": 368,
       "instruction_count": 86,
-      "code_sha256": "e77fb26c008dfcef334c9dae3cb1b7116d55b22f8af9d71786b7d9a0ff7994f3",
-      "normalized_sha256": "297de84016d534ea555fc2b985c4d880d8642b5d70b1c2fb0c65635732fcfcff",
+      "code_sha256": "302c98ab40c8e68e56e501abd52974d05a7c02497d69c06054be2ef17c30494a",
+      "normalized_sha256": "36b3888f51f2a8d2cd22b287c6b536ccdcafb083415be1547b79cd3a63ae08c5",
       "base_path_sha256": "ca71669f5b2ddf1fb7feb67f43a96147deeaf19a6a4d77eddb4e332ad2428d44",
       "patch_dispatch_ids": [
-        1048
+        1046
       ]
     },
     {
       "type": "SkillComponent",
       "name": "UseSkill",
-      "rva": 43130800,
-      "token": "0x6020a7b",
+      "rva": 43210272,
+      "token": "0x6020ba9",
       "parameter_count": 1,
       "byte_count": 240,
       "instruction_count": 52,
-      "code_sha256": "c51bcbe82a49e979d42fb157f51874e053cdf1bd82ed17133348aa8827bc2951",
-      "normalized_sha256": "6fd74b8b9b545ca5f30308f58b92909237e1bfb953ffc7afba36a03ba30475e7",
+      "code_sha256": "2c81d8c4f0d3ff764bc922327dd9c36634e71c9d103e86dced8950cc696a23bb",
+      "normalized_sha256": "3c3dffb453a10dd5f89324d01c583e91a6e863fe29b9ef552f1ee394cfcebaa7",
       "base_path_sha256": "abef87d76fd9293cdc769944e267e6adaa05b790c1257c7202caf1cc4ee7b9d0",
       "patch_dispatch_ids": [
-        98825
+        99046
       ]
     },
     {
       "type": "SkillComponent",
       "name": "UseSkill",
-      "rva": 43131040,
-      "token": "0x6020a7c",
+      "rva": 43210512,
+      "token": "0x6020baa",
       "parameter_count": 3,
       "byte_count": 272,
       "instruction_count": 62,
-      "code_sha256": "fc24d3eeb448dc881712d3a28af443d59d6148d5b05471825e10b567f0875a73",
-      "normalized_sha256": "f302b9c93d25472d9dcc3d1d7494a04d1dfd9cef7829c1d7a9a0be3cf629f830",
+      "code_sha256": "21ad0910690cd33e6354f6268e1a9dff2708247ec9425ea66809b5e29ed4532b",
+      "normalized_sha256": "4f55cac120817146bfbad29ec534f5b5b72dd5072d5a12263084a7ec6b2e8680",
       "base_path_sha256": "19b564242eec3929daee246f0685d99326cf87fbbee94796f8e293588bf14d63",
       "patch_dispatch_ids": [
-        1041
+        1039
       ]
     },
     {
       "type": "SkillComponent",
       "name": "UseSkill",
-      "rva": 43130464,
-      "token": "0x6020a7d",
+      "rva": 43209936,
+      "token": "0x6020bab",
       "parameter_count": 2,
       "byte_count": 336,
       "instruction_count": 82,
-      "code_sha256": "839d10fb36636da9eaec14ee0890798f67f29afa1752885a27d91428c0a1c9b5",
-      "normalized_sha256": "08b6368a0b4b2995a0e7a3dca657d6e5d61c7204df4f86adee2ca700af500f5b",
+      "code_sha256": "68e1e5f525ad0733ac81d2b9f608363988c835e3fe0dac0cfc9cd2433bdcbe48",
+      "normalized_sha256": "27754e9f702680f336b7f5e0ce9da88ed50cb72285c8ec6b5e20a912defad220",
       "base_path_sha256": "60e63d60a29d79b2487f5da8fdc422a48eef63f90c4bdded8745e926bd07a337",
       "patch_dispatch_ids": [
-        98294
+        98515
       ]
     },
     {
       "type": "SkillComponent",
       "name": "UseSkill",
-      "rva": 43128656,
-      "token": "0x6020a7e",
+      "rva": 43208128,
+      "token": "0x6020bac",
       "parameter_count": 4,
       "byte_count": 320,
       "instruction_count": 68,
-      "code_sha256": "b2ede9ed521ef159c880565b0950d152e7e8f3b34a395f52ddf5a9144eb8f89a",
-      "normalized_sha256": "9e01b509b1bdf280c94ecc16803678ff4ccbd4aea1a30f03c9375f3c4a9b4f51",
+      "code_sha256": "49b8fbf6197d4d5cfd1ec89d1088ebe4c8e6bd1ada4053cc2031a85c793e2a06",
+      "normalized_sha256": "787e680f5c27cc92a1502ce06172a0962a72760ca4a4aeafddada124d24befa5",
       "base_path_sha256": "f41e81fd72ed3ce29dc0681f7678d125bf1015b43669170355e565534f93d45a",
       "patch_dispatch_ids": [
-        1111
+        1109
       ]
     },
     {
       "type": "SkillComponent",
       "name": "UseSkill",
-      "rva": 43128976,
-      "token": "0x6020a7f",
+      "rva": 43208448,
+      "token": "0x6020bad",
       "parameter_count": 1,
       "byte_count": 1488,
       "instruction_count": 342,
-      "code_sha256": "db7d77ccd1bf794c4117fe3d38822234b3c18928b18b13c9dd76a7d3de7c4578",
-      "normalized_sha256": "ff504fcb785d86cfebfba342dabac694fc035ce131f9151552c3158dc969c134",
+      "code_sha256": "628155bcf7d3f21e9ebff56f89a93dadbc6dbadd5d5bd9dd5867011fa0ac1565",
+      "normalized_sha256": "22bcc48f9b61d26b4f4d64a6940da61dd5f671777f912f6a523dac32ab4f7303",
       "base_path_sha256": "39deec6f0c63ac2d0779f44efcbdff58c71075c99ad5861bd5932e14a03d4602",
       "patch_dispatch_ids": [
-        1042
+        1040
       ]
     },
     {
       "type": "SkillComponent",
       "name": "IsCurSkillEnd",
-      "rva": 43125296,
-      "token": "0x6020a86",
+      "rva": 43204768,
+      "token": "0x6020bb4",
       "parameter_count": 0,
       "byte_count": 112,
       "instruction_count": 33,
-      "code_sha256": "728e2b37f81e0d4f360499ab6096e468e04c77c8306d02060f00c0efcbfaf8f2",
-      "normalized_sha256": "86e1a0423913c50b8e3240264ccaff5f48691d3d47fff1ebf3c28a9163f4b375",
+      "code_sha256": "a0ca9eaef23593fd1fed136364ef275937956aa01c5ded42efb8e8c136339027",
+      "normalized_sha256": "24b944b4e06ffdd92126811ea3810bdff951fc5da9663c214d7e713d20066e2b",
       "base_path_sha256": "1901525dd0fdef4928abfb753951ed5df30d4873c1f3409f1cb99f33c29b41dc",
       "patch_dispatch_ids": [
-        98827
+        99048
       ]
     },
     {
       "type": "SkillComponent",
       "name": "GetAIUsableSkill",
-      "rva": 43119728,
-      "token": "0x6020a89",
+      "rva": 43199200,
+      "token": "0x6020bb7",
       "parameter_count": 1,
       "byte_count": 1088,
       "instruction_count": 247,
-      "code_sha256": "663e4ebed5e33f389c9ce3235f2360c93c03e78157db31b7bb228af0fa8db167",
-      "normalized_sha256": "734cd99abe80be78d2676f9c9292f9d4b6115e51d8423c5b6b7dc0c100c6f84a",
+      "code_sha256": "c8dbb3c0a6d42399124c05d0d238c3ced8cf5dd1becbd0708fd3a962b68d1731",
+      "normalized_sha256": "4319062cf9c619b8bc79f8f156edfa32deff7404239f4c2c9a362d000d8a4aca",
       "base_path_sha256": "119f34b1afb6d718ef1c9081d9cd1842882ae0f0c356dcbe583a1f0e594bdf1e",
       "patch_dispatch_ids": [
-        4287
+        4273
       ]
     },
     {
       "type": "SkillComponent",
       "name": "SortSkillPriority",
-      "rva": 43127760,
-      "token": "0x6020a8c",
+      "rva": 43207232,
+      "token": "0x6020bba",
       "parameter_count": 2,
       "byte_count": 208,
       "instruction_count": 58,
-      "code_sha256": "a711058439ef56dcb2d9bba465b154eff3841785baab82b5490849731bef4166",
-      "normalized_sha256": "9ff2d618976150ea9a7bee6f8046c5c4803a3886bdb00aa7278403e6039bc992",
+      "code_sha256": "896f36ece8027c94cd13ba0b12ec06bc1da30102d6ad0ca1756861441fe54008",
+      "normalized_sha256": "f65770ef19df04ed9f372025f18a5e6dbc694dd23b09368af817fe852b15babb",
       "base_path_sha256": "adfbbc9b10c541d8808b8c6874e65af019c7571f5f7b3469bb91a4c5b7806571",
       "patch_dispatch_ids": [
-        98816
+        99037
       ]
     },
     {
       "type": "SkillDamageCalSystem",
       "name": "CalSkillHeal",
-      "rva": 43140256,
-      "token": "0x6020a9c",
+      "rva": 43219728,
+      "token": "0x6020bca",
       "parameter_count": 5,
       "byte_count": 960,
       "instruction_count": 204,
-      "code_sha256": "35b084936a973841b179364f8de9f44f30f4de79c43d2061e6a7378726bd00b9",
-      "normalized_sha256": "a2ec78701ccac7d40637cad0ac7500c585a065169d42265ad4f4bab696ae55d4",
+      "code_sha256": "4fb10d0cf37f8d4b502634f29c70d783b3340a2bba5013874dc15834f053bc76",
+      "normalized_sha256": "6700f683db73a5d9f16b0353de66ae9bdc17e7ab92396845294fb73b7172b58c",
       "base_path_sha256": "c83deb62951eadfaadd571320dcac9de18c39eef771319153be6f76d28b0aecc",
       "patch_dispatch_ids": [
-        1241
+        1239
       ]
     },
     {
       "type": "SkillDamageCalSystem",
       "name": "CalPropertySourceValue",
-      "rva": 43134064,
-      "token": "0x6020aa6",
+      "rva": 43213536,
+      "token": "0x6020bd4",
       "parameter_count": 3,
       "byte_count": 1376,
       "instruction_count": 315,
-      "code_sha256": "b519b41c2e2ee2149c34f16e2a0a37f86976490f2bea8e5bbed3ba16253df700",
-      "normalized_sha256": "79f70ef46bb76528a66a7176df237b69c3edcac2e73a5308d6703f41b7f64ecd",
+      "code_sha256": "c0bfbe25c22f9e6a9adb8534b628d206610ef9a39bb116f0cb76cd8272403f64",
+      "normalized_sha256": "64a21822e22a2025ae68d971c23a8dc05258f59e75fb6e7c5486c4c42456837c",
       "base_path_sha256": "2052e33fcf938417225a9608906ff63e7071ce19713991f574d8ff473d1df0a1",
       "patch_dispatch_ids": [
-        1143
+        1141
       ]
     },
     {
       "type": "SkillRelease",
       "name": "OnUseSkill",
-      "rva": 43183472,
-      "token": "0x6020b1d",
+      "rva": 43262944,
+      "token": "0x6020c4b",
       "parameter_count": 0,
       "byte_count": 160,
       "instruction_count": 47,
-      "code_sha256": "ef5932481b7de55f3dc6662bdaeedf69c6efb4e103c543d0d07380de6a58f84e",
-      "normalized_sha256": "3e4c0623f6c3d691c3c8f9c2093233337f6c7b9ae3eca153a321fa9761bf1d7b",
+      "code_sha256": "289961d1671b71a644cb0504817ea902a84fc494d2830bce35f58da5f66d4128",
+      "normalized_sha256": "1e09bee81db9b988272b99e9d3b2ece044c8feb41e3c91bed819e12f17d53267",
       "base_path_sha256": "fda96650c0ee1be58524d39b5ae22d3334d0021e145cf387ff9b7ce5c4bbcc10",
       "patch_dispatch_ids": [
-        1069,
-        1070
+        1067,
+        1068
       ]
     },
     {
       "type": "SkillRelease",
       "name": "Update",
-      "rva": 43186032,
-      "token": "0x6020b1e",
+      "rva": 43265504,
+      "token": "0x6020c4c",
       "parameter_count": 1,
       "byte_count": 480,
       "instruction_count": 131,
-      "code_sha256": "3562eb6fac79f4456467541ecc53b5501dd0dab2661615bfe8650c65f2d47cff",
-      "normalized_sha256": "787fc19753c16153d6dec7c81e632745618d8236b668c155ebf6746418c115a4",
+      "code_sha256": "b504a24d633add82035da001a942d4c201f82fa09ed4e26d22f4ae273f671e7f",
+      "normalized_sha256": "bc4b8e01d6307f42bc2fb0d0e30da2188aec5d30257bf0205e581d0662f6b6c4",
       "base_path_sha256": "e81a7399a7849d6334268f1de9077cf49a08359a7d7bb4c175ebdf119e5e58e8",
       "patch_dispatch_ids": [
-        1070,
-        1103,
-        98802,
-        98803
+        1068,
+        1101,
+        99023,
+        99024
       ]
     },
     {
       "type": "SkillRelease",
       "name": "OnReleaseGoRunning",
-      "rva": 43182352,
-      "token": "0x6020b22",
+      "rva": 43261824,
+      "token": "0x6020c50",
       "parameter_count": 0,
       "byte_count": 1040,
       "instruction_count": 238,
-      "code_sha256": "0debb5ba0ac9786dcd7efa77c63102e6fd51fdbfeeb4cec64900e426cb863271",
-      "normalized_sha256": "9acffcee513639f0f2797c5568cc662b0620404ae054dda1f953bef93a1ab7f6",
+      "code_sha256": "99101ae7f661fd0f307fa2963874f79e683404cf7fd3d21919e3f12d93474740",
+      "normalized_sha256": "48d83418433a6084dcf227bfac82623879ed9c710100195754cf98efd5fffe7c",
       "base_path_sha256": "c8c546105dd1bc4384927e952b643e08410b0781f1c9a5f8663a3ebf7cf12d35",
       "patch_dispatch_ids": [
-        1071
+        1069
       ]
     },
     {
       "type": "SkillRelease",
       "name": "GetCurGameSkillSpeed",
-      "rva": 43180768,
-      "token": "0x6020b23",
+      "rva": 43260240,
+      "token": "0x6020c51",
       "parameter_count": 0,
       "byte_count": 288,
       "instruction_count": 73,
-      "code_sha256": "3790be210281d0b4db487363fb54c8ea0373fc9afa24b39f3bc6894688ffef67",
-      "normalized_sha256": "fd28a25568cab145fb04e1fb779ad87334cf0f7cbe39ce78aade19027b20892e",
+      "code_sha256": "98ee35b315ecc3e6f29e2f947f87e523c74cd5314ef5fe02f90bcf4bd18898ed",
+      "normalized_sha256": "21414c0e4a53b136d652091a51e9bff6ac2ec8747ed6d130b4f581a6d4ef1ad3",
       "base_path_sha256": "3870fa616a6606e14f78e1477139b66987b101be277acc45f2116d389d9bacab",
       "patch_dispatch_ids": [
-        1056,
-        1057
+        1054,
+        1055
       ]
     },
     {
       "type": "SkillRelease",
       "name": "PlayReleaseClip",
-      "rva": 43183632,
-      "token": "0x6020b24",
+      "rva": 43263104,
+      "token": "0x6020c52",
       "parameter_count": 0,
       "byte_count": 896,
       "instruction_count": 226,
-      "code_sha256": "689d5ad2814a2ba1e1b150c46d32de801683a0873d1ac05112a3570195f3077d",
-      "normalized_sha256": "a4a8f633eaaf833fb1e450811f1814ca17becb48aab3e5993080c0a4e6090925",
+      "code_sha256": "72a52884c6ee1916b318356e2a6ffd29f1ebf8618a837c54fc91629b1b31643d",
+      "normalized_sha256": "bf6e25cb41b1e6b6cb70262f00afb1bbae60a77ece51b968ed0b559098475f2a",
       "base_path_sha256": "c3096d129e6f2accb5c299e7359dc415b197e2541ebbb3ad4d6b6921912ea729",
       "patch_dispatch_ids": [
-        1056,
-        1089
+        1054,
+        1087
       ]
     },
     {
       "type": "RaidModelActor",
       "name": "GetGameSkillLength",
-      "rva": 43269184,
-      "token": "0x6020b9b",
+      "rva": 43348656,
+      "token": "0x6020cc9",
       "parameter_count": 2,
       "byte_count": 240,
       "instruction_count": 58,
-      "code_sha256": "a15ad891e522f7fdb9990ee9745de3f783f900dee91601dc63cf18eb2876c3cd",
-      "normalized_sha256": "4831da70d218e15f6e5e1ffbb43f8adac555ccc8c45d1885e9d34883e5551fa6",
+      "code_sha256": "c59464bbcda7abeff4b5053f94d9d3eaef9dbf704cd19275480ae22cc6d8c0f8",
+      "normalized_sha256": "0f3ce3cc25b65dcf2444eb04eeb0a01299ca84663c16164851b783e92192421f",
       "base_path_sha256": "07562293f2363e297265b9be5b6839a0dacb1454d09023ce57c6b36c81148f9f",
       "patch_dispatch_ids": [
-        1092
+        1090
       ]
     },
     {
       "type": "RaidModelActor",
       "name": "BuildAnimatorOverrideControllerTimeData",
-      "rva": 43266512,
-      "token": "0x6020bbe",
+      "rva": 43345984,
+      "token": "0x6020cec",
       "parameter_count": 0,
       "byte_count": 960,
       "instruction_count": 216,
-      "code_sha256": "8b51a5326c832bceac701f421076ebd10c625aaecb175ec16d4df9d7933ed8a4",
-      "normalized_sha256": "fd7125f6ed19474346a642548eb94e3ad726857e620a116c81b7c3b94f0369dc",
+      "code_sha256": "8015f80a4e35b51890fce02dfd938f01d60eb96936778f0b733a1d10d1ac4ed2",
+      "normalized_sha256": "6ff91bad344effd0a8695f5bc57b5cc1ed495f107eefc552dbb626d536404f94",
       "base_path_sha256": "b9815532a30576be656ea8ffaf8c92d065461c9a2d997b6e8c90c722eaa22eb1",
       "patch_dispatch_ids": [
-        930
+        927
       ]
     },
     {
       "type": "SummonPropertyComponent",
       "name": "Initialize",
-      "rva": 43536576,
-      "token": "0x6020e7c",
+      "rva": 43618480,
+      "token": "0x6020faa",
       "parameter_count": 0,
       "byte_count": 2784,
       "instruction_count": 665,
-      "code_sha256": "e1036abcba6ede115db0c8b3bb5d957727064da09070be9993ce4c4ea615c3ac",
-      "normalized_sha256": "bc79fa23ae12c140b368716855677e75c0b9679d2717a9bfd705be77aa2a306c",
+      "code_sha256": "e07816053276ebaa8eae7d50b3db35c42b12080759c3e7ae4b4b699e61fc84e4",
+      "normalized_sha256": "c896aefccc3160d2b14364223f63abdc296c861cce8d7f3e79cc15e0313b07da",
       "base_path_sha256": "9c257d4555e33a7f79a8929331cdd7eec5e0c7f6a32c8b483bdc10f06a895152",
       "patch_dispatch_ids": [
-        864,
-        99287
+        861,
+        99508
       ]
     }
   ],
@@ -1385,621 +1378,277 @@
   },
   "scope": "Selected current method identities, fields and manually traced static base paths. No client loading, process attachment, live patches or complete combat-engine verification. Normalization omits branch addresses and RIP displacements; equal fingerprints alone do not validate referenced data. Base-path fingerprints additionally mask only immediate patch IDs flowing into identified IsPatched/GetPatch calls; immediate gameplay constants and memory operand widths remain significant. RIP-addressed constants require separate comparison.",
   "baseline_comparison": {
-    "build": "2.6.200.276",
-    "image_sha256": "d97fd289b235193f32f16e44fe72b91b1b39fe23a897da16b31994048478cb76",
-    "index_sha256": "d580611e36c36176dd5fa83b15ebf2ca399a18e540db63a2025cd61fea26887e",
+    "build": "2.6.300.293",
+    "audit_sha256": "a74b5baece11c2bc7623d7bb33f3f5b0153f5af9802986ad7b84f4422f861a6b",
     "checked_count": 44,
     "base_path_matches": 44,
+    "selected_field_layouts_match": true,
     "methods": [
       {
         "type": "RBT_UseSkill",
         "name": "OnUpdate",
-        "current_rva": 23479616,
-        "base_path_match": true,
-        "baseline_candidates": [
-          {
-            "rva": 23493136,
-            "base_path_sha256": "0794d10cb309de565b159785f2793ede5e187b5fdaba6a69a568e8135f31b40f"
-          }
-        ]
+        "parameter_count": 0,
+        "base_path_match": true
       },
       {
         "type": "ConditionRandomProbabilityChecker",
         "name": "IsConditionSatisfied",
-        "current_rva": 42803712,
-        "base_path_match": true,
-        "baseline_candidates": [
-          {
-            "rva": 42533360,
-            "base_path_sha256": "f28d438e1ff7f822bb4d2be1f8eaa5ea18811411d4c2dec6485dd247527c08ed"
-          }
-        ]
+        "parameter_count": 0,
+        "base_path_match": true
       },
       {
         "type": "ConditionSkillFinishChecker",
         "name": "OnTargetEntitySkillFinish",
-        "current_rva": 42804864,
-        "base_path_match": true,
-        "baseline_candidates": [
-          {
-            "rva": 42534512,
-            "base_path_sha256": "2a0f26fce057208189447f3af875cce971fca3959158e1998c6bfa5629582e18"
-          }
-        ]
+        "parameter_count": 2,
+        "base_path_match": true
       },
       {
         "type": "RaidEffectSystem",
         "name": "ProcessEffectDamage",
-        "current_rva": 42872800,
-        "base_path_match": true,
-        "baseline_candidates": [
-          {
-            "rva": 42602448,
-            "base_path_sha256": "3e91136317fab94cce18f05fec92cc30aa47107b4e4b82d0e84b1eef91478808"
-          }
-        ]
+        "parameter_count": 5,
+        "base_path_match": true
       },
       {
         "type": "RaidEffectSystem",
         "name": "ProcessEffectRecoverHp",
-        "current_rva": 42879936,
-        "base_path_match": true,
-        "baseline_candidates": [
-          {
-            "rva": 42609584,
-            "base_path_sha256": "2d4972fda59fd614630130c74ee1f65d53fa7bab4fdefdde267c69e2a6997903"
-          }
-        ]
+        "parameter_count": 4,
+        "base_path_match": true
       },
       {
         "type": "RaidEffectSystem",
         "name": "ProcessEffectSummon",
-        "current_rva": 42882240,
-        "base_path_match": true,
-        "baseline_candidates": [
-          {
-            "rva": 42611888,
-            "base_path_sha256": "2bbc2c865140ea86cef80fafe5862070c6f121d12523c5b6f3a3b667da2aa734"
-          }
-        ]
+        "parameter_count": 5,
+        "base_path_match": true
       },
       {
         "type": "RaidBuffBase",
         "name": "RefreshBuff",
-        "current_rva": 42835392,
-        "base_path_match": true,
-        "baseline_candidates": [
-          {
-            "rva": 42565040,
-            "base_path_sha256": "cf599be416d1cd89ce857025e2c19d5cde4455d0195a0294be38f27495cf2e93"
-          }
-        ]
+        "parameter_count": 0,
+        "base_path_match": true
       },
       {
         "type": "RaidBuffBase",
         "name": "OnUpdate",
-        "current_rva": 42835200,
-        "base_path_match": true,
-        "baseline_candidates": [
-          {
-            "rva": 42564848,
-            "base_path_sha256": "430d048c06a642e1ce3a500f2cfbe0b7b47ab80a0ecad9cb1d3654c0b159ced6"
-          }
-        ]
+        "parameter_count": 1,
+        "base_path_match": true
       },
       {
         "type": "RaidBuffBase",
         "name": "RemoveEffect",
-        "current_rva": 42835664,
-        "base_path_match": true,
-        "baseline_candidates": [
-          {
-            "rva": 42565312,
-            "base_path_sha256": "7656032ba5edc396327f169885527d561eb2db265b878ba42152cf9f821b2109"
-          }
-        ]
+        "parameter_count": 0,
+        "base_path_match": true
       },
       {
         "type": "RaidBuffDelayEffect",
         "name": ".ctor",
-        "current_rva": 42842832,
-        "base_path_match": true,
-        "baseline_candidates": [
-          {
-            "rva": 42572480,
-            "base_path_sha256": "42f777e9ff15eb993c6419258744bb652d80c687b202ebfb433cad3b3404a8dd"
-          }
-        ]
+        "parameter_count": 0,
+        "base_path_match": true
       },
       {
         "type": "RaidBuffDelayEffect",
         "name": "AddEffect",
-        "current_rva": 42840768,
-        "base_path_match": true,
-        "baseline_candidates": [
-          {
-            "rva": 42570416,
-            "base_path_sha256": "a3b2bacfe2f6b5ea7829a9842796fe0a566f4e0482ea15fc4909881a5a84296a"
-          }
-        ]
+        "parameter_count": 0,
+        "base_path_match": true
       },
       {
         "type": "RaidBuffDelayEffect",
         "name": "OnUpdate",
-        "current_rva": 42842656,
-        "base_path_match": true,
-        "baseline_candidates": [
-          {
-            "rva": 42572304,
-            "base_path_sha256": "4e506e67e5ccf58093957982e42c60dd348e37236de0106742b09e9d40be6477"
-          }
-        ]
+        "parameter_count": 1,
+        "base_path_match": true
       },
       {
         "type": "RaidBuffDelayEffect",
         "name": "OnEffectTriggered",
-        "current_rva": 42841536,
-        "base_path_match": true,
-        "baseline_candidates": [
-          {
-            "rva": 42571184,
-            "base_path_sha256": "960ecbb5566cabc3615ffb72ca095242e21e4ae8422119058d0cd86f49b97659"
-          }
-        ]
+        "parameter_count": 0,
+        "base_path_match": true
       },
       {
         "type": "RaidBuffDotEffect",
         "name": "AddEffect",
-        "current_rva": 42979888,
-        "base_path_match": true,
-        "baseline_candidates": [
-          {
-            "rva": 42709536,
-            "base_path_sha256": "179192b08df9c98bf162222aef97f941f30a62f301681566d709db9a107d0677"
-          }
-        ]
+        "parameter_count": 0,
+        "base_path_match": true
       },
       {
         "type": "RaidBuffDotEffect",
         "name": "OnUpdate",
-        "current_rva": 42982128,
-        "base_path_match": true,
-        "baseline_candidates": [
-          {
-            "rva": 42711776,
-            "base_path_sha256": "8133fb308535fee6e577c462ca4ae0e3a336ff38d7a8248a4b398cdbb80611e9"
-          }
-        ]
+        "parameter_count": 1,
+        "base_path_match": true
       },
       {
         "type": "RaidBuffDotEffect",
         "name": "OnEffectTriggered",
-        "current_rva": 42980832,
-        "base_path_match": true,
-        "baseline_candidates": [
-          {
-            "rva": 42710480,
-            "base_path_sha256": "8c2948e36471262d3019d9d29d12757e2b4c52c2f2c6b75dc64639fa6cdbea33"
-          }
-        ]
+        "parameter_count": 0,
+        "base_path_match": true
       },
       {
         "type": "RaidBuffPropertyModify",
         "name": "Init",
-        "current_rva": 42990848,
-        "base_path_match": true,
-        "baseline_candidates": [
-          {
-            "rva": 42720496,
-            "base_path_sha256": "df707fc52acf372283af8f5cc1cfbae857a538a83e8dcac33278c5f1f5363bbb"
-          }
-        ]
+        "parameter_count": 6,
+        "base_path_match": true
       },
       {
         "type": "RaidBuffComponent",
         "name": "AddBuff",
-        "current_rva": 42956240,
-        "base_path_match": true,
-        "baseline_candidates": [
-          {
-            "rva": 42685888,
-            "base_path_sha256": "c95ee372db5003b5a89949069cad19e0f5b588ba49d289f2d1fc500d367976be"
-          }
-        ]
+        "parameter_count": 4,
+        "base_path_match": true
       },
       {
         "type": "RaidPropertyUtils",
         "name": "CalculateFinalPropertyValue",
-        "current_rva": 43053232,
-        "base_path_match": true,
-        "baseline_candidates": [
-          {
-            "rva": 42782880,
-            "base_path_sha256": "05e0f4e61516536eccd8f0627d6fcb4e7050e4969004b07a7897628ccb5320d9"
-          }
-        ]
+        "parameter_count": 3,
+        "base_path_match": true
       },
       {
         "type": "SkillBase",
         "name": "CanUseSkill",
-        "current_rva": 43078656,
-        "base_path_match": true,
-        "baseline_candidates": [
-          {
-            "rva": 42808304,
-            "base_path_sha256": "7702320c36ec57b9ed956751f6463e54c41508c521a0e1ce3e06c8eb6a916592"
-          }
-        ]
+        "parameter_count": 0,
+        "base_path_match": true
       },
       {
         "type": "SkillBase",
         "name": "OnUseSkill",
-        "current_rva": 43083456,
-        "base_path_match": true,
-        "baseline_candidates": [
-          {
-            "rva": 42813104,
-            "base_path_sha256": "7b881e42fd78675f3d93a09d3c2660f9b352932b8a1e40d69ffbd6a2a07f2c64"
-          }
-        ]
+        "parameter_count": 0,
+        "base_path_match": true
       },
       {
         "type": "SkillBase",
         "name": "ReleaseFinished",
-        "current_rva": 43084032,
-        "base_path_match": true,
-        "baseline_candidates": [
-          {
-            "rva": 42813680,
-            "base_path_sha256": "89c86bef1cd91ba4e235a3a8061307641d25df01800c41ffb5c2174145bdbd1d"
-          }
-        ]
+        "parameter_count": 1,
+        "base_path_match": true
       },
       {
         "type": "SkillBase",
         "name": "CanInterruptSkill",
-        "current_rva": 43078400,
-        "base_path_match": true,
-        "baseline_candidates": [
-          {
-            "rva": 42808048,
-            "base_path_sha256": "ff3be0a4b6803ab809dfde26bdbc96167833bfe5307a97093d5b3359aa9d3ec8"
-          }
-        ]
+        "parameter_count": 0,
+        "base_path_match": true
       },
       {
         "type": "SkillBase",
         "name": "InterruptSkill",
-        "current_rva": 43082272,
-        "base_path_match": true,
-        "baseline_candidates": [
-          {
-            "rva": 42811920,
-            "base_path_sha256": "4e89ece6e1b189f595b488c96d92c1b935cd660c75d61a8cd9c33b2e8eefaebb"
-          }
-        ]
+        "parameter_count": 1,
+        "base_path_match": true
       },
       {
         "type": "SkillBase",
         "name": "Update",
-        "current_rva": 43084960,
-        "base_path_match": true,
-        "baseline_candidates": [
-          {
-            "rva": 42814608,
-            "base_path_sha256": "b9b47aebfc2656deb3e1f8e6fc3b6795cc3e7b2d949b6bc240e9c4cb10f63d35"
-          }
-        ]
+        "parameter_count": 1,
+        "base_path_match": true
       },
       {
         "type": "SkillBase",
         "name": "IsSkillEnd",
-        "current_rva": 43082848,
-        "base_path_match": true,
-        "baseline_candidates": [
-          {
-            "rva": 42812496,
-            "base_path_sha256": "ca71669f5b2ddf1fb7feb67f43a96147deeaf19a6a4d77eddb4e332ad2428d44"
-          }
-        ]
+        "parameter_count": 0,
+        "base_path_match": true
       },
       {
         "type": "SkillComponent",
         "name": "UseSkill",
-        "current_rva": 43130800,
-        "base_path_match": true,
-        "baseline_candidates": [
-          {
-            "rva": 42860448,
-            "base_path_sha256": "abef87d76fd9293cdc769944e267e6adaa05b790c1257c7202caf1cc4ee7b9d0"
-          },
-          {
-            "rva": 42860688,
-            "base_path_sha256": "19b564242eec3929daee246f0685d99326cf87fbbee94796f8e293588bf14d63"
-          },
-          {
-            "rva": 42860112,
-            "base_path_sha256": "60e63d60a29d79b2487f5da8fdc422a48eef63f90c4bdded8745e926bd07a337"
-          },
-          {
-            "rva": 42858304,
-            "base_path_sha256": "f41e81fd72ed3ce29dc0681f7678d125bf1015b43669170355e565534f93d45a"
-          },
-          {
-            "rva": 42858624,
-            "base_path_sha256": "39deec6f0c63ac2d0779f44efcbdff58c71075c99ad5861bd5932e14a03d4602"
-          }
-        ]
+        "parameter_count": 1,
+        "base_path_match": true
       },
       {
         "type": "SkillComponent",
         "name": "UseSkill",
-        "current_rva": 43131040,
-        "base_path_match": true,
-        "baseline_candidates": [
-          {
-            "rva": 42860448,
-            "base_path_sha256": "abef87d76fd9293cdc769944e267e6adaa05b790c1257c7202caf1cc4ee7b9d0"
-          },
-          {
-            "rva": 42860688,
-            "base_path_sha256": "19b564242eec3929daee246f0685d99326cf87fbbee94796f8e293588bf14d63"
-          },
-          {
-            "rva": 42860112,
-            "base_path_sha256": "60e63d60a29d79b2487f5da8fdc422a48eef63f90c4bdded8745e926bd07a337"
-          },
-          {
-            "rva": 42858304,
-            "base_path_sha256": "f41e81fd72ed3ce29dc0681f7678d125bf1015b43669170355e565534f93d45a"
-          },
-          {
-            "rva": 42858624,
-            "base_path_sha256": "39deec6f0c63ac2d0779f44efcbdff58c71075c99ad5861bd5932e14a03d4602"
-          }
-        ]
+        "parameter_count": 3,
+        "base_path_match": true
       },
       {
         "type": "SkillComponent",
         "name": "UseSkill",
-        "current_rva": 43130464,
-        "base_path_match": true,
-        "baseline_candidates": [
-          {
-            "rva": 42860448,
-            "base_path_sha256": "abef87d76fd9293cdc769944e267e6adaa05b790c1257c7202caf1cc4ee7b9d0"
-          },
-          {
-            "rva": 42860688,
-            "base_path_sha256": "19b564242eec3929daee246f0685d99326cf87fbbee94796f8e293588bf14d63"
-          },
-          {
-            "rva": 42860112,
-            "base_path_sha256": "60e63d60a29d79b2487f5da8fdc422a48eef63f90c4bdded8745e926bd07a337"
-          },
-          {
-            "rva": 42858304,
-            "base_path_sha256": "f41e81fd72ed3ce29dc0681f7678d125bf1015b43669170355e565534f93d45a"
-          },
-          {
-            "rva": 42858624,
-            "base_path_sha256": "39deec6f0c63ac2d0779f44efcbdff58c71075c99ad5861bd5932e14a03d4602"
-          }
-        ]
+        "parameter_count": 2,
+        "base_path_match": true
       },
       {
         "type": "SkillComponent",
         "name": "UseSkill",
-        "current_rva": 43128656,
-        "base_path_match": true,
-        "baseline_candidates": [
-          {
-            "rva": 42860448,
-            "base_path_sha256": "abef87d76fd9293cdc769944e267e6adaa05b790c1257c7202caf1cc4ee7b9d0"
-          },
-          {
-            "rva": 42860688,
-            "base_path_sha256": "19b564242eec3929daee246f0685d99326cf87fbbee94796f8e293588bf14d63"
-          },
-          {
-            "rva": 42860112,
-            "base_path_sha256": "60e63d60a29d79b2487f5da8fdc422a48eef63f90c4bdded8745e926bd07a337"
-          },
-          {
-            "rva": 42858304,
-            "base_path_sha256": "f41e81fd72ed3ce29dc0681f7678d125bf1015b43669170355e565534f93d45a"
-          },
-          {
-            "rva": 42858624,
-            "base_path_sha256": "39deec6f0c63ac2d0779f44efcbdff58c71075c99ad5861bd5932e14a03d4602"
-          }
-        ]
+        "parameter_count": 4,
+        "base_path_match": true
       },
       {
         "type": "SkillComponent",
         "name": "UseSkill",
-        "current_rva": 43128976,
-        "base_path_match": true,
-        "baseline_candidates": [
-          {
-            "rva": 42860448,
-            "base_path_sha256": "abef87d76fd9293cdc769944e267e6adaa05b790c1257c7202caf1cc4ee7b9d0"
-          },
-          {
-            "rva": 42860688,
-            "base_path_sha256": "19b564242eec3929daee246f0685d99326cf87fbbee94796f8e293588bf14d63"
-          },
-          {
-            "rva": 42860112,
-            "base_path_sha256": "60e63d60a29d79b2487f5da8fdc422a48eef63f90c4bdded8745e926bd07a337"
-          },
-          {
-            "rva": 42858304,
-            "base_path_sha256": "f41e81fd72ed3ce29dc0681f7678d125bf1015b43669170355e565534f93d45a"
-          },
-          {
-            "rva": 42858624,
-            "base_path_sha256": "39deec6f0c63ac2d0779f44efcbdff58c71075c99ad5861bd5932e14a03d4602"
-          }
-        ]
+        "parameter_count": 1,
+        "base_path_match": true
       },
       {
         "type": "SkillComponent",
         "name": "IsCurSkillEnd",
-        "current_rva": 43125296,
-        "base_path_match": true,
-        "baseline_candidates": [
-          {
-            "rva": 42854944,
-            "base_path_sha256": "1901525dd0fdef4928abfb753951ed5df30d4873c1f3409f1cb99f33c29b41dc"
-          }
-        ]
+        "parameter_count": 0,
+        "base_path_match": true
       },
       {
         "type": "SkillComponent",
         "name": "GetAIUsableSkill",
-        "current_rva": 43119728,
-        "base_path_match": true,
-        "baseline_candidates": [
-          {
-            "rva": 42849376,
-            "base_path_sha256": "119f34b1afb6d718ef1c9081d9cd1842882ae0f0c356dcbe583a1f0e594bdf1e"
-          }
-        ]
+        "parameter_count": 1,
+        "base_path_match": true
       },
       {
         "type": "SkillComponent",
         "name": "SortSkillPriority",
-        "current_rva": 43127760,
-        "base_path_match": true,
-        "baseline_candidates": [
-          {
-            "rva": 42857408,
-            "base_path_sha256": "adfbbc9b10c541d8808b8c6874e65af019c7571f5f7b3469bb91a4c5b7806571"
-          }
-        ]
+        "parameter_count": 2,
+        "base_path_match": true
       },
       {
         "type": "SkillDamageCalSystem",
         "name": "CalSkillHeal",
-        "current_rva": 43140256,
-        "base_path_match": true,
-        "baseline_candidates": [
-          {
-            "rva": 42869904,
-            "base_path_sha256": "c83deb62951eadfaadd571320dcac9de18c39eef771319153be6f76d28b0aecc"
-          }
-        ]
+        "parameter_count": 5,
+        "base_path_match": true
       },
       {
         "type": "SkillDamageCalSystem",
         "name": "CalPropertySourceValue",
-        "current_rva": 43134064,
-        "base_path_match": true,
-        "baseline_candidates": [
-          {
-            "rva": 42863712,
-            "base_path_sha256": "2052e33fcf938417225a9608906ff63e7071ce19713991f574d8ff473d1df0a1"
-          }
-        ]
+        "parameter_count": 3,
+        "base_path_match": true
       },
       {
         "type": "SkillRelease",
         "name": "OnUseSkill",
-        "current_rva": 43183472,
-        "base_path_match": true,
-        "baseline_candidates": [
-          {
-            "rva": 42913120,
-            "base_path_sha256": "fda96650c0ee1be58524d39b5ae22d3334d0021e145cf387ff9b7ce5c4bbcc10"
-          }
-        ]
+        "parameter_count": 0,
+        "base_path_match": true
       },
       {
         "type": "SkillRelease",
         "name": "Update",
-        "current_rva": 43186032,
-        "base_path_match": true,
-        "baseline_candidates": [
-          {
-            "rva": 42915680,
-            "base_path_sha256": "e81a7399a7849d6334268f1de9077cf49a08359a7d7bb4c175ebdf119e5e58e8"
-          }
-        ]
+        "parameter_count": 1,
+        "base_path_match": true
       },
       {
         "type": "SkillRelease",
         "name": "OnReleaseGoRunning",
-        "current_rva": 43182352,
-        "base_path_match": true,
-        "baseline_candidates": [
-          {
-            "rva": 42912000,
-            "base_path_sha256": "c8c546105dd1bc4384927e952b643e08410b0781f1c9a5f8663a3ebf7cf12d35"
-          }
-        ]
+        "parameter_count": 0,
+        "base_path_match": true
       },
       {
         "type": "SkillRelease",
         "name": "GetCurGameSkillSpeed",
-        "current_rva": 43180768,
-        "base_path_match": true,
-        "baseline_candidates": [
-          {
-            "rva": 42910416,
-            "base_path_sha256": "3870fa616a6606e14f78e1477139b66987b101be277acc45f2116d389d9bacab"
-          }
-        ]
+        "parameter_count": 0,
+        "base_path_match": true
       },
       {
         "type": "SkillRelease",
         "name": "PlayReleaseClip",
-        "current_rva": 43183632,
-        "base_path_match": true,
-        "baseline_candidates": [
-          {
-            "rva": 42913280,
-            "base_path_sha256": "c3096d129e6f2accb5c299e7359dc415b197e2541ebbb3ad4d6b6921912ea729"
-          }
-        ]
+        "parameter_count": 0,
+        "base_path_match": true
       },
       {
         "type": "RaidModelActor",
         "name": "GetGameSkillLength",
-        "current_rva": 43269184,
-        "base_path_match": true,
-        "baseline_candidates": [
-          {
-            "rva": 42998832,
-            "base_path_sha256": "07562293f2363e297265b9be5b6839a0dacb1454d09023ce57c6b36c81148f9f"
-          }
-        ]
+        "parameter_count": 2,
+        "base_path_match": true
       },
       {
         "type": "RaidModelActor",
         "name": "BuildAnimatorOverrideControllerTimeData",
-        "current_rva": 43266512,
-        "base_path_match": true,
-        "baseline_candidates": [
-          {
-            "rva": 42996160,
-            "base_path_sha256": "b9815532a30576be656ea8ffaf8c92d065461c9a2d997b6e8c90c722eaa22eb1"
-          }
-        ]
+        "parameter_count": 0,
+        "base_path_match": true
       },
       {
         "type": "SummonPropertyComponent",
         "name": "Initialize",
-        "current_rva": 43536576,
-        "base_path_match": true,
-        "baseline_candidates": [
-          {
-            "rva": 43165744,
-            "base_path_sha256": "9c257d4555e33a7f79a8929331cdd7eec5e0c7f6a32c8b483bdc10f06a895152"
-          }
-        ]
+        "parameter_count": 0,
+        "base_path_match": true
       }
     ],
-    "scope": "Instruction-shape comparison with relocated addresses and identified patch IDs normalized. Referenced data, call-target equivalence and active patches require separate analysis."
+    "scope": "Selected method instruction shapes and field layouts. Dynamic patch-wrapper identities, generic/runtime callee bodies and active patches are not proved equivalent."
   }
 }

@@ -11,18 +11,18 @@ import json
 from pathlib import Path
 import struct
 from probe_metadata_patterns import infer_xor_mask
-from unpack_client_lzma import unpack,CURRENT_SHA256
+from unpack_client_lzma import unpack,LATEST_SHA256 as CURRENT_SHA256
 
-METADATA_SHA256='7849ac7844a3cd47966f99d0e476f8f7edc04bd921b06112ff42f9d5d24c3f3f'
-DECODED_METADATA_SHA256='f0ad392d0fce8141d05f7b4d053ffdb389a9d7fab5ea42f03b61e2fc162303ba'
-STRING_BASE=2342300
-TYPE_BASE=0x29D0948
-METHOD_BASE=0xD336C8
-FIELD_BASE=0x2264538
-FIELD_POINTERS=0x7846000
-METHOD_POINTERS=0x7937FB0
-TYPE_COUNT=24938
-METHOD_COUNT=170483
+METADATA_SHA256='9a5f4a19ce4f3f9f8c60e8402a253da9feddc901e01f27b4af654e93fc92be26'
+DECODED_METADATA_SHA256='1af8d51d9fbda243f06033505e98dd1edba6ac4070b57584fb5c6d7aa01c81cb'
+STRING_BASE=2346196
+TYPE_BASE=43922704
+METHOD_BASE=13870044
+FIELD_BASE=36125568
+FIELD_POINTERS=126304256
+METHOD_POINTERS=0x7966830
+TYPE_COUNT=24983
+METHOD_COUNT=170826
 BASE=0x180000000
 SELECTED={
  'SkillBase':['OnUseSkill','Update','CanUseSkill','CanInterruptSkill','InterruptSkill','ReleaseFinished','IsSkillEnd'],
@@ -133,6 +133,7 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--binary',type=Path,required=True);p.add_argument('--metadata',type=Path,required=True)
     p.add_argument('--output',type=Path,required=True);p.add_argument('--private-output',type=Path,required=True)
+    p.add_argument('--prior-report',type=Path,help='Previously reviewed static audit for structural continuity checks')
     p.add_argument('--baseline-image',type=Path);p.add_argument('--baseline-index',type=Path)
     args=p.parse_args();raw=args.binary.read_bytes()
     if hashlib.sha256(raw).hexdigest()!=CURRENT_SHA256:raise ValueError('Unverified native combat profile')
@@ -149,7 +150,7 @@ def main():
     (args.private_output/'native-rva-image.bin').write_bytes(image)
     (args.private_output/'method-index.json').write_text(json.dumps(methods),encoding='utf-8')
     (args.private_output/'selected-methods.txt').write_text('\n'.join(private),encoding='utf-8')
-    result={'version':2,'client_build':'2.6.300.293','binary_sha256':CURRENT_SHA256,'metadata_sha256':METADATA_SHA256,
+    result={'version':2,'client_build':'2.6.400.304','binary_sha256':CURRENT_SHA256,'metadata_sha256':METADATA_SHA256,
         'decoded_metadata_sha256':DECODED_METADATA_SHA256,'decoded_streams':streams,'selected_types':types,'methods':rows,
         'verified_claims':{
             'delay_buff_type':16,'delay_buff_fires_once':True,'delay_buff_delay_param':'Param1[0] / 1000, clamped to zero',
@@ -182,6 +183,12 @@ def main():
         result['baseline_comparison']={'build':'2.6.200.276','image_sha256':expected_image,'index_sha256':expected_index,
             'checked_count':len(comparisons),'base_path_matches':sum(c['base_path_match'] for c in comparisons),'methods':comparisons,
             'scope':'Instruction-shape comparison with relocated addresses and identified patch IDs normalized. Referenced data, call-target equivalence and active patches require separate analysis.'}
+    if args.prior_report:
+        previous=json.loads(args.prior_report.read_text(encoding='utf-8'));comparisons=[]
+        for row in rows:
+            candidates=[p for p in previous['methods'] if (p['type'],p['name'],p['parameter_count'])==(row['type'],row['name'],row['parameter_count'])]
+            comparisons.append({'type':row['type'],'name':row['name'],'parameter_count':row['parameter_count'],'base_path_match':any(p['base_path_sha256']==row['base_path_sha256'] for p in candidates)})
+        result['baseline_comparison']={'build':previous['client_build'],'audit_sha256':hashlib.sha256(args.prior_report.read_bytes()).hexdigest(),'checked_count':len(comparisons),'base_path_matches':sum(r['base_path_match'] for r in comparisons),'selected_field_layouts_match':all(types[k]['fields']==v['fields'] for k,v in previous['selected_types'].items()),'methods':comparisons,'scope':'Selected method instruction shapes and field layouts. Dynamic patch-wrapper identities, generic/runtime callee bodies and active patches are not proved equivalent.'}
     args.output.write_text(json.dumps(result,indent=2)+'\n',encoding='utf-8')
     print(f'Audited {len(rows)} current method bodies and {len(types)} selected types; raw artifacts remain private.')
 

@@ -30,7 +30,15 @@
   function finishTriggers(trigger,ends,window,initialDelay=0){let ready=initialDelay;const result=[];
     for(const end of ends){if(end<ready-1e-9||end+trigger.delay_seconds>=window-1e-9)continue;
       result.push(end+trigger.delay_seconds);ready=end+trigger.cooldown_seconds;}return result;}
-  function evaluate(slug,saved,upgrades,estimates,battleSeconds=0,externalFlat=null){
+  function missingBuild(slug,saved,data){
+    const h=data.heroes[slug],stage=h.stages.find(s=>s.id===saved?.stage),level=h.levels.find(l=>l.level===saved?.level),missing=[];
+    if(!stage)missing.push('exact rank / step');if(!level||stage&&level.level>stage.level_max)missing.push('valid hero level');
+    if(!Array.isArray(saved?.gear))missing.push('gear (record equipped items or explicitly none)');else{const slots=new Set();for(const g of saved.gear){const type=data.gear[g?.id];if(!type||!type.levels.some(r=>r.level===g.level)||!level||type.hero_level_required>level.level||slots.has(type.slot)){missing.push('valid gear slots / levels');break;}slots.add(type.slot);}}
+    if(stage)for(const skill of h.skills){const cap=stage.skill_caps[skill.slot]||0;if(!cap)continue;const n=saved?.skills?.[skill.id];if(!Number.isInteger(n)||n<0||n>cap||n>0&&!skill.levels.some(r=>r.level===n))missing.push(skill.name+' level');}
+    return missing;
+  }
+  function evaluate(slug,saved,upgrades,estimates,battleSeconds=0,externalFlat=null,requireRecorded=false){
+    if(requireRecorded){const missing=missingBuild(slug,saved,upgrades);if(missing.length)return {offense:0,durability:0,score:0,low:0,high:0,basis:"Incomplete build",comparable:false,missingFields:missing,healthContribution:0,activeSkillIds:[]};saved=structuredClone(saved);const stage=upgrades.heroes[slug].stages.find(s=>s.id===saved.stage);saved.skills??={};for(const skill of upgrades.heroes[slug].skills)if(!stage.skill_caps[skill.slot])saved.skills[skill.id]=0;}
     const model=estimates.heroes[slug],data=upgrades.heroes[slug];
     const stage=data.stages.find(s=>s.id===saved?.stage)||data.stages.find(s=>s.id===model.reference_stage);
     const levelNumber=Math.min(Number.isInteger(saved?.level)&&data.levels.some(l=>l.level===saved.level)?saved.level:model.reference_level,stage.level_max);
@@ -67,7 +75,7 @@
     const baseStats=[...stats],factors=stats.map((_,i)=>1+selfPercent[i]+teamPercent[i]);
     stats.forEach((_,i)=>stats[i]*=factors[i]);
     function calculate(df,uf){const offense=100*stats[0]*(1+.5*Math.log1p(damage*df))/estimates.scales[0],
-      durability=100*(.7*stats[2]+30*stats[1])*(1+.08*utility*uf)/estimates.scales[1],u=100*(1+utility*uf)/estimates.scales[2];
+      durability=100*(.7*stats[2]+30*stats[1])/estimates.scales[1],u=100*(1+utility*uf)/estimates.scales[2];
       return {offense,durability,score:.55*offense+.35*durability+.1*u};}
     return {...calculate(1,1),low:calculate(.5,.5).score,high:calculate(2.5,1.5).score,
       healthContribution:calculate(1,1).durability*(.7*stats[2])/(.7*stats[2]+30*stats[1]),
@@ -78,7 +86,7 @@
   }
   function compare(slug,saved,upgrades,estimates,basis,flat,battleSeconds=0,externalFlat=null){
     return basis==='flat'?{...flat,low:flat.score,high:flat.score,basis:'Flat max stats'}:
-      evaluate(slug,basis==='recorded'?saved:null,upgrades,estimates,battleSeconds,externalFlat);
+      evaluate(slug,basis==='recorded'?saved:null,upgrades,estimates,battleSeconds,externalFlat,basis==='recorded');
   }
-  const api={evaluate,compare,openingSchedule,openingDamage,coveredTime,finishTriggers,healingFormula};if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.EstimateModel=api;
+  const api={evaluate,compare,missingBuild,openingSchedule,openingDamage,coveredTime,finishTriggers,healingFormula};if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.EstimateModel=api;
 })(globalThis);

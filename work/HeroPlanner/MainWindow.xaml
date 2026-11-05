@@ -198,7 +198,7 @@
                                                             <Run Text="{Binding Faction}" /><Run Text="  •  " /><Run Text="{Binding Role}" />
                                                         </TextBlock>
                                                         <TextBlock FontSize="11" Foreground="{StaticResource AccentBrush}" ToolTip="{Binding EstimateHint}">
-                                                            <Run Text="{Binding IndexPrefix, Mode=OneWay}" /><Run Text="{Binding CompositeIndex, StringFormat=F1}" />
+                                                            <Run Text="{Binding IndexPrefix, Mode=OneWay}" /><Run Text="{Binding IndexValue, Mode=OneWay}" />
                                                         </TextBlock>
                                                     </StackPanel>
                                                 </Border>

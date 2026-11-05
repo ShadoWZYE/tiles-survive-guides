@@ -12,7 +12,7 @@ from decode_cfg import decode_table
 ROOT = Path(__file__).resolve().parents[2]
 
 
-def audit(source):
+def audit(source, audited_date='2026-11-04'):
     names = ['survivor_exclusive_gear_main', 'survivor_skill_main',
              'survivor_skill_type', 'survivor_slg_skill_new',
              'survivor_slg_effect_new', 'effect_buff']
@@ -38,7 +38,7 @@ def audit(source):
     levels = tables['survivor_exclusive_gear_main']
     return {
         'coverage': {'configured_levels': len(levels), 'levels_with_gear_skill_addition': sum(bool(r['GearSkillAddition']) for r in levels), 'levels_with_explicit_slg_skill_benefits': sum(bool(r['GearSkillSlgBenefit']) for r in levels), 'levels_with_legacy_se_overall_benefits': sum(bool(r['GearSkillSeOverallBenefit']) for r in levels)},
-        'audited_date': '2026-11-04',
+        'audited_date': audited_date,
         'scope': 'Configuration links, not verified combat outcomes or buff formulas.',
         'source_hashes': {n: hashlib.sha256((source / (n + '.cfg')).read_bytes()).hexdigest() for n in names},
         'level_one_links': gears,
@@ -57,8 +57,9 @@ def audit(source):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('source', type=Path)
+    parser.add_argument('--audited-date', default='2026-11-04')
     args = parser.parse_args()
-    result = audit(args.source)
+    result = audit(args.source, args.audited_date)
     output = ROOT / 'outputs/hero-report/Hero-Signature-Link-Audit.json'
     output.write_text(json.dumps(result, indent=2) + '\n', encoding='utf-8')
     print(f'{len(result["level_one_links"])} gear links; {len(result["gear_named_buff_rows"])} gear-named buff rows; unresolved effects excluded.')

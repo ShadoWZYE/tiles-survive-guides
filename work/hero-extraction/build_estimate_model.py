@@ -229,11 +229,12 @@ def build(upgrades, audit, roster):
         raise ValueError('Combat audit and progression data must identify the same snapshot.')
     if audit['provenance']['manifest_sha256'] != upgrades['provenance']['manifest_sha256']:
         raise ValueError('Combat audit and progression manifest snapshots differ.')
-    result = {'version': 11, 'reference_level': 110, 'reference_rank': 3,
+    result = {'version': 12, 'reference_level': 110, 'reference_rank': 3,
               'reference_step': 6, 'heroes': {}}
     result['opening_scheduler']='single_caster_non_preemptive_configured_priority_scenario'
     result['native_semantics_build']='2.6.200.276'
     result['current_native_semantics_reverified']=False
+    result['utility_credit_policy']='single_utility_channel_no_durability_multiplier_or_trait_pair_score'
     native=audit.get('native_audit',{})
     if native:
         if native['client_build']!=upgrades['client_build']:raise ValueError('Native/model build mismatch')
@@ -424,7 +425,7 @@ def build(upgrades, audit, roster):
         a, d, h = stats
         pressure = sum(r['damage'] for r in rates); utility = sum(r['utility'] for r in rates)
         raw.append([a * (1 + .5 * math.log1p(pressure)),
-                    (.7 * h + 30 * d) * (1 + .08 * utility), 1 + utility])
+                    (.7 * h + 30 * d), 1 + utility])
     result['scales'] = [max(r[i] for r in raw) for i in range(3)]
     result['source_pack_sha256'] = upgrades['provenance']['config_pack_sha256']
     result['confidence'] = 'low'

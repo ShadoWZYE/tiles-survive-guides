@@ -40,7 +40,7 @@ class EstimateBuilderTests(unittest.TestCase):
         self.assertIsNone(builder.finish_trigger(modified,h,a['native_audit']))
 
     def test_current_native_scope_never_claims_full_runtime_validation(self):
-        self.assertEqual(self.model['native_semantics_build'],'2.6.300.293')
+        self.assertEqual(self.model['native_semantics_build'],'2.6.400.304')
         self.assertGreaterEqual(self.model['native_selected_method_count'],43)
         self.assertFalse(self.model['current_native_semantics_reverified'])
         self.assertIn('live_patches_unverified',self.model['native_verification_scope'])
