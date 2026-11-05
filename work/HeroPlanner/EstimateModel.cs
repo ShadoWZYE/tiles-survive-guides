@@ -49,6 +49,7 @@ public sealed class EstimateSkillLevel
     public int Level { get; set; }
     public double Damage { get; set; }
     public double Utility { get; set; }
+    public double StaminaReductionPercent { get; set; }
     public double[] SelfPercent { get; set; } = [0,0,0];
     public double[] TeamPercent { get; set; } = [0,0,0];
     public Dictionary<string,EstimateOpeningWindow> OpeningWindows { get; set; } = [];
@@ -82,7 +83,8 @@ public sealed class EstimateOpeningWindow
 }
 public sealed record HeroEstimate(double Offense, double Durability, double Score, double Low, double High, string Basis, double HealthContribution = 0,
     double[]? PassiveContributions = null, double[]? TeamPercent = null, double[]? SelfPercent = null, string[]? ActiveSkillIds = null,
-    Dictionary<string,int>? OpeningCastCounts = null,List<HealingPreview>? RawHealingPotential = null, bool Comparable = true, string[]? MissingFields = null);
+    Dictionary<string,int>? OpeningCastCounts = null,List<HealingPreview>? RawHealingPotential = null, bool Comparable = true, string[]? MissingFields = null,
+    double StaminaReductionPercent = 0);
 
 public static class EstimateModel
 {
@@ -172,7 +174,26 @@ public static class EstimateModel
     }
     public static HeroEstimate Evaluate(string slug, HeroBuild? saved, UpgradeData upgrades, EstimateData estimates, int battleSeconds = 0, double[]? externalFlat = null, bool requireRecorded = false)
     {
-        if(requireRecorded){var missing=MissingBuild(slug,saved,upgrades);if(missing.Count>0)return new(0,0,0,0,0,"Incomplete build",Comparable:false,MissingFields:missing.ToArray());saved=saved!.Copy();var lockedStage=upgrades.Heroes[slug].Stages.Single(s=>s.Id==saved.Stage);foreach(var skill in upgrades.Heroes[slug].Skills)if(lockedStage.SkillCaps.ElementAtOrDefault(skill.Slot)==0)saved.Skills[skill.Id]=0;}
+        string[] missing=[];
+        if(requireRecorded)
+        {
+            missing=MissingBuild(slug,saved,upgrades).ToArray();
+            var hero=upgrades.Heroes[slug];
+            var recordedStage=hero.Stages.Find(s=>s.Id==saved?.Stage) ?? hero.Stages.OrderBy(s=>s.Rank).ThenBy(s=>s.Step).First();
+            int recordedLevel=saved?.Level is int recordedNumber && hero.Levels.Any(l=>l.Level==recordedNumber) && recordedNumber<=recordedStage.LevelMax ? recordedNumber : 1;
+            HashSet<int> recordedSlots=[];
+            // Normalize a temporary scoring copy only. Unrecorded progress never borrows the reference build.
+            saved=new HeroBuild
+            {
+                Stage=recordedStage.Id,Level=recordedLevel,
+                Gear=(saved?.Gear??[]).Where(g=>g is not null && upgrades.Gear.TryGetValue(g.Id,out var t) &&
+                    t.HeroLevelRequired<=recordedLevel && t.Levels.Any(r=>r.Level==g.Level) && recordedSlots.Add(t.Slot))
+                    .Select(g=>new GearBuild{Id=g.Id,Level=g.Level}).ToList(),
+                Skills=hero.Skills.ToDictionary(s=>s.Id,s=>saved?.Skills is not null && saved.Skills.TryGetValue(s.Id,out int level) &&
+                    level>=0 && level<=recordedStage.SkillCaps.ElementAtOrDefault(s.Slot) &&
+                    (level==0 || s.Levels.Any(r=>r.Level==level)) ? level : 0)
+            };
+        }
         var model = estimates.Heroes[slug]; var data = upgrades.Heroes[slug];
         var stage = data.Stages.Find(s => s.Id == saved?.Stage) ?? data.Stages.Find(s => s.Id == model.ReferenceStage)!;
         int levelNumber = Math.Min(saved?.Level is int n && data.Levels.Any(l => l.Level == n) ? n : model.ReferenceLevel, stage.LevelMax);
@@ -188,7 +209,7 @@ public static class EstimateModel
             else gearKnown = false;
         }
         if (gearKnown) known++;
-        double damage = 0, utility = 0;
+        double damage = 0, utility = 0, stamina = 0;
         double[] selfPercent = [0,0,0], teamPercent = [0,0,0];
         var activeSkills = new List<string>();
         var selected=new List<(EstimateSkill Skill,EstimateSkillLevel Row)>();
@@ -199,6 +220,7 @@ public static class EstimateModel
             if (saved?.Skills is not null && saved.Skills.TryGetValue(skill.Id, out int recorded) && recorded >= 0 && recorded <= cap && skill.Levels.Any(l => l.Level == recorded))
             { skillLevel = recorded; known++; }
             var row = skill.Levels.Find(l => l.Level == skillLevel) ?? skill.Levels[0];
+            stamina=Math.Max(stamina,row.StaminaReductionPercent);
             if (row.Level > 0) activeSkills.Add(skill.Id);
             if (row.Level > 0) selected.Add((skill,row));
             var opening = battleSeconds is 10 or 20 or 30 ? row.OpeningWindows.GetValueOrDefault(battleSeconds.ToString()) : null;
@@ -239,9 +261,10 @@ public static class EstimateModel
         }
         var typical = Calculate(1, 1);
         return new(typical.offense, typical.durability, typical.score, Calculate(.5, .5).score, Calculate(2.5, 1.5).score,
-            known == 0 ? "Reference build" : known == model.Skills.Count + 3 ? "Recorded build" : "Recorded + assumed",
+            requireRecorded ? missing.Length>0 ? "Recorded + base defaults" : "Recorded build" : known == 0 ? "Reference build" : known == model.Skills.Count + 3 ? "Recorded build" : "Recorded + assumed",
             typical.durability * (.7 * stats[2]) / (.7 * stats[2] + 30 * stats[1]),
             [typical.offense/factors[0],typical.durability*30*baseStats[1]/(.7*stats[2]+30*stats[1]),typical.durability*.7*baseStats[2]/(.7*stats[2]+30*stats[1])],teamPercent,selfPercent,activeSkills.ToArray(),schedule.ToDictionary(x=>x.Key,x=>x.Value.Count(end=>end<=battleSeconds+1e-9)),
-            selected.Where(x=>activeSkills.Contains(x.Skill.Id)).SelectMany(x=>x.Row.HealingBudgets.Select(b=>new HealingPreview(x.Skill.Id,HealingFormula(b),b.Execution))).ToList());
+            selected.Where(x=>activeSkills.Contains(x.Skill.Id)).SelectMany(x=>x.Row.HealingBudgets.Select(b=>new HealingPreview(x.Skill.Id,HealingFormula(b),b.Execution))).ToList(),
+            MissingFields:missing,StaminaReductionPercent:stamina);
     }
 }

@@ -19,7 +19,7 @@ vm.runInContext(fs.readFileSync(path.join(__dirname,'upgrade-ui.js'),'utf8'),con
 const source = fs.readFileSync(path.join(__dirname, "app.js"), "utf8");
 assert.ok(source.includes("wireShell(); renderAll(); registerWebMcp();"));
 vm.runInContext(source.replace("wireShell(); renderAll(); registerWebMcp();",
-  "globalThis.hooks={heroes,profile,sanitizeProfile,mechanicsFor,bestOwnedAndTargets,renderFormationGuide,starQueue};"), context);
+  "globalThis.hooks={heroes,profile,sanitizeProfile,mechanicsFor,bestOwnedAndTargets,renderFormationGuide,starQueue,findTopSquads};"), context);
 const {heroes, profile} = context.hooks;
 heroes.forEach(h=>h.healthContribution=0); // This parser-only fixture does not run renderAll's estimate refresh.
 const example = ["Rosie","Layla","Becca","Ray","Maddie"].map(name => heroes.find(h => h.name === name));
@@ -78,4 +78,17 @@ test("desktop and browser investment rules agree across modes and edge cases", (
     partial:example.slice(0,2),tied:sourceHeroes.filter(h=>h.offense_index===74.09).slice(0,5)};
   for(const [name,squad] of Object.entries(cases))for(const mode of ["Balanced","Offense","Survival","Pve"])
     assert.deepEqual(policy.rank(squad,mode==="Pve"?"PvE farming":mode).map(x=>({slug:x.hero.asset_slug,reason:x.reason})),output[`${name}/${mode}`]);
+});
+
+
+test("PvE farming sorts known stamina saving before combat without increasing combat scores",()=>{
+ const squad=example.map((h,i)=>({...h,asset_slug:'farm-'+i,name:'Farm '+i,staminaReduction:0,estimate:{comparable:true},offense_index:100,durability_index:100,composite_index:100}));
+ const lucky={...squad[2],asset_slug:'farm-lucky',name:'Farm Lucky',staminaReduction:16,offense_index:1,durability_index:1,composite_index:1};
+ profile.mode='PvE farming';
+ const first=context.hooks.findTopSquads([...squad,lucky],1,true)[0];
+ assert.ok(first.heroes.some(h=>h.asset_slug==='farm-lucky'));assert.equal(first.stamina,16);
+ // Use a distinct cache key to represent the normal estimate-refresh invalidation.
+ lucky.staminaReduction=0;lucky.asset_slug='farm-locked';
+ const locked=context.hooks.findTopSquads([...squad,lucky],1,true)[0];
+ assert.ok(!locked.heroes.some(h=>h.asset_slug==='farm-locked'));assert.ok(locked.score>first.score);
 });

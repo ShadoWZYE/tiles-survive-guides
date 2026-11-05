@@ -2,6 +2,16 @@
 const test=require('node:test'),assert=require('node:assert/strict'),{execFileSync}=require('node:child_process'),path=require('node:path');
 const context=require('./army-context-model.js'),model=require('./estimate-model.js');
 const data=require('../../outputs/hero-report/Hero-Army-Context.json'),upgrades=require('../../outputs/hero-report/TilesSurvive-Upgrade-Data.json'),estimates=require('../../outputs/hero-report/Hero-Estimate-Model.json');
+
+test('unrecorded Signature Gear, Research and Behemoth values never supply default bonuses',()=>{
+ for(const slug of Object.keys(estimates.heroes)){
+  const empty=context.resolve(slug,{enabled:true},data,'recorded');assert.deepEqual(empty.flat,[0,0,0]);
+  const partial=context.resolve(slug,{enabled:true,behemothSource:'configured',behemothBuilds:{caser:{}},signature:{[slug]:null},research:{research_group_troop_attack_percent_1:null}},data,'recorded');
+  assert.deepEqual(partial.flat,[0,0,0]);
+  const plain=model.evaluate(slug,null,upgrades,estimates,0,null,true),withMissing=model.evaluate(slug,null,upgrades,estimates,0,partial.flat,true);
+  assert.equal(withMissing.score,plain.score);
+ }
+});
 test('exclusion, malformed profiles and comparison basis are explicit',()=>{
  assert.deepEqual(context.resolve('rosie',{signature:{rosie:1}},data).flat,[0,0,0]);
  assert.deepEqual(context.resolve('rosie',{enabled:true,signature:{rosie:1}},data,'reference').flat,[0,0,0]);

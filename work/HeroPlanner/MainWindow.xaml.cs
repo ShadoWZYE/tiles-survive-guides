@@ -503,7 +503,7 @@ public partial class MainWindow : Window
         if (control.Count > 0) battleSteps.Add("commit burst while control is active instead of splitting damage");
         if (sustain.Count > 0) battleSteps.Add("keep the frontline together so healing and protection cover the carries");
         if (CurrentMode == PlannerMode.Pve && squad.Any(hero => hero.StaminaReductionPercent > 0))
-            battleSteps.Add("Stamina savings are economy benefits; they do not increase this formation’s combat score");
+            battleSteps.Add("PvE farming prioritises configured Stamina savings, then combat strength; use it only for fights you already clear reliably. Choose Balanced or Offense for difficult fights");
         FormationBattleGuide.Text = battleSteps.Count == 0
             ? "Focus one target at a time and protect the two highest-offense heroes; this squad has no strong extracted timing combo."
             : string.Join("; then ", battleSteps) + ".";
@@ -568,19 +568,20 @@ public partial class MainWindow : Window
                 SynergyBonus = result.SynergyBonus,
                 FactionBonus = result.FactionBonus,
                 FrontlineBonus = result.FrontlineBonus,
+                StaminaReduction = result.StaminaReduction,
                 SynergySummary = result.SynergySummary,
                 Label = $"#{i + 1}"
             });
         }
         TopConfigurationsStatus.Text = results.Count == 0
-            ? _comparisonBasis=="recorded" ? "Record complete rank, level, skills and gear for at least five compatible heroes in MY ROSTER." : CurrentAccess == "Owned only" ? "Mark at least five compatible owned heroes in ROSTER." : $"No valid five-hero squad in {CurrentAccess}."
-            : $"{results.Count} highest-scoring configurations • {CurrentMode switch { PlannerMode.Pve => "PvE farming", _ => CurrentMode.ToString() }} • {CurrentAccess} • shown front-to-back";
+            ? _comparisonBasis=="recorded" ? "Mark at least five compatible owned heroes in MY ROSTER. Missing values use base defaults." : CurrentAccess == "Owned only" ? "Mark at least five compatible owned heroes in ROSTER." : $"No valid five-hero squad in {CurrentAccess}."
+            : $"{results.Count} {(CurrentMode==PlannerMode.Pve?"stamina-first configurations, then combat (routine wins only)":"highest-scoring configurations")} • {CurrentMode switch { PlannerMode.Pve => "PvE farming", _ => CurrentMode.ToString() }} • {CurrentAccess} • shown front-to-back";
     }
 
     private static List<SquadResult> FindTopSquads(IReadOnlyList<Hero> pool, PlannerMode mode, bool requireRoleCoverage, int limit, string enemyFaction = "Unknown")
     {
         pool=pool.Where(h=>h.Estimate?.Comparable!=false).ToList();
-        var best = new PriorityQueue<SquadResult, double>();
+        var best = new PriorityQueue<SquadResult, (double Stamina, double Combat)>();
         int count = pool.Count;
         if (count < 5 || limit <= 0) return [];
         for (int a = 0; a < count - 4; a++)
@@ -596,18 +597,22 @@ public partial class MainWindow : Window
             double factionBonus = FactionModel.ScoreBonus(squad, mode, enemyFaction);
             var placement = FormationModel.Evaluate(squad, mode, FactionModel.Compose(squad.Select(h => h.Faction)).HealthBonus);
             double score = baseScore + synergyBonus + factionBonus + placement.Adjustment;
+            // Farming is an economy objective for routine wins, not a stamina-to-damage conversion.
+            // Do not assume multiple stamina perks stack without verified stacking semantics.
+            double stamina = mode==PlannerMode.Pve ? squad.Max(h=>h.StaminaReductionPercent) : 0;
+            var priority=(Stamina:stamina,Combat:score);
             bool shouldKeep = best.Count < limit ||
-                (best.TryPeek(out _, out double lowestScore) && score > lowestScore);
+                (best.TryPeek(out _, out var lowest) && priority.CompareTo(lowest)>0);
             if (!shouldKeep) continue;
-            var result = new SquadResult { Heroes = placement.Heroes, BaseScore = baseScore, SynergyBonus = synergyBonus, FactionBonus = factionBonus, FrontlineBonus = placement.Adjustment, Score = score, Label = "" };
+            var result = new SquadResult { Heroes = placement.Heroes, BaseScore = baseScore, SynergyBonus = synergyBonus, FactionBonus = factionBonus, FrontlineBonus = placement.Adjustment, Score = score, StaminaReduction=stamina, Label = "" };
             if (best.Count < limit)
             {
-                best.Enqueue(result, result.Score);
+                best.Enqueue(result, priority);
             }
             else
             {
                 best.Dequeue();
-                best.Enqueue(result, result.Score);
+                best.Enqueue(result, priority);
             }
         }
         return best.UnorderedItems.Select(item => item.Element)
@@ -618,11 +623,12 @@ public partial class MainWindow : Window
                 SynergyBonus = result.SynergyBonus,
                 FactionBonus = result.FactionBonus,
                 FrontlineBonus = result.FrontlineBonus,
+                StaminaReduction = result.StaminaReduction,
                 SynergySummary = EvaluateSynergy(result.Heroes, mode).Summary + " · " + FactionModel.Compose(result.Heroes.Select(h => h.Faction)).Summary,
                 Score = result.Score,
                 Label = "",
             })
-            .OrderByDescending(result => result.Score).ThenBy(result => result.Names).ToList();
+            .OrderByDescending(result => result.StaminaReduction).ThenByDescending(result => result.Score).ThenBy(result => result.Names).ToList();
     }
 
     private string CounterScenarioText => _enemyFaction == "Unknown"
@@ -728,7 +734,7 @@ public partial class MainWindow : Window
         {
             var staminaHero = squad.OrderByDescending(hero => hero.StaminaReductionPercent).FirstOrDefault();
             if (staminaHero?.StaminaReductionPercent > 0)
-                interactions?.Insert(0, $"{staminaHero.Name}: maximum configured Stamina economy −{staminaHero.StaminaReductionPercent:0.#}% (excluded from combat score)");
+                interactions?.Insert(0, $"{staminaHero.Name}: modeled skill Stamina saving −{staminaHero.StaminaReductionPercent:0.#}% (farming priority; combat score unchanged)");
         }
 
         double capped = passiveBonus; // No uncalibrated trait-presence score on top of individual utility.
@@ -794,7 +800,7 @@ public partial class MainWindow : Window
         if (_comparisonBasis=="recorded")
         {
             owned=owned.Where(h=>h.Estimate?.Comparable!=false).ToList();unowned=unowned.Where(h=>h.Estimate?.Comparable!=false).ToList();
-            if(owned.Count<5){UnlockRecommendation.Text="Record complete rank, level, unlocked skills and equipped gear (or none) for five owned heroes before comparing your current squad.";ResourceRecommendation.Text="Unrecorded heroes are excluded from My builds; switch to Equal builds for hypothetical unlock comparisons.";return;}
+            if(owned.Count<5){UnlockRecommendation.Text="Mark at least five compatible owned heroes to compare your current squad.";ResourceRecommendation.Text="My builds uses base rank, level 1 and no unrecorded skill or gear bonuses.";return;}
         }
         bool coverage = RoleCoverage?.IsChecked == true;
         var current = FindTopSquads(owned, CurrentMode, coverage, 1, _enemyFaction).FirstOrDefault()

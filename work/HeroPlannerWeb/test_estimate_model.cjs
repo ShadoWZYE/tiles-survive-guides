@@ -130,12 +130,46 @@ test('recorded passive levels affect stats; explicit zero removes its benefit',(
   assert.deepEqual(tara.teamPercent,[0,0,0]);
 });
 
-test('My builds never borrows reference strength and matches native eligibility decisions',()=>{
+test('My builds keeps partial heroes eligible without borrowing reference strength; native parity',()=>{
  const root=path.resolve(__dirname,'../..'),cases=JSON.parse(execFileSync('dotnet',['run','--no-build','--project',path.join(root,'work/HeroPlanner.Tests'),'--','--recorded-scores',path.join(root,'outputs/hero-report')],{encoding:'utf8',maxBuffer:4*1024*1024}));
- assert.equal(cases.length,145);for(const c of cases){const r=model.evaluate(c.slug,c.saved,upgrades,estimates,0,null,true);assert.equal(r.comparable!==false,c.result.comparable);assert.deepEqual(r.missingFields||[],c.result.missingFields||[]);assert.ok(Math.abs(r.score-c.result.score)<1e-7);if(r.comparable===false)assert.equal(r.score,0);}
- const partial=model.compare('rosie',{level:1},upgrades,estimates,'recorded',{});assert.equal(partial.comparable,false);assert.ok(partial.missingFields.length);
+ assert.equal(cases.length,145);for(const c of cases){const r=model.evaluate(c.slug,c.saved,upgrades,estimates,0,null,true);assert.equal(r.comparable,true);assert.equal(c.result.comparable,true);assert.deepEqual(r.missingFields||[],c.result.missingFields||[]);assert.ok(Math.abs(r.score-c.result.score)<1e-7);assert.equal(r.staminaReductionPercent,c.result.staminaReductionPercent);}
+ const partial=model.compare('rosie',{level:1},upgrades,estimates,'recorded',{});assert.equal(partial.comparable,true);assert.ok(partial.missingFields.length);
+});
+test('all missing progress uses base rank, level one and no skill or gear bonuses without changing the saved build',()=>{
+ for(const [slug,h] of Object.entries(upgrades.heroes)){
+  const first=[...h.stages].sort((a,b)=>a.rank-b.rank||a.step-b.step)[0];
+  const base={stage:first.id,level:1,gear:[],skills:Object.fromEntries(h.skills.map(s=>[s.id,0]))};
+  const incomplete={skills:{},gear:null};const snapshot=JSON.stringify(incomplete);
+  for(const seconds of [0,10,20,30]){
+   const blank=model.evaluate(slug,incomplete,upgrades,estimates,seconds,null,true),explicit=model.evaluate(slug,base,upgrades,estimates,seconds,null,true);
+   for(const field of ['offense','durability','score'])assert.equal(blank[field],explicit[field],`${slug} ${field}`);
+   assert.deepEqual(blank.activeSkillIds,[]);assert.deepEqual(blank.teamPercent,[0,0,0]);
+  }assert.equal(JSON.stringify(incomplete),snapshot);
+ }
+});
+test('Freja remains eligible when Shadow Guard is unrecorded; missing or locked damaging skills add no benefit',()=>{
+ const h=upgrades.heroes.freja,stage=h.stages.find(s=>s.id==='survivor_freja_rank_9_2'),skills=Object.fromEntries(h.skills.map(s=>[s.id,Math.min(10,stage.skill_caps[s.slot])])) ;delete skills.survivor_freja_skill_3;
+ const saved={stage:stage.id,level:120,gear:[],skills},before=JSON.stringify(saved);
+ const result=model.evaluate('freja',saved,upgrades,estimates,0,null,true);
+ assert.equal(result.comparable,true);assert.ok(result.score>0);assert.ok(!result.activeSkillIds.includes('survivor_freja_skill_3'));assert.equal(JSON.stringify(saved),before);
+ const empty=model.evaluate('freja',{...saved,skills:{}},upgrades,estimates,0,null,true),locked=model.evaluate('freja',{...saved,skills:Object.fromEntries(h.skills.map(s=>[s.id,0]))},upgrades,estimates,0,null,true);
+ assert.equal(empty.score,locked.score);assert.ok(result.offense>empty.offense);
+});
+test('missing level is one even on a developed rank; invalid or rank-locked skills and gated gear add no bonus',()=>{
+ const h=upgrades.heroes.freja,stage=h.stages.at(-1),saved={stage:stage.id,skills:{survivor_freja_attack:999},gear:[{id:'missing-item',level:99}]};
+ const blank=model.evaluate('freja',saved,upgrades,estimates,0,null,true),explicit=model.evaluate('freja',{stage:stage.id,level:1,skills:{},gear:[]},upgrades,estimates,0,null,true);
+ assert.equal(blank.score,explicit.score);assert.deepEqual(blank.activeSkillIds,[]);
+ const first=h.stages[0],locked=Object.fromEntries(h.skills.map(s=>[s.id,first.skill_caps[s.slot]?0:10]));
+ const ignored=model.evaluate('freja',{stage:first.id,level:1,skills:locked,gear:[]},upgrades,estimates,0,null,true),none=model.evaluate('freja',null,upgrades,estimates,0,null,true);
+ assert.equal(ignored.score,none.score);
 });
 test('utility receives a single score channel and cannot inflate physical durability',()=>{
  const altered=structuredClone(estimates);for(const skill of altered.heroes.rosie.skills)for(const row of skill.levels)row.utility*=10;
  const a=model.evaluate('rosie',null,upgrades,estimates),b=model.evaluate('rosie',null,upgrades,altered);assert.equal(a.durability,b.durability);assert.equal(a.offense,b.offense);assert.ok(b.score>a.score);
+});
+test('Lucky farming savings use the selected skill level; missing and locked Wild Hunt give zero',()=>{
+ const h=upgrades.heroes.lucky,stage=h.stages.at(-1),saved={stage:stage.id,level:120,gear:[],skills:{survivor_lucky_skill_2:11}};
+ const result=model.evaluate('lucky',saved,upgrades,estimates,0,null,true);
+ assert.ok(Math.abs(result.staminaReductionPercent-13)<1e-9);
+ for(const skills of [{},{survivor_lucky_skill_2:0}])assert.equal(model.evaluate('lucky',{...saved,skills},upgrades,estimates,0,null,true).staminaReductionPercent,0);
 });

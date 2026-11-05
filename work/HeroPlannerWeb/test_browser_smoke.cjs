@@ -109,8 +109,28 @@ const assert = require("node:assert/strict");
       localStorage.setItem(key,JSON.stringify(p));
     },{slugs});
     await page.reload();await page.locator('[data-tab="squad"]').click();
-    assert.match(await page.locator(`.hero-card[data-slug="${slugs[0]}"]`).innerText(),/Record build/,'Unknown gear cannot borrow reference gear strength');
-    assert.equal(await page.locator('.formation-guide').count(),0,'Incomplete builds cannot produce a finished formation');
+    assert.doesNotMatch(await page.locator(`.hero-card[data-slug="${slugs[0]}"]`).innerText(),/Record build/,'Unknown gear should not disqualify a hero');
+    for(const slug of slugs)await page.locator(`.hero-card[data-slug="${slug}"]`).click();
+    assert.equal(await page.locator('.formation-guide').count(),1,'Partially recorded heroes must still produce a formation');
+    await page.evaluate(()=>{
+      const key='tiles-survive-hero-planner-profile-v1',p=JSON.parse(localStorage.getItem(key));
+      p.mode='PvE farming';p.access='Owned only';p.requireRoleCoverage=true;
+      if(!p.ownedHeroes.includes('lucky'))p.ownedHeroes.push('lucky');
+      const stage=window.__UPGRADE_DATA__.heroes.lucky.stages.at(-1);
+      p.heroProgress.lucky={build:{stage:stage.id,level:1,gear:[],skills:{survivor_lucky_skill_2:11}}};
+      localStorage.setItem(key,JSON.stringify(p));
+    });
+    await page.reload();await page.locator('[data-tab="squad"]').click();
+    assert.match(await page.locator('.result').first().innerText(),/Lucky/);
+    assert.match(await page.locator('.result').first().innerText(),/Stamina −13%/);
+    assert.match(await page.locator('#detail-content').innerText(),/fights you already clear reliably/);
+    await page.evaluate(()=>{
+      const key='tiles-survive-hero-planner-profile-v1',p=JSON.parse(localStorage.getItem(key));
+      delete p.heroProgress.lucky.build.skills.survivor_lucky_skill_2;
+      localStorage.setItem(key,JSON.stringify(p));
+    });
+    await page.reload();await page.locator('[data-tab="squad"]').click();
+    assert.doesNotMatch(await page.locator('.result').first().innerText(),/Stamina −/,'Unrecorded Wild Hunt cannot supply savings');
     assert.deepEqual(errors,[]);
     console.log("Browser smoke passed: actual builds, data-driven returns, metric switching, saved profile, ownership preservation, mobile layout.");
   } finally { await browser.close(); }

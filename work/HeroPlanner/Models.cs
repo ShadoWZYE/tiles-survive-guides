@@ -61,8 +61,8 @@ public sealed class Hero
     [JsonIgnore] public string CombatEvidenceNote { get; set; } = "";
     [JsonIgnore] public string IndexValue => Estimate?.Comparable==false ? "" : CompositeIndex.ToString("F1");
     [JsonIgnore] public string IndexPrefix => Estimate?.Comparable==false ? "Record build " : Estimate?.Basis == "Flat max stats" ? "Stats " : "Est. ";
-    [JsonIgnore] public string EstimateHint => Estimate is null ? "Estimate unavailable" : Estimate.Comparable==false ? "Not ranked: record "+string.Join(", ",Estimate.MissingFields??[]) : $"{Estimate.Basis} · low confidence · scenario range {Estimate.Low:0.0}–{Estimate.High:0.0}. Not a measured combat rating.";
-    [JsonIgnore] public string EstimateDetails => Estimate?.Comparable==false ? EstimateHint : Estimate?.Basis == "Flat max stats" ? "Flat maximum configuration stats only. Saved stars, levels, skills, gear and ownership are ignored. Heroes with identical configuration stats legitimately tie. Stat weights are a planning comparison, not combat strength; skill and synergy weights are excluded. Formation rankings still include faction health and any selected counter scenario." : EstimateHint + "\nEqual builds use level 110, rank 3 step 6, capped skill levels and no gear for everyone. Saved values are used ONLY when My builds is selected; incomplete recorded builds are excluded from recommendations. Skill levels are capped by the selected rank. This is equal development, not equal resource cost.\nLinked permanent stat buffs and the checked Rosie/Tarzan second strikes are included. Other skills use representative effects; cadence, utility weights and effectiveness remain inferred. Conservative/optimistic scenarios vary damage pressure 0.5–2.5× and utility 0.5–1.5×. These are sensitivity ranges, not statistical confidence intervals. Healing, shields, control, debuffs and summons receive planning weights, not a full simulation.\nScores use fixed reference-roster anchors, so a developed build can exceed 100. Unknown effects use a generic prior, not zero. Server changes and live overrides remain unverified. Resource-priority percentages use actual recorded builds of owned heroes, independently of the comparator basis." + "\n" + CombatEvidenceNote;
+    [JsonIgnore] public string EstimateHint => Estimate is null ? "Estimate unavailable" : Estimate.Comparable==false ? "Not ranked: record "+string.Join(", ",Estimate.MissingFields??[]) : $"{Estimate.Basis} · low confidence · scenario range {Estimate.Low:0.0}–{Estimate.High:0.0}. Not a measured combat rating." + (Estimate.MissingFields is {Length:>0} ? " Base defaults applied: "+string.Join(", ",Estimate.MissingFields)+". Missing level = 1; missing rank = base; unrecorded or locked skills and gear add no bonus." : "");
+    [JsonIgnore] public string EstimateDetails => Estimate?.Comparable==false ? EstimateHint : Estimate?.Basis == "Flat max stats" ? "Flat maximum configuration stats only. Saved stars, levels, skills, gear and ownership are ignored. Heroes with identical configuration stats legitimately tie. Stat weights are a planning comparison, not combat strength; skill and synergy weights are excluded. Formation rankings still include faction health and any selected counter scenario." : EstimateHint + "\nEqual builds use level 110, rank 3 step 6, capped skill levels and no gear for everyone. Saved values are used ONLY when My builds is selected; missing values use base rank, level 1, no gear and zero skill levels; heroes remain eligible. Skill levels are capped by the selected rank. This is equal development, not equal resource cost.\nLinked permanent stat buffs and the checked Rosie/Tarzan second strikes are included. Other skills use representative effects; cadence, utility weights and effectiveness remain inferred. Conservative/optimistic scenarios vary damage pressure 0.5–2.5× and utility 0.5–1.5×. These are sensitivity ranges, not statistical confidence intervals. Healing, shields, control, debuffs and summons receive planning weights, not a full simulation.\nScores use fixed reference-roster anchors, so a developed build can exceed 100. Unknown effects use a generic prior, not zero. Server changes and live overrides remain unverified. Resource-priority percentages use actual recorded builds of owned heroes, independently of the comparator basis." + "\n" + CombatEvidenceNote;
     [JsonIgnore] public bool IsOwned { get; set; }
     [JsonIgnore] public HeroProgress Progress { get; set; } = new();
     [JsonIgnore] public string Portrait => $"pack://application:,,,/TilesSurviveHeroPlanner;component/Images/{AssetSlug}.png";
@@ -78,15 +78,9 @@ public sealed class Hero
     [JsonIgnore] public string ClientGateLabel => string.IsNullOrWhiteSpace(ClientVersion) ? "No client gate recorded" : $"Client {ClientVersion}+";
     [JsonIgnore] public string ServerGateLabel => string.IsNullOrWhiteSpace(MinimumServerVersion) ? "No minimum server build recorded" : $"Server {MinimumServerVersion}+";
     [JsonIgnore] public string AcquisitionEvidence => $"{AcquisitionLabel} • {AcquisitionConfidence} confidence";
-    private double? _staminaReductionPercent;
-    [JsonIgnore] public double StaminaReductionPercent => _staminaReductionPercent ??= Skills
-            .SelectMany(skill => skill.MaxLevelOverallBenefits)
-            .Where(benefit => benefit.Name.Equals("prop_intel_stamina_reduce_percent", StringComparison.OrdinalIgnoreCase))
-            .Select(benefit => Math.Abs(benefit.Value) * 100)
-            .DefaultIfEmpty(0)
-            .Max();
+    [JsonIgnore] public double StaminaReductionPercent => Estimate?.StaminaReductionPercent ?? 0;
     [JsonIgnore] public string PveUtilityLabel => StaminaReductionPercent > 0
-        ? $"Global Stamina cost −{StaminaReductionPercent:0.#}%" : "No extracted Stamina economy effect";
+        ? $"Configured Stamina cost −{StaminaReductionPercent:0.#}%" : "No Stamina saving at the modeled skill level";
 
     private HashSet<string>? _mechanicCache;
     private HeroMechanic? _mechanicFlags;
@@ -232,9 +226,10 @@ public sealed class SquadResult
     public double SynergyBonus { get; init; }
     public double FactionBonus { get; init; }
     public double FrontlineBonus { get; init; }
+    public double StaminaReduction { get; init; }
     public string SynergySummary { get; init; } = "No modeled cross-skill pairing";
     public string Names => string.Join(" • ", Heroes.Select(hero => hero.Name));
-    public string SynergyLabel => $"+{SynergyBonus:0.0} synergy · +{FactionBonus:0.0} faction · {FrontlineBonus:+0.0;-0.0;0.0} frontline fit";
+    public string SynergyLabel => (StaminaReduction>0?$"Stamina −{StaminaReduction:0.#}% · ":"")+$"+{SynergyBonus:0.0} synergy · +{FactionBonus:0.0} faction · {FrontlineBonus:+0.0;-0.0;0.0} frontline fit";
 }
 
 public sealed class ReleaseScheduleItem

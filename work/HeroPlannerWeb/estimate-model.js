@@ -38,12 +38,20 @@
     return missing;
   }
   function evaluate(slug,saved,upgrades,estimates,battleSeconds=0,externalFlat=null,requireRecorded=false){
-    if(requireRecorded){const missing=missingBuild(slug,saved,upgrades);if(missing.length)return {offense:0,durability:0,score:0,low:0,high:0,basis:"Incomplete build",comparable:false,missingFields:missing,healthContribution:0,activeSkillIds:[]};saved=structuredClone(saved);const stage=upgrades.heroes[slug].stages.find(s=>s.id===saved.stage);saved.skills??={};for(const skill of upgrades.heroes[slug].skills)if(!stage.skill_caps[skill.slot])saved.skills[skill.id]=0;}
+    let missingFields=[];
+    if(requireRecorded){
+      missingFields=missingBuild(slug,saved,upgrades);
+      const hero=upgrades.heroes[slug],stage=hero.stages.find(s=>s.id===saved?.stage)||[...hero.stages].sort((a,b)=>a.rank-b.rank||a.step-b.step)[0];
+      const level=Number.isInteger(saved?.level)&&hero.levels.some(l=>l.level===saved.level)&&saved.level<=stage.level_max?saved.level:1,slots=new Set();
+      // Scoring copy only: missing/locked upgrades receive no reference-build credit.
+      saved={stage:stage.id,level,gear:(Array.isArray(saved?.gear)?saved.gear:[]).filter(g=>{const t=upgrades.gear[g?.id];if(!t||t.hero_level_required>level||!t.levels.some(r=>r.level===g.level)||slots.has(t.slot))return false;slots.add(t.slot);return true;}).map(g=>({...g})),
+        skills:Object.fromEntries(hero.skills.map(s=>{const n=saved?.skills?.[s.id];return [s.id,Number.isInteger(n)&&n>=0&&n<=(stage.skill_caps[s.slot]||0)&&(n===0||s.levels.some(r=>r.level===n))?n:0];}))};
+    }
     const model=estimates.heroes[slug],data=upgrades.heroes[slug];
     const stage=data.stages.find(s=>s.id===saved?.stage)||data.stages.find(s=>s.id===model.reference_stage);
     const levelNumber=Math.min(Number.isInteger(saved?.level)&&data.levels.some(l=>l.level===saved.level)?saved.level:model.reference_level,stage.level_max);
     const level=data.levels.find(l=>l.level===levelNumber),stats=stage.stats.map((v,i)=>v+level.stats[i]);
-    let known=(saved?.stage===stage.id?1:0)+(saved?.level===levelNumber?1:0),damage=0,utility=0;
+    let known=(saved?.stage===stage.id?1:0)+(saved?.level===levelNumber?1:0),damage=0,utility=0,staminaReductionPercent=0;
     const selfPercent=[0,0,0],teamPercent=[0,0,0];
     const activeSkillIds=[];
     const selected=[];
@@ -54,6 +62,7 @@
     for(const skill of model.skills){const cap=stage.skill_caps[skill.slot]||0;let n=Math.min(skill.reference_level,cap),recorded=saved?.skills?.[skill.id];
       if(Number.isInteger(recorded)&&recorded>=0&&recorded<=cap&&skill.levels.some(l=>l.level===recorded)){n=recorded;known++;}
       const row=skill.levels.find(l=>l.level===n)||skill.levels[0],opening=[10,20,30].includes(battleSeconds)?row.opening_windows?.[battleSeconds]:null;damage+=opening?.damage??row.damage;utility+=row.utility;
+      staminaReductionPercent=Math.max(staminaReductionPercent,row.stamina_reduction_percent||0);
       if(row.level>0)activeSkillIds.push(skill.id);
       if(row.level>0)selected.push({skill,row});
       for(let i=0;i<3;i++){selfPercent[i]+=(opening?.self_percent??row.self_percent)?.[i]||0;teamPercent[i]+=row.team_percent?.[i]||0;}}
@@ -80,9 +89,9 @@
     return {...calculate(1,1),low:calculate(.5,.5).score,high:calculate(2.5,1.5).score,
       healthContribution:calculate(1,1).durability*(.7*stats[2])/(.7*stats[2]+30*stats[1]),
       passiveContributions:[calculate(1,1).offense/factors[0],calculate(1,1).durability*30*baseStats[1]/(.7*stats[2]+30*stats[1]),calculate(1,1).durability*.7*baseStats[2]/(.7*stats[2]+30*stats[1])],
-      teamPercent,selfPercent,activeSkillIds,openingCastCounts:Object.fromEntries(Object.entries(schedule).map(([id,ends])=>[id,ends.filter(end=>end<=battleSeconds+1e-9).length])),
+      teamPercent,selfPercent,activeSkillIds,missingFields,comparable:true,staminaReductionPercent,openingCastCounts:Object.fromEntries(Object.entries(schedule).map(([id,ends])=>[id,ends.filter(end=>end<=battleSeconds+1e-9).length])),
       rawHealingPotential:selected.filter(x=>activeSkillIds.includes(x.skill.id)).flatMap(({skill,row})=>(row.healing_budgets??[]).map(b=>({skillId:skill.id,formula:healingFormula(b),execution:b.execution}))),
-      basis:known===0?'Reference build':known===model.skills.length+3?'Recorded build':'Recorded + assumed'};
+      basis:requireRecorded?(missingFields.length?'Recorded + base defaults':'Recorded build'):known===0?'Reference build':known===model.skills.length+3?'Recorded build':'Recorded + assumed'};
   }
   function compare(slug,saved,upgrades,estimates,basis,flat,battleSeconds=0,externalFlat=null){
     return basis==='flat'?{...flat,low:flat.score,high:flat.score,basis:'Flat max stats'}:

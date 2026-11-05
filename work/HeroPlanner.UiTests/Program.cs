@@ -65,6 +65,27 @@ internal static class Program
                 OffenseIndex = 100, DurabilityIndex = 100, CompositeIndex = 100, HealthContribution = 80,
                 Estimate = new(100, 100, 100, 100, 100, "Reference build") }).ToList();
         var optimize = typeof(MainWindow).GetMethod("FindTopSquads", BindingFlags.Static | BindingFlags.NonPublic)!;
+        var regressionData=Field<UpgradeData>(window,"_upgradeData");
+        var regressionModel=Field<EstimateData>(window,"_estimates");
+        var regressionStage=regressionData.Heroes["freja"].Stages.Single(s=>s.Id=="survivor_freja_rank_9_2");
+        var regressionBuild=new HeroBuild{Stage=regressionStage.Id,Level=120,Gear=[],Skills=regressionData.Heroes["freja"].Skills.ToDictionary(s=>s.Id,s=>Math.Min(10,regressionStage.SkillCaps[s.Slot]))};
+        regressionBuild.Skills.Remove("survivor_freja_skill_3");
+        var regressionEstimate=EstimateModel.Evaluate("freja",regressionBuild,regressionData,regressionModel,0,null,true);
+        var regressionFreja=new Hero{Name="Freja",AssetSlug="freja",Role="Mid",Faction="Wasteland",Estimate=regressionEstimate,
+            OffenseIndex=regressionEstimate.Offense,DurabilityIndex=regressionEstimate.Durability,CompositeIndex=regressionEstimate.Score};
+        var regressionPool=new List<Hero>{regressionFreja};
+        regressionPool.AddRange(Enumerable.Range(0,4).Select(i=>new Hero{Name="Base "+i,AssetSlug="base-"+i,Role=i==0?"Melee":"Range",Estimate=new(10,10,10,10,10,"Recorded build"),OffenseIndex=10,DurabilityIndex=10,CompositeIndex=10}));
+        var regressionSquads=(List<SquadResult>)optimize.Invoke(null,[regressionPool,PlannerMode.Balanced,true,1,"Unknown"])!;
+        Check(regressionSquads.Count==1 && regressionSquads[0].Heroes.Any(h=>h.AssetSlug=="freja"),"Missing Shadow Guard excluded Freja from the optimiser");
+        Check(!regressionBuild.Skills.ContainsKey("survivor_freja_skill_3"),"Scoring saved a default skill into the user's build");
+        var farmingLucky=new Hero{Name="Lucky",AssetSlug="lucky",Role="Range",Estimate=new(1,1,1,1,1,"Recorded build",StaminaReductionPercent:16),OffenseIndex=1,DurabilityIndex=1,CompositeIndex=1};
+        var farmingPool=regressionPool.Append(farmingLucky).ToList();
+        var farmSquads=(List<SquadResult>)optimize.Invoke(null,[farmingPool,PlannerMode.Pve,true,1,"Unknown"])!;
+        Check(farmSquads.Single().Heroes.Contains(farmingLucky) && farmSquads[0].StaminaReduction==16,"PvE farming did not prioritise known Stamina saving");
+        farmingLucky.Estimate=farmingLucky.Estimate! with {StaminaReductionPercent=0};
+        var combatFarmSquads=(List<SquadResult>)optimize.Invoke(null,[farmingPool,PlannerMode.Pve,true,1,"Unknown"])!;
+        Check(!combatFarmSquads.Single().Heroes.Contains(farmingLucky),"Missing/locked economy still influenced farming ranking");
+        Check(farmSquads[0].Score<combatFarmSquads[0].Score,"Stamina saving was falsely added to combat strength");
         var ranked = (List<SquadResult>)optimize.Invoke(null, [synthetic, PlannerMode.Balanced, false, 6, "Unknown"])!;
         Check(ranked[0].Heroes.Any(h => h.Faction == "Sea") && ranked[0].Heroes.Count(h => h.Faction == "Mountain") == 4,
             "Optimizer failed to prefer the Mariner's five-faction bonus over four-faction bonus");

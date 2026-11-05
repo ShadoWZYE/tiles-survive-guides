@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "model_version": 12,
+  "model_version": 13,
   "client_data_build": "2.6.400.304",
   "native_semantics": {
     "traced_build": "2.6.400.304",
@@ -9,7 +9,7 @@
     "scope": "selected_current_static_base_paths; full_engine_and_live_patches_unverified"
   },
   "source_sha256": {
-    "Hero-Estimate-Model.json": "82e900a68f599a95fa5fb79196e7e185f1b876e14bd9d507964911437218c67c",
+    "Hero-Estimate-Model.json": "757a18a095fd8641637fbd72f304904dc4c72e539d6dfd55e60b89ac5c7c279b",
     "Hero-Combat-Audit.json": "2eb078f6aced672130fdd54bb472199ea8b4b290e12a6e8449c18c3e76917c1f",
     "TilesSurvive-Upgrade-Data.json": "4bba139a5ae23d5c8d4eccea649f7ca7d3141fd5d94deaedf57f8c67503eb4fb",
     "TilesSurvive-Hero-Data.json": "0a1d9d93ccd8666ba11d05748b0ac67c0b340c9a7f6372f670ccdb575d3eb32c"

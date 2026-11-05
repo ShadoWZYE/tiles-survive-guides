@@ -229,7 +229,7 @@ def build(upgrades, audit, roster):
         raise ValueError('Combat audit and progression data must identify the same snapshot.')
     if audit['provenance']['manifest_sha256'] != upgrades['provenance']['manifest_sha256']:
         raise ValueError('Combat audit and progression manifest snapshots differ.')
-    result = {'version': 12, 'reference_level': 110, 'reference_rank': 3,
+    result = {'version': 13, 'reference_level': 110, 'reference_rank': 3,
               'reference_step': 6, 'heroes': {}}
     result['opening_scheduler']='single_caster_non_preemptive_configured_priority_scenario'
     result['native_semantics_build']='2.6.200.276'
@@ -351,7 +351,10 @@ def build(upgrades, audit, roster):
                 unresolved = (not effects and not presentation_only) or bool(evidence['missing_assets']) or bool(evidence['unresolved_event_references']) or any(e['custom_formula'] for e in effects)
                 pressure = (representative+periodic_pressure) / cadence if damage or periodic_pressure else ((.25 if skill['slot'] == 0 else .08) if unresolved else 0)
                 uses_prior |= not damage and unresolved
+                stamina_ids={b['id'] for b in source.get('max_level_overall_benefits',[]) if b['name']=='prop_intel_stamina_reduce_percent'}
+                stamina=max([0]+[-100*b['benefit_value'] for b in row.get('overall',[]) if b['benefit_id'] in stamina_ids])
                 levels.append({'level': row['level'], 'damage': round(pressure, 8), 'utility': scaled_utility,
+                               'stamina_reduction_percent':stamina,
                                'self_percent':self_percent,'team_percent':team_percent})
                 windows={}
                 permanent_self,_,_=permanent_stats(evidence,row['params'])

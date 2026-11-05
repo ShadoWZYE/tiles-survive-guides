@@ -5,6 +5,31 @@ if(args.Length==2 && args[0]=="--recorded-scores")
 {
  var root=args[1];var data=UpgradeData.Parse(File.ReadAllText(Path.Combine(root,"TilesSurvive-Upgrade-Data.json")));var model=EstimateData.Parse(File.ReadAllText(Path.Combine(root,"Hero-Estimate-Model.json")));var recordedCases=new List<object>();
  foreach(var (slug,h) in data.Heroes){var stage=h.Stages.First();var complete=new HeroBuild{Stage=stage.Id,Level=1,Gear=[],Skills=h.Skills.ToDictionary(s=>s.Id,s=>stage.SkillCaps.ElementAtOrDefault(s.Slot)>0?1:0)};var unknownGear=complete.Copy();unknownGear.Gear=null;var missingLevel=complete.Copy();missingLevel.Level=null;var missingSkill=complete.Copy();missingSkill.Skills.Clear();foreach(var saved in new HeroBuild?[]{null,complete,unknownGear,missingLevel,missingSkill})recordedCases.Add(new{slug,saved,result=EstimateModel.Evaluate(slug,saved,data,model,0,null,true)});}
+ foreach(var slug in data.Heroes.Keys)
+ {
+  var hero=data.Heroes[slug];var first=hero.Stages.OrderBy(s=>s.Rank).ThenBy(s=>s.Step).First();
+  var baseBuild=new HeroBuild{Stage=first.Id,Level=1,Gear=[],Skills=hero.Skills.ToDictionary(s=>s.Id,s=>0)};
+  foreach(int seconds in new[]{0,10,20,30})
+  {
+   var blank=EstimateModel.Evaluate(slug,null,data,model,seconds,null,true);
+   var explicitBase=EstimateModel.Evaluate(slug,baseBuild,data,model,seconds,null,true);
+   if(!blank.Comparable || blank.Score!=explicitBase.Score || blank.Offense!=explicitBase.Offense || blank.Durability!=explicitBase.Durability || blank.ActiveSkillIds!.Length>0)
+    throw new Exception("Unrecorded progress borrowed strength: "+slug);
+  }
+ }
+ var frejaData=data.Heroes["freja"];var frejaStage=frejaData.Stages.Single(s=>s.Id=="survivor_freja_rank_9_2");
+ var frejaBuild=new HeroBuild{Stage=frejaStage.Id,Level=120,Gear=[],Skills=frejaData.Skills.ToDictionary(s=>s.Id,s=>Math.Min(10,frejaStage.SkillCaps[s.Slot]))};
+ frejaBuild.Skills.Remove("survivor_freja_skill_3");var frejaSnapshot=JsonSerializer.Serialize(frejaBuild);
+ var frejaResult=EstimateModel.Evaluate("freja",frejaBuild,data,model,0,null,true);
+ if(!frejaResult.Comparable || frejaResult.Score<=0 || frejaResult.ActiveSkillIds!.Contains("survivor_freja_skill_3") || JsonSerializer.Serialize(frejaBuild)!=frejaSnapshot)
+  throw new Exception("Freja missing Shadow Guard regression or scoring mutated the profile");
+ var luckyStage=data.Heroes["lucky"].Stages.Last();
+ var luckyBuild=new HeroBuild{Stage=luckyStage.Id,Level=120,Gear=[],Skills=new(){{"survivor_lucky_skill_2",11}}};
+ if(Math.Abs(EstimateModel.Evaluate("lucky",luckyBuild,data,model,0,null,true).StaminaReductionPercent-13)>1e-9)
+  throw new Exception("Lucky farming used maximum economy instead of the recorded skill level");
+ luckyBuild.Skills.Clear();
+ if(EstimateModel.Evaluate("lucky",luckyBuild,data,model,0,null,true).StaminaReductionPercent!=0)
+  throw new Exception("Unrecorded Wild Hunt supplied a farming bonus");
  Console.WriteLine(JsonSerializer.Serialize(recordedCases,new JsonSerializerOptions{PropertyNamingPolicy=JsonNamingPolicy.CamelCase}));return;
 }
 
