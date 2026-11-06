@@ -1,0 +1,201 @@
+{
+  "scope": "Raw cooldown opportunity simulation; no live battle outcome prediction.",
+  "encounter": "gve_boss_new_period_10",
+  "formation_index": 0,
+  "horizon_raw_ticks": 500,
+  "time_in_seconds": null,
+  "winner": null,
+  "damage_prediction": null,
+  "assumptions": [
+    "All listed actors remain alive for this horizon.",
+    "Unmodified field cooldowns; no cast arbitration, movement or interruptions.",
+    "Other formations are separate inputs, not assumed simultaneous enemies."
+  ],
+  "enemy": [
+    {
+      "actor": "survivor_monster_gve_boss_10_1",
+      "position_index": 0,
+      "events": [
+        {
+          "at_raw_tick": 100,
+          "skill": "survivor_monster_common_attack",
+          "effect_ids": [
+            "survivor_monster_common_attack"
+          ]
+        },
+        {
+          "at_raw_tick": 200,
+          "skill": "survivor_monster_common_attack",
+          "effect_ids": [
+            "survivor_monster_common_attack"
+          ]
+        },
+        {
+          "at_raw_tick": 300,
+          "skill": "survivor_monster_common_attack",
+          "effect_ids": [
+            "survivor_monster_common_attack"
+          ]
+        },
+        {
+          "at_raw_tick": 400,
+          "skill": "survivor_monster_common_attack",
+          "effect_ids": [
+            "survivor_monster_common_attack"
+          ]
+        }
+      ],
+      "excluded": []
+    },
+    {
+      "actor": "survivor_monster_gve_boss_10_2",
+      "position_index": 1,
+      "events": [
+        {
+          "at_raw_tick": 100,
+          "skill": "survivor_monster_common_attack",
+          "effect_ids": [
+            "survivor_monster_common_attack"
+          ]
+        },
+        {
+          "at_raw_tick": 200,
+          "skill": "survivor_monster_common_attack",
+          "effect_ids": [
+            "survivor_monster_common_attack"
+          ]
+        },
+        {
+          "at_raw_tick": 300,
+          "skill": "survivor_monster_common_attack",
+          "effect_ids": [
+            "survivor_monster_common_attack"
+          ]
+        },
+        {
+          "at_raw_tick": 400,
+          "skill": "survivor_monster_common_attack",
+          "effect_ids": [
+            "survivor_monster_common_attack"
+          ]
+        }
+      ],
+      "excluded": []
+    },
+    {
+      "actor": "survivor_monster_gve_boss_10_3",
+      "position_index": 2,
+      "events": [
+        {
+          "at_raw_tick": 100,
+          "skill": "survivor_monster_common_attack",
+          "effect_ids": [
+            "survivor_monster_common_attack"
+          ]
+        },
+        {
+          "at_raw_tick": 200,
+          "skill": "survivor_monster_common_attack",
+          "effect_ids": [
+            "survivor_monster_common_attack"
+          ]
+        },
+        {
+          "at_raw_tick": 300,
+          "skill": "survivor_monster_common_attack",
+          "effect_ids": [
+            "survivor_monster_common_attack"
+          ]
+        },
+        {
+          "at_raw_tick": 400,
+          "skill": "survivor_monster_common_attack",
+          "effect_ids": [
+            "survivor_monster_common_attack"
+          ]
+        }
+      ],
+      "excluded": []
+    },
+    {
+      "actor": "survivor_monster_gve_boss_10_4",
+      "position_index": 3,
+      "events": [
+        {
+          "at_raw_tick": 100,
+          "skill": "survivor_monster_common_attack",
+          "effect_ids": [
+            "survivor_monster_common_attack"
+          ]
+        },
+        {
+          "at_raw_tick": 200,
+          "skill": "survivor_monster_common_attack",
+          "effect_ids": [
+            "survivor_monster_common_attack"
+          ]
+        },
+        {
+          "at_raw_tick": 300,
+          "skill": "survivor_monster_common_attack",
+          "effect_ids": [
+            "survivor_monster_common_attack"
+          ]
+        },
+        {
+          "at_raw_tick": 400,
+          "skill": "survivor_monster_common_attack",
+          "effect_ids": [
+            "survivor_monster_common_attack"
+          ]
+        }
+      ],
+      "excluded": []
+    },
+    {
+      "actor": "survivor_monster_gve_boss_10_5",
+      "position_index": 4,
+      "events": [
+        {
+          "at_raw_tick": 100,
+          "skill": "survivor_monster_common_attack",
+          "effect_ids": [
+            "survivor_monster_common_attack"
+          ]
+        },
+        {
+          "at_raw_tick": 200,
+          "skill": "survivor_monster_common_attack",
+          "effect_ids": [
+            "survivor_monster_common_attack"
+          ]
+        },
+        {
+          "at_raw_tick": 300,
+          "skill": "survivor_monster_common_attack",
+          "effect_ids": [
+            "survivor_monster_common_attack"
+          ]
+        },
+        {
+          "at_raw_tick": 400,
+          "skill": "survivor_monster_common_attack",
+          "effect_ids": [
+            "survivor_monster_common_attack"
+          ]
+        }
+      ],
+      "excluded": []
+    }
+  ],
+  "friendly": [],
+  "unresolved": [
+    "Type 11100 field-effect dispatch and final skill magnitudes",
+    "Final property composition, troop-count scaling and casualties",
+    "Cooldown units, runtime cooldown modifiers and shared-cast arbitration",
+    "Target selection, movement, death times, buffs, shields and healing execution",
+    "Behemoth combat skills, rally ordering and carry-over state",
+    "Applicability of the separate Raid damage/power-ratio formulas to field battles"
+  ],
+  "encounter_data_sha256": "74a1bed8a7e103c238acf15aef4013f543dc3db8a3e60c6f0506db2d31cb62a6"
+}

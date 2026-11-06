@@ -1,0 +1,29 @@
+{
+  "schema": 1,
+  "source_filename": "unknown_2026.11.05-21.50.mp4",
+  "source_sha256": "e7536da16d60d8b9e91df7646571fef720912d74a75c8b92387cd2f4ad2b4f2c",
+  "transcription": "Anonymous values visually checked in the supplied recording. Screens from different report selections are not treated as one complete matched fight.",
+  "target": "Lv. 10 Tusker",
+  "configuration_checks": {
+    "enemy_troops_per_formation": 62414,
+    "enemy_hero_power": 6179105,
+    "enemy_power_display": "115.19M",
+    "enemy_total_troop_losses_display": "312.07K",
+    "frame_seconds_approx": [12, 20, 58, 73]
+  },
+  "casualty_observation": {
+    "frame_seconds_approx": 73,
+    "incapacitated": 60000,
+    "hospitalised": 180,
+    "lightly_wounded": 59820,
+    "permanent_losses": 0,
+    "candidate_rule": "battle_gve_rally",
+    "classification": "Single-report consistency check, not general rule-routing validation."
+  },
+  "calibration_eligible": false,
+  "limitations": [
+    "Exact starting hero builds and per-skill levels for every report are not encoded in this recording.",
+    "Rally contribution shares combine rounds and other participants.",
+    "No measured battle timeline or per-hit log is available here."
+  ]
+}

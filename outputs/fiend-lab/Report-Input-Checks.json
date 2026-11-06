@@ -1,0 +1,104 @@
+{
+  "scope": "Cross-date configuration consistency against one recorded encounter, not held-out battle prediction.",
+  "source": {
+    "filename": "ScreenRecording_10-10-2026 06-53-08_1.mov",
+    "sha256": "90d54a78dc6ec55db3889b263a443bb34b9749204d83e376499da6ee61e46636",
+    "duration_seconds": 63.0366666667,
+    "width": 296,
+    "height": 640
+  },
+  "target_display": "Lv. 10 Tusker",
+  "independent_observed_encounters": 1,
+  "note": "Five matching variants are not five independent report samples. Rounded rally contribution percentages are not single-fight damage coefficients.",
+  "checks": [
+    {
+      "formation": "gve_boss_10_1",
+      "troops": {
+        "observed": 62414,
+        "configured": 62414,
+        "match": true
+      },
+      "hero_power": {
+        "observed": 6179105,
+        "configured": 6179105,
+        "match": true
+      }
+    },
+    {
+      "formation": "gve_boss_10_2",
+      "troops": {
+        "observed": 62414,
+        "configured": 62414,
+        "match": true
+      },
+      "hero_power": {
+        "observed": 6179105,
+        "configured": 6179105,
+        "match": true
+      }
+    },
+    {
+      "formation": "gve_boss_10_3",
+      "troops": {
+        "observed": 62414,
+        "configured": 62414,
+        "match": true
+      },
+      "hero_power": {
+        "observed": 6179105,
+        "configured": 6179105,
+        "match": true
+      }
+    },
+    {
+      "formation": "gve_boss_10_4",
+      "troops": {
+        "observed": 62414,
+        "configured": 62414,
+        "match": true
+      },
+      "hero_power": {
+        "observed": 6179105,
+        "configured": 6179105,
+        "match": true
+      }
+    },
+    {
+      "formation": "gve_boss_10_5",
+      "troops": {
+        "observed": 62414,
+        "configured": 62414,
+        "match": true
+      },
+      "hero_power": {
+        "observed": 6179105,
+        "configured": 6179105,
+        "match": true
+      }
+    }
+  ],
+  "damage_prediction_cases": 0,
+  "winner_prediction_cases": 0,
+  "accuracy_percentage": null,
+  "report_reconstruction_limitations": [
+    "Low 296x640 source resolution; rounded/transcribed values",
+    "Round statistics revisited in multiple rally reports; no independent samples inferred from matching screens",
+    "Rally contribution percentage combines repeated rounds and other players, not a single-hero coefficient",
+    "No battle replay, duration, hit counts or cast breakdown",
+    "Zero rear damage is observed for this round, not a universal PvE rule"
+  ],
+  "casualty_consistency_check": {
+    "source_sha256": "e7536da16d60d8b9e91df7646571fef720912d74a75c8b92387cd2f4ad2b4f2c",
+    "frame_seconds_approx": 73,
+    "candidate_rule": "battle_gve_rally",
+    "expected_unrounded": {
+      "hospital_unrounded": 180.0,
+      "minor_wounded_unrounded": 59820.0,
+      "permanent_unrounded": 0
+    },
+    "matches": true,
+    "scope": "Single-report consistency check, not general rule-routing validation."
+  },
+  "data_sha256": "74a1bed8a7e103c238acf15aef4013f543dc3db8a3e60c6f0506db2d31cb62a6",
+  "observation_sha256": "96b76e984fa1809ca3279f1236da7321a19bcb6f9af54b0c6e7cd3b2c1e3c3d6"
+}
