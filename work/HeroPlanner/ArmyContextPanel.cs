@@ -15,7 +15,7 @@ public partial class MainWindow
   var window=new Window{Title="Signature Gear, Behemoth & Research",Owner=this,Width=850,Height=760,MinWidth=560,MinHeight=480,WindowStartupLocation=WindowStartupLocation.CenterOwner,Background=new SolidColorBrush(Color.FromRgb(16,36,62)),Foreground=Brushes.White};
   var panel=new StackPanel{Margin=new Thickness(20)};window.Content=new ScrollViewer{Content=panel,VerticalScrollBarVisibility=ScrollBarVisibility.Auto};
   void Note(string text,bool heading=false)=>panel.Children.Add(CopyText(text,heading));
-  Note("Army stat context",true);Note("Optional stat-only context. Blank sources remain excluded / unknown. Flat max stats ignores this panel.");
+  Note("Army stat context",true);Note("Optional stat-only context. Blank sources remain excluded / unknown. Max heroes (no gear) ignores this panel.");
   var enabled=new CheckBox{Content="Apply recorded stat context",IsChecked=current.Enabled,Foreground=Brushes.White,Margin=new Thickness(0,6,0,8)};panel.Children.Add(enabled);
   var scene=new ComboBox{Width=200,HorizontalAlignment=HorizontalAlignment.Left};foreach(var pair in new[]{("all","General / PvP"),("pve","PvE"),("gve","GVE")}){var item=new ComboBoxItem{Content=pair.Item2,Tag=pair.Item1};scene.Items.Add(item);if(pair.Item1==current.Scene)scene.SelectedItem=item;}panel.Children.Add(scene);
   Note("Behemoth bonuses to all heroes",true);

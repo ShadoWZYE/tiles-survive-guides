@@ -132,7 +132,7 @@ public partial class MainWindow
         Section("Research", $"{_armyContext.Research.Count} / {_armyContextData.Research.Count} nodes recorded", "Configure Research", "ResearchNav");
         Section("Signature Gear", $"{_armyContext.Signature.Count} heroes recorded · applies in My builds", "Configure hero gear", "RosterNav");
         Section("Behemoths", _armyContext.BehemothSource == "configured" ? $"{_armyContext.BehemothBuilds.Count} configured Behemoths" : "Manual hero-bonus snapshot", "Configure Behemoths", "BehemothsNav");
-        panel.Children.Add(CopyText("Partial stat model. Linked Signature skills, Behemoth combat skills and troop multipliers remain excluded. Flat max stats ignores army bonuses."));
+        panel.Children.Add(CopyText("Partial stat model. Linked Signature skills, Behemoth combat skills and troop multipliers remain excluded. Max heroes (no gear) ignores army bonuses."));
         panel.Children.Add(status); var buttons = new WrapPanel(); panel.Children.Add(buttons);
         foreach (string label in new[] { "Save settings", "Detailed editor", "Close" })
         {

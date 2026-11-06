@@ -1,6 +1,15 @@
 using System.Text.Json;
 using TilesSurviveHeroPlanner;
 
+if(args.Length==2 && args[0]=="--max-comparisons")
+{
+ var maxRoot=args[1];var maxData=UpgradeData.Parse(File.ReadAllText(Path.Combine(maxRoot,"TilesSurvive-Upgrade-Data.json")));
+ var maxModel=EstimateData.Parse(File.ReadAllText(Path.Combine(maxRoot,"Hero-Estimate-Model.json")));var maxCases=new List<object>();
+ foreach(var slug in maxData.Heroes.Keys)foreach(var basis in new[]{"flat","reference"})foreach(int seconds in new[]{0,10,20,30})foreach(var context in new double[][]{[0,0,0],[1000,100,10000]})
+  maxCases.Add(new{slug,basis,seconds,context,build=EstimateModel.MaximumBuild(slug,maxModel,basis!="flat"),result=EstimateModel.Compare(slug,new HeroBuild{Level=1},maxData,maxModel,basis,seconds,context)});
+ Console.WriteLine(JsonSerializer.Serialize(maxCases,new JsonSerializerOptions{PropertyNamingPolicy=JsonNamingPolicy.CamelCase}));return;
+}
+
 if(args.Length==2 && args[0]=="--recorded-scores")
 {
  var root=args[1];var data=UpgradeData.Parse(File.ReadAllText(Path.Combine(root,"TilesSurvive-Upgrade-Data.json")));var model=EstimateData.Parse(File.ReadAllText(Path.Combine(root,"Hero-Estimate-Model.json")));var recordedCases=new List<object>();

@@ -7,28 +7,21 @@ scenario range are hidden under **Estimate details**, collapsed by default. No
 mandatory build inputs or save buttons are required. One compact comparison-basis
 selector keeps personal progress separate from fair comparisons:
 
-- **Equal builds** (default): all heroes use the same reference development;
-  saved rank, level, skills, gear and ownership do not affect their scores.
-- **Flat max stats**: original maximum-stat indices only, with no inferred skill
-  pressure, utility, Stamina economy or synergy bonus. Identical stats tie honestly.
-- **My builds** (opt-in): valid recorded values replace reference defaults.
+- **Equal builds · max T5** (default): maximum configured hero level and rank, every skill at its available cap, and the same three-piece yellow T5 Alloy set at maximum gear level. Saved personal progression is ignored. Enabled Research/Behemoth context can apply; Signature Gear remains My builds only.
+- **Max heroes · no gear** (stored profile key `flat`): the same maximum hero level, rank and skills, with no gear or account context. It uses the same skill-aware score, faction and frontline calculations as Equal builds.
+- **My builds** (opt-in): only recorded upgrades count. Missing rank uses the first base rank, missing hero level uses 1, and unrecorded or locked skills and gear grant no upgrade bonus. Partially recorded heroes remain eligible.
 
-The selected basis is saved separately. Old profiles default to Equal builds.
+The selected basis is saved separately; existing profile keys remain compatible.
 Resource priorities independently use recorded builds of owned heroes only;
-reference assumptions are never substituted into upgrade costs or record actions.
+comparison defaults are never written into observations or used to record an upgrade.
 
-## Reference and personal data
+## Maximum and personal data
 
-The reference is level 110, rank 3 step 6, skills at that rank's configured caps,
-no gear. This compares equal development, **not equal resource expenditure**.
-In My builds mode only, valid saved rank, level, skill and gear values replace the respective defaults.
-Missing skills use the reference skill level limited by the effective rank's cap;
-explicitly locked level 0 remains locked. Invalid values are not accepted as
-observations. Assumptions remain in the calculation only: they are never written
-back as the user's actual build or used to record an upgrade.
+As of the 2.6.400.304 data, maximum base-hero development is level 165 and rank 10 step 6. Skill caps are resolved per hero and slot from the available data (up to 40 for standard skills, with separate caps for fourth skills). The standard yellow T5 set is Alloy Helmet, Alloy Armor and Alloy Greaves, each at level 80. These are universal equipment pieces; Signature Gear, refinement and unsupported exclusive effects are not invented as part of this set.
 
-Basis labels distinguish Reference build, Recorded + assumed, and Recorded build.
-Even a fully recorded build retains low confidence: combat mechanics are inferred.
+Both maximum modes use this same hero development. Their deliberate difference is gear and account context. This is equal specified development, not equal resource expenditure. Normalization anchors now use the maximum T5 reference roster, so index values differ from the former level-110 reference version; the change is not a game buff or nerf.
+
+Basis labels distinguish Max heroes, no gear; Equal max T5 build; Recorded + base defaults; and Recorded build. Even a fully recorded build retains low confidence because combat mechanics are incompletely modeled.
 Every unowned/unrecorded hero remains in the candidate pool subject to existing
 access/ownership filters. Changing a build does not re-normalize unrelated heroes.
 
@@ -59,7 +52,7 @@ stun 0.8, slow 0.35, ATK reduction 0.6, DEF reduction 0.8, damage reduction 0.9,
 summon 0.6, based on effect types and identifiers/descriptions. Each tag contributes
 once per skill. These magnitudes and application rates are **model assumptions**, not extracted combat values. Where a numeric level modifier addresses a real healing, shielding or buff dependency, the qualitative weight scales with that modifier. Tooltip-only parameters do not establish runtime scaling. An absent tag is
 not proof that a hero lacks additional utility. AoE and conditional uptime remain
-unresolved. Stamina economy is excluded from combat scoring. The capped qualitative formation-synergy heuristic remains separate from numeric team stat buffs; it now uses only skills active under the effective rank and selected levels. Missing skill levels retain capped reference assumptions, while explicit level 0 removes that skill from synergy and formation advice. Neither economy nor qualitative synergy is measured battle damage.
+unresolved. Stamina economy is excluded from combat scoring. Qualitative mechanic pairings are informational; their former extra score was removed to avoid duplicate utility credit. Numeric permanent team stat buffs remain scored. My builds assigns no benefit to unrecorded or locked skills. PvE farming ranks modeled Stamina saving first and then combat strength; economy does not inflate combat scores.
 
 ## Permanent stat buffs and formation recipients
 
@@ -67,7 +60,7 @@ Sixteen linked permanent ATK/DEF/HP buff records across 12 heroes now supply exp
 
 Native property arithmetic adds percentage factors before multiplying the recipient's base stat. Individual estimates include the hero's self buffs and its own team buff once. Formation scoring adds each other provider's team buff to the recipient, excludes the recipient's already-counted provider, and uses those adjusted DEF/HP contributions when choosing the front two. Multiple providers add rather than multiply. Numeric team stat credit is separate from the cap on qualitative synergy. Existing faction bonuses retain their separate Final Health policy; the complete interaction with live battle properties is not simulated.
 
-Layla's level-30 HP path exposes a client discrepancy: the runtime buff supplies 12.9%, while its tooltip counterpart supplies 25.8%. The model uses the linked runtime row and flags the discrepancy rather than copying the guide's roughly 26% claim. This does not establish what an unobserved server/hotfix executes. The equal-build reference caps may be below level 30.
+Layla's level-30 HP path exposes a client discrepancy: the runtime buff supplies 12.9%, while its tooltip counterpart supplies 25.8%. The model uses the linked runtime row and flags the discrepancy rather than copying the guide's roughly 26% claim. This does not establish what an unobserved server/hotfix executes. Maximum-mode skill caps now follow each hero’s maximum available rank and skill rows.
 
 See [guide cross-check and native evidence](HERO-GUIDE-CROSSCHECK-2026-10-11.md).
 
@@ -121,7 +114,7 @@ Repeated immediate-hit budgets currently cover Tony's active skill (three dispat
 
 ## Opening-window comparisons (25 October recording)
 
-The Battle window selector defaults to **sustained**, preserving existing comparisons. Opening **10, 20 or 30 game seconds** supplies an optional short-fight scenario in both editions; it is independent of Equal builds/My builds. Flat max stats ignores it. The profile saves this preference separately from build observations, and fixed sustained reference anchors remain unchanged.
+The Battle window selector defaults to **sustained**, preserving existing comparisons. Opening **10, 20 or 30 game seconds** supplies an optional short-fight scenario in both editions; it is independent of Equal builds/My builds. Both maximum modes now apply it. The profile saves this preference separately from build observations, and fixed sustained anchors use the maximum T5 reference roster.
 
 For resolved unconditional clipped paths, the opening scenario uses one casting slot per hero. Skills become ready after PreCooldown, the highest configured priority among ready skills takes the slot, and its cooldown starts at cast start. A complete cast or checked root/child chain occupies the slot without interruption; the next skill waits. Ties use stable slot/identifier order as a planner rule. Known direct-dispatch and literal Immediate-projectile events now supply damage at their timeline offsets, including events in an unfinished cast. A periodic budget receives only nominal ticks that fit after its known application offset; unknown application/impact times keep the conservative completion fallback. Release waits, positive release-speed scaling and earlier releases are included in offsets. Looping, unsupported timeline speeds, nested actions and traveling projectile launches do not establish exact impacts. It is not a frame simulation. Unresolved cast paths retain the sustained proxy, rather than acquiring invented timestamps. Locked skills remain zero.
 

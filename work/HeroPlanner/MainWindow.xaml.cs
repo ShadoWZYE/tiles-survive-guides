@@ -62,7 +62,6 @@ public partial class MainWindow : Window
         if (streamInfo is null) throw new InvalidOperationException("Embedded hero data was not found.");
         using var stream = streamInfo.Stream;
         var heroes = JsonSerializer.Deserialize<List<Hero>>(stream) ?? [];
-        foreach (var hero in heroes) _flatIndices[hero.AssetSlug] = (hero.OffenseIndex, hero.DurabilityIndex, hero.CompositeIndex);
         double hpRange = heroes.Max(h => h.Health) - heroes.Min(h => h.Health);
         foreach (var hero in heroes) hero.HealthContribution = hpRange > 0 ? 70 * hero.Health / hpRange : 0;
         _heroes.AddRange(heroes.OrderByDescending(hero => hero.CompositeIndex).ThenBy(hero => hero.Name));
@@ -79,7 +78,6 @@ public partial class MainWindow : Window
     }
     private string _enemyFaction = "Unknown";
     private bool _syncingEnemy;
-    private readonly Dictionary<string, (double Offense, double Durability, double Score)> _flatIndices = [];
     private void ComparisonBasis_Changed(object sender, SelectionChangedEventArgs e)
     {
         if (_loadingProfile || _estimates.Heroes.Count == 0 || ComparisonBasisPicker.SelectedItem is not ComboBoxItem item) return;
@@ -99,10 +97,9 @@ public partial class MainWindow : Window
         if (snapshot == _lastEstimateBuilds) return false;
         foreach (var hero in _heroes)
         {
-            var flat = _flatIndices[hero.AssetSlug];
             var context=ArmyContextModel.Resolve(hero.AssetSlug,_armyContext,_armyContextData,_comparisonBasis);
-            var result = _comparisonBasis == "flat" ? new HeroEstimate(flat.Offense, flat.Durability, flat.Score, flat.Score, flat.Score, "Flat max stats") :
-                EstimateModel.Evaluate(hero.AssetSlug, _comparisonBasis == "recorded" ? _heroBuilds.GetValueOrDefault(hero.AssetSlug) : null, _upgradeData, _estimates, _battleSeconds,context.Flat,_comparisonBasis=="recorded");
+            var result = EstimateModel.Compare(hero.AssetSlug,_heroBuilds.GetValueOrDefault(hero.AssetSlug),
+                _upgradeData,_estimates,_comparisonBasis,_battleSeconds,context.Flat);
             hero.Estimate = result;
             hero.CombatEvidenceNote = (_battleSeconds == 0 ? "Sustained comparison. " : $"Opening {_battleSeconds} game seconds: initial delays, a shared casting slot and remaining periodic ticks. Known immediate hits and buffs use their timeline offsets, including in-progress casts. Other effects keep the completion fallback. One casting slot per hero, configured priority, speed 1 and no interruptions or deaths; utility weights unchanged. Unresolved cast paths retain their sustained proxy. ") + EstimateModel.EvidenceSummary(_estimates.Heroes[hero.AssetSlug]);
             if(result.RawHealingPotential is {Count:>0})
@@ -110,8 +107,7 @@ public partial class MainWindow : Window
             if(context.Active)hero.CombatEvidenceNote += " Stat context applied (partial): +"+string.Join(" / +",context.Flat.Select(v=>v.ToString("0.##")))+" ATK / DEF / HP. "+string.Join("; ",context.Notes);
             if (_battleSeconds > 0 && result.OpeningCastCounts is {Count:>0})
                 hero.CombatEvidenceNote += " Completed casts: " + string.Join("; ",result.OpeningCastCounts.Select(x=>$"{hero.Skills.FirstOrDefault(s=>s.InternalName==x.Key)?.DisplayName ?? "Skill"}: {x.Value}")) + ".";
-            double hpRange = _heroes.Max(h => h.Health) - _heroes.Min(h => h.Health);
-            hero.HealthContribution = _comparisonBasis == "flat" ? (hpRange > 0 ? 70 * hero.Health / hpRange : 0) : result.HealthContribution;
+            hero.HealthContribution = result.HealthContribution;
             hero.OffenseIndex = result.Offense; hero.DurabilityIndex = result.Durability; hero.CompositeIndex = result.Score;
         }
         _heroes.Sort((a, b) => { int score = b.CompositeIndex.CompareTo(a.CompositeIndex); return score != 0 ? score : StringComparer.Ordinal.Compare(a.Name, b.Name); });

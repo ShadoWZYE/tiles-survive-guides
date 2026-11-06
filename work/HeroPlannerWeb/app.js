@@ -23,8 +23,6 @@
   const heroes = window.__HERO_DATA__.map(normalizeHero)
     .sort((a, b) => b.composite_index - a.composite_index || a.name.localeCompare(b.name));
   const bySlug = new Map(heroes.map(hero => [hero.asset_slug, hero]));
-  const hpRange = Math.max(...heroes.map(h=>h.max_level_health))-Math.min(...heroes.map(h=>h.max_level_health));
-  const flatIndices = new Map(heroes.map(h=>[h.asset_slug,{offense:h.offense_index,durability:h.durability_index,score:h.composite_index,healthContribution:hpRange>0?70*h.max_level_health/hpRange:0}]));
   let profile = loadProfile();
   let state = {
     tab: "squad",
@@ -181,7 +179,7 @@
       return `<button class="hero-card${selected ? " selected" : ""}" data-slug="${esc(hero.asset_slug)}" data-rarity="${esc(hero.rarity)}" aria-label="${esc(hero.name)}${own ? ", owned" : ""}">
         <img src="${hero.portrait_data}" alt="${esc(hero.name)}" draggable="false">
         <span class="rarity">${esc(hero.rarity)}</span>${hero.has_ascension ? '<span class="asc">ASC</span>' : ''}${own ? '<span class="owned-badge" title="Owned">✓</span>' : ''}
-        <span class="card-copy"><strong>${esc(hero.name)}</strong><small>${esc(hero.faction)} · ${esc(hero.role)}</small><small class="index" title="${esc(hero.estimate?.basis)}">${profile.comparisonBasis==='flat'?'Stats':'Est.'} ${hero.estimate?.comparable===false?'Record build':number(hero.composite_index)}</small></span>
+        <span class="card-copy"><strong>${esc(hero.name)}</strong><small>${esc(hero.faction)} · ${esc(hero.role)}</small><small class="index" title="${esc(hero.estimate?.basis)}">Est. ${hero.estimate?.comparable===false?'Record build':number(hero.composite_index)}</small></span>
       </button>`;
     }).join("") || '<div class="empty-state">No heroes match these filters.</div>';
     $$(".hero-card").forEach(card => card.addEventListener("click", () => {
@@ -211,7 +209,6 @@
   }
 
   function scoreHero(hero, mode = profile.mode) {
-    if(profile.comparisonBasis==='flat')return mode==='Offense'?hero.offense_index:mode==='Survival'?hero.durability_index:hero.composite_index;
     if (mode === "Offense") return hero.offense_index * .75 + hero.composite_index * .25;
     if (mode === "Survival") return hero.durability_index * .75 + hero.composite_index * .25;
     if (mode === "PvE farming") return hero.offense_index * .45 + hero.durability_index * .30 + hero.composite_index * .25;
@@ -222,10 +219,9 @@
     return formationEvaluation(items,mode).heroes;
   }
 
-  function formationEvaluation(items,mode=profile.mode){return FormationModel.evaluate(items,mode,profile.comparisonBasis==='flat',FactionModel.compose(items.map(h=>h.faction)).healthBonus);}
+  function formationEvaluation(items,mode=profile.mode){return FormationModel.evaluate(items,mode,false,FactionModel.compose(items.map(h=>h.faction)).healthBonus);}
 
   function evaluateSynergy(squad, includeSummary = true) {
-    if(profile.comparisonBasis==='flat')return {bonus:0,summary:'Flat stats: skill synergy excluded'};
     const has = mechanic => squad.some(hero => hero.mechanics.has(mechanic));
     const providers = mechanic => squad.filter(hero => hero.mechanics.has(mechanic)).slice(0, 2).map(hero => hero.name).join("/");
     const carries = () => [...squad].sort((a, b) => b.offense_index - a.offense_index).slice(0, 2).map(hero => hero.name).join("/");
@@ -257,7 +253,7 @@
     return {bonus, summary: !includeSummary ? "" : interactions.length ? interactions.slice(0,3).join(" · ") + (interactions.length > 3 ? ` · +${interactions.length - 3} more` : "") : "No modeled cross-skill pairing"};
   }
 
-  function factionBonus(squad){return FactionModel.scoreBonus(squad,profile.mode,profile.comparisonBasis==='flat',profile.enemyFaction);}
+  function factionBonus(squad){return FactionModel.scoreBonus(squad,profile.mode,false,profile.enemyFaction);}
   function counterScenario(){return profile.enemyFaction==='Unknown'?'Enemy faction unknown: counter damage excluded from ranking.':`Counter scenario: attacks land on ${profile.enemyFaction} targets; this is a planning estimate.`;}
   function enemyPicker(){return `<div class="control-strip"><label>Enemy target faction (optional)<select id="enemy-faction">${['Unknown','Mountain','Wasteland','Sky','Sea'].map(f=>`<option${profile.enemyFaction===f?' selected':''}>${f}</option>`).join('')}</select></label></div><p class="evidence">Unknown excludes counter damage; a selected faction assumes attacks land on that faction.</p>`;}
 
@@ -295,8 +291,9 @@
     const contextNote=profile.armyContext?.enabled&&profile.comparisonBasis!=='flat'?`Stat context applied (partial). ${(hero.estimate?.contextNotes||[]).join('; ')}. `:'';
     const defaultsNote=hero.estimate?.missingFields?.length?`Base defaults applied: ${hero.estimate.missingFields.join(", ")}. Missing level = 1; missing rank = base; unrecorded or locked skills and gear add no bonus. `:"";
     const evidence=`${defaultsNote}${contextNote}${healingNote}${castNote}${profile.battleSeconds?`Opening ${profile.battleSeconds} game seconds: initial delays, a shared casting slot and remaining periodic ticks. Known immediate hits and buffs use their timeline offsets, including in-progress casts. Other effects keep the completion fallback. One casting slot per hero, configured priority, speed 1 and no interruptions or deaths; utility weights unchanged. Unresolved cast paths retain their sustained proxy. `:"Sustained comparison. "}Skill evidence: ${skills.filter(s=>s.damage_selection_basis==='direct_hit_reference').length} skills have linked direct damage effects; ${skills.filter(s=>s.has_damage_zone).length} have damage zones; ${skills.filter(s=>s.has_summon_dependency).length} have summon dependencies. ${skills.reduce((n,s)=>n+(s.permanent_stat_sources?.length||0),0)} permanent stat buffs are modeled; ${skills.reduce((n,s)=>n+(s.sequence_effect_ids?.length||0),0)} checked child strikes are included. ${skills.reduce((n,s)=>n+(s.temporary_stat_sources?.length||0),0)} temporary self stat buffs use assumed duration/cooldown uptime; ${skills.reduce((n,s)=>n+(s.periodic_budgets||[]).filter(p=>p.scored).length,0)} periodic damage paths use full-lifetime potential. ${skills.reduce((n,s)=>n+(s.conditional_effects?.length||0),0)} effect gates are retained separately; description rows give no damage credit. ${skills.filter(s=>s.finish_trigger).length} delayed damage paths require a completed source skill and an unlocked passive. ${skills.filter(s=>s.animation_limited).length} skill budgets are limited by bound clip durations; ${skills.filter(s=>Object.values(s.direct_hit_counts||{}).reduce((a,b)=>a+b,0)>1).length} use repeated immediate-hit potential. Timing assumes speed 1 and uninterrupted casting. Opening scenarios use known timeline dispatch offsets; unknown impacts keep a completion fallback. Projectile travel, target survival, reapplication timing, zones and death times remain uncertain.`;
-    const details=profile.comparisonBasis==='flat'?'Flat maximum configuration stats only. Saved stars, levels, skills, gear and ownership are ignored. Identical stats legitimately tie. Skill and synergy weights are excluded. Formation rankings still include faction health and any selected counter scenario.':`${esc(hero.estimate?.basis)} · low confidence · scenario range ${number(hero.estimate?.low)}–${number(hero.estimate?.high)}. Equal builds uses level 110, rank 3 step 6, capped skills and no gear for everyone. ONLY My builds uses your saved progression; unknown fields then use reference defaults. Equal development is not equal resource cost. Representative effects and inferred utility form a planning proxy, not a combat simulation. Scenario factors: damage 0.5–2.5×, utility 0.5–1.5×; not statistical confidence intervals. Fixed reference anchors allow scores above 100. Server overrides remain unverified.`;
-    return `<div class="section-head"><div><h2>${esc(hero.name)}</h2><p>${esc(hero.rarity)} · ${esc(hero.faction)} · ${esc(hero.role)} · ${esc(hero.has_ascension ? "Ascension available" : "Base form")}</p></div></div><details><summary>Estimate details</summary><p>${details}</p>${profile.comparisonBasis==='flat'?'':`<p>${esc(evidence)}</p>`}<p>Resource priorities independently use actual recorded builds of owned heroes.</p></details>`;
+    const basisDetails=profile.comparisonBasis==='flat'?'Maximum hero level, rank and capped skills; no gear or account context.':profile.comparisonBasis==='reference'?'Maximum hero level, rank and capped skills, plus the standard three-piece yellow T5 set at its configured maximum level. Enabled Research/Behemoth context applies. Personal builds and Signature Gear are excluded.':'My builds uses only recorded upgrades. Missing rank uses base rank; missing level uses level 1; missing or locked skills and gear give no upgrade bonus.';
+    const details=`${esc(hero.estimate?.basis)} · ${basisDetails} Both maximum modes use the same skill, faction and frontline calculations. Skill effects remain estimates, not a combat simulation. Scenario range ${number(hero.estimate?.low)}–${number(hero.estimate?.high)} varies damage and utility assumptions; it is not a statistical confidence interval. Fixed anchors use the maximum T5 reference roster; scores can exceed 100 with external bonuses.`;
+    return `<div class="section-head"><div><h2>${esc(hero.name)}</h2><p>${esc(hero.rarity)} · ${esc(hero.faction)} · ${esc(hero.role)} · ${esc(hero.has_ascension ? "Ascension available" : "Base form")}</p></div></div><details><summary>Estimate details</summary><p>${details}</p><p>${esc(evidence)}</p><p>Resource priorities independently use actual recorded builds of owned heroes.</p></details>`;
   }
 
   function renderDetail() {
@@ -363,7 +360,7 @@
     if(!sustain.length)gaps.push("no extracted healing, shield, or damage-reduction layer");
     if(!control.length)gaps.push("no extracted stun or slow");
     if(!squad.some(hero=>hero.mechanics.has("DEF reduction")))gaps.push("no extracted defense break for burst damage");
-    return `<section class="formation-guide"><div class="formation-banner"><span>Formation ready</span><strong>${esc(profile.mode)} formation</strong><small>Modeled score ${number(base+synergy.bonus+faction+frontline)} · ${number(base)} base + ${number(synergy.bonus)} synergy + ${number(faction)} faction · ${number(frontline)} frontline fit</small><em>${profile.comparisonBasis==='flat'?'Flat stats: position adjustment excluded.':'Frontline fit uses a provisional survival weighting, not measured damage or win odds.'} Click a selected hero on the left to revise the squad.</em></div>
+    return `<section class="formation-guide"><div class="formation-banner"><span>Formation ready</span><strong>${esc(profile.mode)} formation</strong><small>Modeled score ${number(base+synergy.bonus+faction+frontline)} · ${number(base)} base + ${number(synergy.bonus)} synergy + ${number(faction)} faction · ${number(frontline)} frontline fit</small><em>Frontline fit uses a provisional survival weighting, not measured damage or win odds. Click a selected hero on the left to revise the squad.</em></div>
       <div class="control-strip"><label>Formation goal<select id="formation-mode">${["Balanced","Offense","Survival","PvE farming"].map(m=>`<option${m===profile.mode?' selected':''}>${m}</option>`).join("")}</select></label></div>
       <div class="guide-grid"><article class="guide-card"><h3>Placement · front to back</h3><ol>${positions}</ol></article><article class="guide-card"><h3>How it functions</h3><p>${esc(functionParts.join(" "))}</p><small>${esc(synergy.summary)} · ${esc(factionSummary)}. ${esc(counterScenario())}</small></article><article class="guide-card"><h3>Battle guide</h3><p>${esc(battle.length ? `${battle.join("; then ")}.` : "Focus one target at a time and protect your damage core.")}</p></article>${UpgradeUI.panel(squad.map(h=>h.asset_slug),profile)}<article class="guide-card watch"><h3>Watch for</h3><p>${esc(gaps.length ? `Main modeled gaps: ${gaps.slice(0,3).join("; ")}.` : "No obvious structural gap in the extracted roles and mechanics. Exact cooldowns, targeting, gear, and live balance can still change performance.")}</p></article></div></section>`;
   }
@@ -477,7 +474,7 @@
     const snapshot=profile.comparisonBasis+profile.battleSeconds+JSON.stringify(profile.armyContext)+(profile.comparisonBasis==='recorded'?JSON.stringify(heroes.map(h=>profile.heroProgress?.[h.asset_slug]?.build||null)):'');
     if(snapshot!==lastEstimateBuilds){
       for(const hero of heroes){const context=ArmyContextModel.resolve(hero.asset_slug,profile.armyContext,window.__ARMY_CONTEXT_DATA__,profile.comparisonBasis);
-        const result=EstimateModel.compare(hero.asset_slug,profile.heroProgress?.[hero.asset_slug]?.build,window.__UPGRADE_DATA__,window.__ESTIMATE_DATA__,profile.comparisonBasis,flatIndices.get(hero.asset_slug),profile.battleSeconds,context.flat);
+        const result=EstimateModel.compare(hero.asset_slug,profile.heroProgress?.[hero.asset_slug]?.build,window.__UPGRADE_DATA__,window.__ESTIMATE_DATA__,profile.comparisonBasis,null,profile.battleSeconds,context.flat);
         result.contextNotes=context.notes;
         hero.estimate=result;
         hero.staminaReduction=result.staminaReductionPercent||0;

@@ -94,8 +94,11 @@
       basis:requireRecorded?(missingFields.length?'Recorded + base defaults':'Recorded build'):known===0?'Reference build':known===model.skills.length+3?'Recorded build':'Recorded + assumed'};
   }
   function compare(slug,saved,upgrades,estimates,basis,flat,battleSeconds=0,externalFlat=null){
-    return basis==='flat'?{...flat,low:flat.score,high:flat.score,basis:'Flat max stats'}:
-      evaluate(slug,basis==='recorded'?saved:null,upgrades,estimates,battleSeconds,externalFlat,basis==='recorded');
+    if(basis==='recorded')return evaluate(slug,saved,upgrades,estimates,battleSeconds,externalFlat,true);
+    return {...evaluate(slug,maximumBuild(slug,estimates,basis!=='flat'),upgrades,estimates,battleSeconds,basis==='flat'?null:externalFlat),
+      basis:basis==='flat'?'Max heroes, no gear':'Equal max T5 build'};
   }
-  const api={evaluate,compare,missingBuild,openingSchedule,openingDamage,coveredTime,finishTriggers,healingFormula};if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.EstimateModel=api;
+  function maximumBuild(slug,estimates,withGear=true){const h=estimates.heroes[slug];return {stage:h.reference_stage,level:h.reference_level,
+    skills:Object.fromEntries(h.skills.map(s=>[s.id,s.reference_level])),gear:withGear?(estimates.reference_gear||[]).map(g=>({...g})):[]};}
+  const api={evaluate,compare,maximumBuild,missingBuild,openingSchedule,openingDamage,coveredTime,finishTriggers,healingFormula};if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.EstimateModel=api;
 })(globalThis);

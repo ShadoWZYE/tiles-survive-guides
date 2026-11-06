@@ -14,7 +14,7 @@ The Hero Planner supports:
 
 - Owned-roster selection and portable profile import/export
 - Balanced, Offense, Survival, and PvE squad scoring
-- Fair all-hero Equal builds comparison by default; Flat max stats and opt-in My builds modes. Resource priorities use actual owned builds; details stay collapsed ([model](docs/research/HERO-REFERENCE-ESTIMATES.md))
+- Fair all-hero Equal builds at maximum level/rank/skills and maximum yellow T5 gear by default; Max heroes (no gear) and opt-in My builds modes. Resource priorities use actual owned builds; details stay collapsed ([model](docs/research/HERO-REFERENCE-ESTIMATES.md))
 - Five-position front-to-back formation guidance
 - Front pair survival fit in squad rankings, with protected ranged carries and a separate signed score component; corrected direct-hit skill evidence ([combat report](docs/research/COMBAT-MODEL-IMPROVEMENTS-2026-10-10.md))
 - Modeled skill synergy (separate from build-specific upgrade comparisons)
@@ -41,7 +41,7 @@ Source locations:
 
 ### Signature Gear, Behemoth and Research
 
-Both editions expose **Army Setup**, an optional stat-only extension. Record Signature Gear levels for 21 supported heroes (My builds only), current levels for 147 Research nodes with traced hero-stat effects, and either combined Behemoth flat bonuses or configured current level/star base bonuses granted to heroes. The two Behemoth sources never stack; the Behemoth tab translates star progress into the game’s coloured five-star display, with six steps per star. Role/faction and PvE/GVE restrictions apply. Blank sources stay excluded/unknown; Flat max stats ignores context. Selections persist in profiles. Existing raw upgrade-return panels exclude this context.
+Both editions expose **Army Setup**, an optional stat-only extension. Record Signature Gear levels for 21 supported heroes (My builds only), current levels for 147 Research nodes with traced hero-stat effects, and either combined Behemoth flat bonuses or configured current level/star base bonuses granted to heroes. The two Behemoth sources never stack; the Behemoth tab translates star progress into the game’s coloured five-star display, with six steps per star. Role/faction and PvE/GVE restrictions apply. Blank sources stay excluded/unknown; Max heroes (no gear) ignores context. Selections persist in profiles. Existing raw upgrade-return panels exclude this context.
 
 Signature Gear now has its own game-icon card and level selector in Hero Stats, Skills, My Roster and the desktop build editor. A separate **Behemoths** top tab shows the matching creature icons, a simple level number box, coloured star previews, a slider and colour/star/progress selectors. Entries gated in the client are labeled as unconfirmed for live availability. The original detailed context editor remains available through Army Setup.
 
@@ -207,3 +207,7 @@ PvE farming ranks the modeled skill-level Stamina saving first, then the unchang
 ### Fiend mechanics lab — 6 November 2026
 
 The [fiend lab](work/fiend-lab/README.md) exports ten manifest-verified field-fiend encounters and 115 linked field skills, matches level-10 Tusker's troop count and hero power against report observations, and runs a raw cooldown-opportunity simulation. It also tests a casualty-split candidate and an isolated native Raid damage helper. Full fiend damage/winner predictions remain unvalidated; the lab is separate from the released planner's scores. Raw game files, profiles and recordings are not published.
+
+### Maximum comparison builds — 6 November 2026
+
+Both maximum modes now include maximum hero level, rank and capped skills under the same scoring formula. **Max heroes · no gear** excludes equipment/account context. **Equal builds · max T5** adds the standard yellow T5 Alloy helmet, armor and greaves at their configured maximum levels. The current data resolves these to hero level 165, rank 10 step 6 and gear level 80. Personal observations remain separate. Fixed normalization anchors were rebased to the maximum T5 roster; old and new index values should not be interpreted as a measured combat change.

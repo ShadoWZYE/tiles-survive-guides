@@ -6,6 +6,7 @@ public sealed class EstimateData
 {
     public Dictionary<string, EstimateHero> Heroes { get; set; } = [];
     public double[] Scales { get; set; } = [];
+    public List<GearBuild> ReferenceGear { get; set; } = [];
     public static EstimateData Parse(string json) => JsonSerializer.Deserialize<EstimateData>(json,
         new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower })!;
 }
@@ -88,6 +89,20 @@ public sealed record HeroEstimate(double Offense, double Durability, double Scor
 
 public static class EstimateModel
 {
+    public static HeroBuild MaximumBuild(string slug, EstimateData estimates, bool withGear)
+    {
+        var hero=estimates.Heroes[slug];
+        return new(){Stage=hero.ReferenceStage,Level=hero.ReferenceLevel,
+            Skills=hero.Skills.ToDictionary(s=>s.Id,s=>s.ReferenceLevel),
+            Gear=withGear?estimates.ReferenceGear.Select(g=>new GearBuild{Id=g.Id,Level=g.Level}).ToList():[]};
+    }
+    public static HeroEstimate Compare(string slug, HeroBuild? saved, UpgradeData upgrades, EstimateData estimates,
+        string basis, int battleSeconds=0, double[]? externalFlat=null)
+    {
+        if(basis=="recorded")return Evaluate(slug,saved,upgrades,estimates,battleSeconds,externalFlat,true);
+        return Evaluate(slug,MaximumBuild(slug,estimates,basis!="flat"),upgrades,estimates,battleSeconds,
+            basis=="flat"?null:externalFlat) with {Basis=basis=="flat"?"Max heroes, no gear":"Equal max T5 build"};
+    }
     public static string HealingFormula(EstimateHealingBudget budget)
     {
         static string Number(double value)=>value.ToString("0.#######",System.Globalization.CultureInfo.InvariantCulture);

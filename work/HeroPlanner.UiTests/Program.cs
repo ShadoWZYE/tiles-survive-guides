@@ -163,7 +163,7 @@ internal static class Program
         basisPicker.SelectedIndex = 2;
         Check(becca.CompositeIndex < referenceBecca && becca.Estimate!.Basis != "Reference build", "Explicit My builds mode did not use the recorded build");
         basisPicker.SelectedIndex = 1;
-        Check(becca.CompositeIndex == 100 && becca.Estimate!.Basis == "Flat max stats", "Flat stats mode not restored from original config indices");
+        Check(becca.CompositeIndex < referenceBecca && becca.Estimate!.Basis == "Max heroes, no gear" && becca.Estimate.ActiveSkillIds!.Length>0, "No-gear maximum mode did not model maximum hero skills");
         basisPicker.SelectedIndex = 0;
         Check(Math.Abs(becca.CompositeIndex - referenceBecca) < 1e-8, "Equal comparison did not restore fair reference score");
         var settings = Field<UpgradeSettings>(window, "_upgradeSettings");

@@ -48,11 +48,12 @@ test('recorded fields override defaults without mutating the build; unknowns rem
 });
 test('fair comparator ignores personal stars and ownership; recorded and flat modes are explicit',()=>{
   const saved={stage:upgrades.heroes.rosie.stages[0].id,level:1,skills:{},gear:[],owned:true};
-  const ref=model.evaluate('rosie',null,upgrades,estimates),flat={offense:100,durability:100,score:100};
+  const ref=model.compare('rosie',null,upgrades,estimates,'reference'),flat={offense:100,durability:100,score:100};
   assert.deepEqual(model.compare('rosie',saved,upgrades,estimates,'reference',flat),ref);
   assert.deepEqual(model.compare('rosie',{...saved,owned:false,level:110},upgrades,estimates,'reference',flat),ref);
   assert.ok(model.compare('rosie',saved,upgrades,estimates,'recorded',flat).score<ref.score);
-  assert.equal(model.compare('rosie',saved,upgrades,estimates,'flat',flat).score,100);
+  const naked=model.compare('rosie',saved,upgrades,estimates,'flat',flat);
+  assert.equal(naked.basis,'Max heroes, no gear');assert.ok(naked.score<ref.score);assert.ok(naked.activeSkillIds.length>0);
 });
 test('native/browser estimates agree for all heroes and incomplete, reference and locked builds',()=>{
   const root=path.resolve(__dirname,'../..'),cases=JSON.parse(execFileSync('dotnet',['run','--no-build','--project',path.join(root,'work/HeroPlanner.Tests'),'--','unused','--estimates',path.join(root,'outputs/hero-report')],{encoding:'utf8',maxBuffer:1024*1024}));
@@ -71,7 +72,7 @@ test('opening windows change timing while preserving locks, flat stats and defau
   assert.ok(opening.selfPercent[0]<sustained.selfPercent[0]);
   assert.deepEqual(model.evaluate('nikola',null,upgrades,estimates,999),sustained);
   const flat={offense:100,durability:100,score:100};
-  assert.deepEqual(model.compare('nikola',null,upgrades,estimates,'flat',flat,10),model.compare('nikola',null,upgrades,estimates,'flat',flat,0));
+  assert.notEqual(model.compare('nikola',null,upgrades,estimates,'flat',flat,10).score,model.compare('nikola',null,upgrades,estimates,'flat',flat,0).score);
   const saved={skills:{survivor_nikola_skill_1:0}};
   assert.deepEqual(model.evaluate('nikola',saved,upgrades,estimates,10).selfPercent,[0,0,0]);
 });
@@ -172,4 +173,19 @@ test('Lucky farming savings use the selected skill level; missing and locked Wil
  const result=model.evaluate('lucky',saved,upgrades,estimates,0,null,true);
  assert.ok(Math.abs(result.staminaReductionPercent-13)<1e-9);
  for(const skills of [{},{survivor_lucky_skill_2:0}])assert.equal(model.evaluate('lucky',{...saved,skills},upgrades,estimates,0,null,true).staminaReductionPercent,0);
+});
+
+
+test('maximum modes use max level, rank, skills and standard T5 gear with native parity',()=>{
+ const root=path.resolve(__dirname,'../..'),cases=JSON.parse(execFileSync('dotnet',['run','--no-build','--project',path.join(root,'work/HeroPlanner.Tests'),'--','--max-comparisons',path.join(root,'outputs/hero-report')],{encoding:'utf8',maxBuffer:4*1024*1024}));
+ assert.equal(cases.length,464);
+ for(const c of cases){
+  const build=model.maximumBuild(c.slug,estimates,c.basis!=='flat'),hero=upgrades.heroes[c.slug],stage=[...hero.stages].sort((a,b)=>b.rank-a.rank||b.step-a.step)[0];
+  assert.deepEqual(build,c.build);assert.equal(build.stage,stage.id);assert.equal(build.level,Math.max(...hero.levels.filter(r=>r.level<=stage.level_max).map(r=>r.level)));
+  for(const s of hero.skills)assert.equal(build.skills[s.id],Math.min(stage.skill_caps[s.slot],Math.max(...s.levels.map(r=>r.level))));
+  if(c.basis==='flat')assert.deepEqual(build.gear,[]);else{assert.equal(build.gear.length,3);for(const g of build.gear){assert.equal(upgrades.gear[g.id].quality,5);assert.equal(g.level,Math.max(...upgrades.gear[g.id].levels.map(r=>r.level)));}}
+  const result=model.compare(c.slug,{level:1},upgrades,estimates,c.basis,null,c.seconds,c.context);assert.equal(result.basis,c.result.basis);
+  for(const k of ['score','offense','durability','staminaReductionPercent'])assert.ok(Math.abs(result[k]-c.result[k])<1e-7);
+  if(c.basis==='flat')assert.equal(result.score,model.compare(c.slug,null,upgrades,estimates,'flat',null,c.seconds,[0,0,0]).score);
+ }
 });

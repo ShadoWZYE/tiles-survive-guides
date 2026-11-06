@@ -101,11 +101,11 @@
                         </Grid.ColumnDefinitions>
                         <TextBlock x:Name="RosterTitle" Grid.ColumnSpan="4" Text="Hero roster" FontSize="21" FontWeight="Bold" Margin="0,0,0,8" />
                             <ComboBox x:Name="ComparisonBasisPicker" Grid.Row="1" MinWidth="0" Height="32" VerticalAlignment="Top" Margin="0,0,8,0" SelectionChanged="ComparisonBasis_Changed" AutomationProperties.Name="Comparison basis">
-                                <ComboBoxItem Content="Equal builds" Tag="reference" IsSelected="True" />
-                                <ComboBoxItem Content="Flat max stats" Tag="flat" />
+                                <ComboBoxItem Content="Equal builds · max T5" Tag="reference" IsSelected="True" />
+                                <ComboBoxItem Content="Max heroes · no gear" Tag="flat" />
                                 <ComboBoxItem Content="My builds" Tag="recorded" />
                             </ComboBox>
-                        <ComboBox x:Name="BattleWindowPicker" Grid.Row="2" Grid.ColumnSpan="4" Height="30" Margin="0,7,0,0" SelectionChanged="BattleWindow_Changed" AutomationProperties.Name="Battle window" ToolTip="Game seconds at speed 1; one casting slot per hero, initial cooldowns, configured priority and known dispatch times; unresolved effects use completion. No interruptions or deaths. Flat max stats is unaffected.">
+                        <ComboBox x:Name="BattleWindowPicker" Grid.Row="2" Grid.ColumnSpan="4" Height="30" Margin="0,7,0,0" SelectionChanged="BattleWindow_Changed" AutomationProperties.Name="Battle window" ToolTip="Game seconds at speed 1; one casting slot per hero, initial cooldowns, configured priority and known dispatch times; unresolved effects use completion. No interruptions or deaths. Applies to all three comparison modes.">
                             <ComboBoxItem Content="Battle window: sustained" Tag="0" IsSelected="True" />
                             <ComboBoxItem Content="Battle window: opening 10 game seconds" Tag="10" />
                             <ComboBoxItem Content="Battle window: opening 20 game seconds" Tag="20" />

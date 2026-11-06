@@ -229,8 +229,20 @@ def build(upgrades, audit, roster):
         raise ValueError('Combat audit and progression data must identify the same snapshot.')
     if audit['provenance']['manifest_sha256'] != upgrades['provenance']['manifest_sha256']:
         raise ValueError('Combat audit and progression manifest snapshots differ.')
-    result = {'version': 13, 'reference_level': 110, 'reference_rank': 3,
-              'reference_step': 6, 'heroes': {}}
+    gear_by_slot = {}
+    for key, gear in upgrades['gear'].items():
+        if gear['quality'] == 5:
+            if gear['slot'] in gear_by_slot:
+                raise ValueError('Ambiguous standard yellow T5 gear set; choose explicitly before export.')
+            gear_by_slot[gear['slot']] = {'id':key,'level':max(r['level'] for r in gear['levels'])}
+    if set(gear_by_slot) != {1,2,3}:
+        raise ValueError('Expected yellow T5 head, body and leg equipment.')
+    reference_gear = [gear_by_slot[k] for k in sorted(gear_by_slot)]
+    result = {'version': 14, 'reference_level': max(r['level'] for h in upgrades['heroes'].values() for r in h['levels']),
+              'reference_rank': max(s['rank'] for h in upgrades['heroes'].values() for s in h['stages']),
+              'reference_step': 6, 'reference_gear':reference_gear,
+              'reference_policy':'maximum_available_hero_level_rank_skills; equal builds adds standard yellow T5 maximum-level gear; no-gear mode uses the same hero baseline',
+              'heroes': {}}
     result['opening_scheduler']='single_caster_non_preemptive_configured_priority_scenario'
     result['native_semantics_build']='2.6.200.276'
     result['current_native_semantics_reverified']=False
@@ -243,8 +255,8 @@ def build(upgrades, audit, roster):
         result['native_audit_sha256']=native['audit_sha256']
         result['native_verification_scope']='selected_current_static_base_paths; full_engine_and_live_patches_unverified'
     for slug, hero in upgrades['heroes'].items():
-        stage = next(s for s in hero['stages'] if s['rank'] == 3 and s['step'] == 6)
-        level = next(s for s in hero['levels'] if s['level'] == min(110, stage['level_max']))
+        stage = max(hero['stages'], key=lambda s:(s['rank'],s['step']))
+        level = max((r for r in hero['levels'] if r['level']<=stage['level_max']),key=lambda r:r['level'])
         ref_stats = [a + b for a, b in zip(stage['stats'], level['stats'])]
         source_skills = {s['internal_name']: s for s in roster[slug]['skills']}
         audited = {s['id']: s for s in audit['heroes'][slug]['skills']}
@@ -424,7 +436,8 @@ def build(upgrades, audit, roster):
     raw = []
     for model in result['heroes'].values():
         rates = [next(r for r in s['levels'] if r['level'] == s['reference_level']) for s in model['skills']]
-        stats = [v*(1+sum(r['self_percent'][i]+r['team_percent'][i] for r in rates)) for i,v in enumerate(model['reference_stats'])]
+        gear_stats=[sum(next(r for r in upgrades['gear'][g['id']]['levels'] if r['level']==g['level'])['stats'][i] for g in reference_gear) for i in range(3)]
+        stats = [(v+gear_stats[i])*(1+sum(r['self_percent'][i]+r['team_percent'][i] for r in rates)) for i,v in enumerate(model['reference_stats'])]
         a, d, h = stats
         pressure = sum(r['damage'] for r in rates); utility = sum(r['utility'] for r in rates)
         raw.append([a * (1 + .5 * math.log1p(pressure)),
