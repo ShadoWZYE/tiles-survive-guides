@@ -11,19 +11,21 @@ IMAGE_SHA='5afef9adf2a4dc85b40adc702149a45bf10728ef2c9de1895f3b648a9128b14d'
 INDEX_SHA='ee94b9e060a9d0db87e2787b52a339dcf7555e3f65933d21a5ad9e583be13af4'
 METHODS={'RaidFightStatisticsMgr':['OnEntityDamage','OnShieldAbsorbDamage','GetStatisticsData','InitStatisticsData','GetBattleReplayPetStatisticsData'],'RaidFightStatisticsData':['AddDamage','AddBeDamage','AddHeal','AddBeHeal'],'SurvivorEquipmentModule':['GetEquipPower']}
 FIELDS={'RaidEntityHpChange':{'guid':16,'beDamageGuid':24,'combineData':32,'hpChange':60},'RaidEntityShieldAbsorbEvent':{'Guid':16,'BeAbsorbGuid':24,'AbsorbDmg':32},'PveNewEffectConfigCell':{'IsNotStatistics':232},'PveNewMonsterConfigCell':{'IsNotStatistics':304},'SummonDataSource':{'MonsterConfigCell':56},'SurvivorEquipmentLevelNppConfigCell':{'Power':72,'BenefitLvSlgPower':96},'SurvivorEquipmentRankNppConfigCell':{'BenefitSlg':48,'ExtendPower':88,'BenefitLevelStage':96},'SurvivorEquipmentBreakStageConfigCell':{'StageBenefitSlg':48}}
-def fingerprints(image,index_bytes,metadata):
+def fingerprints(image,index_bytes,metadata,selected_methods=None,selected_fields=None):
+    selected_methods=METHODS if selected_methods is None else selected_methods
+    selected_fields=FIELDS if selected_fields is None else selected_fields
     if hashlib.sha256(image).hexdigest()!=IMAGE_SHA or hashlib.sha256(index_bytes).hexdigest()!=INDEX_SHA or hashlib.sha256(metadata).hexdigest()!=DECODED_METADATA_SHA256:
         raise ValueError('Unverified native attribution artifacts')
     original=native.SELECTED
     try:
-        native.SELECTED={**original,**{name:[] for name in FIELDS}}
+        native.SELECTED={**original,**{name:[] for name in selected_fields}}
         types,_=metadata_index(metadata,image)
     finally:native.SELECTED=original
-    for name,expected in FIELDS.items():
+    for name,expected in selected_fields.items():
         fields=dict(types[name]['fields'])
         if any(fields.get(k)!=v for k,v in expected.items()):raise ValueError('Attribution field mapping changed')
     methods=json.loads(index_bytes);addresses=sorted({m['rva'] for m in methods});result=[]
-    for kind,names in METHODS.items():
+    for kind,names in selected_methods.items():
         for name in names:
             m=next(m for m in methods if m['type']==kind and m['name']==name);end=addresses[bisect.bisect_right(addresses,m['rva'])]
             result.append({**m,'byte_count':end-m['rva'],'code_sha256':hashlib.sha256(image[m['rva']:end]).hexdigest()})

@@ -120,9 +120,11 @@ def build(tables, roster):
         heroes[hero['asset_slug']] = {
             'name': hero['name'],
             'skills': [{
-                'id': index['survivor_skill_type'][int(key)]['Id'], 'slot': slot,
+                'id': index['survivor_skill_type'][int(key)]['Id'],
+                'slot': index['survivor_skill_type'][int(key)]['SkillNo'],
+                'skill_config_value_raw': value,
                 'lite_skill': linked_skill(int(key)),
-            } for key, slot in kind['SkillConfig'].items()],
+            } for key, value in kind['SkillConfig'].items()],
         }
     return {
         'schema': 1, 'scope': 'Field-fiend encounter inputs and raw cooldown opportunities; not a win-rate model.',

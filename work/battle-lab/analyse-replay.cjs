@@ -4,22 +4,23 @@ const {openingSchedule,finishTriggers}=require('../HeroPlannerWeb/estimate-model
 function potential(skills,horizon,aliveUntil,persist=false){
  if(!Number.isFinite(horizon)||horizon<=0||!Number.isFinite(aliveUntil)||aliveUntil<0||aliveUntil>horizon)throw new Error('Invalid observation/lifetime window');
  const selected=skills.filter(s=>s.row?.level>0),queue=selected.filter(s=>s.queue_eligible&&s.row.cast_budget),schedule=openingSchedule(queue,aliveUntil,true);
- let coefficient=0;const cutoff=Math.min(horizon,aliveUntil),endsAt=persist?horizon:cutoff;
+ let coefficient=0;const perSkillCoefficient=Object.fromEntries(selected.map(s=>[s.id,0]));
+ const add=(id,value)=>{coefficient+=value;perSkillCoefficient[id]+=value;};const cutoff=Math.min(horizon,aliveUntil),endsAt=persist?horizon:cutoff;
  for(const s of queue){const budget=s.row.cast_budget,duration=s.cast_duration_at_unit_speed_seconds;
   for(const end of schedule[s.id]||[]){const start=end-duration;if(start>=cutoff-1e-9)continue;
-   if(budget.direct_events?.length){for(const e of budget.direct_events)if(start+e.offset_seconds<=cutoff+1e-9)coefficient+=e.coefficient;}
-   else if(end<=cutoff+1e-9)coefficient+=budget.direct_coefficient;
+   if(budget.direct_events?.length){for(const e of budget.direct_events)if(start+e.offset_seconds<=cutoff+1e-9)add(s.id,e.coefficient);}
+   else if(end<=cutoff+1e-9)add(s.id,budget.direct_coefficient);
    for(const tick of budget.periodic_ticks){const applied=start+(tick.application_offset_seconds??duration);
     if(applied>cutoff+1e-9)continue;
-    coefficient+=Math.min(tick.nominal_ticks,Math.max(0,Math.floor((endsAt-applied)*1000/tick.interval_ms+1e-9)))*tick.coefficient_per_tick;
+    add(s.id,Math.min(tick.nominal_ticks,Math.max(0,Math.floor((endsAt-applied)*1000/tick.interval_ms+1e-9)))*tick.coefficient_per_tick);
    }
   }
  }
  for(const s of selected.filter(s=>s.finish_trigger&&s.row.cast_budget)){
   const t=s.finish_trigger,parentEnds=(schedule[t.source_skill_id]||[]).filter(end=>end<=cutoff+1e-9);
-  coefficient+=finishTriggers(t,parentEnds,cutoff,s.base_pre_cooldown_ms/1000).length*s.row.cast_budget.direct_coefficient;
+  add(s.id,finishTriggers(t,parentEnds,cutoff,s.base_pre_cooldown_ms/1000).length*s.row.cast_budget.direct_coefficient);
  }
- return {coefficient,perObservationSecond:coefficient/horizon,completedCasts:Object.fromEntries(queue.map(s=>[s.id,(schedule[s.id]||[]).filter(end=>end<=cutoff+1e-9&&end-s.cast_duration_at_unit_speed_seconds<cutoff-1e-9).length]))};
+ return {coefficient,perSkillCoefficient,perObservationSecond:coefficient/horizon,completedCasts:Object.fromEntries(queue.map(s=>[s.id,(schedule[s.id]||[]).filter(end=>end<=cutoff+1e-9&&end-s.cast_duration_at_unit_speed_seconds<cutoff-1e-9).length]))};
 }
 function analyse(observation,upgrades,estimates){
  const friendly=observation.friendly,heroDamage=observation.heroes.reduce((sum,h)=>sum+h.damage,0),petDamage=friendly.behemoths.reduce((s,p)=>s+p.damage,0);

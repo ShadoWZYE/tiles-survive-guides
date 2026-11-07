@@ -53,6 +53,8 @@ Model v15 includes recorded skill-level flat hero ATK/DEF/HP benefits in both sc
 
 Model v16 adds missing automatic gear-level milestone stats and power. This closes the recorded 169,260 gear-power discrepancy and corrects gear XP milestone returns. A new static attribution audit separates inclusive hero-owned rows from summons, soldiers and shield mechanisms; reproducible scoring sensitivity and prediction-metric checks are available in the [follow-up report](docs/research/DAMAGE-ATTRIBUTION-AND-SCORING-2026-11-07.md).
 
+Retrospective reconstruction now measures error on the existing recorded fight, separately from independent accuracy. It exposes outgoing-model residuals, a small-error shared incoming-budget fit, and a native report-driven replay path that prevents using the animation as an independent fight calculator. See the [reconstruction results](docs/research/RETROSPECTIVE-RECONSTRUCTION-2026-11-07.md). Experimental fits do not change saved builds or production weights.
+
 ### Faction-aware formations
 
 Both planners include faction Final Health bonuses in squad rankings: 2 matching heroes +2%, 2+2 +4%, 3 +8%, 3+2 +12%, 4 +18%, and 5 +25%. Mariners (`Sea` in the extracted data) occupy one wildcard slot each; the planner selects the strongest valid composition without counting a Mariner twice. The faction contribution is separate from skill synergy and also affects recommendations for additional heroes.

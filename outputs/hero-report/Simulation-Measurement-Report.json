@@ -13,7 +13,7 @@
   },
   "attribution_axes": {
     "known_owner_bucket_damage": {
-      "heroes_including_eligible_owned_actors": 32790000,
+      "hero_rows_mechanism_split_unresolved": 32790000,
       "separate_behemoth_rows": 5120000
     },
     "within_owner_mechanism_split": null,
@@ -64,5 +64,60 @@
     "Use owner-inclusive report damage as a distinct target from HP removed; never compare the two definitions.",
     "For squad-score validation compare fresh identical enemy states, exact builds/context and troop count, with no uncontrolled rally participants; record the declared outcome metric."
   ],
-  "overall_accuracy_percentage": null
+  "overall_accuracy_percentage": null,
+  "retrospective_reconstruction": {
+    "artifact": "Retrospective-Damage-Reconstruction.json",
+    "sha256": "64974a3fc21f05e293ef7fc9023c7ad46f77cd5b1fd109206d22d13815e92aec",
+    "independent_battles": 1,
+    "outgoing_models": {
+      "planner_offense": {
+        "fitted_wape": 0.25140433032092774,
+        "worst_owner_error": 0.6424863889120647,
+        "internal_leave_one_owner_out_wape": 0.30321541664556273
+      },
+      "full_30s_coefficient": {
+        "fitted_wape": 0.2718471774479519,
+        "worst_owner_error": 0.38469601249974494,
+        "internal_leave_one_owner_out_wape": 0.3927900118340903
+      },
+      "observed_lifetime_coefficient": {
+        "fitted_wape": 0.2997020221695689,
+        "worst_owner_error": 0.5566973086439109,
+        "internal_leave_one_owner_out_wape": 0.3789471912345767
+      },
+      "native_base_defence_grid": {
+        "fitted_wape": 0.2997020221695689,
+        "worst_owner_error": 0.5566973086439109,
+        "internal_leave_one_owner_out_wape": 0.3789471912345767
+      },
+      "lifetime_only_control": {
+        "fitted_wape": 0.09868609049756176,
+        "worst_owner_error": 0.4223414499931215,
+        "internal_leave_one_owner_out_wape": 0.12148758111398965
+      },
+      "coefficient_plus_owned_exposure": {
+        "fitted_wape": 0.09871215184270345,
+        "worst_owner_error": 0.42193126764223604,
+        "internal_leave_one_owner_out_wape": 0.14664113568243312
+      },
+      "basic_other_plus_exposure": {
+        "fitted_wape": 0.09905388425307114,
+        "worst_owner_error": 0.41637009422356935,
+        "internal_leave_one_owner_out_wape": 0.1598519143799075
+      }
+    },
+    "incoming_models": {
+      "known_flat_hp_scaled": {
+        "fitted_wape": 0.13751632220232643,
+        "worst_owner_error": 0.24459559435231643,
+        "internal_leave_one_owner_out_wape": 0.1724061629243034
+      },
+      "shared_effective_incoming_budget": {
+        "fitted_wape": 0.011651464149911044,
+        "worst_owner_error": 0.02364529813964058,
+        "internal_leave_one_owner_out_wape": 0.019306810433677338
+      }
+    },
+    "scope": "Fitted retrospective results are measurable without a repeat fight. They are distinct from independent future-battle accuracy."
+  }
 }

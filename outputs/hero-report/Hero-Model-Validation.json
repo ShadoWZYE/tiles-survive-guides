@@ -438,7 +438,7 @@
   "accuracy_percentage": null,
   "accuracy_status": "No validated overall accuracy percentage. Consistency checks and software parity do not establish battle prediction accuracy.",
   "evidence_sources_sha256": {
-    "Replay-Observation-2026-11-07.json": "892493ed428c7a4807d69ff06b6f4db8d311bc965ea152d18e94cbca88d3b73c"
+    "Replay-Observation-2026-11-07.json": "3335659a97b3fe13051d1e19d2cd0f6d3e36cf3ac92e9e212735a7b2dda31daf"
   },
   "independent_battle_observations": 1
 }

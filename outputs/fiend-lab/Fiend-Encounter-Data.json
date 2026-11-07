@@ -10610,22 +10610,26 @@
         {
           "id": "survivor_tony_attack",
           "slot": 0,
-          "lite_skill": "survivor_tony_attack_lite"
+          "lite_skill": "survivor_tony_attack_lite",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_tony_skill_1",
-          "slot": 0,
-          "lite_skill": "survivor_tony_skill_lite_1"
+          "slot": 1,
+          "lite_skill": "survivor_tony_skill_lite_1",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_tony_skill_2",
-          "slot": 0,
-          "lite_skill": "survivor_tony_skill_lite_2"
+          "slot": 2,
+          "lite_skill": "survivor_tony_skill_lite_2",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_tony_skill_3",
-          "slot": 86,
-          "lite_skill": "survivor_tony_skill_lite_3"
+          "slot": 3,
+          "lite_skill": "survivor_tony_skill_lite_3",
+          "skill_config_value_raw": 86
         }
       ]
     },
@@ -10635,22 +10639,26 @@
         {
           "id": "survivor_maddie_attack",
           "slot": 0,
-          "lite_skill": "survivor_maddie_attack_lite"
+          "lite_skill": "survivor_maddie_attack_lite",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_maddie_skill_1",
-          "slot": 0,
-          "lite_skill": "survivor_maddie_skill_lite_1"
+          "slot": 1,
+          "lite_skill": "survivor_maddie_skill_lite_1",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_maddie_skill_2",
-          "slot": 0,
-          "lite_skill": "survivor_maddie_skill_lite_2"
+          "slot": 2,
+          "lite_skill": "survivor_maddie_skill_lite_2",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_maddie_skill_3",
-          "slot": 86,
-          "lite_skill": "survivor_maddie_skill_lite_3"
+          "slot": 3,
+          "lite_skill": "survivor_maddie_skill_lite_3",
+          "skill_config_value_raw": 86
         }
       ]
     },
@@ -10660,22 +10668,26 @@
         {
           "id": "survivor_rosie_attack",
           "slot": 0,
-          "lite_skill": "survivor_rosie_attack_lite"
+          "lite_skill": "survivor_rosie_attack_lite",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_rosie_skill_1",
-          "slot": 0,
-          "lite_skill": "survivor_rosie_skill_lite_1"
+          "slot": 1,
+          "lite_skill": "survivor_rosie_skill_lite_1",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_rosie_skill_2",
-          "slot": 0,
-          "lite_skill": "survivor_rosie_skill_lite_2"
+          "slot": 2,
+          "lite_skill": "survivor_rosie_skill_lite_2",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_rosie_skill_3",
-          "slot": 86,
-          "lite_skill": "survivor_rosie_skill_lite_3"
+          "slot": 3,
+          "lite_skill": "survivor_rosie_skill_lite_3",
+          "skill_config_value_raw": 86
         }
       ]
     },
@@ -10685,22 +10697,26 @@
         {
           "id": "survivor_nikola_attack",
           "slot": 0,
-          "lite_skill": "survivor_nikola_attack_lite"
+          "lite_skill": "survivor_nikola_attack_lite",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_nikola_skill_1",
-          "slot": 0,
-          "lite_skill": "survivor_nikola_skill_lite_1"
+          "slot": 1,
+          "lite_skill": "survivor_nikola_skill_lite_1",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_nikola_skill_2",
-          "slot": 0,
-          "lite_skill": "survivor_nikola_skill_lite_2"
+          "slot": 2,
+          "lite_skill": "survivor_nikola_skill_lite_2",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_nikola_skill_3",
-          "slot": 86,
-          "lite_skill": "survivor_nikola_skill_lite_3"
+          "slot": 3,
+          "lite_skill": "survivor_nikola_skill_lite_3",
+          "skill_config_value_raw": 86
         }
       ]
     },
@@ -10710,22 +10726,26 @@
         {
           "id": "survivor_ray_attack",
           "slot": 0,
-          "lite_skill": "survivor_ray_attack_lite"
+          "lite_skill": "survivor_ray_attack_lite",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_ray_skill_1",
-          "slot": 0,
-          "lite_skill": "survivor_ray_skill_lite_1"
+          "slot": 1,
+          "lite_skill": "survivor_ray_skill_lite_1",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_ray_skill_2",
-          "slot": 0,
-          "lite_skill": "survivor_ray_skill_lite_2"
+          "slot": 2,
+          "lite_skill": "survivor_ray_skill_lite_2",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_ray_skill_3",
-          "slot": 86,
-          "lite_skill": "survivor_ray_skill_lite_3"
+          "slot": 3,
+          "lite_skill": "survivor_ray_skill_lite_3",
+          "skill_config_value_raw": 86
         }
       ]
     },
@@ -10735,22 +10755,26 @@
         {
           "id": "survivor_becca_attack",
           "slot": 0,
-          "lite_skill": "survivor_becca_attack_lite"
+          "lite_skill": "survivor_becca_attack_lite",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_becca_skill_1",
-          "slot": 0,
-          "lite_skill": "survivor_becca_skill_lite_1"
+          "slot": 1,
+          "lite_skill": "survivor_becca_skill_lite_1",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_becca_skill_2",
-          "slot": 0,
-          "lite_skill": "survivor_becca_skill_lite_2"
+          "slot": 2,
+          "lite_skill": "survivor_becca_skill_lite_2",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_becca_skill_3",
-          "slot": 86,
-          "lite_skill": "survivor_becca_skill_lite_3"
+          "slot": 3,
+          "lite_skill": "survivor_becca_skill_lite_3",
+          "skill_config_value_raw": 86
         }
       ]
     },
@@ -10760,22 +10784,26 @@
         {
           "id": "survivor_layla_attack",
           "slot": 0,
-          "lite_skill": "survivor_layla_attack_lite"
+          "lite_skill": "survivor_layla_attack_lite",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_layla_skill_1",
-          "slot": 0,
-          "lite_skill": "survivor_layla_skill_lite_1"
+          "slot": 1,
+          "lite_skill": "survivor_layla_skill_lite_1",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_layla_skill_2",
-          "slot": 0,
-          "lite_skill": "survivor_layla_skill_lite_2"
+          "slot": 2,
+          "lite_skill": "survivor_layla_skill_lite_2",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_layla_skill_3",
-          "slot": 86,
-          "lite_skill": "survivor_layla_skill_lite_3"
+          "slot": 3,
+          "lite_skill": "survivor_layla_skill_lite_3",
+          "skill_config_value_raw": 86
         }
       ]
     },
@@ -10785,22 +10813,26 @@
         {
           "id": "survivor_candy_attack",
           "slot": 0,
-          "lite_skill": "survivor_candy_attack_lite"
+          "lite_skill": "survivor_candy_attack_lite",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_candy_skill_1",
-          "slot": 0,
-          "lite_skill": "survivor_candy_skill_lite_1"
+          "slot": 1,
+          "lite_skill": "survivor_candy_skill_lite_1",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_candy_skill_2",
-          "slot": 0,
-          "lite_skill": "survivor_candy_skill_lite_2"
+          "slot": 2,
+          "lite_skill": "survivor_candy_skill_lite_2",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_candy_skill_3",
-          "slot": 86,
-          "lite_skill": "survivor_candy_skill_lite_3"
+          "slot": 3,
+          "lite_skill": "survivor_candy_skill_lite_3",
+          "skill_config_value_raw": 86
         }
       ]
     },
@@ -10810,22 +10842,26 @@
         {
           "id": "survivor_mike_attack",
           "slot": 0,
-          "lite_skill": "survivor_mike_attack_lite"
+          "lite_skill": "survivor_mike_attack_lite",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_mike_skill_1",
-          "slot": 0,
-          "lite_skill": "survivor_mike_skill_lite_1"
+          "slot": 1,
+          "lite_skill": "survivor_mike_skill_lite_1",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_mike_skill_2",
-          "slot": 0,
-          "lite_skill": "survivor_mike_skill_lite_2"
+          "slot": 2,
+          "lite_skill": "survivor_mike_skill_lite_2",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_mike_skill_3",
-          "slot": 86,
-          "lite_skill": "survivor_mike_skill_lite_3"
+          "slot": 3,
+          "lite_skill": "survivor_mike_skill_lite_3",
+          "skill_config_value_raw": 86
         }
       ]
     },
@@ -10835,22 +10871,26 @@
         {
           "id": "survivor_wright_attack",
           "slot": 0,
-          "lite_skill": "survivor_wright_attack_lite"
+          "lite_skill": "survivor_wright_attack_lite",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_wright_skill_1",
-          "slot": 0,
-          "lite_skill": "survivor_wright_skill_lite_1"
+          "slot": 1,
+          "lite_skill": "survivor_wright_skill_lite_1",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_wright_skill_2",
-          "slot": 0,
-          "lite_skill": "survivor_wright_skill_lite_2"
+          "slot": 2,
+          "lite_skill": "survivor_wright_skill_lite_2",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_wright_skill_3",
-          "slot": 86,
-          "lite_skill": "survivor_wright_skill_lite_3"
+          "slot": 3,
+          "lite_skill": "survivor_wright_skill_lite_3",
+          "skill_config_value_raw": 86
         }
       ]
     },
@@ -10860,22 +10900,26 @@
         {
           "id": "survivor_tithi_attack",
           "slot": 0,
-          "lite_skill": "survivor_tithi_attack_lite"
+          "lite_skill": "survivor_tithi_attack_lite",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_tithi_skill_1",
-          "slot": 0,
-          "lite_skill": "survivor_tithi_skill_lite_1"
+          "slot": 1,
+          "lite_skill": "survivor_tithi_skill_lite_1",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_tithi_skill_2",
-          "slot": 0,
-          "lite_skill": "survivor_tithi_skill_lite_2"
+          "slot": 2,
+          "lite_skill": "survivor_tithi_skill_lite_2",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_tithi_skill_3",
-          "slot": 86,
-          "lite_skill": "survivor_tithi_skill_lite_3"
+          "slot": 3,
+          "lite_skill": "survivor_tithi_skill_lite_3",
+          "skill_config_value_raw": 86
         }
       ]
     },
@@ -10885,22 +10929,26 @@
         {
           "id": "survivor_tara_attack",
           "slot": 0,
-          "lite_skill": "survivor_tara_attack_lite"
+          "lite_skill": "survivor_tara_attack_lite",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_tara_skill_1",
-          "slot": 0,
-          "lite_skill": "survivor_tara_skill_lite_1"
+          "slot": 1,
+          "lite_skill": "survivor_tara_skill_lite_1",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_tara_skill_2",
-          "slot": 0,
-          "lite_skill": "survivor_tara_skill_lite_2"
+          "slot": 2,
+          "lite_skill": "survivor_tara_skill_lite_2",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_tara_skill_3",
-          "slot": 86,
-          "lite_skill": "survivor_tara_skill_lite_3"
+          "slot": 3,
+          "lite_skill": "survivor_tara_skill_lite_3",
+          "skill_config_value_raw": 86
         }
       ]
     },
@@ -10910,22 +10958,26 @@
         {
           "id": "survivor_jacob_attack",
           "slot": 0,
-          "lite_skill": "survivor_jacob_attack_lite"
+          "lite_skill": "survivor_jacob_attack_lite",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_jacob_skill_1",
-          "slot": 0,
-          "lite_skill": "survivor_jacob_skill_lite_1"
+          "slot": 1,
+          "lite_skill": "survivor_jacob_skill_lite_1",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_jacob_skill_2",
-          "slot": 0,
-          "lite_skill": "survivor_jacob_skill_lite_2"
+          "slot": 2,
+          "lite_skill": "survivor_jacob_skill_lite_2",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_jacob_skill_3",
-          "slot": 86,
-          "lite_skill": "survivor_jacob_skill_lite_3"
+          "slot": 3,
+          "lite_skill": "survivor_jacob_skill_lite_3",
+          "skill_config_value_raw": 86
         }
       ]
     },
@@ -10935,22 +10987,26 @@
         {
           "id": "survivor_tarzan_attack",
           "slot": 0,
-          "lite_skill": "survivor_tarzan_attack_lite"
+          "lite_skill": "survivor_tarzan_attack_lite",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_tarzan_skill_1",
-          "slot": 0,
-          "lite_skill": "survivor_tarzan_skill_lite_1"
+          "slot": 1,
+          "lite_skill": "survivor_tarzan_skill_lite_1",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_tarzan_skill_2",
-          "slot": 0,
-          "lite_skill": "survivor_tarzan_skill_lite_2"
+          "slot": 2,
+          "lite_skill": "survivor_tarzan_skill_lite_2",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_tarzan_skill_3",
-          "slot": 86,
-          "lite_skill": "survivor_tarzan_skill_lite_3"
+          "slot": 3,
+          "lite_skill": "survivor_tarzan_skill_lite_3",
+          "skill_config_value_raw": 86
         }
       ]
     },
@@ -10960,22 +11016,26 @@
         {
           "id": "survivor_chiron_attack",
           "slot": 0,
-          "lite_skill": "survivor_chiron_attack_lite"
+          "lite_skill": "survivor_chiron_attack_lite",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_chiron_skill_1",
-          "slot": 0,
-          "lite_skill": "survivor_chiron_skill_lite_1"
+          "slot": 1,
+          "lite_skill": "survivor_chiron_skill_lite_1",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_chiron_skill_2",
-          "slot": 0,
-          "lite_skill": "survivor_chiron_skill_lite_2"
+          "slot": 2,
+          "lite_skill": "survivor_chiron_skill_lite_2",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_chiron_skill_3",
-          "slot": 86,
-          "lite_skill": "survivor_chiron_skill_lite_3"
+          "slot": 3,
+          "lite_skill": "survivor_chiron_skill_lite_3",
+          "skill_config_value_raw": 86
         }
       ]
     },
@@ -10985,22 +11045,26 @@
         {
           "id": "survivor_shark_attack",
           "slot": 0,
-          "lite_skill": "survivor_shark_attack_lite"
+          "lite_skill": "survivor_shark_attack_lite",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_shark_skill_1",
-          "slot": 0,
-          "lite_skill": "survivor_shark_skill_lite_1"
+          "slot": 1,
+          "lite_skill": "survivor_shark_skill_lite_1",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_shark_skill_2",
-          "slot": 0,
-          "lite_skill": "survivor_shark_skill_lite_2"
+          "slot": 2,
+          "lite_skill": "survivor_shark_skill_lite_2",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_shark_skill_3",
-          "slot": 86,
-          "lite_skill": "survivor_shark_skill_lite_3"
+          "slot": 3,
+          "lite_skill": "survivor_shark_skill_lite_3",
+          "skill_config_value_raw": 86
         }
       ]
     },
@@ -11010,22 +11074,26 @@
         {
           "id": "survivor_ragnar_attack",
           "slot": 0,
-          "lite_skill": "survivor_ragnar_attack_lite"
+          "lite_skill": "survivor_ragnar_attack_lite",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_ragnar_skill_1",
-          "slot": 0,
-          "lite_skill": "survivor_ragnar_skill_lite_1"
+          "slot": 1,
+          "lite_skill": "survivor_ragnar_skill_lite_1",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_ragnar_skill_2",
-          "slot": 0,
-          "lite_skill": "survivor_ragnar_skill_lite_2"
+          "slot": 2,
+          "lite_skill": "survivor_ragnar_skill_lite_2",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_ragnar_skill_3",
-          "slot": 86,
-          "lite_skill": "survivor_ragnar_skill_lite_3"
+          "slot": 3,
+          "lite_skill": "survivor_ragnar_skill_lite_3",
+          "skill_config_value_raw": 86
         }
       ]
     },
@@ -11035,22 +11103,26 @@
         {
           "id": "survivor_knotty_attack",
           "slot": 0,
-          "lite_skill": "survivor_knotty_attack_lite"
+          "lite_skill": "survivor_knotty_attack_lite",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_knotty_skill_1",
-          "slot": 0,
-          "lite_skill": "survivor_knotty_skill_lite_1"
+          "slot": 1,
+          "lite_skill": "survivor_knotty_skill_lite_1",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_knotty_skill_2",
-          "slot": 0,
-          "lite_skill": "survivor_knotty_skill_lite_2"
+          "slot": 2,
+          "lite_skill": "survivor_knotty_skill_lite_2",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_knotty_skill_3",
-          "slot": 86,
-          "lite_skill": "survivor_knotty_skill_lite_3"
+          "slot": 3,
+          "lite_skill": "survivor_knotty_skill_lite_3",
+          "skill_config_value_raw": 86
         }
       ]
     },
@@ -11060,22 +11132,26 @@
         {
           "id": "survivor_undine_attack",
           "slot": 0,
-          "lite_skill": "survivor_undine_attack_lite"
+          "lite_skill": "survivor_undine_attack_lite",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_undine_skill_1",
-          "slot": 0,
-          "lite_skill": "survivor_undine_skill_lite_1"
+          "slot": 1,
+          "lite_skill": "survivor_undine_skill_lite_1",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_undine_skill_2",
-          "slot": 0,
-          "lite_skill": "survivor_undine_skill_lite_2"
+          "slot": 2,
+          "lite_skill": "survivor_undine_skill_lite_2",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_undine_skill_3",
-          "slot": 86,
-          "lite_skill": "survivor_undine_skill_lite_3"
+          "slot": 3,
+          "lite_skill": "survivor_undine_skill_lite_3",
+          "skill_config_value_raw": 86
         }
       ]
     },
@@ -11085,22 +11161,26 @@
         {
           "id": "survivor_dave_attack",
           "slot": 0,
-          "lite_skill": "survivor_dave_attack_lite"
+          "lite_skill": "survivor_dave_attack_lite",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_dave_skill_1",
-          "slot": 0,
-          "lite_skill": "survivor_dave_skill_lite_1"
+          "slot": 1,
+          "lite_skill": "survivor_dave_skill_lite_1",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_dave_skill_2",
-          "slot": 0,
-          "lite_skill": "survivor_dave_skill_lite_2"
+          "slot": 2,
+          "lite_skill": "survivor_dave_skill_lite_2",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_dave_skill_3",
-          "slot": 86,
-          "lite_skill": "survivor_dave_skill_lite_3"
+          "slot": 3,
+          "lite_skill": "survivor_dave_skill_lite_3",
+          "skill_config_value_raw": 86
         }
       ]
     },
@@ -11110,22 +11190,26 @@
         {
           "id": "survivor_lava_attack",
           "slot": 0,
-          "lite_skill": "survivor_lava_attack_lite"
+          "lite_skill": "survivor_lava_attack_lite",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_lava_skill_1",
-          "slot": 0,
-          "lite_skill": "survivor_lava_skill_lite_1"
+          "slot": 1,
+          "lite_skill": "survivor_lava_skill_lite_1",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_lava_skill_2",
-          "slot": 0,
-          "lite_skill": "survivor_lava_skill_lite_2"
+          "slot": 2,
+          "lite_skill": "survivor_lava_skill_lite_2",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_lava_skill_3",
-          "slot": 86,
-          "lite_skill": "survivor_lava_skill_lite_3"
+          "slot": 3,
+          "lite_skill": "survivor_lava_skill_lite_3",
+          "skill_config_value_raw": 86
         }
       ]
     },
@@ -11135,22 +11219,26 @@
         {
           "id": "survivor_lucky_attack",
           "slot": 0,
-          "lite_skill": "survivor_lucky_attack_lite"
+          "lite_skill": "survivor_lucky_attack_lite",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_lucky_skill_1",
-          "slot": 0,
-          "lite_skill": "survivor_lucky_skill_lite_1"
+          "slot": 1,
+          "lite_skill": "survivor_lucky_skill_lite_1",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_lucky_skill_2",
-          "slot": 0,
-          "lite_skill": "survivor_lucky_skill_lite_2"
+          "slot": 2,
+          "lite_skill": "survivor_lucky_skill_lite_2",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_lucky_skill_3",
-          "slot": 86,
-          "lite_skill": "survivor_lucky_skill_lite_3"
+          "slot": 3,
+          "lite_skill": "survivor_lucky_skill_lite_3",
+          "skill_config_value_raw": 86
         }
       ]
     },
@@ -11160,22 +11248,26 @@
         {
           "id": "survivor_sarge_attack",
           "slot": 0,
-          "lite_skill": "survivor_sarge_attack_lite"
+          "lite_skill": "survivor_sarge_attack_lite",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_sarge_skill_1",
-          "slot": 0,
-          "lite_skill": "survivor_sarge_skill_lite_1"
+          "slot": 1,
+          "lite_skill": "survivor_sarge_skill_lite_1",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_sarge_skill_2",
-          "slot": 0,
-          "lite_skill": "survivor_sarge_skill_lite_2"
+          "slot": 2,
+          "lite_skill": "survivor_sarge_skill_lite_2",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_sarge_skill_3",
-          "slot": 86,
-          "lite_skill": "survivor_sarge_skill_lite_3"
+          "slot": 3,
+          "lite_skill": "survivor_sarge_skill_lite_3",
+          "skill_config_value_raw": 86
         }
       ]
     },
@@ -11185,22 +11277,26 @@
         {
           "id": "survivor_ken_attack",
           "slot": 0,
-          "lite_skill": "survivor_ken_attack_lite"
+          "lite_skill": "survivor_ken_attack_lite",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_ken_skill_1",
-          "slot": 0,
-          "lite_skill": "survivor_ken_skill_lite_1"
+          "slot": 1,
+          "lite_skill": "survivor_ken_skill_lite_1",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_ken_skill_2",
-          "slot": 0,
-          "lite_skill": "survivor_ken_skill_lite_2"
+          "slot": 2,
+          "lite_skill": "survivor_ken_skill_lite_2",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_ken_skill_3",
-          "slot": 86,
-          "lite_skill": "survivor_ken_skill_lite_3"
+          "slot": 3,
+          "lite_skill": "survivor_ken_skill_lite_3",
+          "skill_config_value_raw": 86
         }
       ]
     },
@@ -11210,22 +11306,26 @@
         {
           "id": "survivor_freja_attack",
           "slot": 0,
-          "lite_skill": "survivor_freja_attack_lite"
+          "lite_skill": "survivor_freja_attack_lite",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_freja_skill_1",
-          "slot": 0,
-          "lite_skill": "survivor_freja_skill_lite_1"
+          "slot": 1,
+          "lite_skill": "survivor_freja_skill_lite_1",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_freja_skill_2",
-          "slot": 0,
-          "lite_skill": "survivor_freja_skill_lite_2"
+          "slot": 2,
+          "lite_skill": "survivor_freja_skill_lite_2",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_freja_skill_3",
-          "slot": 86,
-          "lite_skill": "survivor_freja_skill_lite_3"
+          "slot": 3,
+          "lite_skill": "survivor_freja_skill_lite_3",
+          "skill_config_value_raw": 86
         }
       ]
     },
@@ -11235,22 +11335,26 @@
         {
           "id": "survivor_travis_attack",
           "slot": 0,
-          "lite_skill": "survivor_travis_attack_lite"
+          "lite_skill": "survivor_travis_attack_lite",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_travis_skill_1",
-          "slot": 0,
-          "lite_skill": "survivor_travis_skill_lite_1"
+          "slot": 1,
+          "lite_skill": "survivor_travis_skill_lite_1",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_travis_skill_2",
-          "slot": 0,
-          "lite_skill": "survivor_travis_skill_lite_2"
+          "slot": 2,
+          "lite_skill": "survivor_travis_skill_lite_2",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_travis_skill_3",
-          "slot": 86,
-          "lite_skill": "survivor_travis_skill_lite_3"
+          "slot": 3,
+          "lite_skill": "survivor_travis_skill_lite_3",
+          "skill_config_value_raw": 86
         }
       ]
     },
@@ -11260,22 +11364,26 @@
         {
           "id": "survivor_eva_attack",
           "slot": 0,
-          "lite_skill": "survivor_eva_attack_lite"
+          "lite_skill": "survivor_eva_attack_lite",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_eva_skill_1",
-          "slot": 0,
-          "lite_skill": "survivor_eva_skill_lite_1"
+          "slot": 1,
+          "lite_skill": "survivor_eva_skill_lite_1",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_eva_skill_2",
-          "slot": 0,
-          "lite_skill": "survivor_eva_skill_lite_2"
+          "slot": 2,
+          "lite_skill": "survivor_eva_skill_lite_2",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_eva_skill_3",
-          "slot": 86,
-          "lite_skill": "survivor_eva_skill_lite_3"
+          "slot": 3,
+          "lite_skill": "survivor_eva_skill_lite_3",
+          "skill_config_value_raw": 86
         }
       ]
     },
@@ -11285,17 +11393,20 @@
         {
           "id": "survivor_rusty_attack",
           "slot": 0,
-          "lite_skill": "survivor_rusty_attack_lite"
+          "lite_skill": "survivor_rusty_attack_lite",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_rusty_skill_1",
-          "slot": 0,
-          "lite_skill": "survivor_rusty_skill_lite_1"
+          "slot": 1,
+          "lite_skill": "survivor_rusty_skill_lite_1",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_rusty_skill_2",
-          "slot": 86,
-          "lite_skill": "survivor_rusty_skill_lite_2"
+          "slot": 2,
+          "lite_skill": "survivor_rusty_skill_lite_2",
+          "skill_config_value_raw": 86
         }
       ]
     },
@@ -11305,17 +11416,20 @@
         {
           "id": "survivor_tim_attack",
           "slot": 0,
-          "lite_skill": "survivor_tim_attack_lite"
+          "lite_skill": "survivor_tim_attack_lite",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_tim_skill_1",
-          "slot": 0,
-          "lite_skill": "survivor_tim_skill_lite_1"
+          "slot": 1,
+          "lite_skill": "survivor_tim_skill_lite_1",
+          "skill_config_value_raw": 0
         },
         {
           "id": "survivor_tim_skill_2",
-          "slot": 86,
-          "lite_skill": "survivor_tim_skill_lite_2"
+          "slot": 2,
+          "lite_skill": "survivor_tim_skill_lite_2",
+          "skill_config_value_raw": 86
         }
       ]
     }

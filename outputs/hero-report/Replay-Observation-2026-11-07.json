@@ -248,12 +248,13 @@
     "battle_formula_coefficient.same_unit_type_add_up": "0;0.02;0.1;0.15;0.25",
     "game_configs.same_unit_type_add_up_desc": "2|0.02,2_2|0.04,3|0.08,3_2|0.12,4|0.18,5|0.25"
   },
-  "damage_definition": "report_owned_rows_unsplit_hp_change_and_absorption",
+  "damage_definition": "report_owner_totals_mechanisms_unresolved",
   "resolved": {
     "gear_power_residual": {
       "previous_residual": 169260,
       "cause": "Missing current-row BenefitLvSlgPower in progression exporter",
       "new_residual": 0
     }
-  }
+  },
+  "replay_authority_note": "Selected static BattleReplay paths load stored report rounds and import supplied report statistics. Matching replay/report totals and replay lifetimes do not independently verify original battle calculation."
 }

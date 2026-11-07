@@ -1,5 +1,7 @@
 # Damage attribution, measurement and model 16
 
+**Follow-up:** [retrospective reconstruction](RETROSPECTIVE-RECONSTRUCTION-2026-11-07.md) adds measured fit errors and identifies a report-driven replay path. Generic Raid counter rules below do not establish the original server report's mechanism accounting.
+
 ## A closed gap: gear level milestone bonuses
 
 The earlier 169,260 gear-power discrepancy was an exporter omission. `survivor_equipment_level_npp` has both `BenefitSlg` / `Power` and **`BenefitLvSlg` / `BenefitLvSlgPower`**. The latter current-row milestone bonuses were missing. The selected static native `SurvivorEquipmentModule.GetEquipPower` path adds both power fields for base-rank gear without breakthrough or external additions.

@@ -1,0 +1,21 @@
+"""Selected static evidence separating report-driven replay from fight calculation."""
+import argparse,json,hashlib
+from pathlib import Path
+from audit_damage_attribution import fingerprints,IMAGE_SHA,INDEX_SHA
+ROOT=Path(__file__).resolve().parents[2]
+METHODS={'RaidBattleReplayPlayMode':['OnStart','OnTick','HandleSingleData','HandleSingleRound','ScheduleHealEvent','DoSurvivorDied'],'HeroPropertyComponent':['Initialize','SupplyBattleReportProperty'],'SoldierPropertyComponent':['Initialize','SupplyBattleReplayProperty'],'RaidFightStatisticsMgr':['GetAllStatisticsData','GetBattleReplayStatisticsData','GetBattleReplayPetStatisticsData']}
+FIELDS={'InputBattleReportData':{'ReportData':128,'IsWinBySelf':152,'MyStatisticsData':160,'MyTitanStatisticsData':168,'MyPetStatisticsData':176},'MailBattleReportData':{'rounds_info':16},'RaidBattleReplayPlayMode':{'_roundData':16,'_pendingHealEvents':96}}
+def build(image,index,metadata):
+    rows=fingerprints(image,index,metadata,METHODS,FIELDS)
+    return {'schema':1,'client_build':'2.6.400.304','private_image_sha256':IMAGE_SHA,'private_index_sha256':INDEX_SHA,'methods':rows,'field_offsets':FIELDS,
+      'selected_static_trace':[
+       {'method':'RaidBattleReplayPlayMode.OnStart','finding':'Copies InputBattleReportData.ReportData.rounds_info into _roundData.','instruction_rvas':['0x14942dd','0x14942ed','0x14942f1']},
+       {'method':'RaidBattleReplayPlayMode.HandleSingleData','finding':'Processes round input and calls CalculateDeadSoldier, DoSurvivorDied and ScheduleHealEvent. The visible deaths/heals therefore have a report-driven scheduling path.','instruction_rvas':['0x14937fc','0x14939ed','0x1493af0']},
+       {'method':'RaidFightStatisticsMgr.GetAllStatisticsData','finding':'Type-12 branch reads InputBattleReportData.MyStatisticsData, MyTitanStatisticsData and MyPetStatisticsData and converts those records, rather than returning the normal accumulated statistics dictionary.','instruction_rvas':['0x2a15d75','0x2a15e30','0x2a15f2e','0x2a1604d']},
+       {'method':'HeroPropertyComponent.Initialize / SupplyBattleReportProperty','finding':'Type-12 branch chooses SupplyBattleReportProperty, which initializes ATK property 1 to 0 and HP/HP-max properties 4/3 to 100. These are presentation setup values, not the report hero ATK/HP.','instruction_rvas':['0x297799a','0x29779b9','0x2977bc4','0x2977bdc','0x2977bf7','0x2977c02']},
+       {'method':'SoldierPropertyComponent.SupplyBattleReplayProperty','finding':'Initializes base property 1 (the separately audited ATK property mapping) to zero and HP/HP-max to 100. This is not proof no later property modifier or flat effect can contribute damage.','instruction_rvas':['0x2991517','0x299151a','0x2991522']}
+      ],'conclusions':['Report-versus-replay totals can share supplied records; agreement is not an independent combat-formula check.','Visible replay timing can be tested as a descriptive reconstruction covariate, but is not established as the authoritative original fight clock.','A fitted lifetime/exposure coefficient cannot be identified as soldier DPS from these totals.','The Raid animation/coefficient model is not established as the original world-battle calculation engine.'],
+      'scope':'Manually traced selected static paths and hash/field checks only. Exact live dispatch and active ILFix overrides were not dynamically inspected. Original server battle equations and the Type-11100 field/Lite bridge remain untraced.'}
+def main():
+    p=argparse.ArgumentParser(description=__doc__);base=ROOT/'tmp/scoring-close-2026-11-05/native';p.add_argument('--image',type=Path,default=base/'verified/native-rva-image.bin');p.add_argument('--index',type=Path,default=base/'verified/method-index.json');p.add_argument('--metadata',type=Path,default=base/'metadata.dat');p.add_argument('--output',type=Path,default=ROOT/'outputs/hero-report/Replay-Authority-Audit.json');a=p.parse_args();r=build(a.image.read_bytes(),a.index.read_bytes(),a.metadata.read_bytes());a.output.write_text(json.dumps(r,indent=2)+'\n',encoding='utf-8');print(f"Fingerprinted {len(r['methods'])} replay methods; stored-round and imported-statistics paths documented.")
+if __name__=='__main__':main()

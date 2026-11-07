@@ -1,0 +1,60 @@
+{
+  "schema": 1,
+  "battle_id": "pvp-defense-2026-11-07-a",
+  "candidate_stages": {
+    "rosie": "survivor_rosie_rank_4_3",
+    "freja": "survivor_freja_rank_9_2",
+    "becca": "survivor_becca_rank_4_1",
+    "maddie": "survivor_maddie_rank_9_2",
+    "ray": "survivor_ray_rank_6_4"
+  },
+  "stage_provenance": "Candidate exact steps from the existing build snapshot, consistent with recorded rank bars. Their combined hero power, with video-observed skills/gear and Signature power, exactly reconciles the report; this does not independently establish each ambiguous rank sector.",
+  "signature": {
+    "becca": 1
+  },
+  "signature_power": 98880,
+  "signature_provenance": "Video Signature panel; linked 20% ATK skill remains excluded because its runtime path is unverified.",
+  "unknown_context": [
+    "Research flat stats and percentages",
+    "Behemoth hero stat bonuses and battle modifiers",
+    "Collection and troop-related damage modifiers",
+    "Target-by-target defence, criticals, shields and power correction"
+  ],
+  "policy": "Only known build bonuses enter fixed features. Fitted nuisance parameters are experiment outputs, never saved build upgrades or production scoring weights.",
+  "candidate_army_context": {
+    "enabled": true,
+    "scene": "all",
+    "behemothSource": "configured",
+    "behemothBuilds": {
+      "caser": {
+        "level": 101,
+        "star": 82
+      },
+      "water_dragon": {
+        "level": 42,
+        "star": 20
+      }
+    },
+    "research": {
+      "new_hero_infantry_hero_health_1": 5,
+      "new_hero_infantry_hero_attack_1": 5,
+      "new_hero_infantry_hero_defense_1": 5,
+      "new_hero_cavalry_hero_health_1": 5,
+      "new_hero_cavalry_hero_attack_1": 5,
+      "new_hero_cavalry_hero_defense_1": 5,
+      "new_hero_ranged_hero_health_1": 5,
+      "new_hero_ranged_hero_attack_1": 5,
+      "new_hero_ranged_hero_defense_1": 5,
+      "new_hero_infantry_hero_health_2": 5,
+      "new_hero_infantry_hero_attack_2": 5,
+      "new_hero_infantry_hero_defense_2": 5,
+      "new_hero_cavalry_hero_health_2": 1,
+      "new_hero_cavalry_hero_attack_2": 1,
+      "new_hero_cavalry_hero_defense_2": 1
+    },
+    "signature": {
+      "becca": 1
+    }
+  },
+  "candidate_context_provenance": "Existing saved build snapshot: observed Behemoth levels and Signature agree with the video. Research levels and Behemoth exact star steps are candidate historical context, not independently established for the fight; evaluated separately from video-only inputs."
+}

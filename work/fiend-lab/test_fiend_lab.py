@@ -15,6 +15,16 @@ class FiendLabTests(unittest.TestCase):
         cls.data = json.loads((ROOT / 'outputs/fiend-lab/Fiend-Encounter-Data.json').read_text(encoding='utf-8'))
         cls.progression = json.loads((ROOT / 'outputs/hero-report/TilesSurvive-Upgrade-Data.json').read_text(encoding='utf-8'))
 
+    def test_friendly_skill_slots_come_from_skill_no_not_skill_config_values(self):
+        for slug,hero in self.data['heroes'].items():
+            expected={s['id']:s['slot'] for s in self.progression['heroes'][slug]['skills']}
+            self.assertEqual({s['id']:s['slot'] for s in hero['skills']},expected)
+        saved={'stage':'survivor_freja_rank_9_2','skills':{'survivor_freja_skill_3':1}}
+        selected=friendly_skills('freja',saved,self.data['heroes'],self.progression)
+        self.assertEqual(next(s for s in selected if s['id']=='survivor_freja_skill_3')['level'],1)
+        saved['stage']=self.progression['heroes']['freja']['stages'][0]['id']
+        self.assertEqual(next(s for s in friendly_skills('freja',saved,self.data['heroes'],self.progression) if s['id']=='survivor_freja_skill_3')['level'],0)
+
     def test_tusker_level_10_matches_independent_report_inputs(self):
         encounter = self.data['encounters']['gve_boss_new_period_10']
         self.assertEqual(len(encounter['formations']), 5)
