@@ -81,6 +81,8 @@ function specifications(rows){
  const one=(id,label,fn)=>({id,parameter_count:1,labels:[label],candidates:[{parameters:{},features:r=>[fn(r)]}]});
  return [one('planner_offense','current production offense index',r=>r.offense_index),one('full_30s_coefficient','known ATK times 30-second coefficient',r=>r.attack*r.full_coefficient),
   one('observed_lifetime_coefficient','known ATK times observed-lifetime coefficient',r=>r.attack*r.coefficient),
+  one('attack_times_observed_lifetime','known ATK times observed survival seconds; no Raid skill coefficients',r=>r.attack*r.alive_seconds),
+  {id:'attack_lifetime_plus_shared',parameter_count:2,labels:['known ATK times observed survival seconds','observed survival seconds (unidentified shared output)'],candidates:[{parameters:{},features:r=>[r.attack*r.alive_seconds,r.alive_seconds]}]},
   {id:'native_base_defence_grid',parameter_count:2,labels:['native ATK^2/(ATK+2.5*shared_DEF) times observed-lifetime coefficient'],candidates:[0,.25,.5,1,2].map(ratio=>({parameters:{defence_to_mean_known_attack:ratio,shared_defence:ratio*meanAttack},features:r=>[r.attack*r.attack/(r.attack+2.5*ratio*meanAttack)*r.coefficient]}))},
   one('lifetime_only_control','observed survival seconds, with no skill/build information',r=>r.alive_seconds),
   {id:'coefficient_plus_owned_exposure',parameter_count:2,labels:['known ATK times observed-lifetime coefficient','observed survival seconds (unassigned owned-output term, not identified soldier damage)'],candidates:[{parameters:{},features:r=>[r.attack*r.coefficient,r.alive_seconds]}]},

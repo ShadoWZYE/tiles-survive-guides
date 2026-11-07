@@ -6,7 +6,7 @@ const data=require('../../outputs/hero-report/Hero-Army-Context.json'),upgrades=
 test('unrecorded Signature Gear, Research and Behemoth values never supply default bonuses',()=>{
  for(const slug of Object.keys(estimates.heroes)){
   const empty=context.resolve(slug,{enabled:true},data,'recorded');assert.deepEqual(empty.flat,[0,0,0]);
-  const partial=context.resolve(slug,{enabled:true,behemothSource:'configured',behemothBuilds:{caser:{}},signature:{[slug]:null},research:{research_group_troop_attack_percent_1:null}},data,'recorded');
+  const partial=context.resolve(slug,{enabled:true,behemothSource:'configured',behemothBuilds:{caser:{}},signature:{[slug]:null},research:{new_hero_all_hero_attack:null}},data,'recorded');
   assert.deepEqual(partial.flat,[0,0,0]);
   const plain=model.evaluate(slug,null,upgrades,estimates,0,null,true),withMissing=model.evaluate(slug,null,upgrades,estimates,0,partial.flat,true);
   assert.equal(withMissing.score,plain.score);
@@ -21,10 +21,10 @@ test('exclusion, malformed profiles and comparison basis are explicit',()=>{
  assert.deepEqual(clean.research,{});assert.deepEqual(clean.signature,{});assert.deepEqual(clean.behemoth,[null,null,null]);
 });
 test('research applies current row once and respects recipient and encounter',()=>{
- const key='research_group_troop_attack_percent_1',row=data.research[key].levels.find(r=>r.level===2);
+ const key='new_hero_all_hero_attack',row=data.research[key].levels.find(r=>r.level===2);
  const expected=row.effects.filter(e=>e.scene==='all'&&e.stat===0).reduce((s,e)=>s+e.value,0);
  assert.equal(context.resolve('rosie',{enabled:true,research:{[key]:2}},data).flat[0],expected);
- assert.equal(expected,13);
+ assert.equal(expected,300);
  for(const [key,node] of Object.entries(data.research))for(const row of node.levels.slice(0,1)){
   for(const [slug,hero] of Object.entries(data.heroes))for(const scene of ['all','pve','gve']){
    const expected=[0,0,0];for(const e of row.effects)if((e.scope==='all'||e.scope===hero.role||e.scope===hero.faction)&&(e.scene==='all'||e.scene===scene))expected[e.stat]+=e.value;
@@ -67,4 +67,12 @@ test('Behemoth star display follows client six-sector fills and thirty-step colo
  assert.equal(context.starView(31).phase,2);assert.equal(context.starView(31).star,1);assert.equal(context.starView(31).step,1);
  assert.ok(context.starView(360).slots.every(s=>s.overlay===12&&s.steps===6));assert.ok(context.starView(900).slots.every(s=>s.overlay===12&&s.steps===6));
  for(const beast of Object.values(data.behemoths))for(const row of beast.stars){const v=context.starView(row.level);assert.equal((v.phase-1)*30+(v.star-1)*6+v.step,row.level);}
+});
+
+test('legacy research and unavailable Behemoth records cannot return as scored profile bonuses',()=>{
+ assert.deepEqual(Object.keys(data.behemoths).sort(),['caser','water_dragon']);
+ assert.ok(Object.values(data.research_trees).every(t=>!t.legacy));
+ assert.equal(data.research_trees['4300013'].gated,true);
+ const old={enabled:true,research:{research_group_troop_attack_percent_1:10},behemothSource:'configured',behemothBuilds:{griffon_eagle:{level:100,star:100},fire_dragon:{level:100,star:100}}};
+ const cleaned=context.sanitize(old,data);assert.deepEqual(cleaned.research,{});assert.deepEqual(cleaned.behemothBuilds,{});assert.deepEqual(context.resolve('rosie',old,data,'recorded').flat,[0,0,0]);
 });

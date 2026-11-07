@@ -11,7 +11,7 @@ const {pathToFileURL}=require('node:url'),path=require('node:path'),assert=requi
   assert.match(await basis.innerText(),/Equal builds · max T5/);assert.match(await basis.innerText(),/Max heroes · no gear/);
   const expected=await page.evaluate(()=>{
    const u=window.__UPGRADE_DATA__,e=window.__ESTIMATE_DATA__;
-   const number=v=>v.toLocaleString('en-US',{maximumFractionDigits:1});
+   const number=v=>v.toFixed(2);
    return Object.fromEntries(['reference','flat'].map(b=>[b,number(window.EstimateModel.compare('rosie',null,u,e,b).score)]));
   });
   const card=page.locator('.hero-card[data-slug="rosie"] .index');

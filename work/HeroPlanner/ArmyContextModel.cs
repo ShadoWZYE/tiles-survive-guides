@@ -11,7 +11,7 @@ public sealed class ArmyContextData
  public static ArmyContextData Parse(string json)=>JsonSerializer.Deserialize<ArmyContextData>(json,new JsonSerializerOptions{PropertyNamingPolicy=JsonNamingPolicy.SnakeCaseLower})!;
 }
 public sealed class BehemothStarDisplay {public int Tiers {get;set;}=12;public int Slots {get;set;}=5;public int StepsPerStar {get;set;}=6;public int StepsPerTier {get;set;}=30;}
-public sealed class ArmyResearchTree {public string Name {get;set;}="";public bool Legacy {get;set;} public int Order {get;set;}}
+public sealed class ArmyResearchTree {public string Name {get;set;}="";public bool Legacy {get;set;} public bool Gated {get;set;} public string AvailabilityNote {get;set;}=""; public int Order {get;set;}}
 public sealed class ArmyHeroScope {public string Role {get;set;}="";public string Faction {get;set;}="";}
 public sealed class ArmyContextEntry {public string Tree {get;set;}=""; public int Tier {get;set;} public int Row {get;set;} public string AvailabilityNote {get;set;}=""; public string IconAsset {get;set;}=""; public string SkillIconAsset {get;set;}=""; public string SkillName {get;set;}=""; public string Name {get;set;}="";public List<ArmyContextLevel> Levels {get;set;}=[];public List<ArmyContextLevel> Stars {get;set;}=[];}
 public sealed class ArmyContextLevel {public int Level {get;set;} public List<ArmyContextEffect> Effects {get;set;}=[];public List<string> Unmodeled {get;set;}=[];public bool LinkedSkill {get;set;} public string Description {get;set;}="";}

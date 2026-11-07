@@ -111,7 +111,7 @@
   },
   "retrospective_reconstruction": {
     "artifact": "Retrospective-Damage-Reconstruction.json",
-    "sha256": "f06409369e3f1da12b98fc7ce390d6c6073164625f4907af0ec78ee848fa8532",
+    "sha256": "5b6fefd64ba31ac95580170d4c3878e26809089513456b01647a10984098c312",
     "independent_battles": 1,
     "outgoing_models": {
       "planner_offense": {
@@ -128,6 +128,16 @@
         "fitted_wape": 0.2997020221695689,
         "worst_owner_error": 0.5566973086439109,
         "internal_leave_one_owner_out_wape": 0.3789471912345767
+      },
+      "attack_times_observed_lifetime": {
+        "fitted_wape": 0.16084748289654777,
+        "worst_owner_error": 0.2857792070814936,
+        "internal_leave_one_owner_out_wape": 0.2206736656895571
+      },
+      "attack_lifetime_plus_shared": {
+        "fitted_wape": 0.09868609049756176,
+        "worst_owner_error": 0.4223414499931215,
+        "internal_leave_one_owner_out_wape": 0.14832882156853572
       },
       "native_base_defence_grid": {
         "fitted_wape": 0.2997020221695689,

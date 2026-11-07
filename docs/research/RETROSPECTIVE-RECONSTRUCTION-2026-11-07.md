@@ -11,10 +11,14 @@ The most complete recorded PvP case has five friendly hero rows, 32.79M displaye
 | Current planner offense index + shared scale | 1 | 25.1% | 64.2% | 30.3% |
 | ATK × full 30-second coefficient | 1 | 27.2% | 38.5% | 39.3% |
 | ATK × observed-lifetime coefficient | 1 | 30.0% | 55.7% | 37.9% |
+| Known ATK × observed survival time | 1 | 16.1% | 28.6% | 22.1% |
+| ATK × survival time + shared exposure | 2 | 9.9% | 42.2% | 14.8% |
 | Native base helper + fitted defence grid | 2 | 30.0% | 55.7% | 37.9% |
 | Lifetime-only control | 1 | 9.9% | 42.2% | 12.1% |
 | Coefficient + shared exposure term | 2 | 9.9% | 42.2% | 14.7% |
 | Basic/other coefficients + exposure | 3 | 9.9% | 41.6% | 16.0% |
+
+The additional **ATK × observed survival time** probe uses the same single shared fitted scale as the production-index probe, and no Raid skill coefficients. It gives **16.1% fitted WAPE**, **28.6% worst-owner error** and **22.1% internal leave-one-owner-out WAPE**, versus 25.1%, 64.2% and 30.3% for the production offense proxy. This is a better same-fight reconstruction, not a replacement general hero ranking: survival times come from the recorded outcome and are not predicted. Adding a second shared exposure term collapses back to the lifetime-only control; it does not identify troop DPS.
 
 WAPE is the sum of absolute row errors divided by the sum of observed row damage. It is not the difference between team totals. One shared multiplier can make a total look right while individual heroes are very wrong; both mean and worst-row error are shown. Nonnegative least squares fits at most three shared coefficients. No separate multiplier is fitted for each hero.
 

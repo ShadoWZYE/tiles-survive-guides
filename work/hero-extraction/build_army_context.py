@@ -55,6 +55,7 @@ def export(source,language,audited_date="2026-11-04"):
         fx,excluded=effects(r['Benefits'])
         if not fx:continue
         g=groups[r['Group']];key=g['Id']
+        if trees[g['Tree']]['IsOld']:continue
         entry=research.setdefault(key,{'name':lang.get(g['Name'],key)+' · '+lang.get(g['LevelRoman'],g['LevelRoman'].replace('roman_numeral_','')),'levels':[],'icon_asset':g['Image'],'tree':str(g['Tree']),'tier':g['Tier'],'row':g['Row']})
         entry['levels'].append({'level':r['Level'],'effects':fx,'unmodeled':excluded,'linked_skill':False})
     for entry in research.values():
@@ -64,6 +65,7 @@ def export(source,language,audited_date="2026-11-04"):
     base_rows={r['InternalId']:r for r in tables['behemoth_base_data']}
     behemoths={}
     for beast in tables['behemoth_base']:
+        if beast['ServerOpenDays']>=99999:continue
         entries={}
         for table_name,key,field in [('behemoth_level','levels','BehemothLevel'),('behemoth_star_level','stars','BehemothStarLevelTotal')]:
             values=[]
@@ -77,8 +79,8 @@ def export(source,language,audited_date="2026-11-04"):
             entries[key]=sorted(values,key=lambda r:r['level'])
         if not any(row['effects'] for row in entries['levels']+entries['stars']):continue
         assert all(len({row['level'] for row in entries[k]})==len(entries[k]) for k in ['levels','stars'])
-        behemoths[beast['Id']]={'name':lang.get(beast['ArticleName'],beast['Id'])+' ('+beast['Id']+')','icon_asset':beast['PhotoIcon'],'availability_note':('Gated client entry; live availability is unconfirmed.' if beast['ServerOpenDays']>=99999 else 'Confirm availability and applicability in-game.'),**entries}
-    return {'version':5,'audited_date':audited_date,'signature':signature,'research':research,'behemoths':behemoths,'behemoth_star_display':{'tiers':int(next(r['Value'] for r in tables['game_configs'] if r['Id']=='behemoth_show_graduate_star'))//5,'slots':5,'steps_per_star':6,'steps_per_tier':30,'sprites':['sp_base_titan_star_'+str(i) for i in range(13)]},'research_trees':{str(i):{'name':lang.get(t['Name'],t['Name']),'legacy':bool(t['IsOld']),'order':t['Position']} for i,t in trees.items() if any(g['tree']==str(i) for g in research.values())},
+        behemoths[beast['Id']]={'name':lang.get(beast['ArticleName'],beast['Id']),'icon_asset':beast['PhotoIcon'],'availability_note':'Record this Behemoth only if owned. Unknown levels and stars add no bonus.',**entries}
+    return {'version':6,'audited_date':audited_date,'signature':signature,'research':research,'behemoths':behemoths,'behemoth_star_display':{'tiers':int(next(r['Value'] for r in tables['game_configs'] if r['Id']=='behemoth_show_graduate_star'))//5,'slots':5,'steps_per_star':6,'steps_per_tier':30,'sprites':['sp_base_titan_star_'+str(i) for i in range(13)]},'research_trees':{str(i):{'name':lang.get(t['Name'],t['Name']),'legacy':bool(t['IsOld']),'order':t['Position'],'gated':i in [4300013,4300014,4300015,4300016],'availability_note':('Client branch behind '+t['ShowUnlock']+'; requires 118 learned research entries in Special Forces. Live availability is unconfirmed.' if i in [4300013,4300014,4300015,4300016] else ''),'feature_gate':t['ShowUnlock'],'research_prerequisites':t['NeedResearchTree']} for i,t in trees.items() if any(g['tree']==str(i) for g in research.values())},
 
       'heroes':{r['asset_slug']:{'role':r['role'],'faction':r['faction']} for r in heroes},
       'source_hashes':{n:hashlib.sha256((source/(n+'.cfg')).read_bytes()).hexdigest() for n in names},

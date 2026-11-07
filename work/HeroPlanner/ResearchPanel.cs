@@ -9,6 +9,7 @@ public partial class MainWindow
     private readonly Dictionary<string, int> _researchEdits = [];
     private string _researchTree = "4300006", _researchSearch = "";
     private bool _researchRecordedOnly, _researchChangedOnly;
+    private bool _showGatedResearch;
 
     private static string ResearchEffects(ArmyContextLevel? row) => row is null ? "Unknown / not recorded — excluded from estimates" :
         string.Join(" / ", row.Effects.Select(e => $"{(e.Scope == "all" ? "All heroes" : e.Scope)} · {new[] { "ATK", "DEF", "HP" }[e.Stat]} +{e.Value:N0}" + (e.Scene == "all" ? "" : $" ({e.Scene.ToUpperInvariant()})")));
@@ -17,12 +18,14 @@ public partial class MainWindow
     {
         var panel = ResearchPanel; panel.Children.Clear();
         panel.Children.Add(CopyText("Research", true));
-        panel.Children.Add(CopyText($"Match the icon, branch and numbered research to your game. Only the {_armyContextData.Research.Count} nodes with supported hero-stat bonuses are shown. Economy and troop multipliers remain excluded. Legacy branches come from older client trees; confirm the tree in your game."));
+        panel.Children.Add(CopyText("Match the icon, branch and numbered research to your game. Legacy technology is excluded. Faction Power branches exist in the client files behind feature and Special Forces prerequisites; live availability is unconfirmed. They are hidden by default. Record them only if you can match them in-game."));
+        var gated = new CheckBox { Content="Show gated client branches (availability unconfirmed)", IsChecked=_showGatedResearch, Foreground=Brushes.White, Margin=new Thickness(0,6,0,10) };panel.Children.Add(gated);
+        gated.Click+=(_,_)=>{_showGatedResearch=gated.IsChecked==true;if(!_showGatedResearch&&_armyContextData.ResearchTrees.GetValueOrDefault(_researchTree)?.Gated==true)_researchTree="4300006";RenderResearch();};
         var toolbar = new WrapPanel(); panel.Children.Add(toolbar);
         var tree = new ComboBox { Width = 210 }; tree.Items.Add(new ComboBoxItem { Content = "All branches", Tag = "all" }); tree.SelectedIndex = 0;
-        foreach (var (key, value) in _armyContextData.ResearchTrees.OrderBy(x => x.Value.Order))
+        foreach (var (key, value) in _armyContextData.ResearchTrees.Where(x=>!x.Value.Legacy&&(_showGatedResearch||!x.Value.Gated)).OrderBy(x => x.Value.Order))
         {
-            var item = new ComboBoxItem { Content = value.Name + (value.Legacy ? " · legacy" : ""), Tag = key }; tree.Items.Add(item);
+            var item = new ComboBoxItem { Content = value.Name + (value.Gated ? " · gated" : ""), Tag = key,ToolTip=value.AvailabilityNote }; tree.Items.Add(item);
             if (key == _researchTree) tree.SelectedItem = item;
         }
         Field(toolbar, "Research branch", tree);
@@ -48,6 +51,7 @@ public partial class MainWindow
         {
             area.Children.Clear(); shown = 0;
             var rows = _armyContextData.Research.Where(x =>
+                (!_armyContextData.ResearchTrees[x.Value.Tree].Legacy&&(_showGatedResearch||!_armyContextData.ResearchTrees[x.Value.Tree].Gated)) &&
                 (_researchTree == "all" || x.Value.Tree == _researchTree) &&
                 (!_researchRecordedOnly || Value(x.Key) > 0) && (!_researchChangedOnly || _researchEdits.ContainsKey(x.Key)) &&
                 (x.Key + " " + x.Value.Name + " " + ResearchEffects(x.Value.Levels[0])).Contains(_researchSearch.Trim(), StringComparison.OrdinalIgnoreCase))

@@ -113,6 +113,7 @@ public partial class MainWindow : Window
             hero.OffenseIndex = result.Offense; hero.DurabilityIndex = result.Durability; hero.CompositeIndex = result.Score;
         }
         _heroes.Sort((a, b) => { int score = b.CompositeIndex.CompareTo(a.CompositeIndex); return score != 0 ? score : StringComparer.Ordinal.Compare(a.Name, b.Name); });
+        double leader=_heroes.Max(h=>h.CompositeIndex);foreach(var hero in _heroes)hero.RosterLeaderScore=leader;
         HeroRoster.Items.Refresh();
         if (_activeHero is not null) { StatsPanel.DataContext = null; StatsPanel.DataContext = _activeHero; }
         ArmyContextButton.Content=_armyContext.Enabled&&_comparisonBasis!="flat"?"Army Setup: ON (partial)":"Army Setup";
@@ -515,6 +516,7 @@ public partial class MainWindow : Window
     {
         if (OptimizerPanel is null || TopConfigurationsPanel is null || FormationGuidePanel is null) return;
         RefreshArmyButtons();
+        RefreshSquadDataNotice();
         bool complete = _selected.Count == 5 && _selected.All(h=>h.Estimate?.Comparable!=false);
         OptimizerPanel.Visibility = complete ? Visibility.Collapsed : Visibility.Visible;
         TopConfigurationsPanel.Visibility = complete ? Visibility.Collapsed : Visibility.Visible;

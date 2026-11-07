@@ -1,0 +1,521 @@
+{
+  "schema": 1,
+  "client_build": "2.6.400.304",
+  "private_image_sha256": "5afef9adf2a4dc85b40adc702149a45bf10728ef2c9de1895f3b648a9128b14d",
+  "native_methods": [
+    {
+      "type": "ResearchTreeConfigCell",
+      "name": "CanShow",
+      "rva": 30654480,
+      "token": "0x6014ba4",
+      "parameter_count": 0,
+      "byte_count": 112,
+      "code_sha256": "d53d43deef85862658d706ece52ae3769d81fc1c764e4b27a10342d7058a3d05"
+    },
+    {
+      "type": "ResearchModule",
+      "name": "IsTreeUnlock",
+      "rva": 22182736,
+      "token": "0x600db67",
+      "parameter_count": 1,
+      "byte_count": 816,
+      "code_sha256": "1413a302635a2e0aa258da571bca4945cae0702092c9a4dd1eb9db165f2718b8"
+    },
+    {
+      "type": "ResearchModule",
+      "name": "GetTreeLearnedCount",
+      "rva": 22169920,
+      "token": "0x600db65",
+      "parameter_count": 3,
+      "byte_count": 720,
+      "code_sha256": "7e5260b20bd6a7cf18fb4e00da749badd89757729b96eaaa39fddc10314a71d0"
+    }
+  ],
+  "research": {
+    "legacy_excluded": [
+      "research_tree_development",
+      "research_tree_battle",
+      "research_tree_economic"
+    ],
+    "faction_branches": [
+      {
+        "id": "new_tree_faction_mountain",
+        "feature_gate": "research_tree_new_tree_faction_unlock",
+        "research_prerequisites": {
+          "4300009": 118
+        }
+      },
+      {
+        "id": "new_tree_faction_wilderness",
+        "feature_gate": "research_tree_new_tree_faction_unlock",
+        "research_prerequisites": {
+          "4300009": 118
+        }
+      },
+      {
+        "id": "new_tree_faction_sky",
+        "feature_gate": "research_tree_new_tree_faction_unlock",
+        "research_prerequisites": {
+          "4300009": 118
+        }
+      },
+      {
+        "id": "new_tree_faction_sea",
+        "feature_gate": "research_sea_tree_new_tree_faction_unlock",
+        "research_prerequisites": {
+          "4300009": 118
+        }
+      }
+    ],
+    "static_trace": "ResearchTreeConfigCell.CanShow passes ShowUnlock at offset 64 to FeatureOpenModule.IsFeatureOpen. IsTreeUnlock separately checks learned-tree prerequisites. GetTreeLearnedCount increments its learned count for topology child entries passing IsLearn. This does not establish the live gate state or inspect active ILFix overrides."
+  },
+  "behemoths": {
+    "normal_catalogue": [
+      "caser",
+      "water_dragon"
+    ],
+    "unavailable_excluded": [
+      {
+        "id": "behemoth_01",
+        "server_open_days": 99999,
+        "name_key": "behemoth_main_name_title",
+        "icon": "sp_icon_bubble_titan_cultivate"
+      },
+      {
+        "id": "behemoth_02",
+        "server_open_days": 99999,
+        "name_key": "behemoth2_main_name_title",
+        "icon": ""
+      },
+      {
+        "id": "behemoth_daily",
+        "server_open_days": 99999,
+        "name_key": "",
+        "icon": ""
+      },
+      {
+        "id": "behemoth_soc_infection",
+        "server_open_days": 99999,
+        "name_key": "",
+        "icon": ""
+      },
+      {
+        "id": "griffon_eagle",
+        "server_open_days": 99999,
+        "name_key": "water_dragon_name_title",
+        "icon": "sp_icon_bubble_water_dragon_cultivate"
+      },
+      {
+        "id": "fire_dragon",
+        "server_open_days": 99999,
+        "name_key": "behemoth_only_fire_dragon",
+        "icon": "sp_icon_bubble_only_behemoth_cultivate"
+      }
+    ],
+    "release_note": "99999 is a configured gate, not a future release announcement. griffon_eagle shares water_dragon name/icon keys; their records are not merged or added together."
+  },
+  "star_fill": {
+    "asset": "p_titan_star",
+    "bundle_digest": "69df84a87541042f926c7ccd149c8a46",
+    "asset_list_build": "2.6.400.312",
+    "lua_sha256": "1cc91352a6a64c994a3546777f8576c38445000b0a1060eb30c32e7b07853e4f",
+    "images": [
+      {
+        "name": "p_star_icon_1",
+        "fill_method": 4,
+        "fill_origin": 1,
+        "clockwise": 0
+      },
+      {
+        "name": "p_star_icon_2",
+        "fill_method": 4,
+        "fill_origin": 1,
+        "clockwise": 0
+      },
+      {
+        "name": "p_star_icon_3",
+        "fill_method": 4,
+        "fill_origin": 1,
+        "clockwise": 0
+      },
+      {
+        "name": "p_star_icon_4",
+        "fill_method": 4,
+        "fill_origin": 1,
+        "clockwise": 0
+      },
+      {
+        "name": "p_star_icon_5",
+        "fill_method": 4,
+        "fill_origin": 1,
+        "clockwise": 0
+      }
+    ],
+    "unity_enum_source": "https://github.com/Unity-Technologies/uGUI/blob/main/com.unity.ugui/Runtime/UGUI/UI/Core/Image.cs",
+    "interpretation": "Radial360, right origin, counter-clockwise. Lua sets partial fill to remaining steps / 6."
+  },
+  "selected_field_skill_links": [
+    {
+      "hero": "rosie",
+      "skill": "survivor_rosie_attack",
+      "raid_skill_id": 81200022,
+      "field_skill": "survivor_rosie_attack_lite",
+      "initial_cd_raw": 100,
+      "common_cd_raw": 100,
+      "effects": [
+        {
+          "Id": "survivor_rosie_attack_lite",
+          "Type": 11100,
+          "EffectAttrRate": 0.0,
+          "TargetTypeLite": 1,
+          "TargetNum": 1,
+          "AttackCount": 1
+        }
+      ]
+    },
+    {
+      "hero": "rosie",
+      "skill": "survivor_rosie_skill_1",
+      "raid_skill_id": 81200024,
+      "field_skill": "survivor_rosie_skill_lite_1",
+      "initial_cd_raw": 300,
+      "common_cd_raw": 300,
+      "effects": [
+        {
+          "Id": "survivor_rosie_skill_lite_1",
+          "Type": 11100,
+          "EffectAttrRate": 0.0,
+          "TargetTypeLite": 1,
+          "TargetNum": 1,
+          "AttackCount": 1
+        }
+      ]
+    },
+    {
+      "hero": "rosie",
+      "skill": "survivor_rosie_skill_2",
+      "raid_skill_id": 81200027,
+      "field_skill": "survivor_rosie_skill_lite_2",
+      "initial_cd_raw": 300,
+      "common_cd_raw": 300,
+      "effects": [
+        {
+          "Id": "survivor_rosie_skill_lite_2",
+          "Type": 11100,
+          "EffectAttrRate": 0.0,
+          "TargetTypeLite": 0,
+          "TargetNum": 0,
+          "AttackCount": 1
+        }
+      ]
+    },
+    {
+      "hero": "rosie",
+      "skill": "survivor_rosie_skill_3",
+      "raid_skill_id": 81200028,
+      "field_skill": "survivor_rosie_skill_lite_3",
+      "initial_cd_raw": 0,
+      "common_cd_raw": 0,
+      "effects": [
+        {
+          "Id": "survivor_rosie_skill_lite_3",
+          "Type": 11100,
+          "EffectAttrRate": 0.0,
+          "TargetTypeLite": 0,
+          "TargetNum": 0,
+          "AttackCount": 0
+        }
+      ]
+    },
+    {
+      "hero": "freja",
+      "skill": "survivor_freja_attack",
+      "raid_skill_id": 81200029,
+      "field_skill": "survivor_freja_attack_lite",
+      "initial_cd_raw": 100,
+      "common_cd_raw": 100,
+      "effects": [
+        {
+          "Id": "survivor_freja_attack_lite",
+          "Type": 11100,
+          "EffectAttrRate": 0.0,
+          "TargetTypeLite": 1,
+          "TargetNum": 1,
+          "AttackCount": 1
+        }
+      ]
+    },
+    {
+      "hero": "freja",
+      "skill": "survivor_freja_skill_1",
+      "raid_skill_id": 81200030,
+      "field_skill": "survivor_freja_skill_lite_1",
+      "initial_cd_raw": 300,
+      "common_cd_raw": 300,
+      "effects": [
+        {
+          "Id": "survivor_freja_skill_lite_1",
+          "Type": 11100,
+          "EffectAttrRate": 0.0,
+          "TargetTypeLite": 1,
+          "TargetNum": 1,
+          "AttackCount": 1
+        }
+      ]
+    },
+    {
+      "hero": "freja",
+      "skill": "survivor_freja_skill_2",
+      "raid_skill_id": 81200031,
+      "field_skill": "survivor_freja_skill_lite_2",
+      "initial_cd_raw": 0,
+      "common_cd_raw": 0,
+      "effects": [
+        {
+          "Id": "survivor_freja_skill_lite_2",
+          "Type": 11100,
+          "EffectAttrRate": 0.0,
+          "TargetTypeLite": 0,
+          "TargetNum": 0,
+          "AttackCount": 0
+        }
+      ]
+    },
+    {
+      "hero": "freja",
+      "skill": "survivor_freja_skill_3",
+      "raid_skill_id": 81200032,
+      "field_skill": "survivor_freja_skill_lite_3",
+      "initial_cd_raw": 0,
+      "common_cd_raw": 0,
+      "effects": [
+        {
+          "Id": "survivor_freja_skill_lite_3",
+          "Type": 11100,
+          "EffectAttrRate": 0.0,
+          "TargetTypeLite": 0,
+          "TargetNum": 0,
+          "AttackCount": 0
+        }
+      ]
+    },
+    {
+      "hero": "becca",
+      "skill": "survivor_becca_attack",
+      "raid_skill_id": 81200060,
+      "field_skill": "survivor_becca_attack_lite",
+      "initial_cd_raw": 100,
+      "common_cd_raw": 100,
+      "effects": [
+        {
+          "Id": "survivor_becca_attack_lite",
+          "Type": 11100,
+          "EffectAttrRate": 0.0,
+          "TargetTypeLite": 1,
+          "TargetNum": 1,
+          "AttackCount": 1
+        }
+      ]
+    },
+    {
+      "hero": "becca",
+      "skill": "survivor_becca_skill_1",
+      "raid_skill_id": 81200061,
+      "field_skill": "survivor_becca_skill_lite_1",
+      "initial_cd_raw": 300,
+      "common_cd_raw": 300,
+      "effects": [
+        {
+          "Id": "survivor_becca_skill_lite_1",
+          "Type": 11100,
+          "EffectAttrRate": 0.0,
+          "TargetTypeLite": 1,
+          "TargetNum": 1,
+          "AttackCount": 1
+        }
+      ]
+    },
+    {
+      "hero": "becca",
+      "skill": "survivor_becca_skill_2",
+      "raid_skill_id": 81200063,
+      "field_skill": "survivor_becca_skill_lite_2",
+      "initial_cd_raw": 0,
+      "common_cd_raw": 0,
+      "effects": [
+        {
+          "Id": "survivor_becca_skill_lite_2",
+          "Type": 11100,
+          "EffectAttrRate": 0.0,
+          "TargetTypeLite": 0,
+          "TargetNum": 0,
+          "AttackCount": 0
+        }
+      ]
+    },
+    {
+      "hero": "becca",
+      "skill": "survivor_becca_skill_3",
+      "raid_skill_id": 81200064,
+      "field_skill": "survivor_becca_skill_lite_3",
+      "initial_cd_raw": 0,
+      "common_cd_raw": 0,
+      "effects": [
+        {
+          "Id": "survivor_becca_skill_lite_3",
+          "Type": 11100,
+          "EffectAttrRate": 0.0,
+          "TargetTypeLite": 0,
+          "TargetNum": 0,
+          "AttackCount": 0
+        }
+      ]
+    },
+    {
+      "hero": "maddie",
+      "skill": "survivor_maddie_attack",
+      "raid_skill_id": 81200281,
+      "field_skill": "survivor_maddie_attack_lite",
+      "initial_cd_raw": 100,
+      "common_cd_raw": 100,
+      "effects": [
+        {
+          "Id": "survivor_maddie_attack_lite",
+          "Type": 11100,
+          "EffectAttrRate": 0.0,
+          "TargetTypeLite": 1,
+          "TargetNum": 1,
+          "AttackCount": 1
+        }
+      ]
+    },
+    {
+      "hero": "maddie",
+      "skill": "survivor_maddie_skill_1",
+      "raid_skill_id": 81200282,
+      "field_skill": "survivor_maddie_skill_lite_1",
+      "initial_cd_raw": 300,
+      "common_cd_raw": 300,
+      "effects": [
+        {
+          "Id": "survivor_maddie_skill_lite_1",
+          "Type": 11100,
+          "EffectAttrRate": 0.0,
+          "TargetTypeLite": 1,
+          "TargetNum": 1,
+          "AttackCount": 1
+        }
+      ]
+    },
+    {
+      "hero": "maddie",
+      "skill": "survivor_maddie_skill_2",
+      "raid_skill_id": 81200285,
+      "field_skill": "survivor_maddie_skill_lite_2",
+      "initial_cd_raw": 300,
+      "common_cd_raw": 300,
+      "effects": [
+        {
+          "Id": "survivor_maddie_skill_lite_2",
+          "Type": 11100,
+          "EffectAttrRate": 0.0,
+          "TargetTypeLite": 2,
+          "TargetNum": 0,
+          "AttackCount": 1
+        }
+      ]
+    },
+    {
+      "hero": "maddie",
+      "skill": "survivor_maddie_skill_3",
+      "raid_skill_id": 81200287,
+      "field_skill": "survivor_maddie_skill_lite_3",
+      "initial_cd_raw": 0,
+      "common_cd_raw": 0,
+      "effects": [
+        {
+          "Id": "survivor_maddie_skill_lite_3",
+          "Type": 11100,
+          "EffectAttrRate": 0.0,
+          "TargetTypeLite": 0,
+          "TargetNum": 0,
+          "AttackCount": 0
+        }
+      ]
+    },
+    {
+      "hero": "ray",
+      "skill": "survivor_ray_attack",
+      "raid_skill_id": 81200353,
+      "field_skill": "survivor_ray_attack_lite",
+      "initial_cd_raw": 100,
+      "common_cd_raw": 100,
+      "effects": [
+        {
+          "Id": "survivor_ray_attack_lite",
+          "Type": 11100,
+          "EffectAttrRate": 0.0,
+          "TargetTypeLite": 1,
+          "TargetNum": 1,
+          "AttackCount": 1
+        }
+      ]
+    },
+    {
+      "hero": "ray",
+      "skill": "survivor_ray_skill_1",
+      "raid_skill_id": 81200355,
+      "field_skill": "survivor_ray_skill_lite_1",
+      "initial_cd_raw": 300,
+      "common_cd_raw": 300,
+      "effects": [
+        {
+          "Id": "survivor_ray_skill_lite_1",
+          "Type": 11100,
+          "EffectAttrRate": 0.0,
+          "TargetTypeLite": 1,
+          "TargetNum": 1,
+          "AttackCount": 1
+        }
+      ]
+    },
+    {
+      "hero": "ray",
+      "skill": "survivor_ray_skill_2",
+      "raid_skill_id": 81200361,
+      "field_skill": "survivor_ray_skill_lite_2",
+      "initial_cd_raw": 300,
+      "common_cd_raw": 300,
+      "effects": [
+        {
+          "Id": "survivor_ray_skill_lite_2",
+          "Type": 11100,
+          "EffectAttrRate": 0.0,
+          "TargetTypeLite": 0,
+          "TargetNum": 2,
+          "AttackCount": 1
+        }
+      ]
+    },
+    {
+      "hero": "ray",
+      "skill": "survivor_ray_skill_3",
+      "raid_skill_id": 81200362,
+      "field_skill": "survivor_ray_skill_lite_3",
+      "initial_cd_raw": 0,
+      "common_cd_raw": 0,
+      "effects": [
+        {
+          "Id": "survivor_ray_skill_lite_3",
+          "Type": 11100,
+          "EffectAttrRate": 0.0,
+          "TargetTypeLite": 0,
+          "TargetNum": 0,
+          "AttackCount": 0
+        }
+      ]
+    }
+  ],
+  "field_damage_formula_identified": false,
+  "field_scope": "Selected linked Lite effect records have Type 11100 and zero EffectAttrRate. These rows do not expose a verified numerical damage formula. RaidNewSkill is a separate link; substituting its coefficient/animation into the original world report remains unverified."
+}

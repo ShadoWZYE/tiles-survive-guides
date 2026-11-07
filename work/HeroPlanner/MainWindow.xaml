@@ -55,18 +55,18 @@
                 </Grid.ColumnDefinitions>
                 <WrapPanel>
                     <Button x:Name="SquadNav" Content="SQUAD BUILDER" Tag="0" Click="Navigation_Click"
-                            Background="#168C87" BorderBrush="#3DE0D4" Padding="14,10" Margin="0,0,6,0" FontWeight="Bold" />
+                            Background="#168C87" BorderBrush="#3DE0D4" Padding="14,10" Margin="0,0,6,4" FontWeight="Bold" />
                     <Button x:Name="StatsNav" Content="HERO STATS" Tag="1" Click="Navigation_Click"
-                            Padding="14,10" Margin="0,0,6,0" FontWeight="Bold" />
+                            Padding="14,10" Margin="0,0,6,4" FontWeight="Bold" />
                     <Button x:Name="SkillsNav" Content="SKILLS" Tag="2" Click="Navigation_Click"
-                            Padding="14,10" Margin="0,0,6,0" FontWeight="Bold" />
+                            Padding="14,10" Margin="0,0,6,4" FontWeight="Bold" />
                     <Button x:Name="RosterNav" Content="MY ROSTER" Tag="3" Click="Navigation_Click"
-                            Padding="14,10" Margin="0,0,6,0" FontWeight="Bold" />
+                            Padding="14,10" Margin="0,0,6,4" FontWeight="Bold" />
                     <Button x:Name="ReleaseNav" Content="RELEASE &amp; ACCESS" Tag="4" Click="Navigation_Click"
-                            Padding="14,10" FontWeight="Bold" />
-                    <Button x:Name="ResearchNav" Content="RESEARCH" Tag="6" Click="Navigation_Click" Padding="14,10" FontWeight="Bold" />
-                    <Button x:Name="BehemothsNav" Content="BEHEMOTHS" Tag="5" Click="Navigation_Click" Padding="14,10" FontWeight="Bold" />
-                    <Button x:Name="ArmyContextButton" Content="Army Setup" Click="ArmySetup_Click" Padding="14,10" FontWeight="Bold" AutomationProperties.Name="Army Setup" />
+                            Padding="14,10" Margin="0,0,6,4" FontWeight="Bold" />
+                    <Button x:Name="ResearchNav" Content="RESEARCH" Tag="6" Click="Navigation_Click" Padding="14,10" Margin="0,0,6,4" FontWeight="Bold" />
+                    <Button x:Name="BehemothsNav" Content="BEHEMOTHS" Tag="5" Click="Navigation_Click" Padding="14,10" Margin="0,0,6,4" FontWeight="Bold" />
+                    <Button x:Name="ArmyContextButton" Content="Army Setup" Click="ArmySetup_Click" Padding="14,10" Margin="0,0,6,4" FontWeight="Bold" AutomationProperties.Name="Army Setup" />
                 </WrapPanel>
                 <TextBlock Visibility="Collapsed" Grid.Column="1" Text="Select a section, then inspect any hero from the roster."
                            HorizontalAlignment="Right" VerticalAlignment="Center" Margin="18,0,10,0"
@@ -145,14 +145,14 @@
                             </ItemsControl.ItemsPanel>
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Button Click="HeroCard_Click" Tag="{Binding}" Padding="0" Margin="5" Width="142" Height="222"
+                                    <Button Click="HeroCard_Click" Tag="{Binding}" Padding="0" Margin="5" Width="142" Height="244"
                                             Background="Transparent" BorderThickness="0">
                                         <Border CornerRadius="12" BorderThickness="3" BorderBrush="{Binding Rarity, Converter={StaticResource RarityBrush}}"
                                                 Background="#203A61" ClipToBounds="True">
                                             <Grid>
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="*" />
-                                                    <RowDefinition Height="72" />
+                                                    <RowDefinition Height="94" />
                                                 </Grid.RowDefinitions>
                                                 <Image Source="{Binding Portrait}" Stretch="UniformToFill" />
                                                 <Border VerticalAlignment="Top" HorizontalAlignment="Left" Margin="7" CornerRadius="7"
@@ -201,6 +201,7 @@
                                                             <Run Text="{Binding IndexPrefix, Mode=OneWay}" /><Run Text="{Binding IndexValue, Mode=OneWay}" />
                                                         </TextBlock>
                                                         <TextBlock Text="{Binding ArmyAssignmentLabel}" FontSize="10" Foreground="{StaticResource AccentBrush}"/>
+                                                        <TextBlock Text="{Binding ModelGapLabel}" FontSize="10" Foreground="{StaticResource MutedInkBrush}" ToolTip="{Binding ScoreBreakdown}"/>
                                                     </StackPanel>
                                                 </Border>
                                             </Grid>
@@ -253,6 +254,7 @@
                                         <Button Content="4" Tag="3" Click="Army_Click" AutomationProperties.Name="Army 4" Margin="3,0" Padding="10,7"/>
                                         <Button Content="5" Tag="4" Click="Army_Click" AutomationProperties.Name="Army 5" Margin="3,0" Padding="10,7"/>
                                     </UniformGrid>
+                                    <StackPanel x:Name="SquadDataNotice" Margin="0,0,0,10" />
                                 <Grid>
                                     <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
                                     <StackPanel>

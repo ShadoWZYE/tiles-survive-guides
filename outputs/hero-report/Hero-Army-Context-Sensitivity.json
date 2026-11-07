@@ -1,5 +1,5 @@
 {
-  "audited_date": "2026-11-06",
+  "audited_date": "2026-11-07",
   "scope": "Individual Balanced estimate sensitivity, controlled maximum T5 builds under My builds context; not full-squad rankings, live outcomes, or win probabilities.",
   "weights_changed": false,
   "weights": {
@@ -9,23 +9,23 @@
   },
   "formula": "flat source bonuses added to ATK/DEF/HP before modeled in-battle passive modifiers; fixed normalization anchors retained",
   "sources": {
-    "survivor_exclusive_gear": "8f8383ce027fb7af1d5295270b28874802eb0a84af6eb2c4eb24d1cfb7bead72",
-    "survivor_exclusive_gear_main": "272dc34ca70e5c9b0a5f206dd55eb50259f699609584e60407174c638e96d16a",
-    "research_main": "a05047cb2662ba4a7857c2bcfffd8c5d78f6f875f688ad1abe709d785c59c87b",
+    "survivor_exclusive_gear": "04541c031a995cc9cea9ad8815a3e1a0d589333fe9fc20adc730bea0dfb3778d",
+    "survivor_exclusive_gear_main": "21aaf73969f5b63aeb6432523927c2a200ba353bd022cca6e20cc71adc938eb9",
+    "research_main": "aa3c8a898ccaadb7d3096c4646785fe53c7ad532a43ad40859bd5b03bfd90d5e",
     "research_group": "7fac4350425d369567560f1f30d46867194d31dccc6a2f7d70f1ceb8e74273eb",
     "research_tree": "4590f66afd93823dc2740abd2fcdc45fbb828901a18b6c0f3f4248fff7a086fc",
-    "benefits": "27aff0b4cf8166cb0785bbe692ce0c6f859eb5849653b4725ba10add1c85bf86",
+    "benefits": "755d06008f624b9f050132878b6cec55189bf7ff6b633a2930552a3c3196eec6",
     "benefits_map": "78e3cca9579c57dfb89e0fa4a6c7549dfac3961651d6b8927285d14e2bbea420",
-    "benefit_calc": "daafbe5cc9bea8278262bd9c4affb87aa969d64f580a855f826df4675ac71e63",
+    "benefit_calc": "eb3e770a1879a83a47fa2059b453cefe535b38efea56f4d3904a8d22e1173787",
     "behemoth_base": "f11b6128be98b80ac5b9057fe07f8b1cf71d727e62264a1e6102177c79821617",
     "behemoth_level": "4edb39ae8101db06e7f8325aee6d8982b23f7a5d3684644e20657a64bde8a3d6",
     "behemoth_star_level": "dc9203f5f90bf75c2d2cec40505138ea12b0f8226cec9d5d704891486bff67bf",
     "behemoth_base_data": "4c258ede2f29b57e679838e45e6995952c0d2b3cf74f6c5f2e880811b62a5030",
-    "survivor_skill_main": "fb1354684941eacf65f3a2c0ce1d2bf3ac60fb7c0ca02f03c8f3bedc72e6a9a9",
-    "survivor_skill_type": "2e77c65f30354614116c4fb60be1683a64daa073246c23434e7c4d54f9f7510b",
-    "survivor_slg_skill_new": "92947c757a5fdfa048545d875cae80d8295a66888ffcbc1a750432fbbb71d5ac",
-    "survivor_slg_effect_new": "9d2275515446c1fdf3348b1f25b6c353ce42b66e9bf19f1aae28e78d33806662",
-    "effect_buff": "92a3445a69af56e9bedbae93cf262faf1959273c8470f960ab6c7b7be88d932a",
+    "survivor_skill_main": "aa333bf9fe8c22d07aa602ba4ff209c2ead77d0a7a92e1271f68232601c7d934",
+    "survivor_skill_type": "1c91aabb69917c7e4105e0790a4585aa0078aaf3f8b110b9b24379a5d375c3e5",
+    "survivor_slg_skill_new": "a0779e42174fcc220c88ef5b80bd18c537ff67ad2ac079bc44dc225d73442839",
+    "survivor_slg_effect_new": "e5e175d2784d3329e1035be1a323a87687e93fadad2bfa23e174ba58cead9bc3",
+    "effect_buff": "398b00bf619af1719fd9d3a25de76ba198838c1a786cbb71bb87d14905500f8a",
     "game_configs": "7297bc64868b0f61ea14388ce63f5d6153a8240ac6ab1982b650c12e29b83242"
   },
   "model_sha256": "be21bac22c50b4af0e90574f6b611166a5a5673b381cfd57066a46ae46f34828",
@@ -794,8 +794,8 @@
             83784
           ],
           "notes": [
-            "Legendary Griffin (caser): additional effects excluded",
-            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+            "Legendary Griffin: additional effects excluded",
+            "Legendary Griffin: level/star stats only; skill, talent and full-skill bonuses excluded"
           ],
           "rank": 1,
           "baseline_rank": 1
@@ -809,8 +809,8 @@
             83784
           ],
           "notes": [
-            "Legendary Griffin (caser): additional effects excluded",
-            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+            "Legendary Griffin: additional effects excluded",
+            "Legendary Griffin: level/star stats only; skill, talent and full-skill bonuses excluded"
           ],
           "rank": 2,
           "baseline_rank": 2
@@ -824,8 +824,8 @@
             83784
           ],
           "notes": [
-            "Legendary Griffin (caser): additional effects excluded",
-            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+            "Legendary Griffin: additional effects excluded",
+            "Legendary Griffin: level/star stats only; skill, talent and full-skill bonuses excluded"
           ],
           "rank": 3,
           "baseline_rank": 3
@@ -839,8 +839,8 @@
             83784
           ],
           "notes": [
-            "Legendary Griffin (caser): additional effects excluded",
-            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+            "Legendary Griffin: additional effects excluded",
+            "Legendary Griffin: level/star stats only; skill, talent and full-skill bonuses excluded"
           ],
           "rank": 4,
           "baseline_rank": 5
@@ -854,8 +854,8 @@
             83784
           ],
           "notes": [
-            "Legendary Griffin (caser): additional effects excluded",
-            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+            "Legendary Griffin: additional effects excluded",
+            "Legendary Griffin: level/star stats only; skill, talent and full-skill bonuses excluded"
           ],
           "rank": 5,
           "baseline_rank": 4
@@ -869,8 +869,8 @@
             83784
           ],
           "notes": [
-            "Legendary Griffin (caser): additional effects excluded",
-            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+            "Legendary Griffin: additional effects excluded",
+            "Legendary Griffin: level/star stats only; skill, talent and full-skill bonuses excluded"
           ],
           "rank": 6,
           "baseline_rank": 6
@@ -884,8 +884,8 @@
             83784
           ],
           "notes": [
-            "Legendary Griffin (caser): additional effects excluded",
-            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+            "Legendary Griffin: additional effects excluded",
+            "Legendary Griffin: level/star stats only; skill, talent and full-skill bonuses excluded"
           ],
           "rank": 7,
           "baseline_rank": 7
@@ -899,8 +899,8 @@
             83784
           ],
           "notes": [
-            "Legendary Griffin (caser): additional effects excluded",
-            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+            "Legendary Griffin: additional effects excluded",
+            "Legendary Griffin: level/star stats only; skill, talent and full-skill bonuses excluded"
           ],
           "rank": 8,
           "baseline_rank": 8
@@ -914,8 +914,8 @@
             83784
           ],
           "notes": [
-            "Legendary Griffin (caser): additional effects excluded",
-            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+            "Legendary Griffin: additional effects excluded",
+            "Legendary Griffin: level/star stats only; skill, talent and full-skill bonuses excluded"
           ],
           "rank": 9,
           "baseline_rank": 9
@@ -929,8 +929,8 @@
             83784
           ],
           "notes": [
-            "Legendary Griffin (caser): additional effects excluded",
-            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+            "Legendary Griffin: additional effects excluded",
+            "Legendary Griffin: level/star stats only; skill, talent and full-skill bonuses excluded"
           ],
           "rank": 10,
           "baseline_rank": 10
@@ -944,8 +944,8 @@
             83784
           ],
           "notes": [
-            "Legendary Griffin (caser): additional effects excluded",
-            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+            "Legendary Griffin: additional effects excluded",
+            "Legendary Griffin: level/star stats only; skill, talent and full-skill bonuses excluded"
           ],
           "rank": 11,
           "baseline_rank": 11
@@ -959,8 +959,8 @@
             83784
           ],
           "notes": [
-            "Legendary Griffin (caser): additional effects excluded",
-            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+            "Legendary Griffin: additional effects excluded",
+            "Legendary Griffin: level/star stats only; skill, talent and full-skill bonuses excluded"
           ],
           "rank": 12,
           "baseline_rank": 12
@@ -974,8 +974,8 @@
             83784
           ],
           "notes": [
-            "Legendary Griffin (caser): additional effects excluded",
-            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+            "Legendary Griffin: additional effects excluded",
+            "Legendary Griffin: level/star stats only; skill, talent and full-skill bonuses excluded"
           ],
           "rank": 13,
           "baseline_rank": 13
@@ -989,8 +989,8 @@
             83784
           ],
           "notes": [
-            "Legendary Griffin (caser): additional effects excluded",
-            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+            "Legendary Griffin: additional effects excluded",
+            "Legendary Griffin: level/star stats only; skill, talent and full-skill bonuses excluded"
           ],
           "rank": 14,
           "baseline_rank": 14
@@ -1004,8 +1004,8 @@
             83784
           ],
           "notes": [
-            "Legendary Griffin (caser): additional effects excluded",
-            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+            "Legendary Griffin: additional effects excluded",
+            "Legendary Griffin: level/star stats only; skill, talent and full-skill bonuses excluded"
           ],
           "rank": 15,
           "baseline_rank": 15
@@ -1019,8 +1019,8 @@
             83784
           ],
           "notes": [
-            "Legendary Griffin (caser): additional effects excluded",
-            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+            "Legendary Griffin: additional effects excluded",
+            "Legendary Griffin: level/star stats only; skill, talent and full-skill bonuses excluded"
           ],
           "rank": 16,
           "baseline_rank": 16
@@ -1034,8 +1034,8 @@
             83784
           ],
           "notes": [
-            "Legendary Griffin (caser): additional effects excluded",
-            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+            "Legendary Griffin: additional effects excluded",
+            "Legendary Griffin: level/star stats only; skill, talent and full-skill bonuses excluded"
           ],
           "rank": 17,
           "baseline_rank": 17
@@ -1049,8 +1049,8 @@
             83784
           ],
           "notes": [
-            "Legendary Griffin (caser): additional effects excluded",
-            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+            "Legendary Griffin: additional effects excluded",
+            "Legendary Griffin: level/star stats only; skill, talent and full-skill bonuses excluded"
           ],
           "rank": 18,
           "baseline_rank": 18
@@ -1064,8 +1064,8 @@
             83784
           ],
           "notes": [
-            "Legendary Griffin (caser): additional effects excluded",
-            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+            "Legendary Griffin: additional effects excluded",
+            "Legendary Griffin: level/star stats only; skill, talent and full-skill bonuses excluded"
           ],
           "rank": 19,
           "baseline_rank": 19
@@ -1079,8 +1079,8 @@
             83784
           ],
           "notes": [
-            "Legendary Griffin (caser): additional effects excluded",
-            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+            "Legendary Griffin: additional effects excluded",
+            "Legendary Griffin: level/star stats only; skill, talent and full-skill bonuses excluded"
           ],
           "rank": 20,
           "baseline_rank": 20
@@ -1094,8 +1094,8 @@
             83784
           ],
           "notes": [
-            "Legendary Griffin (caser): additional effects excluded",
-            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+            "Legendary Griffin: additional effects excluded",
+            "Legendary Griffin: level/star stats only; skill, talent and full-skill bonuses excluded"
           ],
           "rank": 21,
           "baseline_rank": 21
@@ -1109,8 +1109,8 @@
             83784
           ],
           "notes": [
-            "Legendary Griffin (caser): additional effects excluded",
-            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+            "Legendary Griffin: additional effects excluded",
+            "Legendary Griffin: level/star stats only; skill, talent and full-skill bonuses excluded"
           ],
           "rank": 22,
           "baseline_rank": 22
@@ -1124,8 +1124,8 @@
             83784
           ],
           "notes": [
-            "Legendary Griffin (caser): additional effects excluded",
-            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+            "Legendary Griffin: additional effects excluded",
+            "Legendary Griffin: level/star stats only; skill, talent and full-skill bonuses excluded"
           ],
           "rank": 23,
           "baseline_rank": 23
@@ -1139,8 +1139,8 @@
             83784
           ],
           "notes": [
-            "Legendary Griffin (caser): additional effects excluded",
-            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+            "Legendary Griffin: additional effects excluded",
+            "Legendary Griffin: level/star stats only; skill, talent and full-skill bonuses excluded"
           ],
           "rank": 24,
           "baseline_rank": 24
@@ -1154,8 +1154,8 @@
             83784
           ],
           "notes": [
-            "Legendary Griffin (caser): additional effects excluded",
-            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+            "Legendary Griffin: additional effects excluded",
+            "Legendary Griffin: level/star stats only; skill, talent and full-skill bonuses excluded"
           ],
           "rank": 25,
           "baseline_rank": 25
@@ -1169,8 +1169,8 @@
             83784
           ],
           "notes": [
-            "Legendary Griffin (caser): additional effects excluded",
-            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+            "Legendary Griffin: additional effects excluded",
+            "Legendary Griffin: level/star stats only; skill, talent and full-skill bonuses excluded"
           ],
           "rank": 26,
           "baseline_rank": 26
@@ -1184,8 +1184,8 @@
             83784
           ],
           "notes": [
-            "Legendary Griffin (caser): additional effects excluded",
-            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+            "Legendary Griffin: additional effects excluded",
+            "Legendary Griffin: level/star stats only; skill, talent and full-skill bonuses excluded"
           ],
           "rank": 27,
           "baseline_rank": 27
@@ -1199,8 +1199,8 @@
             83784
           ],
           "notes": [
-            "Legendary Griffin (caser): additional effects excluded",
-            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+            "Legendary Griffin: additional effects excluded",
+            "Legendary Griffin: level/star stats only; skill, talent and full-skill bonuses excluded"
           ],
           "rank": 28,
           "baseline_rank": 28
@@ -1214,8 +1214,8 @@
             83784
           ],
           "notes": [
-            "Legendary Griffin (caser): additional effects excluded",
-            "Legendary Griffin (caser): level/star stats only; skill, talent and full-skill bonuses excluded"
+            "Legendary Griffin: additional effects excluded",
+            "Legendary Griffin: level/star stats only; skill, talent and full-skill bonuses excluded"
           ],
           "rank": 29,
           "baseline_rank": 29
@@ -1227,7 +1227,7 @@
       "settings": {
         "enabled": true,
         "research": {
-          "research_group_troop_attack_percent_1": 2
+          "new_hero_all_hero_attack": 2
         }
       },
       "top_five": [
@@ -1241,9 +1241,9 @@
       "rows": [
         {
           "slug": "lava",
-          "score": 92.76963703094759,
+          "score": 92.8553896548638,
           "flat": [
-            13,
+            300,
             0,
             0
           ],
@@ -1253,9 +1253,9 @@
         },
         {
           "slug": "tithi",
-          "score": 84.51175303317254,
+          "score": 84.61065434473112,
           "flat": [
-            13,
+            300,
             0,
             0
           ],
@@ -1265,9 +1265,9 @@
         },
         {
           "slug": "ragnar",
-          "score": 83.5904494860228,
+          "score": 83.68679072368792,
           "flat": [
-            13,
+            300,
             0,
             0
           ],
@@ -1277,9 +1277,9 @@
         },
         {
           "slug": "nikola",
-          "score": 82.11761182001557,
+          "score": 82.20071013404775,
           "flat": [
-            13,
+            300,
             0,
             0
           ],
@@ -1289,9 +1289,9 @@
         },
         {
           "slug": "becca",
-          "score": 82.08878464083428,
+          "score": 82.18322250361912,
           "flat": [
-            13,
+            300,
             0,
             0
           ],
@@ -1301,9 +1301,9 @@
         },
         {
           "slug": "maddie",
-          "score": 82.01292547418281,
+          "score": 82.10137331270668,
           "flat": [
-            13,
+            300,
             0,
             0
           ],
@@ -1313,9 +1313,9 @@
         },
         {
           "slug": "chiron",
-          "score": 80.99387449148094,
+          "score": 81.08612279505903,
           "flat": [
-            13,
+            300,
             0,
             0
           ],
@@ -1325,9 +1325,9 @@
         },
         {
           "slug": "mike",
-          "score": 80.91638911837634,
+          "score": 80.98910014345871,
           "flat": [
-            13,
+            300,
             0,
             0
           ],
@@ -1337,9 +1337,9 @@
         },
         {
           "slug": "ray",
-          "score": 80.26665541496935,
+          "score": 80.35373383544174,
           "flat": [
-            13,
+            300,
             0,
             0
           ],
@@ -1349,9 +1349,9 @@
         },
         {
           "slug": "wright",
-          "score": 79.54571235701209,
+          "score": 79.63546552275233,
           "flat": [
-            13,
+            300,
             0,
             0
           ],
@@ -1361,9 +1361,9 @@
         },
         {
           "slug": "knotty",
-          "score": 77.3733752356909,
+          "score": 77.45912665073106,
           "flat": [
-            13,
+            300,
             0,
             0
           ],
@@ -1373,9 +1373,9 @@
         },
         {
           "slug": "rosie",
-          "score": 77.23506042444559,
+          "score": 77.31767731475499,
           "flat": [
-            13,
+            300,
             0,
             0
           ],
@@ -1385,9 +1385,9 @@
         },
         {
           "slug": "layla",
-          "score": 77.21931235994506,
+          "score": 77.2900525432863,
           "flat": [
-            13,
+            300,
             0,
             0
           ],
@@ -1397,9 +1397,9 @@
         },
         {
           "slug": "tarzan",
-          "score": 77.07743202752019,
+          "score": 77.16212053166122,
           "flat": [
-            13,
+            300,
             0,
             0
           ],
@@ -1409,9 +1409,9 @@
         },
         {
           "slug": "tara",
-          "score": 76.42426539745725,
+          "score": 76.5018631440288,
           "flat": [
-            13,
+            300,
             0,
             0
           ],
@@ -1421,9 +1421,9 @@
         },
         {
           "slug": "dave",
-          "score": 73.77715220807634,
+          "score": 73.8562788741873,
           "flat": [
-            13,
+            300,
             0,
             0
           ],
@@ -1433,9 +1433,9 @@
         },
         {
           "slug": "shark",
-          "score": 73.12467171092432,
+          "score": 73.19432452900261,
           "flat": [
-            13,
+            300,
             0,
             0
           ],
@@ -1445,9 +1445,9 @@
         },
         {
           "slug": "candy",
-          "score": 72.46736238507735,
+          "score": 72.54007341015972,
           "flat": [
-            13,
+            300,
             0,
             0
           ],
@@ -1457,9 +1457,9 @@
         },
         {
           "slug": "undine",
-          "score": 72.21287355708353,
+          "score": 72.2891186017715,
           "flat": [
-            13,
+            300,
             0,
             0
           ],
@@ -1469,9 +1469,9 @@
         },
         {
           "slug": "tony",
-          "score": 71.463719384343,
+          "score": 71.53772147851251,
           "flat": [
-            13,
+            300,
             0,
             0
           ],
@@ -1481,9 +1481,9 @@
         },
         {
           "slug": "jacob",
-          "score": 67.86661379781002,
+          "score": 67.93197269097027,
           "flat": [
-            13,
+            300,
             0,
             0
           ],
@@ -1493,9 +1493,9 @@
         },
         {
           "slug": "freja",
-          "score": 65.13853952987016,
+          "score": 65.22346186570216,
           "flat": [
-            13,
+            300,
             0,
             0
           ],
@@ -1505,9 +1505,9 @@
         },
         {
           "slug": "travis",
-          "score": 63.122399551548064,
+          "score": 63.20930196887138,
           "flat": [
-            13,
+            300,
             0,
             0
           ],
@@ -1517,9 +1517,9 @@
         },
         {
           "slug": "lucky",
-          "score": 61.32275743338231,
+          "score": 61.40118366602988,
           "flat": [
-            13,
+            300,
             0,
             0
           ],
@@ -1529,9 +1529,9 @@
         },
         {
           "slug": "ken",
-          "score": 59.42096831286392,
+          "score": 59.491169799191425,
           "flat": [
-            13,
+            300,
             0,
             0
           ],
@@ -1541,9 +1541,9 @@
         },
         {
           "slug": "sarge",
-          "score": 58.902357259193884,
+          "score": 58.979653533340134,
           "flat": [
-            13,
+            300,
             0,
             0
           ],
@@ -1553,9 +1553,9 @@
         },
         {
           "slug": "eva",
-          "score": 57.84483523286004,
+          "score": 57.91972425435477,
           "flat": [
-            13,
+            300,
             0,
             0
           ],
@@ -1565,9 +1565,9 @@
         },
         {
           "slug": "rusty",
-          "score": 53.75949283521772,
+          "score": 53.84005030097915,
           "flat": [
-            13,
+            300,
             0,
             0
           ],
@@ -1577,9 +1577,9 @@
         },
         {
           "slug": "tim",
-          "score": 48.85153338659252,
+          "score": 48.925757240355736,
           "flat": [
-            13,
+            300,
             0,
             0
           ],

@@ -434,14 +434,14 @@ internal static class Program
                 var source=elements.OfType<ComboBox>().Single(x=>x.Items.OfType<ComboBoxItem>().Any(i=>i.Tag?.ToString()=="configured"));source.SelectedIndex=1;
                 foreach(string kind in new[]{"behemoth-level","behemoth-star"})elements.OfType<ComboBox>().Single(x=>System.Windows.Automation.AutomationProperties.GetName(x)==kind+" caser").SelectedIndex=1;
                 var signature=elements.OfType<ComboBox>().Single(x=>System.Windows.Automation.AutomationProperties.GetName(x)=="signature rosie");signature.SelectedIndex=1;
-                var research=elements.OfType<ComboBox>().Single(x=>System.Windows.Automation.AutomationProperties.GetName(x)=="research research_group_troop_attack_percent_1");research.SelectedIndex=2;
+                var research=elements.OfType<ComboBox>().Single(x=>System.Windows.Automation.AutomationProperties.GetName(x)=="research new_hero_all_hero_attack");research.SelectedIndex=2;
                 elements.OfType<Button>().Single(x=>x.Content?.ToString()=="Apply").RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
             }catch(Exception ex){contextError=ex;modal.Close();}
         }),System.Windows.Threading.DispatcherPriority.Loaded);
         Invoke(window,"ArmyContext_Click",new Button(),new RoutedEventArgs());
         if(contextError is not null)throw contextError;
         var contextSaved=JsonSerializer.Deserialize<PlannerProfile>(File.ReadAllText(profilePath))!.ArmyContext;
-        Check(contextSaved.Enabled&&contextSaved.Signature["rosie"]==1&&contextSaved.Research["research_group_troop_attack_percent_1"]==2&&contextSaved.Behemoth[0]==348&&contextSaved.BehemothSource=="configured"&&contextSaved.BehemothBuilds["caser"].Level==1&&contextSaved.BehemothBuilds["caser"].Star==1,"Army stat context did not save through the native dialog");
+        Check(contextSaved.Enabled&&contextSaved.Signature["rosie"]==1&&contextSaved.Research["new_hero_all_hero_attack"]==2&&contextSaved.Behemoth[0]==348&&contextSaved.BehemothSource=="configured"&&contextSaved.BehemothBuilds["caser"].Level==1&&contextSaved.BehemothBuilds["caser"].Star==1,"Army stat context did not save through the native dialog");
         Check(Walk((StackPanel)window.FindName("StatsSignaturePanel")).OfType<CheckBox>().All(x=>x.IsChecked==true),"Hero Signature UI was stale after context dialog Apply");
         Invoke(window,"SetActiveHero",heroes.Single(h=>h.AssetSlug=="rosie"));
         Invoke(window,"Navigation_Click",(Button)window.FindName("StatsNav"),new RoutedEventArgs());window.UpdateLayout();
@@ -459,7 +459,7 @@ internal static class Program
         Check(Field<ArmyContextSettings>(window,"_armyContext").Signature["rosie"]==2,"Hero-local Signature save failed");
         Invoke(window,"Navigation_Click",(Button)window.FindName("BehemothsNav"),new RoutedEventArgs());window.UpdateLayout();
         var beastView=(StackPanel)window.FindName("BehemothsPanel");
-        Check(Walk(beastView).OfType<Image>().Count(x=>x.Width==76)==4,"Behemoth icons missing");
+        Check(Walk(beastView).OfType<Image>().Count(x=>x.Width==76)==2,"Behemoth icons missing");
         var beastLevel=Walk(beastView).OfType<TextBox>().Single(x=>System.Windows.Automation.AutomationProperties.GetName(x)=="Behemoth caser level");
         beastLevel.Text="2";window.UpdateLayout();var levelCaret=beastLevel.GetRectFromCharacterIndex(0);Check(levelCaret.Top>=0&&levelCaret.Bottom<=beastLevel.ActualHeight-1,"Styled level input clips its text");
         foreach(int n in new[]{1,6,30,31,360,900}){var slots=BehemothStarProgress.Slots(n);Check(slots.Count==5&&slots.All(x=>x.Steps>=0&&x.Steps<=6&&x.Overlay<=12),"Behemoth star display out of bounds");}
@@ -478,13 +478,13 @@ internal static class Program
             Invoke(window,"Navigation_Click",(Button)window.FindName("StatsNav"),new RoutedEventArgs());Capture("native-signature.png");
         }
         var afterBeast=Field<ArmyContextSettings>(window,"_armyContext");
-        Check(afterBeast.Signature["rosie"]==2&&afterBeast.Research["research_group_troop_attack_percent_1"]==2&&afterBeast.BehemothBuilds["caser"].Star==2,"Behemoth tab overwrote other context sources");
+        Check(afterBeast.Signature["rosie"]==2&&afterBeast.Research["new_hero_all_hero_attack"]==2&&afterBeast.BehemothBuilds["caser"].Star==2,"Behemoth tab overwrote other context sources");
         Invoke(window,"Navigation_Click",(Button)window.FindName("ResearchNav"),new RoutedEventArgs());window.UpdateLayout();
         var researchHeader=(StackPanel)window.FindName("ResearchPanel");
-        var treePicker=Walk(researchHeader).OfType<ComboBox>().Single();treePicker.SelectedItem=treePicker.Items.OfType<ComboBoxItem>().Single(i=>i.Tag?.ToString()=="4300002");window.UpdateLayout();
-        ComboBox ResearchPicker()=>Walk((StackPanel)window.FindName("ResearchCardsPanel")).OfType<ComboBox>().Single(x=>System.Windows.Automation.AutomationProperties.GetName(x)=="Research node research_group_troop_attack_percent_1");
+        var treePicker=Walk(researchHeader).OfType<ComboBox>().Single();treePicker.SelectedItem=treePicker.Items.OfType<ComboBoxItem>().Single(i=>i.Tag?.ToString()=="4300006");window.UpdateLayout();
+        ComboBox ResearchPicker()=>Walk((StackPanel)window.FindName("ResearchCardsPanel")).OfType<ComboBox>().Single(x=>System.Windows.Automation.AutomationProperties.GetName(x)=="Research node new_hero_all_hero_attack");
         ResearchPicker().SelectedIndex=3;
-        Check(Field<ArmyContextSettings>(window,"_armyContext").Research["research_group_troop_attack_percent_1"]==2,"Research draft saved prematurely");
+        Check(Field<ArmyContextSettings>(window,"_armyContext").Research["new_hero_all_hero_attack"]==2,"Research draft saved prematurely");
         Invoke(window,"Navigation_Click",(Button)window.FindName("BehemothsNav"),new RoutedEventArgs());
         Invoke(window,"Navigation_Click",(Button)window.FindName("ResearchNav"),new RoutedEventArgs());window.UpdateLayout();
         Check(ResearchPicker().SelectedIndex==3,"Research draft lost on tab switch");
@@ -492,7 +492,7 @@ internal static class Program
         window.UpdateLayout();Check(ResearchPicker().SelectedIndex==2,"Research discard changed saved level");
         ResearchPicker().SelectedIndex=3;
         Walk((StackPanel)window.FindName("ResearchPanel")).OfType<Button>().Single(x=>x.Content?.ToString()=="Save Research").RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
-        Check(Field<ArmyContextSettings>(window,"_armyContext").Research["research_group_troop_attack_percent_1"]==3,"Research save failed");
+        Check(Field<ArmyContextSettings>(window,"_armyContext").Research["new_hero_all_hero_attack"]==3,"Research save failed");
         Check(Field<ArmyContextSettings>(window,"_armyContext").Signature["rosie"]==2&&Field<ArmyContextSettings>(window,"_armyContext").BehemothBuilds["caser"].Star==2,"Research save overwrote other sources");
         if(!string.IsNullOrEmpty(screenshotDir)){window.UpdateLayout();var bitmap=new RenderTargetBitmap((int)window.ActualWidth,(int)window.ActualHeight,96,96,PixelFormats.Pbgra32);bitmap.Render(window);var researchEncoder=new PngBitmapEncoder();researchEncoder.Frames.Add(BitmapFrame.Create(bitmap));using var researchStream=File.Create(Path.Combine(screenshotDir,"native-research.png"));researchEncoder.Save(researchStream);}
         Exception? setupError=null;
@@ -521,6 +521,8 @@ internal static class Program
         Field<ComboBox>(window,"AccessPicker").SelectedIndex=0;
         Invoke(window,"Optimize_Click",new Button(),new RoutedEventArgs());
         Check(Field<IList<Hero>>(window,"_selected").Count==5&&!Field<IList<Hero>>(window,"_selected").Any(h=>h.AssetSlug=="becca"),"Army 5 optimizer used an already allocated hero");
+        Check(((StackPanel)window.FindName("SquadDataNotice")).Children.OfType<Expander>().Any(),"Incomplete squad did not request build data");
+        foreach(var name in new[]{"ReleaseNav","ResearchNav","BehemothsNav","ArmyContextButton"})Check(((Button)window.FindName(name)).Margin.Right==6,"Navigation spacing differs: "+name);
         Invoke(window,"Clear_Click",new Button(),new RoutedEventArgs());
         Invoke(window,"Army_Click",new Button{Tag="1"},new RoutedEventArgs());
         Check(Field<IList<Hero>>(window,"_selected").Single().AssetSlug=="becca"&&Field<ComboBox>(window,"ModePicker").SelectedIndex==1,"Army 2 was overwritten");
@@ -529,8 +531,10 @@ internal static class Program
         var dirtyArmies=ArmyRoster.Clean([new(){Heroes=["a","a","bad","b","c","d","e","f"]},new(){Heroes=["b","f","g"]}],new[]{"a","b","c","d","e","f","g"});
         Check(dirtyArmies[0].Heroes.SequenceEqual(new[]{"a","b","c","d","e"})&&dirtyArmies[1].Heroes.SequenceEqual(new[]{"f","g"}),"Malformed army migration failed");
         if(!string.IsNullOrEmpty(screenshotDir)){window.UpdateLayout();var bitmap=new RenderTargetBitmap((int)window.ActualWidth,(int)window.ActualHeight,96,96,PixelFormats.Pbgra32);bitmap.Render(window);var armyEncoder=new PngBitmapEncoder();armyEncoder.Frames.Add(BitmapFrame.Create(bitmap));using var stream=File.Create(Path.Combine(screenshotDir,"native-five-armies.png"));armyEncoder.Save(stream);}
+        Field<ComboBox>(window,"ComparisonBasisPicker").SelectedItem=Field<ComboBox>(window,"ComparisonBasisPicker").Items.Cast<ComboBoxItem>().Single(i=>(string)i.Tag=="recorded");
         window.Close();
         var reopened = Create();
+        Check(Field<string>(reopened,"_comparisonBasis")=="recorded","Build comparison dropdown reset after reopen");
         Check(Field<ArmyContextSettings>(reopened,"_armyContext").Enabled&&Field<ArmyContextSettings>(reopened,"_armyContext").BehemothBuilds["caser"].Star==2,"Army context missing after reopen");
 
         Invoke(reopened, "SetActiveHero", ((List<Hero>)typeof(MainWindow).GetField("_heroes", BindingFlags.Instance | BindingFlags.NonPublic)!.GetValue(reopened)!).Single(h => h.Name == "Becca"));
