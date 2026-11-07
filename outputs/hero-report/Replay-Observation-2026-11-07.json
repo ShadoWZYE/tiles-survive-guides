@@ -226,7 +226,30 @@
       10,
       10,
       10
-    ]
+    ],
+    "shown_healing": [
+      {
+        "owner": "maddie",
+        "value": 2010000,
+        "display_quantum": 10000
+      },
+      {
+        "owner": "chef",
+        "value": 495110,
+        "display_quantum": 10
+      },
+      {
+        "owner": "rosie",
+        "value": 381120,
+        "display_quantum": 10
+      },
+      {
+        "owner": "tidal_drake",
+        "value": 1090000,
+        "display_quantum": 10000
+      }
+    ],
+    "shown_healing_frame_seconds": 37
   },
   "timing_scenario": {
     "speed": 2,

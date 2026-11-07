@@ -28,7 +28,8 @@ def main() -> None:
 
     html = (HERE / "index.template.html").read_text(encoding="utf-8")
     html = html.replace("__APP_CSS__", (HERE / "app.css").read_text(encoding="utf-8"))
-    html = html.replace("__APP_JS__", (HERE / "formation-priority.js").read_text(encoding="utf-8")
+    html = html.replace("__APP_JS__", (HERE / "army-roster.js").read_text(encoding="utf-8")
+                        + "\n" + (HERE / "formation-priority.js").read_text(encoding="utf-8")
                         + "\n" + (HERE / "upgrade-model.js").read_text(encoding="utf-8")
                         + "\n" + (HERE / "upgrade-ui.js").read_text(encoding="utf-8")
                         + "\n" + (HERE / "army-context-model.js").read_text(encoding="utf-8")

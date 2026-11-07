@@ -27,7 +27,7 @@
   let state = {
     tab: "squad",
     active: heroes[0].asset_slug,
-    squad: (window.__INITIAL_SQUAD__||[]).filter(slug=>bySlug.has(slug)).slice(0,5),
+    squad: [...profile.armies[profile.activeArmy].heroes],
     faction: "All factions",
     role: "All roles",
     rarity: "All rarities",
@@ -82,7 +82,7 @@
       const parsed = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
       if (parsed && typeof parsed === "object") return sanitizeProfile(parsed);
     } catch (_) {}
-    return {...DEFAULT_PROFILE};
+    return sanitizeProfile(DEFAULT_PROFILE);
   }
 
   function sanitizeProfile(candidate) {
@@ -94,7 +94,10 @@
       const build=UpgradeModel.sanitizeBuild(candidate.heroProgress?.[slug]?.build,h);
       if(build)heroProgress[slug]={...heroProgress[slug],build};
     }
+    const activeArmy=ArmyRoster.index(candidate.activeArmy??candidate.active_army);
+    const armies=ArmyRoster.clean(candidate.armies??[{heroes:candidate.squad??window.__INITIAL_SQUAD__??[],mode:candidate.mode}],bySlug.keys());
     return {
+      armies,activeArmy,
       version: 1,
       comparisonBasis: ["flat","recorded"].includes(candidate.comparisonBasis)?candidate.comparisonBasis:"reference",
       battleSeconds: [10,20,30].includes(candidate.battleSeconds)?candidate.battleSeconds:0,
@@ -104,7 +107,7 @@
       upgradeSettings: UpgradeModel.sanitizeSettings(candidate.upgradeSettings),
       armyContext: ArmyContextModel.sanitize(candidate.armyContext,window.__ARMY_CONTEXT_DATA__),
       serverOpenDate: /^\d{4}-\d{2}-\d{2}$/.test(candidate.serverOpenDate || "") ? candidate.serverOpenDate : DEFAULT_PROFILE.serverOpenDate,
-      mode: allowedModes.includes(candidate.mode) ? candidate.mode : DEFAULT_PROFILE.mode,
+      mode: armies[activeArmy].mode,
       access: allowedAccess.includes(candidate.access) ? candidate.access : DEFAULT_PROFILE.access,
       requireRoleCoverage: candidate.requireRoleCoverage !== false,
       leftWidth: Math.min(72, Math.max(38, Number(candidate.leftWidth) || DEFAULT_PROFILE.leftWidth))
@@ -112,7 +115,9 @@
   }
 
   function saveProfile() {
+    profile.armies[profile.activeArmy]={heroes:[...state.squad],mode:profile.mode};
     profile = sanitizeProfile(profile);
+    state.squad=[...profile.armies[profile.activeArmy].heroes];
     document.documentElement.style.setProperty("--left", `${profile.leftWidth}%`);
     const status = $("#save-status");
     try {
@@ -127,6 +132,7 @@
 
   function setProfile(next) {
     profile = sanitizeProfile(next);
+    state.squad=[...profile.armies[profile.activeArmy].heroes];
     optimizerCache.clear();
     saveProfile();
     renderAll();
@@ -175,11 +181,11 @@
     const visible = heroes.filter(matchesFilters);
     $("#hero-grid").innerHTML = visible.map(hero => {
       const selected = state.squad.includes(hero.asset_slug);
-      const own = owned(hero);
-      return `<button class="hero-card${selected ? " selected" : ""}" data-slug="${esc(hero.asset_slug)}" data-rarity="${esc(hero.rarity)}" aria-label="${esc(hero.name)}${own ? ", owned" : ""}">
+      const own = owned(hero),assigned=ArmyRoster.owner(profile.armies,hero.asset_slug),blocked=assigned>=0&&assigned!==profile.activeArmy;
+      return `<button class="hero-card${selected ? " selected" : ""}" data-slug="${esc(hero.asset_slug)}" data-rarity="${esc(hero.rarity)}" ${state.tab==='squad'&&blocked?'disabled':''} title="${blocked?`Assigned to army ${assigned+1}; remove there to use here`:esc(hero.name)}" aria-label="${esc(hero.name)}${own ? ", owned" : ""}">
         <img src="${hero.portrait_data}" alt="${esc(hero.name)}" draggable="false">
         <span class="rarity">${esc(hero.rarity)}</span>${hero.has_ascension ? '<span class="asc">ASC</span>' : ''}${own ? '<span class="owned-badge" title="Owned">✓</span>' : ''}
-        <span class="card-copy"><strong>${esc(hero.name)}</strong><small>${esc(hero.faction)} · ${esc(hero.role)}</small><small class="index" title="${esc(hero.estimate?.basis)}">Est. ${hero.estimate?.comparable===false?'Record build':number(hero.composite_index)}</small></span>
+        ${assigned>=0?`<span class="army-badge">Army ${assigned+1}</span>`:""}<span class="card-copy"><strong>${esc(hero.name)}</strong><small>${esc(hero.faction)} · ${esc(hero.role)}</small><small class="index" title="${esc(hero.estimate?.basis)}">Est. ${hero.estimate?.comparable===false?'Record build':number(hero.composite_index)}</small></span>
       </button>`;
     }).join("") || '<div class="empty-state">No heroes match these filters.</div>';
     $$(".hero-card").forEach(card => card.addEventListener("click", () => {
@@ -196,10 +202,12 @@
   }
 
   function toggleSquad(hero) {
+    if(ArmyRoster.blocked(profile.armies,profile.activeArmy).has(hero.asset_slug))return;
     const found = state.squad.indexOf(hero.asset_slug);
     if (found >= 0) state.squad.splice(found, 1);
     else if (state.squad.length < 5) state.squad.push(hero.asset_slug);
     state.squad = orderFormation(state.squad.map(slug => bySlug.get(slug)), profile.mode).map(item => item.asset_slug);
+    optimizerCache.clear();saveProfile();
   }
 
   function toggleOwned(hero) {
@@ -258,7 +266,8 @@
   function enemyPicker(){return `<div class="control-strip"><label>Enemy target faction (optional)<select id="enemy-faction">${['Unknown','Mountain','Wasteland','Sky','Sea'].map(f=>`<option${profile.enemyFaction===f?' selected':''}>${f}</option>`).join('')}</select></label></div><p class="evidence">Unknown excludes counter damage; a selected faction assumes attacks land on that faction.</p>`;}
 
   function findTopSquads(pool, limit = 20, roleCoverage = profile.requireRoleCoverage) {
-    pool=pool.filter(h=>h.estimate?.comparable!==false);
+    const reserved=ArmyRoster.blocked(profile.armies,profile.activeArmy);
+    pool=pool.filter(h=>h.estimate?.comparable!==false&&!reserved.has(h.asset_slug));
     const key = `${pool.map(hero => hero.asset_slug).join(",")}|${profile.mode}|${roleCoverage}|${limit}|${profile.enemyFaction}`;
     if (optimizerCache.has(key)) return optimizerCache.get(key);
     const best = [];
@@ -317,13 +326,14 @@
     const planning = complete ? renderFormationGuide(selected) : `<div class="control-strip"><label>Battle focus<select id="mode"><option>Balanced</option><option>Offense</option><option>Survival</option><option>PvE farming</option></select></label><label>Hero access<select id="access"><option>All access</option><option>F2P confirmed</option><option>F2P + events</option><option>IAP-linked</option><option>Owned only</option></select></label><label class="check-label"><input id="role-coverage" type="checkbox"> All 3 roles</label></div>
       <h3>Top configurations</h3><p class="evidence">${results.length ? `${results.length} ${profile.mode==="PvE farming"?"stamina-first squads, then combat":"highest-scoring squads"} · click one to load it` : (profile.comparisonBasis==='recorded'?"Mark at least five compatible owned heroes in My Roster. Missing values use base defaults.":"No valid five-hero squad for this access filter.")}</p>
       <div class="result-list">${results.map((result,i) => `<button class="result" data-index="${i}"><span class="result-line"><span class="rank">#${i+1}</span><span>${result.heroes.map(h=>esc(h.name)).join(" · ")}</span><span class="score">${number(result.score)}</span></span><span class="synergy">${result.stamina?`Stamina −${number(result.stamina)}% · `:""}+${number(result.synergy)} synergy · +${number(result.faction)} faction · ${number(result.frontline)} frontline fit · ${esc(result.summary)}</span></button>`).join("")}</div>`;
-    $("#detail-content").innerHTML = `<div class="section-head"><div><h2>Your squad</h2><p>${selected.length} / 5 selected · formation shown front-to-back</p></div><button class="button secondary" id="clear-squad">Clear</button></div>
+    $("#detail-content").innerHTML = `<div class="army-picker" role="group" aria-label="Armies">${profile.armies.map((a,i)=>`<button class="button army-number${i===profile.activeArmy?" active":""}" data-army="${i}" aria-label="Army ${i+1}" aria-pressed="${i===profile.activeArmy}" title="${a.heroes.length}/5 heroes · ${esc(a.mode)}">${i+1}</button>`).join("")}</div><p class="evidence">Heroes in other armies are reserved. Clear an army to free its heroes.</p><div class="section-head"><div><h2>Army ${profile.activeArmy+1}</h2><p>${selected.length} / 5 selected · formation shown front-to-back</p></div><button class="button secondary" id="clear-squad">Clear</button></div>
       <div class="squad-slots">${[0,1,2,3,4].map(i => selected[i] ? `<div class="slot"><img src="${selected[i].portrait_data}" alt=""><b>${esc(selected[i].name)}</b><small>${esc(selected[i].role)} · position ${i+1}</small></div>` : '<div class="slot empty">Empty</div>').join("")}</div>
       ${enemyPicker()}
       ${profile.mode==="PvE farming"?`<p class="evidence">PvE farming ranks configured Stamina savings first, then combat strength. Use for fights you already clear reliably; choose Balanced or Offense for difficult fights. Savings depend on the action and its cost rounding.</p>`:""}
       ${planning}`;
     $("#enemy-faction").onchange = event => {profile.enemyFaction=FactionModel.normalize(event.target.value);optimizerCache.clear();saveProfile();renderDetail()};
-    $("#clear-squad").onclick = () => {state.squad=[];renderCards();renderDetail()};
+    $("#clear-squad").onclick = () => {state.squad=[];optimizerCache.clear();saveProfile();renderCards();renderDetail()};
+    $$("[data-army]").forEach(b=>b.onclick=()=>{saveProfile();profile.activeArmy=Number(b.dataset.army);state.squad=[...profile.armies[profile.activeArmy].heroes];profile.mode=profile.armies[profile.activeArmy].mode;optimizerCache.clear();saveProfile();renderAll();});
     UpgradeUI.bindPanel(profile,saveProfile,renderDetail);
     if (complete) $("#formation-mode").onchange = event => {profile.mode=event.target.value;optimizerCache.clear();saveProfile();renderDetail()};
     if (!complete) {
@@ -331,7 +341,7 @@
       $("#mode").onchange = event => {profile.mode=event.target.value; optimizerCache.clear(); state.squad=orderFormation(selected).map(h=>h.asset_slug); saveProfile();renderDetail()};
       $("#access").onchange = event => {profile.access=event.target.value; optimizerCache.clear();saveProfile();renderDetail()};
       $("#role-coverage").onchange = event => {profile.requireRoleCoverage=event.target.checked;optimizerCache.clear();saveProfile();renderDetail()};
-      $$(".result").forEach(button => button.onclick = () => {state.squad=results[Number(button.dataset.index)].heroes.map(h=>h.asset_slug);renderCards();renderDetail()});
+      $$(".result").forEach(button => button.onclick = () => {state.squad=results[Number(button.dataset.index)].heroes.map(h=>h.asset_slug);optimizerCache.clear();saveProfile();renderCards();renderDetail()});
     }
   }
 
@@ -408,8 +418,9 @@
   }
 
   function bestOwnedAndTargets() {
-    const ownedHeroes = heroes.filter(owned).filter(h=>h.estimate?.comparable!==false);
-    const unowned = heroes.filter(hero => !owned(hero) && matchesAccess(hero, profile.access === "Owned only" ? "All access" : profile.access));
+    const reserved=ArmyRoster.blocked(profile.armies,profile.activeArmy);
+    const ownedHeroes = heroes.filter(owned).filter(h=>h.estimate?.comparable!==false&&!reserved.has(h.asset_slug));
+    const unowned = heroes.filter(hero => !owned(hero) && !reserved.has(hero.asset_slug) && matchesAccess(hero, profile.access === "Owned only" ? "All access" : profile.access));
     if (ownedHeroes.length < 5) return {unlock:`Mark your remaining heroes. Strongest current candidates: ${unowned.sort((a,b)=>scoreHero(b)-scoreHero(a)).slice(0,Math.max(3,5-ownedHeroes.length)).map(h=>h.name).join(", ") || "none"}.`};
     const current = findTopSquads(ownedHeroes,1)[0] || findTopSquads(ownedHeroes,1,false)[0];
     const upgrades = unowned.map(candidate => {
@@ -495,7 +506,7 @@
     $('#army-context').onclick=()=>ResearchUI.setup(profile.armyContext,window.__ARMY_CONTEXT_DATA__,heroes,next=>setProfile({...profile,armyContext:next}),tab=>{state.tab=tab;renderDetail();},()=>ArmyContextUI.open(profile.armyContext,window.__ARMY_CONTEXT_DATA__,heroes,next=>{ResearchUI.reset();setProfile({...profile,armyContext:next});}));
     $('#battle-window').onchange=event=>{profile.battleSeconds=Number(event.target.value);renderAll();};
     $('#comparison-basis').onchange=event=>{profile.comparisonBasis=event.target.value;renderAll();};
-    $$(".top-nav [data-tab]").forEach(button => button.onclick=()=>{state.tab=button.dataset.tab;if(state.tab==="release")state.releaseActive=null;renderDetail()});
+    $$(".top-nav [data-tab]").forEach(button => button.onclick=()=>{state.tab=button.dataset.tab;if(state.tab==="release")state.releaseActive=null;renderCards();renderDetail()});
     [["#faction-filter","faction"],["#role-filter","role"],["#rarity-filter","rarity"]].forEach(([selector,key]) => $(selector).onchange=event=>{state[key]=event.target.value;renderCards()});
     $("#export-profile").onclick=exportProfile;
     $("#import-profile").onclick=()=>$("#profile-file").click();

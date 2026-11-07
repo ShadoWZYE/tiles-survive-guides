@@ -2007,7 +2007,7 @@
   ],
   "independent_battle_accuracy": null,
   "source_hashes": {
-    "Replay-Observation-2026-11-07.json": "3335659a97b3fe13051d1e19d2cd0f6d3e36cf3ac92e9e212735a7b2dda31daf",
+    "Replay-Observation-2026-11-07.json": "31940e8af718213acb896b30334c3a275ae0856ce759045afee69f4cdfd42d6d",
     "Replay-Reconstruction-Inputs-2026-11-07.json": "ad79e66946d013e13eec06d10f25db160ccf8bd6f8cf30e696173f974202ae8e",
     "Hero-Estimate-Model.json": "be21bac22c50b4af0e90574f6b611166a5a5673b381cfd57066a46ae46f34828",
     "TilesSurvive-Upgrade-Data.json": "a93fd9d5918652c0edba2af65f935474e4573d8ca9583b09dfffa68eb5aa2c94",

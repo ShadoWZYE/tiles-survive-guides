@@ -65,9 +65,53 @@
     "For squad-score validation compare fresh identical enemy states, exact builds/context and troop count, with no uncontrolled rally participants; record the declared outcome metric."
   ],
   "overall_accuracy_percentage": null,
+  "health_balance_hypothesis": {
+    "schema": 1,
+    "battle_id": "pvp-defense-2026-11-07-a",
+    "source_sha256": "aea2b2109fcda79a18c9bcaeea483d47c8a00f1825742fd49d005d4429423288",
+    "fitted_parameters": 0,
+    "hypothesis": "Displayed outgoing damage is gross pressure while the incoming column may describe net HP depletion. Test outgoing = taken + effective recovery + shield/overkill/coverage terms; reported shown healing is only a proxy for effective recovery.",
+    "friendly_outgoing": {
+      "gross_outgoing_display": 37910000,
+      "taken_display": 33919480,
+      "shown_opponent_healing": 3976230,
+      "unadjusted_gap": 3990520,
+      "healing_adjusted_gap": 14290,
+      "unadjusted_gap_fraction": 0.10526299129517278,
+      "adjusted_gap_fraction": 0.00037694539699287787,
+      "conservative_rounding_budget": 110050,
+      "within_display_precision": true,
+      "remaining_gap_interval": [
+        -95760,
+        124340
+      ]
+    },
+    "enemy_outgoing": {
+      "gross_outgoing_display": 75400000,
+      "taken_display": 71680000,
+      "shown_opponent_healing": 3228170,
+      "unadjusted_gap": 3720000,
+      "healing_adjusted_gap": 491830,
+      "unadjusted_gap_fraction": 0.0493368700265252,
+      "adjusted_gap_fraction": 0.006522944297082228,
+      "conservative_rounding_budget": 140020,
+      "within_display_precision": false,
+      "remaining_gap_interval": [
+        351810,
+        631850
+      ]
+    },
+    "status": "Consistent within display precision in the friendly-outgoing direction. Reverse direction retains a positive residual; this is evidence for a bookkeeping hypothesis, not proof of the server counter definitions.",
+    "limits": [
+      "Shown healing may differ from effective recovery and may have recipient coverage not visible in the report.",
+      "The remaining reverse-direction residual could include overkill, shields, omitted recovery or actor coverage; it is not assigned to any one cause.",
+      "Neither per-hero damage predictions nor global scoring weights are calibrated by this accounting identity.",
+      "Conservative display budgets use one full shown unit per value, not an assumed exact rounding implementation."
+    ]
+  },
   "retrospective_reconstruction": {
     "artifact": "Retrospective-Damage-Reconstruction.json",
-    "sha256": "64974a3fc21f05e293ef7fc9023c7ad46f77cd5b1fd109206d22d13815e92aec",
+    "sha256": "f06409369e3f1da12b98fc7ce390d6c6073164625f4907af0ec78ee848fa8532",
     "independent_battles": 1,
     "outgoing_models": {
       "planner_offense": {

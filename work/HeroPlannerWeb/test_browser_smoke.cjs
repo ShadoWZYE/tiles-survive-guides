@@ -100,7 +100,7 @@ const assert = require("node:assert/strict");
     },{slugs});
     await page.setViewportSize({width:1440,height:1080});await page.reload();
     await page.locator('[data-tab="squad"]').click();
-    for(const slug of slugs)await page.locator(`.hero-card[data-slug="${slug}"]`).click();
+    assert.equal(await page.locator('.squad-slots .slot:not(.empty)').count(),5,'Saved formation must survive reload');
     assert.match(await page.locator('.formation-guide').innerText(),/No modeled cross-skill pairing/);
     assert.doesNotMatch(await page.locator('.formation-guide').innerText(),/healing \+|DEF break →|control →|Permanent team stat buffs/);
     await page.evaluate(({slugs})=>{
@@ -110,11 +110,12 @@ const assert = require("node:assert/strict");
     },{slugs});
     await page.reload();await page.locator('[data-tab="squad"]').click();
     assert.doesNotMatch(await page.locator(`.hero-card[data-slug="${slugs[0]}"]`).innerText(),/Record build/,'Unknown gear should not disqualify a hero');
-    for(const slug of slugs)await page.locator(`.hero-card[data-slug="${slug}"]`).click();
+    assert.equal(await page.locator('.squad-slots .slot:not(.empty)').count(),5,'Build edits must retain the saved formation');
     assert.equal(await page.locator('.formation-guide').count(),1,'Partially recorded heroes must still produce a formation');
     await page.evaluate(()=>{
       const key='tiles-survive-hero-planner-profile-v1',p=JSON.parse(localStorage.getItem(key));
       p.mode='PvE farming';p.access='Owned only';p.requireRoleCoverage=true;
+      p.armies[p.activeArmy]={heroes:[],mode:'PvE farming'};
       if(!p.ownedHeroes.includes('lucky'))p.ownedHeroes.push('lucky');
       const stage=window.__UPGRADE_DATA__.heroes.lucky.stages.at(-1);
       p.heroProgress.lucky={build:{stage:stage.id,level:1,gear:[],skills:{survivor_lucky_skill_2:11}}};

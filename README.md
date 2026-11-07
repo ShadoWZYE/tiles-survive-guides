@@ -16,6 +16,7 @@ The Hero Planner supports:
 - Balanced, Offense, Survival, and PvE squad scoring
 - Fair all-hero Equal builds at maximum level/rank/skills and maximum yellow T5 gear by default; Max heroes (no gear) and opt-in My builds modes. Resource priorities use actual owned builds; details stay collapsed ([model](docs/research/HERO-REFERENCE-ESTIMATES.md))
 - Five-position front-to-back formation guidance
+- Five saved armies, selected with buttons 1–5 above the formation. Each keeps its formation and battle focus; heroes assigned to another army are excluded from selection and recommendations. Clear an army to release its heroes.
 - Front pair survival fit in squad rankings, with protected ranged carries and a separate signed score component; corrected direct-hit skill evidence ([combat report](docs/research/COMBAT-MODEL-IMPROVEMENTS-2026-10-10.md))
 - Modeled skill synergy (separate from build-specific upgrade comparisons)
 - Exact rank-step, level, skill and optional universal-gear recording

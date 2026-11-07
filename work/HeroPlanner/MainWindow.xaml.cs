@@ -13,6 +13,8 @@ public partial class MainWindow : Window
     private readonly ObservableCollection<Hero> _selected = [];
     private readonly ObservableCollection<SquadResult> _topSquads = [];
     private readonly ObservableCollection<ReleaseScheduleItem> _releaseSchedule = [];
+    private List<ArmyConfiguration> _armies = ArmyRoster.Clean(null, []);
+    private int _activeArmy;
     private Hero? _activeHero;
     private Hero? _releaseHero;
     private Point _rosterDragStart;
@@ -137,6 +139,8 @@ public partial class MainWindow : Window
                 else
                 {
                     var profile = JsonSerializer.Deserialize<PlannerProfile>(json) ?? new PlannerProfile();
+                    _armies=ArmyRoster.Clean(profile.Armies,_heroes.Select(h=>h.AssetSlug));
+                    _activeArmy=ArmyRoster.Index(profile.ActiveArmy);
                     owned = profile.OwnedHeroes;
                     progress = profile.HeroProgress ?? [];
                     _heroBuilds = (profile.HeroBuilds ?? []).Where(x => _heroes.Any(h => h.AssetSlug == x.Key) && x.Value is not null).ToDictionary();
@@ -155,6 +159,10 @@ public partial class MainWindow : Window
                 if (progress.TryGetValue(hero.AssetSlug, out var entry) && entry is not null)
                     hero.Progress = new() { Current = HeroProgress.Clean(entry.Current), Target = HeroProgress.Clean(entry.Target) };
             }
+            _selected.Clear();
+            foreach(var slug in _armies[_activeArmy].Heroes)_selected.Add(_heroes.Single(h=>h.AssetSlug==slug));
+            ModePicker.SelectedIndex=ArmyModeIndex(_armies[_activeArmy].Mode);
+            FormationModePicker.SelectedIndex=ModePicker.SelectedIndex;
             ServerOpenDate.SelectedDate = serverOpenDate;
             ComparisonBasisPicker.SelectedItem = ComparisonBasisPicker.Items.Cast<ComboBoxItem>().First(i => (string)i.Tag == _comparisonBasis);
             BattleWindowPicker.SelectedItem = BattleWindowPicker.Items.Cast<ComboBoxItem>().First(i => (string)i.Tag == _battleSeconds.ToString());
@@ -175,6 +183,7 @@ public partial class MainWindow : Window
         Directory.CreateDirectory(Path.GetDirectoryName(ProfilePath)!);
         var profile = new PlannerProfile
         {
+            Armies = _armies, ActiveArmy = _activeArmy,
             OwnedHeroes = _heroes.Where(hero => hero.IsOwned).Select(hero => hero.AssetSlug).ToHashSet(),
             HeroBuilds = _heroBuilds,
             UpgradeSettings = _upgradeSettings,
@@ -235,9 +244,12 @@ public partial class MainWindow : Window
             return;
         }
         if (InspectorTabs.SelectedIndex != 0) return;
+        int owner=ArmyRoster.Owner(_armies,hero.AssetSlug);
+        if(owner>=0&&owner!=_activeArmy){SelectionStatus.Text=$"Assigned to army {owner+1}. Remove it there before using it here.";return;}
         if (_selected.Contains(hero)) _selected.Remove(hero);
         else if (_selected.Count < 5) _selected.Add(hero);
         NormalizeSelectedOrder();
+        StoreActiveArmy();
         SelectionStatus.Text = $"{_selected.Count} / 5 selected";
         UpdateSquadPresentation();
     }
@@ -391,9 +403,44 @@ public partial class MainWindow : Window
         StarSaveStatus.Text = "Saved locally. Stars change the target queue, not simulated power.";
     }
 
+    private HashSet<string> ReservedHeroes => ArmyRoster.Blocked(_armies,_activeArmy);
+    private static int ArmyModeIndex(string mode) => mode switch { "Offense"=>1,"Survival"=>2,"PvE farming"=>3,_=>0 };
+    private void StoreActiveArmy()
+    {
+        if(_loadingProfile||_heroes.Count==0)return;
+        _armies[_activeArmy]=new(){Heroes=_selected.Select(h=>h.AssetSlug).ToList(),Mode=CurrentMode==PlannerMode.Pve?"PvE farming":CurrentMode.ToString()};
+        SaveProfile();
+    }
+    private void Army_Click(object sender,RoutedEventArgs e)
+    {
+        int next=int.Parse((string)((Button)sender).Tag);if(next==_activeArmy)return;
+        StoreActiveArmy();_activeArmy=next;
+        _loadingProfile=true;
+        try {
+            _selected.Clear();foreach(var slug in _armies[next].Heroes)_selected.Add(_heroes.Single(h=>h.AssetSlug==slug));
+            ModePicker.SelectedIndex=ArmyModeIndex(_armies[next].Mode);FormationModePicker.SelectedIndex=ModePicker.SelectedIndex;
+        } finally {_loadingProfile=false;}
+        SelectionStatus.Text=$"{_selected.Count} / 5 selected";
+        SaveProfile();RebuildOptimizer();UpdateRecommendations();UpdateSquadPresentation();
+    }
+    private void RefreshArmyButtons()
+    {
+        if(ArmyButtons is null)return;
+        ArmyTitle.Text=$"Army {_activeArmy+1}";
+        foreach(Button button in ArmyButtons.Children) {
+            int i=int.Parse((string)button.Tag);button.Opacity=i==_activeArmy?1:.6;
+            button.BorderThickness=new Thickness(i==_activeArmy?3:1);
+            button.ToolTip=$"Army {i+1}: {_armies[i].Heroes.Count}/5 heroes · {_armies[i].Mode}";
+        }
+        foreach(var hero in _heroes){int i=ArmyRoster.Owner(_armies,hero.AssetSlug);hero.ArmyAssignmentLabel=i>=0?$"Army {i+1}":"";}
+        HeroRoster?.Items.Refresh();
+    }
+
     private void Clear_Click(object sender, RoutedEventArgs e)
     {
         _selected.Clear();
+        StoreActiveArmy();
+        RebuildOptimizer();
         SelectionStatus.Text = "0 / 5 selected";
         UpdateSquadPresentation();
     }
@@ -412,6 +459,7 @@ public partial class MainWindow : Window
 
     private void ModePicker_Changed(object sender, SelectionChangedEventArgs e)
     {
+        if(_loadingProfile||_heroes.Count==0)return;
         if (ReferenceEquals(sender, FormationModePicker))
         {
             if (ModePicker.SelectedIndex != FormationModePicker.SelectedIndex)
@@ -421,6 +469,7 @@ public partial class MainWindow : Window
         if (FormationModePicker is not null && FormationModePicker.SelectedIndex != ModePicker.SelectedIndex)
             FormationModePicker.SelectedIndex = ModePicker.SelectedIndex;
         NormalizeSelectedOrder();
+        StoreActiveArmy();
         RebuildOptimizer();
         UpdateRecommendations();
         UpdateSquadPresentation();
@@ -445,9 +494,11 @@ public partial class MainWindow : Window
 
     private void LoadSquad(SquadResult squad)
     {
+        if(squad.Heroes.Any(h=>ReservedHeroes.Contains(h.AssetSlug)))return;
         _selected.Clear();
         foreach (var hero in squad.Heroes) _selected.Add(hero);
         NormalizeSelectedOrder();
+        StoreActiveArmy();
         SelectionStatus.Text = "5 / 5 selected";
         UpdateSquadPresentation();
     }
@@ -463,6 +514,7 @@ public partial class MainWindow : Window
     private void UpdateSquadPresentation()
     {
         if (OptimizerPanel is null || TopConfigurationsPanel is null || FormationGuidePanel is null) return;
+        RefreshArmyButtons();
         bool complete = _selected.Count == 5 && _selected.All(h=>h.Estimate?.Comparable!=false);
         OptimizerPanel.Visibility = complete ? Visibility.Collapsed : Visibility.Visible;
         TopConfigurationsPanel.Visibility = complete ? Visibility.Collapsed : Visibility.Visible;
@@ -550,7 +602,8 @@ public partial class MainWindow : Window
     private void RebuildOptimizer()
     {
         if (TopSquads is null || RoleCoverage is null || ModePicker is null || AccessPicker is null) return;
-        var pool = _heroes.Where(MatchesAccess).Where(h=>h.Estimate?.Comparable!=false).ToList();
+        var reserved=ReservedHeroes;
+        var pool = _heroes.Where(MatchesAccess).Where(h=>h.Estimate?.Comparable!=false&&!reserved.Contains(h.AssetSlug)).ToList();
         var results = FindTopSquads(pool, CurrentMode, RoleCoverage.IsChecked == true, 20, _enemyFaction);
         _topSquads.Clear();
         for (int i = 0; i < results.Count; i++)
@@ -774,8 +827,9 @@ public partial class MainWindow : Window
     private void UpdateRecommendations()
     {
         if (UnlockRecommendation is null || ResourceRecommendation is null) return;
-        var owned = _heroes.Where(hero => hero.IsOwned).ToList();
-        var allUnowned = _heroes.Where(hero => !hero.IsOwned).ToList();
+        var reserved=ReservedHeroes;
+        var owned = _heroes.Where(hero => hero.IsOwned&&!reserved.Contains(hero.AssetSlug)).ToList();
+        var allUnowned = _heroes.Where(hero => !hero.IsOwned&&!reserved.Contains(hero.AssetSlug)).ToList();
         var unowned = CurrentAccess switch
         {
             "F2P confirmed" => allUnowned.Where(hero => hero.AcquisitionClass == "f2p_confirmed").ToList(),
@@ -783,7 +837,7 @@ public partial class MainWindow : Window
             "IAP-linked" => allUnowned.Where(hero => hero.IapLinked).ToList(),
             _ => allUnowned,
         };
-        OwnedCount.Text = $"{owned.Count} / {_heroes.Count} marked as owned";
+        OwnedCount.Text = $"{_heroes.Count(h=>h.IsOwned)} / {_heroes.Count} marked as owned";
         if (owned.Count < 5)
         {
             int needed = 5 - owned.Count;

@@ -21,6 +21,7 @@ internal enum HeroMechanic
 
 public sealed class Hero
 {
+    [JsonIgnore] public string ArmyAssignmentLabel { get; set; } = "";
     [JsonPropertyName("name")] public string Name { get; set; } = "";
     [JsonPropertyName("asset_slug")] public string AssetSlug { get; set; } = "";
     [JsonPropertyName("hero_id")] public int HeroId { get; set; }
@@ -243,6 +244,9 @@ public sealed class ReleaseScheduleItem
 
 public sealed class PlannerProfile
 {
+    [JsonPropertyName("armies")] public List<ArmyConfiguration> Armies { get; set; } = [];
+    [JsonPropertyName("active_army")] public int ActiveArmy { get; set; }
+
     [JsonPropertyName("army_context")] public ArmyContextSettings ArmyContext { get; set; } = new();
     [JsonPropertyName("enemy_faction")] public string EnemyFaction { get; set; } = "Unknown";
     [JsonPropertyName("comparison_basis")] public string ComparisonBasis { get; set; } = "reference";
@@ -252,4 +256,25 @@ public sealed class PlannerProfile
     [JsonPropertyName("hero_progress")] public Dictionary<string, HeroProgress> HeroProgress { get; set; } = [];
     [JsonPropertyName("owned_heroes")] public HashSet<string> OwnedHeroes { get; set; } = [];
     [JsonPropertyName("server_open_date")] public DateTime? ServerOpenDate { get; set; }
+}
+
+public sealed class ArmyConfiguration
+{
+    [JsonPropertyName("heroes")] public List<string> Heroes { get; set; } = [];
+    [JsonPropertyName("mode")] public string Mode { get; set; } = "Balanced";
+}
+public static class ArmyRoster
+{
+    public static int Index(int value) => value is >=0 and <5 ? value : 0;
+    public static List<ArmyConfiguration> Clean(IEnumerable<ArmyConfiguration>? input,IEnumerable<string> known)
+    {
+        var source=(input??[]).Take(5).ToArray();var available=known.ToHashSet();var used=new HashSet<string>();
+        return Enumerable.Range(0,5).Select(i=>{
+            var raw=source.ElementAtOrDefault(i);var heroes=new List<string>();
+            foreach(var slug in raw?.Heroes??[])if(slug is not null&&available.Contains(slug)&&!used.Contains(slug)&&heroes.Count<5){heroes.Add(slug);used.Add(slug);}
+            return new ArmyConfiguration{Heroes=heroes,Mode=raw?.Mode is "Offense" or "Survival" or "PvE farming" ? raw.Mode : "Balanced"};
+        }).ToList();
+    }
+    public static HashSet<string> Blocked(IReadOnlyList<ArmyConfiguration> armies,int active) => armies.Where((_,i)=>i!=active).SelectMany(a=>a.Heroes).ToHashSet();
+    public static int Owner(IReadOnlyList<ArmyConfiguration> armies,string slug) {for(int i=0;i<armies.Count;i++)if(armies[i].Heroes.Contains(slug))return i;return -1;}
 }
