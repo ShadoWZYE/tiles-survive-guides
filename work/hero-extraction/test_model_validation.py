@@ -5,6 +5,17 @@ from validate_model_evidence import prediction_metrics,check_countdown,report
 
 
 class EvidenceValidationTests(unittest.TestCase):
+    def test_cli_rejects_duplicate_report_replay_evidence(self):
+        import subprocess, sys, tempfile
+        root=Path(__file__).resolve().parents[2]
+        evidence=root/'outputs/hero-report/Replay-Observation-2026-11-07.json'
+        with tempfile.TemporaryDirectory() as folder:
+            result=subprocess.run([sys.executable,str(root/'work/hero-extraction/validate_model_evidence.py'),
+                '--evidence',str(evidence),'--evidence',str(evidence),'--output',str(Path(folder)/'out.json')],capture_output=True,text=True)
+            self.assertNotEqual(result.returncode,0)
+            self.assertIn('Duplicate battle observation',result.stderr)
+            self.assertFalse((Path(folder)/'out.json').exists())
+
     def test_absent_predictions_are_unknown_not_zero_or_perfect_accuracy(self):
         result=prediction_metrics([{'outcome':'loss','evaluation_role':'mechanics_observation'},
             {'outcome':'win','evaluation_role':'calibration','prediction':{'outcome':'win'}}])

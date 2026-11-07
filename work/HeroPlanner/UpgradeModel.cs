@@ -145,6 +145,7 @@ public sealed class UpgradeSkill
 }
 public sealed class UpgradeSkillLevel
 {
+    public double[] FlatStats { get; set; } = [0, 0, 0];
     public int Level { get; set; }
     public double Power { get; set; }
     public Dictionary<string, double> Cost { get; set; } = [];
@@ -247,7 +248,10 @@ public static class UpgradeModel
             int cap = skill.Slot < stage.SkillCaps.Length ? stage.SkillCaps[skill.Slot] : 0;
             var sl = skill.Levels.Find(l => l.Level == n);
             if (n < 0 || n > cap || (n > 0 && sl is null)) { error = $"{skill.Name}: level exceeds cap or is absent from data"; return null; }
-            if (n > 0) power += sl!.Power;
+            if (n > 0) {
+                power += sl!.Power;
+                for (int i = 0; i < 3; i++) stats[i] += sl.FlatStats.ElementAtOrDefault(i);
+            }
         }
         return new(b, stage, level, stats, power, null, notes);
     }

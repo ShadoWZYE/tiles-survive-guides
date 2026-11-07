@@ -49,6 +49,8 @@ Signature Gear now has its own game-icon card and level selector in Hero Stats, 
 
 These systems are not universally ranking-neutral. Controlled individual-ranking tests found changes from faction Research and hero-specific Signature Gear while small shared-bonus examples preserved order. Main scoring weights remain unchanged. Signature linked skills, Behemoth battle skills/own damage and troop multipliers are explicitly excluded, so this does not claim full combat support. See the [scope and evidence](docs/research/HERO-ARMY-CONTEXT-2026-11-04.md) and [sensitivity report](outputs/hero-report/Hero-Army-Context-Sensitivity.json).
 
+Model v15 includes recorded skill-level flat hero ATK/DEF/HP benefits in both scoring and upgrade returns, with no credit for locked or unrecorded skills. The November replay adds survival-window sensitivity checks and an exact skill-power reconciliation; global battle accuracy remains unmeasured. See the [recording analysis and remaining discrepancies](docs/research/REPLAY-MODEL-CHECK-2026-11-07.md).
+
 ### Faction-aware formations
 
 Both planners include faction Final Health bonuses in squad rankings: 2 matching heroes +2%, 2+2 +4%, 3 +8%, 3+2 +12%, 4 +18%, and 5 +25%. Mariners (`Sea` in the extracted data) occupy one wildcard slot each; the planner selects the strongest valid composition without counting a Mariner twice. The faction contribution is separate from skill synergy and also affects recommendations for additional heroes.

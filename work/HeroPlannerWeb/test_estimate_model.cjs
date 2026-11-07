@@ -189,3 +189,21 @@ test('maximum modes use max level, rank, skills and standard T5 gear with native
   if(c.basis==='flat')assert.equal(result.score,model.compare(c.slug,null,upgrades,estimates,'flat',null,c.seconds,[0,0,0]).score);
  }
 });
+
+test('recorded fourth skills add their verified flat stats once, before permanent percentages',()=>{
+ const upgrade=require('./upgrade-model.js');
+ for(const [slug,expected] of [['freja',[5378,1075,358560]],['maddie',[6480,1296,432000]]]){
+  const h=upgrades.heroes[slug],s=h.skills.find(s=>s.slot===3),stage=h.stages.at(-1);
+  assert.deepEqual(s.levels.find(r=>r.level===1).flat_stats,expected);
+  const base={stage:stage.id,level:120,gear:[],skills:Object.fromEntries(h.skills.map(s=>[s.id,0]))},on=structuredClone(base);on.skills[s.id]=1;
+  const before=upgrade.state(slug,base,upgrades,30),after=upgrade.state(slug,on,upgrades,30);
+  assert.deepEqual(after.stats.map((v,i)=>v-before.stats[i]),expected);
+  assert.equal(after.power-before.power,s.levels.find(r=>r.level===1).power,'power already includes skill power');
+  const a=model.evaluate(slug,base,upgrades,estimates,0,null,true),b=model.evaluate(slug,on,upgrades,estimates,0,null,true);
+  assert.ok(Math.abs(b.offense-a.offense-100*expected[0]/estimates.scales[0])<1e-8);
+  assert.ok(Math.abs(b.durability-a.durability-100*(.7*expected[2]+30*expected[1])/estimates.scales[1])<1e-8);
+  const unknown=structuredClone(on);delete unknown.skills[s.id];
+  assert.equal(model.evaluate(slug,unknown,upgrades,estimates,0,null,true).score,a.score);
+  const low={...on,stage:h.stages[0].id,level:1};assert.equal(model.evaluate(slug,low,upgrades,estimates,0,null,true).activeSkillIds.includes(s.id),false);
+ }
+});

@@ -1,0 +1,146 @@
+{
+  "schema": 1,
+  "battle_id": "pvp-defense-2026-11-07-a",
+  "independent_battles": 1,
+  "model_version": 15,
+  "source_sha256": "aea2b2109fcda79a18c9bcaeea483d47c8a00f1825742fd49d005d4429423288",
+  "opening_countdowns": [
+    {
+      "hero": "Rosie",
+      "consistent": true,
+      "configured": 5.6,
+      "display": 6
+    },
+    {
+      "hero": "Freja",
+      "consistent": true,
+      "configured": 4.2,
+      "display": 5
+    },
+    {
+      "hero": "Becca",
+      "consistent": true,
+      "configured": 6.3,
+      "display": 7
+    },
+    {
+      "hero": "Maddie",
+      "consistent": true,
+      "configured": 7,
+      "display": 7
+    },
+    {
+      "hero": "Ray",
+      "consistent": true,
+      "configured": 6.3,
+      "display": 7
+    }
+  ],
+  "skill_power": {
+    "observed": 1165764,
+    "reconstructed": 1165764,
+    "consistent": true
+  },
+  "gear_power": {
+    "observed": 1927128,
+    "reconstructed": 1757868,
+    "residual": 169260
+  },
+  "damage": {
+    "hero": 32790000,
+    "behemoth": 5120000,
+    "total": 37910000,
+    "behemoth_fraction": 0.13505671326826696
+  },
+  "heroes": [
+    {
+      "hero": "Rosie",
+      "scenario_alive_seconds": [
+        10,
+        13
+      ],
+      "damage_per_alive_second_scenario": [
+        230000,
+        299000
+      ],
+      "lifetime_coefficient_potential": [
+        10.488,
+        12.6312
+      ],
+      "full_30s_coefficient_potential": 30.3924
+    },
+    {
+      "hero": "Freja",
+      "scenario_alive_seconds": [
+        8,
+        13
+      ],
+      "damage_per_alive_second_scenario": [
+        279230.76923076925,
+        453750
+      ],
+      "lifetime_coefficient_potential": [
+        9.101,
+        16.87
+      ],
+      "full_30s_coefficient_potential": 35.405
+    },
+    {
+      "hero": "Becca",
+      "scenario_alive_seconds": [
+        20,
+        23
+      ],
+      "damage_per_alive_second_scenario": [
+        335652.17391304346,
+        386000
+      ],
+      "lifetime_coefficient_potential": [
+        44.23199999999999,
+        46.28399999999999
+      ],
+      "full_30s_coefficient_potential": 65.66399999999999
+    },
+    {
+      "hero": "Maddie",
+      "scenario_alive_seconds": [
+        24,
+        27
+      ],
+      "damage_per_alive_second_scenario": [
+        341481.48148148146,
+        384166.6666666667
+      ],
+      "lifetime_coefficient_potential": [
+        40.44,
+        42.635999999999996
+      ],
+      "full_30s_coefficient_potential": 44.099999999999994
+    },
+    {
+      "hero": "Ray",
+      "scenario_alive_seconds": [
+        20,
+        23
+      ],
+      "damage_per_alive_second_scenario": [
+        401304.347826087,
+        461500
+      ],
+      "lifetime_coefficient_potential": [
+        29.750000000000004,
+        31.892
+      ],
+      "full_30s_coefficient_potential": 44.982
+    }
+  ],
+  "winner_prediction": null,
+  "damage_prediction": null,
+  "accuracy_percentage": null,
+  "scope": "Observed-lifetime sensitivity analysis at assumed 2x playback, not a live battle simulator. Coefficients omit targets, hit success, movement, interruption, attack speed, some conditional/summon effects and effective healing. No global weight fitting from this one fight.",
+  "unresolved": [
+    "Friendly gear display exceeds the sum of transcribed item rows by 169260; no multiplier inferred.",
+    "The report displays 10% troop health for 3+1+1, matching the local battle-formula tier; planner Final Health uses the separate 8% description tier. Runtime selector and application to hero versus troop health remain untraced; no forced global substitution.",
+    "Enemy damage and friendly damage-taken totals do not conserve exactly; shield/overkill/summon attribution unknown."
+  ]
+}

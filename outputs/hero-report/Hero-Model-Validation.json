@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "model_version": 14,
+  "model_version": 15,
   "client_data_build": "2.6.400.304",
   "native_semantics": {
     "traced_build": "2.6.400.304",
@@ -9,9 +9,9 @@
     "scope": "selected_current_static_base_paths; full_engine_and_live_patches_unverified"
   },
   "source_sha256": {
-    "Hero-Estimate-Model.json": "4190c736f652320c7e590570a1df8b5426095be9840e10f2408d0695cd367980",
+    "Hero-Estimate-Model.json": "454a46776de6ea3e9e54a107967eae5681c2398e9b6a3f0425dff113d6b5cf37",
     "Hero-Combat-Audit.json": "2eb078f6aced672130fdd54bb472199ea8b4b290e12a6e8449c18c3e76917c1f",
-    "TilesSurvive-Upgrade-Data.json": "4bba139a5ae23d5c8d4eccea649f7ca7d3141fd5d94deaedf57f8c67503eb4fb",
+    "TilesSurvive-Upgrade-Data.json": "2d215fe98e44e118e522d4f24d755596e11e2a6c3111fb5964dd9e8c53244310",
     "TilesSurvive-Hero-Data.json": "0a1d9d93ccd8666ba11d05748b0ac67c0b340c9a7f6372f670ccdb575d3eb32c"
   },
   "mechanics_checks": {
@@ -19,98 +19,53 @@
     "countdown_rule": "Ceiling-display hypothesis: displayed minus one < configured initial delay <= displayed. Intro counts are rounded, not measured cast-start timestamps.",
     "opening_countdowns": [
       {
-        "battle_id": "replay_1",
-        "hero": "Rusty",
-        "slug": "rusty",
-        "frame_seconds": 7.0,
-        "observed_display": 4,
-        "configured_seconds": 3.5,
-        "consistent": true
-      },
-      {
-        "battle_id": "replay_1",
-        "hero": "Ghost",
-        "slug": "tim",
-        "frame_seconds": 7.0,
-        "observed_display": 5,
-        "configured_seconds": 4.2,
-        "consistent": true
-      },
-      {
-        "battle_id": "replay_1",
-        "hero": "Freja",
-        "slug": "freja",
-        "frame_seconds": 7.0,
-        "observed_display": 5,
-        "configured_seconds": 4.2,
-        "consistent": true
-      },
-      {
-        "battle_id": "replay_1",
-        "hero": "Maddie",
-        "slug": "maddie",
-        "frame_seconds": 7.0,
-        "observed_display": 7,
-        "configured_seconds": 7.0,
-        "consistent": true
-      },
-      {
-        "battle_id": "replay_1",
-        "hero": "Lucky",
-        "slug": "lucky",
-        "frame_seconds": 7.0,
-        "observed_display": 6,
-        "configured_seconds": 5.6,
-        "consistent": true
-      },
-      {
-        "battle_id": "replay_2",
-        "hero": "Layla",
-        "slug": "layla",
-        "frame_seconds": 63.0,
-        "observed_display": 7,
-        "configured_seconds": 7.0,
-        "consistent": true
-      },
-      {
-        "battle_id": "replay_2",
-        "hero": "Nikola",
-        "slug": "nikola",
-        "frame_seconds": 63.0,
-        "observed_display": 5,
-        "configured_seconds": 4.9,
-        "consistent": true
-      },
-      {
-        "battle_id": "replay_2",
-        "hero": "Becca",
-        "slug": "becca",
-        "frame_seconds": 63.0,
-        "observed_display": 7,
-        "configured_seconds": 6.3,
-        "consistent": true
-      },
-      {
-        "battle_id": "replay_2",
-        "hero": "Ray",
-        "slug": "ray",
-        "frame_seconds": 63.0,
-        "observed_display": 7,
-        "configured_seconds": 6.3,
-        "consistent": true
-      },
-      {
-        "battle_id": "replay_2",
+        "battle_id": "pvp-defense-2026-11-07-a",
         "hero": "Rosie",
         "slug": "rosie",
-        "frame_seconds": 63.0,
+        "frame_seconds": 44,
         "observed_display": 6,
         "configured_seconds": 5.6,
+        "consistent": true
+      },
+      {
+        "battle_id": "pvp-defense-2026-11-07-a",
+        "hero": "Freja",
+        "slug": "freja",
+        "frame_seconds": 44,
+        "observed_display": 5,
+        "configured_seconds": 4.2,
+        "consistent": true
+      },
+      {
+        "battle_id": "pvp-defense-2026-11-07-a",
+        "hero": "Becca",
+        "slug": "becca",
+        "frame_seconds": 44,
+        "observed_display": 7,
+        "configured_seconds": 6.3,
+        "consistent": true
+      },
+      {
+        "battle_id": "pvp-defense-2026-11-07-a",
+        "hero": "Maddie",
+        "slug": "maddie",
+        "frame_seconds": 44,
+        "observed_display": 7,
+        "configured_seconds": 7.0,
+        "consistent": true
+      },
+      {
+        "battle_id": "pvp-defense-2026-11-07-a",
+        "hero": "Ray",
+        "slug": "ray",
+        "frame_seconds": 44,
+        "observed_display": 7,
+        "configured_seconds": 6.3,
         "consistent": true
       }
     ],
-    "consistent_count": 10,
-    "checked_count": 10
+    "consistent_count": 5,
+    "checked_count": 5
   },
   "prediction_metrics": {
     "winner_cases": 0,
@@ -482,5 +437,8 @@
   ],
   "accuracy_percentage": null,
   "accuracy_status": "No validated overall accuracy percentage. Consistency checks and software parity do not establish battle prediction accuracy.",
-  "evidence_sha256": "a97a410181df02c5f39bfa29b12f5347f61cd7c213d12b190aa5764c78786087"
+  "evidence_sources_sha256": {
+    "Replay-Observation-2026-11-07.json": "3e5692b5b743744d6d29e2c1896649e0ecd35c15ed0641b03f7883aca0436f48"
+  },
+  "independent_battle_observations": 1
 }

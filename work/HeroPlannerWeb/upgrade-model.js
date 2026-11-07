@@ -43,7 +43,7 @@
     }
     for(const skill of h.skills) {
       const n=b.skills[skill.id];
-      if(n>0)power+=row(skill.levels,n)?.power||0;
+      if(n>0){const selected=row(skill.levels,n);power+=selected?.power||0;stats.forEach((_,i)=>stats[i]+=selected?.flat_stats?.[i]||0);}
     }
     return {build:b,stage,level,stats,power,direct:null,missing};
   }

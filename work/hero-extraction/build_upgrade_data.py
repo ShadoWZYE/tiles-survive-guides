@@ -59,7 +59,7 @@ def export(source: Path, roster: list, version: str, localized: dict) -> dict:
                            "effect_type": s["EffectType"], "subskills": bool(timeline.get("SubSkill")),
                            "levels": [{"level": r["Level"], "cost": r["SlgItemReq"],
                                        "power": r["BattlePower"], "params": r["RaidSkillParam_1"],
-                                       "overall": r["OverallBenefit"]}
+                                       "overall": r["OverallBenefit"], "flat_stats": stats(r["Benefits"])}
                                       for r in sorted((r for r in skill_levels if r["SkillType"] == s["InternalId"]), key=lambda r: r["Level"])]})
         if len({s["id"] for s in stages}) != len(stages) or not stages or not hero_levels:
             raise ValueError(f"Invalid progression for {entry['name']}")
@@ -85,7 +85,7 @@ def export(source: Path, roster: list, version: str, localized: dict) -> dict:
     used_items.update(key for hero in result.values() for skill in hero["skills"] for level in skill["levels"] for key in level["cost"])
     return {"gear_xp_cost_checks":xp_checks,"gear_xp_cost_basis":"Current ExpNeed; cross-checked against adjacent ExpProvide differences. Zero partial XP progress assumed.","schema": 1, "client_build": version, "source_hashes": files, "heroes": result, "gear": gear,
             "items": {**{key: items.get(key, key) for key in sorted(used_items)}, "hero-xp": "Hero XP", "gear-xp": "Gear XP"},
-            "model_notes": "BenefitTroop + BenefitsTroops + recorded BenefitSlg gear. Rank costs use destination ItemReqNew; skill costs use destination SlgItemReq. Runtime damage/utility return is not scored in upgrade-cost comparisons. Not a win-rate or live damage simulator."}
+            "model_notes": "BenefitTroop + BenefitsTroops + recorded BenefitSlg gear. Rank costs use destination ItemReqNew; skill costs use destination SlgItemReq. Runtime damage/utility return is not scored in upgrade-cost comparisons. Not a win-rate or live damage simulator. Recorded skill Benefits flat hero stats (301825/301826/301827) included once; OverallBenefit troop percentages remain separate."}
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)

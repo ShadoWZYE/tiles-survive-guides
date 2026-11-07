@@ -47,6 +47,7 @@ public sealed class EstimatePeriodicBudget { public string EffectId { get; set; 
 public sealed class EstimateStatSource { public string Id { get; set; } = ""; public string Scope { get; set; } = ""; }
 public sealed class EstimateSkillLevel
 {
+    public double[] FlatStats { get; set; } = [0, 0, 0];
     public int Level { get; set; }
     public double Damage { get; set; }
     public double Utility { get; set; }
@@ -235,6 +236,7 @@ public static class EstimateModel
             if (saved?.Skills is not null && saved.Skills.TryGetValue(skill.Id, out int recorded) && recorded >= 0 && recorded <= cap && skill.Levels.Any(l => l.Level == recorded))
             { skillLevel = recorded; known++; }
             var row = skill.Levels.Find(l => l.Level == skillLevel) ?? skill.Levels[0];
+            if (row.Level > 0) for (int i = 0; i < 3; i++) stats[i] += row.FlatStats.ElementAtOrDefault(i);
             stamina=Math.Max(stamina,row.StaminaReductionPercent);
             if (row.Level > 0) activeSkills.Add(skill.Id);
             if (row.Level > 0) selected.Add((skill,row));

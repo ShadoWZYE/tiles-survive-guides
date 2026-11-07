@@ -1,0 +1,237 @@
+{
+  "schema": 1,
+  "id": "pvp-defense-2026-11-07-a",
+  "evaluation_role": "mechanics_observation",
+  "prediction": null,
+  "outcome": "loss",
+  "source_sha256": "aea2b2109fcda79a18c9bcaeea483d47c8a00f1825742fd49d005d4429423288",
+  "source_duration_seconds": 67.71640625,
+  "privacy": "Account names, alliance tags and coordinates omitted. Report and replay are one battle, not independent samples.",
+  "opening_countdown_frame_seconds": 44,
+  "heroes": [
+    {
+      "planner_slug": "rosie",
+      "name": "Rosie",
+      "level": 120,
+      "damage": 2990000,
+      "healing": 419340,
+      "damage_taken": 13470000,
+      "opening_countdown_display": 6,
+      "skill_levels_by_slot": [
+        15,
+        15,
+        15,
+        0
+      ],
+      "grey_wall_seconds": [
+        51,
+        52
+      ],
+      "gear": [
+        {
+          "id": "equipment_suit1_head_5",
+          "level": 30
+        },
+        {
+          "id": "equipment_suit1_body_5",
+          "level": 23
+        },
+        {
+          "id": "equipment_suit1_leg_5",
+          "level": 14
+        }
+      ]
+    },
+    {
+      "planner_slug": "freja",
+      "name": "Freja",
+      "level": 120,
+      "damage": 3630000,
+      "healing": null,
+      "damage_taken": 13500000,
+      "opening_countdown_display": 5,
+      "skill_levels_by_slot": [
+        12,
+        10,
+        10,
+        1
+      ],
+      "grey_wall_seconds": [
+        50,
+        52
+      ],
+      "gear": [
+        {
+          "id": "equipment_suit1_head_4",
+          "level": 20
+        },
+        {
+          "id": "equipment_suit1_body_5",
+          "level": 20
+        },
+        {
+          "id": "equipment_scatter1_leg_3",
+          "level": 20
+        }
+      ]
+    },
+    {
+      "planner_slug": "becca",
+      "name": "Becca",
+      "level": 120,
+      "damage": 7720000,
+      "healing": null,
+      "damage_taken": 15230000,
+      "opening_countdown_display": 7,
+      "skill_levels_by_slot": [
+        15,
+        15,
+        15,
+        0
+      ],
+      "grey_wall_seconds": [
+        56,
+        57
+      ],
+      "gear": [
+        {
+          "id": "equipment_suit1_head_5",
+          "level": 30
+        },
+        {
+          "id": "equipment_suit1_body_5",
+          "level": 67
+        },
+        {
+          "id": "equipment_suit1_leg_5",
+          "level": 30
+        }
+      ]
+    },
+    {
+      "planner_slug": "maddie",
+      "name": "Maddie",
+      "level": 120,
+      "damage": 9220000,
+      "healing": 1620000,
+      "damage_taken": 15230000,
+      "opening_countdown_display": 7,
+      "skill_levels_by_slot": [
+        23,
+        30,
+        20,
+        1
+      ],
+      "grey_wall_seconds": [
+        58,
+        59
+      ],
+      "gear": [
+        {
+          "id": "equipment_suit1_head_4",
+          "level": 20
+        },
+        {
+          "id": "equipment_suit1_body_4",
+          "level": 20
+        },
+        {
+          "id": "equipment_suit1_leg_4",
+          "level": 20
+        }
+      ]
+    },
+    {
+      "planner_slug": "ray",
+      "name": "Ray",
+      "level": 120,
+      "damage": 9230000,
+      "healing": 98830,
+      "damage_taken": 14250000,
+      "opening_countdown_display": 7,
+      "skill_levels_by_slot": [
+        20,
+        20,
+        20,
+        0
+      ],
+      "grey_wall_seconds": [
+        56,
+        57
+      ],
+      "gear": [
+        {
+          "id": "equipment_suit1_head_5",
+          "level": 21
+        },
+        {
+          "id": "equipment_suit1_body_5",
+          "level": 15
+        },
+        {
+          "id": "equipment_suit1_leg_5",
+          "level": 20
+        }
+      ]
+    }
+  ],
+  "friendly": {
+    "troops": 60000,
+    "tier": 8,
+    "hero_power": 6562465,
+    "gear_power": 1927128,
+    "skill_power": 1165764,
+    "signature_power": 98880,
+    "faction_health_display": 0.1,
+    "factions": [
+      "Mountain",
+      "Mountain",
+      "Wasteland",
+      "Sky",
+      "Mountain"
+    ],
+    "behemoths": [
+      {
+        "kind": "Tidal Drake",
+        "level": 42,
+        "skill_level": 4,
+        "damage": 1490000,
+        "healing": 1090000
+      },
+      {
+        "kind": "Legendary Griffin",
+        "level": 101,
+        "skill_level": 14,
+        "damage": 3630000,
+        "healing": null
+      }
+    ]
+  },
+  "opponent": {
+    "troops": 66600,
+    "tier": 8,
+    "hero_damage": 69890000,
+    "behemoth_damage": 5510000
+  },
+  "timing_scenario": {
+    "speed": 2,
+    "battle_start_wall_seconds": [
+      45.5,
+      46.0
+    ],
+    "status": "Compatible with rounded countdown changes; scenario assumption, not verified engine time.",
+    "death_marker_note": "Broad manually reviewed HUD greying intervals; transient greying is not treated as death. Travel, incapacitation and animation completion are not resolved."
+  },
+  "unresolved": [
+    "Friendly gear display exceeds the sum of transcribed item rows by 169260; no multiplier inferred.",
+    "The report displays 10% troop health for 3+1+1, matching the local battle-formula tier; planner Final Health uses the separate 8% description tier. Runtime selector and application to hero versus troop health remain untraced; no forced global substitution.",
+    "Enemy damage and friendly damage-taken totals do not conserve exactly; shield/overkill/summon attribution unknown."
+  ],
+  "verified_local_faction_tables": {
+    "verification": "Installed downloaded tables verified against current manifest; parallel definitions, runtime selector not traced.",
+    "config_pack_sha256": "f7c6944491f8bad652c95d10a1ec15f9fb1ca45e776c9163e0162203db714b71",
+    "manifest_sha256": "f77e8f2fe941ce1146d157c164b76be1bbb4ff1cfeb4d85189e17a0cdc92510d",
+    "battle_formula_coefficient.same_unit_type_add_up": "0;0.02;0.1;0.15;0.25",
+    "game_configs.same_unit_type_add_up_desc": "2|0.02,2_2|0.04,3|0.08,3_2|0.12,4|0.18,5|0.25"
+  }
+}

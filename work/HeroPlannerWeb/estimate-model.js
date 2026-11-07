@@ -62,6 +62,7 @@
     for(const skill of model.skills){const cap=stage.skill_caps[skill.slot]||0;let n=Math.min(skill.reference_level,cap),recorded=saved?.skills?.[skill.id];
       if(Number.isInteger(recorded)&&recorded>=0&&recorded<=cap&&skill.levels.some(l=>l.level===recorded)){n=recorded;known++;}
       const row=skill.levels.find(l=>l.level===n)||skill.levels[0],opening=[10,20,30].includes(battleSeconds)?row.opening_windows?.[battleSeconds]:null;damage+=opening?.damage??row.damage;utility+=row.utility;
+      if(row.level>0)stats.forEach((_,i)=>stats[i]+=row.flat_stats?.[i]||0);
       staminaReductionPercent=Math.max(staminaReductionPercent,row.stamina_reduction_percent||0);
       if(row.level>0)activeSkillIds.push(skill.id);
       if(row.level>0)selected.push({skill,row});

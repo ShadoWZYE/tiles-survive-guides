@@ -238,11 +238,12 @@ def build(upgrades, audit, roster):
     if set(gear_by_slot) != {1,2,3}:
         raise ValueError('Expected yellow T5 head, body and leg equipment.')
     reference_gear = [gear_by_slot[k] for k in sorted(gear_by_slot)]
-    result = {'version': 14, 'reference_level': max(r['level'] for h in upgrades['heroes'].values() for r in h['levels']),
+    result = {'version': 15, 'reference_level': max(r['level'] for h in upgrades['heroes'].values() for r in h['levels']),
               'reference_rank': max(s['rank'] for h in upgrades['heroes'].values() for s in h['stages']),
               'reference_step': 6, 'reference_gear':reference_gear,
               'reference_policy':'maximum_available_hero_level_rank_skills; equal builds adds standard yellow T5 maximum-level gear; no-gear mode uses the same hero baseline',
               'heroes': {}}
+    result['flat_skill_stat_policy']='selected_level_Benefits_301825_301826_301827_once_before_runtime_percent; unknown_or_locked_zero; OverallBenefit_separate'
     result['opening_scheduler']='single_caster_non_preemptive_configured_priority_scenario'
     result['native_semantics_build']='2.6.200.276'
     result['current_native_semantics_reverified']=False
@@ -323,7 +324,7 @@ def build(upgrades, audit, roster):
             immediate_counts=Counter(e['reference'] for e in nodes[0].get('immediate_hit_events',[]) if e['reference'] in {d['id'] for d in direct_damage}) if nodes else Counter()
             all_hit_counts=Counter(e['reference'] for e in evidence.get('timeline_events',[]) if e['reference'] in {d['id'] for d in direct_damage})
             counted_hits=bool(direct_damage) and nodes[0]['condition'] is None and cast is not None and immediate_counts==all_hit_counts and all(not e.get('has_property_sources') for e in direct_damage)
-            levels = [{'level': 0, 'damage': 0, 'utility': 0, 'self_percent':[0,0,0], 'team_percent':[0,0,0]}]
+            levels = [{'level': 0, 'damage': 0, 'utility': 0, 'flat_stats':[0,0,0], 'self_percent':[0,0,0], 'team_percent':[0,0,0]}]
             uses_prior = False
             stat_sources = []
             temp_sources = []
@@ -366,7 +367,7 @@ def build(upgrades, audit, roster):
                 stamina_ids={b['id'] for b in source.get('max_level_overall_benefits',[]) if b['name']=='prop_intel_stamina_reduce_percent'}
                 stamina=max([0]+[-100*b['benefit_value'] for b in row.get('overall',[]) if b['benefit_id'] in stamina_ids])
                 levels.append({'level': row['level'], 'damage': round(pressure, 8), 'utility': scaled_utility,
-                               'stamina_reduction_percent':stamina,
+                               'stamina_reduction_percent':stamina, 'flat_stats':row['flat_stats'],
                                'self_percent':self_percent,'team_percent':team_percent})
                 windows={}
                 permanent_self,_,_=permanent_stats(evidence,row['params'])
@@ -437,7 +438,7 @@ def build(upgrades, audit, roster):
     for model in result['heroes'].values():
         rates = [next(r for r in s['levels'] if r['level'] == s['reference_level']) for s in model['skills']]
         gear_stats=[sum(next(r for r in upgrades['gear'][g['id']]['levels'] if r['level']==g['level'])['stats'][i] for g in reference_gear) for i in range(3)]
-        stats = [(v+gear_stats[i])*(1+sum(r['self_percent'][i]+r['team_percent'][i] for r in rates)) for i,v in enumerate(model['reference_stats'])]
+        stats = [(v+gear_stats[i]+sum(r['flat_stats'][i] for r in rates))*(1+sum(r['self_percent'][i]+r['team_percent'][i] for r in rates)) for i,v in enumerate(model['reference_stats'])]
         a, d, h = stats
         pressure = sum(r['damage'] for r in rates); utility = sum(r['utility'] for r in rates)
         raw.append([a * (1 + .5 * math.log1p(pressure)),

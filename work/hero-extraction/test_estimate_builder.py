@@ -18,6 +18,12 @@ class EstimateBuilderTests(unittest.TestCase):
         cls.model = builder.build(read('TilesSurvive-Upgrade-Data.json'), read('Hero-Combat-Audit.json'),
                                   {h['asset_slug']: h for h in read('TilesSurvive-Hero-Data.json')})
 
+    def test_flat_skill_benefits_survive_export_and_locked_row_is_zero(self):
+        for hero, expected in [('freja',[5378,1075,358560]),('maddie',[6480,1296,432000])]:
+            skill=self.skill(hero,3)
+            self.assertEqual(skill['levels'][0]['flat_stats'],[0,0,0])
+            self.assertEqual(skill['levels'][1]['flat_stats'],expected)
+
     def skill(self, hero, slot):
         return next(s for s in self.model['heroes'][hero]['skills'] if s['slot'] == slot)
 

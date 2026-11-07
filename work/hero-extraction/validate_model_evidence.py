@@ -109,11 +109,19 @@ def report(folder,evidence):
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--data',type=Path,default=ROOT/'outputs/hero-report')
-    p.add_argument('--evidence',type=Path,default=ROOT/'outputs/battle-reports/Battle-Replay-Evidence-2026-10-25.json')
+    p.add_argument('--evidence',type=Path,action='append',help='Repeat for independently recorded evidence files; repeated battle IDs are rejected.')
     p.add_argument('--output',type=Path,default=ROOT/'outputs/hero-report/Hero-Model-Validation.json')
-    args=p.parse_args();evidence=json.loads(args.evidence.read_text(encoding='utf-8'))
+    args=p.parse_args()
+    paths=args.evidence or [ROOT/'outputs/hero-report/Replay-Observation-2026-11-07.json']
+    evidence={'battles':[]};fingerprints={};seen=set()
+    for path in paths:
+        source=json.loads(path.read_text(encoding='utf-8'));fingerprints[path.name]=hashlib.sha256(path.read_bytes()).hexdigest()
+        for battle in source.get('battles',[source] if 'id' in source else []):
+            if battle['id'] in seen:raise ValueError('Duplicate battle observation: '+battle['id'])
+            seen.add(battle['id']);evidence['battles'].append(battle)
     result=report(args.data,evidence)
-    result['evidence_sha256']=hashlib.sha256(args.evidence.read_bytes()).hexdigest()
+    result['evidence_sources_sha256']=fingerprints
+    result['independent_battle_observations']=len(seen)
     args.output.write_text(json.dumps(result,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
     checks=result['mechanics_checks']
     print(f"Opening countdown consistency: {checks['consistent_count']}/{checks['checked_count']}; held-out winner cases: {result['prediction_metrics']['winner_cases']}. Overall accuracy unvalidated.")
