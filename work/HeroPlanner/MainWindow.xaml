@@ -254,7 +254,7 @@
                                         <Button Content="4" Tag="3" Click="Army_Click" AutomationProperties.Name="Army 4" Margin="3,0" Padding="10,7"/>
                                         <Button Content="5" Tag="4" Click="Army_Click" AutomationProperties.Name="Army 5" Margin="3,0" Padding="10,7"/>
                                     </UniformGrid>
-                                    <CheckBox x:Name="SurvivalToggle" Content="HP survival benchmark (experimental · My builds)" Checked="Survival_Changed" Unchecked="Survival_Changed" Foreground="{StaticResource InkBrush}" Margin="0,0,0,5"/>
+                                    <CheckBox x:Name="SurvivalToggle" Content="HP survival benchmark (experimental)" Checked="Survival_Changed" Unchecked="Survival_Changed" Foreground="{StaticResource InkBrush}" Margin="0,0,0,5"/>
                                     <TextBlock x:Name="SurvivalNotice" Foreground="{StaticResource MutedInkBrush}" FontSize="11" TextWrapping="Wrap" Margin="0,0,0,8"/>
                                     <StackPanel x:Name="SquadDataNotice" Margin="0,0,0,10" />
                                 <Grid>

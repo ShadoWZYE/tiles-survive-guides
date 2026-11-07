@@ -61,6 +61,35 @@ def immediate_hit_events(timeline):
     return result
 
 
+def projectile_launch_events(release, timeline, takes, start=0):
+    """Literal launches, never a substituted traveling-impact time or target count."""
+    timing=release_timing(release,timeline,takes);duration=timing['duration_at_unit_speed_seconds']
+    if start is None or duration is None or not timeline or timeline.get('Loop') or release.get('LoopTime',0)>0 or timeline.get('Speed',1)!=1:return []
+    speed=release.get('Speed',0)/1000 if release.get('Speed',0)>0 else 1
+    found=[]
+    for stage_index,stage in enumerate(timeline.get('Stages',[])):
+        at=stage.get('Time')
+        if not isinstance(at,(int,float)) or not math.isfinite(at) or at<0:continue
+        offset=release.get('PreWait',0)/1000+at/speed
+        if offset>duration+1e-9:continue
+        for action_index,action in enumerate(stage.get('Actions',[])):
+            if action.get('Action')!='Projectile':continue
+            kind=action.get('Type');config=action.get('Config') or {}
+            if kind not in ['Immediate','Line','RaidHorizontalKeepingCast']:continue
+            if config.get('TimeScale',1)!=1 or config.get('Acceleration',0)!=0:continue
+            if kind!='Immediate' and (not isinstance(config.get('Velocity'),(int,float)) or config['Velocity']<=0):continue
+            if config.get('HitTargetNumLimit',1)!=1:continue
+            if kind=='RaidHorizontalKeepingCast' and config.get('CastNumLimit')!=1:continue
+            for hit_index,hit in enumerate(action.get('HitActions',[])):
+                if hit.get('Action')=='RaidEvent' and hit.get('RaidEventType')==1:
+                    found.append({'reference':hit.get('StringParam0',''),'projectile_type':kind,
+                        'launch_offset_seconds':start+offset,'impact_offset_seconds':start+offset if kind=='Immediate' else None,
+                        'stage_index':stage_index,'action_index':action_index,'hit_index':hit_index,
+                        'hit_target_limit':config.get('HitTargetNumLimit',1),'default_hit_limit_used':'HitTargetNumLimit' not in config,
+                        'cast_num_limit':config.get('CastNumLimit'),'velocity':config.get('Velocity'),'source_timeline':release.get('SkillEvent')})
+    return found
+
+
 def condition_dependencies(seeds, conditions):
     """Selected condition graph, including nested AND/OR gates; never assume uptime."""
     found, pending = {}, list(seeds)
@@ -222,6 +251,7 @@ def build_report(data, tables, timelines, animations=None):
                 seen.add(node['InternalId'])
                 cond = conditions.get(node.get('Condition'))
                 node_effects, node_events, timing, immediate, dispatches = set(), [], [], [], []
+                projectiles=[]
                 elapsed=0.
                 for release_id in node['SkillRelease']:
                     release = releases.get(release_id)
@@ -233,6 +263,7 @@ def build_report(data, tables, timelines, animations=None):
                     timeline = timelines.get(release.get('SkillEvent'))
                     timing.append(release_timing(release, timeline, takes))
                     dispatches.extend(timed_dispatches(release,timeline,takes,elapsed))
+                    projectiles.extend(projectile_launch_events(release,timeline,takes,elapsed))
                     duration=timing[-1]['duration_at_unit_speed_seconds']
                     elapsed=elapsed+duration if elapsed is not None and duration is not None else None
                     if timeline:
@@ -248,6 +279,7 @@ def build_report(data, tables, timelines, animations=None):
                     'release_timings':timing,
                     'immediate_hit_events':immediate,
                     'timed_dispatches':dispatches,
+                    'projectile_launches':projectiles,
                     'cast_duration_at_unit_speed_seconds':sum(t['duration_at_unit_speed_seconds'] for t in timing) if timing and all(t['duration_at_unit_speed_seconds'] is not None for t in timing) else None,
                     'effects':[effect_summary(effects[n]) for n in sorted(node_effects) if n in effects]})
                 for child in node['SubSkill']:

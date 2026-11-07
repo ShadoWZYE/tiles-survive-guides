@@ -257,9 +257,9 @@ class EstimateBuilderTests(unittest.TestCase):
             s=self.skill(hero,0)
             self.assertEqual(s['direct_hit_counts'],counts)
             self.assertEqual(s['direct_hit_budget_basis'],'unconditional_immediate_timeline_potential')
-        # Traveling projectiles are not converted to guaranteed hit counts.
-        self.assertEqual(self.skill('sarge',0)['direct_hit_counts'],{})
-        self.assertEqual(self.skill('eva',1)['direct_hit_counts'],{})
+        # Distinct launch opportunities are counted, with travel timing left unresolved.
+        self.assertEqual(self.skill('sarge',0)['direct_hit_counts'],{'damage_sarge_attack':3})
+        self.assertEqual(self.skill('eva',1)['direct_hit_counts'],{'damage_eva_skill_1':8})
         lava=self.skill('lava',0)
         self.assertAlmostEqual(lava['levels'][1]['damage'],.7/lava['cadence_assumed_seconds'],places=7)
 
@@ -278,6 +278,39 @@ class EstimateBuilderTests(unittest.TestCase):
         self.assertEqual(len(self.skill('tim',0)['levels'][1]['cast_budget']['direct_events']),4)
         self.assertEqual(self.skill('sarge',0)['levels'][1]['cast_budget']['direct_events'],[])
         self.assertAlmostEqual(self.skill('nikola',1)['levels'][1]['cast_budget']['temporary_buffs'][0]['application_offset_seconds'],.5)
+
+
+    def test_traveling_projectile_bursts_count_launches_without_inventing_impact_times(self):
+        for slug,slot,count,coefficient in [('tony',0,6,.6),('dave',1,3,13.5),('sarge',0,3,.6),('eva',1,8,6)]:
+            skill=self.skill(slug,slot)
+            self.assertEqual(skill['damage_selection_basis'],'projectile_burst_potential')
+            self.assertEqual(sum(skill['direct_hit_counts'].values()),count)
+            self.assertAlmostEqual(skill['levels'][1]['cast_budget']['direct_coefficient'],coefficient)
+            self.assertEqual(skill['levels'][1]['cast_budget']['direct_events'],[])
+            self.assertEqual(skill['levels'][0]['damage'],0)
+            self.assertEqual(skill['levels'][0]['utility'],0)
+
+    def test_burst_guard_rejects_missing_duplicate_unknown_and_conditional_launches(self):
+        import copy
+        audit=json.loads((ROOT/'outputs/hero-report/Hero-Combat-Audit.json').read_text(encoding='utf-8'))
+        source=next(s for s in audit['heroes']['tony']['skills'] if s['id']=='survivor_tony_attack')
+        damage=[e for e in source['skill_nodes'][0]['effects'] if e['type']==0]
+        self.assertEqual(sum(builder.projectile_burst_counts(source,damage).values()),6)
+        for mutate in [lambda s:s['skill_nodes'][0]['projectile_launches'].pop(),
+                       lambda s:s['skill_nodes'][0]['projectile_launches'].append(copy.deepcopy(s['skill_nodes'][0]['projectile_launches'][0])),
+                       lambda s:s['skill_nodes'][0]['projectile_launches'][0].update(projectile_type='Unknown'),
+                       lambda s:s['skill_nodes'][0].update(condition={'Type':19}),
+                       lambda s:s['skill_nodes'][0]['projectile_launches'][0].update(hit_target_limit=2)]:
+            changed=copy.deepcopy(source);mutate(changed)
+            self.assertFalse(builder.projectile_burst_counts(changed,damage))
+        self.assertFalse(builder.projectile_burst_counts(source,[{**e,'has_attribute_fixes':True} for e in damage]))
+
+    def test_structurally_resolved_maddie_and_wright_zones_do_not_require_a_ray_name(self):
+        for slug in ['maddie','wright']:
+            skill=self.skill(slug,1)
+            self.assertEqual(skill['damage_selection_basis'],'projectile_zone_dispatch_potential')
+            self.assertEqual(len(skill['projectile_zone_dispatches']),1)
+            self.assertAlmostEqual(skill['levels'][1]['cast_budget']['direct_coefficient'],10)
 
 
 if __name__ == '__main__':

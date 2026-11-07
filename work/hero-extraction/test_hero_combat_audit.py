@@ -1,10 +1,25 @@
 import unittest
 import json
 from pathlib import Path
-from audit_combat_effects import events, effect_summary, condition_dependencies, release_timing, immediate_hit_events, timed_dispatches, summon_inventory
+from audit_combat_effects import events, effect_summary, condition_dependencies, release_timing, immediate_hit_events, timed_dispatches, summon_inventory, projectile_launch_events
 
 
 class CombatAuditTests(unittest.TestCase):
+
+    def test_projectile_launches_keep_simultaneous_actions_and_do_not_use_launch_as_impact(self):
+        import copy
+        r=dict(Id='release',SkillEvent='clip',PreWait=100,AfterWait=0,Speed=1000,LoopTime=0)
+        hit=dict(Action='RaidEvent',RaidEventType=1,StringParam0='damage')
+        action=dict(Action='Projectile',Type='Line',Config={'Velocity':15,'TimeScale':1,'Acceleration':0},HitActions=[hit])
+        timeline=dict(Take='attack',Speed=1,Loop=False,CustomLength=2,Stages=[{'Time':.3,'Actions':[action,copy.deepcopy(action)]}])
+        events=projectile_launch_events(r,timeline,{},start=1)
+        self.assertEqual(len(events),2);self.assertNotEqual(events[0]['action_index'],events[1]['action_index'])
+        self.assertAlmostEqual(events[0]['launch_offset_seconds'],1.4)
+        self.assertIsNone(events[0]['impact_offset_seconds']);self.assertEqual(events[0]['hit_target_limit'],1)
+        self.assertEqual(projectile_launch_events(r,{**timeline,'Loop':True},{}),[])
+        self.assertEqual(projectile_launch_events({**r,'LoopTime':1000},timeline,{}),[])
+        self.assertEqual(projectile_launch_events(r,{**timeline,'Speed':2},{}),[])
+
     def test_timed_dispatches_scale_release_speed_and_preserve_release_start(self):
         r=dict(Id='release',SkillEvent='clip',PreWait=100,AfterWait=0,Speed=2000,LoopTime=0)
         hit=dict(Action='RaidEvent',RaidEventType=1,StringParam0='damage')
@@ -60,7 +75,7 @@ class CombatAuditTests(unittest.TestCase):
         high = max(h['max_level_attack'] for h in heroes)
         for hero in heroes:
             self.assertIsNone(hero['best_non_basic_damage_coefficient'], hero['name'])
-            expected = round((hero['max_level_attack'] - low) / (high - low) * 100, 2)
+            expected = round((hero['max_level_attack'] - low) / (high - low) * 1000, 2)
             self.assertEqual(hero['offense_index'], expected, hero['name'])
 
     def test_child_buffs_and_periodic_effects_are_in_dependency_graph(self):

@@ -175,6 +175,92 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [
+                {
+                  "reference": "damage_tony_attack",
+                  "projectile_type": "Line",
+                  "launch_offset_seconds": 0.033043477684259415,
+                  "impact_offset_seconds": null,
+                  "stage_index": 0,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": 15.0,
+                  "source_timeline": "raid_action_survivor_tony_attack"
+                },
+                {
+                  "reference": "damage_tony_attack_2",
+                  "projectile_type": "Line",
+                  "launch_offset_seconds": 0.11652173846960068,
+                  "impact_offset_seconds": null,
+                  "stage_index": 1,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": 15.0,
+                  "source_timeline": "raid_action_survivor_tony_attack"
+                },
+                {
+                  "reference": "damage_tony_attack_2",
+                  "projectile_type": "Line",
+                  "launch_offset_seconds": 0.1721739023923874,
+                  "impact_offset_seconds": null,
+                  "stage_index": 2,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": 15.0,
+                  "source_timeline": "raid_action_survivor_tony_attack"
+                },
+                {
+                  "reference": "damage_tony_attack_2",
+                  "projectile_type": "Line",
+                  "launch_offset_seconds": 0.1721739023923874,
+                  "impact_offset_seconds": null,
+                  "stage_index": 5,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": 15.0,
+                  "source_timeline": "raid_action_survivor_tony_attack"
+                },
+                {
+                  "reference": "damage_tony_attack_2",
+                  "projectile_type": "Line",
+                  "launch_offset_seconds": 0.29739129543304443,
+                  "impact_offset_seconds": null,
+                  "stage_index": 6,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": 15.0,
+                  "source_timeline": "raid_action_survivor_tony_attack"
+                },
+                {
+                  "reference": "damage_tony_attack_2",
+                  "projectile_type": "Line",
+                  "launch_offset_seconds": 0.35304346680641174,
+                  "impact_offset_seconds": null,
+                  "stage_index": 7,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": 15.0,
+                  "source_timeline": "raid_action_survivor_tony_attack"
+                }
+              ],
               "cast_duration_at_unit_speed_seconds": 1.0,
               "effects": [
                 {
@@ -535,6 +621,7 @@
                 }
               ],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 2.4000000953674316,
               "effects": [
                 {
@@ -841,6 +928,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {
@@ -1121,6 +1209,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {
@@ -1357,6 +1446,22 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [
+                {
+                  "reference": "damage_maddie_attack",
+                  "projectile_type": "Line",
+                  "launch_offset_seconds": 0.10000000149011612,
+                  "impact_offset_seconds": null,
+                  "stage_index": 0,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": 14.0,
+                  "source_timeline": "raid_action_survivor_maddie_attack"
+                }
+              ],
               "cast_duration_at_unit_speed_seconds": 1.0,
               "effects": [
                 {
@@ -1524,6 +1629,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 1.7333334684371948,
               "effects": [
                 {
@@ -1769,6 +1875,7 @@
                   "offset_seconds": 0.31889763474464417
                 }
               ],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 1.3666667938232422,
               "effects": [
                 {
@@ -2040,6 +2147,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {
@@ -2309,6 +2417,22 @@
                   "offset_seconds": 0.36944442987442017
                 }
               ],
+              "projectile_launches": [
+                {
+                  "reference": "damage_rosie_attack_1",
+                  "projectile_type": "Immediate",
+                  "launch_offset_seconds": 0.36944442987442017,
+                  "impact_offset_seconds": 0.36944442987442017,
+                  "stage_index": 2,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": null,
+                  "source_timeline": "raid_action_survivor_rosie_attack_1"
+                }
+              ],
               "cast_duration_at_unit_speed_seconds": 1.4000000953674316,
               "effects": [
                 {
@@ -2388,6 +2512,22 @@
                 {
                   "reference": "damage_rosie_attack_2",
                   "offset_seconds": 0.44999998807907104
+                }
+              ],
+              "projectile_launches": [
+                {
+                  "reference": "damage_rosie_attack_2",
+                  "projectile_type": "Immediate",
+                  "launch_offset_seconds": 0.44999998807907104,
+                  "impact_offset_seconds": 0.44999998807907104,
+                  "stage_index": 1,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": null,
+                  "source_timeline": "raid_action_survivor_rosie_attack_2"
                 }
               ],
               "cast_duration_at_unit_speed_seconds": 1.7333333492279053,
@@ -2568,6 +2708,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 2.866666793823242,
               "effects": [
                 {
@@ -2689,6 +2830,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {
@@ -2915,6 +3057,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {
@@ -3163,6 +3306,22 @@
                   "offset_seconds": 0.15294118225574493
                 }
               ],
+              "projectile_launches": [
+                {
+                  "reference": "damage_nikola_attack",
+                  "projectile_type": "Immediate",
+                  "launch_offset_seconds": 0.15294118225574493,
+                  "impact_offset_seconds": 0.15294118225574493,
+                  "stage_index": 1,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": null,
+                  "source_timeline": "raid_action_survivor_nikola_attack"
+                }
+              ],
               "cast_duration_at_unit_speed_seconds": 1.100000023841858,
               "effects": [
                 {
@@ -3366,6 +3525,7 @@
                   "offset_seconds": 0.5
                 }
               ],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 1.3000000715255737,
               "effects": [
                 {
@@ -3643,6 +3803,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {
@@ -4023,6 +4184,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {
@@ -4283,6 +4445,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.9000000357627869,
               "effects": [
                 {
@@ -4658,6 +4821,50 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [
+                {
+                  "reference": "ray_skill_summon_damagezone2",
+                  "projectile_type": "Line",
+                  "launch_offset_seconds": 0.30979999899864197,
+                  "impact_offset_seconds": null,
+                  "stage_index": 1,
+                  "action_index": 1,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": 15.0,
+                  "source_timeline": "raid_action_survivor_ray_skill_1"
+                },
+                {
+                  "reference": "ray_skill_summon_damagezone",
+                  "projectile_type": "Line",
+                  "launch_offset_seconds": 0.4425197243690491,
+                  "impact_offset_seconds": null,
+                  "stage_index": 2,
+                  "action_index": 1,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": 15.0,
+                  "source_timeline": "raid_action_survivor_ray_skill_1"
+                },
+                {
+                  "reference": "ray_skill_summon_damagezone3",
+                  "projectile_type": "Line",
+                  "launch_offset_seconds": 0.5732283592224121,
+                  "impact_offset_seconds": null,
+                  "stage_index": 3,
+                  "action_index": 1,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": 15.0,
+                  "source_timeline": "raid_action_survivor_ray_skill_1"
+                }
+              ],
               "cast_duration_at_unit_speed_seconds": 2.366666793823242,
               "effects": [
                 {
@@ -5166,6 +5373,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {
@@ -5229,6 +5437,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {
@@ -5512,6 +5721,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {
@@ -5748,6 +5958,22 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [
+                {
+                  "reference": "damage_becca_attack",
+                  "projectile_type": "Line",
+                  "launch_offset_seconds": 0.05999999865889549,
+                  "impact_offset_seconds": null,
+                  "stage_index": 0,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": 11.0,
+                  "source_timeline": "raid_action_survivor_becca_attack"
+                }
+              ],
               "cast_duration_at_unit_speed_seconds": 0.6333333849906921,
               "effects": [
                 {
@@ -5949,6 +6175,7 @@
                   "offset_seconds": 0.0
                 }
               ],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 1.5000001192092896,
               "effects": [
                 {
@@ -6141,6 +6368,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {
@@ -6365,6 +6593,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {
@@ -6611,6 +6840,22 @@
                 {
                   "reference": "damage_layla_attack",
                   "offset_seconds": 0.7
+                }
+              ],
+              "projectile_launches": [
+                {
+                  "reference": "damage_layla_attack",
+                  "projectile_type": "Immediate",
+                  "launch_offset_seconds": 0.7,
+                  "impact_offset_seconds": 0.7,
+                  "stage_index": 0,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": null,
+                  "source_timeline": "raid_action_survivor_layla_attack"
                 }
               ],
               "cast_duration_at_unit_speed_seconds": 1.2000000476837158,
@@ -6867,6 +7112,36 @@
                   "offset_seconds": 0.2199999988079071
                 }
               ],
+              "projectile_launches": [
+                {
+                  "reference": "layla_skill_1_buff",
+                  "projectile_type": "Immediate",
+                  "launch_offset_seconds": 0.2199999988079071,
+                  "impact_offset_seconds": 0.2199999988079071,
+                  "stage_index": 0,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": null,
+                  "source_timeline": "raid_action_survivor_layla_skill_1"
+                },
+                {
+                  "reference": "layla_skill_1_heal",
+                  "projectile_type": "Immediate",
+                  "launch_offset_seconds": 0.2199999988079071,
+                  "impact_offset_seconds": 0.2199999988079071,
+                  "stage_index": 0,
+                  "action_index": 0,
+                  "hit_index": 1,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": null,
+                  "source_timeline": "raid_action_survivor_layla_skill_1"
+                }
+              ],
               "cast_duration_at_unit_speed_seconds": 2.1000001430511475,
               "effects": [
                 {
@@ -6949,6 +7224,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {
@@ -7212,6 +7488,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {
@@ -7436,6 +7713,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {
@@ -7672,6 +7950,22 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [
+                {
+                  "reference": "damage_candy_attack",
+                  "projectile_type": "Line",
+                  "launch_offset_seconds": 0.0,
+                  "impact_offset_seconds": null,
+                  "stage_index": 0,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": 10.0,
+                  "source_timeline": "raid_action_survivor_candy_attack"
+                }
+              ],
               "cast_duration_at_unit_speed_seconds": 0.6333333849906921,
               "effects": [
                 {
@@ -7888,6 +8182,36 @@
                   "offset_seconds": 0.0
                 }
               ],
+              "projectile_launches": [
+                {
+                  "reference": "buff_candy_skill_1",
+                  "projectile_type": "Immediate",
+                  "launch_offset_seconds": 0.0,
+                  "impact_offset_seconds": 0.0,
+                  "stage_index": 0,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": null,
+                  "source_timeline": "raid_action_survivor_candy_skill_1"
+                },
+                {
+                  "reference": "heal_candy_skill_1",
+                  "projectile_type": "Immediate",
+                  "launch_offset_seconds": 0.0,
+                  "impact_offset_seconds": 0.0,
+                  "stage_index": 0,
+                  "action_index": 0,
+                  "hit_index": 1,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": null,
+                  "source_timeline": "raid_action_survivor_candy_skill_1"
+                }
+              ],
               "cast_duration_at_unit_speed_seconds": 1.5666667222976685,
               "effects": [
                 {
@@ -7969,6 +8293,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {
@@ -8195,6 +8520,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {
@@ -8419,6 +8745,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {
@@ -8665,6 +8992,22 @@
                 {
                   "reference": "damage_mike_attack",
                   "offset_seconds": 0.4
+                }
+              ],
+              "projectile_launches": [
+                {
+                  "reference": "damage_mike_attack",
+                  "projectile_type": "Immediate",
+                  "launch_offset_seconds": 0.4,
+                  "impact_offset_seconds": 0.4,
+                  "stage_index": 0,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": null,
+                  "source_timeline": "raid_action_survivor_mike_attack02"
                 }
               ],
               "cast_duration_at_unit_speed_seconds": 1.0,
@@ -8935,6 +9278,7 @@
                   "offset_seconds": 0.6
                 }
               ],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 1.1666667461395264,
               "effects": [
                 {
@@ -9002,6 +9346,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {
@@ -9399,6 +9744,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {
@@ -9679,6 +10025,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {
@@ -9915,6 +10262,22 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [
+                {
+                  "reference": "damage_wright_attack",
+                  "projectile_type": "Line",
+                  "launch_offset_seconds": 0.03333333507180214,
+                  "impact_offset_seconds": null,
+                  "stage_index": 0,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": 25.0,
+                  "source_timeline": "raid_action_survivor_wright_attack"
+                }
+              ],
               "cast_duration_at_unit_speed_seconds": 1.0,
               "effects": [
                 {
@@ -10082,6 +10445,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 1.3333333730697632,
               "effects": [
                 {
@@ -10280,6 +10644,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {
@@ -10504,6 +10869,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {
@@ -10752,6 +11118,22 @@
                   "offset_seconds": 0.6100000143051147
                 }
               ],
+              "projectile_launches": [
+                {
+                  "reference": "damage_tithi_attack",
+                  "projectile_type": "Immediate",
+                  "launch_offset_seconds": 0.6100000143051147,
+                  "impact_offset_seconds": 0.6100000143051147,
+                  "stage_index": 0,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": null,
+                  "source_timeline": "raid_action_survivor_tithi_attack"
+                }
+              ],
               "cast_duration_at_unit_speed_seconds": 1.2000000476837158,
               "effects": [
                 {
@@ -10926,6 +11308,22 @@
                   "offset_seconds": 0.5
                 }
               ],
+              "projectile_launches": [
+                {
+                  "reference": "damage_tithi_skill_1",
+                  "projectile_type": "Immediate",
+                  "launch_offset_seconds": 0.5,
+                  "impact_offset_seconds": 0.5,
+                  "stage_index": 0,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": null,
+                  "source_timeline": "raid_action_survivor_tithi_skill_1"
+                }
+              ],
               "cast_duration_at_unit_speed_seconds": 2.0,
               "effects": [
                 {
@@ -11063,6 +11461,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {
@@ -11287,6 +11686,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {
@@ -11535,6 +11935,22 @@
                   "offset_seconds": 0.42500001192092896
                 }
               ],
+              "projectile_launches": [
+                {
+                  "reference": "damage_tara_attack",
+                  "projectile_type": "Immediate",
+                  "launch_offset_seconds": 0.42500001192092896,
+                  "impact_offset_seconds": 0.42500001192092896,
+                  "stage_index": 2,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": null,
+                  "source_timeline": "raid_action_survivor_tara_attack"
+                }
+              ],
               "cast_duration_at_unit_speed_seconds": 1.533333420753479,
               "effects": [
                 {
@@ -11701,6 +12117,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 1.5666667222976685,
               "effects": [
                 {
@@ -11765,6 +12182,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {
@@ -11959,6 +12377,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {
@@ -12183,6 +12602,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {
@@ -12569,6 +12989,92 @@
                   "offset_seconds": 0.9100000262260437
                 }
               ],
+              "projectile_launches": [
+                {
+                  "reference": "damage_jacob_attack",
+                  "projectile_type": "Immediate",
+                  "launch_offset_seconds": 0.3100000023841858,
+                  "impact_offset_seconds": 0.3100000023841858,
+                  "stage_index": 0,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": null,
+                  "source_timeline": "raid_action_survivor_jacob_attack"
+                },
+                {
+                  "reference": "jacob_attack_weaken_def",
+                  "projectile_type": "Immediate",
+                  "launch_offset_seconds": 0.3100000023841858,
+                  "impact_offset_seconds": 0.3100000023841858,
+                  "stage_index": 0,
+                  "action_index": 0,
+                  "hit_index": 1,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": null,
+                  "source_timeline": "raid_action_survivor_jacob_attack"
+                },
+                {
+                  "reference": "damage_jacob_attack",
+                  "projectile_type": "Immediate",
+                  "launch_offset_seconds": 0.6000000238418579,
+                  "impact_offset_seconds": 0.6000000238418579,
+                  "stage_index": 2,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": null,
+                  "source_timeline": "raid_action_survivor_jacob_attack"
+                },
+                {
+                  "reference": "jacob_attack_weaken_def",
+                  "projectile_type": "Immediate",
+                  "launch_offset_seconds": 0.6000000238418579,
+                  "impact_offset_seconds": 0.6000000238418579,
+                  "stage_index": 2,
+                  "action_index": 0,
+                  "hit_index": 1,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": null,
+                  "source_timeline": "raid_action_survivor_jacob_attack"
+                },
+                {
+                  "reference": "damage_jacob_attack",
+                  "projectile_type": "Immediate",
+                  "launch_offset_seconds": 0.9100000262260437,
+                  "impact_offset_seconds": 0.9100000262260437,
+                  "stage_index": 3,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": null,
+                  "source_timeline": "raid_action_survivor_jacob_attack"
+                },
+                {
+                  "reference": "jacob_attack_weaken_def",
+                  "projectile_type": "Immediate",
+                  "launch_offset_seconds": 0.9100000262260437,
+                  "impact_offset_seconds": 0.9100000262260437,
+                  "stage_index": 3,
+                  "action_index": 0,
+                  "hit_index": 1,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": null,
+                  "source_timeline": "raid_action_survivor_jacob_attack"
+                }
+              ],
               "cast_duration_at_unit_speed_seconds": 2.200000047683716,
               "effects": [
                 {
@@ -12812,6 +13318,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 1.3333333730697632,
               "effects": [
                 {
@@ -13101,6 +13608,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {
@@ -13381,6 +13889,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {
@@ -13667,6 +14176,22 @@
                   "offset_seconds": 0.20000000298023224
                 }
               ],
+              "projectile_launches": [
+                {
+                  "reference": "damage_tarzan_attack_1",
+                  "projectile_type": "Immediate",
+                  "launch_offset_seconds": 0.4166666567325592,
+                  "impact_offset_seconds": 0.4166666567325592,
+                  "stage_index": 2,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": null,
+                  "source_timeline": "raid_action_survivor_tarzan_attack_1"
+                }
+              ],
               "cast_duration_at_unit_speed_seconds": 0.8000000715255737,
               "effects": [
                 {
@@ -13776,6 +14301,22 @@
                 {
                   "reference": "tarzan_attack_buff_inc_self_dmg_dec",
                   "offset_seconds": 0.10000000149011612
+                }
+              ],
+              "projectile_launches": [
+                {
+                  "reference": "damage_tarzan_attack_2",
+                  "projectile_type": "Immediate",
+                  "launch_offset_seconds": 0.3333333432674408,
+                  "impact_offset_seconds": 0.3333333432674408,
+                  "stage_index": 0,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": null,
+                  "source_timeline": "raid_action_survivor_tarzan_attack_2"
                 }
               ],
               "cast_duration_at_unit_speed_seconds": 0.8000000715255737,
@@ -14185,6 +14726,7 @@
                   "offset_seconds": 0.45
                 }
               ],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 1.0,
               "effects": [
                 {
@@ -14323,6 +14865,7 @@
                 }
               ],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.1,
               "effects": [
                 {
@@ -14667,6 +15210,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {
@@ -14947,6 +15491,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {
@@ -15220,6 +15765,22 @@
                   "offset_seconds": 0.0
                 }
               ],
+              "projectile_launches": [
+                {
+                  "reference": "damage_chiron_attack",
+                  "projectile_type": "Line",
+                  "launch_offset_seconds": 0.6499999761581421,
+                  "impact_offset_seconds": null,
+                  "stage_index": 0,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": 11.0,
+                  "source_timeline": "raid_action_survivor_chiron_attack"
+                }
+              ],
               "cast_duration_at_unit_speed_seconds": 1.3333333730697632,
               "effects": [
                 {
@@ -15471,6 +16032,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 1.533333420753479,
               "effects": [
                 {
@@ -15686,6 +16248,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {
@@ -15966,6 +16529,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {
@@ -16195,6 +16759,22 @@
                   "offset_seconds": 0.3499999940395355
                 }
               ],
+              "projectile_launches": [
+                {
+                  "reference": "damage_shark_attack",
+                  "projectile_type": "Immediate",
+                  "launch_offset_seconds": 0.3499999940395355,
+                  "impact_offset_seconds": 0.3499999940395355,
+                  "stage_index": 0,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": null,
+                  "source_timeline": "raid_action_survivor_shark_attack"
+                }
+              ],
               "cast_duration_at_unit_speed_seconds": 1.5000001192092896,
               "effects": [
                 {
@@ -16346,6 +16926,7 @@
                   "offset_seconds": 0.33000001311302185
                 }
               ],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 1.0,
               "effects": [
                 {
@@ -16409,6 +16990,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {
@@ -16600,6 +17182,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {
@@ -16859,6 +17442,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": []
             }
@@ -17117,6 +17701,36 @@
                   "offset_seconds": 1.3499999940395355
                 }
               ],
+              "projectile_launches": [
+                {
+                  "reference": "damage_ragnar_attack",
+                  "projectile_type": "Immediate",
+                  "launch_offset_seconds": 0.3499999940395355,
+                  "impact_offset_seconds": 0.3499999940395355,
+                  "stage_index": 0,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": null,
+                  "source_timeline": "raid_action_survivor_ragnar_attack"
+                },
+                {
+                  "reference": "damage_ragnar_attack",
+                  "projectile_type": "Immediate",
+                  "launch_offset_seconds": 1.3499999940395355,
+                  "impact_offset_seconds": 1.3499999940395355,
+                  "stage_index": 0,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": null,
+                  "source_timeline": "raid_action_survivor_ragnar_attack_3"
+                }
+              ],
               "cast_duration_at_unit_speed_seconds": 2.0,
               "effects": [
                 {
@@ -17211,6 +17825,36 @@
                 {
                   "reference": "ragnar_attack_debuff_atk",
                   "offset_seconds": 0.20000000298023224
+                }
+              ],
+              "projectile_launches": [
+                {
+                  "reference": "damage_ragnar_attack_2",
+                  "projectile_type": "Immediate",
+                  "launch_offset_seconds": 0.20000000298023224,
+                  "impact_offset_seconds": 0.20000000298023224,
+                  "stage_index": 0,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": null,
+                  "source_timeline": "raid_action_survivor_ragnar_attack_2"
+                },
+                {
+                  "reference": "ragnar_attack_debuff_atk",
+                  "projectile_type": "Immediate",
+                  "launch_offset_seconds": 0.20000000298023224,
+                  "impact_offset_seconds": 0.20000000298023224,
+                  "stage_index": 0,
+                  "action_index": 0,
+                  "hit_index": 1,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": null,
+                  "source_timeline": "raid_action_survivor_ragnar_attack_2"
                 }
               ],
               "cast_duration_at_unit_speed_seconds": 1.433333396911621,
@@ -17494,6 +18138,7 @@
                   "offset_seconds": 0.0
                 }
               ],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 1.1666667461395264,
               "effects": [
                 {
@@ -17711,6 +18356,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {
@@ -17970,6 +18616,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": []
             }
@@ -18206,6 +18853,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 1.3333333730697632,
               "effects": [
                 {
@@ -18306,6 +18954,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 1.7333334684371948,
               "effects": [
                 {
@@ -18605,6 +19254,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {
@@ -18799,6 +19449,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {
@@ -19002,6 +19653,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": []
             }
@@ -19164,6 +19816,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 1.3666667938232422,
               "effects": []
             }
@@ -19281,6 +19934,22 @@
                   "offset_seconds": 0.1899999976158142
                 }
               ],
+              "projectile_launches": [
+                {
+                  "reference": "damage_undine_skill1",
+                  "projectile_type": "Immediate",
+                  "launch_offset_seconds": 0.1899999976158142,
+                  "impact_offset_seconds": 0.1899999976158142,
+                  "stage_index": 0,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": null,
+                  "source_timeline": "raid_action_survivor_undine_skill_1"
+                }
+              ],
               "cast_duration_at_unit_speed_seconds": 1.8000000715255737,
               "effects": [
                 {
@@ -19344,6 +20013,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {
@@ -19514,6 +20184,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {
@@ -19717,6 +20388,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": []
             }
@@ -19906,6 +20578,22 @@
                   "offset_seconds": 0.33
                 }
               ],
+              "projectile_launches": [
+                {
+                  "reference": "damage_dave_attack",
+                  "projectile_type": "Immediate",
+                  "launch_offset_seconds": 0.33,
+                  "impact_offset_seconds": 0.33,
+                  "stage_index": 0,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": null,
+                  "source_timeline": "raid_action_survivor_dave_attack"
+                }
+              ],
               "cast_duration_at_unit_speed_seconds": 2.266666889190674,
               "effects": [
                 {
@@ -20074,6 +20762,50 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [
+                {
+                  "reference": "damage_dave_skill_1",
+                  "projectile_type": "Line",
+                  "launch_offset_seconds": 0.33,
+                  "impact_offset_seconds": null,
+                  "stage_index": 0,
+                  "action_index": 2,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": false,
+                  "cast_num_limit": null,
+                  "velocity": 8.0,
+                  "source_timeline": "raid_action_survivor_dave_skill_1"
+                },
+                {
+                  "reference": "damage_dave_skill_1",
+                  "projectile_type": "Line",
+                  "launch_offset_seconds": 0.44,
+                  "impact_offset_seconds": null,
+                  "stage_index": 1,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": false,
+                  "cast_num_limit": null,
+                  "velocity": 8.0,
+                  "source_timeline": "raid_action_survivor_dave_skill_1"
+                },
+                {
+                  "reference": "damage_dave_skill_1",
+                  "projectile_type": "Line",
+                  "launch_offset_seconds": 0.55,
+                  "impact_offset_seconds": null,
+                  "stage_index": 2,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": false,
+                  "cast_num_limit": null,
+                  "velocity": 8.0,
+                  "source_timeline": "raid_action_survivor_dave_skill_1"
+                }
+              ],
               "cast_duration_at_unit_speed_seconds": 2.4000000953674316,
               "effects": [
                 {
@@ -20231,6 +20963,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {
@@ -20490,6 +21223,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": []
             }
@@ -21116,6 +21850,190 @@
                 {
                   "reference": "lava_skill_2_lowhp_heal",
                   "offset_seconds": 0.6
+                }
+              ],
+              "projectile_launches": [
+                {
+                  "reference": "lava_attack01_cast_vfx",
+                  "projectile_type": "Immediate",
+                  "launch_offset_seconds": 0.21428571428571427,
+                  "impact_offset_seconds": 0.21428571428571427,
+                  "stage_index": 0,
+                  "action_index": 1,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": null,
+                  "source_timeline": "raid_action_survivor_lava_attack"
+                },
+                {
+                  "reference": "lava_attack02_cast_vfx",
+                  "projectile_type": "Immediate",
+                  "launch_offset_seconds": 0.21428571428571427,
+                  "impact_offset_seconds": 0.21428571428571427,
+                  "stage_index": 0,
+                  "action_index": 1,
+                  "hit_index": 1,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": null,
+                  "source_timeline": "raid_action_survivor_lava_attack"
+                },
+                {
+                  "reference": "damage_lava_attack",
+                  "projectile_type": "Immediate",
+                  "launch_offset_seconds": 0.21428571428571427,
+                  "impact_offset_seconds": 0.21428571428571427,
+                  "stage_index": 0,
+                  "action_index": 1,
+                  "hit_index": 2,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": null,
+                  "source_timeline": "raid_action_survivor_lava_attack"
+                },
+                {
+                  "reference": "lava_attack01_hit_vfx",
+                  "projectile_type": "Immediate",
+                  "launch_offset_seconds": 0.21428571428571427,
+                  "impact_offset_seconds": 0.21428571428571427,
+                  "stage_index": 0,
+                  "action_index": 1,
+                  "hit_index": 3,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": null,
+                  "source_timeline": "raid_action_survivor_lava_attack"
+                },
+                {
+                  "reference": "lava_attack02_hit_vfx",
+                  "projectile_type": "Immediate",
+                  "launch_offset_seconds": 0.21428571428571427,
+                  "impact_offset_seconds": 0.21428571428571427,
+                  "stage_index": 0,
+                  "action_index": 1,
+                  "hit_index": 4,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": null,
+                  "source_timeline": "raid_action_survivor_lava_attack"
+                },
+                {
+                  "reference": "lava_attack_add_burn",
+                  "projectile_type": "Immediate",
+                  "launch_offset_seconds": 0.21428571428571427,
+                  "impact_offset_seconds": 0.21428571428571427,
+                  "stage_index": 0,
+                  "action_index": 1,
+                  "hit_index": 5,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": null,
+                  "source_timeline": "raid_action_survivor_lava_attack"
+                },
+                {
+                  "reference": "lava_skill_2_lowhp_heal",
+                  "projectile_type": "Immediate",
+                  "launch_offset_seconds": 0.21428571428571427,
+                  "impact_offset_seconds": 0.21428571428571427,
+                  "stage_index": 0,
+                  "action_index": 1,
+                  "hit_index": 6,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": null,
+                  "source_timeline": "raid_action_survivor_lava_attack"
+                },
+                {
+                  "reference": "lava_skill_1_burning_extra",
+                  "projectile_type": "Immediate",
+                  "launch_offset_seconds": 0.21428571428571427,
+                  "impact_offset_seconds": 0.21428571428571427,
+                  "stage_index": 0,
+                  "action_index": 1,
+                  "hit_index": 7,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": null,
+                  "source_timeline": "raid_action_survivor_lava_attack"
+                },
+                {
+                  "reference": "damage_lava_attack_2",
+                  "projectile_type": "Immediate",
+                  "launch_offset_seconds": 0.6,
+                  "impact_offset_seconds": 0.6,
+                  "stage_index": 1,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": null,
+                  "source_timeline": "raid_action_survivor_lava_attack"
+                },
+                {
+                  "reference": "lava_attack01_hit_vfx",
+                  "projectile_type": "Immediate",
+                  "launch_offset_seconds": 0.6,
+                  "impact_offset_seconds": 0.6,
+                  "stage_index": 1,
+                  "action_index": 0,
+                  "hit_index": 1,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": null,
+                  "source_timeline": "raid_action_survivor_lava_attack"
+                },
+                {
+                  "reference": "lava_attack02_hit_vfx",
+                  "projectile_type": "Immediate",
+                  "launch_offset_seconds": 0.6,
+                  "impact_offset_seconds": 0.6,
+                  "stage_index": 1,
+                  "action_index": 0,
+                  "hit_index": 2,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": null,
+                  "source_timeline": "raid_action_survivor_lava_attack"
+                },
+                {
+                  "reference": "lava_attack_add_burn",
+                  "projectile_type": "Immediate",
+                  "launch_offset_seconds": 0.6,
+                  "impact_offset_seconds": 0.6,
+                  "stage_index": 1,
+                  "action_index": 0,
+                  "hit_index": 3,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": null,
+                  "source_timeline": "raid_action_survivor_lava_attack"
+                },
+                {
+                  "reference": "lava_skill_2_lowhp_heal",
+                  "projectile_type": "Immediate",
+                  "launch_offset_seconds": 0.6,
+                  "impact_offset_seconds": 0.6,
+                  "stage_index": 1,
+                  "action_index": 0,
+                  "hit_index": 4,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": null,
+                  "source_timeline": "raid_action_survivor_lava_attack"
                 }
               ],
               "cast_duration_at_unit_speed_seconds": 0.9333333969116211,
@@ -21842,6 +22760,22 @@
                   "offset_seconds": 0.3243243098258972
                 }
               ],
+              "projectile_launches": [
+                {
+                  "reference": "damage_lava_skill_1",
+                  "projectile_type": "Immediate",
+                  "launch_offset_seconds": 0.3243243098258972,
+                  "impact_offset_seconds": 0.3243243098258972,
+                  "stage_index": 1,
+                  "action_index": 3,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": null,
+                  "source_timeline": "raid_action_survivor_lava_skill_1"
+                }
+              ],
               "cast_duration_at_unit_speed_seconds": 1.2333333492279053,
               "effects": [
                 {
@@ -22208,6 +23142,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {
@@ -22447,6 +23382,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": []
             }
@@ -22644,6 +23580,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 1.2000000476837158,
               "effects": [
                 {
@@ -22858,6 +23795,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 1.2666667699813843,
               "effects": [
                 {
@@ -23110,6 +24048,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {
@@ -23353,6 +24292,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {
@@ -23594,6 +24534,50 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [
+                {
+                  "reference": "damage_sarge_attack",
+                  "projectile_type": "RaidHorizontalKeepingCast",
+                  "launch_offset_seconds": 0.0,
+                  "impact_offset_seconds": null,
+                  "stage_index": 0,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": 1,
+                  "velocity": 14.0,
+                  "source_timeline": "raid_action_survivor_sarge_attack"
+                },
+                {
+                  "reference": "damage_sarge_attack",
+                  "projectile_type": "RaidHorizontalKeepingCast",
+                  "launch_offset_seconds": 0.20000000298023224,
+                  "impact_offset_seconds": null,
+                  "stage_index": 1,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": 1,
+                  "velocity": 14.0,
+                  "source_timeline": "raid_action_survivor_sarge_attack"
+                },
+                {
+                  "reference": "damage_sarge_attack",
+                  "projectile_type": "RaidHorizontalKeepingCast",
+                  "launch_offset_seconds": 0.4000000059604645,
+                  "impact_offset_seconds": null,
+                  "stage_index": 2,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": 1,
+                  "velocity": 14.0,
+                  "source_timeline": "raid_action_survivor_sarge_attack"
+                }
+              ],
               "cast_duration_at_unit_speed_seconds": 0.8000000715255737,
               "effects": [
                 {
@@ -23774,6 +24758,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 1.2666667699813843,
               "effects": [
                 {
@@ -23973,6 +24958,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {
@@ -24199,6 +25185,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {
@@ -24428,6 +25415,22 @@
                   "offset_seconds": 0.23000000417232513
                 }
               ],
+              "projectile_launches": [
+                {
+                  "reference": "damage_ken_attack",
+                  "projectile_type": "Immediate",
+                  "launch_offset_seconds": 0.23000000417232513,
+                  "impact_offset_seconds": 0.23000000417232513,
+                  "stage_index": 0,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": null,
+                  "source_timeline": "raid_action_survivor_ken_attack"
+                }
+              ],
               "cast_duration_at_unit_speed_seconds": 1.2333333492279053,
               "effects": [
                 {
@@ -24623,6 +25626,22 @@
                 {
                   "reference": "ken_skill_1_heal",
                   "offset_seconds": 0.3214285671710968
+                }
+              ],
+              "projectile_launches": [
+                {
+                  "reference": "ken_skill_1_taunt",
+                  "projectile_type": "Immediate",
+                  "launch_offset_seconds": 0.3214285671710968,
+                  "impact_offset_seconds": 0.3214285671710968,
+                  "stage_index": 1,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": null,
+                  "source_timeline": "raid_action_survivor_ken_skill_1"
                 }
               ],
               "cast_duration_at_unit_speed_seconds": 1.8666667938232422,
@@ -24846,6 +25865,7 @@
                   "offset_seconds": 0.25
                 }
               ],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 2.4000000953674316,
               "effects": [
                 {
@@ -25070,6 +26090,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {
@@ -25347,6 +26368,36 @@
                   "offset_seconds": 1.1500000655651093
                 }
               ],
+              "projectile_launches": [
+                {
+                  "reference": "damage_freja_attack_1",
+                  "projectile_type": "Immediate",
+                  "launch_offset_seconds": 0.2428198605775833,
+                  "impact_offset_seconds": 0.2428198605775833,
+                  "stage_index": 0,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": null,
+                  "source_timeline": "raid_action_survivor_freja_attack_1"
+                },
+                {
+                  "reference": "damage_freja_attack_2",
+                  "projectile_type": "Immediate",
+                  "launch_offset_seconds": 1.1500000655651093,
+                  "impact_offset_seconds": 1.1500000655651093,
+                  "stage_index": 1,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": null,
+                  "source_timeline": "raid_action_survivor_freja_attack_2"
+                }
+              ],
               "cast_duration_at_unit_speed_seconds": 1.533333420753479,
               "effects": [
                 {
@@ -25576,6 +26627,22 @@
                   "offset_seconds": 0.0
                 }
               ],
+              "projectile_launches": [
+                {
+                  "reference": "damage_freja_skill_1",
+                  "projectile_type": "Immediate",
+                  "launch_offset_seconds": 0.4479452669620514,
+                  "impact_offset_seconds": 0.4479452669620514,
+                  "stage_index": 0,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": null,
+                  "source_timeline": "raid_action_survivor_freja_skill_1"
+                }
+              ],
               "cast_duration_at_unit_speed_seconds": 1.100000023841858,
               "effects": [
                 {
@@ -25794,6 +26861,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {
@@ -26080,6 +27148,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {
@@ -26297,6 +27366,22 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [
+                {
+                  "reference": "damage_travis_attack",
+                  "projectile_type": "Line",
+                  "launch_offset_seconds": 0.23076923191547394,
+                  "impact_offset_seconds": null,
+                  "stage_index": 0,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": 16.0,
+                  "source_timeline": "raid_action_survivor_travis_attack"
+                }
+              ],
               "cast_duration_at_unit_speed_seconds": 1.7333334684371948,
               "effects": [
                 {
@@ -26525,6 +27610,22 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [
+                {
+                  "reference": "travis_skill_1_mark",
+                  "projectile_type": "RaidHorizontalKeepingCast",
+                  "launch_offset_seconds": 0.0,
+                  "impact_offset_seconds": null,
+                  "stage_index": 0,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": false,
+                  "cast_num_limit": 1,
+                  "velocity": 100.0,
+                  "source_timeline": "raid_action_survivor_travis_skill_1"
+                }
+              ],
               "cast_duration_at_unit_speed_seconds": 1.7666667699813843,
               "effects": [
                 {
@@ -26776,6 +27877,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {
@@ -27002,6 +28104,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {
@@ -27219,6 +28322,22 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [
+                {
+                  "reference": "damage_eva_attack",
+                  "projectile_type": "RaidHorizontalKeepingCast",
+                  "launch_offset_seconds": 0.14000000059604645,
+                  "impact_offset_seconds": null,
+                  "stage_index": 0,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": 1,
+                  "velocity": 13.0,
+                  "source_timeline": "raid_action_survivor_eva_attack"
+                }
+              ],
               "cast_duration_at_unit_speed_seconds": 0.8000000715255737,
               "effects": [
                 {
@@ -27504,6 +28623,120 @@
                   "offset_seconds": 0.0
                 }
               ],
+              "projectile_launches": [
+                {
+                  "reference": "damage_eva_skill_1",
+                  "projectile_type": "Line",
+                  "launch_offset_seconds": 0.3955695629119873,
+                  "impact_offset_seconds": null,
+                  "stage_index": 1,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": false,
+                  "cast_num_limit": null,
+                  "velocity": 30.0,
+                  "source_timeline": "raid_action_survivor_eva_skill_1"
+                },
+                {
+                  "reference": "damage_eva_skill_1",
+                  "projectile_type": "Line",
+                  "launch_offset_seconds": 0.4430379271507263,
+                  "impact_offset_seconds": null,
+                  "stage_index": 2,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": false,
+                  "cast_num_limit": null,
+                  "velocity": 30.0,
+                  "source_timeline": "raid_action_survivor_eva_skill_1"
+                },
+                {
+                  "reference": "damage_eva_skill_1",
+                  "projectile_type": "Line",
+                  "launch_offset_seconds": 0.4968353807926178,
+                  "impact_offset_seconds": null,
+                  "stage_index": 3,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": false,
+                  "cast_num_limit": null,
+                  "velocity": 30.0,
+                  "source_timeline": "raid_action_survivor_eva_skill_1"
+                },
+                {
+                  "reference": "damage_eva_skill_1",
+                  "projectile_type": "Line",
+                  "launch_offset_seconds": 0.5411391854286194,
+                  "impact_offset_seconds": null,
+                  "stage_index": 4,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": false,
+                  "cast_num_limit": null,
+                  "velocity": 30.0,
+                  "source_timeline": "raid_action_survivor_eva_skill_1"
+                },
+                {
+                  "reference": "damage_eva_skill_1",
+                  "projectile_type": "Line",
+                  "launch_offset_seconds": 0.5886075496673584,
+                  "impact_offset_seconds": null,
+                  "stage_index": 5,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": false,
+                  "cast_num_limit": null,
+                  "velocity": 30.0,
+                  "source_timeline": "raid_action_survivor_eva_skill_1"
+                },
+                {
+                  "reference": "damage_eva_skill_1",
+                  "projectile_type": "Line",
+                  "launch_offset_seconds": 0.6329113245010376,
+                  "impact_offset_seconds": null,
+                  "stage_index": 6,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": false,
+                  "cast_num_limit": null,
+                  "velocity": 30.0,
+                  "source_timeline": "raid_action_survivor_eva_skill_1"
+                },
+                {
+                  "reference": "damage_eva_skill_1",
+                  "projectile_type": "Line",
+                  "launch_offset_seconds": 0.6835442185401917,
+                  "impact_offset_seconds": null,
+                  "stage_index": 7,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": false,
+                  "cast_num_limit": null,
+                  "velocity": 30.0,
+                  "source_timeline": "raid_action_survivor_eva_skill_1"
+                },
+                {
+                  "reference": "damage_eva_skill_1",
+                  "projectile_type": "Line",
+                  "launch_offset_seconds": 0.7215189337730408,
+                  "impact_offset_seconds": null,
+                  "stage_index": 8,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": false,
+                  "cast_num_limit": null,
+                  "velocity": 30.0,
+                  "source_timeline": "raid_action_survivor_eva_skill_1"
+                }
+              ],
               "cast_duration_at_unit_speed_seconds": 2.7333335876464844,
               "effects": [
                 {
@@ -27716,6 +28949,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {
@@ -27940,6 +29174,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {
@@ -28169,6 +29404,22 @@
                   "offset_seconds": 0.33000001311302185
                 }
               ],
+              "projectile_launches": [
+                {
+                  "reference": "damage_rusty_attack",
+                  "projectile_type": "Immediate",
+                  "launch_offset_seconds": 0.33000001311302185,
+                  "impact_offset_seconds": 0.33000001311302185,
+                  "stage_index": 0,
+                  "action_index": 1,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": null,
+                  "source_timeline": "raid_action_survivor_rusty_attack"
+                }
+              ],
               "cast_duration_at_unit_speed_seconds": 1.0,
               "effects": [
                 {
@@ -28358,6 +29609,22 @@
                 {
                   "reference": "damage_rusty_skill_1",
                   "offset_seconds": 0.5
+                }
+              ],
+              "projectile_launches": [
+                {
+                  "reference": "damage_rusty_skill_1",
+                  "projectile_type": "Immediate",
+                  "launch_offset_seconds": 0.5,
+                  "impact_offset_seconds": 0.5,
+                  "stage_index": 1,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": null,
+                  "source_timeline": "raid_action_survivor_rusty_skill_1_kt"
                 }
               ],
               "cast_duration_at_unit_speed_seconds": 1.7666667699813843,
@@ -28595,6 +29862,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {
@@ -28864,6 +30132,64 @@
                   "offset_seconds": 0.9100000262260437
                 }
               ],
+              "projectile_launches": [
+                {
+                  "reference": "damage_tim_attack",
+                  "projectile_type": "Immediate",
+                  "launch_offset_seconds": 0.3100000023841858,
+                  "impact_offset_seconds": 0.3100000023841858,
+                  "stage_index": 0,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": null,
+                  "source_timeline": "raid_action_survivor_tim_attack"
+                },
+                {
+                  "reference": "damage_tim_attack",
+                  "projectile_type": "Immediate",
+                  "launch_offset_seconds": 0.5099999904632568,
+                  "impact_offset_seconds": 0.5099999904632568,
+                  "stage_index": 2,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": null,
+                  "source_timeline": "raid_action_survivor_tim_attack"
+                },
+                {
+                  "reference": "damage_tim_attack",
+                  "projectile_type": "Immediate",
+                  "launch_offset_seconds": 0.7099999785423279,
+                  "impact_offset_seconds": 0.7099999785423279,
+                  "stage_index": 3,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": null,
+                  "source_timeline": "raid_action_survivor_tim_attack"
+                },
+                {
+                  "reference": "damage_tim_attack",
+                  "projectile_type": "Immediate",
+                  "launch_offset_seconds": 0.9100000262260437,
+                  "impact_offset_seconds": 0.9100000262260437,
+                  "stage_index": 4,
+                  "action_index": 0,
+                  "hit_index": 0,
+                  "hit_target_limit": 1,
+                  "default_hit_limit_used": true,
+                  "cast_num_limit": null,
+                  "velocity": null,
+                  "source_timeline": "raid_action_survivor_tim_attack"
+                }
+              ],
               "cast_duration_at_unit_speed_seconds": 2.8333334922790527,
               "effects": [
                 {
@@ -29048,6 +30374,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 1.1666667461395264,
               "effects": [
                 {
@@ -29361,6 +30688,7 @@
               ],
               "immediate_hit_events": [],
               "timed_dispatches": [],
+              "projectile_launches": [],
               "cast_duration_at_unit_speed_seconds": 0.0,
               "effects": [
                 {

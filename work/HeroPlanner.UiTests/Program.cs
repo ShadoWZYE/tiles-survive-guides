@@ -582,6 +582,19 @@ internal static class Program
         Check(reviewBuilds["freja"].ReviewedUtc<DateTimeOffset.UtcNow.AddDays(-14),"Single edit falsely reviewed untouched build data");
         foreach(double raw in new[]{-10d,0d,1d,100d,500d,10000d})Check(ScoreDisplay.Value(raw)==raw,"Formatting changed the actual model scale");
         Check(ScoreDisplay.Value(120)>ScoreDisplay.Value(110),"Display scale flattened normal model differences");
+        var parityBasisPicker=(ComboBox)reviewWindow.FindName("ComparisonBasisPicker");
+        var equalModels=Field<EstimateData>(reviewWindow,"_estimates");
+        var parityHeroes=Field<List<Hero>>(reviewWindow,"_heroes").Where(h=>new[]{"rosie","freja","becca","maddie","ray"}.Contains(h.AssetSlug)).ToList();
+        selection.Clear();foreach(var h in parityHeroes){selection.Add(h);reviewBuilds[h.AssetSlug]=EstimateModel.MaximumBuild(h.AssetSlug,equalModels,true);}
+        Field<ArmyContextSettings>(reviewWindow,"_armyContext").Enabled=false;
+        parityBasisPicker.SelectedItem=parityBasisPicker.Items.Cast<ComboBoxItem>().Single(i=>i.Tag?.ToString()=="reference");
+        Invoke(reviewWindow,"RefreshEstimates");((CheckBox)reviewWindow.FindName("SurvivalToggle")).IsChecked=true;Invoke(reviewWindow,"UpdateSquadPresentation");
+        Check(((CheckBox)reviewWindow.FindName("SurvivalToggle")).IsEnabled,"Equal builds incorrectly disabled the shared survival model");
+        var equalFormation=((TextBlock)reviewWindow.FindName("FormationScoreLabel")).Text;var equalNotice=((TextBlock)reviewWindow.FindName("SurvivalNotice")).Text;
+        var sameScores=parityHeroes.ToDictionary(h=>h.AssetSlug,h=>h.CompositeIndex);
+        parityBasisPicker.SelectedItem=parityBasisPicker.Items.Cast<ComboBoxItem>().Single(i=>i.Tag?.ToString()=="recorded");
+        Check(parityHeroes.All(h=>h.CompositeIndex==sameScores[h.AssetSlug]),"Combat scores depend on the build-mode label");
+        Check(((TextBlock)reviewWindow.FindName("FormationScoreLabel")).Text==equalFormation&&((TextBlock)reviewWindow.FindName("SurvivalNotice")).Text==equalNotice,"Identical builds changed forecast or formation scoring between modes");
         reviewWindow.Close();
         app.Shutdown();
         Console.WriteLine("WPF UI regression passed: ownership, autosave, star layout, selectable priority cards, resource filters, top-three percent ordering, rank/level/skill/gear recording, balance deduction, stale-click protection, save rollback and safe Undo. Real profile untouched.");

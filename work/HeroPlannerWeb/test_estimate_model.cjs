@@ -220,3 +220,25 @@ test('1000-point normalization changes actual score components and preserves phy
   for(const key of ['heroStats','teamPercent','selfPercent','staminaReductionPercent'])assert.deepEqual(current[key],old[key]);
  }
 });
+
+
+test('comparison basis changes inputs only: identical max builds produce identical combat estimates',()=>{
+ for(const slug of Object.keys(estimates.heroes))for(const seconds of [0,10,20,30]){
+  const build=model.maximumBuild(slug,estimates,true),snapshot=JSON.stringify(build);
+  const a=model.compare(slug,build,upgrades,estimates,'reference',null,seconds,[100,20,2000]);
+  const b=model.compare(slug,build,upgrades,estimates,'recorded',null,seconds,[100,20,2000]);
+  for(const key of ['offense','durability','score','low','high','healthContribution','passiveContributions','teamPercent','selfPercent','heroStats','activeSkillIds','openingCastCounts','rawHealingPotential','staminaReductionPercent'])assert.deepEqual(a[key],b[key],slug+' '+key);
+  const naked=model.maximumBuild(slug,estimates,false),flat=model.compare(slug,null,upgrades,estimates,'flat',null,seconds),recorded=model.compare(slug,naked,upgrades,estimates,'recorded',null,seconds);
+  for(const key of ['offense','durability','score','heroStats','activeSkillIds','openingCastCounts'])assert.deepEqual(flat[key],recorded[key],slug+' no-gear '+key);
+  assert.equal(JSON.stringify(build),snapshot);
+ }
+});
+
+test('recorded projectile bursts scale each linked effect and vanish when the skill is locked',()=>{
+ for(const [slug,slot,count] of [['tony',0,6],['dave',1,3],['sarge',0,3],['eva',1,8]]){
+  const skill=estimates.heroes[slug].skills.find(s=>s.slot===slot);assert.equal(Object.values(skill.direct_hit_counts).reduce((a,b)=>a+b,0),count);
+  const on=model.compare(slug,null,upgrades,estimates,'reference'),build=model.maximumBuild(slug,estimates,true);build.skills[skill.id]=0;
+  const off=model.compare(slug,build,upgrades,estimates,'recorded');assert.ok(off.offense<on.offense);assert.ok(!off.activeSkillIds.includes(skill.id));
+  assert.deepEqual(skill.levels[1].cast_budget.direct_events,[],'Launch time was presented as an impact time');
+ }
+});

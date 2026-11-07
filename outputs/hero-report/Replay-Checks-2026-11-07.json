@@ -2,7 +2,7 @@
   "schema": 1,
   "battle_id": "pvp-defense-2026-11-07-a",
   "independent_battles": 1,
-  "model_version": 18,
+  "model_version": 19,
   "source_sha256": "aea2b2109fcda79a18c9bcaeea483d47c8a00f1825742fd49d005d4429423288",
   "opening_countdowns": [
     {

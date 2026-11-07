@@ -171,14 +171,14 @@ public static class EstimateModel
         return result;
     }
     public static string EvidenceSummary(EstimateHero model) =>
-        $"Skill evidence: {model.Skills.Count(s => s.DamageSelectionBasis == "direct_hit_reference")} skills have linked direct damage effects; " +
+        $"Skill evidence: {model.Skills.Count(s => s.DamageSelectionBasis == "projectile_burst_potential")} traveling burst paths count distinct launches; impact success and travel timing remain unresolved. {model.Skills.Count(s => s.DamageSelectionBasis == "direct_hit_reference")} skills have linked direct damage effects; " +
         $"{model.Skills.Count(s=>s.DamageSelectionBasis=="projectile_zone_dispatch_potential")} checked projectile-zone paths sum linked impacts at one assumed target per impact; projectile timing retains the completion fallback. " +
         $"{model.Skills.Count(s => s.HasDamageZone)} have damage zones; {model.Skills.Count(s => s.HasSummonDependency)} have summon dependencies. " +
         $"{model.Skills.Sum(s => s.PermanentStatSources.Count)} permanent stat buffs are modeled; {model.Skills.Sum(s => s.SequenceEffectIds.Count)} checked child strikes are included. " +
         $"{model.Skills.Sum(s => s.TemporaryStatSources.Count)} temporary self stat buffs use assumed duration/cooldown uptime; {model.Skills.Sum(s => s.PeriodicBudgets.Count(p => p.Scored))} periodic damage paths use full-lifetime potential. " +
         $"{model.Skills.Sum(s => s.ConditionalEffects.Count)} effect gates are retained separately; description rows give no damage credit. " +
         $"{model.Skills.Count(s => s.FinishTrigger is not null)} delayed damage paths require a completed source skill and an unlocked passive. " +
-        $"{model.Skills.Count(s => s.AnimationLimited)} skill budgets are limited by bound clip durations; {model.Skills.Count(s => s.DirectHitCounts.Values.Sum() > 1)} use repeated immediate-hit potential. " +
+        $"{model.Skills.Count(s => s.AnimationLimited)} skill budgets are limited by bound clip durations; {model.Skills.Count(s => s.DamageSelectionBasis != "projectile_burst_potential" && s.DirectHitCounts.Values.Sum() > 1)} use repeated immediate-hit potential. " +
         "Timing assumes speed 1 and uninterrupted casting. Opening scenarios use known timeline dispatch offsets; unknown impacts keep a completion fallback. Projectile travel, target survival, reapplication timing, zones and death times remain uncertain.";
     public static List<string> MissingBuild(string slug, HeroBuild? saved, UpgradeData data)
     {

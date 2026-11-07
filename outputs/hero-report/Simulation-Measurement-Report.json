@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "battle_id": "pvp-defense-2026-11-07-a",
-  "model_sha256": "d8f4197bc825d3258f0a9e2b3f9ad980aaf327d25c0728803736057a34436aa3",
+  "model_sha256": "3250012a6fd357509869a22cb0e7a6bb3dbb7076037e0eeeb13eacdf49113be2",
   "source_sha256": "aea2b2109fcda79a18c9bcaeea483d47c8a00f1825742fd49d005d4429423288",
   "input_reconstruction_checks": {
     "skill_power_absolute_error": 0,
@@ -634,14 +634,14 @@
     "source_hashes": {
       "Replay-Observation-2026-11-07.json": "31940e8af718213acb896b30334c3a275ae0856ce759045afee69f4cdfd42d6d",
       "Replay-Reconstruction-Inputs-2026-11-07.json": "ad79e66946d013e13eec06d10f25db160ccf8bd6f8cf30e696173f974202ae8e",
-      "Hero-Estimate-Model.json": "d8f4197bc825d3258f0a9e2b3f9ad980aaf327d25c0728803736057a34436aa3",
+      "Hero-Estimate-Model.json": "3250012a6fd357509869a22cb0e7a6bb3dbb7076037e0eeeb13eacdf49113be2",
       "Hero-Army-Context.json": "c9d7a22cc2b53e09a15bbfb85a3914a9eef4e7cb7ee9aee16c66551c61e4474d"
     }
   },
   "ray_impact_audit": "Ray-Impact-Audit.json",
   "retrospective_reconstruction": {
     "artifact": "Retrospective-Damage-Reconstruction.json",
-    "sha256": "7826bfd8c161b2bb631ce0f3ec849ae876570fa9adf77579250d91094a861b5e",
+    "sha256": "6238594f3ab0e49987d91725078cf37c06235701fb7c0c8fd896b5970b425033",
     "independent_battles": 1,
     "outgoing_models": {
       "planner_offense": {

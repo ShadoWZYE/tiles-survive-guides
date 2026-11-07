@@ -21,7 +21,6 @@ def projectile_zone_dispatches(evidence):
     Projectile-hit offsets are local to the projectile, not caster timeline offsets.
     Unknown child conditions, repeat cadence, scaling or sources retain the old path.
     """
-    if evidence['id'] not in {'survivor_ray_attack','survivor_ray_skill_1'}:return []
     nodes=evidence.get('skill_nodes',[])
     if len(nodes)!=1 or nodes[0].get('condition') or evidence.get('missing_assets') or evidence.get('unresolved_event_references'):return []
     events=evidence.get('timeline_events',[])
@@ -39,6 +38,21 @@ def projectile_zone_dispatches(evidence):
         if effect['type']!=0 or effect['custom_formula'] or effect.get('unlock_condition') or effect.get('return_condition') or effect.get('has_property_sources') or effect.get('has_attribute_fixes') or effect['base_param2']<=0 or effect['base_param3']!=0:return []
         result.append({'dispatch':event['reference'],'template':actor['template_id'],'effect_id':effect['id'],'base_coefficient':effect['base_param2']/1000,'targets_assumed':1})
     return result
+
+
+def projectile_burst_counts(evidence, direct_damage):
+    """One eligible-recipient opportunity per distinct, bounded projectile launch."""
+    nodes=evidence.get('skill_nodes',[])
+    if not nodes or nodes[0].get('condition') or evidence.get('missing_assets') or evidence.get('unresolved_event_references'):return Counter()
+    ids={d['id'] for d in direct_damage}
+    if not ids or any(d.get('custom_formula') or d.get('unlock_condition') or d.get('return_condition') or d.get('has_property_sources') or d.get('has_attribute_fixes') or d.get('base_param3',0)!=0 or d.get('base_param2',0)<=0 for d in direct_damage):return Counter()
+    launches=[p for p in nodes[0].get('projectile_launches',[]) if p['reference'] in ids]
+    expected=Counter(e['reference'] for e in nodes[0].get('events',[]) if e.get('event_type')==1 and e['reference'] in ids)
+    if any(p.get('projectile_type') not in ['Immediate','Line','RaidHorizontalKeepingCast'] or p.get('hit_target_limit')!=1 or not isinstance(p.get('launch_offset_seconds'),(int,float)) or not math.isfinite(p['launch_offset_seconds']) or p['launch_offset_seconds']<0 or p.get('projectile_type')=='RaidHorizontalKeepingCast' and p.get('cast_num_limit')!=1 for p in launches):return Counter()
+    counts=Counter(p['reference'] for p in launches)
+    keys=[(p['source_timeline'],p['stage_index'],p['action_index'],p['hit_index']) for p in launches]
+    if counts!=expected or sum(counts.values())<2 or len(keys)!=len(set(keys)) or not any(p['projectile_type']!='Immediate' for p in launches):return Counter()
+    return counts
 
 
 def buff_dispatch_offset(evidence,buff_id):
@@ -264,7 +278,7 @@ def build(upgrades, audit, roster):
     if set(gear_by_slot) != {1,2,3}:
         raise ValueError('Expected yellow T5 head, body and leg equipment.')
     reference_gear = [gear_by_slot[k] for k in sorted(gear_by_slot)]
-    result = {'version': 18, 'score_scale': 1000, 'reference_level': max(r['level'] for h in upgrades['heroes'].values() for r in h['levels']),
+    result = {'version': 19, 'score_scale': 1000, 'reference_level': max(r['level'] for h in upgrades['heroes'].values() for r in h['levels']),
               'reference_rank': max(s['rank'] for h in upgrades['heroes'].values() for s in h['stages']),
               'reference_step': 6, 'reference_gear':reference_gear,
               'reference_policy':'maximum_available_hero_level_rank_skills; equal builds adds standard yellow T5 maximum-level gear; no-gear mode uses the same hero baseline',
@@ -354,6 +368,9 @@ def build(upgrades, audit, roster):
             immediate_counts=Counter(e['reference'] for e in nodes[0].get('immediate_hit_events',[]) if e['reference'] in {d['id'] for d in direct_damage}) if nodes else Counter()
             all_hit_counts=Counter(e['reference'] for e in evidence.get('timeline_events',[]) if e['reference'] in {d['id'] for d in direct_damage})
             counted_hits=bool(direct_damage) and nodes[0]['condition'] is None and cast is not None and immediate_counts==all_hit_counts and all(not e.get('has_property_sources') for e in direct_damage)
+            burst_counts=projectile_burst_counts(evidence,direct_damage)
+            hit_counts=burst_counts or immediate_counts
+            counted_hits=counted_hits or bool(burst_counts)
             levels = [{'level': 0, 'damage': 0, 'utility': 0, 'flat_stats':[0,0,0], 'self_percent':[0,0,0], 'team_percent':[0,0,0]}]
             uses_prior = False
             stat_sources = []
@@ -374,7 +391,7 @@ def build(upgrades, audit, roster):
                 if impacts:
                     representative=sum(e['base_coefficient']*modifiers.get(e['effect_id'],1) for e in impacts)
                 if counted_hits:
-                    representative=sum(immediate_counts[e['id']]*e['base_param2']/1000*modifiers.get(e['id'],1) for e in direct_damage)
+                    representative=sum(hit_counts[e['id']]*e['base_param2']/1000*modifiers.get(e['id'],1) for e in direct_damage)
                 representative += sum(e['base_param2']/1000*modifiers.get(e['id'],1) for e in combo)
                 periodic=periodic_budgets(evidence,row['params'])
                 periodic_pressure=sum(p['coefficient_per_tick']*p['nominal_ticks'] for p in periodic if p['scored'])
@@ -411,7 +428,7 @@ def build(upgrades, audit, roster):
                 levels[-1]['opening_windows']=windows
                 levels[-1]['cast_budget']={
                     'direct_coefficient':representative if damage else (pressure*cadence if not periodic_pressure else 0),
-                    'direct_events':timed_damage_budget(nodes[0],direct_damage,combo_node,combo,root_cast,modifiers,representative) if counted_hits else [],
+                    'direct_events':timed_damage_budget(nodes[0],direct_damage,combo_node,combo,root_cast,modifiers,representative) if counted_hits and not burst_counts else [],
                     'periodic_ticks':[p for p in periodic if p['scored']],
                     'permanent_self_percent':permanent_self,
                     'temporary_buffs':[{'duration_seconds':s['duration_ms']/1000,
@@ -424,7 +441,7 @@ def build(upgrades, audit, roster):
                            'reference_level': min(stage['skill_caps'][skill['slot']], max(r['level'] for r in levels)),
                            'damage_effects': [e['id'] for e in damage], 'cadence_assumed_seconds': cadence,
                            'uses_generic_pressure_prior': uses_prior,
-                           'damage_selection_basis': 'projectile_zone_dispatch_potential' if impacts else 'direct_hit_reference' if direct_damage else 'periodic_buff_potential' if periodic_ids else 'representative_dependency' if damage else 'no_resolved_damage',
+                           'damage_selection_basis': 'projectile_zone_dispatch_potential' if impacts else 'projectile_burst_potential' if burst_counts else 'direct_hit_reference' if direct_damage else 'periodic_buff_potential' if periodic_ids else 'representative_dependency' if damage else 'no_resolved_damage',
                            'projectile_zone_dispatches':impacts,
                            'direct_damage_effect_ids': [e['id'] for e in direct_damage],
                            'unresolved_execution': (not evidence['complete_combat_graph_verified']),
@@ -444,8 +461,8 @@ def build(upgrades, audit, roster):
             curves[-1]['queue_eligible']=bool(nodes and nodes[0].get('skill_type') in (0,1) and nodes[0]['condition'] is None and cast is not None and cast>0)
             curves[-1]['priority']=nodes[0].get('priority',0) if nodes else 0
             curves[-1]['animation_limited']=cast is not None and cast > max(.5,skill['cooldown']/1000 if skill['cooldown']>0 else (2 if skill['slot']==0 else 12))
-            curves[-1]['direct_hit_counts']=dict(immediate_counts) if counted_hits else {}
-            curves[-1]['direct_hit_budget_basis']='unconditional_immediate_timeline_potential' if counted_hits else 'representative_effect'
+            curves[-1]['direct_hit_counts']=dict(hit_counts) if counted_hits else {}
+            curves[-1]['direct_hit_budget_basis']='distinct_projectile_launch_single_recipient_potential' if burst_counts else 'unconditional_immediate_timeline_potential' if counted_hits else 'representative_effect'
             if cast is not None:curves[-1]['cadence_model']='max_cooldown_and_uninterrupted_clip_chain_at_unit_speed'
             curves[-1]['conditional_effects']=[{'id':e['id'],'condition_id':e['unlock_condition']} for e in effects if e.get('unlock_condition')]
             curves[-1]['condition_dependencies']=evidence.get('referenced_conditions',[])

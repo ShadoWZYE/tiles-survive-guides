@@ -113,6 +113,14 @@
     }
   ],
   "previous_error": "The representative-dependency maximum credited an unlinked 0.6 basic fallback instead of the linked 0.36 zone, and retained only max(2.4,3.2,4.0) rather than the three distinct active impact potentials.",
+  "comparison_roster": [
+    "rosie",
+    "freja",
+    "becca",
+    "maddie",
+    "ray"
+  ],
+  "comparison_scope": "The fixed recorded friendly roster; other roster corrections are audited separately.",
   "baseline_commit": "350272f",
   "before": {
     "planner_offense": {
@@ -215,8 +223,8 @@
     "These static Raid paths do not establish original world-report field/Lite execution or active ILFix behavior."
   ],
   "source_sha256": {
-    "Hero-Combat-Audit.json": "2eb078f6aced672130fdd54bb472199ea8b4b290e12a6e8449c18c3e76917c1f",
-    "Hero-Estimate-Model.json": "d8f4197bc825d3258f0a9e2b3f9ad980aaf327d25c0728803736057a34436aa3",
-    "Retrospective-Damage-Reconstruction.json": "7826bfd8c161b2bb631ce0f3ec849ae876570fa9adf77579250d91094a861b5e"
+    "Hero-Combat-Audit.json": "425feb7968e33134c75ac9bf73174a7e69e9f6b1d6a0d048fca4b700f9a02781",
+    "Hero-Estimate-Model.json": "3250012a6fd357509869a22cb0e7a6bb3dbb7076037e0eeeb13eacdf49113be2",
+    "Retrospective-Damage-Reconstruction.json": "6238594f3ab0e49987d91725078cf37c06235701fb7c0c8fd896b5970b425033"
   }
 }

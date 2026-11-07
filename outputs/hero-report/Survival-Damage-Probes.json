@@ -1,0 +1,195 @@
+{
+  "schema": 1,
+  "battle_id": "pvp-defense-2026-11-07-a",
+  "training_battles": 1,
+  "independent_battle_accuracy": null,
+  "promoted_to_optimizer": false,
+  "scope": "Negative/control experiment: shared pressure fitted without held owner; integrate configured coefficients only up to predicted survival. No per-hero corrections.",
+  "models": [
+    {
+      "mode": "coefficient",
+      "fitted_parameter_count": 3,
+      "fitted": {
+        "wape": 0.2551346724817859,
+        "mae": 1673173.1821355517,
+        "max_owner_relative_error": 0.550306881192856,
+        "observed_total": 32790000,
+        "predicted_total": 28989321.093779244,
+        "rounding_separated_rank_pairs": 10,
+        "rank_pairs_agree": 7,
+        "rows": [
+          {
+            "hero": "rosie",
+            "observed": 2990000,
+            "predicted": 1507664.913788766,
+            "relative_error": -0.4957642428800114
+          },
+          {
+            "hero": "freja",
+            "observed": 3630000,
+            "predicted": 1632386.0212699329,
+            "relative_error": -0.550306881192856
+          },
+          {
+            "hero": "becca",
+            "observed": 7720000,
+            "predicted": 10002593.5022285,
+            "relative_error": 0.2956727334492877
+          },
+          {
+            "hero": "maddie",
+            "observed": 9220000,
+            "predicted": 9203591.408449989,
+            "relative_error": -0.0017796737039057486
+          },
+          {
+            "hero": "ray",
+            "observed": 9230000,
+            "predicted": 6643085.248042054,
+            "relative_error": -0.2802724541666247
+          }
+        ]
+      },
+      "internal_held_owner": {
+        "wape": 0.2974231256635609,
+        "mae": 1950500.8581016324,
+        "max_owner_relative_error": 0.5148892726741046,
+        "observed_total": 32790000,
+        "predicted_total": 30987386.079580013,
+        "rounding_separated_rank_pairs": 10,
+        "rank_pairs_agree": 7,
+        "rows": [
+          {
+            "hero": "rosie",
+            "observed": 2990000,
+            "predicted": 1493113.5001120304,
+            "relative_error": -0.5006309364173811
+          },
+          {
+            "hero": "freja",
+            "observed": 3630000,
+            "predicted": 2602071.966388086,
+            "relative_error": -0.28317576683523804
+          },
+          {
+            "hero": "becca",
+            "observed": 7720000,
+            "predicted": 11694945.185044087,
+            "relative_error": 0.5148892726741046
+          },
+          {
+            "hero": "maddie",
+            "observed": 9220000,
+            "predicted": 9155986.916220615,
+            "relative_error": -0.006942850735291217
+          },
+          {
+            "hero": "ray",
+            "observed": 9230000,
+            "predicted": 6041268.511815195,
+            "relative_error": -0.3454747007784188
+          }
+        ]
+      }
+    },
+    {
+      "mode": "coefficient_plus_exposure",
+      "fitted_parameter_count": 4,
+      "fitted": {
+        "wape": 0.11938891056927883,
+        "mae": 782952.4755133305,
+        "max_owner_relative_error": 0.2430515813321657,
+        "observed_total": 32790000,
+        "predicted_total": 33291946.864302017,
+        "rounding_separated_rank_pairs": 10,
+        "rank_pairs_agree": 8,
+        "rows": [
+          {
+            "hero": "rosie",
+            "observed": 2990000,
+            "predicted": 3716724.2281831754,
+            "relative_error": 0.24305158133216564
+          },
+          {
+            "hero": "freja",
+            "observed": 3630000,
+            "predicted": 4048663.283632267,
+            "relative_error": 0.11533423791522512
+          },
+          {
+            "hero": "becca",
+            "observed": 7720000,
+            "predicted": 8782967.109118894,
+            "relative_error": 0.13769004004130747
+          },
+          {
+            "hero": "maddie",
+            "observed": 9220000,
+            "predicted": 8895435.347923515,
+            "relative_error": -0.0352022399215276
+          },
+          {
+            "hero": "ray",
+            "observed": 9230000,
+            "predicted": 7848156.895444168,
+            "relative_error": -0.14971214567235447
+          }
+        ]
+      },
+      "internal_held_owner": {
+        "wape": 0.1949379813869429,
+        "mae": 1278403.2819355715,
+        "max_owner_relative_error": 0.2867230378580154,
+        "observed_total": 32790000,
+        "predicted_total": 34224404.88977877,
+        "rounding_separated_rank_pairs": 10,
+        "rank_pairs_agree": 7,
+        "rows": [
+          {
+            "hero": "rosie",
+            "observed": 2990000,
+            "predicted": 3759579.3104371787,
+            "relative_error": 0.2573843847615982
+          },
+          {
+            "hero": "freja",
+            "observed": 3630000,
+            "predicted": 4560129.487027257,
+            "relative_error": 0.2562340184648091
+          },
+          {
+            "hero": "becca",
+            "observed": 7720000,
+            "predicted": 9933501.852263879,
+            "relative_error": 0.28672303785801545
+          },
+          {
+            "hero": "maddie",
+            "observed": 9220000,
+            "predicted": 8675668.59389496,
+            "relative_error": -0.05903811346041643
+          },
+          {
+            "hero": "ray",
+            "observed": 9230000,
+            "predicted": 7295525.646155497,
+            "relative_error": -0.20958552045985945
+          }
+        ]
+      }
+    }
+  ],
+  "limits": [
+    "The coefficient-only model performs worse than the simpler HP-times-ATK control on held owners.",
+    "Adding an exposure term has no identified soldier attribution; four fitted parameters on five owners is underconstrained.",
+    "Replay presentation time is not verified original combat time.",
+    "No independent battle validation; these diagnostics do not change ranking or confidence."
+  ],
+  "source_sha256": {
+    "Replay-Observation-2026-11-07.json": "31940e8af718213acb896b30334c3a275ae0856ce759045afee69f4cdfd42d6d",
+    "Replay-Reconstruction-Inputs-2026-11-07.json": "ad79e66946d013e13eec06d10f25db160ccf8bd6f8cf30e696173f974202ae8e",
+    "TilesSurvive-Upgrade-Data.json": "ae6802329145f628c34f7d6ac177061ce2679fe82d4946745d90ebb72d53fb96",
+    "Hero-Estimate-Model.json": "3250012a6fd357509869a22cb0e7a6bb3dbb7076037e0eeeb13eacdf49113be2",
+    "Hero-Army-Context.json": "c9d7a22cc2b53e09a15bbfb85a3914a9eef4e7cb7ee9aee16c66551c61e4474d"
+  }
+}
