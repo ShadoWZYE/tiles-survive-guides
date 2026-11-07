@@ -17,6 +17,8 @@ The Hero Planner supports:
 - Fair all-hero Equal builds at maximum level/rank/skills and maximum yellow T5 gear by default; Max heroes (no gear) and opt-in My builds modes. Resource priorities use actual owned builds; details stay collapsed ([model](docs/research/HERO-REFERENCE-ESTIMATES.md))
 - Five-position front-to-back formation guidance
 - Five saved armies, selected with buttons 1–5 above the formation. Each keeps its formation and battle focus; heroes assigned to another army are excluded from selection and recommendations. Clear an army to release its heroes.
+- Actual 1000-point model normalization, exact in-game gear icon panels, compact headers, explicit dated build/account reviews, same-version data-change detection and conditional post-merge draft-age clues.
+- Ray projectile impact correction and an optional pre-fight HP survival benchmark that changes squad recommendations; off by default pending independent validation ([model 17 evidence and limits](docs/research/RAY-SURVIVAL-MODEL-2026-11-07.md)).
 - Incomplete-build notices with edit links, clearer model-score gaps and component breakdowns, supported Behemoth catalogue, and gated research separated from normal branches ([7 November refinements](docs/research/PLANNER-REFINEMENTS-2026-11-07.md)). Windows relaunches reuse one instance to protect saved configurations.
 - Front pair survival fit in squad rankings, with protected ranged carries and a separate signed score component; corrected direct-hit skill evidence ([combat report](docs/research/COMBAT-MODEL-IMPROVEMENTS-2026-10-10.md))
 - Modeled skill synergy (separate from build-specific upgrade comparisons)

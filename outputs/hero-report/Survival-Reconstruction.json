@@ -1,0 +1,529 @@
+{
+  "schema": 1,
+  "battle_id": "pvp-defense-2026-11-07-a",
+  "independent_battles": 1,
+  "independent_battle_accuracy": null,
+  "model": "Shared HP-pressure budget; two front positions shield three back positions; pressure redirects after deaths",
+  "pre_fight_front_pair": [
+    "rosie",
+    "freja"
+  ],
+  "fitted_survival_parameters": 2,
+  "fitted_survival_and_damage_parameters": 3,
+  "scope": "Same-battle calibration, not an independent validation. Held-owner folds exclude that owner death time AND damage from every fitted parameter. Only known pre-fight HP and positions are used when predicting.",
+  "limits": [
+    "Pressure is an inferred HP-drain benchmark, not recovered enemy ATK or a transferable server formula.",
+    "Troop health, shield, effective healing, control and target-specific mitigation are not supplied or invented.",
+    "Presentation death intervals remain an uncertain proxy for original combat time.",
+    "The optional optimiser adjustment discounts personal offense exposure only; survival and utility score weights remain unchanged.",
+    "A position-only control performs similarly on this small sample; the HP mechanism is not established as superior by independent battles."
+  ],
+  "calibration": {
+    "back_share": 0.3,
+    "pressure": 580357.9446236538,
+    "sse": 9.52701762516556
+  },
+  "controls": {
+    "position_only_held_owner": {
+      "wape": 0.11049723756906077,
+      "mae": 2,
+      "max_owner_relative_error": 0.1568627450980392,
+      "observed_total": 90.5,
+      "predicted_total": 90.5,
+      "rounding_separated_rank_pairs": 9,
+      "rank_pairs_agree": 6,
+      "rows": [
+        {
+          "hero": "rosie",
+          "observed": 11.5,
+          "predicted": 10.5,
+          "relative_error": -0.08695652173913049
+        },
+        {
+          "hero": "freja",
+          "observed": 10.5,
+          "predicted": 11.5,
+          "relative_error": 0.09523809523809534
+        },
+        {
+          "hero": "becca",
+          "observed": 21.5,
+          "predicted": 23.5,
+          "relative_error": 0.09302325581395343
+        },
+        {
+          "hero": "maddie",
+          "observed": 25.5,
+          "predicted": 21.5,
+          "relative_error": -0.1568627450980392
+        },
+        {
+          "hero": "ray",
+          "observed": 21.5,
+          "predicted": 23.5,
+          "relative_error": 0.09302325581395343
+        }
+      ]
+    }
+  },
+  "survival": {
+    "fitted": {
+      "wape": 0.06526537377824766,
+      "mae": 1.1813032653862827,
+      "max_owner_relative_error": 0.12754592770801496,
+      "observed_total": 90.5,
+      "predicted_total": 89.87093676589494,
+      "rounding_separated_rank_pairs": 9,
+      "rank_pairs_agree": 8,
+      "rows": [
+        {
+          "hero": "rosie",
+          "observed": 11.5,
+          "predicted": 10.033221831357828,
+          "relative_error": -0.12754592770801498
+        },
+        {
+          "hero": "freja",
+          "observed": 10.5,
+          "predicted": 10.929284593442308,
+          "relative_error": 0.040884246994505435
+        },
+        {
+          "hero": "becca",
+          "observed": 21.5,
+          "predicted": 23.709441952970867,
+          "relative_error": 0.10276474199864505
+        },
+        {
+          "hero": "maddie",
+          "observed": 25.5,
+          "predicted": 24.013047687384066,
+          "relative_error": -0.05831185539670325
+        },
+        {
+          "hero": "ray",
+          "observed": 21.5,
+          "predicted": 21.185940700739867,
+          "relative_error": -0.014607409267913152
+        }
+      ]
+    },
+    "internal_held_owner": {
+      "wape": 0.11305352694353975,
+      "mae": 2.0462688376780696,
+      "max_owner_relative_error": 0.20561305743276442,
+      "observed_total": 90.5,
+      "predicted_total": 90.9996738681009,
+      "rounding_separated_rank_pairs": 9,
+      "rank_pairs_agree": 7,
+      "rows": [
+        {
+          "hero": "rosie",
+          "observed": 11.5,
+          "predicted": 9.94672561088272,
+          "training_owners": [
+            "freja",
+            "becca",
+            "maddie",
+            "ray"
+          ],
+          "calibration": {
+            "back_share": 0.3,
+            "pressure": 585404.7078195467,
+            "sse": 7.248708661297352
+          },
+          "attack_damage": 2592380.0951752556,
+          "offense_damage": 2329504.298023014,
+          "relative_error": -0.13506733818411132
+        },
+        {
+          "hero": "freja",
+          "observed": 10.5,
+          "predicted": 12.658937103044027,
+          "training_owners": [
+            "rosie",
+            "becca",
+            "maddie",
+            "ray"
+          ],
+          "calibration": {
+            "back_share": 0.4,
+            "pressure": 584570.9324906289,
+            "sse": 7.143915926582298
+          },
+          "attack_damage": 3557865.579608524,
+          "offense_damage": 3260142.146378427,
+          "relative_error": 0.20561305743276437
+        },
+        {
+          "hero": "becca",
+          "observed": 21.5,
+          "predicted": 24.706571925201594,
+          "training_owners": [
+            "rosie",
+            "freja",
+            "maddie",
+            "ray"
+          ],
+          "calibration": {
+            "back_share": 0.3,
+            "pressure": 556935.3385673204,
+            "sse": 2.442283088406572
+          },
+          "attack_damage": 10090511.578111358,
+          "offense_damage": 10555524.63650948,
+          "relative_error": 0.14914288024193456
+        },
+        {
+          "hero": "maddie",
+          "observed": 25.5,
+          "predicted": 22.605233790003002,
+          "training_owners": [
+            "rosie",
+            "freja",
+            "becca",
+            "ray"
+          ],
+          "calibration": {
+            "back_share": 0.4,
+            "pressure": 616501.6088514494,
+            "sse": 5.58406955237066
+          },
+          "attack_damage": 10105234.006587127,
+          "offense_damage": 9875767.459338823,
+          "relative_error": -0.11352024352929402
+        },
+        {
+          "hero": "ray",
+          "observed": 21.5,
+          "predicted": 21.082205438969552,
+          "training_owners": [
+            "rosie",
+            "freja",
+            "becca",
+            "maddie"
+          ],
+          "calibration": {
+            "back_share": 0.3,
+            "pressure": 583213.6033202877,
+            "sse": 9.395805358093657
+          },
+          "attack_damage": 5897540.740804278,
+          "offense_damage": 5922057.4690056145,
+          "relative_error": -0.01943230516420691
+        }
+      ]
+    },
+    "held_owner_predictions_inside_observed_interval": 2
+  },
+  "damage": {
+    "attack": {
+      "fitted": {
+        "wape": 0.1786196266312576,
+        "mae": 1171387.5114477873,
+        "max_owner_relative_error": 0.29822758831715884,
+        "observed_total": 32790000,
+        "predicted_total": 31282534.119695522,
+        "rounding_separated_rank_pairs": 9,
+        "rank_pairs_agree": 8,
+        "rows": [
+          {
+            "hero": "rosie",
+            "observed": 2990000,
+            "predicted": 2603557.3132978403,
+            "display_quantum": 10000,
+            "relative_error": -0.1292450457197859
+          },
+          {
+            "hero": "freja",
+            "observed": 3630000,
+            "predicted": 3086881.6080978285,
+            "display_quantum": 10000,
+            "relative_error": -0.14961939170858718
+          },
+          {
+            "hero": "becca",
+            "observed": 7720000,
+            "predicted": 9249486.983536642,
+            "display_quantum": 10000,
+            "relative_error": 0.198120075587648
+          },
+          {
+            "hero": "maddie",
+            "observed": 9220000,
+            "predicted": 9865248.854930587,
+            "display_quantum": 10000,
+            "relative_error": 0.06998360682544336
+          },
+          {
+            "hero": "ray",
+            "observed": 9230000,
+            "predicted": 6477359.359832624,
+            "display_quantum": 10000,
+            "relative_error": -0.2982275883171588
+          }
+        ]
+      },
+      "internal_held_owner": {
+        "wape": 0.21524730616378246,
+        "mae": 1411591.8338220853,
+        "max_owner_relative_error": 0.3610465069551161,
+        "observed_total": 32790000,
+        "predicted_total": 32243532.000286542,
+        "rounding_separated_rank_pairs": 9,
+        "rank_pairs_agree": 8,
+        "rows": [
+          {
+            "hero": "rosie",
+            "observed": 2990000,
+            "predicted": 2592380.0951752556,
+            "display_quantum": 10000,
+            "relative_error": -0.13298324576078413
+          },
+          {
+            "hero": "freja",
+            "observed": 3630000,
+            "predicted": 3557865.579608524,
+            "display_quantum": 10000,
+            "relative_error": -0.019871741154676492
+          },
+          {
+            "hero": "becca",
+            "observed": 7720000,
+            "predicted": 10090511.578111358,
+            "display_quantum": 10000,
+            "relative_error": 0.30706108524758524
+          },
+          {
+            "hero": "maddie",
+            "observed": 9220000,
+            "predicted": 10105234.006587127,
+            "display_quantum": 10000,
+            "relative_error": 0.09601236513960165
+          },
+          {
+            "hero": "ray",
+            "observed": 9230000,
+            "predicted": 5897540.740804278,
+            "display_quantum": 10000,
+            "relative_error": -0.3610465069551161
+          }
+        ]
+      }
+    },
+    "offense_index": {
+      "fitted": {
+        "wape": 0.19588114215366442,
+        "mae": 1284588.5302437313,
+        "max_owner_relative_error": 0.29521614135440133,
+        "observed_total": 32790000,
+        "predicted_total": 30875794.181330338,
+        "rounding_separated_rank_pairs": 9,
+        "rank_pairs_agree": 8,
+        "rows": [
+          {
+            "hero": "rosie",
+            "observed": 2990000,
+            "predicted": 2344628.978564849,
+            "display_quantum": 10000,
+            "relative_error": -0.21584315098165585
+          },
+          {
+            "hero": "freja",
+            "observed": 3630000,
+            "predicted": 2831641.7711921153,
+            "display_quantum": 10000,
+            "relative_error": -0.21993339636580844
+          },
+          {
+            "hero": "becca",
+            "observed": 7720000,
+            "predicted": 9491461.167788196,
+            "display_quantum": 10000,
+            "relative_error": 0.22946388183784916
+          },
+          {
+            "hero": "maddie",
+            "observed": 9220000,
+            "predicted": 9702907.2484863,
+            "display_quantum": 10000,
+            "relative_error": 0.052376057319555525
+          },
+          {
+            "hero": "ray",
+            "observed": 9230000,
+            "predicted": 6505155.015298876,
+            "display_quantum": 10000,
+            "relative_error": -0.29521614135440133
+          }
+        ]
+      },
+      "internal_held_owner": {
+        "wape": 0.23877975548768673,
+        "mae": 1565917.6364882495,
+        "max_owner_relative_error": 0.3672959373716943,
+        "observed_total": 32790000,
+        "predicted_total": 31942996.009255357,
+        "rounding_separated_rank_pairs": 9,
+        "rank_pairs_agree": 7,
+        "rows": [
+          {
+            "hero": "rosie",
+            "observed": 2990000,
+            "predicted": 2329504.298023014,
+            "display_quantum": 10000,
+            "relative_error": -0.22090157256755394
+          },
+          {
+            "hero": "freja",
+            "observed": 3630000,
+            "predicted": 3260142.146378427,
+            "display_quantum": 10000,
+            "relative_error": -0.10188921587371158
+          },
+          {
+            "hero": "becca",
+            "observed": 7720000,
+            "predicted": 10555524.63650948,
+            "display_quantum": 10000,
+            "relative_error": 0.3672959373716942
+          },
+          {
+            "hero": "maddie",
+            "observed": 9220000,
+            "predicted": 9875767.459338823,
+            "display_quantum": 10000,
+            "relative_error": 0.07112445329054484
+          },
+          {
+            "hero": "ray",
+            "observed": 9230000,
+            "predicted": 5922057.4690056145,
+            "display_quantum": 10000,
+            "relative_error": -0.3583903067166181
+          }
+        ]
+      }
+    }
+  },
+  "folds": [
+    {
+      "hero": "rosie",
+      "observed": 11.5,
+      "predicted": 9.94672561088272,
+      "training_owners": [
+        "freja",
+        "becca",
+        "maddie",
+        "ray"
+      ],
+      "calibration": {
+        "back_share": 0.3,
+        "pressure": 585404.7078195467,
+        "sse": 7.248708661297352
+      },
+      "attack_damage": 2592380.0951752556,
+      "offense_damage": 2329504.298023014
+    },
+    {
+      "hero": "freja",
+      "observed": 10.5,
+      "predicted": 12.658937103044027,
+      "training_owners": [
+        "rosie",
+        "becca",
+        "maddie",
+        "ray"
+      ],
+      "calibration": {
+        "back_share": 0.4,
+        "pressure": 584570.9324906289,
+        "sse": 7.143915926582298
+      },
+      "attack_damage": 3557865.579608524,
+      "offense_damage": 3260142.146378427
+    },
+    {
+      "hero": "becca",
+      "observed": 21.5,
+      "predicted": 24.706571925201594,
+      "training_owners": [
+        "rosie",
+        "freja",
+        "maddie",
+        "ray"
+      ],
+      "calibration": {
+        "back_share": 0.3,
+        "pressure": 556935.3385673204,
+        "sse": 2.442283088406572
+      },
+      "attack_damage": 10090511.578111358,
+      "offense_damage": 10555524.63650948
+    },
+    {
+      "hero": "maddie",
+      "observed": 25.5,
+      "predicted": 22.605233790003002,
+      "training_owners": [
+        "rosie",
+        "freja",
+        "becca",
+        "ray"
+      ],
+      "calibration": {
+        "back_share": 0.4,
+        "pressure": 616501.6088514494,
+        "sse": 5.58406955237066
+      },
+      "attack_damage": 10105234.006587127,
+      "offense_damage": 9875767.459338823
+    },
+    {
+      "hero": "ray",
+      "observed": 21.5,
+      "predicted": 21.082205438969552,
+      "training_owners": [
+        "rosie",
+        "freja",
+        "becca",
+        "maddie"
+      ],
+      "calibration": {
+        "back_share": 0.3,
+        "pressure": 583213.6033202877,
+        "sse": 9.395805358093657
+      },
+      "attack_damage": 5897540.740804278,
+      "offense_damage": 5922057.4690056145
+    }
+  ],
+  "presentation_time_sensitivity": [
+    {
+      "position": "earliest",
+      "calibration": {
+        "back_share": 0.2,
+        "pressure": 622017.589948332,
+        "sse": 11.223205956299838
+      },
+      "survival_held_owner_wape": 0.13657717500626157,
+      "offense_damage_held_owner_wape": 0.2744471670842271
+    },
+    {
+      "position": "latest",
+      "calibration": {
+        "back_share": 0.4,
+        "pressure": 547935.8807759776,
+        "sse": 7.84644055346456
+      },
+      "survival_held_owner_wape": 0.07273711412733769,
+      "offense_damage_held_owner_wape": 0.22411757626810452
+    }
+  ],
+  "source_hashes": {
+    "Replay-Observation-2026-11-07.json": "31940e8af718213acb896b30334c3a275ae0856ce759045afee69f4cdfd42d6d",
+    "Replay-Reconstruction-Inputs-2026-11-07.json": "ad79e66946d013e13eec06d10f25db160ccf8bd6f8cf30e696173f974202ae8e",
+    "Hero-Estimate-Model.json": "d8f4197bc825d3258f0a9e2b3f9ad980aaf327d25c0728803736057a34436aa3",
+    "Hero-Army-Context.json": "c9d7a22cc2b53e09a15bbfb85a3914a9eef4e7cb7ee9aee16c66551c61e4474d"
+  }
+}

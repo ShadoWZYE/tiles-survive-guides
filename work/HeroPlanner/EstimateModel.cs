@@ -6,6 +6,7 @@ public sealed class EstimateData
 {
     public Dictionary<string, EstimateHero> Heroes { get; set; } = [];
     public double[] Scales { get; set; } = [];
+    public double ScoreScale {get;set;}=1000;
     public List<GearBuild> ReferenceGear { get; set; } = [];
     public static EstimateData Parse(string json) => JsonSerializer.Deserialize<EstimateData>(json,
         new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower })!;
@@ -86,7 +87,7 @@ public sealed class EstimateOpeningWindow
 public sealed record HeroEstimate(double Offense, double Durability, double Score, double Low, double High, string Basis, double HealthContribution = 0,
     double[]? PassiveContributions = null, double[]? TeamPercent = null, double[]? SelfPercent = null, string[]? ActiveSkillIds = null,
     Dictionary<string,int>? OpeningCastCounts = null,List<HealingPreview>? RawHealingPotential = null, bool Comparable = true, string[]? MissingFields = null,
-    double StaminaReductionPercent = 0);
+    double StaminaReductionPercent = 0,double[]? HeroStats = null);
 
 public static class EstimateModel
 {
@@ -171,6 +172,7 @@ public static class EstimateModel
     }
     public static string EvidenceSummary(EstimateHero model) =>
         $"Skill evidence: {model.Skills.Count(s => s.DamageSelectionBasis == "direct_hit_reference")} skills have linked direct damage effects; " +
+        $"{model.Skills.Count(s=>s.DamageSelectionBasis=="projectile_zone_dispatch_potential")} checked projectile-zone paths sum linked impacts at one assumed target per impact; projectile timing retains the completion fallback. " +
         $"{model.Skills.Count(s => s.HasDamageZone)} have damage zones; {model.Skills.Count(s => s.HasSummonDependency)} have summon dependencies. " +
         $"{model.Skills.Sum(s => s.PermanentStatSources.Count)} permanent stat buffs are modeled; {model.Skills.Sum(s => s.SequenceEffectIds.Count)} checked child strikes are included. " +
         $"{model.Skills.Sum(s => s.TemporaryStatSources.Count)} temporary self stat buffs use assumed duration/cooldown uptime; {model.Skills.Sum(s => s.PeriodicBudgets.Count(p => p.Scored))} periodic damage paths use full-lifetime potential. " +
@@ -271,9 +273,9 @@ public static class EstimateModel
         for(int i=0;i<3;i++) stats[i] *= factors[i];
         (double offense, double durability, double score) Calculate(double damageFactor, double utilityFactor)
         {
-            double o = 100 * stats[0] * (1 + .5 * Math.Log(1 + damage * damageFactor)) / estimates.Scales[0];
-            double d = 100 * (.7 * stats[2] + 30 * stats[1]) / estimates.Scales[1];
-            double u = 100 * (1 + utility * utilityFactor) / estimates.Scales[2];
+            double o = estimates.ScoreScale * stats[0] * (1 + .5 * Math.Log(1 + damage * damageFactor)) / estimates.Scales[0];
+            double d = estimates.ScoreScale * (.7 * stats[2] + 30 * stats[1]) / estimates.Scales[1];
+            double u = estimates.ScoreScale * (1 + utility * utilityFactor) / estimates.Scales[2];
             return (o, d, .55 * o + .35 * d + .1 * u);
         }
         var typical = Calculate(1, 1);
@@ -282,6 +284,6 @@ public static class EstimateModel
             typical.durability * (.7 * stats[2]) / (.7 * stats[2] + 30 * stats[1]),
             [typical.offense/factors[0],typical.durability*30*baseStats[1]/(.7*stats[2]+30*stats[1]),typical.durability*.7*baseStats[2]/(.7*stats[2]+30*stats[1])],teamPercent,selfPercent,activeSkills.ToArray(),schedule.ToDictionary(x=>x.Key,x=>x.Value.Count(end=>end<=battleSeconds+1e-9)),
             selected.Where(x=>activeSkills.Contains(x.Skill.Id)).SelectMany(x=>x.Row.HealingBudgets.Select(b=>new HealingPreview(x.Skill.Id,HealingFormula(b),b.Execution))).ToList(),
-            MissingFields:missing,StaminaReductionPercent:stamina);
+            MissingFields:missing,StaminaReductionPercent:stamina,HeroStats:stats.ToArray());
     }
 }

@@ -63,7 +63,7 @@ test('native/browser estimates agree for all heroes and incomplete, reference an
     assert.deepEqual(r.openingCastCounts,c.result.openingCastCounts,`${c.slug}: shared cast counts`);
     assert.deepEqual(r.rawHealingPotential,c.result.rawHealingPotential,`${c.slug}: raw healing evidence parity`);
     for(const k of ['offense','durability','score','low','high','healthContribution'])assert.ok(Math.abs(r[k]-c.result[k])<1e-8,`${c.slug}: ${k}`);
-    for(const k of ['selfPercent','teamPercent','passiveContributions'])r[k].forEach((v,i)=>assert.ok(Math.abs(v-c.result[k][i])<1e-8));}
+    for(const k of ['selfPercent','teamPercent','passiveContributions','heroStats'])r[k].forEach((v,i)=>assert.ok(Math.abs(v-c.result[k][i])<1e-8));}
 });
 
 test('opening windows change timing while preserving locks, flat stats and defaults',()=>{
@@ -200,10 +200,23 @@ test('recorded fourth skills add their verified flat stats once, before permanen
   assert.deepEqual(after.stats.map((v,i)=>v-before.stats[i]),expected);
   assert.equal(after.power-before.power,s.levels.find(r=>r.level===1).power,'power already includes skill power');
   const a=model.evaluate(slug,base,upgrades,estimates,0,null,true),b=model.evaluate(slug,on,upgrades,estimates,0,null,true);
-  assert.ok(Math.abs(b.offense-a.offense-100*expected[0]/estimates.scales[0])<1e-8);
-  assert.ok(Math.abs(b.durability-a.durability-100*(.7*expected[2]+30*expected[1])/estimates.scales[1])<1e-8);
+  assert.ok(Math.abs(b.offense-a.offense-1000*expected[0]/estimates.scales[0])<1e-8);
+  assert.ok(Math.abs(b.durability-a.durability-1000*(.7*expected[2]+30*expected[1])/estimates.scales[1])<1e-8);
   const unknown=structuredClone(on);delete unknown.skills[s.id];
   assert.equal(model.evaluate(slug,unknown,upgrades,estimates,0,null,true).score,a.score);
   const low={...on,stage:h.stages[0].id,level:1};assert.equal(model.evaluate(slug,low,upgrades,estimates,0,null,true).activeSkillIds.includes(s.id),false);
+ }
+});
+
+
+test('1000-point normalization changes actual score components and preserves physical stats and percentage effects',()=>{
+ assert.equal(estimates.score_scale,1000);
+ const legacy={...estimates,score_scale:100};
+ for(const slug of Object.keys(estimates.heroes))for(const basis of ['reference','flat','recorded']){
+  const build={level:1,skills:{}};
+  const old=model.compare(slug,build,upgrades,legacy,basis),current=model.compare(slug,build,upgrades,estimates,basis);
+  for(const key of ['offense','durability','score','low','high','healthContribution'])assert.ok(Math.abs(current[key]-10*old[key])<1e-8,slug+' '+key);
+  for(let i=0;i<3;i++)assert.ok(Math.abs(current.passiveContributions[i]-10*old.passiveContributions[i])<1e-8);
+  for(const key of ['heroStats','teamPercent','selfPercent','staminaReductionPercent'])assert.deepEqual(current[key],old[key]);
  }
 });

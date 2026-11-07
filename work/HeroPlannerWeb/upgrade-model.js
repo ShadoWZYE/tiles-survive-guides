@@ -12,13 +12,13 @@
     }
     if(Array.isArray(value.gear)&&value.gear.some(g=>!g||typeof g.id!=="string"||integer(g.level,1000)===null))return null;
     const gear=Array.isArray(value.gear) ? value.gear.map(g=>({id:g.id,level:g.level})) : null;
-    return {stage:data.stages.some(s=>s.id===value.stage)?value.stage:null,level:integer(value.level,1000),skills,gear};
+    return {reviewedUtc:typeof value.reviewedUtc==="string"&&Number.isFinite(Date.parse(value.reviewedUtc))?value.reviewedUtc:null,reviewedClientBuild:typeof value.reviewedClientBuild==="string"?value.reviewedClientBuild:null,stage:data.stages.some(s=>s.id===value.stage)?value.stage:null,level:integer(value.level,1000),skills,gear};
   }
   function sanitizeSettings(value={}) {
     const inventory={};
     if(value?.inventory && typeof value.inventory==="object")for(const [key,n] of Object.entries(value.inventory))
       if(typeof n==="number"&&Number.isFinite(n)&&n>=0&&n<=1e12)inventory[key]=n;
-    return {goal:goals.includes(value?.goal)&&value.goal!=="direct"?value.goal:"power",seconds:integer(value?.seconds,300)||30,inventory,onlyAffordable:value?.onlyAffordable===true};
+    return {targetedPool:typeof value?.targetedPool==="string"?value.targetedPool:null,goal:goals.includes(value?.goal)&&value.goal!=="direct"?value.goal:"power",seconds:integer(value?.seconds,300)||30,inventory,onlyAffordable:value?.onlyAffordable===true};
   }
   function state(slug,build,data,seconds) {
     const h=data.heroes[slug], b=sanitizeBuild(build,h), missing=[];
@@ -101,6 +101,7 @@
     if(settings.onlyAffordable)result.candidates=result.candidates.filter(c=>c.affordability==="affordable"&&!c.blocked);
     return result;
   }
-  const api={sanitizeBuild,sanitizeSettings,state,evaluate,goals};
+  const reviewSnapshot=data=>(data.client_build||"standalone")+"|"+Object.entries(data.source_hashes||{}).sort(([a],[b])=>a<b?-1:a>b?1:0).map(([k,v])=>k+":"+v).join("|");
+  const api={reviewSnapshot,sanitizeBuild,sanitizeSettings,state,evaluate,goals};
   if(typeof module!=="undefined"&&module.exports)module.exports=api;else root.UpgradeModel=api;
 })(typeof globalThis!=="undefined"?globalThis:this);

@@ -8,17 +8,17 @@ The most complete recorded PvP case has five friendly hero rows, 32.79M displaye
 
 | Model | Shared fitted parameters | Fitted WAPE | Worst hero error | Leave-one-owner-out WAPE |
 |---|---:|---:|---:|---:|
-| Current planner offense index + shared scale | 1 | 25.1% | 64.2% | 30.3% |
-| ATK × full 30-second coefficient | 1 | 27.2% | 38.5% | 39.3% |
-| ATK × observed-lifetime coefficient | 1 | 30.0% | 55.7% | 37.9% |
+| Current planner offense index + shared scale | 1 | 24.1% | 63.5% | 29.2% |
+| ATK × full 30-second coefficient | 1 | 21.8% | 33.5% | 31.7% |
+| ATK × observed-lifetime coefficient | 1 | 25.0% | 56.5% | 31.6% |
 | Known ATK × observed survival time | 1 | 16.1% | 28.6% | 22.1% |
 | ATK × survival time + shared exposure | 2 | 9.9% | 42.2% | 14.8% |
-| Native base helper + fitted defence grid | 2 | 30.0% | 55.7% | 37.9% |
+| Native base helper + fitted defence grid | 2 | 25.0% | 56.5% | 31.6% |
 | Lifetime-only control | 1 | 9.9% | 42.2% | 12.1% |
-| Coefficient + shared exposure term | 2 | 9.9% | 42.2% | 14.7% |
-| Basic/other coefficients + exposure | 3 | 9.9% | 41.6% | 16.0% |
+| Coefficient + shared exposure term | 2 | 9.6% | 33.1% | 15.0% |
+| Basic/other coefficients + exposure | 3 | 9.0% | 21.4% | 17.6% |
 
-The additional **ATK × observed survival time** probe uses the same single shared fitted scale as the production-index probe, and no Raid skill coefficients. It gives **16.1% fitted WAPE**, **28.6% worst-owner error** and **22.1% internal leave-one-owner-out WAPE**, versus 25.1%, 64.2% and 30.3% for the production offense proxy. This is a better same-fight reconstruction, not a replacement general hero ranking: survival times come from the recorded outcome and are not predicted. Adding a second shared exposure term collapses back to the lifetime-only control; it does not identify troop DPS.
+The additional **ATK × observed survival time** probe uses the same single shared fitted scale as the production-index probe, and no Raid skill coefficients. It gives **16.1% fitted WAPE**, **28.6% worst-owner error** and **22.1% internal leave-one-owner-out WAPE**, versus 24.1%, 63.5% and 29.2% for the current production offense proxy. This is a better same-fight reconstruction, not a replacement general hero ranking: survival times come from the recorded outcome and are not predicted. Adding a second shared exposure term collapses back to the lifetime-only control; it does not identify troop DPS.
 
 WAPE is the sum of absolute row errors divided by the sum of observed row damage. It is not the difference between team totals. One shared multiplier can make a total look right while individual heroes are very wrong; both mean and worst-row error are shown. Nonnegative least squares fits at most three shared coefficients. No separate multiplier is fitted for each hero.
 
@@ -34,7 +34,7 @@ The simple lifetime control fits 9.9% weighted error, but Rosie is still 42.2% o
 | Maddie | 9.220M | 9.430M | +2.3% |
 | Ray | 9.230M | 7.951M | -13.9% |
 
-Adding skill/source terms does not improve the internal test: the lifetime control gives 12.1% leave-one-owner-out WAPE, compared with 14.7% for coefficient plus exposure and 16.0% for basic/other plus exposure. The richer fits put almost all output into the generic exposure term. **That is a warning that the current skill features are missing or misapplying important information, not evidence that soldiers supply nearly all damage.**
+Adding skill/source terms does not improve the internal test: the lifetime control gives 12.1% leave-one-owner-out WAPE, compared with 15.0% for coefficient plus exposure and 17.6% for basic/other plus exposure. The richer fits put almost all output into the generic exposure term. **That is a warning that the current skill features are missing or misapplying important information, not evidence that soldiers supply nearly all damage.**
 
 The native-helper defence grid chooses its zero-defence boundary and does not improve the coefficient model. This is not recovered enemy DEF. A shared defence adjustment alone does not explain these rows under the available inputs.
 
@@ -63,7 +63,7 @@ This is a useful small-margin reconstruction: 1.2% fitted weighted error, 2.4% w
 
 A second scenario uses the saved Research/Behemoth configuration. The video agrees with its Behemoth levels and Signature, but exact historical Research and star steps are not independently established. This scenario is kept separate, rather than silently declaring the snapshot to be the fight state.
 
-With it, the current offense-index fit is 26.7% WAPE; the shared incoming-budget fit remains about 1.2%. Simply adding this candidate context does not close the outgoing model. The full JSON preserves all scenario metrics and inputs.
+With it, the current offense-index fit is 25.6% WAPE; the shared incoming-budget fit remains about 1.2%. Simply adding this candidate context does not close the outgoing model. The full JSON preserves all scenario metrics and inputs.
 
 For the lifetime control, choosing the broad earliest and latest observed presentation windows produces 10.3% and 11.5% fitted WAPE, versus 9.9% at the midpoint. Those are scenario results, not confidence bounds, and the best window is not selected separately for each hero.
 
@@ -83,9 +83,15 @@ This does **not** make reconstruction pointless. It pinpoints the next bridge to
 
 A separate concrete bug was found while tracing the field links: the fiend export used values from `survivor.SkillConfig` as skill-slot indices. Those are not the canonical slot numbers; an entry such as 86 could make a recorded unlocked fourth skill appear capped at zero. The export now uses `survivor_skill_type.SkillNo`, retains the old value only as explicitly raw metadata, and has a regression for Freja's unlocked/locked fourth skill. This fixes input gating; it does not establish the field effect's damage formula or execution.
 
+## Predicted survival and Ray impact correction
+
+Model v17 replaces Ray's maximum-dependency fallback with the single-target potential of the actual bound projectile zones: 0.36 for the basic and 2.4 + 3.2 + 4.0 for the active at level 1. Hits, target coverage and field-engine equivalence remain unverified. See [the Ray audit](../../outputs/hero-report/Ray-Impact-Audit.json).
+
+An additional model now predicts survival from pre-fight HP and front/back positions, without supplying the predicted hero's observed survival time. The optional optimiser benchmark uses that prediction to discount personal offense exposure. Its one-fight calibration, internal held-owner results and limits are separate from the outcome-conditioned table above. See [Ray and survival modelling](RAY-SURVIVAL-MODEL-2026-11-07.md).
+
 ## Implications for the optimiser
 
-The current offense index does not reproduce this fight closely enough to claim accurate damage prediction. The incoming-budget fit is encouraging, but fitting that offset does not justify adding invented stats to My builds. Balanced scoring also includes utility and survival; it cannot be fitted to outgoing damage columns alone. Production scoring weights and saved builds are unchanged by this experiment.
+The current offense index does not reproduce this fight closely enough to claim accurate damage prediction. The incoming-budget fit is encouraging, but fitting that offset does not justify adding invented stats to My builds. Balanced scoring also includes utility and survival; it cannot be fitted to outgoing damage columns alone. The 55/35/10 scoring weights and saved builds remain unchanged. Model v17 corrects Ray impact accounting; the survival benchmark is optional and off by default.
 
 The next useful refinements are to trace the original round/field calculation and identify the shared account/army contribution, then rerun these same cases. Existing incomplete fights can supply further constraints, but their missing builds must be represented explicitly rather than filled with maximum reference heroes. New recordings or exact repeat fights are not prerequisites for measuring retrospective fit.
 

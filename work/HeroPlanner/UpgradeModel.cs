@@ -6,11 +6,13 @@ namespace TilesSurviveHeroPlanner;
 
 public sealed class HeroBuild
 {
+    public DateTimeOffset? ReviewedUtc { get; set; }
+    public string? ReviewedClientBuild { get; set; }
     public string? Stage { get; set; }
     public int? Level { get; set; }
     public Dictionary<string, int> Skills { get; set; } = [];
     public List<GearBuild>? Gear { get; set; }
-    public HeroBuild Copy() => new() { Stage = Stage, Level = Level, Skills = new(Skills ?? []), Gear = Gear?.Select(g => new GearBuild { Id = g.Id, Level = g.Level }).ToList() };
+    public HeroBuild Copy() => new() { ReviewedUtc=ReviewedUtc, ReviewedClientBuild=ReviewedClientBuild, Stage = Stage, Level = Level, Skills = new(Skills ?? []), Gear = Gear?.Select(g => new GearBuild { Id = g.Id, Level = g.Level }).ToList() };
 }
 public sealed class GearBuild { public string Id { get; set; } = ""; public int Level { get; set; } }
 public sealed class UpgradeSettings
@@ -30,6 +32,7 @@ public sealed class UpgradeSettings
 public sealed class UpgradeData
 {
     public string ClientBuild { get; set; } = "";
+    public Dictionary<string,string> SourceHashes {get;set;}=[];
     public Dictionary<string, UpgradeHero> Heroes { get; set; } = [];
     public Dictionary<string, UpgradeGear> Gear { get; set; } = [];
     public Dictionary<string, string> Items { get; set; } = [];
@@ -153,6 +156,7 @@ public sealed class UpgradeSkillLevel
 }
 public sealed class UpgradeGear
 {
+    public string IconAsset {get;set;} = "";
     public string Name { get; set; } = "";
     public int Slot { get; set; }
     public int Quality { get; set; }

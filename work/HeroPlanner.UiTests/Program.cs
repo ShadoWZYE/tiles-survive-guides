@@ -16,7 +16,7 @@ internal static class Program
         Directory.CreateDirectory(scratch);
         string profilePath = Path.Combine(scratch, "profile.json");
         File.WriteAllText(profilePath, "{\"owned_heroes\":[\"becca\"]}");
-        var app = new App();
+        var app = new App { ShutdownMode=ShutdownMode.OnExplicitShutdown, IsolatedTestWindows=true };
         app.InitializeComponent();
         MainWindow Create() => (MainWindow)Activator.CreateInstance(typeof(MainWindow),
             BindingFlags.Instance | BindingFlags.NonPublic, null, [profilePath], null)!;
@@ -532,9 +532,19 @@ internal static class Program
         Check(dirtyArmies[0].Heroes.SequenceEqual(new[]{"a","b","c","d","e"})&&dirtyArmies[1].Heroes.SequenceEqual(new[]{"f","g"}),"Malformed army migration failed");
         if(!string.IsNullOrEmpty(screenshotDir)){window.UpdateLayout();var bitmap=new RenderTargetBitmap((int)window.ActualWidth,(int)window.ActualHeight,96,96,PixelFormats.Pbgra32);bitmap.Render(window);var armyEncoder=new PngBitmapEncoder();armyEncoder.Frames.Add(BitmapFrame.Create(bitmap));using var stream=File.Create(Path.Combine(screenshotDir,"native-five-armies.png"));armyEncoder.Save(stream);}
         Field<ComboBox>(window,"ComparisonBasisPicker").SelectedItem=Field<ComboBox>(window,"ComparisonBasisPicker").Items.Cast<ComboBoxItem>().Single(i=>(string)i.Tag=="recorded");
+        foreach(var h in heroes.Where(h=>Field<Dictionary<string,HeroBuild>>(window,"_heroBuilds").ContainsKey(h.AssetSlug)&&h.AssetSlug!="becca"))Invoke(window,"HeroCard_Click",new Button{Tag=h},new RoutedEventArgs());
+        var noExposure=((TextBlock)window.FindName("FormationScoreLabel")).Text;
+        ((CheckBox)window.FindName("SurvivalToggle")).IsChecked=true;
+        Check(((TextBlock)window.FindName("SurvivalNotice")).Text.Contains("Reference survival:"),"Predicted survival times missing");
+        Check(((TextBlock)window.FindName("FormationScoreLabel")).Text.Contains("exposure benchmark")&&((TextBlock)window.FindName("FormationScoreLabel")).Text!=noExposure,"Survival projection did not change actual squad score");
+        ((CheckBox)window.FindName("SurvivalToggle")).IsChecked=false;Check(((TextBlock)window.FindName("FormationScoreLabel")).Text==noExposure,"Disabling survival changed original scoring");
+        ((CheckBox)window.FindName("SurvivalToggle")).IsChecked=true;
+        if(!string.IsNullOrEmpty(screenshotDir)){window.UpdateLayout();var bitmap=new RenderTargetBitmap((int)window.ActualWidth,(int)window.ActualHeight,96,96,PixelFormats.Pbgra32);bitmap.Render(window);var survivalEncoder=new PngBitmapEncoder();survivalEncoder.Frames.Add(BitmapFrame.Create(bitmap));using var stream=File.Create(Path.Combine(screenshotDir,"survival-benchmark-native.png"));survivalEncoder.Save(stream);}
+        foreach(var h in heroes.Where(h=>Field<Dictionary<string,HeroBuild>>(window,"_heroBuilds").ContainsKey(h.AssetSlug)&&h.AssetSlug!="becca"))Invoke(window,"HeroCard_Click",new Button{Tag=h},new RoutedEventArgs());
         window.Close();
         var reopened = Create();
         Check(Field<string>(reopened,"_comparisonBasis")=="recorded","Build comparison dropdown reset after reopen");
+        Check(Field<bool>(reopened,"_survivalBenchmark")&&((CheckBox)reopened.FindName("SurvivalToggle")).IsChecked==true,"Survival option did not persist");
         Check(Field<ArmyContextSettings>(reopened,"_armyContext").Enabled&&Field<ArmyContextSettings>(reopened,"_armyContext").BehemothBuilds["caser"].Star==2,"Army context missing after reopen");
 
         Invoke(reopened, "SetActiveHero", ((List<Hero>)typeof(MainWindow).GetField("_heroes", BindingFlags.Instance | BindingFlags.NonPublic)!.GetValue(reopened)!).Single(h => h.Name == "Becca"));
@@ -546,6 +556,33 @@ internal static class Program
         Check(Field<Dictionary<string, HeroBuild>>(reopened, "_heroBuilds")[becca.AssetSlug].Stage == data.Heroes[becca.AssetSlug].Stages[5].Id, "Partial rank missing after reopen");
         Check(Field<int>(reopened,"_activeArmy")==1&&Field<IList<Hero>>(reopened,"_selected").Single().AssetSlug=="becca","Army state missing after reopen");
         reopened.Close();
+        var reviewWindow=Create();reviewWindow.Show();reviewWindow.UpdateLayout();var freja=Field<List<Hero>>(reviewWindow,"_heroes").Single(h=>h.AssetSlug=="freja");
+        var reviewBuilds=Field<Dictionary<string,HeroBuild>>(reviewWindow,"_heroBuilds");var fd=data.Heroes["freja"];var fs=fd.Stages.Last();
+        reviewBuilds["freja"]=new(){Stage=fs.Id,Level=fs.LevelMax,Skills=fd.Skills.ToDictionary(k=>k.Id,k=>0),Gear=[]};
+        reviewBuilds["freja"].Skills.Remove(fd.Skills.Last().Id);
+        var selection=Field<System.Collections.ObjectModel.ObservableCollection<Hero>>(reviewWindow,"_selected");selection.Clear();selection.Add(freja);
+        Invoke(reviewWindow,"RefreshSquadDataNotice");
+        Check(Walk((StackPanel)reviewWindow.FindName("SquadDataNotice")).OfType<Expander>().Single().Header.ToString()!.Contains("incomplete"),"Missing build notice absent");
+        Invoke(reviewWindow,"EditBuild_Click",new Button{Tag=freja},new RoutedEventArgs());
+        Field<Dictionary<string,TextBox>>(reviewWindow,"_skillEditors")[fd.Skills.Last().Id].Text="0";
+        Check(!Walk((StackPanel)reviewWindow.FindName("SquadDataNotice")).OfType<Expander>().Single().Header.ToString()!.Contains("incomplete"),"Completeness notice stayed stale after a saved edit in max comparison mode");
+        var editorRoot=(StackPanel)reviewWindow.FindName("BuildFields");
+        foreach(var expander in Walk(editorRoot).OfType<Expander>().ToList())expander.IsExpanded=true;reviewWindow.UpdateLayout();
+        Check(Walk(editorRoot).OfType<Button>().Count(b=>System.Windows.Automation.AutomationProperties.GetName(b).StartsWith("Gear slot "))==21,"Selectable gear panels missing");
+        Walk(editorRoot).OfType<Button>().Single(b=>b.Content?.ToString()=="I checked this build in game").RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+        Check(reviewBuilds["freja"].ReviewedUtc is not null,"Explicit review did not record date");
+        Check(!Walk((StackPanel)reviewWindow.FindName("SquadDataNotice")).OfType<Button>().Any(b=>ReferenceEquals(b.Tag,freja)),"Review notice failed to clear");
+        data.SourceHashes["review_test"]="changed";Invoke(reviewWindow,"RefreshSquadDataNotice");
+        // The window has its own parsed catalog; mutate that instance to emulate a same-build hotfix.
+        var reviewedData=Field<UpgradeData>(reviewWindow,"_upgradeData");reviewedData.SourceHashes["review_test"]="changed";Invoke(reviewWindow,"RefreshSquadDataNotice");
+        Check(Walk((StackPanel)reviewWindow.FindName("SquadDataNotice")).OfType<Expander>().Single().Header.ToString()!.Contains("Review squad data"),"Same-build data change did not request revalidation");reviewedData.SourceHashes.Remove("review_test");data.SourceHashes.Remove("review_test");
+        reviewBuilds["freja"].ReviewedUtc=DateTimeOffset.UtcNow.AddDays(-15);Invoke(reviewWindow,"RefreshSquadDataNotice");
+        Check(Walk((StackPanel)reviewWindow.FindName("SquadDataNotice")).OfType<Expander>().Single().Header.ToString()!.Contains("Review squad data"),"Expired review not detected");
+        Field<TextBox>(reviewWindow,"_levelEditor").Text=(fs.LevelMax-1).ToString();
+        Check(reviewBuilds["freja"].ReviewedUtc<DateTimeOffset.UtcNow.AddDays(-14),"Single edit falsely reviewed untouched build data");
+        foreach(double raw in new[]{-10d,0d,1d,100d,500d,10000d})Check(ScoreDisplay.Value(raw)==raw,"Formatting changed the actual model scale");
+        Check(ScoreDisplay.Value(120)>ScoreDisplay.Value(110),"Display scale flattened normal model differences");
+        reviewWindow.Close();
         app.Shutdown();
         Console.WriteLine("WPF UI regression passed: ownership, autosave, star layout, selectable priority cards, resource filters, top-three percent ordering, rank/level/skill/gear recording, balance deduction, stale-click protection, save rollback and safe Undo. Real profile untouched.");
     }

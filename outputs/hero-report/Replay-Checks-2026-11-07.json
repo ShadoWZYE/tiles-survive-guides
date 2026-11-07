@@ -2,7 +2,7 @@
   "schema": 1,
   "battle_id": "pvp-defense-2026-11-07-a",
   "independent_battles": 1,
-  "model_version": 16,
+  "model_version": 18,
   "source_sha256": "aea2b2109fcda79a18c9bcaeea483d47c8a00f1825742fd49d005d4429423288",
   "opening_countdowns": [
     {
@@ -128,10 +128,10 @@
         461500
       ],
       "lifetime_coefficient_potential": [
-        29.750000000000004,
-        31.892
+        38.794,
+        40.0792
       ],
-      "full_30s_coefficient_potential": 44.982
+      "full_30s_coefficient_potential": 58.4052
     }
   ],
   "winner_prediction": null,

@@ -38,10 +38,15 @@ def main() -> None:
                         + "\n" + (HERE / "estimate-model.js").read_text(encoding="utf-8")
                         + "\n" + (HERE / "faction-model.js").read_text(encoding="utf-8")
                         + "\n" + (HERE / "formation-model.js").read_text(encoding="utf-8")
+                        + "\n" + (HERE / "survival-model.js").read_text(encoding="utf-8")
                         + "\n" + (HERE / "app.js").read_text(encoding="utf-8"))
     upgrades = json.loads((ROOT / "outputs/hero-report/TilesSurvive-Upgrade-Data.json").read_text(encoding="utf-8"))
+    for g in upgrades['gear'].values():
+        g['icon_data']='data:image/png;base64,'+png_data(IMAGE_ROOT/'gear-icons'/(g['icon_asset']+'.png'))
     html = html.replace('__CLIENT_BUILD__', upgrades['client_build']).replace('__HERO_COUNT__', str(len(heroes)))
     estimates = json.loads((ROOT / 'outputs/hero-report/Hero-Estimate-Model.json').read_text(encoding='utf-8'))
+    survival = json.loads((ROOT / 'outputs/hero-report/Survival-Benchmark.json').read_text(encoding='utf-8'))
+    html = html.replace('__EMBEDDED_SURVIVAL_JSON__',json.dumps(survival,separators=(',',':')).replace('</','<\\/'))
     context = json.loads((ROOT / 'outputs/hero-report/Hero-Army-Context.json').read_text(encoding='utf-8'))
     for group in ['signature','behemoths','research']:
         for row in context[group].values():

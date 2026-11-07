@@ -10,7 +10,7 @@ class ReconstructionEvidenceTests(unittest.TestCase):
         r=json.loads((root/'outputs/hero-report/Retrospective-Damage-Reconstruction.json').read_text(encoding='utf-8'))
         text=render(r)
         self.assertEqual(text,(root/'docs/research/RETROSPECTIVE-RECONSTRUCTION-2026-11-07.md').read_text(encoding='utf-8'))
-        self.assertIn('25.1%',text);self.assertIn('1.2%',text);self.assertIn('42.2%',text)
+        self.assertIn('24.1%',text);self.assertIn('1.2%',text);self.assertIn('42.2%',text)
         audit=json.loads((root/'outputs/hero-report/Replay-Authority-Audit.json').read_text(encoding='utf-8'))
         self.assertEqual(len(audit['methods']),13)
         self.assertTrue(any(m['type']=='HeroPropertyComponent' and m['name']=='SupplyBattleReportProperty' for m in audit['methods']))

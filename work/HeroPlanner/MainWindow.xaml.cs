@@ -42,6 +42,7 @@ public partial class MainWindow : Window
         LoadUpgradeData();
         LoadEstimates();
         LoadArmyContextData();
+        LoadSurvivalData();
         LoadProfile();
         SyncEnemyPickers();
         RefreshEstimates();
@@ -65,7 +66,7 @@ public partial class MainWindow : Window
         using var stream = streamInfo.Stream;
         var heroes = JsonSerializer.Deserialize<List<Hero>>(stream) ?? [];
         double hpRange = heroes.Max(h => h.Health) - heroes.Min(h => h.Health);
-        foreach (var hero in heroes) hero.HealthContribution = hpRange > 0 ? 70 * hero.Health / hpRange : 0;
+        foreach (var hero in heroes) hero.HealthContribution = hpRange > 0 ? 700 * hero.Health / hpRange : 0;
         _heroes.AddRange(heroes.OrderByDescending(hero => hero.CompositeIndex).ThenBy(hero => hero.Name));
     }
 
@@ -142,6 +143,7 @@ public partial class MainWindow : Window
                     var profile = JsonSerializer.Deserialize<PlannerProfile>(json) ?? new PlannerProfile();
                     _armies=ArmyRoster.Clean(profile.Armies,_heroes.Select(h=>h.AssetSlug));
                     _activeArmy=ArmyRoster.Index(profile.ActiveArmy);
+                    _survivalBenchmark=profile.SurvivalBenchmark; _accountReview=profile.AccountReview;
                     owned = profile.OwnedHeroes;
                     progress = profile.HeroProgress ?? [];
                     _heroBuilds = (profile.HeroBuilds ?? []).Where(x => _heroes.Any(h => h.AssetSlug == x.Key) && x.Value is not null).ToDictionary();
@@ -184,7 +186,7 @@ public partial class MainWindow : Window
         Directory.CreateDirectory(Path.GetDirectoryName(ProfilePath)!);
         var profile = new PlannerProfile
         {
-            Armies = _armies, ActiveArmy = _activeArmy,
+            Armies = _armies, ActiveArmy = _activeArmy, SurvivalBenchmark = _survivalBenchmark, AccountReview=_accountReview,
             OwnedHeroes = _heroes.Where(hero => hero.IsOwned).Select(hero => hero.AssetSlug).ToHashSet(),
             HeroBuilds = _heroBuilds,
             UpgradeSettings = _upgradeSettings,
@@ -336,6 +338,7 @@ public partial class MainWindow : Window
             ReleaseEvidencePanel.DataContext = null;
             ReleaseEvidencePanel.Visibility = Visibility.Collapsed;
             ReleaseSelectionHint.Visibility = Visibility.Visible;
+            RefreshDraftAgeEstimate();
             UpdateReleaseSchedule(ServerOpenDate.SelectedDate);
         }
         if(tabIndex==5) RenderBehemoths();
@@ -516,6 +519,7 @@ public partial class MainWindow : Window
     {
         if (OptimizerPanel is null || TopConfigurationsPanel is null || FormationGuidePanel is null) return;
         RefreshArmyButtons();
+        RefreshSurvivalNotice();
         RefreshSquadDataNotice();
         bool complete = _selected.Count == 5 && _selected.All(h=>h.Estimate?.Comparable!=false);
         OptimizerPanel.Visibility = complete ? Visibility.Collapsed : Visibility.Visible;
@@ -535,7 +539,8 @@ public partial class MainWindow : Window
 
         FormationModeLabel.Text = $"{(CurrentMode == PlannerMode.Pve ? "PvE farming" : CurrentMode)} formation";
         double frontline = FormationModel.Evaluate(squad, CurrentMode, FactionModel.Compose(squad.Select(h => h.Faction)).HealthBonus).Adjustment;
-        FormationScoreLabel.Text = $"Modeled score {baseScore + synergy.Bonus + factionBonus + frontline:0.0}  •  {baseScore:0.0} base + {synergy.Bonus:0.0} synergy + {factionBonus:0.0} faction · {frontline:+0.0;-0.0;0.0} frontline fit";
+        double exposure=SurvivalModel.Evaluate(squad,CurrentMode,ActiveSurvivalData,SurvivalHorizon).Adjustment;
+        FormationScoreLabel.Text = $"Modeled score {ScoreDisplay.Label(baseScore + synergy.Bonus + factionBonus + frontline + exposure)}  •  {baseScore:0.0} base + {synergy.Bonus:0.0} synergy + {factionBonus:0.0} faction · {frontline:+0.0;-0.0;0.0} frontline fit" + (ActiveSurvivalData is null?"":$" · {exposure:0.0} exposure benchmark");
         FormationPositions.Text = string.Join("\n", squad.Select((hero, index) =>
             $"{index + 1}. {hero.Name} — {(index < 2 ? "Front" : "Back")}; {PositionJob(hero, carries, index)}"));
 
@@ -606,7 +611,7 @@ public partial class MainWindow : Window
         if (TopSquads is null || RoleCoverage is null || ModePicker is null || AccessPicker is null) return;
         var reserved=ReservedHeroes;
         var pool = _heroes.Where(MatchesAccess).Where(h=>h.Estimate?.Comparable!=false&&!reserved.Contains(h.AssetSlug)).ToList();
-        var results = FindTopSquads(pool, CurrentMode, RoleCoverage.IsChecked == true, 20, _enemyFaction);
+        var results = FindCurrentSquads(pool, CurrentMode, RoleCoverage.IsChecked == true, 20, _enemyFaction);
         _topSquads.Clear();
         for (int i = 0; i < results.Count; i++)
         {
@@ -619,6 +624,7 @@ public partial class MainWindow : Window
                 SynergyBonus = result.SynergyBonus,
                 FactionBonus = result.FactionBonus,
                 FrontlineBonus = result.FrontlineBonus,
+                ExposureAdjustment=result.ExposureAdjustment,
                 StaminaReduction = result.StaminaReduction,
                 SynergySummary = result.SynergySummary,
                 Label = $"#{i + 1}"
@@ -629,7 +635,8 @@ public partial class MainWindow : Window
             : $"{results.Count} {(CurrentMode==PlannerMode.Pve?"stamina-first configurations, then combat (routine wins only)":"highest-scoring configurations")} • {CurrentMode switch { PlannerMode.Pve => "PvE farming", _ => CurrentMode.ToString() }} • {CurrentAccess} • shown front-to-back";
     }
 
-    private static List<SquadResult> FindTopSquads(IReadOnlyList<Hero> pool, PlannerMode mode, bool requireRoleCoverage, int limit, string enemyFaction = "Unknown")
+    private static List<SquadResult> FindTopSquads(IReadOnlyList<Hero> pool, PlannerMode mode, bool requireRoleCoverage, int limit, string enemyFaction = "Unknown")=>FindTopSquadsCore(pool,mode,requireRoleCoverage,limit,enemyFaction,null,30);
+    private static List<SquadResult> FindTopSquadsCore(IReadOnlyList<Hero> pool, PlannerMode mode, bool requireRoleCoverage, int limit, string enemyFaction,SurvivalBenchmarkData? survivalData,int survivalHorizon)
     {
         pool=pool.Where(h=>h.Estimate?.Comparable!=false).ToList();
         var best = new PriorityQueue<SquadResult, (double Stamina, double Combat)>();
@@ -647,15 +654,18 @@ public partial class MainWindow : Window
             double synergyBonus = EvaluateSynergy(squad, mode, false).Bonus;
             double factionBonus = FactionModel.ScoreBonus(squad, mode, enemyFaction);
             var placement = FormationModel.Evaluate(squad, mode, FactionModel.Compose(squad.Select(h => h.Faction)).HealthBonus);
-            double score = baseScore + synergyBonus + factionBonus + placement.Adjustment;
+            double upper=baseScore+synergyBonus+factionBonus+placement.Adjustment;
             // Farming is an economy objective for routine wins, not a stamina-to-damage conversion.
             // Do not assume multiple stamina perks stack without verified stacking semantics.
             double stamina = mode==PlannerMode.Pve ? squad.Max(h=>h.StaminaReductionPercent) : 0;
+            if(survivalData is not null&&best.Count>=limit&&best.TryPeek(out _,out var optimisticLowest)&&(stamina,upper).CompareTo(optimisticLowest)<0)continue;
+            double exposure=survivalData is null?0:SurvivalModel.Evaluate(placement.Heroes,mode,survivalData,survivalHorizon).Adjustment;
+            double score=upper+exposure;
             var priority=(Stamina:stamina,Combat:score);
             bool shouldKeep = best.Count < limit ||
                 (best.TryPeek(out _, out var lowest) && priority.CompareTo(lowest)>0);
             if (!shouldKeep) continue;
-            var result = new SquadResult { Heroes = placement.Heroes, BaseScore = baseScore, SynergyBonus = synergyBonus, FactionBonus = factionBonus, FrontlineBonus = placement.Adjustment, Score = score, StaminaReduction=stamina, Label = "" };
+            var result = new SquadResult { Heroes = placement.Heroes, BaseScore = baseScore, SynergyBonus = synergyBonus, FactionBonus = factionBonus, FrontlineBonus = placement.Adjustment, ExposureAdjustment=exposure, Score = score, StaminaReduction=stamina, Label = "" };
             if (best.Count < limit)
             {
                 best.Enqueue(result, priority);
@@ -674,6 +684,7 @@ public partial class MainWindow : Window
                 SynergyBonus = result.SynergyBonus,
                 FactionBonus = result.FactionBonus,
                 FrontlineBonus = result.FrontlineBonus,
+                ExposureAdjustment=result.ExposureAdjustment,
                 StaminaReduction = result.StaminaReduction,
                 SynergySummary = EvaluateSynergy(result.Heroes, mode).Summary + " · " + FactionModel.Compose(result.Heroes.Select(h => h.Faction)).Summary,
                 Score = result.Score,
@@ -855,13 +866,13 @@ public partial class MainWindow : Window
             if(owned.Count<5){UnlockRecommendation.Text="Mark at least five compatible owned heroes to compare your current squad.";ResourceRecommendation.Text="My builds uses base rank, level 1 and no unrecorded skill or gear bonuses.";return;}
         }
         bool coverage = RoleCoverage?.IsChecked == true;
-        var current = FindTopSquads(owned, CurrentMode, coverage, 1, _enemyFaction).FirstOrDefault()
-            ?? FindTopSquads(owned, CurrentMode, false, 1, _enemyFaction).First();
+        var current = FindCurrentSquads(owned, CurrentMode, coverage, 1, _enemyFaction).FirstOrDefault()
+            ?? FindCurrentSquads(owned, CurrentMode, false, 1, _enemyFaction).First();
         var upgrades = unowned.Select(candidate =>
         {
             var candidatePool = owned.Append(candidate).ToList();
-            var squad = FindTopSquads(candidatePool, CurrentMode, coverage, 1, _enemyFaction).FirstOrDefault()
-                ?? FindTopSquads(candidatePool, CurrentMode, false, 1, _enemyFaction).First();
+            var squad = FindCurrentSquads(candidatePool, CurrentMode, coverage, 1, _enemyFaction).FirstOrDefault()
+                ?? FindCurrentSquads(candidatePool, CurrentMode, false, 1, _enemyFaction).First();
             return (candidate, squad, gain: squad.Score - current.Score);
         }).OrderByDescending(item => item.gain).ThenByDescending(item => item.squad.Score).Take(3).ToList();
 
@@ -881,6 +892,7 @@ public partial class MainWindow : Window
     private void UpdateReleaseEstimate()
     {
         if (ReleaseEstimate is null || ServerOpenDate is null) return;
+        RefreshDraftAgeEstimate();
         UpdateReleaseSchedule(ServerOpenDate.SelectedDate);
         if (_releaseHero is null) return;
         if (_releaseHero.ReleaseWeekMin is null)

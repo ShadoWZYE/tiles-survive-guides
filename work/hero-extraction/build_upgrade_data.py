@@ -36,7 +36,9 @@ def export(source: Path, roster: list, version: str, localized: dict) -> dict:
     skill_levels = table("survivor_skill_main")
     timelines = {r["InternalId"]: r for r in table("pve_new_skill")}
     gear_types, gear_levels = table("survivor_equipment_npp"), table("survivor_equipment_level_npp")
-    items = {str(r["InternalId"]): localized.get(r["Name"], r["Name"] or r["Id"]) for r in table("itemlist")}
+    item_rows = table("itemlist")
+    items = {str(r["InternalId"]): localized.get(r["Name"], r["Name"] or r["Id"]) for r in item_rows}
+    item_icons = {r["Id"]: r["ImageCentral"] for r in item_rows}
     result = {}
     for entry in roster:
         hero_id = entry["hero_id"]
@@ -79,7 +81,7 @@ def export(source: Path, roster: list, version: str, localized: dict) -> dict:
         if not rows:
             continue
         gear[r["Id"]] = {"name": localized.get(r["EquipmentName"], r["Id"]), "slot": r["Part"], "quality": r["Quality"],
-                         "hero_level_required": r["SurvivorLevel"],
+                         "hero_level_required": r["SurvivorLevel"], "icon_asset": item_icons.get(r["EquipmentItem"], ""),
                          "levels": [gear_level(g) for g in rows]}
     used_items = {key for hero in result.values() for stage in hero["stages"] for key in stage["cost"]}
     xp_checks=0

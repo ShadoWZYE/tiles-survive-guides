@@ -2,6 +2,7 @@ using System.Text.Json;
 namespace TilesSurviveHeroPlanner;
 public sealed class ArmyContextData
 {
+ public Dictionary<string,string> SourceHashes {get;set;}=[];
  public BehemothStarDisplay BehemothStarDisplay {get;set;}=new();
  public Dictionary<string,ArmyResearchTree> ResearchTrees {get;set;}=[];
  public Dictionary<string,ArmyContextEntry> Signature {get;set;}=[];

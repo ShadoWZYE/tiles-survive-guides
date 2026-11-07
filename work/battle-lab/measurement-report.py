@@ -23,6 +23,8 @@ def main():
     read=lambda n:json.loads((FOLDER/n).read_text(encoding='utf-8'))
     r=report(read('Replay-Observation-2026-11-07.json'),read('Replay-Checks-2026-11-07.json'),(FOLDER/'Hero-Estimate-Model.json').read_bytes())
     r['health_balance_hypothesis']=health_balance_report(read('Replay-Observation-2026-11-07.json'))
+    r['survival_reconstruction']=read('Survival-Reconstruction.json')
+    r['ray_impact_audit']='Ray-Impact-Audit.json'
     retrospective=read('Retrospective-Damage-Reconstruction.json')
     r['retrospective_reconstruction']={'artifact':'Retrospective-Damage-Reconstruction.json','sha256':hashlib.sha256((FOLDER/'Retrospective-Damage-Reconstruction.json').read_bytes()).hexdigest(),'independent_battles':1,'outgoing_models':{m['id']:{'fitted_wape':m['in_sample']['wape'],'worst_owner_error':m['in_sample']['max_owner_relative_error'],'internal_leave_one_owner_out_wape':m['leave_one_owner_out']['wape']} for m in retrospective['models']},'incoming_models':{m['id']:{'fitted_wape':m['in_sample']['wape'],'worst_owner_error':m['in_sample']['max_owner_relative_error'],'internal_leave_one_owner_out_wape':m['leave_one_owner_out']['wape']} for m in retrospective['damage_taken_models']},'scope':'Fitted retrospective results are measurable without a repeat fight. They are distinct from independent future-battle accuracy.'}
     (FOLDER/'Simulation-Measurement-Report.json').write_text(json.dumps(r,indent=2)+'\n',encoding='utf-8');print(json.dumps({'input_checks':r['input_reconstruction_checks'],'counter_gaps':{k:v['difference'] for k,v in r['counter_reconciliation'].items() if isinstance(v,dict)},'held_out_damage_pairs':r['held_out_simulation']['owner_pairs'],'matched_score_pairs':r['matched_global_scoring']['matched_pairs']}))

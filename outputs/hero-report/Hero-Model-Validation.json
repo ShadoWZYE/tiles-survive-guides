@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "model_version": 16,
+  "model_version": 18,
   "client_data_build": "2.6.400.304",
   "native_semantics": {
     "traced_build": "2.6.400.304",
@@ -9,10 +9,10 @@
     "scope": "selected_current_static_base_paths; full_engine_and_live_patches_unverified"
   },
   "source_sha256": {
-    "Hero-Estimate-Model.json": "be21bac22c50b4af0e90574f6b611166a5a5673b381cfd57066a46ae46f34828",
+    "Hero-Estimate-Model.json": "d8f4197bc825d3258f0a9e2b3f9ad980aaf327d25c0728803736057a34436aa3",
     "Hero-Combat-Audit.json": "2eb078f6aced672130fdd54bb472199ea8b4b290e12a6e8449c18c3e76917c1f",
-    "TilesSurvive-Upgrade-Data.json": "a93fd9d5918652c0edba2af65f935474e4573d8ca9583b09dfffa68eb5aa2c94",
-    "TilesSurvive-Hero-Data.json": "0a1d9d93ccd8666ba11d05748b0ac67c0b340c9a7f6372f670ccdb575d3eb32c"
+    "TilesSurvive-Upgrade-Data.json": "ae6802329145f628c34f7d6ac177061ce2679fe82d4946745d90ebb72d53fb96",
+    "TilesSurvive-Hero-Data.json": "47f9b49e66d928cde0d987d9c61391217390058da1607d14c11bb38507b4e13e"
   },
   "mechanics_checks": {
     "kind": "in-sample consistency, not held-out prediction validation",
@@ -135,7 +135,7 @@
       "summon_dependency_paths": 0,
       "mapped_actor_links": 4,
       "conditional_effect_references": 0,
-      "proxy_damage_paths": 2,
+      "proxy_damage_paths": 0,
       "resolved_raw_healing_effects": 1,
       "prediction_confidence": "not empirically calibrated"
     },

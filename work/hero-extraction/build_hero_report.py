@@ -261,9 +261,9 @@ def build(source: Path, language_pack: Path | None = DEFAULT_LANGUAGE_PACK, supp
             + offense * 0.35
             + durability * 0.25
         )
-        row["offense_index"] = round(offense * 100, 2)
-        row["durability_index"] = round(durability * 100, 2)
-        row["composite_index"] = round(composite * 100, 2)
+        row["offense_index"] = round(offense * 1000, 2)
+        row["durability_index"] = round(durability * 1000, 2)
+        row["composite_index"] = round(composite * 1000, 2)
 
     for field, rank_field in (
         ("offense_index", "offense_rank"),

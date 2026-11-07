@@ -3,7 +3,7 @@
   "battle_id": "pvp-defense-2026-11-07-a",
   "evaluation_role": "retrospective_calibration",
   "independent_battles": 1,
-  "model_version": 16,
+  "model_version": 18,
   "source_sha256": "aea2b2109fcda79a18c9bcaeea483d47c8a00f1825742fd49d005d4429423288",
   "damage_definition": "report_owner_totals_mechanisms_unresolved",
   "build_power_check": {
@@ -70,8 +70,8 @@
       ],
       "base_attack": 33404,
       "known_attack_factor": 1,
-      "offense_index": 16.788032011923196,
-      "offense_per_additional_team_attack_percent": 16.788032011923196,
+      "offense_index": 167.88032011923192,
+      "offense_per_additional_team_attack_percent": 167.88032011923192,
       "team_attack_percent": 0,
       "alive_seconds": 11.5,
       "alive_seconds_bounds": [
@@ -130,8 +130,8 @@
       ],
       "base_attack": 36358,
       "known_attack_factor": 1,
-      "offense_index": 18.612840256788697,
-      "offense_per_additional_team_attack_percent": 18.612840256788697,
+      "offense_index": 186.12840256788698,
+      "offense_per_additional_team_attack_percent": 186.12840256788698,
       "team_attack_percent": 0,
       "alive_seconds": 10.5,
       "alive_seconds_bounds": [
@@ -190,8 +190,8 @@
       ],
       "base_attack": 50219,
       "known_attack_factor": 1,
-      "offense_index": 28.75926733603107,
-      "offense_per_additional_team_attack_percent": 28.75926733603107,
+      "offense_index": 287.5926733603107,
+      "offense_per_additional_team_attack_percent": 287.5926733603107,
       "team_attack_percent": 0,
       "alive_seconds": 21.5,
       "alive_seconds_bounds": [
@@ -250,8 +250,8 @@
       ],
       "base_attack": 52885,
       "known_attack_factor": 1,
-      "offense_index": 29.02823774474739,
-      "offense_per_additional_team_attack_percent": 29.02823774474739,
+      "offense_index": 290.2823774474739,
+      "offense_per_additional_team_attack_percent": 290.2823774474739,
       "team_attack_percent": 0,
       "alive_seconds": 25.5,
       "alive_seconds_bounds": [
@@ -310,18 +310,18 @@
       ],
       "base_attack": 39357,
       "known_attack_factor": 1,
-      "offense_index": 21.00165317506043,
-      "offense_per_additional_team_attack_percent": 21.00165317506043,
+      "offense_index": 220.58499788681644,
+      "offense_per_additional_team_attack_percent": 220.58499788681644,
       "team_attack_percent": 0,
       "alive_seconds": 21.5,
       "alive_seconds_bounds": [
         20,
         23
       ],
-      "coefficient": 31.178,
-      "basic_coefficient": 12.138000000000003,
-      "other_coefficient": 19.04,
-      "full_coefficient": 44.982,
+      "coefficient": 39.6508,
+      "basic_coefficient": 7.282799999999999,
+      "other_coefficient": 32.367999999999995,
+      "full_coefficient": 58.4052,
       "attack": 39357
     }
   ],
@@ -334,68 +334,68 @@
       ],
       "fitted_parameters": {
         "coefficients": [
-          292531.8643280617
+          29125.417442925274
         ]
       },
       "in_sample": {
-        "wape": 0.25140433032092774,
-        "mae": 1648709.5982446442,
-        "max_owner_relative_error": 0.6424863889120647,
+        "wape": 0.24146638997445016,
+        "mae": 1583536.5854524442,
+        "max_owner_relative_error": 0.6353125096737647,
         "observed_total": 32790000,
-        "predicted_total": 33404222.517025113,
+        "predicted_total": 33566134.05642781,
         "rounding_separated_rank_pairs": 9,
         "rank_pairs_agree": 8,
         "rows": [
           {
             "hero": "rosie",
             "observed": 2990000,
-            "predicted": 4911034.302847073,
+            "predicted": 4889584.403924556,
             "display_quantum": 10000,
-            "relative_error": 0.6424863889120647
+            "relative_error": 0.6353125096737646
           },
           {
             "hero": "freja",
             "observed": 3630000,
-            "predicted": 5444848.860758796,
+            "predicted": 5421067.422774553,
             "display_quantum": 10000,
-            "relative_error": 0.4999583638453984
+            "relative_error": 0.49340700351916067
           },
           {
             "hero": "becca",
             "observed": 7720000,
-            "predicted": 8413002.090518298,
+            "predicted": 8376256.665145904,
             "display_quantum": 10000,
-            "relative_error": 0.089767110170764
+            "relative_error": 0.08500734004480615
           },
           {
             "hero": "maddie",
             "observed": 9220000,
-            "predicted": 8491684.505629163,
+            "predicted": 8454595.419482475,
             "display_quantum": 10000,
-            "relative_error": -0.07899300372785645
+            "relative_error": -0.08301568118411329
           },
           {
             "hero": "ray",
             "observed": 9230000,
-            "predicted": 6143652.757271783,
+            "predicted": 6424630.145100318,
             "display_quantum": 10000,
-            "relative_error": -0.3343821498080408
+            "relative_error": -0.30394039598046396
           }
         ]
       },
       "leave_one_owner_out": {
-        "wape": 0.30321541664556273,
-        "mae": 1988486.7023616005,
-        "max_owner_relative_error": 0.7161776014004064,
+        "wape": 0.2924520613866465,
+        "mae": 1917900.6185736277,
+        "max_owner_relative_error": 0.7068559201641208,
         "observed_total": 32790000,
-        "predicted_total": 33271129.952619694,
+        "predicted_total": 33385704.598884,
         "rounding_separated_rank_pairs": 9,
-        "rank_pairs_agree": 6,
+        "rank_pairs_agree": 7,
         "rows": [
           {
             "hero": "rosie",
             "observed": 2990000,
-            "predicted": 5131371.028187215,
+            "predicted": 5103499.201290721,
             "display_quantum": 10000,
             "trained_on": [
               "freja",
@@ -405,15 +405,15 @@
             ],
             "parameters": {
               "coefficients": [
-                305656.49532612355
+                30399.62753029131
               ]
             },
-            "relative_error": 0.7161776014004064
+            "relative_error": 0.7068559201641207
           },
           {
             "hero": "freja",
             "observed": 3630000,
-            "predicted": 5707626.333925671,
+            "predicted": 5675561.0474935165,
             "display_quantum": 10000,
             "trained_on": [
               "rosie",
@@ -423,15 +423,15 @@
             ],
             "parameters": {
               "coefficients": [
-                306649.9392452432
+                30492.7188392081
               ]
             },
-            "relative_error": 0.5723488523211215
+            "relative_error": 0.5635154400808586
           },
           {
             "hero": "becca",
             "observed": 7720000,
-            "predicted": 8712784.370100962,
+            "predicted": 8653543.597091831,
             "display_quantum": 10000,
             "trained_on": [
               "rosie",
@@ -441,15 +441,15 @@
             ],
             "parameters": {
               "coefficients": [
-                302955.7140068427
+                30089.58293680254
               ]
             },
-            "relative_error": 0.1285990116711091
+            "relative_error": 0.1209253364108589
           },
           {
             "hero": "maddie",
             "observed": 9220000,
-            "predicted": 8168074.741607399,
+            "predicted": 8122475.714194184,
             "display_quantum": 10000,
             "trained_on": [
               "rosie",
@@ -459,15 +459,15 @@
             ],
             "parameters": {
               "coefficients": [
-                281383.7620261808
+                27981.291133196442
               ]
             },
-            "relative_error": -0.11409167661524955
+            "relative_error": -0.11903734119368936
           },
           {
             "hero": "ray",
             "observed": 9230000,
-            "predicted": 5551273.478798447,
+            "predicted": 5830625.038813746,
             "display_quantum": 10000,
             "trained_on": [
               "rosie",
@@ -477,10 +477,10 @@
             ],
             "parameters": {
               "coefficients": [
-                264325.5477331
+                26432.55477331
               ]
             },
-            "relative_error": -0.3985619199568313
+            "relative_error": -0.36829631215452374
           }
         ]
       },
@@ -494,68 +494,68 @@
       ],
       "fitted_parameters": {
         "coefficients": [
-          3.2079728389380127
+          3.1248006629809715
         ]
       },
       "in_sample": {
-        "wape": 0.2718471774479519,
-        "mae": 1782773.7897036686,
-        "max_owner_relative_error": 0.38469601249974494,
+        "wape": 0.2177035069018859,
+        "mae": 1427699.5982625675,
+        "max_owner_relative_error": 0.33475148577070796,
         "observed_total": 32790000,
-        "predicted_total": 31125831.922167335,
+        "predicted_total": 31969664.006403513,
         "rounding_separated_rank_pairs": 9,
         "rank_pairs_agree": 7,
         "rows": [
           {
             "hero": "rosie",
             "observed": 2990000,
-            "predicted": 3256822.981893505,
+            "predicted": 3172384.2825307464,
             "display_quantum": 10000,
-            "relative_error": 0.08923845548277765
+            "relative_error": 0.06099808780292526
           },
           {
             "hero": "freja",
             "observed": 3630000,
-            "predicted": 4129479.044707423,
+            "predicted": 4022415.246177564,
             "display_quantum": 10000,
-            "relative_error": 0.13759753297725164
+            "relative_error": 0.10810337360263467
           },
           {
             "hero": "becca",
             "observed": 7720000,
-            "predicted": 10578548.40874191,
+            "predicted": 10304281.470149865,
             "display_quantum": 10000,
-            "relative_error": 0.3702782912878122
+            "relative_error": 0.3347514857707079
           },
           {
             "hero": "maddie",
             "observed": 9220000,
-            "predicted": 7481725.682197141,
+            "predicted": 7287749.163023115,
             "display_quantum": 10000,
-            "relative_error": -0.18853300626929048
+            "relative_error": -0.20957167429250378
           },
           {
             "hero": "ray",
             "observed": 9230000,
-            "predicted": 5679255.804627354,
+            "predicted": 7182833.844522222,
             "display_quantum": 10000,
-            "relative_error": -0.38469601249974494
+            "relative_error": -0.22179481641146026
           }
         ]
       },
       "leave_one_owner_out": {
-        "wape": 0.3927900118340903,
-        "mae": 2575916.8976079645,
-        "max_owner_relative_error": 0.7278274185362011,
+        "wape": 0.31710066072524634,
+        "mae": 2079546.1330361657,
+        "max_owner_relative_error": 0.6061817605072427,
         "observed_total": 32790000,
-        "predicted_total": 32787569.073725365,
+        "predicted_total": 32974955.09710691,
         "rounding_separated_rank_pairs": 9,
         "rank_pairs_agree": 7,
         "rows": [
           {
             "hero": "rosie",
             "observed": 2990000,
-            "predicted": 3269853.8940405548,
+            "predicted": 3180468.047999569,
             "display_quantum": 10000,
             "trained_on": [
               "freja",
@@ -565,15 +565,15 @@
             ],
             "parameters": {
               "coefficients": [
-                3.220808296212396
+                3.132763177432786
               ]
             },
-            "relative_error": 0.093596620080453
+            "relative_error": 0.06370168829417033
           },
           {
             "hero": "freja",
             "observed": 3630000,
-            "predicted": 4169895.2157425648,
+            "predicted": 4051151.642028389,
             "display_quantum": 10000,
             "trained_on": [
               "rosie",
@@ -583,15 +583,15 @@
             ],
             "parameters": {
               "coefficients": [
-                3.239370014594051
+                3.147124441932355
               ]
             },
-            "relative_error": 0.1487314643918911
+            "relative_error": 0.11601973609597493
           },
           {
             "hero": "becca",
             "observed": 7720000,
-            "predicted": 13338827.671099473,
+            "predicted": 12399723.191115914,
             "display_quantum": 10000,
             "trained_on": [
               "rosie",
@@ -601,15 +601,15 @@
             ],
             "parameters": {
               "coefficients": [
-                4.045034840205539
+                3.760248917949638
               ]
             },
-            "relative_error": 0.727827418536201
+            "relative_error": 0.6061817605072428
           },
           {
             "hero": "maddie",
             "observed": 9220000,
-            "predicted": 6915420.716891509,
+            "predicted": 6730054.201473942,
             "display_quantum": 10000,
             "trained_on": [
               "rosie",
@@ -619,15 +619,15 @@
             ],
             "parameters": {
               "coefficients": [
-                2.9651557370521413
+                2.8856753107484723
               ]
             },
-            "relative_error": -0.249954369100704
+            "relative_error": -0.2700591972370996
           },
           {
             "hero": "ray",
             "observed": 9230000,
-            "predicted": 5093571.575951263,
+            "predicted": 6613558.0144891,
             "display_quantum": 10000,
             "trained_on": [
               "rosie",
@@ -640,7 +640,7 @@
                 2.877144441270769
               ]
             },
-            "relative_error": -0.44815042514070824
+            "relative_error": -0.28347150438904656
           }
         ]
       },
@@ -654,68 +654,68 @@
       ],
       "fitted_parameters": {
         "coefficients": [
-          4.382133801493845
+          4.303850998630708
         ]
       },
       "in_sample": {
-        "wape": 0.2997020221695689,
-        "mae": 1965445.8613880328,
-        "max_owner_relative_error": 0.5566973086439109,
+        "wape": 0.24998547391098555,
+        "mae": 1639404.7379082432,
+        "max_owner_relative_error": 0.564616504809098,
         "observed_total": 32790000,
-        "predicted_total": 28274205.941288713,
+        "predicted_total": 29204292.498330664,
         "rounding_separated_rank_pairs": 9,
         "rank_pairs_agree": 6,
         "rows": [
           {
             "hero": "rosie",
             "observed": 2990000,
-            "predicted": 1692103.4668399584,
+            "predicted": 1661875.5897099841,
             "display_quantum": 10000,
-            "relative_error": -0.4340791080802815
+            "relative_error": -0.44418876598328294
           },
           {
             "hero": "freja",
             "observed": 3630000,
-            "predicted": 1609188.7696226037,
+            "predicted": 1580442.0875429744,
             "display_quantum": 10000,
-            "relative_error": -0.5566973086439109
+            "relative_error": -0.564616504809098
           },
           {
             "hero": "becca",
             "observed": 7720000,
-            "predicted": 9884501.406275187,
+            "predicted": 9707923.850673378,
             "display_quantum": 10000,
-            "relative_error": 0.28037582982839204
+            "relative_error": 0.2575030894654635
           },
           {
             "hero": "maddie",
             "observed": 9220000,
-            "predicted": 9711216.217839252,
+            "predicted": 9537734.243262561,
             "display_quantum": 10000,
-            "relative_error": 0.053277247054148935
+            "relative_error": 0.03446141467055974
           },
           {
             "hero": "ray",
             "observed": 9230000,
-            "predicted": 5377196.080711711,
+            "predicted": 6716316.727141764,
             "display_quantum": 10000,
-            "relative_error": -0.417421876412599
+            "relative_error": -0.27233838275820543
           }
         ]
       },
       "leave_one_owner_out": {
-        "wape": 0.3789471912345767,
-        "mae": 2485135.680116354,
-        "max_owner_relative_error": 0.5631389310550748,
+        "wape": 0.3158119592882689,
+        "mae": 2071094.8290124673,
+        "max_owner_relative_error": 0.5706671310679391,
         "observed_total": 32790000,
-        "predicted_total": 29664319.74803482,
+        "predicted_total": 30096688.0530929,
         "rounding_separated_rank_pairs": 9,
         "rank_pairs_agree": 6,
         "rows": [
           {
             "hero": "rosie",
             "observed": 2990000,
-            "predicted": 1675477.4739957184,
+            "predicted": 1646120.6188594005,
             "display_quantum": 10000,
             "trained_on": [
               "freja",
@@ -725,15 +725,15 @@
             ],
             "parameters": {
               "coefficients": [
-                4.3390765495858385
+                4.263049480485469
               ]
             },
-            "relative_error": -0.43963964080410756
+            "relative_error": -0.449457987003545
           },
           {
             "hero": "freja",
             "observed": 3630000,
-            "predicted": 1585805.6802700781,
+            "predicted": 1558478.314223381,
             "display_quantum": 10000,
             "trained_on": [
               "rosie",
@@ -743,15 +743,15 @@
             ],
             "parameters": {
               "coefficients": [
-                4.318457104160763
+                4.2440393747311
               ]
             },
-            "relative_error": -0.563138931055075
+            "relative_error": -0.5706671310679391
           },
           {
             "hero": "becca",
             "observed": 7720000,
-            "predicted": 11528019.067766102,
+            "predicted": 11033476.146846538,
             "display_quantum": 10000,
             "trained_on": [
               "rosie",
@@ -761,15 +761,15 @@
             ],
             "parameters": {
               "coefficients": [
-                5.1107607702956495
+                4.891513166296595
               ]
             },
-            "relative_error": 0.4932667186225521
+            "relative_error": 0.42920675477286774
           },
           {
             "hero": "maddie",
             "observed": 9220000,
-            "predicted": 10061980.006542193,
+            "predicted": 9737604.95223108,
             "display_quantum": 10000,
             "trained_on": [
               "rosie",
@@ -779,15 +779,15 @@
             ],
             "parameters": {
               "coefficients": [
-                4.540414064267894
+                4.394041575181825
               ]
             },
-            "relative_error": 0.091321041924316
+            "relative_error": 0.05613936575174394
           },
           {
             "hero": "ray",
             "observed": 9230000,
-            "predicted": 4813037.519460729,
+            "predicted": 6121008.020932499,
             "display_quantum": 10000,
             "trained_on": [
               "rosie",
@@ -800,7 +800,7 @@
                 3.9223740561633664
               ]
             },
-            "relative_error": -0.47854414740403795
+            "relative_error": -0.33683553402681476
           }
         ]
       },
@@ -1143,68 +1143,68 @@
         "defence_to_mean_known_attack": 0,
         "shared_defence": 0,
         "coefficients": [
-          4.382133801493845
+          4.303850998630708
         ]
       },
       "in_sample": {
-        "wape": 0.2997020221695689,
-        "mae": 1965445.8613880328,
-        "max_owner_relative_error": 0.5566973086439109,
+        "wape": 0.24998547391098555,
+        "mae": 1639404.7379082432,
+        "max_owner_relative_error": 0.564616504809098,
         "observed_total": 32790000,
-        "predicted_total": 28274205.941288713,
+        "predicted_total": 29204292.498330664,
         "rounding_separated_rank_pairs": 9,
         "rank_pairs_agree": 6,
         "rows": [
           {
             "hero": "rosie",
             "observed": 2990000,
-            "predicted": 1692103.4668399584,
+            "predicted": 1661875.5897099841,
             "display_quantum": 10000,
-            "relative_error": -0.4340791080802815
+            "relative_error": -0.44418876598328294
           },
           {
             "hero": "freja",
             "observed": 3630000,
-            "predicted": 1609188.7696226037,
+            "predicted": 1580442.0875429744,
             "display_quantum": 10000,
-            "relative_error": -0.5566973086439109
+            "relative_error": -0.564616504809098
           },
           {
             "hero": "becca",
             "observed": 7720000,
-            "predicted": 9884501.406275187,
+            "predicted": 9707923.850673378,
             "display_quantum": 10000,
-            "relative_error": 0.28037582982839204
+            "relative_error": 0.2575030894654635
           },
           {
             "hero": "maddie",
             "observed": 9220000,
-            "predicted": 9711216.217839252,
+            "predicted": 9537734.243262561,
             "display_quantum": 10000,
-            "relative_error": 0.053277247054148935
+            "relative_error": 0.03446141467055974
           },
           {
             "hero": "ray",
             "observed": 9230000,
-            "predicted": 5377196.080711711,
+            "predicted": 6716316.727141764,
             "display_quantum": 10000,
-            "relative_error": -0.417421876412599
+            "relative_error": -0.27233838275820543
           }
         ]
       },
       "leave_one_owner_out": {
-        "wape": 0.3789471912345767,
-        "mae": 2485135.680116354,
-        "max_owner_relative_error": 0.5631389310550748,
+        "wape": 0.3158119592882689,
+        "mae": 2071094.8290124673,
+        "max_owner_relative_error": 0.5706671310679391,
         "observed_total": 32790000,
-        "predicted_total": 29664319.74803482,
+        "predicted_total": 30096688.0530929,
         "rounding_separated_rank_pairs": 9,
         "rank_pairs_agree": 6,
         "rows": [
           {
             "hero": "rosie",
             "observed": 2990000,
-            "predicted": 1675477.4739957184,
+            "predicted": 1646120.6188594005,
             "display_quantum": 10000,
             "trained_on": [
               "freja",
@@ -1216,15 +1216,15 @@
               "defence_to_mean_known_attack": 0,
               "shared_defence": 0,
               "coefficients": [
-                4.3390765495858385
+                4.263049480485469
               ]
             },
-            "relative_error": -0.43963964080410756
+            "relative_error": -0.449457987003545
           },
           {
             "hero": "freja",
             "observed": 3630000,
-            "predicted": 1585805.6802700781,
+            "predicted": 1558478.314223381,
             "display_quantum": 10000,
             "trained_on": [
               "rosie",
@@ -1236,15 +1236,15 @@
               "defence_to_mean_known_attack": 0,
               "shared_defence": 0,
               "coefficients": [
-                4.318457104160763
+                4.2440393747311
               ]
             },
-            "relative_error": -0.563138931055075
+            "relative_error": -0.5706671310679391
           },
           {
             "hero": "becca",
             "observed": 7720000,
-            "predicted": 11528019.067766102,
+            "predicted": 11033476.146846538,
             "display_quantum": 10000,
             "trained_on": [
               "rosie",
@@ -1256,15 +1256,15 @@
               "defence_to_mean_known_attack": 0,
               "shared_defence": 0,
               "coefficients": [
-                5.1107607702956495
+                4.891513166296595
               ]
             },
-            "relative_error": 0.4932667186225521
+            "relative_error": 0.42920675477286774
           },
           {
             "hero": "maddie",
             "observed": 9220000,
-            "predicted": 10061980.006542193,
+            "predicted": 9737604.95223108,
             "display_quantum": 10000,
             "trained_on": [
               "rosie",
@@ -1276,15 +1276,15 @@
               "defence_to_mean_known_attack": 0,
               "shared_defence": 0,
               "coefficients": [
-                4.540414064267894
+                4.394041575181825
               ]
             },
-            "relative_error": 0.091321041924316
+            "relative_error": 0.05613936575174394
           },
           {
             "hero": "ray",
             "observed": 9230000,
-            "predicted": 4813037.519460729,
+            "predicted": 6121008.020932499,
             "display_quantum": 10000,
             "trained_on": [
               "rosie",
@@ -1299,7 +1299,7 @@
                 3.9223740561633664
               ]
             },
-            "relative_error": -0.47854414740403795
+            "relative_error": -0.33683553402681476
           }
         ]
       },
@@ -1474,62 +1474,62 @@
       ],
       "fitted_parameters": {
         "coefficients": [
-          0.002463614480786573,
-          369619.40850826906
+          0.5044517893067475,
+          329043.34433072835
         ]
       },
       "in_sample": {
-        "wape": 0.09871215184270345,
-        "mae": 647354.2917844492,
-        "max_owner_relative_error": 0.42193126764223604,
+        "wape": 0.0960093179279463,
+        "mae": 629629.1069714718,
+        "max_owner_relative_error": 0.33069762509350437,
         "observed_total": 32790000,
-        "predicted_total": 33466452.09216442,
+        "predicted_total": 33201440.236402623,
         "rounding_separated_rank_pairs": 9,
         "rank_pairs_agree": 7,
         "rows": [
           {
             "hero": "rosie",
             "observed": 2990000,
-            "predicted": 4251574.490250286,
+            "predicted": 3978785.899029578,
             "display_quantum": 10000,
-            "relative_error": 0.421931267642236
+            "relative_error": 0.3306976250935043
           },
           {
             "hero": "freja",
             "observed": 3630000,
-            "predicted": 3881908.467499279,
+            "predicted": 3640197.7828443567,
             "display_quantum": 10000,
-            "relative_error": 0.06939627203836896
+            "relative_error": 0.0028093065686933816
           },
           {
             "hero": "becca",
             "observed": 7720000,
-            "predicted": 7952374.301928792,
+            "predicted": 8212291.824024254,
             "display_quantum": 10000,
-            "relative_error": 0.03010029817730464
+            "relative_error": 0.0637683709875978
           },
           {
             "hero": "maddie",
             "observed": 9220000,
-            "predicted": 9430754.515864976,
+            "predicted": 9508517.379731802,
             "display_quantum": 10000,
-            "relative_error": 0.022858407360626387
+            "relative_error": 0.03129255745464232
           },
           {
             "hero": "ray",
             "observed": 9230000,
-            "predicted": 7949840.316621087,
+            "predicted": 7861647.350772632,
             "display_quantum": 10000,
-            "relative_error": -0.1386955236596873
+            "relative_error": -0.14825055787945474
           }
         ]
       },
       "leave_one_owner_out": {
-        "wape": 0.14664113568243312,
-        "mae": 961672.5678053964,
+        "wape": 0.150124900042989,
+        "mae": 984519.094481922,
         "max_owner_relative_error": 0.45548961424332357,
         "observed_total": 32790000,
-        "predicted_total": 33133385.394227263,
+        "predicted_total": 33851786.74023771,
         "rounding_separated_rank_pairs": 9,
         "rank_pairs_agree": 7,
         "rows": [
@@ -1555,7 +1555,7 @@
           {
             "hero": "freja",
             "observed": 3630000,
-            "predicted": 3899332.16168717,
+            "predicted": 3645288.638066922,
             "display_quantum": 10000,
             "trained_on": [
               "rosie",
@@ -1565,16 +1565,16 @@
             ],
             "parameters": {
               "coefficients": [
-                0,
-                371364.9677797305
+                0.4958017053428376,
+                329830.7064950559
               ]
             },
-            "relative_error": 0.07419618779260895
+            "relative_error": 0.004211746023945473
           },
           {
             "hero": "becca",
             "observed": 7720000,
-            "predicted": 8301166.834264272,
+            "predicted": 8864929.629819222,
             "display_quantum": 10000,
             "trained_on": [
               "rosie",
@@ -1584,16 +1584,16 @@
             ],
             "parameters": {
               "coefficients": [
-                0.33572625123821714,
-                350878.6238626813
+                1.2018847376299022,
+                286228.5777596408
               ]
             },
-            "relative_error": 0.07528067801350669
+            "relative_error": 0.1483069468677749
           },
           {
             "hero": "maddie",
             "observed": 9220000,
-            "predicted": 9583461.174088143,
+            "predicted": 9690058.891849978,
             "display_quantum": 10000,
             "trained_on": [
               "rosie",
@@ -1603,16 +1603,16 @@
             ],
             "parameters": {
               "coefficients": [
-                0.09094816761457436,
-                367918.1008955581
+                0.5903226064529864,
+                328699.96362097474
               ]
             },
-            "relative_error": 0.03942095163645809
+            "relative_error": 0.05098252623101707
           },
           {
             "hero": "ray",
             "observed": 9230000,
-            "predicted": 6997511.27760014,
+            "predicted": 7299595.63391405,
             "display_quantum": 10000,
             "trained_on": [
               "rosie",
@@ -1626,7 +1626,7 @@
                 273763.19676697534
               ]
             },
-            "relative_error": -0.24187310101840298
+            "relative_error": -0.2091445683733424
           }
         ]
       },
@@ -1643,69 +1643,69 @@
       "fitted_parameters": {
         "coefficients": [
           0,
-          0.045076787982978754,
-          367584.5312822786
+          1.3331787588707475,
+          295751.4057560676
         ]
       },
       "in_sample": {
-        "wape": 0.09905388425307114,
-        "mae": 649595.3729316406,
-        "max_owner_relative_error": 0.41637009422356935,
+        "wape": 0.09020303396919185,
+        "mae": 591551.4967699602,
+        "max_owner_relative_error": 0.2139123872660004,
         "observed_total": 32790000,
-        "predicted_total": 33451668.948264305,
+        "predicted_total": 32944282.637291864,
         "rounding_separated_rank_pairs": 9,
         "rank_pairs_agree": 7,
         "rows": [
           {
             "hero": "rosie",
             "observed": 2990000,
-            "predicted": 4234946.581728472,
+            "predicted": 3629598.037925341,
             "display_quantum": 10000,
-            "relative_error": 0.4163700942235693
+            "relative_error": 0.21391238726600048
           },
           {
             "hero": "freja",
             "observed": 3630000,
-            "predicted": 3869641.4354020143,
+            "predicted": 3401261.0985136083,
             "display_quantum": 10000,
-            "relative_error": 0.06601692435317208
+            "relative_error": -0.0630134714838545
           },
           {
             "hero": "becca",
             "observed": 7720000,
-            "predicted": 7975325.084574684,
+            "predicted": 8495728.082363477,
             "display_quantum": 10000,
-            "relative_error": 0.03307319748376725
+            "relative_error": 0.10048291222324823
           },
           {
             "hero": "maddie",
             "observed": 9220000,
-            "predicted": 9434909.804756084,
+            "predicted": 9360693.940282015,
             "display_quantum": 10000,
-            "relative_error": 0.023309089452937526
+            "relative_error": 0.015259646451411646
           },
           {
             "hero": "ray",
             "observed": 9230000,
-            "predicted": 7936846.041803052,
+            "predicted": 8057001.478207424,
             "display_quantum": 10000,
-            "relative_error": -0.1401033540841764
+            "relative_error": -0.12708543031338848
           }
         ]
       },
       "leave_one_owner_out": {
-        "wape": 0.1598519143799075,
-        "mae": 1048308.8545034335,
-        "max_owner_relative_error": 0.45548961424332357,
+        "wape": 0.17640351382993916,
+        "mae": 1156854.243696741,
+        "max_owner_relative_error": 0.4185159124404211,
         "observed_total": 32790000,
-        "predicted_total": 33516221.615813613,
+        "predicted_total": 33578526.60622796,
         "rounding_separated_rank_pairs": 9,
-        "rank_pairs_agree": 7,
+        "rank_pairs_agree": 6,
         "rows": [
           {
             "hero": "rosie",
             "observed": 2990000,
-            "predicted": 4351913.946587537,
+            "predicted": 4241362.578196859,
             "display_quantum": 10000,
             "trained_on": [
               "freja",
@@ -1716,16 +1716,16 @@
             "parameters": {
               "coefficients": [
                 0,
-                0,
-                378427.2997032641
+                0.21928467017054581,
+                365546.55691470136
               ]
             },
-            "relative_error": 0.45548961424332357
+            "relative_error": 0.41851591244042097
           },
           {
             "hero": "freja",
             "observed": 3630000,
-            "predicted": 3899332.16168717,
+            "predicted": 3298831.3592168055,
             "display_quantum": 10000,
             "trained_on": [
               "rosie",
@@ -1736,16 +1736,16 @@
             "parameters": {
               "coefficients": [
                 0,
-                0,
-                371364.9677797305
+                1.5610476958034663,
+                281179.92790207354
               ]
             },
-            "relative_error": 0.07419618779260895
+            "relative_error": -0.09123103051878634
           },
           {
             "hero": "becca",
             "observed": 7720000,
-            "predicted": 8596563.436215732,
+            "predicted": 9534171.763907705,
             "display_quantum": 10000,
             "trained_on": [
               "rosie",
@@ -1756,16 +1756,16 @@
             "parameters": {
               "coefficients": [
                 0,
-                0.7797469047759049,
-                341704.0265604879
+                2.744994964880038,
+                238789.34732823583
               ]
             },
-            "relative_error": 0.11354448655644189
+            "relative_error": 0.23499634247509116
           },
           {
             "hero": "maddie",
             "observed": 9220000,
-            "predicted": 9696073.399674948,
+            "predicted": 9440864.570251267,
             "display_quantum": 10000,
             "trained_on": [
               "rosie",
@@ -1775,17 +1775,17 @@
             ],
             "parameters": {
               "coefficients": [
-                0.6380486121738832,
                 0,
-                358928.3487493723
+                1.311275754062923,
+                300067.31997286004
               ]
             },
-            "relative_error": 0.05163485896691422
+            "relative_error": 0.023954942543521485
           },
           {
             "hero": "ray",
             "observed": 9230000,
-            "predicted": 6972338.671648221,
+            "predicted": 7063296.33465532,
             "display_quantum": 10000,
             "trained_on": [
               "rosie",
@@ -1800,7 +1800,7 @@
                 264496.61643537646
               ]
             },
-            "relative_error": -0.24460036060149282
+            "relative_error": -0.23474579256172046
           }
         ]
       },
@@ -2142,18 +2142,18 @@
       "models": [
         {
           "id": "planner_offense",
-          "in_sample_wape": 0.25140433032092774,
-          "leave_one_owner_out_wape": 0.30321541664556273
+          "in_sample_wape": 0.24146638997445016,
+          "leave_one_owner_out_wape": 0.2924520613866465
         },
         {
           "id": "full_30s_coefficient",
-          "in_sample_wape": 0.2718471774479519,
-          "leave_one_owner_out_wape": 0.3927900118340903
+          "in_sample_wape": 0.2177035069018859,
+          "leave_one_owner_out_wape": 0.31710066072524634
         },
         {
           "id": "observed_lifetime_coefficient",
-          "in_sample_wape": 0.31039315224231745,
-          "leave_one_owner_out_wape": 0.39192648115479634
+          "in_sample_wape": 0.25602640018606626,
+          "leave_one_owner_out_wape": 0.32284223436086923
         },
         {
           "id": "attack_times_observed_lifetime",
@@ -2167,8 +2167,8 @@
         },
         {
           "id": "native_base_defence_grid",
-          "in_sample_wape": 0.31039315224231745,
-          "leave_one_owner_out_wape": 0.39192648115479634
+          "in_sample_wape": 0.25602640018606626,
+          "leave_one_owner_out_wape": 0.32284223436086923
         },
         {
           "id": "lifetime_only_control",
@@ -2178,12 +2178,12 @@
         {
           "id": "coefficient_plus_owned_exposure",
           "in_sample_wape": 0.1032132856469544,
-          "leave_one_owner_out_wape": 0.13783926127497437
+          "leave_one_owner_out_wape": 0.14600230825706514
         },
         {
           "id": "basic_other_plus_exposure",
-          "in_sample_wape": 0.1032132856469544,
-          "leave_one_owner_out_wape": 0.13765553094779037
+          "in_sample_wape": 0.10461839812488447,
+          "leave_one_owner_out_wape": 0.17148307300993923
         }
       ]
     },
@@ -2192,18 +2192,18 @@
       "models": [
         {
           "id": "planner_offense",
-          "in_sample_wape": 0.25140433032092774,
-          "leave_one_owner_out_wape": 0.30321541664556273
+          "in_sample_wape": 0.24146638997445016,
+          "leave_one_owner_out_wape": 0.2924520613866465
         },
         {
           "id": "full_30s_coefficient",
-          "in_sample_wape": 0.2718471774479519,
-          "leave_one_owner_out_wape": 0.3927900118340903
+          "in_sample_wape": 0.2177035069018859,
+          "leave_one_owner_out_wape": 0.31710066072524634
         },
         {
           "id": "observed_lifetime_coefficient",
-          "in_sample_wape": 0.26443343243373396,
-          "leave_one_owner_out_wape": 0.34101740576325024
+          "in_sample_wape": 0.21845229726889226,
+          "leave_one_owner_out_wape": 0.28353155083733406
         },
         {
           "id": "attack_times_observed_lifetime",
@@ -2217,8 +2217,8 @@
         },
         {
           "id": "native_base_defence_grid",
-          "in_sample_wape": 0.26443343243373396,
-          "leave_one_owner_out_wape": 0.34101740576325024
+          "in_sample_wape": 0.21845229726889226,
+          "leave_one_owner_out_wape": 0.28353155083733406
         },
         {
           "id": "lifetime_only_control",
@@ -2227,13 +2227,13 @@
         },
         {
           "id": "coefficient_plus_owned_exposure",
-          "in_sample_wape": 0.11905752525957178,
-          "leave_one_owner_out_wape": 0.1875814716152678
+          "in_sample_wape": 0.1127293301062671,
+          "leave_one_owner_out_wape": 0.18997509079937072
         },
         {
           "id": "basic_other_plus_exposure",
-          "in_sample_wape": 0.11798448745195977,
-          "leave_one_owner_out_wape": 0.20754012026286614
+          "in_sample_wape": 0.09230032297603145,
+          "leave_one_owner_out_wape": 0.20446151649275135
         }
       ]
     }
@@ -2286,21 +2286,21 @@
     "models": [
       {
         "id": "planner_offense",
-        "in_sample_wape": 0.2666730242402141,
-        "max_owner_relative_error": 0.7527620779926963,
-        "leave_one_owner_out_wape": 0.3226038368337329
+        "in_sample_wape": 0.25641004654611294,
+        "max_owner_relative_error": 0.7442794138053382,
+        "leave_one_owner_out_wape": 0.31124346852500523
       },
       {
         "id": "full_30s_coefficient",
-        "in_sample_wape": 0.2818477258779525,
-        "max_owner_relative_error": 0.36188738311562657,
-        "leave_one_owner_out_wape": 0.3964403402866811
+        "in_sample_wape": 0.22516355082455997,
+        "max_owner_relative_error": 0.3124695990600114,
+        "leave_one_owner_out_wape": 0.31729184146834577
       },
       {
         "id": "observed_lifetime_coefficient",
-        "in_sample_wape": 0.28070465356284796,
-        "max_owner_relative_error": 0.5246482222875858,
-        "leave_one_owner_out_wape": 0.35794875835365764
+        "in_sample_wape": 0.22785716313422497,
+        "max_owner_relative_error": 0.5352693239394303,
+        "leave_one_owner_out_wape": 0.28906484074393557
       },
       {
         "id": "attack_times_observed_lifetime",
@@ -2316,9 +2316,9 @@
       },
       {
         "id": "native_base_defence_grid",
-        "in_sample_wape": 0.28070465356284796,
-        "max_owner_relative_error": 0.5246482222875858,
-        "leave_one_owner_out_wape": 0.35794875835365764
+        "in_sample_wape": 0.22785716313422497,
+        "max_owner_relative_error": 0.5352693239394303,
+        "leave_one_owner_out_wape": 0.28906484074393557
       },
       {
         "id": "lifetime_only_control",
@@ -2328,15 +2328,15 @@
       },
       {
         "id": "coefficient_plus_owned_exposure",
-        "in_sample_wape": 0.09898390082545619,
-        "max_owner_relative_error": 0.41703260154157634,
-        "leave_one_owner_out_wape": 0.14795227793825222
+        "in_sample_wape": 0.09627591720218442,
+        "max_owner_relative_error": 0.3127936432574471,
+        "leave_one_owner_out_wape": 0.15349159286776243
       },
       {
         "id": "basic_other_plus_exposure",
-        "in_sample_wape": 0.0993209707383193,
-        "max_owner_relative_error": 0.41057260771175275,
-        "leave_one_owner_out_wape": 0.16277865586620174
+        "in_sample_wape": 0.08662680756905537,
+        "max_owner_relative_error": 0.19487360929271727,
+        "leave_one_owner_out_wape": 0.16893658244744844
       }
     ],
     "damage_taken_models": [
@@ -2368,16 +2368,16 @@
   "source_hashes": {
     "Replay-Observation-2026-11-07.json": "31940e8af718213acb896b30334c3a275ae0856ce759045afee69f4cdfd42d6d",
     "Replay-Reconstruction-Inputs-2026-11-07.json": "ad79e66946d013e13eec06d10f25db160ccf8bd6f8cf30e696173f974202ae8e",
-    "Hero-Estimate-Model.json": "be21bac22c50b4af0e90574f6b611166a5a5673b381cfd57066a46ae46f34828",
-    "TilesSurvive-Upgrade-Data.json": "a93fd9d5918652c0edba2af65f935474e4573d8ca9583b09dfffa68eb5aa2c94",
+    "Hero-Estimate-Model.json": "d8f4197bc825d3258f0a9e2b3f9ad980aaf327d25c0728803736057a34436aa3",
+    "TilesSurvive-Upgrade-Data.json": "ae6802329145f628c34f7d6ac177061ce2679fe82d4946745d90ebb72d53fb96",
     "Hero-Army-Context.json": "c9d7a22cc2b53e09a15bbfb85a3914a9eef4e7cb7ee9aee16c66551c61e4474d",
     "Replay-Authority-Audit.json": "fe4f2ea982cb3d01b8ac66971dc0440f6e1046b082e2f9b3d38756b19f7b0a18"
   },
   "code_hashes": {
     "reconstruct-damage.cjs": "b22b930ba13ceaad880092b645b287c1d642b47cbd17c6a7567ade12d934951e",
     "analyse-replay.cjs": "7d5ac028925a3c4182e40444e7315676b4d0df9f6c9436a3f353dbd230935c59",
-    "../HeroPlannerWeb/estimate-model.js": "210bca083c8887bb4e76c78d37f7fd43d4b213f2dc1ad2be104a8fe4081ad1b9",
-    "../HeroPlannerWeb/upgrade-model.js": "d0ab7855da5aa529838a14a2e5bceb25d3e110043cc1c67d085550bdf5818771",
+    "../HeroPlannerWeb/estimate-model.js": "87f129a75e68718a66d2cfa4557c412a74f6915056acfb68640bd06ff203f9bd",
+    "../HeroPlannerWeb/upgrade-model.js": "098dcdc9b97cd5747640c20f1104f7082bfbd6729f03c59947f942b62b8fa2ba",
     "../HeroPlannerWeb/army-context-model.js": "d26c1e07469f5fd2e3c081c69b1a64ac922eaa61feb19c565a56d703bf3c8552"
   }
 }

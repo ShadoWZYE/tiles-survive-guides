@@ -20,7 +20,7 @@ vm.runInContext(fs.readFileSync(path.join(__dirname,'upgrade-ui.js'),'utf8'),con
 const source = fs.readFileSync(path.join(__dirname, "app.js"), "utf8");
 assert.ok(source.includes("wireShell(); renderAll(); registerWebMcp();"));
 vm.runInContext(source.replace("wireShell(); renderAll(); registerWebMcp();",
-  "globalThis.hooks={heroes,profile,sanitizeProfile,mechanicsFor,bestOwnedAndTargets,renderFormationGuide,starQueue,findTopSquads};"), context);
+  "globalThis.hooks={heroes,profile,sanitizeProfile,mechanicsFor,bestOwnedAndTargets,renderFormationGuide,starQueue,findTopSquads,clearOptimizerCache:()=>optimizerCache.clear()};"), context);
 const {heroes, profile} = context.hooks;
 heroes.forEach(h=>h.healthContribution=0); // This parser-only fixture does not run renderAll's estimate refresh.
 const example = ["Rosie","Layla","Becca","Ray","Maddie"].map(name => heroes.find(h => h.name === name));
@@ -92,4 +92,26 @@ test("PvE farming sorts known stamina saving before combat without increasing co
  lucky.staminaReduction=0;lucky.asset_slug='farm-locked';
  const locked=context.hooks.findTopSquads([...squad,lucky],1,true)[0];
  assert.ok(!locked.heroes.some(h=>h.asset_slug==='farm-locked'));assert.ok(locked.score>first.score);
+});
+
+
+test('survival benchmark changes the selected five rather than only the displayed score',()=>{
+ const oldBasis=profile.comparisonBasis,oldMode=profile.mode,oldFlag=profile.survivalBenchmark;
+ const h=(slug,role,offense,durability,hp)=>({asset_slug:slug,name:slug,role,faction:'Mountain',skills:[],mechanics:new Set(),composite_index:.55*offense+.35*durability,offense_index:offense,durability_index:durability,healthContribution:0,estimate:{basis:'Recorded build',comparable:true,heroStats:[100,100,hp],selfPercent:[0,0,0],teamPercent:[0,0,0]}});
+ const candidates=[h('core-a','Melee',100,100,1000),h('core-b','Melee',100,100,1000),h('core-c','Mid',100,100,1000),h('core-d','Range',100,100,1000),h('fragile','Range',250,10,10),h('sturdy','Range',100,100,1000)];
+ context.SurvivalModel=require('./survival-model.js');context.window.__SURVIVAL_DATA__={pressure:1000,back_share:.3};
+ try{profile.comparisonBasis='recorded';profile.mode='Balanced';profile.survivalBenchmark=false;
+ const before=context.hooks.findTopSquads(candidates,1)[0];assert.ok(before.heroes.some(h=>h.asset_slug==='fragile'));
+ profile.survivalBenchmark=true;const after=context.hooks.findTopSquads(candidates,1)[0];assert.ok(after.heroes.some(h=>h.asset_slug==='sturdy'));assert.ok(!after.heroes.some(h=>h.asset_slug==='fragile'));
+ }finally{profile.comparisonBasis=oldBasis;profile.mode=oldMode;profile.survivalBenchmark=oldFlag;}
+});
+
+
+test('entire formation scores and every contribution use the actual 1000-point scale',()=>{
+ const model=require('./estimate-model.js'),u=require('../../outputs/hero-report/TilesSurvive-Upgrade-Data.json'),e=require('../../outputs/hero-report/Hero-Estimate-Model.json');
+ const prior={...e,score_scale:100},saved={mode:profile.mode,basis:profile.comparisonBasis,flag:profile.survivalBenchmark};
+ const pool=data=>['rosie','freja','becca','maddie','ray','layla'].map(slug=>{const h=heroes.find(h=>h.asset_slug===slug),r=model.compare(slug,null,u,data,'reference');return {...h,estimate:r,offense_index:r.offense,durability_index:r.durability,composite_index:r.score,healthContribution:r.healthContribution};});
+ try{profile.mode='Balanced';profile.comparisonBasis='reference';profile.survivalBenchmark=false;context.hooks.clearOptimizerCache();const before=context.hooks.findTopSquads(pool(prior),3);context.hooks.clearOptimizerCache();const after=context.hooks.findTopSquads(pool(e),3);
+ for(let i=0;i<after.length;i++){assert.deepEqual(after[i].heroes.map(h=>h.asset_slug),before[i].heroes.map(h=>h.asset_slug));for(const key of ['score','synergy','faction','frontline','exposure'])assert.ok(Math.abs(after[i][key]-10*before[i][key])<1e-7,key);}
+ }finally{profile.mode=saved.mode;profile.comparisonBasis=saved.basis;profile.survivalBenchmark=saved.flag;context.hooks.clearOptimizerCache();}
 });

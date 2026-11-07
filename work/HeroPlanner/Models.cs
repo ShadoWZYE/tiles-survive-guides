@@ -19,6 +19,13 @@ internal enum HeroMechanic
     StaminaReduction = 1 << 10,
 }
 
+public static class ScoreDisplay
+{
+    // Formatting only. EstimateModel already returns actual 1000-point model units.
+    public static double Value(double score) => score;
+    public static string Label(double score) => $"{score:F1}";
+}
+
 public sealed class Hero
 {
     [JsonIgnore] public string ArmyAssignmentLabel { get; set; } = "";
@@ -62,11 +69,11 @@ public sealed class Hero
     [JsonIgnore] public string CombatEvidenceNote { get; set; } = "";
     [JsonIgnore] public double RosterLeaderScore {get;set;}
     [JsonIgnore] public string ModelGapLabel => RosterLeaderScore<=0 ? "" : CompositeIndex>=RosterLeaderScore-1e-9 ? "Roster model leader" : $"{100*(CompositeIndex/RosterLeaderScore-1):F1}% model gap";
-    [JsonIgnore] public string ScoreBreakdown => Estimate is null ? "" : $"Model points (not a 0–100 cap): {CompositeIndex:F2}. Offense {OffenseIndex:F2} × 55% + durability {DurabilityIndex:F2} × 35% + utility {(CompositeIndex-.55*OffenseIndex-.35*DurabilityIndex)/.1:F2} × 10%. {ModelGapLabel}. A model-score gap is not a measured damage or win-rate difference.";
-    [JsonIgnore] public string IndexValue => Estimate?.Comparable==false ? "" : CompositeIndex.ToString("F2");
+    [JsonIgnore] public string ScoreBreakdown => Estimate is null ? "" : $"Model points: {CompositeIndex:F2}. Offense {OffenseIndex:F2} × 55% + durability {DurabilityIndex:F2} × 35% + utility {(CompositeIndex-.55*OffenseIndex-.35*DurabilityIndex)/.1:F2} × 10%. {ModelGapLabel}. A model-score gap is not a measured damage or win-rate difference.";
+    [JsonIgnore] public string IndexValue => Estimate?.Comparable==false ? "" : ScoreDisplay.Label(CompositeIndex);
     [JsonIgnore] public string IndexPrefix => Estimate?.Comparable==false ? "Record build " : Estimate?.Basis == "Flat max stats" ? "Stats " : "Est. ";
-    [JsonIgnore] public string EstimateHint => Estimate is null ? "Estimate unavailable" : Estimate.Comparable==false ? "Not ranked: record "+string.Join(", ",Estimate.MissingFields??[]) : $"{Estimate.Basis} · low confidence · scenario range {Estimate.Low:0.0}–{Estimate.High:0.0}. Not a measured combat rating." + (Estimate.MissingFields is {Length:>0} ? " Base defaults applied: "+string.Join(", ",Estimate.MissingFields)+". Missing level = 1; missing rank = base; unrecorded or locked skills and gear add no bonus." : "");
-    [JsonIgnore] public string EstimateDetails => ScoreBreakdown + "\n" + EstimateHint + "\nMax heroes, no gear: maximum level, rank and capped skills; equipment and account context excluded. Equal builds: the same maximum hero development, plus the three-piece yellow T5 Alloy set at maximum level (currently 80). Enabled Research/Behemoth context applies; personal builds and Signature Gear do not. Both use the same skill, faction and frontline model.\nMy builds uses only recorded upgrades. Missing rank uses base rank; missing level uses level 1; unrecorded or locked skills and gear give no upgrade bonus. Defaults never overwrite saved observations.\nSkill effects and utility remain estimates, not a full combat simulation. The scenario range varies damage and utility assumptions and is not a statistical confidence interval. Fixed anchors use the maximum T5 roster; external bonuses can produce scores above 100. Resource priorities independently use actual recorded builds." + "\n" + CombatEvidenceNote;
+    [JsonIgnore] public string EstimateHint => Estimate is null ? "Estimate unavailable" : Estimate.Comparable==false ? "Not ranked: record "+string.Join(", ",Estimate.MissingFields??[]) : $"{Estimate.Basis} · low confidence · scenario range {ScoreDisplay.Value(Estimate.Low):0.0}–{ScoreDisplay.Value(Estimate.High):0.0}. Not a measured combat rating." + (Estimate.MissingFields is {Length:>0} ? " Base defaults applied: "+string.Join(", ",Estimate.MissingFields)+". Missing level = 1; missing rank = base; unrecorded or locked skills and gear add no bonus." : "");
+    [JsonIgnore] public string EstimateDetails => ScoreBreakdown + "\n" + EstimateHint + "\nMax heroes, no gear: maximum level, rank and capped skills; equipment and account context excluded. Equal builds: the same maximum hero development, plus the three-piece yellow T5 Alloy set at maximum level (currently 80). Enabled Research/Behemoth context applies; personal builds and Signature Gear do not. Both use the same skill, faction and frontline model.\nMy builds uses only recorded upgrades. Missing rank uses base rank; missing level uses level 1; unrecorded or locked skills and gear give no upgrade bonus. Defaults never overwrite saved observations.\nSkill effects and utility remain estimates, not a full combat simulation. The scenario range varies damage and utility assumptions and is not a statistical confidence interval. Fixed anchors use the maximum T5 roster; the model normalizes offense, durability and utility to a 1000-point reference scale before weighting. Formation bonuses use the same units. Account bonuses may exceed reference maxima; scores are not clipped and are not percentages. Resource priorities independently use actual recorded builds." + "\n" + CombatEvidenceNote;
     [JsonIgnore] public bool IsOwned { get; set; }
     [JsonIgnore] public HeroProgress Progress { get; set; } = new();
     [JsonIgnore] public string Portrait => $"pack://application:,,,/TilesSurviveHeroPlanner;component/Images/{AssetSlug}.png";
@@ -230,10 +237,12 @@ public sealed class SquadResult
     public double SynergyBonus { get; init; }
     public double FactionBonus { get; init; }
     public double FrontlineBonus { get; init; }
+    public double ExposureAdjustment {get;init;}
     public double StaminaReduction { get; init; }
     public string SynergySummary { get; init; } = "No modeled cross-skill pairing";
+    public string DisplayScore => ScoreDisplay.Label(Score);
     public string Names => string.Join(" • ", Heroes.Select(hero => hero.Name));
-    public string SynergyLabel => (StaminaReduction>0?$"Stamina −{StaminaReduction:0.#}% · ":"")+$"+{SynergyBonus:0.0} synergy · +{FactionBonus:0.0} faction · {FrontlineBonus:+0.0;-0.0;0.0} frontline fit";
+    public string SynergyLabel => (StaminaReduction>0?$"Stamina −{StaminaReduction:0.#}% · ":"")+$"+{SynergyBonus:0.0} synergy · +{FactionBonus:0.0} faction · {FrontlineBonus:+0.0;-0.0;0.0} frontline fit"+(ExposureAdjustment!=0?$" · {ExposureAdjustment:0.0} exposure benchmark":"");
 }
 
 public sealed class ReleaseScheduleItem
@@ -252,6 +261,8 @@ public sealed class PlannerProfile
 
     [JsonPropertyName("army_context")] public ArmyContextSettings ArmyContext { get; set; } = new();
     [JsonPropertyName("enemy_faction")] public string EnemyFaction { get; set; } = "Unknown";
+    [JsonPropertyName("account_review")] public AccountDataReview? AccountReview {get;set;}
+    [JsonPropertyName("survival_benchmark")] public bool SurvivalBenchmark {get;set;}
     [JsonPropertyName("comparison_basis")] public string ComparisonBasis { get; set; } = "reference";
     [JsonPropertyName("battle_seconds")] public int BattleSeconds { get; set; }
     [JsonPropertyName("hero_builds")] public Dictionary<string, HeroBuild> HeroBuilds { get; set; } = [];
@@ -281,3 +292,5 @@ public static class ArmyRoster
     public static HashSet<string> Blocked(IReadOnlyList<ArmyConfiguration> armies,int active) => armies.Where((_,i)=>i!=active).SelectMany(a=>a.Heroes).ToHashSet();
     public static int Owner(IReadOnlyList<ArmyConfiguration> armies,string slug) {for(int i=0;i<armies.Count;i++)if(armies[i].Heroes.Contains(slug))return i;return -1;}
 }
+
+public sealed class AccountDataReview { public DateTimeOffset ReviewedUtc {get;set;} public string ClientBuild {get;set;}=""; public string ContentHash {get;set;}=""; }

@@ -27,6 +27,29 @@ class EstimateBuilderTests(unittest.TestCase):
     def skill(self, hero, slot):
         return next(s for s in self.model['heroes'][hero]['skills'] if s['slot'] == slot)
 
+    def test_ray_projectile_zones_follow_actual_dispatches_not_fallback_maximum(self):
+        attack=self.skill('ray',0);active=self.skill('ray',1)
+        self.assertEqual(attack['damage_selection_basis'],'projectile_zone_dispatch_potential')
+        self.assertEqual([x['effect_id'] for x in attack['projectile_zone_dispatches']],['damage_ray_attack'])
+        self.assertAlmostEqual(attack['levels'][1]['cast_budget']['direct_coefficient'],.36)
+        self.assertAlmostEqual(active['levels'][1]['cast_budget']['direct_coefficient'],9.6)
+        self.assertEqual(len(active['projectile_zone_dispatches']),3)
+        self.assertEqual(active['levels'][1]['cast_budget']['direct_events'],[], 'Projectile-local event time is not a caster offset')
+        self.assertEqual(active['levels'][0]['damage'],0)
+
+    def test_unknown_zone_execution_shape_is_not_counted_as_known(self):
+        from copy import deepcopy
+        a=json.loads((ROOT/'outputs/hero-report/Hero-Combat-Audit.json').read_text(encoding='utf-8'))
+        original=next(s for s in a['heroes']['ray']['skills'] if s['id']=='survivor_ray_skill_1')
+        for change in ['condition','repeat','scaling','missing','property']:
+            e=deepcopy(original);actor=e['summoned_actors'][0]
+            if change=='condition':actor['skills'][0]['condition_id']=123
+            if change=='repeat':actor['skills'][0]['cooldown_ms']=100
+            if change=='scaling':actor['stat_rates_per_mille'][0]=500
+            if change=='missing':actor['missing_references']=['unknown']
+            if change=='property':actor['skills'][0]['effects'][0]['has_property_sources']=True
+            self.assertEqual(builder.projectile_zone_dispatches(e),[],change)
+
     def test_ray_delay_damage_depends_on_completed_active_not_own_cooldown(self):
         s=self.skill('ray',2)
         self.assertEqual(s['damage_selection_basis'],'finish_triggered_delayed_effect')

@@ -15,6 +15,32 @@ def presentation_effect(identifier):
     return name.startswith('text_') or '_text' in name or name == 'effect_skill_3_empty'
 
 
+def projectile_zone_dispatches(evidence):
+    """Selected graph-resolved single-target impact potential, not hit success.
+
+    Projectile-hit offsets are local to the projectile, not caster timeline offsets.
+    Unknown child conditions, repeat cadence, scaling or sources retain the old path.
+    """
+    if evidence['id'] not in {'survivor_ray_attack','survivor_ray_skill_1'}:return []
+    nodes=evidence.get('skill_nodes',[])
+    if len(nodes)!=1 or nodes[0].get('condition') or evidence.get('missing_assets') or evidence.get('unresolved_event_references'):return []
+    events=evidence.get('timeline_events',[])
+    actors={a['effect_id']:a for a in evidence.get('summoned_actors',[])}
+    if not events or any(e.get('context')!='projectile_hit' or e.get('event_type')!=1 for e in events):return []
+    result=[]
+    for event in events:
+        actor=actors.get(event['reference'])
+        if not actor or actor['actor_type']!=3 or actor['stat_rates_per_mille']!=[1000,1000,1000] or len(actor['skills'])!=1 or actor.get('missing_references'):return []
+        skill=actor['skills'][0]
+        if skill.get('condition_id') or skill['pre_cooldown_ms']!=0 or skill['cooldown_ms']<=actor['lifetime_ms'] or skill['configured_level']!=1:return []
+        damage=skill['effects']
+        if len(damage)!=1:return []
+        effect=damage[0]
+        if effect['type']!=0 or effect['custom_formula'] or effect.get('unlock_condition') or effect.get('return_condition') or effect.get('has_property_sources') or effect.get('has_attribute_fixes') or effect['base_param2']<=0 or effect['base_param3']!=0:return []
+        result.append({'dispatch':event['reference'],'template':actor['template_id'],'effect_id':effect['id'],'base_coefficient':effect['base_param2']/1000,'targets_assumed':1})
+    return result
+
+
 def buff_dispatch_offset(evidence,buff_id):
     nodes=evidence.get('skill_nodes',[])
     if not nodes:return None
@@ -238,7 +264,7 @@ def build(upgrades, audit, roster):
     if set(gear_by_slot) != {1,2,3}:
         raise ValueError('Expected yellow T5 head, body and leg equipment.')
     reference_gear = [gear_by_slot[k] for k in sorted(gear_by_slot)]
-    result = {'version': 16, 'reference_level': max(r['level'] for h in upgrades['heroes'].values() for r in h['levels']),
+    result = {'version': 18, 'score_scale': 1000, 'reference_level': max(r['level'] for h in upgrades['heroes'].values() for r in h['levels']),
               'reference_rank': max(s['rank'] for h in upgrades['heroes'].values() for s in h['stages']),
               'reference_step': 6, 'reference_gear':reference_gear,
               'reference_policy':'maximum_available_hero_level_rank_skills; equal builds adds standard yellow T5 maximum-level gear; no-gear mode uses the same hero baseline',
@@ -274,6 +300,10 @@ def build(upgrades, audit, roster):
             # One representative effect still cannot establish repeated hits or target count.
             periodic_ids={p['effect_id'] for p in periodic_budgets(evidence,[]) if p['scored']}
             damage = direct_damage or [e for e in damage_candidates if e['id'] not in periodic_ids]
+            impacts=projectile_zone_dispatches(evidence)
+            if impacts:
+                impact_ids={e['effect_id'] for e in impacts}
+                damage=[e for e in damage_candidates if e['id'] in impact_ids]
             source = source_skills[skill['id']]
             text = ' '.join([source.get('game_description', ''), *[e['id'] for e in effects]]).lower()
             # Dimensionless planning priors. They are deliberately not native effect magnitudes.
@@ -341,6 +371,8 @@ def build(upgrades, audit, roster):
                             pass
                 # One representative non-text effect per assumed activation, never a sum of references.
                 representative = max((e['base_param2'] / 1000 * modifiers.get(e['id'], 1) for e in damage), default=0)
+                if impacts:
+                    representative=sum(e['base_coefficient']*modifiers.get(e['effect_id'],1) for e in impacts)
                 if counted_hits:
                     representative=sum(immediate_counts[e['id']]*e['base_param2']/1000*modifiers.get(e['id'],1) for e in direct_damage)
                 representative += sum(e['base_param2']/1000*modifiers.get(e['id'],1) for e in combo)
@@ -392,7 +424,8 @@ def build(upgrades, audit, roster):
                            'reference_level': min(stage['skill_caps'][skill['slot']], max(r['level'] for r in levels)),
                            'damage_effects': [e['id'] for e in damage], 'cadence_assumed_seconds': cadence,
                            'uses_generic_pressure_prior': uses_prior,
-                           'damage_selection_basis': 'direct_hit_reference' if direct_damage else 'periodic_buff_potential' if periodic_ids else 'representative_dependency' if damage else 'no_resolved_damage',
+                           'damage_selection_basis': 'projectile_zone_dispatch_potential' if impacts else 'direct_hit_reference' if direct_damage else 'periodic_buff_potential' if periodic_ids else 'representative_dependency' if damage else 'no_resolved_damage',
+                           'projectile_zone_dispatches':impacts,
                            'direct_damage_effect_ids': [e['id'] for e in direct_damage],
                            'unresolved_execution': (not evidence['complete_combat_graph_verified']),
                            'has_damage_zone': any(e['type'] == 7 and ('damagezone' in e['id'].lower() or 'damage_zone' in e['id'].lower()) for e in effects)
@@ -445,6 +478,7 @@ def build(upgrades, audit, roster):
                     (.7 * h + 30 * d), 1 + utility])
     result['scales'] = [max(r[i] for r in raw) for i in range(3)]
     result['source_pack_sha256'] = upgrades['provenance']['config_pack_sha256']
+    result['projectile_zone_policy']='Selected Ray basic/active graphs: sum one single-target potential per bound projectile impact; no area multiplier; projectile-local timing retains completion fallback; hit success and world-engine equivalence unverified.'
     result['confidence'] = 'low'
     return result
 

@@ -1,0 +1,222 @@
+{
+  "schema": 1,
+  "client_build": "2.6.400.304",
+  "private_image_sha256": "5afef9adf2a4dc85b40adc702149a45bf10728ef2c9de1895f3b648a9128b14d",
+  "private_index_sha256": "ee94b9e060a9d0db87e2787b52a339dcf7555e3f65933d21a5ad9e583be13af4",
+  "native_methods": [
+    {
+      "type": "RaidSESummonObject",
+      "name": "GetSkillParamLevelUpOwner",
+      "rva": 43575584,
+      "token": "0x602107f",
+      "parameter_count": 0,
+      "byte_count": 256,
+      "code_sha256": "d468bf1a98679b219d0cc06b8446b8984cda0a285f7970e8d57c13acaff529c0"
+    },
+    {
+      "type": "RaidSESummonObject",
+      "name": "CreateSkillComponent",
+      "rva": 43575440,
+      "token": "0x6021084",
+      "parameter_count": 0,
+      "byte_count": 144,
+      "code_sha256": "912f56e3e79a5d767913001de19c0b1273e7f5c7d08d9e1dcb9da9c042281eff"
+    },
+    {
+      "type": "SkillComponent",
+      "name": "AutoUseNoClipSkill",
+      "rva": 43196448,
+      "token": "0x6020bae",
+      "parameter_count": 5,
+      "byte_count": 816,
+      "code_sha256": "84dcd423ea57dce321f07770d631675b92ad674518593621f8d8894d7267d68d"
+    },
+    {
+      "type": "RaidEffectSystem",
+      "name": "ProcessEffectSummon",
+      "rva": 42961744,
+      "token": "0x60206a5",
+      "parameter_count": 5,
+      "byte_count": 2752,
+      "code_sha256": "9e06766bb43d1a32d05d942404fbf06e0caf2f4d7f7a625ce43b0a9087ca0e80"
+    }
+  ],
+  "paths": [
+    {
+      "skill": "survivor_ray_attack",
+      "dispatches": [
+        {
+          "dispatch": "ray_attack_summon_damagezone",
+          "template": "ray_attack_summon_damagezone",
+          "effect_id": "damage_ray_attack",
+          "base_coefficient": 0.36,
+          "targets_assumed": 1
+        }
+      ],
+      "level_1_per_target_potential": 0.36,
+      "projectile_timing_used_as_caster_offset": false
+    },
+    {
+      "skill": "survivor_ray_skill_1",
+      "dispatches": [
+        {
+          "dispatch": "ray_skill_summon_damagezone2",
+          "template": "ray_skill_summon_damagezone2",
+          "effect_id": "damage_ray_skill_1_2",
+          "base_coefficient": 2.4,
+          "targets_assumed": 1
+        },
+        {
+          "dispatch": "ray_skill_summon_damagezone",
+          "template": "ray_skill_summon_damagezone",
+          "effect_id": "damage_ray_skill_1",
+          "base_coefficient": 3.2,
+          "targets_assumed": 1
+        },
+        {
+          "dispatch": "ray_skill_summon_damagezone3",
+          "template": "ray_skill_summon_damagezone3",
+          "effect_id": "damage_ray_skill_1_3",
+          "base_coefficient": 4.0,
+          "targets_assumed": 1
+        }
+      ],
+      "level_1_per_target_potential": 9.6,
+      "projectile_timing_used_as_caster_offset": false
+    }
+  ],
+  "static_trace": [
+    {
+      "method": "RaidSESummonObject.GetSkillParamLevelUpOwner",
+      "finding": "Uses _hostGUID to resolve and cache _hostEntity, then returns that host.",
+      "instruction_rvas": [
+        "0x298e9ad",
+        "0x298e9b7",
+        "0x298e9d2"
+      ]
+    },
+    {
+      "method": "RaidSESummonObject.CreateSkillComponent",
+      "finding": "Constructs a SkillComponent for the summon; effect execution still depends on target/skill gates.",
+      "instruction_rvas": [
+        "0x298e8e2"
+      ]
+    },
+    {
+      "method": "SkillComponent.AutoUseNoClipSkill",
+      "finding": "Includes configured no-clip eligibility, filtered target selection and UseSkill dispatch paths.",
+      "instruction_rvas": [
+        "0x29320f7",
+        "0x2932166",
+        "0x29321c8"
+      ]
+    }
+  ],
+  "previous_error": "The representative-dependency maximum credited an unlinked 0.6 basic fallback instead of the linked 0.36 zone, and retained only max(2.4,3.2,4.0) rather than the three distinct active impact potentials.",
+  "baseline_commit": "350272f",
+  "before": {
+    "planner_offense": {
+      "fitted_wape": 0.25140433032092774,
+      "internal_held_owner_wape": 0.30321541664556273,
+      "ray_relative_error": -0.3343821498080408
+    },
+    "full_30s_coefficient": {
+      "fitted_wape": 0.2718471774479519,
+      "internal_held_owner_wape": 0.3927900118340903,
+      "ray_relative_error": -0.38469601249974494
+    },
+    "observed_lifetime_coefficient": {
+      "fitted_wape": 0.2997020221695689,
+      "internal_held_owner_wape": 0.3789471912345767,
+      "ray_relative_error": -0.417421876412599
+    },
+    "attack_times_observed_lifetime": {
+      "fitted_wape": 0.16084748289654777,
+      "internal_held_owner_wape": 0.2206736656895571,
+      "ray_relative_error": -0.2857792070814936
+    },
+    "attack_lifetime_plus_shared": {
+      "fitted_wape": 0.09868609049756176,
+      "internal_held_owner_wape": 0.14832882156853572,
+      "ray_relative_error": -0.13858193873656033
+    },
+    "native_base_defence_grid": {
+      "fitted_wape": 0.2997020221695689,
+      "internal_held_owner_wape": 0.3789471912345767,
+      "ray_relative_error": -0.417421876412599
+    },
+    "lifetime_only_control": {
+      "fitted_wape": 0.09868609049756176,
+      "internal_held_owner_wape": 0.12148758111398965,
+      "ray_relative_error": -0.13858193873656033
+    },
+    "coefficient_plus_owned_exposure": {
+      "fitted_wape": 0.09871215184270345,
+      "internal_held_owner_wape": 0.14664113568243312,
+      "ray_relative_error": -0.1386955236596873
+    },
+    "basic_other_plus_exposure": {
+      "fitted_wape": 0.09905388425307114,
+      "internal_held_owner_wape": 0.1598519143799075,
+      "ray_relative_error": -0.1401033540841764
+    }
+  },
+  "after": {
+    "planner_offense": {
+      "fitted_wape": 0.24146638997445016,
+      "internal_held_owner_wape": 0.2924520613866465,
+      "ray_relative_error": -0.30394039598046396
+    },
+    "full_30s_coefficient": {
+      "fitted_wape": 0.2177035069018859,
+      "internal_held_owner_wape": 0.31710066072524634,
+      "ray_relative_error": -0.22179481641146026
+    },
+    "observed_lifetime_coefficient": {
+      "fitted_wape": 0.24998547391098555,
+      "internal_held_owner_wape": 0.3158119592882689,
+      "ray_relative_error": -0.27233838275820543
+    },
+    "attack_times_observed_lifetime": {
+      "fitted_wape": 0.16084748289654777,
+      "internal_held_owner_wape": 0.2206736656895571,
+      "ray_relative_error": -0.2857792070814936
+    },
+    "attack_lifetime_plus_shared": {
+      "fitted_wape": 0.09868609049756176,
+      "internal_held_owner_wape": 0.14832882156853572,
+      "ray_relative_error": -0.13858193873656033
+    },
+    "native_base_defence_grid": {
+      "fitted_wape": 0.24998547391098555,
+      "internal_held_owner_wape": 0.3158119592882689,
+      "ray_relative_error": -0.27233838275820543
+    },
+    "lifetime_only_control": {
+      "fitted_wape": 0.09868609049756176,
+      "internal_held_owner_wape": 0.12148758111398965,
+      "ray_relative_error": -0.13858193873656033
+    },
+    "coefficient_plus_owned_exposure": {
+      "fitted_wape": 0.0960093179279463,
+      "internal_held_owner_wape": 0.150124900042989,
+      "ray_relative_error": -0.14825055787945474
+    },
+    "basic_other_plus_exposure": {
+      "fitted_wape": 0.09020303396919185,
+      "internal_held_owner_wape": 0.17640351382993916,
+      "ray_relative_error": -0.12708543031338848
+    }
+  },
+  "assumptions": [
+    "One eligible target and one activation per bound impact; no measured hit success or area coverage is inferred.",
+    "Configured child cooldown exceeds zone lifetime and known stat-inheritance rates are one; unknown repeat, scaling, condition or property-source cases are rejected.",
+    "Projectile-local hit offsets are not substituted for caster timeline offsets.",
+    "These static Raid paths do not establish original world-report field/Lite execution or active ILFix behavior."
+  ],
+  "source_sha256": {
+    "Hero-Combat-Audit.json": "2eb078f6aced672130fdd54bb472199ea8b4b290e12a6e8449c18c3e76917c1f",
+    "Hero-Estimate-Model.json": "d8f4197bc825d3258f0a9e2b3f9ad980aaf327d25c0728803736057a34436aa3",
+    "Retrospective-Damage-Reconstruction.json": "7826bfd8c161b2bb631ce0f3ec849ae876570fa9adf77579250d91094a861b5e"
+  }
+}

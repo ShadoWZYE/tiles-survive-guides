@@ -87,6 +87,18 @@ public partial class MainWindow
         _skillEditors.Clear(); _skillLabels.Clear(); _gearEditors.Clear(); _budgetEditors.Clear();
         var b = _heroBuilds.GetValueOrDefault(hero.AssetSlug) ?? new();
         BuildFields.Children.Add(CopyText("Valid changes save automatically. Blank = unknown. Skill level 0 = locked."));
+        var review = new Button { Content="I checked this build in game", HorizontalAlignment=HorizontalAlignment.Left, Margin=new Thickness(0,4,0,8), Padding=new Thickness(9,5,9,5) };
+        review.Click += (_,_) => {
+            if(!ReadBuild(out var checkedBuild)) { BuildError.Text="Not confirmed: "+BuildError.Text; return; }
+            var missing=EstimateModel.MissingBuild(hero.AssetSlug,checkedBuild,_upgradeData);
+            if(missing.Count>0) { BuildError.Text="Complete first: "+string.Join(", ",missing); return; }
+            var previous=_heroBuilds.GetValueOrDefault(hero.AssetSlug);
+            checkedBuild.ReviewedUtc=DateTimeOffset.UtcNow; checkedBuild.ReviewedClientBuild=ReviewSnapshotKey;
+            try { _heroBuilds[hero.AssetSlug]=checkedBuild; SaveProfile(); RefreshSquadDataNotice(); QueueBuildRefresh(); BuildError.Text="Build checked in game today."; }
+            catch(Exception ex) when(ex is IOException or UnauthorizedAccessException) { if(previous is null)_heroBuilds.Remove(hero.AssetSlug);else _heroBuilds[hero.AssetSlug]=previous; BuildError.Text="Could not save: "+ex.Message; }
+        };
+        BuildFields.Children.Add(CopyText("Review reminders appear after 14 days or a game-data change. Saving a single field does not confirm the other values."));
+        BuildFields.Children.Add(review);
         BuildFields.Children.Add(CopyText("Current build", true));
         _starPreview = new StackPanel { Orientation = Orientation.Horizontal };
         _starSliderLabel = CopyText("");
@@ -171,7 +183,21 @@ public partial class MainWindow
             var recorded = b.Gear?.Find(g => g is not null && _upgradeData.Gear.GetValueOrDefault(g.Id)?.Slot == slot);
             type.SelectedItem = type.Items.Cast<Choice>().FirstOrDefault(c => c.Id == recorded?.Id) ?? type.Items[0];
             var level = NumberEditor(recorded?.Level); _gearEditors[slot] = (type, level);
-            Field(row, $"Gear slot {slot}", type); Field(row, $"Slot {slot} level", level);
+            type.Visibility=Visibility.Collapsed; row.Children.Add(type);
+            var panels=new WrapPanel{MaxWidth=620};
+            var choices=new List<Button>();
+            foreach(var choice in type.Items.Cast<Choice>()) {
+                var panel=new StackPanel{Width=73};
+                var gear=choice.Id is null?null:_upgradeData.Gear[choice.Id];
+                if(gear is not null && !string.IsNullOrEmpty(gear.IconAsset))panel.Children.Add(new Image{Source=new BitmapImage(new Uri($"pack://application:,,,/TilesSurviveHeroPlanner;component/Images/GearIcons/{gear.IconAsset}.png")),Width=46,Height=46});
+                panel.Children.Add(new TextBlock{Text=gear?.Name??"None",FontSize=10,TextWrapping=TextWrapping.Wrap,TextAlignment=TextAlignment.Center,MinHeight=28});
+                var button=new Button{Content=panel,Tag=choice,Padding=new Thickness(3),Margin=new Thickness(0,0,5,5),BorderThickness=new Thickness(2),ToolTip=choice.Label};
+                System.Windows.Automation.AutomationProperties.SetName(button,$"Gear slot {slot}: {gear?.Name??"None"}");
+                button.Click+=(_,_)=>{_populatingEditor=true;try{type.SelectedItem=choice;_gearModeEditor.SelectedIndex=1;}finally{_populatingEditor=false;}SaveBuildOnEdit();};choices.Add(button);panels.Children.Add(button);
+            }
+            void Highlight(){foreach(var button in choices)button.BorderBrush=Equals(button.Tag,type.SelectedItem)?Brushes.Turquoise:Brushes.SlateGray;}
+            type.SelectionChanged+=(_,_)=>Highlight(); Highlight();
+            Field(row, $"Gear slot {slot}", panels); Field(row, $"Slot {slot} level", level);
         }
         BuildFields.Children.Add(CreateSignaturePanel(hero.AssetSlug));
         var comparison = new StackPanel();
@@ -305,9 +331,10 @@ public partial class MainWindow
         BuildError.Foreground = Brushes.Gold;
         if (!ReadBuild(out var build)) { BuildError.Text = "Not saved: " + BuildError.Text; return; }
         var slug = _editingHero.AssetSlug; var previous = _heroBuilds.GetValueOrDefault(slug);
+        build.ReviewedUtc=previous?.ReviewedUtc; build.ReviewedClientBuild=previous?.ReviewedClientBuild;
         try
         {
-            _heroBuilds[slug] = build; SaveProfile(); QueueBuildRefresh();
+            _heroBuilds[slug] = build; SaveProfile(); RefreshSquadDataNotice(); QueueBuildRefresh();
             BuildError.Text = "Saved automatically."; BuildError.Foreground = Brushes.LightGreen;
         }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
@@ -339,6 +366,7 @@ public partial class MainWindow
     private bool _refreshingEstimateViews;
     private void RefreshUpgradeViews()
     {
+        RefreshSquadDataNotice();
         bool editing = BuildOverlay.Visibility == Visibility.Visible;
         if(editing && !_buildComparison.IsExpanded) { _buildViewsDirty=true; return; }
         if (!editing && !_refreshingEstimateViews && RefreshEstimates())

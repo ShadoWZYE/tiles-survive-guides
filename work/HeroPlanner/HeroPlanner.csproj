@@ -10,6 +10,8 @@
     <ApplicationIcon>Assets\app-icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Resource Include="..\..\outputs\hero-tool\images\gear-icons\*.png" Link="Images\GearIcons\%(Filename)%(Extension)" />
+    <Resource Include="..\..\outputs\hero-report\Survival-Benchmark.json" Link="Data\survival.json" />
     <Resource Include="..\..\outputs\hero-report\Hero-Army-Context.json" Link="Data\army-context.json" />
     <Resource Include="Assets\app-icon.ico" />
     <Resource Include="..\..\outputs\hero-tool\images\context-icons\*.png" Link="Images\ContextIcons\%(Filename)%(Extension)" />

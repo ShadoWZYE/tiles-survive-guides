@@ -1,6 +1,11 @@
 using System.Text.Json;
 using TilesSurviveHeroPlanner;
 
+if(args.Length==1&&args[0]=="--survival"){
+ var survivalCases=JsonSerializer.Deserialize<double[][]>(Console.In.ReadToEnd())!;
+ Console.WriteLine(JsonSerializer.Serialize(survivalCases.Select(r=>SurvivalModel.Project(r.Take(5).ToArray(),r[5],r[6],r[7])),new JsonSerializerOptions{PropertyNamingPolicy=JsonNamingPolicy.CamelCase}));return;
+}
+
 if(args.Length==2 && args[0]=="--max-comparisons")
 {
  var maxRoot=args[1];var maxData=UpgradeData.Parse(File.ReadAllText(Path.Combine(maxRoot,"TilesSurvive-Upgrade-Data.json")));

@@ -12,24 +12,28 @@
       <div class="control-strip">${h.skills.map((s,i)=>`<label>${esc(s.name)}${input('build-skill-'+i,b.skills?.[s.id],1000)}</label>`).join('')}</div>
       <p>Skill level 0 means locked; blank means unknown. Gear is optional. Only universal gear types are supported; profession and exclusive effects are not modeled.</p>
       <label>Gear recording<select id="build-gear-mode"><option value="unknown"${b.gear==null?' selected':''}>Unknown / excluded</option><option value="recorded"${Array.isArray(b.gear)?' selected':''}>Recorded (empty slots mean no gear)</option></select></label>
-      <div class="control-strip">${[1,2,3].map(slot=>{const g=b.gear?.find(x=>data().gear[x.id]?.slot===slot);return `<label>Gear slot ${slot}<select id="build-gear-${slot}"><option value="">None</option>${Object.entries(data().gear).filter(([,t])=>t.slot===slot).map(([id,t])=>`<option value="${esc(id)}"${g?.id===id?' selected':''}>${esc(t.name)} · quality ${t.quality}</option>`).join('')}</select>${input('build-gear-level-'+slot,g?.level,1000)}</label>`}).join('')}</div>
-      <button class="button" id="save-build">Save build</button><p id="build-error" role="status"></p></details>`;
+      <div class="control-strip">${[1,2,3].map(slot=>{const g=b.gear?.find(x=>data().gear[x.id]?.slot===slot);return `<label>Gear slot ${slot}<select hidden id="build-gear-${slot}"><option value="">None</option>${Object.entries(data().gear).filter(([,t])=>t.slot===slot).map(([id,t])=>`<option value="${esc(id)}"${g?.id===id?' selected':''}>${esc(t.name)} · quality ${t.quality}</option>`).join('')}</select><span class="gear-panels" role="group" aria-label="Gear slot ${slot}"><button type="button" class="gear-choice" data-gear-slot="${slot}" data-gear-id="" aria-pressed="${!g}">None</button>${Object.entries(data().gear).filter(([,t])=>t.slot===slot).map(([id,t])=>`<button type="button" class="gear-choice" data-gear-slot="${slot}" data-gear-id="${esc(id)}" aria-pressed="${g?.id===id}" title="${esc(t.name)} · quality ${t.quality}"><img src="${t.icon_data}" alt=""><small>${esc(t.name)}</small></button>`).join('')}</span>${input('build-gear-level-'+slot,g?.level,1000)}</label>`}).join('')}</div>
+      <button class="button" id="save-build">Save build</button> <button class="button secondary" id="review-build">Save and confirm checked in game</button><p>Review reminders appear after 14 days or a game-data change. Saving an edit does not confirm untouched values.</p><p id="build-error" role="status"></p></details>`;
   }
   function bindEditor(slug,profile,save,render){
     const $=id=>document.getElementById(id),h=data().heroes[slug];
     if(!$('save-build'))return;
-    $('save-build').onclick=()=>{
+    document.querySelectorAll('[data-gear-slot]').forEach(button=>button.onclick=()=>{const slot=button.dataset.gearSlot;$('build-gear-mode').value='recorded';$('build-gear-'+slot).value=button.dataset.gearId;document.querySelectorAll(`[data-gear-slot="${slot}"]`).forEach(b=>b.setAttribute('aria-pressed',String(b===button)));});
+    const saveBuild=(review=false)=>{
       const fields=[...document.querySelectorAll('[id^="build-"][type="number"]')];
       if(fields.some(x=>!x.reportValidity()))return;
       const num=id=>$(id).value===''?null:Number($(id).value),skills={};
       h.skills.forEach((s,i)=>{const n=num('build-skill-'+i);if(n!==null)skills[s.id]=n;});
       const gear=$('build-gear-mode').value==='recorded'?[1,2,3].filter(s=>$('build-gear-'+s).value).map(s=>({id:$('build-gear-'+s).value,level:num('build-gear-level-'+s)})):null;
-      const b={stage:$('build-stage').value||null,level:num('build-level'),skills,gear};
+      const previous=profile.heroProgress?.[slug]?.build||{};
+      const b={reviewedUtc:previous.reviewedUtc,reviewedClientBuild:previous.reviewedClientBuild,stage:$('build-stage').value||null,level:num('build-level'),skills,gear};
       const clean=UpgradeModel.sanitizeBuild(b,h);
       if(!clean){$('build-error').textContent='Selected gear needs a valid level.';return;}
       if(clean.stage&&clean.level!==null){const check=UpgradeModel.state(slug,clean,data(),30);if(check.error){$('build-error').textContent=check.error;return;}}
+      if(review){const missing=EstimateModel.missingBuild(slug,clean,data());if(missing.length){$('build-error').textContent='Complete first: '+missing.join(', ');return;}clean.reviewedUtc=new Date().toISOString();clean.reviewedClientBuild=UpgradeModel.reviewSnapshot(data());}
       profile.heroProgress[slug]={...profile.heroProgress[slug],build:clean};save();render();
     };
+    $('save-build').onclick=()=>saveBuild(false);$('review-build').onclick=()=>saveBuild(true);
   }
   const labels={power:'Configured power contribution',attack:'Hero ATK total',health:'Hero HP total',defense:'Hero DEF total',direct:'Experimental direct-output potential'};
   function panel(slugs,profile){

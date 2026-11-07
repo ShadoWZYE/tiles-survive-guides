@@ -84,13 +84,13 @@
     for(let i=0;i<3;i++){const v=externalFlat?.[i];if(Number.isFinite(v)&&v>=0)stats[i]+=v;}
     const baseStats=[...stats],factors=stats.map((_,i)=>1+selfPercent[i]+teamPercent[i]);
     stats.forEach((_,i)=>stats[i]*=factors[i]);
-    function calculate(df,uf){const offense=100*stats[0]*(1+.5*Math.log1p(damage*df))/estimates.scales[0],
-      durability=100*(.7*stats[2]+30*stats[1])/estimates.scales[1],u=100*(1+utility*uf)/estimates.scales[2];
+    function calculate(df,uf){const offense=(estimates.score_scale??1000)*stats[0]*(1+.5*Math.log1p(damage*df))/estimates.scales[0],
+      durability=(estimates.score_scale??1000)*(.7*stats[2]+30*stats[1])/estimates.scales[1],u=(estimates.score_scale??1000)*(1+utility*uf)/estimates.scales[2];
       return {offense,durability,score:.55*offense+.35*durability+.1*u};}
     return {...calculate(1,1),low:calculate(.5,.5).score,high:calculate(2.5,1.5).score,
       healthContribution:calculate(1,1).durability*(.7*stats[2])/(.7*stats[2]+30*stats[1]),
       passiveContributions:[calculate(1,1).offense/factors[0],calculate(1,1).durability*30*baseStats[1]/(.7*stats[2]+30*stats[1]),calculate(1,1).durability*.7*baseStats[2]/(.7*stats[2]+30*stats[1])],
-      teamPercent,selfPercent,activeSkillIds,missingFields,comparable:true,staminaReductionPercent,openingCastCounts:Object.fromEntries(Object.entries(schedule).map(([id,ends])=>[id,ends.filter(end=>end<=battleSeconds+1e-9).length])),
+      heroStats:[...stats],teamPercent,selfPercent,activeSkillIds,missingFields,comparable:true,staminaReductionPercent,openingCastCounts:Object.fromEntries(Object.entries(schedule).map(([id,ends])=>[id,ends.filter(end=>end<=battleSeconds+1e-9).length])),
       rawHealingPotential:selected.filter(x=>activeSkillIds.includes(x.skill.id)).flatMap(({skill,row})=>(row.healing_budgets??[]).map(b=>({skillId:skill.id,formula:healingFormula(b),execution:b.execution}))),
       basis:requireRecorded?(missingFields.length?'Recorded + base defaults':'Recorded build'):known===0?'Reference build':known===model.skills.length+3?'Recorded build':'Recorded + assumed'};
   }
@@ -99,7 +99,7 @@
     return {...evaluate(slug,maximumBuild(slug,estimates,basis!=='flat'),upgrades,estimates,battleSeconds,basis==='flat'?null:externalFlat),
       basis:basis==='flat'?'Max heroes, no gear':'Equal max T5 build'};
   }
-  function maximumBuild(slug,estimates,withGear=true){const h=estimates.heroes[slug];return {stage:h.reference_stage,level:h.reference_level,
+  function maximumBuild(slug,estimates,withGear=true){const h=estimates.heroes[slug];return {reviewedUtc:null,reviewedClientBuild:null,stage:h.reference_stage,level:h.reference_level,
     skills:Object.fromEntries(h.skills.map(s=>[s.id,s.reference_level])),gear:withGear?(estimates.reference_gear||[]).map(g=>({...g})):[]};}
   const api={evaluate,compare,maximumBuild,missingBuild,openingSchedule,openingDamage,coveredTime,finishTriggers,healingFormula};if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.EstimateModel=api;
 })(globalThis);

@@ -1,7 +1,7 @@
 <Application x:Class="TilesSurviveHeroPlanner.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             StartupUri="MainWindow.xaml">
+             >
     <Application.Resources>
         <Color x:Key="Ink">#F4F8FF</Color>
         <Color x:Key="MutedInk">#A9BAD5</Color>

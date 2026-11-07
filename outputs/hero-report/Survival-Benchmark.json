@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "pressure": 580357.9446236538,
+  "back_share": 0.3,
+  "horizon": 30,
+  "label": "Recorded-pressure HP benchmark (experimental)",
+  "source_battle": "pvp-defense-2026-11-07-a",
+  "training_battles": 1,
+  "scope": "Same-battle calibration, not an independent validation. Held-owner folds exclude that owner death time AND damage from every fitted parameter. Only known pre-fight HP and positions are used when predicting.",
+  "limits": [
+    "Pressure is an inferred HP-drain benchmark, not recovered enemy ATK or a transferable server formula.",
+    "Troop health, shield, effective healing, control and target-specific mitigation are not supplied or invented.",
+    "Presentation death intervals remain an uncertain proxy for original combat time.",
+    "The optional optimiser adjustment discounts personal offense exposure only; survival and utility score weights remain unchanged.",
+    "A position-only control performs similarly on this small sample; the HP mechanism is not established as superior by independent battles."
+  ]
+}

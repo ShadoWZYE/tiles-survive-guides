@@ -15,6 +15,7 @@ def main():
     parser.add_argument('--bundle-list', type=Path, required=True)
     parser.add_argument('--root', type=Path, action='append', required=True)
     parser.add_argument('--stars-only', action='store_true')
+    parser.add_argument('--gear-only', action='store_true')
     args = parser.parse_args()
     sys.path.insert(0, str(ROOT / 'work/tools/unitypy'))
     import UnityPy
@@ -22,6 +23,9 @@ def main():
     wanted = {row[key] for group in ['signature', 'behemoths', 'research']
               for row in catalog[group].values() for key in ['icon_asset', 'skill_icon_asset'] if row.get(key)}
     if args.stars_only: wanted = set(catalog['behemoth_star_display']['sprites'])
+    if args.gear_only:
+        upgrades=json.loads((ROOT/'outputs/hero-report/TilesSurvive-Upgrade-Data.json').read_text(encoding='utf-8'))
+        wanted={g['icon_asset'] for g in upgrades['gear'].values()}
     ids = asset_bundle_ids(args.asset_index, wanted)
     hashes = bundle_hashes(args.bundle_list, set(ids.values()))
     if wanted - ids.keys():
@@ -29,7 +33,7 @@ def main():
     by_bundle = {}
     for name, bid in ids.items():
         by_bundle.setdefault(hashes[bid], set()).add(name)
-    output = ROOT / 'outputs/hero-tool/images/context-icons'
+    output = ROOT / ('outputs/hero-tool/images/gear-icons' if args.gear_only else 'outputs/hero-tool/images/context-icons')
     output.mkdir(parents=True, exist_ok=True)
     found = set()
     for digest, names in by_bundle.items():
