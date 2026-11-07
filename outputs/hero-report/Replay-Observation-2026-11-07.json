@@ -211,7 +211,22 @@
     "troops": 66600,
     "tier": 8,
     "hero_damage": 69890000,
-    "behemoth_damage": 5510000
+    "behemoth_damage": 5510000,
+    "damage_taken_by_hero": {
+      "maddie": 18190000,
+      "sarge": 13850000,
+      "chef": 605140,
+      "lucky": 808530,
+      "rosie": 465810
+    },
+    "damage_taken_frame_seconds": 38,
+    "damage_taken_rounding_quanta": [
+      10000,
+      10000,
+      10,
+      10,
+      10
+    ]
   },
   "timing_scenario": {
     "speed": 2,
@@ -223,7 +238,6 @@
     "death_marker_note": "Broad manually reviewed HUD greying intervals; transient greying is not treated as death. Travel, incapacitation and animation completion are not resolved."
   },
   "unresolved": [
-    "Friendly gear display exceeds the sum of transcribed item rows by 169260; no multiplier inferred.",
     "The report displays 10% troop health for 3+1+1, matching the local battle-formula tier; planner Final Health uses the separate 8% description tier. Runtime selector and application to hero versus troop health remain untraced; no forced global substitution.",
     "Enemy damage and friendly damage-taken totals do not conserve exactly; shield/overkill/summon attribution unknown."
   ],
@@ -233,5 +247,13 @@
     "manifest_sha256": "f77e8f2fe941ce1146d157c164b76be1bbb4ff1cfeb4d85189e17a0cdc92510d",
     "battle_formula_coefficient.same_unit_type_add_up": "0;0.02;0.1;0.15;0.25",
     "game_configs.same_unit_type_add_up_desc": "2|0.02,2_2|0.04,3|0.08,3_2|0.12,4|0.18,5|0.25"
+  },
+  "damage_definition": "report_owned_rows_unsplit_hp_change_and_absorption",
+  "resolved": {
+    "gear_power_residual": {
+      "previous_residual": 169260,
+      "cause": "Missing current-row BenefitLvSlgPower in progression exporter",
+      "new_residual": 0
+    }
   }
 }

@@ -66,3 +66,17 @@ test('shared gear XP ranks marginal gain per XP and favours the cheaper efficien
  const gear=model.evaluate(['a','b'],saved,data,{goal:'attack'}).candidates.filter(c=>c.kind==='gear');assert.equal(gear[0].slug,'a');assert.ok(gear[0].gain<gear[1].gain);assert.ok(gear[0].efficiency>gear[1].efficiency);assert.deepEqual(gear.map(c=>c.cost['gear-xp']),[100,1000]);
  assert.ok(real.gear_xp_cost_checks>0);
 });
+
+test('gear level milestone benefits and power enter once and improve marginal upgrade returns',()=>{
+ const h=real.heroes.rosie,stage=h.stages.at(-1),skills=Object.fromEntries(h.skills.map(s=>[s.id,0]));
+ const build=n=>({stage:stage.id,level:120,skills,gear:[{id:'equipment_suit1_body_5',level:n}]});
+ const before=model.state('rosie',build(19),real,30),after=model.state('rosie',build(20),real,30);
+ assert.deepEqual(after.stats.map((v,i)=>v-before.stats[i]),[192,222,12000]);
+ assert.equal(after.power-before.power,8712);
+ const r=model.evaluate(['rosie'],{rosie:build(19)},real,{goal:'defense'});
+ const candidate=r.candidates.find(c=>c.kind==='gear');
+ assert.ok(candidate);assert.equal(candidate.delta[1],222);assert.ok(Math.abs(candidate.gain-222/before.stats[1]*100)<1e-9);assert.equal(candidate.cost['gear-xp'],5200);
+ const g=real.gear.equipment_suit1_body_5.levels.find(r=>r.level===20);
+ assert.deepEqual(g.stats,[3872,1602,285200]);assert.equal(g.power,122512);
+ assert.equal(g.level_bonus_power,7320);assert.equal(g.base_power+g.level_bonus_power,g.power);
+});

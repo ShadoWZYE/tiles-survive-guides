@@ -14,6 +14,13 @@ def stats(values):
     lookup = {v["benefit_id"]: v["benefit_value"] for v in values}
     return [float(lookup.get(i, 0)) for i in STAT_IDS]
 
+def gear_level(row):
+    base, bonus = stats(row['BenefitSlg']), stats(row['BenefitLvSlg'])
+    return {"level": row['Level'], "stats": [a+b for a,b in zip(base,bonus)],
+            "power": row['Power']+row['BenefitLvSlgPower'], "xp_next": row['ExpNeed'],
+            "base_stats": base, "level_bonus_stats": bonus,
+            "base_power": row['Power'], "level_bonus_power": row['BenefitLvSlgPower']}
+
 def export(source: Path, roster: list, version: str, localized: dict) -> dict:
     files = {}
     def table(name):
@@ -73,7 +80,7 @@ def export(source: Path, roster: list, version: str, localized: dict) -> dict:
             continue
         gear[r["Id"]] = {"name": localized.get(r["EquipmentName"], r["Id"]), "slot": r["Part"], "quality": r["Quality"],
                          "hero_level_required": r["SurvivorLevel"],
-                         "levels": [{"level": g["Level"], "stats": stats(g["BenefitSlg"]), "power": g["Power"], "xp_next": g["ExpNeed"]} for g in rows]}
+                         "levels": [gear_level(g) for g in rows]}
     used_items = {key for hero in result.values() for stage in hero["stages"] for key in stage["cost"]}
     xp_checks=0
     for rows in [[g for g in gear_levels if g["SurvivorEquipmentId"]==r["InternalId"]] for r in gear_types if r["Arms"]==0]:
@@ -85,7 +92,7 @@ def export(source: Path, roster: list, version: str, localized: dict) -> dict:
     used_items.update(key for hero in result.values() for skill in hero["skills"] for level in skill["levels"] for key in level["cost"])
     return {"gear_xp_cost_checks":xp_checks,"gear_xp_cost_basis":"Current ExpNeed; cross-checked against adjacent ExpProvide differences. Zero partial XP progress assumed.","schema": 1, "client_build": version, "source_hashes": files, "heroes": result, "gear": gear,
             "items": {**{key: items.get(key, key) for key in sorted(used_items)}, "hero-xp": "Hero XP", "gear-xp": "Gear XP"},
-            "model_notes": "BenefitTroop + BenefitsTroops + recorded BenefitSlg gear. Rank costs use destination ItemReqNew; skill costs use destination SlgItemReq. Runtime damage/utility return is not scored in upgrade-cost comparisons. Not a win-rate or live damage simulator. Recorded skill Benefits flat hero stats (301825/301826/301827) included once; OverallBenefit troop percentages remain separate."}
+            "model_notes": "BenefitTroop + BenefitsTroops + recorded BenefitSlg gear. Rank costs use destination ItemReqNew; skill costs use destination SlgItemReq. Runtime damage/utility return is not scored in upgrade-cost comparisons. Not a win-rate or live damage simulator. Recorded skill Benefits flat hero stats (301825/301826/301827) included once; OverallBenefit troop percentages remain separate. Gear includes current-row BenefitLvSlg and BenefitLvSlgPower once; unrecorded gear rank, breakthrough and enchant bonuses are not inferred."}
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)

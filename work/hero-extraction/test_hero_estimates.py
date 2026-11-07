@@ -6,6 +6,15 @@ from build_estimate_model import build
 
 
 class ReferenceEstimateTests(unittest.TestCase):
+    def test_gear_export_adds_current_bonus_row_once(self):
+        from build_upgrade_data import gear_level
+        row={'Level':20,'Power':100,'BenefitLvSlgPower':30,'ExpNeed':500,
+             'BenefitSlg':[{'benefit_id':301825,'benefit_value':10}],
+             'BenefitLvSlg':[{'benefit_id':301825,'benefit_value':2},{'benefit_id':301827,'benefit_value':100}]}
+        exported=gear_level(row)
+        self.assertEqual(exported['stats'],[12,0,100]);self.assertEqual(exported['power'],130)
+        self.assertEqual(exported['xp_next'],500)
+
     def test_reproducible_and_same_snapshot_required(self):
         folder = Path(__file__).resolve().parents[2] / 'outputs/hero-report'
         read = lambda name: json.loads((folder / name).read_text(encoding='utf-8'))

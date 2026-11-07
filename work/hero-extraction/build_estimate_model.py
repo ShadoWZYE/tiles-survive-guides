@@ -238,7 +238,7 @@ def build(upgrades, audit, roster):
     if set(gear_by_slot) != {1,2,3}:
         raise ValueError('Expected yellow T5 head, body and leg equipment.')
     reference_gear = [gear_by_slot[k] for k in sorted(gear_by_slot)]
-    result = {'version': 15, 'reference_level': max(r['level'] for h in upgrades['heroes'].values() for r in h['levels']),
+    result = {'version': 16, 'reference_level': max(r['level'] for h in upgrades['heroes'].values() for r in h['levels']),
               'reference_rank': max(s['rank'] for h in upgrades['heroes'].values() for s in h['stages']),
               'reference_step': 6, 'reference_gear':reference_gear,
               'reference_policy':'maximum_available_hero_level_rank_skills; equal builds adds standard yellow T5 maximum-level gear; no-gear mode uses the same hero baseline',

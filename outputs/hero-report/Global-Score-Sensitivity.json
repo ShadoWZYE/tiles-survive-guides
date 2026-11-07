@@ -1,0 +1,598 @@
+{
+  "schema": 1,
+  "model_version": 16,
+  "scope": "Global individual hero index sensitivity. Full-access equal maximum T5 builds, no account context or enemy. Not squad rankings: faction composition, team synergy and front-pair placement are excluded. No observed outcome is used to fit weights.",
+  "baseline_weights": [
+    0.55,
+    0.35,
+    0.1
+  ],
+  "weight_sensitivity": {
+    "scenarios": 9,
+    "heroes": [
+      {
+        "hero": "lava",
+        "baseline_rank": 1,
+        "best_rank": 1,
+        "worst_rank": 1,
+        "top_five_scenarios": 9
+      },
+      {
+        "hero": "tithi",
+        "baseline_rank": 2,
+        "best_rank": 2,
+        "worst_rank": 5,
+        "top_five_scenarios": 9
+      },
+      {
+        "hero": "ragnar",
+        "baseline_rank": 3,
+        "best_rank": 3,
+        "worst_rank": 6,
+        "top_five_scenarios": 7
+      },
+      {
+        "hero": "nikola",
+        "baseline_rank": 4,
+        "best_rank": 2,
+        "worst_rank": 9,
+        "top_five_scenarios": 5
+      },
+      {
+        "hero": "becca",
+        "baseline_rank": 5,
+        "best_rank": 4,
+        "worst_rank": 8,
+        "top_five_scenarios": 5
+      },
+      {
+        "hero": "maddie",
+        "baseline_rank": 6,
+        "best_rank": 4,
+        "worst_rank": 6,
+        "top_five_scenarios": 4
+      },
+      {
+        "hero": "chiron",
+        "baseline_rank": 7,
+        "best_rank": 5,
+        "worst_rank": 10,
+        "top_five_scenarios": 3
+      },
+      {
+        "hero": "mike",
+        "baseline_rank": 8,
+        "best_rank": 2,
+        "worst_rank": 13,
+        "top_five_scenarios": 3
+      },
+      {
+        "hero": "ray",
+        "baseline_rank": 9,
+        "best_rank": 8,
+        "worst_rank": 9,
+        "top_five_scenarios": 0
+      },
+      {
+        "hero": "wright",
+        "baseline_rank": 10,
+        "best_rank": 7,
+        "worst_rank": 11,
+        "top_five_scenarios": 0
+      },
+      {
+        "hero": "knotty",
+        "baseline_rank": 11,
+        "best_rank": 10,
+        "worst_rank": 14,
+        "top_five_scenarios": 0
+      },
+      {
+        "hero": "rosie",
+        "baseline_rank": 12,
+        "best_rank": 11,
+        "worst_rank": 14,
+        "top_five_scenarios": 0
+      },
+      {
+        "hero": "layla",
+        "baseline_rank": 13,
+        "best_rank": 7,
+        "worst_rank": 16,
+        "top_five_scenarios": 0
+      },
+      {
+        "hero": "tarzan",
+        "baseline_rank": 14,
+        "best_rank": 11,
+        "worst_rank": 15,
+        "top_five_scenarios": 0
+      },
+      {
+        "hero": "tara",
+        "baseline_rank": 15,
+        "best_rank": 12,
+        "worst_rank": 15,
+        "top_five_scenarios": 0
+      },
+      {
+        "hero": "dave",
+        "baseline_rank": 16,
+        "best_rank": 15,
+        "worst_rank": 18,
+        "top_five_scenarios": 0
+      },
+      {
+        "hero": "shark",
+        "baseline_rank": 17,
+        "best_rank": 16,
+        "worst_rank": 20,
+        "top_five_scenarios": 0
+      },
+      {
+        "hero": "candy",
+        "baseline_rank": 18,
+        "best_rank": 17,
+        "worst_rank": 20,
+        "top_five_scenarios": 0
+      },
+      {
+        "hero": "undine",
+        "baseline_rank": 19,
+        "best_rank": 17,
+        "worst_rank": 19,
+        "top_five_scenarios": 0
+      },
+      {
+        "hero": "tony",
+        "baseline_rank": 20,
+        "best_rank": 18,
+        "worst_rank": 20,
+        "top_five_scenarios": 0
+      },
+      {
+        "hero": "jacob",
+        "baseline_rank": 21,
+        "best_rank": 21,
+        "worst_rank": 22,
+        "top_five_scenarios": 0
+      },
+      {
+        "hero": "freja",
+        "baseline_rank": 22,
+        "best_rank": 21,
+        "worst_rank": 22,
+        "top_five_scenarios": 0
+      },
+      {
+        "hero": "travis",
+        "baseline_rank": 23,
+        "best_rank": 23,
+        "worst_rank": 23,
+        "top_five_scenarios": 0
+      },
+      {
+        "hero": "lucky",
+        "baseline_rank": 24,
+        "best_rank": 24,
+        "worst_rank": 24,
+        "top_five_scenarios": 0
+      },
+      {
+        "hero": "ken",
+        "baseline_rank": 25,
+        "best_rank": 25,
+        "worst_rank": 27,
+        "top_five_scenarios": 0
+      },
+      {
+        "hero": "sarge",
+        "baseline_rank": 26,
+        "best_rank": 25,
+        "worst_rank": 26,
+        "top_five_scenarios": 0
+      },
+      {
+        "hero": "eva",
+        "baseline_rank": 27,
+        "best_rank": 26,
+        "worst_rank": 27,
+        "top_five_scenarios": 0
+      },
+      {
+        "hero": "rusty",
+        "baseline_rank": 28,
+        "best_rank": 28,
+        "worst_rank": 28,
+        "top_five_scenarios": 0
+      },
+      {
+        "hero": "tim",
+        "baseline_rank": 29,
+        "best_rank": 29,
+        "worst_rank": 29,
+        "top_five_scenarios": 0
+      }
+    ],
+    "runs": [
+      {
+        "top_five": [
+          "lava",
+          "tithi",
+          "ragnar",
+          "becca",
+          "chiron"
+        ],
+        "weights": [
+          0.45,
+          0.5,
+          0.05
+        ]
+      },
+      {
+        "top_five": [
+          "lava",
+          "tithi",
+          "mike",
+          "ragnar",
+          "nikola"
+        ],
+        "weights": [
+          0.45,
+          0.45000000000000007,
+          0.1
+        ]
+      },
+      {
+        "top_five": [
+          "lava",
+          "mike",
+          "nikola",
+          "maddie",
+          "tithi"
+        ],
+        "weights": [
+          0.45,
+          0.4,
+          0.15
+        ]
+      },
+      {
+        "top_five": [
+          "lava",
+          "tithi",
+          "ragnar",
+          "becca",
+          "chiron"
+        ],
+        "weights": [
+          0.55,
+          0.39999999999999997,
+          0.05
+        ]
+      },
+      {
+        "top_five": [
+          "lava",
+          "tithi",
+          "ragnar",
+          "nikola",
+          "becca"
+        ],
+        "weights": [
+          0.55,
+          0.35,
+          0.1
+        ]
+      },
+      {
+        "top_five": [
+          "lava",
+          "nikola",
+          "mike",
+          "tithi",
+          "maddie"
+        ],
+        "weights": [
+          0.55,
+          0.29999999999999993,
+          0.15
+        ]
+      },
+      {
+        "top_five": [
+          "lava",
+          "tithi",
+          "ragnar",
+          "becca",
+          "chiron"
+        ],
+        "weights": [
+          0.65,
+          0.3,
+          0.05
+        ]
+      },
+      {
+        "top_five": [
+          "lava",
+          "tithi",
+          "ragnar",
+          "becca",
+          "maddie"
+        ],
+        "weights": [
+          0.65,
+          0.24999999999999997,
+          0.1
+        ]
+      },
+      {
+        "top_five": [
+          "lava",
+          "tithi",
+          "nikola",
+          "ragnar",
+          "maddie"
+        ],
+        "weights": [
+          0.65,
+          0.19999999999999998,
+          0.15
+        ]
+      }
+    ]
+  },
+  "timing_sensitivity": {
+    "scenarios": 4,
+    "heroes": [
+      {
+        "hero": "lava",
+        "baseline_rank": 1,
+        "best_rank": 1,
+        "worst_rank": 1,
+        "top_five_scenarios": 4
+      },
+      {
+        "hero": "tithi",
+        "baseline_rank": 2,
+        "best_rank": 2,
+        "worst_rank": 2,
+        "top_five_scenarios": 4
+      },
+      {
+        "hero": "ragnar",
+        "baseline_rank": 3,
+        "best_rank": 3,
+        "worst_rank": 4,
+        "top_five_scenarios": 4
+      },
+      {
+        "hero": "nikola",
+        "baseline_rank": 4,
+        "best_rank": 4,
+        "worst_rank": 8,
+        "top_five_scenarios": 1
+      },
+      {
+        "hero": "becca",
+        "baseline_rank": 5,
+        "best_rank": 4,
+        "worst_rank": 5,
+        "top_five_scenarios": 4
+      },
+      {
+        "hero": "maddie",
+        "baseline_rank": 6,
+        "best_rank": 3,
+        "worst_rank": 8,
+        "top_five_scenarios": 2
+      },
+      {
+        "hero": "chiron",
+        "baseline_rank": 7,
+        "best_rank": 6,
+        "worst_rank": 8,
+        "top_five_scenarios": 0
+      },
+      {
+        "hero": "mike",
+        "baseline_rank": 8,
+        "best_rank": 5,
+        "worst_rank": 8,
+        "top_five_scenarios": 1
+      },
+      {
+        "hero": "ray",
+        "baseline_rank": 9,
+        "best_rank": 9,
+        "worst_rank": 9,
+        "top_five_scenarios": 0
+      },
+      {
+        "hero": "wright",
+        "baseline_rank": 10,
+        "best_rank": 10,
+        "worst_rank": 10,
+        "top_five_scenarios": 0
+      },
+      {
+        "hero": "knotty",
+        "baseline_rank": 11,
+        "best_rank": 11,
+        "worst_rank": 11,
+        "top_five_scenarios": 0
+      },
+      {
+        "hero": "rosie",
+        "baseline_rank": 12,
+        "best_rank": 12,
+        "worst_rank": 15,
+        "top_five_scenarios": 0
+      },
+      {
+        "hero": "layla",
+        "baseline_rank": 13,
+        "best_rank": 12,
+        "worst_rank": 13,
+        "top_five_scenarios": 0
+      },
+      {
+        "hero": "tarzan",
+        "baseline_rank": 14,
+        "best_rank": 13,
+        "worst_rank": 15,
+        "top_five_scenarios": 0
+      },
+      {
+        "hero": "tara",
+        "baseline_rank": 15,
+        "best_rank": 13,
+        "worst_rank": 15,
+        "top_five_scenarios": 0
+      },
+      {
+        "hero": "dave",
+        "baseline_rank": 16,
+        "best_rank": 16,
+        "worst_rank": 17,
+        "top_five_scenarios": 0
+      },
+      {
+        "hero": "shark",
+        "baseline_rank": 17,
+        "best_rank": 16,
+        "worst_rank": 17,
+        "top_five_scenarios": 0
+      },
+      {
+        "hero": "candy",
+        "baseline_rank": 18,
+        "best_rank": 18,
+        "worst_rank": 18,
+        "top_five_scenarios": 0
+      },
+      {
+        "hero": "undine",
+        "baseline_rank": 19,
+        "best_rank": 19,
+        "worst_rank": 19,
+        "top_five_scenarios": 0
+      },
+      {
+        "hero": "tony",
+        "baseline_rank": 20,
+        "best_rank": 20,
+        "worst_rank": 20,
+        "top_five_scenarios": 0
+      },
+      {
+        "hero": "jacob",
+        "baseline_rank": 21,
+        "best_rank": 21,
+        "worst_rank": 21,
+        "top_five_scenarios": 0
+      },
+      {
+        "hero": "freja",
+        "baseline_rank": 22,
+        "best_rank": 22,
+        "worst_rank": 22,
+        "top_five_scenarios": 0
+      },
+      {
+        "hero": "travis",
+        "baseline_rank": 23,
+        "best_rank": 23,
+        "worst_rank": 23,
+        "top_five_scenarios": 0
+      },
+      {
+        "hero": "lucky",
+        "baseline_rank": 24,
+        "best_rank": 24,
+        "worst_rank": 24,
+        "top_five_scenarios": 0
+      },
+      {
+        "hero": "ken",
+        "baseline_rank": 25,
+        "best_rank": 25,
+        "worst_rank": 26,
+        "top_five_scenarios": 0
+      },
+      {
+        "hero": "sarge",
+        "baseline_rank": 26,
+        "best_rank": 25,
+        "worst_rank": 26,
+        "top_five_scenarios": 0
+      },
+      {
+        "hero": "eva",
+        "baseline_rank": 27,
+        "best_rank": 27,
+        "worst_rank": 27,
+        "top_five_scenarios": 0
+      },
+      {
+        "hero": "rusty",
+        "baseline_rank": 28,
+        "best_rank": 28,
+        "worst_rank": 28,
+        "top_five_scenarios": 0
+      },
+      {
+        "hero": "tim",
+        "baseline_rank": 29,
+        "best_rank": 29,
+        "worst_rank": 29,
+        "top_five_scenarios": 0
+      }
+    ],
+    "runs": [
+      {
+        "top_five": [
+          "lava",
+          "tithi",
+          "ragnar",
+          "nikola",
+          "becca"
+        ],
+        "game_seconds": "sustained"
+      },
+      {
+        "top_five": [
+          "lava",
+          "tithi",
+          "ragnar",
+          "maddie",
+          "becca"
+        ],
+        "game_seconds": 10
+      },
+      {
+        "top_five": [
+          "lava",
+          "tithi",
+          "maddie",
+          "ragnar",
+          "becca"
+        ],
+        "game_seconds": 20
+      },
+      {
+        "top_five": [
+          "lava",
+          "tithi",
+          "ragnar",
+          "becca",
+          "mike"
+        ],
+        "game_seconds": 30
+      }
+    ]
+  },
+  "ranking_accuracy": null,
+  "note": "Rank robustness measures dependence on modeling choices, not combat prediction accuracy. The 9 weight settings are deliberately selected scenarios, not a probability distribution."
+}

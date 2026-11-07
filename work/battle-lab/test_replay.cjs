@@ -14,6 +14,6 @@ test('already dispatched periodic effects have separate cancel and persist scena
 test('report/replay form one observation; independent power and countdown checks remain honest',()=>{
  const base='../../outputs/hero-report/',r=analyse(require(base+'Replay-Observation-2026-11-07.json'),require(base+'TilesSurvive-Upgrade-Data.json'),require(base+'Hero-Estimate-Model.json'));
  assert.equal(r.independent_battles,1);assert.ok(r.opening_countdowns.every(c=>c.consistent));assert.equal(r.skill_power.reconstructed,1165764);assert.equal(r.skill_power.consistent,true);
- assert.equal(r.gear_power.residual,169260);assert.equal(r.damage.total,37910000);assert.equal(r.accuracy_percentage,null);
+ assert.equal(r.gear_power.residual,0);assert.equal(r.damage.total,37910000);assert.equal(r.accuracy_percentage,null);
  for(const h of r.heroes){assert.ok(h.lifetime_coefficient_potential[0]<=h.lifetime_coefficient_potential[1]);assert.ok(h.lifetime_coefficient_potential[1]<=h.full_30s_coefficient_potential+1e-8);}
 });

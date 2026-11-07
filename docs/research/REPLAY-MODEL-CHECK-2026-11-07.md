@@ -1,5 +1,7 @@
 # Replay model check — 7 November 2026
 
+**Follow-up:** model 16 resolves the gear residual below through omitted level milestone bonuses. See [damage attribution and scoring follow-up](DAMAGE-ATTRIBUTION-AND-SCORING-2026-11-07.md) for the correction and newer measurement report.
+
 The supplied recording shows one PvP defence report and its replay. Account names, alliances and coordinates are excluded from the public observation. The report and replay count as one battle. No prediction was saved before the result, so this is a mechanics check, not held-out validation.
 
 ## Correction shipped in model 15

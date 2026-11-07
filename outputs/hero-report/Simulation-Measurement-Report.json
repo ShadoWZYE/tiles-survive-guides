@@ -1,0 +1,68 @@
+{
+  "schema": 1,
+  "battle_id": "pvp-defense-2026-11-07-a",
+  "model_sha256": "be21bac22c50b4af0e90574f6b611166a5a5673b381cfd57066a46ae46f34828",
+  "source_sha256": "aea2b2109fcda79a18c9bcaeea483d47c8a00f1825742fd49d005d4429423288",
+  "input_reconstruction_checks": {
+    "skill_power_absolute_error": 0,
+    "gear_power_absolute_error": 0,
+    "gear_power_relative_error": 0.0,
+    "opening_countdowns_consistent": 5,
+    "opening_countdowns_checked": 5,
+    "scope": "Input and rounded-readiness consistency only. These are not simulated damage or winner errors."
+  },
+  "attribution_axes": {
+    "known_owner_bucket_damage": {
+      "heroes_including_eligible_owned_actors": 32790000,
+      "separate_behemoth_rows": 5120000
+    },
+    "within_owner_mechanism_split": null,
+    "direct_hero_vs_soldier_vs_summon_identifiable_from_report": false,
+    "shield_vs_hp_damage_identifiable_from_report": false,
+    "scope": "Ownership and mechanism are separate axes; adding summons or shields on top of an inclusive hero row double counts."
+  },
+  "counter_reconciliation": {
+    "enemy_outgoing_vs_friendly_hero_taken": {
+      "outgoing_display_sum": 75400000,
+      "incoming_display_sum": 71680000,
+      "difference": 3720000,
+      "relative_to_outgoing": 0.0493368700265252,
+      "conservative_display_rounding_budget": 120000,
+      "larger_than_rounding_budget": true,
+      "attributed_cause": null
+    },
+    "friendly_outgoing_vs_enemy_hero_taken": {
+      "outgoing_display_sum": 37910000,
+      "incoming_display_sum": 33919480,
+      "difference": 3990520,
+      "relative_to_outgoing": 0.10526299129517278,
+      "conservative_display_rounding_budget": 90030,
+      "larger_than_rounding_budget": true,
+      "attributed_cause": null
+    },
+    "rounding_scope": "Conservative one full display unit per row, not a claimed rounding algorithm. Comparison includes pet outgoing rows but only visible hero incoming rows; missing actor coverage and attribution must be checked before treating residual as model error. Shields enter both counters when both endpoints resolve, so shields alone do not prove the cause."
+  },
+  "held_out_simulation": {
+    "independent_eligible_battles": 0,
+    "owner_pairs": 0,
+    "mae": null,
+    "wape": null,
+    "exclusions": {
+      "no_frozen_prediction": 1
+    },
+    "pairs": [],
+    "scope": "Same definition, current model hash, held-out timestamped predictions only. WAPE is an error ratio, not winner or global ranking accuracy."
+  },
+  "matched_global_scoring": {
+    "matched_pairs": 0,
+    "pairwise_agreement": null,
+    "exclusions": {},
+    "scope": "Agreement for the declared outcome metric and reviewed matched context. Does not imply universal balanced-score accuracy."
+  },
+  "next_measurable_tests": [
+    "Freeze a complete prediction with model and input hashes before an independent outcome.",
+    "Use owner-inclusive report damage as a distinct target from HP removed; never compare the two definitions.",
+    "For squad-score validation compare fresh identical enemy states, exact builds/context and troop count, with no uncontrolled rally participants; record the declared outcome metric."
+  ],
+  "overall_accuracy_percentage": null
+}
