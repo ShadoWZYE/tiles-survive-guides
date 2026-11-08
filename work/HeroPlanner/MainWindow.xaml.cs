@@ -327,7 +327,7 @@ public partial class MainWindow : Window
     {
         if (sender is not Button { Tag: string tabText } || !int.TryParse(tabText, out int tabIndex)) return;
         InspectorTabs.SelectedIndex = tabIndex;
-        bool beasts = tabIndex is 5 or 6;
+        bool beasts = tabIndex is 5 or 6 or 7;
         RosterArea.Visibility = RosterSplitter.Visibility = beasts ? Visibility.Collapsed : Visibility.Visible;
         Grid.SetColumn(InspectorPanel, beasts ? 0 : 2); Grid.SetColumnSpan(InspectorPanel, beasts ? 3 : 1);
         UpdateNavigationState(tabIndex);
@@ -343,12 +343,13 @@ public partial class MainWindow : Window
         }
         if(tabIndex==5) RenderBehemoths();
         if(tabIndex==6) RenderResearch();
+        if(tabIndex==7) RenderFactionTalents();
         HeroRoster.Items.Refresh();
     }
 
     private void UpdateNavigationState(int selectedIndex)
     {
-        Button[] buttons = [SquadNav, StatsNav, SkillsNav, RosterNav, ReleaseNav, BehemothsNav, ResearchNav];
+        Button[] buttons = [SquadNav, StatsNav, SkillsNav, RosterNav, ReleaseNav, BehemothsNav, ResearchNav, FactionTalentsNav];
         for (int index = 0; index < buttons.Length; index++)
         {
             bool selected = index == selectedIndex;

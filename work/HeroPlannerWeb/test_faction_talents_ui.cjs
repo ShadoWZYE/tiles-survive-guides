@@ -1,0 +1,19 @@
+'use strict';
+const {chromium}=require(process.env.PLANNER_PLAYWRIGHT||'playwright'),{pathToFileURL}=require('node:url'),fs=require('node:fs'),os=require('node:os'),path=require('node:path'),assert=require('node:assert/strict');
+(async()=>{
+ const folder=fs.mkdtempSync(path.join(os.tmpdir(),'planner-talents-')),options={headless:true,executablePath:process.env.PLANNER_BROWSER,viewport:{width:1440,height:1080}},url=pathToFileURL(path.resolve(__dirname,'../../outputs/Tiles-Survive-Hero-Planner-Offline.html')).href;
+ let browser=await chromium.launchPersistentContext(folder,options);
+ try{
+  let page=await browser.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));await page.goto(url);
+  await page.locator('.hero-card[data-slug="rosie"]').click();await page.locator('[data-tab="talents"]').click();assert.equal(await page.locator('[data-talent]').count(),24);
+  await page.locator('[data-talent-points="163600001"]').fill('39');await page.locator('[data-talent="163600001:2"] select').selectOption('1');await page.locator('#save-talents').click();assert.match(await page.locator('#talents-status').innerText(),/prerequisite missing/);
+  await page.locator('[data-talent="163600001:1"] select').selectOption('3');await page.locator('#talents-enabled').check();await page.locator('#save-talents').click();assert.match(await page.locator('#talents-status').innerText(),/Saved locally/);
+  assert.match(await page.locator('#talents-summary').innerText(),/spent 13 \/ 39/);assert.match(await page.locator('#talents-recommendations').innerText(),/score.*points/);
+  assert.equal(await page.locator('[data-talent] img').evaluateAll(imgs=>imgs.every(i=>i.complete&&i.naturalWidth>0)),true);
+  await page.locator('#detail-content').evaluate(el=>{for(let p=el;p;p=p.parentElement)p.scrollTop=0;});
+  if(process.env.PLANNER_SCREENSHOT_DIR)await page.screenshot({path:path.join(process.env.PLANNER_SCREENSHOT_DIR,'browser-faction-talents.png')});
+  await browser.close();browser=await chromium.launchPersistentContext(folder,options);page=await browser.newPage();await page.goto(url);await page.locator('[data-tab="talents"]').click();assert.equal(await page.locator('[data-talent-points="163600001"]').inputValue(),'39');assert.equal(await page.locator('[data-talent="163600001:1"] select').inputValue(),'3');assert.equal(await page.locator('[data-talent="163600001:2"] select').inputValue(),'1');assert.equal(await page.locator('#talents-enabled').isChecked(),true);
+  await page.locator('#army-context').click();await page.locator('#setup-advanced').click();await page.locator('#context-apply').click();await page.locator('[data-tab="talents"]').click();assert.equal(await page.locator('[data-talent="163600001:1"] select').inputValue(),'3');assert.deepEqual(errors,[]);
+  console.log('PASS browser talent catalog, icons, prerequisite rejection, cost totals, recommendations, save, restart and advanced-context preservation.');
+ }finally{await browser.close();fs.rmSync(folder,{recursive:true,force:true});}
+})().catch(e=>{console.error(e);process.exit(1)});

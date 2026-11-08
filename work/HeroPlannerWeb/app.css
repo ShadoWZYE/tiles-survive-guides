@@ -18,3 +18,9 @@
 .app-header{padding:8px 20px;min-height:0;gap:12px}.brand img{width:30px;height:30px}.brand{gap:9px}.brand h1{font-size:23px;margin:0}.brand span{font-size:10px}.header-meta{padding:5px 10px;font-size:11px}.header-meta small{display:none}.top-nav{padding:5px 20px;gap:5px}.top-nav>button,.save-tools button{padding:7px 10px}.save-tools{gap:5px}
 
 .gear-panels{display:flex;flex-wrap:wrap;gap:5px;max-width:620px}.gear-choice{width:76px;min-height:84px;padding:4px;border:2px solid #56708a;background:#182d49;color:white;border-radius:6px;cursor:pointer}.gear-choice img{width:44px;height:44px;object-fit:contain}.gear-choice small{display:block;font-size:10px;white-space:normal}.gear-choice[aria-pressed=true]{border-color:#31d6c8;background:#204b59}.gear-choice:focus-visible{outline:2px solid white}
+
+.talent-branches{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.talent-branch input{max-width:130px}.talent-description,#talents-recommendations{white-space:pre-line}.talent-branch .research-card{margin-top:12px}.talent-branch select{width:100%}@media(max-width:850px){.talent-branches{grid-template-columns:1fr}}
+
+#save-talents{border:1px solid var(--cyan);border-radius:8px;background:#137f80;color:white;padding:10px 18px;font-weight:700;cursor:pointer}
+
+.talent-branch input[type=number],.talent-branch select{background:#1b3654;color:var(--ink);border:1px solid #496582;border-radius:7px;padding:8px;min-height:36px}.talent-branch .context-icon{width:40px;height:40px}.talent-branch h3{margin:14px 0}

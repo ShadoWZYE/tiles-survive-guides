@@ -65,6 +65,7 @@
                     <Button x:Name="ReleaseNav" Content="RELEASE &amp; ACCESS" Tag="4" Click="Navigation_Click"
                             Padding="11,6" Margin="0,0,6,4" FontWeight="Bold" />
                     <Button x:Name="ResearchNav" Content="RESEARCH" Tag="6" Click="Navigation_Click" Padding="11,6" Margin="0,0,6,4" FontWeight="Bold" />
+                    <Button x:Name="FactionTalentsNav" Content="FACTION TALENTS" Tag="7" Click="Navigation_Click" Padding="11,6" Margin="0,0,6,4" FontWeight="Bold" />
                     <Button x:Name="BehemothsNav" Content="BEHEMOTHS" Tag="5" Click="Navigation_Click" Padding="11,6" Margin="0,0,6,4" FontWeight="Bold" />
                     <Button x:Name="ArmyContextButton" Content="Army Setup" Click="ArmySetup_Click" Padding="11,6" Margin="0,0,6,4" FontWeight="Bold" AutomationProperties.Name="Army Setup" />
                 </WrapPanel>
@@ -569,6 +570,7 @@
                         </TabItem>
                         <TabItem Header="BEHEMOTHS"><ScrollViewer VerticalScrollBarVisibility="Auto"><StackPanel x:Name="BehemothsPanel" Margin="10,16" /></ScrollViewer></TabItem>
                         <TabItem Header="RESEARCH"><Grid Margin="10,16"><Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /></Grid.RowDefinitions><StackPanel x:Name="ResearchPanel" /><ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto"><StackPanel x:Name="ResearchCardsPanel" /></ScrollViewer></Grid></TabItem>
+                        <TabItem Header="FACTION TALENTS"><ScrollViewer VerticalScrollBarVisibility="Auto"><StackPanel x:Name="FactionTalentsPanel" Margin="10,16" /></ScrollViewer></TabItem>
                     </TabControl>
                 </Grid>
             </Border>

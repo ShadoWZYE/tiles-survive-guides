@@ -34,6 +34,7 @@ def main() -> None:
                         + "\n" + (HERE / "upgrade-ui.js").read_text(encoding="utf-8")
                         + "\n" + (HERE / "army-context-model.js").read_text(encoding="utf-8")
                         + "\n" + (HERE / "army-context-ui.js").read_text(encoding="utf-8")
+                        + "\n" + (HERE / "faction-talents-ui.js").read_text(encoding="utf-8")
                         + "\n" + (HERE / "research-ui.js").read_text(encoding="utf-8")
                         + "\n" + (HERE / "estimate-model.js").read_text(encoding="utf-8")
                         + "\n" + (HERE / "faction-model.js").read_text(encoding="utf-8")
@@ -54,6 +55,9 @@ def main() -> None:
                 if row.get(key):
                     icon = IMAGE_ROOT / 'context-icons' / (row[key] + '.png')
                     row[key.replace('_asset','_data')] = 'data:image/png;base64,' + png_data(icon)
+    for branch in context.get('faction_talents', {}).values():
+        for node in branch['nodes'].values():
+            node['icon_data'] = 'data:image/png;base64,' + png_data(IMAGE_ROOT / 'context-icons' / (node['icon_asset'] + '.png'))
     context['behemoth_star_display']['images'] = ['data:image/png;base64,' + png_data(IMAGE_ROOT / 'context-icons' / (name + '.png')) for name in context['behemoth_star_display']['sprites']]
     html = html.replace('__EMBEDDED_CONTEXT_JSON__',json.dumps(context,ensure_ascii=False,separators=(',',':')).replace('</','<\\/'))
     html = html.replace('__EMBEDDED_ESTIMATE_JSON__', json.dumps(estimates, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/'))

@@ -318,8 +318,9 @@
     $$(".top-nav [data-tab]").forEach(button => button.classList.toggle("active", button.dataset.tab === state.tab));
     const titles = {squad:["Hero roster","Click heroes to build a five-hero formation."],stats:["Choose a hero","Click a card to inspect extracted maximum stats."],skills:["Choose a hero","Click a card to inspect skills, icons, and modeled payoff."],roster:["My roster","Select a hero to record its build; use its owned button to change ownership."],release:["Release roster","Click a hero for its release and access evidence."]};
     $("#roster-title").textContent = (titles[state.tab]||["Behemoths",""])[0]; $("#roster-hint").textContent = (titles[state.tab]||["Behemoths",""])[1];
-    $("#workspace").classList.toggle("behemoth-view",["behemoths","research"].includes(state.tab));
-    if (state.tab === "research") ResearchUI.mount($("#detail-content"),window.__ARMY_CONTEXT_DATA__,()=>profile.armyContext,next=>setProfile({...profile,armyContext:next}));
+    $("#workspace").classList.toggle("behemoth-view",["behemoths","research","talents"].includes(state.tab));
+    if(state.tab==='talents') FactionTalentsUI.mount($('#detail-content'),window.__ARMY_CONTEXT_DATA__,()=>profile.armyContext,next=>setProfile({...profile,armyContext:next}),candidate=>state.squad.reduce((sum,slug)=>sum+EstimateModel.compare(slug,profile.heroProgress?.[slug]?.build,window.__UPGRADE_DATA__,window.__ESTIMATE_DATA__,profile.comparisonBasis,null,profile.battleSeconds,ArmyContextModel.resolve(slug,candidate,window.__ARMY_CONTEXT_DATA__,profile.comparisonBasis).flat).score,0)/Math.max(1,state.squad.length),state.squad.length,profile.comparisonBasis);
+    else if (state.tab === "research") ResearchUI.mount($("#detail-content"),window.__ARMY_CONTEXT_DATA__,()=>profile.armyContext,next=>setProfile({...profile,armyContext:next}));
     else if (state.tab === "behemoths") {$("#detail-content").innerHTML=ArmyContextUI.behemoths(profile.armyContext,window.__ARMY_CONTEXT_DATA__);ArmyContextUI.bindBehemoths(profile.armyContext,window.__ARMY_CONTEXT_DATA__,next=>setProfile({...profile,armyContext:next}));}
     else if (state.tab === "squad") renderSquad();
     else if (state.tab === "stats") renderStats();
@@ -328,12 +329,12 @@
     else renderRelease();
   }
 
-  function accountReviewSnapshot(){return UpgradeModel.reviewSnapshot(window.__UPGRADE_DATA__)+"|"+UpgradeModel.reviewSnapshot(window.__ARMY_CONTEXT_DATA__);}
+  function accountReviewSnapshot(){return UpgradeModel.reviewSnapshot(window.__UPGRADE_DATA__)+"|"+UpgradeModel.reviewSnapshot({...window.__ARMY_CONTEXT_DATA__,source_hashes:{...window.__ARMY_CONTEXT_DATA__.source_hashes,...Object.fromEntries(Object.entries(window.__ARMY_CONTEXT_DATA__.faction_talent_source_hashes||{}).map(([k,v])=>["faction-talents:"+k,v]))}});}
   function squadDataNotice(selected){
     const gaps=selected.map(h=>({hero:h,fields:EstimateModel.missingBuild(h.asset_slug,profile.heroProgress?.[h.asset_slug]?.build,window.__UPGRADE_DATA__)})).filter(x=>x.fields.length);
     const stale=selected.filter(h=>!gaps.some(x=>x.hero===h)).filter(h=>{const b=profile.heroProgress?.[h.asset_slug]?.build,t=Date.parse(b?.reviewedUtc);return !Number.isFinite(t)||t>Date.now()+300000||Date.now()-t>14*86400000||b.reviewedClientBuild!==UpgradeModel.reviewSnapshot(window.__UPGRADE_DATA__);});
     const context=profile.armyContext,account=[];
-    if(!context.enabled)account.push('Army bonuses disabled');if(!Object.keys(context.research).length)account.push('Research not recorded');
+    if(!Object.keys(context.factionTalents).length)account.push('Faction talents not recorded (if unlocked)');if(!context.enabled)account.push('Army bonuses disabled');if(!Object.keys(context.research).length)account.push('Research not recorded');
     if(context.behemothSource==='configured'?!Object.values(context.behemothBuilds).some(b=>b.level>0||b.star>0):context.behemoth.every(v=>v===null))account.push('Behemoth bonuses not recorded');
     if(profile.comparisonBasis==='recorded'&&!selected.some(h=>context.signature[h.asset_slug]>0))account.push('Signature Gear not recorded (if owned)');
     const review=profile.accountReview,t=Date.parse(review?.at),fresh=Number.isFinite(t)&&t<=Date.now()+300000&&Date.now()-t<14*86400000&&review.clientBuild===accountReviewSnapshot()&&review.content===JSON.stringify(context);

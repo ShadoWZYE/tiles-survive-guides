@@ -609,7 +609,23 @@ internal static class Program
             reviewWindow.UpdateLayout();var preview=new RenderTargetBitmap((int)reviewWindow.ActualWidth,(int)reviewWindow.ActualHeight,96,96,PixelFormats.Pbgra32);preview.Render(reviewWindow);
             var png=new PngBitmapEncoder();png.Frames.Add(BitmapFrame.Create(preview));using var stream=File.Create(defaultScreenshot);png.Save(stream);
         }
+        Invoke(reviewWindow,"Navigation_Click",(Button)reviewWindow.FindName("FactionTalentsNav"),new RoutedEventArgs());reviewWindow.UpdateLayout();
+        var talentsPanel=(StackPanel)reviewWindow.FindName("FactionTalentsPanel");
+        var talentPickers=Walk(talentsPanel).OfType<ComboBox>().ToList();Check(talentPickers.Count==24,"Faction talent catalog missing nodes");
+        var talentBudget=Walk(talentsPanel).OfType<TextBox>().Single(x=>System.Windows.Automation.AutomationProperties.GetName(x)=="Faction total points 163600001");talentBudget.Text="39";
+        var talentAttack=talentPickers.Single(x=>System.Windows.Automation.AutomationProperties.GetName(x)=="Faction talent 163600001:1");
+        var talentDefense=talentPickers.Single(x=>System.Windows.Automation.AutomationProperties.GetName(x)=="Faction talent 163600001:2");
+        talentDefense.SelectedIndex=1;
+        var talentSave=Walk(talentsPanel).OfType<Button>().Single(x=>x.Content?.ToString()=="Save faction talents");talentSave.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+        Check(Walk(talentsPanel).OfType<TextBlock>().Any(x=>x.Text.Contains("Nothing saved")),"Invalid talent prerequisite was saved");
+        talentAttack.SelectedIndex=3;talentSave.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+        Check(Field<ArmyContextSettings>(reviewWindow,"_armyContext").FactionTalents["163600001:1"]==3,"Faction talents failed to save");
+        if(!string.IsNullOrEmpty(screenshotDir)){
+            reviewWindow.UpdateLayout();var shot=new RenderTargetBitmap((int)reviewWindow.ActualWidth,(int)reviewWindow.ActualHeight,96,96,PixelFormats.Pbgra32);shot.Render(reviewWindow);
+            var talentEncoder=new PngBitmapEncoder();talentEncoder.Frames.Add(BitmapFrame.Create(shot));using var stream=File.Create(Path.Combine(screenshotDir,"native-faction-talents.png"));talentEncoder.Save(stream);
+        }
         reviewWindow.Close();
+        var talentRestart=Create();Check(Field<ArmyContextSettings>(talentRestart,"_armyContext").FactionPoints.GetValueOrDefault("163600001")==39,"Faction point total lost on restart");Check(Field<ArmyContextSettings>(talentRestart,"_armyContext").FactionTalents.GetValueOrDefault("163600001:1")==3,"Faction node level lost on restart");talentRestart.Close();
         app.Shutdown();
         Console.WriteLine("WPF UI regression passed: ownership, autosave, star layout, selectable priority cards, resource filters, top-three percent ordering, rank/level/skill/gear recording, balance deduction, stale-click protection, save rollback and safe Undo. Real profile untouched.");
     }

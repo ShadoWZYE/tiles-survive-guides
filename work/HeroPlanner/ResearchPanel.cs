@@ -133,6 +133,7 @@ public partial class MainWindow
             var button = new Button { Content = action, HorizontalAlignment = HorizontalAlignment.Left, Padding = new Thickness(12, 6, 12, 6) }; body.Children.Add(button);
             button.Click += (_, _) => { if (!Apply()) return; window.Close(); Navigation_Click(FindName(nav), new RoutedEventArgs()); };
         }
+        Section("Faction talents", $"{_armyContext.FactionTalents.Count} purchased nodes recorded", "Configure faction talents", "FactionTalentsNav");
         Section("Research", $"{_armyContext.Research.Count} / {_armyContextData.Research.Count} nodes recorded", "Configure Research", "ResearchNav");
         Section("Signature Gear", $"{_armyContext.Signature.Count} heroes recorded · applies in My builds", "Configure hero gear", "RosterNav");
         Section("Behemoths", _armyContext.BehemothSource == "configured" ? $"{_armyContext.BehemothBuilds.Count} configured Behemoths" : "Manual hero-bonus snapshot", "Configure Behemoths", "BehemothsNav");

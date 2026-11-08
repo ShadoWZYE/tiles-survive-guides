@@ -2,6 +2,8 @@ using System.Text.Json;
 namespace TilesSurviveHeroPlanner;
 public sealed class ArmyContextData
 {
+ public Dictionary<string,string> FactionTalentSourceHashes {get;set;}=[];
+ public Dictionary<string,FactionTalentBranch> FactionTalents {get;set;}=[];
  public Dictionary<string,string> SourceHashes {get;set;}=[];
  public BehemothStarDisplay BehemothStarDisplay {get;set;}=new();
  public Dictionary<string,ArmyResearchTree> ResearchTrees {get;set;}=[];
@@ -15,10 +17,12 @@ public sealed class BehemothStarDisplay {public int Tiers {get;set;}=12;public i
 public sealed class ArmyResearchTree {public string Name {get;set;}="";public bool Legacy {get;set;} public bool Gated {get;set;} public string AvailabilityNote {get;set;}=""; public int Order {get;set;}}
 public sealed class ArmyHeroScope {public string Role {get;set;}="";public string Faction {get;set;}="";}
 public sealed class ArmyContextEntry {public string Tree {get;set;}=""; public int Tier {get;set;} public int Row {get;set;} public string AvailabilityNote {get;set;}=""; public string IconAsset {get;set;}=""; public string SkillIconAsset {get;set;}=""; public string SkillName {get;set;}=""; public string Name {get;set;}="";public List<ArmyContextLevel> Levels {get;set;}=[];public List<ArmyContextLevel> Stars {get;set;}=[];}
-public sealed class ArmyContextLevel {public int Level {get;set;} public List<ArmyContextEffect> Effects {get;set;}=[];public List<string> Unmodeled {get;set;}=[];public bool LinkedSkill {get;set;} public string Description {get;set;}="";}
+public class ArmyContextLevel {public int Level {get;set;} public List<ArmyContextEffect> Effects {get;set;}=[];public List<string> Unmodeled {get;set;}=[];public bool LinkedSkill {get;set;} public string Description {get;set;}="";}
 public sealed class ArmyContextEffect {public string Scope {get;set;}="all";public string Scene {get;set;}="all";public int Stat {get;set;} public double Value {get;set;}}
 public sealed class ArmyContextSettings
 {
+ public Dictionary<string,int> FactionTalents {get;set;}=[];
+ public Dictionary<string,int> FactionPoints {get;set;}=[];
  public string BehemothSource {get;set;}="manual";
  public Dictionary<string,ArmyBehemothBuild> BehemothBuilds {get;set;}=[];
  public bool Enabled {get;set;}
@@ -37,7 +41,8 @@ public static class ArmyContextModel
   Dictionary<string,int> Selected(Dictionary<string,int>? values,Dictionary<string,ArmyContextEntry> catalog)=>(values??[]).Where(x=>catalog.TryGetValue(x.Key,out var row)&&row.Levels.Any(r=>r.Level==x.Value)).ToDictionary();
   Dictionary<string,ArmyBehemothBuild> beasts=[];
   foreach(var (key,value) in raw.BehemothBuilds??[]){if(!data.Behemoths.TryGetValue(key,out var entry)||value is null)continue;int level=entry.Levels.Any(r=>r.Level==value.Level)?value.Level:0,star=entry.Stars.Any(r=>r.Level==value.Star)?value.Star:0;if(level>0||star>0)beasts[key]=new(){Level=level,Star=star};}
-  return new(){Enabled=raw.Enabled,Scene=raw.Scene is "pve" or "gve"?raw.Scene:"all",BehemothSource=raw.BehemothSource=="configured"?"configured":"manual",BehemothBuilds=beasts,Research=Selected(raw.Research,data.Research),Signature=Selected(raw.Signature,data.Signature),Behemoth=Enumerable.Range(0,3).Select(i=>raw.Behemoth?.ElementAtOrDefault(i) is double v&&double.IsFinite(v)&&v>=0&&v<=1e12?(double?)v:null).ToArray()};
+  var talents=FactionTalentModel.ValidSelections(raw,data);
+  return new(){FactionTalents=talents,FactionPoints=(raw.FactionPoints??[]).Where(x=>data.FactionTalents.ContainsKey(x.Key)&&x.Value>=0&&x.Value<=100000).ToDictionary(),Enabled=raw.Enabled,Scene=raw.Scene is "pve" or "gve"?raw.Scene:"all",BehemothSource=raw.BehemothSource=="configured"?"configured":"manual",BehemothBuilds=beasts,Research=Selected(raw.Research,data.Research),Signature=Selected(raw.Signature,data.Signature),Behemoth=Enumerable.Range(0,3).Select(i=>raw.Behemoth?.ElementAtOrDefault(i) is double v&&double.IsFinite(v)&&v>=0&&v<=1e12?(double?)v:null).ToArray()};
  }
  public static ArmyContextResult Resolve(string slug,ArmyContextSettings? raw,ArmyContextData data,string basis="reference")
  {
@@ -52,6 +57,7 @@ public static class ArmyContextModel
   if(s.BehemothSource=="manual")for(int i=0;i<3;i++)flat[i]+=s.Behemoth[i]??0;
   else foreach(var (key,build) in s.BehemothBuilds){var entry=data.Behemoths[key];foreach(var row in new[]{entry.Levels.Find(r=>r.Level==build.Level),entry.Stars.Find(r=>r.Level==build.Star)})if(row is not null)Apply(row,entry.Name);notes.Add(entry.Name+": level/star stats only; skill, talent and full-skill bonuses excluded");}
   foreach(var (key,n) in s.Research)Apply(data.Research[key].Levels.First(r=>r.Level==n),data.Research[key].Name);
+  foreach(var (key,n) in s.FactionTalents){var parts=key.Split(':');Apply(data.FactionTalents[parts[0]].Nodes[parts[1]].Levels.First(r=>r.Level==n),"Faction talent");}
   if(basis=="recorded"&&s.Signature.TryGetValue(slug,out int level))Apply(data.Signature[slug].Levels.First(r=>r.Level==level),"Signature Gear");
   return new(flat,notes,true);
  }

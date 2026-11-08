@@ -13,7 +13,7 @@ public partial class MainWindow
 {
 
     private string ReviewSnapshotKey=>_upgradeData.ClientBuild+"|"+string.Join("|",_upgradeData.SourceHashes.OrderBy(x=>x.Key,StringComparer.Ordinal).Select(x=>x.Key+":"+x.Value));
-    private string AccountReviewSnapshotKey=>ReviewSnapshotKey+"|standalone|"+string.Join("|",_armyContextData.SourceHashes.OrderBy(x=>x.Key,StringComparer.Ordinal).Select(x=>x.Key+":"+x.Value));
+    private string AccountReviewSnapshotKey=>ReviewSnapshotKey+"|standalone|"+string.Join("|",_armyContextData.SourceHashes.Concat(_armyContextData.FactionTalentSourceHashes.Select(x=>new KeyValuePair<string,string>("faction-talents:"+x.Key,x.Value))).OrderBy(x=>x.Key,StringComparer.Ordinal).Select(x=>x.Key+":"+x.Value));
     private AccountDataReview? _accountReview;
     private string AccountContentHash()=>Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes(System.Text.Json.JsonSerializer.Serialize(_armyContext))));
     private bool AccountReviewFresh=>_accountReview is not null && _accountReview.ClientBuild==AccountReviewSnapshotKey && _accountReview.ContentHash==AccountContentHash() && _accountReview.ReviewedUtc<=DateTimeOffset.UtcNow.AddMinutes(5) && DateTimeOffset.UtcNow-_accountReview.ReviewedUtc<TimeSpan.FromDays(14);
@@ -35,6 +35,7 @@ public partial class MainWindow
 
         if(!_armyContext.Enabled)account.Add("Army bonuses disabled");
 
+        if(_armyContext.FactionTalents.Count==0)account.Add("Faction talents not recorded (if unlocked)");
         if(_armyContext.Research.Count==0)account.Add("Research not recorded");
 
         if(_armyContext.BehemothSource=="configured" ? !_armyContext.BehemothBuilds.Values.Any(b=>b.Level>0||b.Star>0) : _armyContext.Behemoth.All(v=>v is null))account.Add("Behemoth bonuses not recorded");
