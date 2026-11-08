@@ -12,9 +12,9 @@ Recorded values feed hero ranking, squad scoring and optimization through the sa
 
 ## Tree interface
 
-Both editions display the in-game arrangement: Rover above the central faction emblem, Stalwart down-left and Aeronaut down-right. Exact client icons, faction colours, prerequisite connectors and current levels identify nodes. Selecting a node opens a single inspector, leaving the tree visible.
+Both editions display the in-game arrangement: Rover above the central faction emblem, Stalwart down-left and Aeronaut down-right. Exact client icons, faction colours, prerequisite connectors and current levels identify nodes. The tree fills the available desktop viewport; +/− controls and the mouse wheel zoom from 50% to 300%, dragging empty space pans, and Fit recentres the entire tree. Navigation does not alter purchased levels. Mouse/pointer capture is released when dragging ends, is cancelled or the view is unloaded. Selecting a node opens a single inspector, leaving the tree visible.
 
-The best affordable **scored** next upgrade in each independent point pool receives a gold glow and a NEXT badge. The matching recommendation button opens that node without purchasing or changing its recorded level. Badges update when points or purchased levels change; missing totals, unmet prerequisites and invalid edits cannot receive a recommendation. Unverified effects are not promoted to a scored recommendation.
+The best affordable **scored** next upgrade in each independent point pool receives a gold glow and a NEXT badge. The matching recommendation button opens that node without purchasing or changing its recorded level. The white outline identifies selection, not a recommendation. Up to three gold markers can appear, one for each known faction point pool. Blank totals explicitly ask the user to fill the point cards. Badges update when points or purchased levels change; missing totals, unmet prerequisites and invalid edits cannot receive a recommendation. Unverified effects are not promoted to a scored recommendation.
 
 ## Configuration and recommendations
 

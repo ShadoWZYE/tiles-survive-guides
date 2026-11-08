@@ -609,10 +609,16 @@ internal static class Program
             reviewWindow.UpdateLayout();var preview=new RenderTargetBitmap((int)reviewWindow.ActualWidth,(int)reviewWindow.ActualHeight,96,96,PixelFormats.Pbgra32);preview.Render(reviewWindow);
             var png=new PngBitmapEncoder();png.Frames.Add(BitmapFrame.Create(preview));using var stream=File.Create(defaultScreenshot);png.Save(stream);
         }
+        reviewWindow.Width=1920;reviewWindow.Height=1080;reviewWindow.UpdateLayout();
         Invoke(reviewWindow,"Navigation_Click",(Button)reviewWindow.FindName("FactionTalentsNav"),new RoutedEventArgs());reviewWindow.UpdateLayout();
         var talentsPanel=(StackPanel)reviewWindow.FindName("FactionTalentsPanel");
+        Check(Walk(talentsPanel).OfType<TextBlock>().Any(x=>x.Text.StartsWith("Enter total Star Points")),"Missing point totals do not explain why NEXT markers are absent");
+        var talentViewport=Walk(talentsPanel).OfType<TalentTreeViewport>().Single();Check(talentViewport.ActualWidth>900&&talentViewport.ActualHeight>600,"Talent tree viewport still wastes 1080p space");
+        var talentZoomIn=Walk(talentsPanel).OfType<Button>().Single(x=>System.Windows.Automation.AutomationProperties.GetName(x)=="Talent tree +");talentZoomIn.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));Check(talentViewport.Zoom>1,"Zoom-in button did not enlarge tree");talentViewport.PanBy(70,40);Check(talentViewport.Pan.X!=0,"Tree did not pan");
+        talentViewport.SetZoom(20);Check(talentViewport.Zoom==3,"Maximum zoom is unbounded");talentViewport.SetZoom(.01);Check(talentViewport.Zoom==.5,"Minimum zoom is unbounded");talentViewport.Fit();Check(talentViewport.Zoom==1&&talentViewport.Pan==new Point(),"Fit did not reset pan and zoom");
+        reviewWindow.Activate();talentViewport.Surface.RaiseEvent(new System.Windows.Input.MouseButtonEventArgs(System.Windows.Input.Mouse.PrimaryDevice,Environment.TickCount,System.Windows.Input.MouseButton.Left){RoutedEvent=UIElement.MouseLeftButtonDownEvent});Check(talentViewport.Surface.IsMouseCaptured,"Pan gesture did not capture the pointer");talentViewport.Surface.RaiseEvent(new System.Windows.Input.MouseButtonEventArgs(System.Windows.Input.Mouse.PrimaryDevice,Environment.TickCount,System.Windows.Input.MouseButton.Left){RoutedEvent=UIElement.MouseLeftButtonUpEvent});Check(!talentViewport.Surface.IsMouseCaptured,"Pan gesture failed to release the pointer");
         var talentPickers=Walk(talentsPanel).OfType<ComboBox>().ToList();Check(talentPickers.Count==24,"Faction talent catalog missing nodes");
-        var talentBudget=Walk(talentsPanel).OfType<TextBox>().Single(x=>System.Windows.Automation.AutomationProperties.GetName(x)=="Faction total points 163600001");talentBudget.Text="39";
+        var talentBudget=Walk(talentsPanel).OfType<TextBox>().Single(x=>System.Windows.Automation.AutomationProperties.GetName(x)=="Faction total points 163600001");talentBudget.Text="39";foreach(var input in Walk(talentsPanel).OfType<TextBox>().Where(x=>System.Windows.Automation.AutomationProperties.GetName(x).StartsWith("Faction total points ")))input.Text="39";
         var talentAttack=talentPickers.Single(x=>System.Windows.Automation.AutomationProperties.GetName(x)=="Faction talent 163600001:1");
         var talentDefense=talentPickers.Single(x=>System.Windows.Automation.AutomationProperties.GetName(x)=="Faction talent 163600001:2");
         talentDefense.SelectedIndex=1;
@@ -621,7 +627,7 @@ internal static class Program
         talentAttack.SelectedIndex=3;talentSave.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
         Check(Field<ArmyContextSettings>(reviewWindow,"_armyContext").FactionTalents["163600001:1"]==3,"Faction talents failed to save");
         var talentTreeButtons=Walk(talentsPanel).OfType<Button>().Where(x=>System.Windows.Automation.AutomationProperties.GetName(x).StartsWith("Talent tree node ")).ToList();Check(talentTreeButtons.Count==24,"Talent tree node buttons missing");
-        var talentNext=Walk(talentsPanel).OfType<TextBlock>().Where(x=>x.Text=="NEXT"&&x.Visibility==Visibility.Visible).ToList();Check(talentNext.Count>=1,"Recommended next node is not highlighted");
+        var talentNext=Walk(talentsPanel).OfType<TextBlock>().Where(x=>x.Text=="NEXT"&&x.Visibility==Visibility.Visible).ToList();Check(talentNext.Count==3,"Each known faction pool should have its own NEXT marker");
         var talentHpButton=talentTreeButtons.Single(x=>System.Windows.Automation.AutomationProperties.GetName(x)=="Talent tree node 163600001:3");talentHpButton.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));reviewWindow.UpdateLayout();
         var talentHpPicker=talentPickers.Single(x=>System.Windows.Automation.AutomationProperties.GetName(x)=="Faction talent 163600001:3");Check(talentHpPicker.IsVisible,"Tree click did not open the node inspector");Check(talentPickers.Count(x=>x.IsVisible)==1,"More than one talent node editor is visible");
         talentHpPicker.SelectedIndex=3;var talentDefenseButton=talentTreeButtons.Single(x=>System.Windows.Automation.AutomationProperties.GetName(x)=="Talent tree node 163600001:2");Check(System.Windows.Automation.AutomationProperties.GetHelpText(talentDefenseButton).Contains("Recommended NEXT"),"Next marker did not move after completing the recommended node");talentHpPicker.SelectedIndex=0;
