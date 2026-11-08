@@ -56,6 +56,7 @@ def main() -> None:
                     icon = IMAGE_ROOT / 'context-icons' / (row[key] + '.png')
                     row[key.replace('_asset','_data')] = 'data:image/png;base64,' + png_data(icon)
     for branch in context.get('faction_talents', {}).values():
+        branch['icon_data'] = 'data:image/png;base64,' + png_data(IMAGE_ROOT / 'context-icons' / ('sp_icon_survivor_faction_' + str(branch['faction']) + '.png'))
         for node in branch['nodes'].values():
             node['icon_data'] = 'data:image/png;base64,' + png_data(IMAGE_ROOT / 'context-icons' / (node['icon_asset'] + '.png'))
     context['behemoth_star_display']['images'] = ['data:image/png;base64,' + png_data(IMAGE_ROOT / 'context-icons' / (name + '.png')) for name in context['behemoth_star_display']['sprites']]

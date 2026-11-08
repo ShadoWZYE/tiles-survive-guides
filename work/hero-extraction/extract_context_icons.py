@@ -27,7 +27,7 @@ def main():
     if args.gear_only:
         upgrades=json.loads((ROOT/'outputs/hero-report/TilesSurvive-Upgrade-Data.json').read_text(encoding='utf-8'))
         wanted={g['icon_asset'] for g in upgrades['gear'].values()}
-    if args.talents_only: wanted = {n['icon_asset'] for b in catalog['faction_talents'].values() for n in b['nodes'].values()}
+    if args.talents_only: wanted = {n['icon_asset'] for b in catalog['faction_talents'].values() for n in b['nodes'].values()} | {'sp_icon_survivor_faction_'+str(i) for i in range(1,4)}
     ids = asset_bundle_ids(args.asset_index, wanted)
     hashes = bundle_hashes(args.bundle_list, set(ids.values()))
     if wanted - ids.keys():

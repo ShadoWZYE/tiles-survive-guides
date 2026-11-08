@@ -10,6 +10,12 @@ At level 3, each branch grants +2,100 ATK, +420 DEF and +140,000 HP. Buying all 
 
 Recorded values feed hero ranking, squad scoring and optimization through the same stat path as other account bonuses. My builds and Equal builds use identical combat rules. The existing Max heroes/no gear mode intentionally excludes account context. Unrecorded nodes and unspent points supply no bonus.
 
+## Tree interface
+
+Both editions display the in-game arrangement: Rover above the central faction emblem, Stalwart down-left and Aeronaut down-right. Exact client icons, faction colours, prerequisite connectors and current levels identify nodes. Selecting a node opens a single inspector, leaving the tree visible.
+
+The best affordable **scored** next upgrade in each independent point pool receives a gold glow and a NEXT badge. The matching recommendation button opens that node without purchasing or changing its recorded level. Badges update when points or purchased levels change; missing totals, unmet prerequisites and invalid edits cannot receive a recommendation. Unverified effects are not promoted to a scored recommendation.
+
 ## Configuration and recommendations
 
 - Enter the game's **total** earned points, not remaining Available points. Blank totals stay unknown; no affordability recommendation is made for that branch.
