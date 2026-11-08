@@ -4,7 +4,7 @@ using TilesSurviveHeroPlanner;
 if(args.Length==2&&args[0]=="--faction-talents"){
  var talentData=ArmyContextData.Parse(File.ReadAllText(Path.Combine(args[1],"Hero-Army-Context.json")));
  var talentSettings=JsonSerializer.Deserialize<ArmyContextSettings[]>(Console.In.ReadToEnd(),new JsonSerializerOptions{PropertyNamingPolicy=JsonNamingPolicy.CamelCase})!;
- Console.WriteLine(JsonSerializer.Serialize(talentSettings.Select(s=>new{clean=ArmyContextModel.Clean(s,talentData),flat=ArmyContextModel.Resolve("rosie",s,talentData,"recorded").Flat,errors=talentData.FactionTalents.Keys.SelectMany(b=>FactionTalentModel.Errors(s,talentData,b)),choices=FactionTalentModel.Recommend(s,talentData,c=>{var full=new ArmyContextSettings{Enabled=true,FactionPoints=c.FactionPoints,FactionTalents=c.FactionTalents};return ArmyContextModel.Resolve("rosie",full,talentData,"recorded").Flat.Sum();})}),new JsonSerializerOptions{PropertyNamingPolicy=JsonNamingPolicy.CamelCase}));return;
+ Console.WriteLine(JsonSerializer.Serialize(talentSettings.Select(s=>new{guidance=FactionTalentModel.Guidance(s,talentData,[]),clean=ArmyContextModel.Clean(s,talentData),flat=ArmyContextModel.Resolve("rosie",s,talentData,"recorded").Flat,errors=talentData.FactionTalents.Keys.SelectMany(b=>FactionTalentModel.Errors(s,talentData,b)),choices=FactionTalentModel.Recommend(s,talentData,c=>{var full=new ArmyContextSettings{Enabled=true,FactionPoints=c.FactionPoints,FactionTalents=c.FactionTalents};return ArmyContextModel.Resolve("rosie",full,talentData,"recorded").Flat.Sum();})}),new JsonSerializerOptions{PropertyNamingPolicy=JsonNamingPolicy.CamelCase}));return;
 }
 
 if(args.Length==1&&args[0]=="--survival"){

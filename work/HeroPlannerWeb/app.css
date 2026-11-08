@@ -41,3 +41,7 @@
 @media(max-width:750px){.talent-viewport{height:480px}.talent-zoom-controls small{width:100%}.talent-viewport .talent-node{padding:7px;border-width:3px}.talent-viewport .talent-core span{font-size:9px}}
 
 .talent-quick-controls{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 5px}.talent-quick-controls button{background:#236469;color:white;border:1px solid #52bbb1;border-radius:7px;padding:8px;cursor:pointer}.talent-quick-controls button:disabled{opacity:.4;cursor:default}.talent-editor>small{color:var(--muted);font-size:11px}
+
+.talent-node.is-save{border-color:#7fb8e4}.talent-node.is-save .talent-next{display:block;background:#42769f;color:white}.talent-rec.talent-guide-other{border-color:#5681a7;background:#1c3047;color:#b6d5ef}
+
+.talent-next{white-space:nowrap}

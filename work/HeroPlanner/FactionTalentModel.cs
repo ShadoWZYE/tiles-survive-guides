@@ -15,8 +15,36 @@ public sealed class FactionTalentLevel:ArmyContextLevel
  public int Id {get;set;} public int Cost {get;set;} public List<int> Requires {get;set;}=[];
 }
 public sealed record FactionTalentChoice(string Key,string Name,int Level,int Cost,double Gain,double GainPerPoint,bool Modeled);
+public sealed record FactionTalentGuide(string Branch,string Kind,FactionTalentChoice? Choice,string Message,int Shortfall=0);
 public static class FactionTalentModel
 {
+ public static List<FactionTalentGuide> Guidance(ArmyContextSettings s,ArmyContextData data,List<FactionTalentChoice> scored)
+ {
+  List<FactionTalentGuide> result=[];
+  foreach(var (branch,b) in data.FactionTalents){
+   if(Errors(s,data,branch).Count>0){result.Add(new(branch,"invalid",null,"Check recorded levels and point totals."));continue;}
+   if(!s.FactionPoints.TryGetValue(branch,out int total)||total<0||total>100000){result.Add(new(branch,"unknown",null,"Enter total Star Points for this faction."));continue;}
+   int available=total-Spent(branch,s,data);var best=scored.FirstOrDefault(c=>c.Key.StartsWith(branch+":")&&c.Modeled&&c.Gain>0);
+   if(best is not null){result.Add(new(branch,"scored",best,"Ranked by selected-squad hero-score gain per point."));continue;}
+   var legal=new List<(string Serial,FactionTalentNode Node,FactionTalentLevel Row)>();
+   foreach(var (serial,node) in b.Nodes){string key=branch+":"+serial;var row=node.Levels.Find(r=>r.Level==s.FactionTalents.GetValueOrDefault(key)+1);if(row is null)continue;
+    var candidate=new ArmyContextSettings{FactionTalents=new(s.FactionTalents)};candidate.FactionTalents[key]=row.Level;
+    if(Errors(candidate,data,branch).Count==0)legal.Add((serial,node,row));
+   }
+   if(legal.Count==0){bool full=b.Nodes.All(n=>s.FactionTalents.GetValueOrDefault(branch+":"+n.Key)==n.Value.Levels.Last().Level);result.Add(new(branch,full?"complete":"locked",null,full?"All configured talent levels are recorded.":"No unlocked next level. Check prerequisite levels."));continue;}
+   var affordable=legal.Where(x=>x.Row.Cost<=available).OrderBy(x=>int.Parse(x.Serial)).ToList();
+   var target=affordable.Count>0?affordable[0]:legal.OrderBy(x=>x.Row.Cost-available).ThenBy(x=>int.Parse(x.Serial)).First();
+   var choice=new FactionTalentChoice(branch+":"+target.Serial,b.Name+" · "+target.Node.Name,target.Row.Level,target.Row.Cost,0,0,target.Row.Effects.Count>0);
+   if(affordable.Count==0){int missing=target.Row.Cost-available;var owned=new Dictionary<string,int>(s.FactionTalents){[branch+":"+target.Serial]=target.Row.Level};
+    var ids=b.Nodes.SelectMany(n=>n.Value.Levels.Select(r=>(r.Id,Key:branch+":"+n.Key,Row:r))).ToDictionary(r=>r.Id);
+    var unlocks=b.Nodes.Where(n=>s.FactionTalents.GetValueOrDefault(branch+":"+n.Key)==0&&n.Value.Levels[0].Requires.Contains(target.Row.Id)&&n.Value.Levels[0].Requires.All(id=>ids.TryGetValue(id,out var p)&&owned.GetValueOrDefault(p.Key)>=p.Row.Level)).Select(n=>n.Value.Name);
+    string message=$"Save {missing} more points for {target.Node.Name} Lv {target.Row.Level}: costs {target.Row.Cost}, available {available}.";if(unlocks.Any())message+=" Unlocks "+string.Join(", ",unlocks)+".";
+    result.Add(new(branch,"save",choice,message,missing));
+   }else if(target.Node.Type==3)result.Add(new(branch,"review",choice,"Conditional effect is unverified. Review before spending; no numerical ranking."));
+   else result.Add(new(branch,"progression",choice,target.Row.Description+". Unlock-order guide; combat gain not quantified."));
+  }
+  return result;
+ }
  public static int Spent(string branch,ArmyContextSettings s,ArmyContextData data)=>data.FactionTalents[branch].Nodes.Sum(pair=>pair.Value.Levels.Where(r=>r.Level<=s.FactionTalents.GetValueOrDefault(branch+":"+pair.Key)).Sum(r=>r.Cost));
  public static List<string> Errors(ArmyContextSettings s,ArmyContextData data,string branch)
  {

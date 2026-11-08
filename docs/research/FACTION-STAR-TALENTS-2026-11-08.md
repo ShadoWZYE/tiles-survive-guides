@@ -2,6 +2,16 @@
 
 The supplied screenshot matches the client's Hero Faction Talent feature. This establishes availability for the account shown, not a universal release date. The planner now exposes all three branches, 24 nodes and 72 level rows in both editions.
 
+### Reported 39 / 28 / 26 point case
+
+With Stalwart basic stats at 3/3/3, Rover at 3/2/3 and Aeronaut at 3/3/3, the guidance is:
+
+- Stalwart: Firepower Burst Lv 1 costs 3 of 9 available points; its configured troop attack bonus is +0.5%.
+- Rover: Armor Boost Lv 3 costs 4 points, with 2 available. Save 2 more. Completing it unlocks Firepower Burst because Endurance Boost is already at Lv 3.
+- Aeronaut: Firepower Burst Lv 1 costs the 2 available points; its configured troop attack bonus is +0.5%.
+
+These are separate point pools. The two troop bonuses are displayed from config and remain outside the numerical hero-only score.
+
 ## Quick recording
 
 The selected-node inspector has +1 level and −1 level buttons. These immediately save the planner record, update available points and recalculate recommendations. One level may cost multiple Star Points; the + button shows the exact next-row cost. Total earned points are never decremented. Removing a recorded level releases that row's cost in the available-point calculation.
@@ -20,7 +30,7 @@ Recorded values feed hero ranking, squad scoring and optimization through the sa
 
 Both editions display the in-game arrangement: Rover above the central faction emblem, Stalwart down-left and Aeronaut down-right. Exact client icons, faction colours, prerequisite connectors and current levels identify nodes. The tree fills the available desktop viewport; +/− controls and the mouse wheel zoom from 50% to 300%, dragging empty space pans, and Fit recentres the entire tree. Navigation does not alter purchased levels. Mouse/pointer capture is released when dragging ends, is cancelled or the view is unloaded. Selecting a node opens a single inspector, leaving the tree visible. Stalwart fork coordinates are reflected to match the supplied in-game reference: defense is above-left of health, including the troop-stat pair. Rover and Aeronaut retain their existing orientation; benefit identities and prerequisites are unchanged.
 
-The best affordable **scored** next upgrade in each independent point pool receives a gold glow and a NEXT badge. The matching recommendation button opens that node without purchasing or changing its recorded level. The white outline identifies selection, not a recommendation. Up to three gold markers can appear, one for each known faction point pool. Blank totals explicitly ask the user to fill the point cards. Badges update when points or purchased levels change; missing totals, unmet prerequisites and invalid edits cannot receive a recommendation. Unverified effects are not promoted to a scored recommendation.
+The best affordable **scored** next upgrade in each independent point pool receives a gold glow and a NEXT badge. Once no scored option remains, affordable non-conditional nodes continue as explicitly labelled **progression guides**, following node unlock order rather than an invented combat ranking. Their declared benefit is displayed without a numerical hero-score gain. The matching recommendation button opens that node without purchasing or changing its recorded level. The white outline identifies selection, not a recommendation. Up to three gold markers can appear, one for each known faction point pool. Blank totals explicitly ask the user to fill the point cards. Badges update when points or purchased levels change; missing totals, unmet prerequisites and invalid edits cannot receive an affordable NEXT marker. An unaffordable legal next level has a blue SAVE badge and names the target, exact shortfall, total cost, currently available points and any newly completed unlock. Saving targets use the smallest shortfall, then unlock order. Conditional capstones with conflicting client rows receive REVIEW guidance rather than a spending recommendation. Unverified effects are never promoted to a scored recommendation.
 
 ## Configuration and recommendations
 

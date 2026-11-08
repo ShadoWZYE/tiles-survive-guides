@@ -60,5 +60,25 @@ function talentRecommendations(s,data,score){
  }
  return result.sort((a,b)=>a.key.split(':')[0].localeCompare(b.key.split(':')[0])||b.gainPerPoint-a.gainPerPoint||a.key.localeCompare(b.key));
 }
-const api={sanitize,resolve,starView,colors,talentSpent,talentErrors,talentRecommendations};if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.ArmyContextModel=api;
+function talentGuidance(s,data,scored){
+ const result=[];
+ for(const [branch,b] of Object.entries(data.faction_talents||{})){
+  const add=(kind,choice,message,shortfall=0)=>result.push({branch,kind,choice,message,shortfall});
+  if(talentErrors(s,data,branch).length){add('invalid',null,'Check recorded levels and point totals.');continue;}
+  const total=s.factionPoints?.[branch];if(!Number.isInteger(total)||total<0||total>100000){add('unknown',null,'Enter total Star Points for this faction.');continue;}
+  const available=total-talentSpent(branch,s,data),best=scored.find(c=>c.key.startsWith(branch+':')&&c.modeled&&c.gain>0);
+  if(best){add('scored',best,'Ranked by selected-squad hero-score gain per point.');continue;}
+  const legal=[];for(const [serial,node] of Object.entries(b.nodes)){const key=branch+':'+serial,row=node.levels.find(r=>r.level===(s.factionTalents?.[key]||0)+1);if(!row)continue;const candidate={factionTalents:{...s.factionTalents,[key]:row.level}};if(!talentErrors(candidate,data,branch).length)legal.push({serial,node,row});}
+  if(!legal.length){const full=Object.entries(b.nodes).every(([n,node])=>s.factionTalents?.[branch+':'+n]===node.levels.at(-1).level);add(full?'complete':'locked',null,full?'All configured talent levels are recorded.':'No unlocked next level. Check prerequisite levels.');continue;}
+  const affordable=legal.filter(x=>x.row.cost<=available).sort((a,b)=>Number(a.serial)-Number(b.serial)),target=affordable[0]||[...legal].sort((a,b)=>a.row.cost-available-(b.row.cost-available)||Number(a.serial)-Number(b.serial))[0];
+  const choice={key:branch+':'+target.serial,name:b.name+' · '+target.node.name,level:target.row.level,cost:target.row.cost,gain:0,gainPerPoint:0,modeled:target.row.effects.length>0};
+  if(!affordable.length){const missing=target.row.cost-available,owned={...s.factionTalents,[choice.key]:choice.level},ids=new Map(Object.entries(b.nodes).flatMap(([n,node])=>node.levels.map(row=>[row.id,{key:branch+':'+n,row}])));
+   const unlocks=Object.entries(b.nodes).filter(([n,node])=>!s.factionTalents?.[branch+':'+n]&&node.levels[0].requires.includes(target.row.id)&&node.levels[0].requires.every(id=>{const p=ids.get(id);return p&&(owned[p.key]||0)>=p.row.level;})).map(([,node])=>node.name);
+   add('save',choice,`Save ${missing} more points for ${target.node.name} Lv ${target.row.level}: costs ${target.row.cost}, available ${available}.`+(unlocks.length?' Unlocks '+unlocks.join(', ')+'.':''),missing);
+  }else if(target.node.type===3)add('review',choice,'Conditional effect is unverified. Review before spending; no numerical ranking.');
+  else add('progression',choice,target.row.description+'. Unlock-order guide; combat gain not quantified.');
+ }
+ return result;
+}
+const api={sanitize,resolve,starView,colors,talentSpent,talentErrors,talentRecommendations,talentGuidance};if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.ArmyContextModel=api;
 })(globalThis);
