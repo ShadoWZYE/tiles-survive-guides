@@ -152,7 +152,7 @@
                                             <Grid>
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="*" />
-                                                    <RowDefinition Height="94" />
+                                                    <RowDefinition Height="112" />
                                                 </Grid.RowDefinitions>
                                                 <Image Source="{Binding Portrait}" Stretch="UniformToFill" />
                                                 <Border VerticalAlignment="Top" HorizontalAlignment="Left" Margin="7" CornerRadius="7"
@@ -202,6 +202,7 @@
                                                         </TextBlock>
                                                         <TextBlock Text="{Binding ArmyAssignmentLabel}" FontSize="10" Foreground="{StaticResource AccentBrush}"/>
                                                         <TextBlock Text="{Binding ModelGapLabel}" FontSize="10" Foreground="{StaticResource MutedInkBrush}" ToolTip="{Binding ScoreBreakdown}"/>
+                                                        <TextBlock Text="{Binding BuildDataLabel}" FontSize="10" Foreground="#FFCF72" ToolTip="{Binding EstimateHint}"/>
                                                     </StackPanel>
                                                 </Border>
                                             </Grid>

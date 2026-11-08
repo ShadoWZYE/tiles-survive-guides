@@ -162,6 +162,9 @@ internal static class Program
         var basisPicker = (ComboBox)window.FindName("ComparisonBasisPicker");
         basisPicker.SelectedIndex = 2;
         Check(becca.CompositeIndex < referenceBecca && becca.Estimate!.Basis != "Reference build", "Explicit My builds mode did not use the recorded build");
+        var partialHero=heroes.First(h=>h.Estimate?.MissingFields is {Length:>0});
+        Check(partialHero.BuildDataLabel.StartsWith("Defaults")&&partialHero.IndexPrefix=="Base est. ","Missing-build defaults are not visible on the hero card");
+        Check(heroes.All(h=>!h.ModelGapLabel.Contains("model gap")),"Score differences are mislabeled as model error");
         basisPicker.SelectedIndex = 1;
         Check(becca.CompositeIndex < referenceBecca && becca.Estimate!.Basis == "Max heroes, no gear" && becca.Estimate.ActiveSkillIds!.Length>0, "No-gear maximum mode did not model maximum hero skills");
         basisPicker.SelectedIndex = 0;
@@ -595,6 +598,17 @@ internal static class Program
         parityBasisPicker.SelectedItem=parityBasisPicker.Items.Cast<ComboBoxItem>().Single(i=>i.Tag?.ToString()=="recorded");
         Check(parityHeroes.All(h=>h.CompositeIndex==sameScores[h.AssetSlug]),"Combat scores depend on the build-mode label");
         Check(((TextBlock)reviewWindow.FindName("FormationScoreLabel")).Text==equalFormation&&((TextBlock)reviewWindow.FindName("SurvivalNotice")).Text==equalNotice,"Identical builds changed forecast or formation scoring between modes");
+        Invoke(reviewWindow,"CloseBuild_Click",new Button(),new RoutedEventArgs());reviewWindow.UpdateLayout();
+        foreach(var card in Walk((ItemsControl)reviewWindow.FindName("HeroRoster")).OfType<Button>().Where(b=>b.Tag is Hero&&b.Content is Border)){
+            var grid=(Grid)((Border)card.Content).Child;var footer=grid.Children.OfType<Border>().Single(b=>Grid.GetRow(b)==1);
+            var last=((StackPanel)footer.Child).Children.OfType<TextBlock>().Last();
+            Check(last.TranslatePoint(new Point(),footer).Y+last.ActualHeight+footer.Padding.Bottom<=footer.ActualHeight+1,"Hero card clips its build-data status");
+        }
+        var defaultScreenshot=Environment.GetEnvironmentVariable("PLANNER_DEFAULTS_SCREENSHOT");
+        if(!string.IsNullOrWhiteSpace(defaultScreenshot)){
+            reviewWindow.UpdateLayout();var preview=new RenderTargetBitmap((int)reviewWindow.ActualWidth,(int)reviewWindow.ActualHeight,96,96,PixelFormats.Pbgra32);preview.Render(reviewWindow);
+            var png=new PngBitmapEncoder();png.Frames.Add(BitmapFrame.Create(preview));using var stream=File.Create(defaultScreenshot);png.Save(stream);
+        }
         reviewWindow.Close();
         app.Shutdown();
         Console.WriteLine("WPF UI regression passed: ownership, autosave, star layout, selectable priority cards, resource filters, top-three percent ordering, rank/level/skill/gear recording, balance deduction, stale-click protection, save rollback and safe Undo. Real profile untouched.");

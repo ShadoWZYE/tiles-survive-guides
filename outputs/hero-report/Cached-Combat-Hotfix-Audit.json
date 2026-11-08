@@ -1,0 +1,212 @@
+{
+  "schema": 1,
+  "scope": "Cached containers only; no process attachment, assembly loading or patch execution.",
+  "format_reference": "https://github.com/Tencent/InjectFix/blob/5ba42eb8f63fe37134a3c78690f97d8425e13588/Source/VSProj/Src/Builder/FileVirtualMachineBuilder.cs",
+  "instruction_format_magic": "3d575de849000000",
+  "watched_types": [
+    "ConditionCheckerManager",
+    "ConditionSkillFinishChecker",
+    "HeroPropertyComponent",
+    "RaidBuffDelayEffect",
+    "RaidEffectSystem",
+    "RaidEntityManager",
+    "RaidFightStatisticsMgr",
+    "RaidGameActionProjectile",
+    "RaidGameProjectileConfig",
+    "RaidGameProjectileLine",
+    "RaidSESummonObject",
+    "RaidUtils",
+    "SkillBase",
+    "SkillComponent",
+    "SkillDamageCalSystem",
+    "SkillRelease",
+    "SoldierPropertyComponent",
+    "SummonPropertyComponent",
+    "SurvivorData"
+  ],
+  "files": [
+    {
+      "file": "2.6.0_4a",
+      "size": 22254,
+      "sha256": "858f39859e3fbd35cb335b553f242deaab3dacdf4b40d1a35405bd7ec7ca5e51",
+      "fully_consumed": true,
+      "replacement_count": 6,
+      "watched_replacements": []
+    },
+    {
+      "file": "2.6.0_6a",
+      "size": 26911,
+      "sha256": "51a206200791d0ac41b509910c6e890f017954fb3e1f0e288cefc9f3b644d639",
+      "fully_consumed": true,
+      "replacement_count": 9,
+      "watched_replacements": []
+    },
+    {
+      "file": "2.6.0_7a",
+      "size": 88069,
+      "sha256": "944083610f23fb6f11e8bea1dd6fc7e19876a323c6992768ced13106a13a4353",
+      "fully_consumed": true,
+      "replacement_count": 35,
+      "watched_replacements": []
+    },
+    {
+      "file": "2.6.100_10a",
+      "size": 38784,
+      "sha256": "40982f3b7f6fca9dd7d91a9d8c856e037fe9942e2faf15d9c9743fc89906004b",
+      "fully_consumed": true,
+      "replacement_count": 10,
+      "watched_replacements": []
+    },
+    {
+      "file": "2.6.100_4a",
+      "size": 4776,
+      "sha256": "a33a26cf0b805e58aaa0aea04dcae372d06329c765a782b84b2af824e100895a",
+      "fully_consumed": true,
+      "replacement_count": 1,
+      "watched_replacements": []
+    },
+    {
+      "file": "2.6.100_6a",
+      "size": 9821,
+      "sha256": "888a56cbe5c3018c3b57fa47d54922c85c181d99b84e4db56d72ef7baf4170bd",
+      "fully_consumed": true,
+      "replacement_count": 2,
+      "watched_replacements": []
+    },
+    {
+      "file": "2.6.100_7a",
+      "size": 12777,
+      "sha256": "fb67c594aeb23891e0cb9bf8b500849dee5493cc8aee0fd20ad0ecf6dde83c69",
+      "fully_consumed": true,
+      "replacement_count": 4,
+      "watched_replacements": []
+    },
+    {
+      "file": "2.6.100_8a",
+      "size": 36667,
+      "sha256": "86ececcaba09bd9cf53cd63cd953faf0db020af952054d869b835cb58083d2b5",
+      "fully_consumed": true,
+      "replacement_count": 7,
+      "watched_replacements": []
+    },
+    {
+      "file": "2.6.200_1b",
+      "size": 2465,
+      "sha256": "c507eeb8589c88425cea56f46143901b969795aed8167cb75ea521e68a0821dc",
+      "fully_consumed": true,
+      "replacement_count": 1,
+      "watched_replacements": []
+    },
+    {
+      "file": "2.6.200_2b",
+      "size": 2587,
+      "sha256": "926fddb325808d83887b5b7dfd8424fd797bfe2bb56c23d1c07b81ddc4e64374",
+      "fully_consumed": true,
+      "replacement_count": 1,
+      "watched_replacements": []
+    },
+    {
+      "file": "2.6.200_3a",
+      "size": 57434,
+      "sha256": "88e68e5a7cc227d66da835203dab6ff7266dac70183b08bfcc66160b5457e98b",
+      "fully_consumed": true,
+      "replacement_count": 12,
+      "watched_replacements": []
+    },
+    {
+      "file": "2.6.200_4a",
+      "size": 57491,
+      "sha256": "e22213efad436d2cd77055545e5647c10f52837ca48d1746382f40c8bffe0677",
+      "fully_consumed": true,
+      "replacement_count": 12,
+      "watched_replacements": []
+    },
+    {
+      "file": "2.6.300_1b",
+      "size": 6905,
+      "sha256": "360d544c64e224b698581ede0622f577671770d13373233a216b6c190c7ca983",
+      "fully_consumed": true,
+      "replacement_count": 3,
+      "watched_replacements": []
+    },
+    {
+      "file": "2.6.300_2a",
+      "size": 23180,
+      "sha256": "7aaf034268f422ac681b94175900c64fb957e41a59a9cccb3cf550df4f58da26",
+      "fully_consumed": true,
+      "replacement_count": 9,
+      "watched_replacements": []
+    },
+    {
+      "file": "2.6.300_2b",
+      "size": 6905,
+      "sha256": "360d544c64e224b698581ede0622f577671770d13373233a216b6c190c7ca983",
+      "fully_consumed": true,
+      "replacement_count": 3,
+      "watched_replacements": []
+    },
+    {
+      "file": "2.6.300_3b",
+      "size": 6905,
+      "sha256": "360d544c64e224b698581ede0622f577671770d13373233a216b6c190c7ca983",
+      "fully_consumed": true,
+      "replacement_count": 3,
+      "watched_replacements": []
+    },
+    {
+      "file": "2.6.300_4a",
+      "size": 47515,
+      "sha256": "3b507395c8aab03d9f853f8820d40f48ad59a26236fc85e94d81691ac55c3c0c",
+      "fully_consumed": true,
+      "replacement_count": 12,
+      "watched_replacements": []
+    },
+    {
+      "file": "2.6.300_5a",
+      "size": 54204,
+      "sha256": "f9ac620498c825a115f1d0aa9ff26472911efd9115da1e2bf7ed241edad0be56",
+      "fully_consumed": true,
+      "replacement_count": 13,
+      "watched_replacements": []
+    },
+    {
+      "file": "2.6.300_6a",
+      "size": 55296,
+      "sha256": "c2656e90d10f8e62a65e8744b4142b34098ef23db59bc6f035c1d666cb39516e",
+      "fully_consumed": true,
+      "replacement_count": 14,
+      "watched_replacements": []
+    },
+    {
+      "file": "2.6.300_7a",
+      "size": 65369,
+      "sha256": "79e1009895d1e56f9d86779e74dd1fe6b328801bdd2a8a63f22aa06132dbb861",
+      "fully_consumed": true,
+      "replacement_count": 18,
+      "watched_replacements": []
+    },
+    {
+      "file": "2.6.400_1a",
+      "size": 10462,
+      "sha256": "b94d437b66ad119e28a06ec9668a83e422f4f99d555f6088113d21e71b71381a",
+      "fully_consumed": true,
+      "replacement_count": 3,
+      "watched_replacements": []
+    },
+    {
+      "file": "2.6.400_2a",
+      "size": 24958,
+      "sha256": "001627e9a50f9c789f48e23d4a3d2b84f921096a823e3052c208f29d1b9fe023",
+      "fully_consumed": true,
+      "replacement_count": 6,
+      "watched_replacements": []
+    }
+  ],
+  "direct_watched_replacements": 0,
+  "live_loaded_patch_verified": false,
+  "limits": [
+    "Absence means no direct watched-type replacement in these files, not proof of all transitive behavior.",
+    "Runtime load selection, future/downloaded patches and original server code are not inspected.",
+    "Bodies are structurally skipped and hashed; opcode meanings and replacement execution are not simulated."
+  ]
+}

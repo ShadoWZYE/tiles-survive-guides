@@ -1,0 +1,2705 @@
+{
+  "schema": 1,
+  "client_build": "2.6.400.304",
+  "native_methods": [
+    {
+      "type": "SkillBase",
+      "name": "AddConditionTriggerListener",
+      "rva": 43156912,
+      "token": "0x6020b73",
+      "parameter_count": 0,
+      "byte_count": 400,
+      "code_sha256": "c3aefa254ee710c4511efcdba94c8b9758eac7560b3e6af2ef0ad2acc2ffbfd6"
+    },
+    {
+      "type": "ConditionCheckerManager",
+      "name": "GetConditionCheckerByConfig",
+      "rva": 42834224,
+      "token": "0x6020526",
+      "parameter_count": 4,
+      "byte_count": 13584,
+      "code_sha256": "29e2acb2f021f38945ef8a652c7d8c3980b0cf31b939e8c691e3585d1e3b9df6"
+    },
+    {
+      "type": "ConditionCheckerManager",
+      "name": "GetConditionCheckerByConfigId",
+      "rva": 42833792,
+      "token": "0x6020524",
+      "parameter_count": 4,
+      "byte_count": 432,
+      "code_sha256": "20f88bd2939b08d36365e29a73cc9d491c0973b0646b2ec3989e4cb05693ff48"
+    },
+    {
+      "type": "ConditionSkillFinishChecker",
+      "name": "OnBeginCheck",
+      "rva": 42884048,
+      "token": "0x602061b",
+      "parameter_count": 0,
+      "byte_count": 160,
+      "code_sha256": "e394a37281bda86c293e51369e41c46e0f9e687309c87b8cac907b2ef1356d99"
+    },
+    {
+      "type": "ConditionSkillFinishChecker",
+      "name": "OnTargetEntitySkillFinish",
+      "rva": 42884368,
+      "token": "0x602061d",
+      "parameter_count": 2,
+      "byte_count": 224,
+      "code_sha256": "d8f17a3f312e7a6b26d78e69b55a854be5b14622280807ca65d9bc9e1dc72e71"
+    },
+    {
+      "type": "RaidEntityManager",
+      "name": "GetSkillTargetsBySkillData",
+      "rva": 43510992,
+      "token": "0x6020e9d",
+      "parameter_count": 6,
+      "byte_count": 656,
+      "code_sha256": "64d91524c79ea6a41c2a079f2cba934a3182cef4971eeeda16aaaa8620adf7c1"
+    },
+    {
+      "type": "RaidUtils",
+      "name": "FilterTargetNum",
+      "rva": 44283568,
+      "token": "0x6021b37",
+      "parameter_count": 3,
+      "byte_count": 576,
+      "code_sha256": "7af25cbe02e0c8b23c5c5cb5bf3a632ea4d59037a068af7e4635029d0bc09d81"
+    },
+    {
+      "type": "ConditionCheckerManager",
+      "name": "GetConditionCheckerByConfigId",
+      "rva": 42832208,
+      "token": "0x6020525",
+      "parameter_count": 4,
+      "byte_count": 1584,
+      "code_sha256": "0f685438fe4bb377e2bbddf19c2451cfab6d162256bbac20a51c76bda6dd3c11"
+    }
+  ],
+  "private_image_sha256": "5afef9adf2a4dc85b40adc702149a45bf10728ef2c9de1895f3b648a9128b14d",
+  "private_index_sha256": "ee94b9e060a9d0db87e2787b52a339dcf7555e3f65933d21a5ad9e583be13af4",
+  "manifest_sha256": "f77e8f2fe941ce1146d157c164b76be1bbb4ff1cfeb4d85189e17a0cdc92510d",
+  "config_pack_sha256": "f7c6944491f8bad652c95d10a1ec15f9fb1ca45e776c9163e0162203db714b71",
+  "table_sha256": {
+    "pve_condition": "646b1907a6d882127bcc32a1907a6d7150ee3b0b75de3a4cab94f121ac1e5ca6",
+    "survivor_skill_type": "2e77c65f30354614116c4fb60be1683a64daa073246c23434e7c4d54f9f7510b",
+    "survivor_slg_effect_new": "9d2275515446c1fdf3348b1f25b6c353ce42b66e9bf19f1aae28e78d33806662",
+    "survivor_slg_skill_new": "92947c757a5fdfa048545d875cae80d8295a66888ffcbc1a750432fbbb71d5ac"
+  },
+  "roster_sha256": "85bfda9a62602ad9201833c98ae08a20878371121e5144778bcb7d3edf9a4cbf",
+  "heroes": {
+    "tony": [
+      {
+        "skill": "survivor_tony_attack",
+        "linked_field_skill": "survivor_tony_attack_lite",
+        "initial_cd_raw": 100,
+        "common_cd_raw": 100,
+        "effects": [
+          {
+            "Id": "survivor_tony_attack_lite",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 1,
+            "TargetNum": 1,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_tony_skill_1",
+        "linked_field_skill": "survivor_tony_skill_lite_1",
+        "initial_cd_raw": 300,
+        "common_cd_raw": 300,
+        "effects": [
+          {
+            "Id": "survivor_tony_skill_lite_1",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 1,
+            "TargetNum": 1,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_tony_skill_2",
+        "linked_field_skill": "survivor_tony_skill_lite_2",
+        "initial_cd_raw": 0,
+        "common_cd_raw": 0,
+        "effects": [
+          {
+            "Id": "survivor_tony_skill_lite_2",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 0,
+            "TargetPosition": 0,
+            "TargetNum": 0,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 0,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_tony_skill_3",
+        "linked_field_skill": "survivor_tony_skill_lite_3",
+        "initial_cd_raw": 0,
+        "common_cd_raw": 0,
+        "effects": [
+          {
+            "Id": "survivor_tony_skill_lite_3",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 0,
+            "TargetPosition": 0,
+            "TargetNum": 0,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 0,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      }
+    ],
+    "maddie": [
+      {
+        "skill": "survivor_maddie_attack",
+        "linked_field_skill": "survivor_maddie_attack_lite",
+        "initial_cd_raw": 100,
+        "common_cd_raw": 100,
+        "effects": [
+          {
+            "Id": "survivor_maddie_attack_lite",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 1,
+            "TargetNum": 1,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_maddie_skill_1",
+        "linked_field_skill": "survivor_maddie_skill_lite_1",
+        "initial_cd_raw": 300,
+        "common_cd_raw": 300,
+        "effects": [
+          {
+            "Id": "survivor_maddie_skill_lite_1",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 1,
+            "TargetNum": 1,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_maddie_skill_2",
+        "linked_field_skill": "survivor_maddie_skill_lite_2",
+        "initial_cd_raw": 300,
+        "common_cd_raw": 300,
+        "effects": [
+          {
+            "Id": "survivor_maddie_skill_lite_2",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 2,
+            "TargetPosition": 0,
+            "TargetNum": 0,
+            "TargetArmy": 0,
+            "SpecialTarget": 1,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_maddie_skill_3",
+        "linked_field_skill": "survivor_maddie_skill_lite_3",
+        "initial_cd_raw": 0,
+        "common_cd_raw": 0,
+        "effects": [
+          {
+            "Id": "survivor_maddie_skill_lite_3",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 0,
+            "TargetPosition": 0,
+            "TargetNum": 0,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 0,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      }
+    ],
+    "rosie": [
+      {
+        "skill": "survivor_rosie_attack",
+        "linked_field_skill": "survivor_rosie_attack_lite",
+        "initial_cd_raw": 100,
+        "common_cd_raw": 100,
+        "effects": [
+          {
+            "Id": "survivor_rosie_attack_lite",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 1,
+            "TargetNum": 1,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_rosie_skill_1",
+        "linked_field_skill": "survivor_rosie_skill_lite_1",
+        "initial_cd_raw": 300,
+        "common_cd_raw": 300,
+        "effects": [
+          {
+            "Id": "survivor_rosie_skill_lite_1",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 1,
+            "TargetNum": 1,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_rosie_skill_2",
+        "linked_field_skill": "survivor_rosie_skill_lite_2",
+        "initial_cd_raw": 300,
+        "common_cd_raw": 300,
+        "effects": [
+          {
+            "Id": "survivor_rosie_skill_lite_2",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 0,
+            "TargetPosition": 0,
+            "TargetNum": 0,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_rosie_skill_3",
+        "linked_field_skill": "survivor_rosie_skill_lite_3",
+        "initial_cd_raw": 0,
+        "common_cd_raw": 0,
+        "effects": [
+          {
+            "Id": "survivor_rosie_skill_lite_3",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 0,
+            "TargetPosition": 0,
+            "TargetNum": 0,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 0,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      }
+    ],
+    "nikola": [
+      {
+        "skill": "survivor_nikola_attack",
+        "linked_field_skill": "survivor_nikola_attack_lite",
+        "initial_cd_raw": 100,
+        "common_cd_raw": 100,
+        "effects": [
+          {
+            "Id": "survivor_nikola_attack_lite",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 1,
+            "TargetNum": 1,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_nikola_skill_1",
+        "linked_field_skill": "survivor_nikola_skill_lite_1",
+        "initial_cd_raw": 300,
+        "common_cd_raw": 300,
+        "effects": [
+          {
+            "Id": "survivor_nikola_skill_lite_1",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 1,
+            "TargetNum": 1,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_nikola_skill_2",
+        "linked_field_skill": "survivor_nikola_skill_lite_2",
+        "initial_cd_raw": 0,
+        "common_cd_raw": 0,
+        "effects": [
+          {
+            "Id": "survivor_nikola_skill_lite_2",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 0,
+            "TargetPosition": 0,
+            "TargetNum": 0,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 0,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_nikola_skill_3",
+        "linked_field_skill": "survivor_nikola_skill_lite_3",
+        "initial_cd_raw": 0,
+        "common_cd_raw": 0,
+        "effects": [
+          {
+            "Id": "survivor_nikola_skill_lite_3",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 0,
+            "TargetPosition": 0,
+            "TargetNum": 0,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 0,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      }
+    ],
+    "ray": [
+      {
+        "skill": "survivor_ray_attack",
+        "linked_field_skill": "survivor_ray_attack_lite",
+        "initial_cd_raw": 100,
+        "common_cd_raw": 100,
+        "effects": [
+          {
+            "Id": "survivor_ray_attack_lite",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 1,
+            "TargetNum": 1,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_ray_skill_1",
+        "linked_field_skill": "survivor_ray_skill_lite_1",
+        "initial_cd_raw": 300,
+        "common_cd_raw": 300,
+        "effects": [
+          {
+            "Id": "survivor_ray_skill_lite_1",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 1,
+            "TargetNum": 1,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_ray_skill_2",
+        "linked_field_skill": "survivor_ray_skill_lite_2",
+        "initial_cd_raw": 300,
+        "common_cd_raw": 300,
+        "effects": [
+          {
+            "Id": "survivor_ray_skill_lite_2",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 0,
+            "TargetPosition": 3,
+            "TargetNum": 2,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_ray_skill_3",
+        "linked_field_skill": "survivor_ray_skill_lite_3",
+        "initial_cd_raw": 0,
+        "common_cd_raw": 0,
+        "effects": [
+          {
+            "Id": "survivor_ray_skill_lite_3",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 0,
+            "TargetPosition": 0,
+            "TargetNum": 0,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 0,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      }
+    ],
+    "becca": [
+      {
+        "skill": "survivor_becca_attack",
+        "linked_field_skill": "survivor_becca_attack_lite",
+        "initial_cd_raw": 100,
+        "common_cd_raw": 100,
+        "effects": [
+          {
+            "Id": "survivor_becca_attack_lite",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 1,
+            "TargetNum": 1,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_becca_skill_1",
+        "linked_field_skill": "survivor_becca_skill_lite_1",
+        "initial_cd_raw": 300,
+        "common_cd_raw": 300,
+        "effects": [
+          {
+            "Id": "survivor_becca_skill_lite_1",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 1,
+            "TargetNum": 1,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_becca_skill_2",
+        "linked_field_skill": "survivor_becca_skill_lite_2",
+        "initial_cd_raw": 0,
+        "common_cd_raw": 0,
+        "effects": [
+          {
+            "Id": "survivor_becca_skill_lite_2",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 0,
+            "TargetPosition": 0,
+            "TargetNum": 0,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 0,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_becca_skill_3",
+        "linked_field_skill": "survivor_becca_skill_lite_3",
+        "initial_cd_raw": 0,
+        "common_cd_raw": 0,
+        "effects": [
+          {
+            "Id": "survivor_becca_skill_lite_3",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 0,
+            "TargetPosition": 0,
+            "TargetNum": 0,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 0,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      }
+    ],
+    "layla": [
+      {
+        "skill": "survivor_layla_attack",
+        "linked_field_skill": "survivor_layla_attack_lite",
+        "initial_cd_raw": 100,
+        "common_cd_raw": 100,
+        "effects": [
+          {
+            "Id": "survivor_layla_attack_lite",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 1,
+            "TargetNum": 1,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_layla_skill_1",
+        "linked_field_skill": "survivor_layla_skill_lite_1",
+        "initial_cd_raw": 300,
+        "common_cd_raw": 300,
+        "effects": [
+          {
+            "Id": "survivor_layla_skill_lite_1",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 2,
+            "TargetPosition": 0,
+            "TargetNum": 5,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_layla_skill_2",
+        "linked_field_skill": "survivor_layla_skill_lite_2",
+        "initial_cd_raw": 300,
+        "common_cd_raw": 300,
+        "effects": [
+          {
+            "Id": "survivor_layla_skill_lite_2",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 1,
+            "TargetNum": 1,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 0,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_layla_skill_3",
+        "linked_field_skill": "survivor_layla_skill_lite_3",
+        "initial_cd_raw": 0,
+        "common_cd_raw": 0,
+        "effects": [
+          {
+            "Id": "survivor_layla_skill_lite_3",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 0,
+            "TargetPosition": 0,
+            "TargetNum": 0,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 0,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      }
+    ],
+    "candy": [
+      {
+        "skill": "survivor_candy_attack",
+        "linked_field_skill": "survivor_candy_attack_lite",
+        "initial_cd_raw": 100,
+        "common_cd_raw": 100,
+        "effects": [
+          {
+            "Id": "survivor_candy_attack_lite",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 1,
+            "TargetNum": 1,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_candy_skill_1",
+        "linked_field_skill": "survivor_candy_skill_lite_1",
+        "initial_cd_raw": 1000,
+        "common_cd_raw": 1000,
+        "effects": [
+          {
+            "Id": "survivor_candy_skill_lite_1",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 2,
+            "TargetPosition": 0,
+            "TargetNum": 5,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_candy_skill_2",
+        "linked_field_skill": "survivor_candy_skill_lite_2",
+        "initial_cd_raw": 300,
+        "common_cd_raw": 300,
+        "effects": [
+          {
+            "Id": "survivor_candy_skill_lite_2",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 1,
+            "TargetNum": 1,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 0,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_candy_skill_3",
+        "linked_field_skill": "survivor_candy_skill_lite_3",
+        "initial_cd_raw": 0,
+        "common_cd_raw": 0,
+        "effects": [
+          {
+            "Id": "survivor_candy_skill_lite_3",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 0,
+            "TargetPosition": 0,
+            "TargetNum": 0,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 0,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      }
+    ],
+    "mike": [
+      {
+        "skill": "survivor_mike_attack",
+        "linked_field_skill": "survivor_mike_attack_lite",
+        "initial_cd_raw": 100,
+        "common_cd_raw": 100,
+        "effects": [
+          {
+            "Id": "survivor_mike_attack_lite",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 1,
+            "TargetNum": 1,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_mike_skill_1",
+        "linked_field_skill": "survivor_mike_skill_lite_1",
+        "initial_cd_raw": 300,
+        "common_cd_raw": 300,
+        "effects": [
+          {
+            "Id": "survivor_mike_skill_lite_1",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 1,
+            "TargetNum": 1,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": [
+              25401327
+            ]
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_mike_skill_2",
+        "linked_field_skill": "survivor_mike_skill_lite_2",
+        "initial_cd_raw": 0,
+        "common_cd_raw": 0,
+        "effects": [
+          {
+            "Id": "survivor_mike_skill_lite_2",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 0,
+            "TargetPosition": 0,
+            "TargetNum": 0,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 0,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_mike_skill_3",
+        "linked_field_skill": "survivor_mike_skill_lite_3",
+        "initial_cd_raw": 0,
+        "common_cd_raw": 0,
+        "effects": [
+          {
+            "Id": "survivor_mike_skill_lite_3",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 0,
+            "TargetPosition": 0,
+            "TargetNum": 0,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 0,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      }
+    ],
+    "wright": [
+      {
+        "skill": "survivor_wright_attack",
+        "linked_field_skill": "survivor_wright_attack_lite",
+        "initial_cd_raw": 100,
+        "common_cd_raw": 100,
+        "effects": [
+          {
+            "Id": "survivor_wright_attack_lite",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 1,
+            "TargetNum": 1,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_wright_skill_1",
+        "linked_field_skill": "survivor_wright_skill_lite_1",
+        "initial_cd_raw": 300,
+        "common_cd_raw": 300,
+        "effects": [
+          {
+            "Id": "survivor_wright_skill_lite_1",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 1,
+            "TargetNum": 1,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_wright_skill_2",
+        "linked_field_skill": "survivor_wright_skill_lite_2",
+        "initial_cd_raw": 0,
+        "common_cd_raw": 0,
+        "effects": [
+          {
+            "Id": "survivor_wright_skill_lite_2",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 0,
+            "TargetPosition": 0,
+            "TargetNum": 0,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 0,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_wright_skill_3",
+        "linked_field_skill": "survivor_wright_skill_lite_3",
+        "initial_cd_raw": 0,
+        "common_cd_raw": 0,
+        "effects": [
+          {
+            "Id": "survivor_wright_skill_lite_3",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 0,
+            "TargetPosition": 0,
+            "TargetNum": 0,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 0,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      }
+    ],
+    "tithi": [
+      {
+        "skill": "survivor_tithi_attack",
+        "linked_field_skill": "survivor_tithi_attack_lite",
+        "initial_cd_raw": 100,
+        "common_cd_raw": 100,
+        "effects": [
+          {
+            "Id": "survivor_tithi_attack_lite",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 1,
+            "TargetNum": 1,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_tithi_skill_1",
+        "linked_field_skill": "survivor_tithi_skill_lite_1",
+        "initial_cd_raw": 300,
+        "common_cd_raw": 300,
+        "effects": [
+          {
+            "Id": "survivor_tithi_skill_lite_1",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 1,
+            "TargetNum": 1,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_tithi_skill_2",
+        "linked_field_skill": "survivor_tithi_skill_lite_2",
+        "initial_cd_raw": 0,
+        "common_cd_raw": 0,
+        "effects": [
+          {
+            "Id": "survivor_tithi_skill_lite_2",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 0,
+            "TargetPosition": 0,
+            "TargetNum": 0,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 0,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_tithi_skill_3",
+        "linked_field_skill": "survivor_tithi_skill_lite_3",
+        "initial_cd_raw": 0,
+        "common_cd_raw": 0,
+        "effects": [
+          {
+            "Id": "survivor_tithi_skill_lite_3",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 0,
+            "TargetPosition": 0,
+            "TargetNum": 0,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 0,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      }
+    ],
+    "tara": [
+      {
+        "skill": "survivor_tara_attack",
+        "linked_field_skill": "survivor_tara_attack_lite",
+        "initial_cd_raw": 100,
+        "common_cd_raw": 100,
+        "effects": [
+          {
+            "Id": "survivor_tara_attack_lite",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 1,
+            "TargetNum": 1,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_tara_skill_1",
+        "linked_field_skill": "survivor_tara_skill_lite_1",
+        "initial_cd_raw": 300,
+        "common_cd_raw": 300,
+        "effects": [
+          {
+            "Id": "survivor_tara_skill_lite_1",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 1,
+            "TargetNum": 1,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": [
+              25401316
+            ]
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_tara_skill_2",
+        "linked_field_skill": "survivor_tara_skill_lite_2",
+        "initial_cd_raw": 0,
+        "common_cd_raw": 0,
+        "effects": [
+          {
+            "Id": "survivor_tara_skill_lite_2",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 0,
+            "TargetPosition": 0,
+            "TargetNum": 0,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 0,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_tara_skill_3",
+        "linked_field_skill": "survivor_tara_skill_lite_3",
+        "initial_cd_raw": 0,
+        "common_cd_raw": 0,
+        "effects": [
+          {
+            "Id": "survivor_tara_skill_lite_3",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 0,
+            "TargetPosition": 0,
+            "TargetNum": 0,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 0,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      }
+    ],
+    "jacob": [
+      {
+        "skill": "survivor_jacob_attack",
+        "linked_field_skill": "survivor_jacob_attack_lite",
+        "initial_cd_raw": 100,
+        "common_cd_raw": 100,
+        "effects": [
+          {
+            "Id": "survivor_jacob_attack_lite",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 1,
+            "TargetNum": 1,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_jacob_skill_1",
+        "linked_field_skill": "survivor_jacob_skill_lite_1",
+        "initial_cd_raw": 300,
+        "common_cd_raw": 300,
+        "effects": [
+          {
+            "Id": "survivor_jacob_skill_lite_1",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 1,
+            "TargetNum": 1,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_jacob_skill_2",
+        "linked_field_skill": "survivor_jacob_skill_lite_2",
+        "initial_cd_raw": 0,
+        "common_cd_raw": 0,
+        "effects": [
+          {
+            "Id": "survivor_jacob_skill_lite_2",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 0,
+            "TargetPosition": 0,
+            "TargetNum": 0,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 0,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_jacob_skill_3",
+        "linked_field_skill": "survivor_jacob_skill_lite_3",
+        "initial_cd_raw": 0,
+        "common_cd_raw": 0,
+        "effects": [
+          {
+            "Id": "survivor_jacob_skill_lite_3",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 0,
+            "TargetPosition": 0,
+            "TargetNum": 0,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 0,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      }
+    ],
+    "tarzan": [
+      {
+        "skill": "survivor_tarzan_attack",
+        "linked_field_skill": "survivor_tarzan_attack_lite",
+        "initial_cd_raw": 100,
+        "common_cd_raw": 100,
+        "effects": [
+          {
+            "Id": "survivor_tarzan_attack_lite",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 1,
+            "TargetNum": 1,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_tarzan_skill_1",
+        "linked_field_skill": "survivor_tarzan_skill_lite_1",
+        "initial_cd_raw": 300,
+        "common_cd_raw": 300,
+        "effects": [
+          {
+            "Id": "survivor_tarzan_skill_lite_1",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 1,
+            "TargetNum": 1,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_tarzan_skill_2",
+        "linked_field_skill": "survivor_tarzan_skill_lite_2",
+        "initial_cd_raw": 0,
+        "common_cd_raw": 0,
+        "effects": [
+          {
+            "Id": "survivor_tarzan_skill_lite_2",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 0,
+            "TargetPosition": 0,
+            "TargetNum": 0,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 0,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_tarzan_skill_3",
+        "linked_field_skill": "survivor_tarzan_skill_lite_3",
+        "initial_cd_raw": 0,
+        "common_cd_raw": 0,
+        "effects": [
+          {
+            "Id": "survivor_tarzan_skill_lite_3",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 0,
+            "TargetPosition": 0,
+            "TargetNum": 0,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 0,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      }
+    ],
+    "chiron": [
+      {
+        "skill": "survivor_chiron_attack",
+        "linked_field_skill": "survivor_chiron_attack_lite",
+        "initial_cd_raw": 100,
+        "common_cd_raw": 100,
+        "effects": [
+          {
+            "Id": "survivor_chiron_attack_lite",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 1,
+            "TargetNum": 1,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_chiron_skill_1",
+        "linked_field_skill": "survivor_chiron_skill_lite_1",
+        "initial_cd_raw": 300,
+        "common_cd_raw": 300,
+        "effects": [
+          {
+            "Id": "survivor_chiron_skill_lite_1",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 1,
+            "TargetNum": 1,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_chiron_skill_2",
+        "linked_field_skill": "survivor_chiron_skill_lite_2",
+        "initial_cd_raw": 0,
+        "common_cd_raw": 0,
+        "effects": [
+          {
+            "Id": "survivor_chiron_skill_lite_2",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 0,
+            "TargetPosition": 0,
+            "TargetNum": 0,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 0,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_chiron_skill_3",
+        "linked_field_skill": "survivor_chiron_skill_lite_3",
+        "initial_cd_raw": 0,
+        "common_cd_raw": 0,
+        "effects": [
+          {
+            "Id": "survivor_chiron_skill_lite_3",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 0,
+            "TargetPosition": 0,
+            "TargetNum": 0,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 0,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      }
+    ],
+    "shark": [
+      {
+        "skill": "survivor_shark_attack",
+        "linked_field_skill": "survivor_shark_attack_lite",
+        "initial_cd_raw": 100,
+        "common_cd_raw": 100,
+        "effects": [
+          {
+            "Id": "survivor_shark_attack_lite",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 1,
+            "TargetNum": 1,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_shark_skill_1",
+        "linked_field_skill": "survivor_shark_skill_lite_1",
+        "initial_cd_raw": 400,
+        "common_cd_raw": 400,
+        "effects": [
+          {
+            "Id": "survivor_shark_skill_lite_1",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 5,
+            "TargetNum": 2,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": [
+              25401301
+            ]
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_shark_skill_2",
+        "linked_field_skill": "survivor_shark_skill_lite_2",
+        "initial_cd_raw": 0,
+        "common_cd_raw": 0,
+        "effects": [
+          {
+            "Id": "survivor_shark_skill_lite_2",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 0,
+            "TargetPosition": 0,
+            "TargetNum": 0,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 0,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_shark_skill_3",
+        "linked_field_skill": "survivor_shark_skill_lite_3",
+        "initial_cd_raw": 0,
+        "common_cd_raw": 0,
+        "effects": [
+          {
+            "Id": "survivor_shark_skill_lite_3",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 0,
+            "TargetPosition": 0,
+            "TargetNum": 0,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 0,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      }
+    ],
+    "ragnar": [
+      {
+        "skill": "survivor_ragnar_attack",
+        "linked_field_skill": "survivor_ragnar_attack_lite",
+        "initial_cd_raw": 100,
+        "common_cd_raw": 100,
+        "effects": [
+          {
+            "Id": "survivor_ragnar_attack_lite",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 1,
+            "TargetNum": 1,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_ragnar_skill_1",
+        "linked_field_skill": "survivor_ragnar_skill_lite_1",
+        "initial_cd_raw": 400,
+        "common_cd_raw": 400,
+        "effects": [
+          {
+            "Id": "survivor_ragnar_skill_lite_1",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 5,
+            "TargetNum": 2,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": [
+              25401317
+            ]
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_ragnar_skill_2",
+        "linked_field_skill": "survivor_ragnar_skill_lite_2",
+        "initial_cd_raw": 0,
+        "common_cd_raw": 0,
+        "effects": [
+          {
+            "Id": "survivor_ragnar_skill_lite_2",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 0,
+            "TargetPosition": 0,
+            "TargetNum": 0,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 0,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_ragnar_skill_3",
+        "linked_field_skill": "survivor_ragnar_skill_lite_3",
+        "initial_cd_raw": 0,
+        "common_cd_raw": 0,
+        "effects": [
+          {
+            "Id": "survivor_ragnar_skill_lite_3",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 0,
+            "TargetPosition": 0,
+            "TargetNum": 0,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 0,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      }
+    ],
+    "knotty": [
+      {
+        "skill": "survivor_knotty_attack",
+        "linked_field_skill": "survivor_knotty_attack_lite",
+        "initial_cd_raw": 100,
+        "common_cd_raw": 100,
+        "effects": [
+          {
+            "Id": "survivor_knotty_attack_lite",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 1,
+            "TargetNum": 1,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_knotty_skill_1",
+        "linked_field_skill": "survivor_knotty_skill_lite_1",
+        "initial_cd_raw": 800,
+        "common_cd_raw": 800,
+        "effects": [
+          {
+            "Id": "survivor_knotty_skill_lite_1",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 5,
+            "TargetNum": 2,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_knotty_skill_2",
+        "linked_field_skill": "survivor_knotty_skill_lite_2",
+        "initial_cd_raw": 0,
+        "common_cd_raw": 0,
+        "effects": [
+          {
+            "Id": "survivor_knotty_skill_lite_2",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 0,
+            "TargetPosition": 0,
+            "TargetNum": 0,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 0,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_knotty_skill_3",
+        "linked_field_skill": "survivor_knotty_skill_lite_3",
+        "initial_cd_raw": 0,
+        "common_cd_raw": 0,
+        "effects": [
+          {
+            "Id": "survivor_knotty_skill_lite_3",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 0,
+            "TargetPosition": 0,
+            "TargetNum": 0,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 0,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      }
+    ],
+    "undine": [
+      {
+        "skill": "survivor_undine_attack",
+        "linked_field_skill": "survivor_undine_attack_lite",
+        "initial_cd_raw": 100,
+        "common_cd_raw": 100,
+        "effects": [
+          {
+            "Id": "survivor_undine_attack_lite",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 1,
+            "TargetNum": 1,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_undine_skill_1",
+        "linked_field_skill": "survivor_undine_skill_lite_1",
+        "initial_cd_raw": 300,
+        "common_cd_raw": 300,
+        "effects": [
+          {
+            "Id": "survivor_undine_skill_lite_1",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 1,
+            "TargetNum": 1,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": [
+              25401333
+            ]
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_undine_skill_2",
+        "linked_field_skill": "survivor_undine_skill_lite_2",
+        "initial_cd_raw": 100,
+        "common_cd_raw": 100,
+        "effects": [
+          {
+            "Id": "survivor_undine_skill_lite_2",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 2,
+            "TargetPosition": 4,
+            "TargetNum": 3,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 0,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_undine_skill_3",
+        "linked_field_skill": "survivor_undine_skill_lite_3",
+        "initial_cd_raw": 0,
+        "common_cd_raw": 0,
+        "effects": [
+          {
+            "Id": "survivor_undine_skill_lite_3",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 0,
+            "TargetPosition": 0,
+            "TargetNum": 0,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 0,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      }
+    ],
+    "dave": [
+      {
+        "skill": "survivor_dave_attack",
+        "linked_field_skill": "survivor_dave_attack_lite",
+        "initial_cd_raw": 100,
+        "common_cd_raw": 100,
+        "effects": [
+          {
+            "Id": "survivor_dave_attack_lite",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 1,
+            "TargetNum": 1,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_dave_skill_1",
+        "linked_field_skill": "survivor_dave_skill_lite_1",
+        "initial_cd_raw": 800,
+        "common_cd_raw": 800,
+        "effects": [
+          {
+            "Id": "survivor_dave_skill_lite_1",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 1,
+            "TargetNum": 1,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": [
+              25401348
+            ]
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_dave_skill_2",
+        "linked_field_skill": "survivor_dave_skill_lite_2",
+        "initial_cd_raw": 0,
+        "common_cd_raw": 0,
+        "effects": [
+          {
+            "Id": "survivor_dave_skill_lite_2",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 0,
+            "TargetPosition": 0,
+            "TargetNum": 0,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 0,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_dave_skill_3",
+        "linked_field_skill": "survivor_dave_skill_lite_3",
+        "initial_cd_raw": 0,
+        "common_cd_raw": 0,
+        "effects": [
+          {
+            "Id": "survivor_dave_skill_lite_3",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 0,
+            "TargetPosition": 0,
+            "TargetNum": 0,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 0,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      }
+    ],
+    "lava": [
+      {
+        "skill": "survivor_lava_attack",
+        "linked_field_skill": "survivor_lava_attack_lite",
+        "initial_cd_raw": 100,
+        "common_cd_raw": 100,
+        "effects": [
+          {
+            "Id": "survivor_lava_attack_lite",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 1,
+            "TargetNum": 1,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_lava_skill_1",
+        "linked_field_skill": "survivor_lava_skill_lite_1",
+        "initial_cd_raw": 300,
+        "common_cd_raw": 300,
+        "effects": [
+          {
+            "Id": "survivor_lava_skill_lite_1",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 1,
+            "TargetNum": 1,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_lava_skill_2",
+        "linked_field_skill": "survivor_lava_skill_lite_2",
+        "initial_cd_raw": 300,
+        "common_cd_raw": 300,
+        "effects": [
+          {
+            "Id": "survivor_lava_skill_lite_2",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 0,
+            "TargetPosition": 0,
+            "TargetNum": 0,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_lava_skill_3",
+        "linked_field_skill": "survivor_lava_skill_lite_3",
+        "initial_cd_raw": 0,
+        "common_cd_raw": 0,
+        "effects": [
+          {
+            "Id": "survivor_lava_skill_lite_3",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 0,
+            "TargetPosition": 0,
+            "TargetNum": 0,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 0,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      }
+    ],
+    "lucky": [
+      {
+        "skill": "survivor_lucky_attack",
+        "linked_field_skill": "survivor_lucky_attack_lite",
+        "initial_cd_raw": 100,
+        "common_cd_raw": 100,
+        "effects": [
+          {
+            "Id": "survivor_lucky_attack_lite",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 1,
+            "TargetNum": 1,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_lucky_skill_1",
+        "linked_field_skill": "survivor_lucky_skill_lite_1",
+        "initial_cd_raw": 300,
+        "common_cd_raw": 300,
+        "effects": [
+          {
+            "Id": "survivor_lucky_skill_lite_1",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 1,
+            "TargetNum": 1,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_lucky_skill_2",
+        "linked_field_skill": "survivor_lucky_skill_lite_2",
+        "initial_cd_raw": 0,
+        "common_cd_raw": 0,
+        "effects": [
+          {
+            "Id": "survivor_lucky_skill_lite_2",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 0,
+            "TargetPosition": 0,
+            "TargetNum": 0,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 0,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_lucky_skill_3",
+        "linked_field_skill": "survivor_lucky_skill_lite_3",
+        "initial_cd_raw": 0,
+        "common_cd_raw": 0,
+        "effects": [
+          {
+            "Id": "survivor_lucky_skill_lite_3",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 0,
+            "TargetPosition": 0,
+            "TargetNum": 0,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 0,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      }
+    ],
+    "sarge": [
+      {
+        "skill": "survivor_sarge_attack",
+        "linked_field_skill": "survivor_sarge_attack_lite",
+        "initial_cd_raw": 100,
+        "common_cd_raw": 100,
+        "effects": [
+          {
+            "Id": "survivor_sarge_attack_lite",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 1,
+            "TargetNum": 1,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_sarge_skill_1",
+        "linked_field_skill": "survivor_sarge_skill_lite_1",
+        "initial_cd_raw": 300,
+        "common_cd_raw": 300,
+        "effects": [
+          {
+            "Id": "survivor_sarge_skill_lite_1",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 1,
+            "TargetNum": 1,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_sarge_skill_2",
+        "linked_field_skill": "survivor_sarge_skill_lite_2",
+        "initial_cd_raw": 0,
+        "common_cd_raw": 0,
+        "effects": [
+          {
+            "Id": "survivor_sarge_skill_lite_2",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 0,
+            "TargetPosition": 0,
+            "TargetNum": 0,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 0,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_sarge_skill_3",
+        "linked_field_skill": "survivor_sarge_skill_lite_3",
+        "initial_cd_raw": 0,
+        "common_cd_raw": 0,
+        "effects": [
+          {
+            "Id": "survivor_sarge_skill_lite_3",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 0,
+            "TargetPosition": 0,
+            "TargetNum": 0,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 0,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      }
+    ],
+    "ken": [
+      {
+        "skill": "survivor_ken_attack",
+        "linked_field_skill": "survivor_ken_attack_lite",
+        "initial_cd_raw": 100,
+        "common_cd_raw": 100,
+        "effects": [
+          {
+            "Id": "survivor_ken_attack_lite",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 1,
+            "TargetNum": 1,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_ken_skill_1",
+        "linked_field_skill": "survivor_ken_skill_lite_1",
+        "initial_cd_raw": 300,
+        "common_cd_raw": 300,
+        "effects": [
+          {
+            "Id": "survivor_ken_skill_lite_1",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 0,
+            "TargetPosition": 0,
+            "TargetNum": 0,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_ken_skill_2",
+        "linked_field_skill": "survivor_ken_skill_lite_2",
+        "initial_cd_raw": 300,
+        "common_cd_raw": 300,
+        "effects": [
+          {
+            "Id": "survivor_ken_skill_lite_2",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 1,
+            "TargetNum": 1,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 0,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_ken_skill_3",
+        "linked_field_skill": "survivor_ken_skill_lite_3",
+        "initial_cd_raw": 0,
+        "common_cd_raw": 0,
+        "effects": [
+          {
+            "Id": "survivor_ken_skill_lite_3",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 0,
+            "TargetPosition": 0,
+            "TargetNum": 0,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 0,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      }
+    ],
+    "freja": [
+      {
+        "skill": "survivor_freja_attack",
+        "linked_field_skill": "survivor_freja_attack_lite",
+        "initial_cd_raw": 100,
+        "common_cd_raw": 100,
+        "effects": [
+          {
+            "Id": "survivor_freja_attack_lite",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 1,
+            "TargetNum": 1,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_freja_skill_1",
+        "linked_field_skill": "survivor_freja_skill_lite_1",
+        "initial_cd_raw": 300,
+        "common_cd_raw": 300,
+        "effects": [
+          {
+            "Id": "survivor_freja_skill_lite_1",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 1,
+            "TargetNum": 1,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_freja_skill_2",
+        "linked_field_skill": "survivor_freja_skill_lite_2",
+        "initial_cd_raw": 0,
+        "common_cd_raw": 0,
+        "effects": [
+          {
+            "Id": "survivor_freja_skill_lite_2",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 0,
+            "TargetPosition": 0,
+            "TargetNum": 0,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 0,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_freja_skill_3",
+        "linked_field_skill": "survivor_freja_skill_lite_3",
+        "initial_cd_raw": 0,
+        "common_cd_raw": 0,
+        "effects": [
+          {
+            "Id": "survivor_freja_skill_lite_3",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 0,
+            "TargetPosition": 0,
+            "TargetNum": 0,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 0,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      }
+    ],
+    "travis": [
+      {
+        "skill": "survivor_travis_attack",
+        "linked_field_skill": "survivor_travis_attack_lite",
+        "initial_cd_raw": 100,
+        "common_cd_raw": 100,
+        "effects": [
+          {
+            "Id": "survivor_travis_attack_lite",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 1,
+            "TargetNum": 1,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_travis_skill_1",
+        "linked_field_skill": "survivor_travis_skill_lite_1",
+        "initial_cd_raw": 300,
+        "common_cd_raw": 300,
+        "effects": [
+          {
+            "Id": "survivor_travis_skill_lite_1",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 1,
+            "TargetNum": 1,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_travis_skill_2",
+        "linked_field_skill": "survivor_travis_skill_lite_2",
+        "initial_cd_raw": 0,
+        "common_cd_raw": 0,
+        "effects": [
+          {
+            "Id": "survivor_travis_skill_lite_2",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 0,
+            "TargetPosition": 0,
+            "TargetNum": 0,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 0,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_travis_skill_3",
+        "linked_field_skill": "survivor_travis_skill_lite_3",
+        "initial_cd_raw": 0,
+        "common_cd_raw": 0,
+        "effects": [
+          {
+            "Id": "survivor_travis_skill_lite_3",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 0,
+            "TargetPosition": 0,
+            "TargetNum": 0,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 0,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      }
+    ],
+    "eva": [
+      {
+        "skill": "survivor_eva_attack",
+        "linked_field_skill": "survivor_eva_attack_lite",
+        "initial_cd_raw": 100,
+        "common_cd_raw": 100,
+        "effects": [
+          {
+            "Id": "survivor_eva_attack_lite",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 1,
+            "TargetNum": 1,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_eva_skill_1",
+        "linked_field_skill": "survivor_eva_skill_lite_1",
+        "initial_cd_raw": 300,
+        "common_cd_raw": 300,
+        "effects": [
+          {
+            "Id": "survivor_eva_skill_lite_1",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 1,
+            "TargetNum": 1,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_eva_skill_2",
+        "linked_field_skill": "survivor_eva_skill_lite_2",
+        "initial_cd_raw": 0,
+        "common_cd_raw": 0,
+        "effects": [
+          {
+            "Id": "survivor_eva_skill_lite_2",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 0,
+            "TargetPosition": 0,
+            "TargetNum": 0,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 0,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_eva_skill_3",
+        "linked_field_skill": "survivor_eva_skill_lite_3",
+        "initial_cd_raw": 0,
+        "common_cd_raw": 0,
+        "effects": [
+          {
+            "Id": "survivor_eva_skill_lite_3",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 0,
+            "TargetPosition": 0,
+            "TargetNum": 0,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 0,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      }
+    ],
+    "rusty": [
+      {
+        "skill": "survivor_rusty_attack",
+        "linked_field_skill": "survivor_rusty_attack_lite",
+        "initial_cd_raw": 100,
+        "common_cd_raw": 100,
+        "effects": [
+          {
+            "Id": "survivor_rusty_attack_lite",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 1,
+            "TargetNum": 1,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_rusty_skill_1",
+        "linked_field_skill": "survivor_rusty_skill_lite_1",
+        "initial_cd_raw": 300,
+        "common_cd_raw": 300,
+        "effects": [
+          {
+            "Id": "survivor_rusty_skill_lite_1",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 1,
+            "TargetNum": 1,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_rusty_skill_2",
+        "linked_field_skill": "survivor_rusty_skill_lite_2",
+        "initial_cd_raw": 0,
+        "common_cd_raw": 0,
+        "effects": [
+          {
+            "Id": "survivor_rusty_skill_lite_2",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 0,
+            "TargetPosition": 0,
+            "TargetNum": 0,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 0,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      }
+    ],
+    "tim": [
+      {
+        "skill": "survivor_tim_attack",
+        "linked_field_skill": "survivor_tim_attack_lite",
+        "initial_cd_raw": 100,
+        "common_cd_raw": 100,
+        "effects": [
+          {
+            "Id": "survivor_tim_attack_lite",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 1,
+            "TargetNum": 1,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_tim_skill_1",
+        "linked_field_skill": "survivor_tim_skill_lite_1",
+        "initial_cd_raw": 300,
+        "common_cd_raw": 300,
+        "effects": [
+          {
+            "Id": "survivor_tim_skill_lite_1",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 1,
+            "TargetPosition": 1,
+            "TargetNum": 1,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 1,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      },
+      {
+        "skill": "survivor_tim_skill_2",
+        "linked_field_skill": "survivor_tim_skill_lite_2",
+        "initial_cd_raw": 0,
+        "common_cd_raw": 0,
+        "effects": [
+          {
+            "Id": "survivor_tim_skill_lite_2",
+            "Type": 11100,
+            "EffectAttrRate": 0.0,
+            "TargetTypeLite": 0,
+            "TargetPosition": 0,
+            "TargetNum": 0,
+            "TargetArmy": 0,
+            "SpecialTarget": 0,
+            "AttackCount": 0,
+            "AttackInterval": 0,
+            "ExtraTriggerSkill": []
+          }
+        ],
+        "damage_bridge_verified": false
+      }
+    ]
+  },
+  "linked_effect_count": 114,
+  "type_11100_count": 114,
+  "ray_trigger": {
+    "scope": "owner_active_completion",
+    "condition": {
+      "Id": "ray_skill_3",
+      "Type": 19,
+      "ParamInt": [
+        1
+      ],
+      "ConditionTarget": 0,
+      "ConditionTarget_2": 0
+    },
+    "trace": [
+      {
+        "rva": "0x292866a",
+        "finding": "SkillBase reads its OwnerObj, passes it as the condition source at 0x2928682, and calls the condition factory at 0x292868f."
+      },
+      {
+        "rva": "0x28d9217",
+        "finding": "ConditionTarget zero retains the source entity; the Type-19 factory binds that entity to the finish checker."
+      },
+      {
+        "rva": "0x28e5c36",
+        "finding": "Subscribes to the bound entity skill-over stream; interrupted completions are rejected at 0x28e5d38."
+      }
+    ]
+  },
+  "target_cap_trace": {
+    "rva": "0x297edff",
+    "finding": "GetSkillTargetsBySkillData passes EffectiveSurvivor to FilterTargetNum before area filtering. FilterTargetNum limits distance-cull entities, not guaranteed impacts; do not multiply damage by this raw field."
+  },
+  "field_damage_bridge_verified": false,
+  "scope": "Static config identity and selected native dispatch only. Field/Lite Type-11100 execution, cooldown units and original server formula remain unverified.",
+  "hotfix_inventory": "Cached-Combat-Hotfix-Audit.json",
+  "runtime_model_weights_changed": false
+}

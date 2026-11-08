@@ -14,6 +14,7 @@
 .army-picker{display:flex;gap:8px;margin-bottom:14px}.army-number{min-width:44px}.army-number.active{background:var(--cyan);color:#092136;border:2px solid #e2fff9;box-shadow:0 0 0 2px #31ddd044}.army-badge{position:absolute;top:36px;left:8px;background:#123d60;color:#a8f7ed;padding:3px 6px;border-radius:5px;font-size:11px}.hero-card:disabled{opacity:.5;cursor:not-allowed}
 
 /* Compact persistent header; keep the working area for heroes and formations. */
+.card-copy .build-defaults{color:#ffcf72}
 .app-header{padding:8px 20px;min-height:0;gap:12px}.brand img{width:30px;height:30px}.brand{gap:9px}.brand h1{font-size:23px;margin:0}.brand span{font-size:10px}.header-meta{padding:5px 10px;font-size:11px}.header-meta small{display:none}.top-nav{padding:5px 20px;gap:5px}.top-nav>button,.save-tools button{padding:7px 10px}.save-tools{gap:5px}
 
 .gear-panels{display:flex;flex-wrap:wrap;gap:5px;max-width:620px}.gear-choice{width:76px;min-height:84px;padding:4px;border:2px solid #56708a;background:#182d49;color:white;border-radius:6px;cursor:pointer}.gear-choice img{width:44px;height:44px;object-fit:contain}.gear-choice small{display:block;font-size:10px;white-space:normal}.gear-choice[aria-pressed=true]{border-color:#31d6c8;background:#204b59}.gear-choice:focus-visible{outline:2px solid white}
