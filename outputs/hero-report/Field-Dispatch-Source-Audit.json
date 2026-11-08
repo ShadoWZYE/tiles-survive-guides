@@ -1,0 +1,603 @@
+{
+  "schema": 1,
+  "native_build": "2.6.400.304",
+  "lua_asset_index_build": "2.6.400.312",
+  "private_image_sha256": "5afef9adf2a4dc85b40adc702149a45bf10728ef2c9de1895f3b648a9128b14d",
+  "private_index_sha256": "ee94b9e060a9d0db87e2787b52a339dcf7555e3f65933d21a5ad9e583be13af4",
+  "literal_descriptors_validated": 68874,
+  "selected_literal_references": [
+    {
+      "instruction_rva": "0xbebe1c",
+      "slot_rva": "0x7bb1228",
+      "literal": "survivor_damage_and_withstand"
+    },
+    {
+      "instruction_rva": "0xbebe4b",
+      "slot_rva": "0x7c25600",
+      "literal": "titan_damage_and_withstand"
+    },
+    {
+      "instruction_rva": "0xbebe82",
+      "slot_rva": "0x7bd9a58",
+      "literal": "pet_damage_and_withstand"
+    },
+    {
+      "instruction_rva": "0x38ed784",
+      "slot_rva": "0x7b58720",
+      "literal": "rounds_info"
+    },
+    {
+      "instruction_rva": "0x38edad2",
+      "slot_rva": "0x7c1ff70",
+      "literal": "hp"
+    },
+    {
+      "instruction_rva": "0x38edb36",
+      "slot_rva": "0x7c09008",
+      "literal": "pos"
+    },
+    {
+      "instruction_rva": "0x38edb9a",
+      "slot_rva": "0x7b70c58",
+      "literal": "start_hp"
+    },
+    {
+      "instruction_rva": "0x38edbfd",
+      "slot_rva": "0x7bc21d8",
+      "literal": "heal_hp"
+    }
+  ],
+  "native_methods": [
+    {
+      "type": "GotoUtils",
+      "name": "GenBattleReportInputData",
+      "rva": 12496256,
+      "token": "0x6000051",
+      "parameter_count": 2,
+      "byte_count": 6368,
+      "code_sha256": "0d620331345bac9e6d1bb62532b1e8f525f3cb99e9505ca87e9ef351f07d3feb"
+    },
+    {
+      "type": "BattleReportReplayModule",
+      "name": "OnGetSubMailData",
+      "rva": 59688992,
+      "token": "0x6005777",
+      "parameter_count": 2,
+      "byte_count": 1104,
+      "code_sha256": "f2dfb0207ea6e95f584243f16199a34cb32001ff966c33df7080fbba4eac09e0"
+    },
+    {
+      "type": "BattleReportReplayModule",
+      "name": "ParMailBattleReportData",
+      "rva": 59692208,
+      "token": "0x6005778",
+      "parameter_count": 2,
+      "byte_count": 2432,
+      "code_sha256": "1de59b75978fbdf455e0918967e59243baffc3663eab691c2c2fb32d7a58a3e5"
+    },
+    {
+      "type": "BattleReportReplayModule",
+      "name": "SetBattleReportData",
+      "rva": 59694848,
+      "token": "0x6005770",
+      "parameter_count": 3,
+      "byte_count": 352,
+      "code_sha256": "61f70b77fca91341020c7ba43b180292faedf27c0e92ec3861f7c6f20e6a6571"
+    },
+    {
+      "type": "BattleReportReplayModule",
+      "name": "OnRemove",
+      "rva": 59690848,
+      "token": "0x600576f",
+      "parameter_count": 0,
+      "byte_count": 720,
+      "code_sha256": "29b90dfb25c12c4e87d70d21883600cb69ab9fc7f987dd1726ba3ea2fc605a92"
+    },
+    {
+      "type": "RaidFightStatisticsMgr",
+      "name": "GetBattleReplayStatisticsData",
+      "rva": 44132704,
+      "token": "0x6021aba",
+      "parameter_count": 1,
+      "byte_count": 544,
+      "code_sha256": "f7c98dd31ebeb7f587f87017cc78d610401f13abcb543522123cfe6163025487"
+    },
+    {
+      "type": "MarchFightingSkillData",
+      "name": ".ctor",
+      "rva": 19341632,
+      "token": "0x600ba45",
+      "parameter_count": 4,
+      "byte_count": 368,
+      "code_sha256": "80f4c1377f41e89b33dc823fbfd09090b23a32ed40bd141476877dc0d6ac1ed6"
+    }
+  ],
+  "field_offsets": {
+    "UnitStatus": {
+      "hp": 16,
+      "pos": 24,
+      "start_hp": 32,
+      "heal_hp": 40
+    },
+    "BattleReportStatisticsData": {
+      "i_survivor": 16,
+      "cure": 24,
+      "damage": 32,
+      "withstand": 40
+    },
+    "InputBattleReportData": {
+      "ReportData": 128,
+      "MyStatisticsData": 160,
+      "MyTitanStatisticsData": 168,
+      "MyPetStatisticsData": 176
+    },
+    "BattleReportReplayModule": {
+      "_allReportDict": 24
+    }
+  },
+  "direct_config_getter_references": [
+    {
+      "callsite_rva": "0x127223d",
+      "caller": {
+        "type": "MarchFightingSkillData",
+        "name": ".ctor",
+        "rva": 19341632,
+        "token": "0x600ba45",
+        "parameter_count": 4
+      },
+      "target": {
+        "type": "ConfigRefer",
+        "name": "get_SurvivorSlgSkillNewConfig",
+        "rva": 29419872,
+        "token": "0x60131a1",
+        "parameter_count": 0
+      }
+    },
+    {
+      "callsite_rva": "0x1c733f8",
+      "caller": {
+        "type": "EffectBuffConfigCell",
+        "name": "EffectSkillId2Cell",
+        "rva": 29832096,
+        "token": "0x6013d2a",
+        "parameter_count": 0
+      },
+      "target": {
+        "type": "ConfigRefer",
+        "name": "get_SurvivorSlgSkillNewConfig",
+        "rva": 29419872,
+        "token": "0x60131a1",
+        "parameter_count": 0
+      }
+    },
+    {
+      "callsite_rva": "0x1d6ccb8",
+      "caller": {
+        "type": "SurvivorSkillMainConfigCell",
+        "name": "CombatSkill2Cell",
+        "rva": 30854240,
+        "token": "0x6014e8c",
+        "parameter_count": 0
+      },
+      "target": {
+        "type": "ConfigRefer",
+        "name": "get_SurvivorSlgSkillNewConfig",
+        "rva": 29419872,
+        "token": "0x60131a1",
+        "parameter_count": 0
+      }
+    },
+    {
+      "callsite_rva": "0x1d70a28",
+      "caller": {
+        "type": "SurvivorSkillTypeConfigCell",
+        "name": "SurvivorSlgSkillNew_ID2Cell",
+        "rva": 30869968,
+        "token": "0x6014eb3",
+        "parameter_count": 0
+      },
+      "target": {
+        "type": "ConfigRefer",
+        "name": "get_SurvivorSlgSkillNewConfig",
+        "rva": 29419872,
+        "token": "0x60131a1",
+        "parameter_count": 0
+      }
+    },
+    {
+      "callsite_rva": "0x1ded8f8",
+      "caller": {
+        "type": "SpecificLinkedConfigCell",
+        "name": "Skill2Cell",
+        "rva": 31381664,
+        "token": "0x6015820",
+        "parameter_count": 0
+      },
+      "target": {
+        "type": "ConfigRefer",
+        "name": "get_SurvivorSlgSkillNewConfig",
+        "rva": 29419872,
+        "token": "0x60131a1",
+        "parameter_count": 0
+      }
+    },
+    {
+      "callsite_rva": "0x1dfc5e8",
+      "caller": {
+        "type": "SurvivorExpandSkillConfigCell",
+        "name": "SlgSkillIdNew2Cell",
+        "rva": 31442320,
+        "token": "0x601598c",
+        "parameter_count": 0
+      },
+      "target": {
+        "type": "ConfigRefer",
+        "name": "get_SurvivorSlgSkillNewConfig",
+        "rva": 29419872,
+        "token": "0x60131a1",
+        "parameter_count": 0
+      }
+    },
+    {
+      "callsite_rva": "0x1e08c08",
+      "caller": {
+        "type": "UnitSlgSkillConfigCell",
+        "name": "CombatSkillId2Cell",
+        "rva": 31493040,
+        "token": "0x6015aad",
+        "parameter_count": 0
+      },
+      "target": {
+        "type": "ConfigRefer",
+        "name": "get_SurvivorSlgSkillNewConfig",
+        "rva": 29419872,
+        "token": "0x60131a1",
+        "parameter_count": 0
+      }
+    },
+    {
+      "callsite_rva": "0x2cf62ec",
+      "caller": {
+        "type": "ConfigReferWrap",
+        "name": "_g_get_SurvivorSlgEffectNewConfig",
+        "rva": 47145600,
+        "token": "0x6023b3e",
+        "parameter_count": 1
+      },
+      "target": {
+        "type": "ConfigRefer",
+        "name": "get_SurvivorSlgEffectNewConfig",
+        "rva": 29419200,
+        "token": "0x601319f",
+        "parameter_count": 0
+      }
+    },
+    {
+      "callsite_rva": "0x2cf65ac",
+      "caller": {
+        "type": "ConfigReferWrap",
+        "name": "_g_get_SurvivorSlgSkillNewConfig",
+        "rva": 47146304,
+        "token": "0x6023b40",
+        "parameter_count": 1
+      },
+      "target": {
+        "type": "ConfigRefer",
+        "name": "get_SurvivorSlgSkillNewConfig",
+        "rva": 29419872,
+        "token": "0x60131a1",
+        "parameter_count": 0
+      }
+    },
+    {
+      "callsite_rva": "0x1c30d5b",
+      "caller": {
+        "type": "<>c",
+        "name": "<.cctor>b__5595_1765",
+        "rva": 29560096,
+        "token": "0x60138ee",
+        "parameter_count": 0
+      },
+      "target": {
+        "type": "ConfigRefer",
+        "name": "get_SurvivorSlgEffectNewConfig",
+        "rva": 29419200,
+        "token": "0x601319f",
+        "parameter_count": 0
+      }
+    },
+    {
+      "callsite_rva": "0x1c30ddb",
+      "caller": {
+        "type": "<>c",
+        "name": "<.cctor>b__5595_1767",
+        "rva": 29560224,
+        "token": "0x60138f0",
+        "parameter_count": 0
+      },
+      "target": {
+        "type": "ConfigRefer",
+        "name": "get_SurvivorSlgSkillNewConfig",
+        "rva": 29419872,
+        "token": "0x60131a1",
+        "parameter_count": 0
+      }
+    }
+  ],
+  "lua_coverage": {
+    "asset_index_sha256": "521982f3a535e932e7c82d118af2a120e5911140443952666db77910a399e84e",
+    "indexed_lua_count": 11354,
+    "searched_utf8_sources": 11354,
+    "missing_sources": 0,
+    "corpus_sha256": "06b3f4d4eed0aa1d82c74dce7312008c0bfca2c3262ac8ab90468acec0bfe0a2",
+    "bundle_count": 53,
+    "searched_symbols": [
+      "SurvivorSlgEffectNew",
+      "SurvivorSlgSkillNew",
+      "EffectAttrRate",
+      "TargetTypeLite",
+      "DamageParam",
+      "CalSkillDamage"
+    ],
+    "symbol_hits": {},
+    "numeric_11100_files": [
+      "MissionConfigInfo.lua"
+    ],
+    "scope": "Text-source and selected-symbol coverage only; dynamically constructed names and indirect calls are not excluded.",
+    "bundle_list_sha256": "9f15a3aa41064629558377434503453e0539590867934fcd414072d51a9a434a",
+    "extracted_bundle_sha256": [
+      {
+        "digest": "02781d2f7caf3982e6ef552003ee09c8",
+        "sha256": "8c55b245b0b64b8cf4e7fca54b28051bc919b7fe7bc42d539071b6c4d17047af"
+      },
+      {
+        "digest": "06f23a5635cc16093ffbe31fec9b9700",
+        "sha256": "000617d1c91674af5b7457c09d381fe0aaf8ddbe58adb026f123b64bfd3fc8c9"
+      },
+      {
+        "digest": "09b846cfa872a4f62856a231ab1759d1",
+        "sha256": "cd24de0205704cc2864897908e8e1b8f2e9d72c5c9284c902746fac0df1b9c63"
+      },
+      {
+        "digest": "0ea2d19407f51671675c840d159f0ca5",
+        "sha256": "fdf952e060e14f85f8c5b806918fe4af76ef4243295faccbf5125a7c5a842869"
+      },
+      {
+        "digest": "1791fa1041fb6c1649a498b1bbea0544",
+        "sha256": "16e73fc3430cb7abe0a828f37389980db5440f46f39f01382c8d6bdb6f1ba2a3"
+      },
+      {
+        "digest": "18a890b6f2c268da1ea51b1604cb8899",
+        "sha256": "827fe170c8042a0d4ff3b7989a9c95dbcc0980f92051a0aba8e259555e33a16d"
+      },
+      {
+        "digest": "1d0a3011a6c890bacbb5e5f1353e29fb",
+        "sha256": "9e6880e5cc436632d6c1c7770896673b666cc228fde5b042655f1a747f74cc8a"
+      },
+      {
+        "digest": "2d535774f7d611848d3a1baf5717a67b",
+        "sha256": "2d3c55363584c1694207afeff865f36669c8a9e0b882b748e129074a1f0c0d44"
+      },
+      {
+        "digest": "38e65ad8492be29a23acef48f37a4288",
+        "sha256": "93b5e48ce37f601318b8beae063f9515979d1da98519700bee57865733c2bac9"
+      },
+      {
+        "digest": "3d508737e624410eb7ff798152ec6f5c",
+        "sha256": "c5a8dc470188f4ce26a58ac347eaf689e9a67e23f843ae90a11e715ab89c4249"
+      },
+      {
+        "digest": "47d9cd5b88a84eff2f95fd0228966ce6",
+        "sha256": "c02cfc62c7df73ccd5ee669dadeb4d8d7a39617e4b6869ade434061aa1e22372"
+      },
+      {
+        "digest": "4c2d4c00c181a5ce74927c765f3e9f4f",
+        "sha256": "0500a1391763b9946f863a04dd4bfdbe953064b288fe4a1c1debccf186a51ec6"
+      },
+      {
+        "digest": "4ced8871ed57637574d06c87eb12d5c4",
+        "sha256": "0304af6a23d4899886b8ffe67440bcc064bfa26b1d45de55c60dd044457fd4af"
+      },
+      {
+        "digest": "4cf15454a79796c325e75eca35233898",
+        "sha256": "189f8eca21f47e944395b404bedde71a497d1e0a0b3921744bcce0e546f5646c"
+      },
+      {
+        "digest": "5051b071dd5927c47106b906de80d3bf",
+        "sha256": "c598b3266b349298f592ab0735d285f5c44711f38ae54963a9de8431b91ed74e"
+      },
+      {
+        "digest": "58dea17651e2bcdff15b326f77733702",
+        "sha256": "8bdf1098b064dee77dbbeb3935f666a49344a3fe6f7bed43c5ada005a4669e34"
+      },
+      {
+        "digest": "5a19c3983bedaa454940671917cb4bd3",
+        "sha256": "56ffcc7347de481a54352a701a5bc5b50b0c0be3b52d5af810c8e410dfd4237f"
+      },
+      {
+        "digest": "5ac72b292529a14a8d60c7cc9f481955",
+        "sha256": "83b4ea691254e66db71ac5f6814860843f851d701fde0176e4ebfdeb3dcc10f1"
+      },
+      {
+        "digest": "5cc91eb005bf25c4bf0b244c96905768",
+        "sha256": "7d3d2c0f5d9d27504835ce06b8a55e61174fd1db56c63e99505fcdf34a657400"
+      },
+      {
+        "digest": "607b7318480b20c0353f842c622dec1b",
+        "sha256": "ea255274ff92631ce0349962b0f32345035d678730c7efd9d0bb1e07a85ffcd1"
+      },
+      {
+        "digest": "62552e19c3534669f1045ec6ec75f496",
+        "sha256": "eeb04b566bf0c5823dabcfc2e9e59c68cce756093d09577e6c6f7a87e067cb6b"
+      },
+      {
+        "digest": "67e69c957e1d1a31917558af43748479",
+        "sha256": "fd5aadff2afcca65accf98d89fc27b9e6e5fec0dc0d31be73a33a234c84355f4"
+      },
+      {
+        "digest": "69d6f3e62a875c8e47492d2334d6e467",
+        "sha256": "5d853a1d3b13cc79520850a1825f4096f9b2d116291bde6dc1f322fdee44e3b0"
+      },
+      {
+        "digest": "6f6f4219771f1cb075c6186d23efb710",
+        "sha256": "4a5898b1031288c23114150f56a89bdc71a5fd7e77560b74e2328e7b04708acd"
+      },
+      {
+        "digest": "74f168e1a6a925f5545f63798400c9ac",
+        "sha256": "f1f219182f05dfca361b3d0a6c7c691ae9573ceb5d89dd336e24fd8671855be2"
+      },
+      {
+        "digest": "77630dd9ea2cd37ff5fffaa9c20530b0",
+        "sha256": "084d46b610f995088925ab99b2f6b0dfd38a213bb567777d8a374e1786979fa1"
+      },
+      {
+        "digest": "7a1b9db42a0279099acb7bdcfa161e6a",
+        "sha256": "01749d6a0acc7b96bdcd297e358c98be39232448fc20aaf2c502354bac7c4682"
+      },
+      {
+        "digest": "7fec0b11bffad4c6a1daba3b473b5107",
+        "sha256": "f9322569c292041180a81fe589c18d10f2b809b1558291c8d88b0a1130b48a00"
+      },
+      {
+        "digest": "84e5cdff195813305c24e234cc4e0a7f",
+        "sha256": "1802c375c83fa834d4854b94cefb9da307a4421f246f065dfd37f0c5f5f6da39"
+      },
+      {
+        "digest": "878f2425aa41ea5e01f9e5d3f06e6e5a",
+        "sha256": "0811a00fc437da64a86896504ec11dc0a93a64dacb1b07296263666a4cece727"
+      },
+      {
+        "digest": "8c761d73bb67e7436a9dba6a2b9f405d",
+        "sha256": "020fcd4fe671d1ffc7226a5d7675cb358b5f5a1d66d4d0c343d77be185489d10"
+      },
+      {
+        "digest": "95253d64d17272d8aad177f26351b62b",
+        "sha256": "bc29c441d75a3fcb8f8ddf3a69881088a45c5b28e192c69897222b0358cb713e"
+      },
+      {
+        "digest": "97efce5f8b9df3667fccf3af18f63ca2",
+        "sha256": "0ee970ad960bf047abe896534c6329297ab920b4cb73bf144ddb9760178604ea"
+      },
+      {
+        "digest": "990cf44ed9685056eb82f11bc32e3396",
+        "sha256": "c2885c8ad1fc4ecd854ab8d7d88bfd61bb6c97282562ab8eb040c4c508e86bca"
+      },
+      {
+        "digest": "9911a465cfb10cba1e48c7e978b6bbcb",
+        "sha256": "783c1c712438abee5f2436054dfa795a7a18b36c2216745225819ba7cd77eafe"
+      },
+      {
+        "digest": "9affdd00ab540eab25c5adaee1e23bb1",
+        "sha256": "7a85c73e15dcb67a20c1ea76ff807227d2621210cce8a9af3d75630da55ddc6e"
+      },
+      {
+        "digest": "af440a5ee52b7a3516ea94d2ad78db35",
+        "sha256": "8c530800cb597fc634aa09453204299a0cd13c44a6bdfc14b5b177e593e45847"
+      },
+      {
+        "digest": "b086443f584042781e0344deb3e465f4",
+        "sha256": "31e17f1fe5935e22ff5b406b071a36b00b456e60095997516a2668db8a5ca7b1"
+      },
+      {
+        "digest": "bb1cd793b1228f1c5d4cba11bd529fba",
+        "sha256": "2e45f6171558b47442ec80ff8fd87cc78aec072ec35e736d22b70c6540faea90"
+      },
+      {
+        "digest": "bba222f5c630fcbeb3ab3c528e691e01",
+        "sha256": "4f4d0d6823ac13d354b302edbae51f886d5a54c5c05c4f2ecbed8e28e15a146d"
+      },
+      {
+        "digest": "c3991cc1e5ee18eaea3ab11ee17a2390",
+        "sha256": "cec2b872acdf629bb71761542cf6c8ad3afd8d1d280ba84f9577584fae105baa"
+      },
+      {
+        "digest": "c8a72d0c9b9b6b21f684fb8a956db894",
+        "sha256": "612d7b06a54b97522d6f8ee25167d951791486fe926ae84cfbfc5b04ee0d7ba0"
+      },
+      {
+        "digest": "c9e71b238f9ec72f8478afe0000333a7",
+        "sha256": "d2a486f1ca0d3d1f76e707aee919eec2af50096c4888785a59400fe81f8fb5fa"
+      },
+      {
+        "digest": "ca2dbad544cd2706f2de7b5e8369f3f4",
+        "sha256": "adcf5197c6ea5adfb4a9ac8bbbf282091d9d2381b5c5a3905af1090e32e915f4"
+      },
+      {
+        "digest": "d444cfd82c0f2de0c0ffe3184a025611",
+        "sha256": "e9e342d52895b34c872e6b3d8004def7cb3c980918e366d6d3a59ec4b5f53bcb"
+      },
+      {
+        "digest": "d8c3c0bd8a266dde6c4abeac6977f6b8",
+        "sha256": "6431e7b37ec835161a1912309aeed36e6a4d77e2e1ccaf00494fc1907ed96d11"
+      },
+      {
+        "digest": "dde830dc45ec6cdb1c7efbc7c3f1d27c",
+        "sha256": "791ed159a5dad13c8e1cac9553f00a28b551bdb0b77f20d0c6a55846820316ad"
+      },
+      {
+        "digest": "ea377fcd76fe242e1e5970e994cb8050",
+        "sha256": "cb951cfdcb06d035caabeb9f3d106d33e6251d21c197017df2ac5db9080bccd9"
+      },
+      {
+        "digest": "f62ed4cec83724ac28a5dcc7f2e2717a",
+        "sha256": "3f4a89e48f49e1fefbe2a776557e1b49973fa39a011cdadb47b6adf0be76ede9"
+      },
+      {
+        "digest": "f7b9becaebef5540bc6dea39a54f4ca6",
+        "sha256": "dbf7dbac1b71a2e57b33ebc074720cc34f50aca82ec2995b58d9743de12a15e2"
+      },
+      {
+        "digest": "fb3a7791050787d489f17155b1be8e8b",
+        "sha256": "24e507aa7ad06c6384272e31964dcf9bbfe719bd600eded167ee7a86779c520d"
+      },
+      {
+        "digest": "fce3f42411c460daf39fd3ba6e85c7dc",
+        "sha256": "89fb9301f1f24bc583ba58107ec8ea057cb3c8576ff5f773ef28cb6608724553"
+      },
+      {
+        "digest": "fd10493708eeb4ec662a98f8a014af2f",
+        "sha256": "8416590e14f8fd1cbc3870b220594a3e5f6d0338de9fccd18fddca6c5b4a6fb2"
+      }
+    ]
+  },
+  "report_boundary": {
+    "round_states": [
+      "hp",
+      "pos",
+      "start_hp",
+      "heal_hp"
+    ],
+    "owner_totals": [
+      "i_survivor",
+      "cure",
+      "damage",
+      "withstand"
+    ],
+    "source": "Supplied report/response records; the replay builder assigns owner totals and round states to separate input fields.",
+    "self_hero_conversion": [
+      {
+        "rva": "0x2a16b0d",
+        "operation": "Adds supplied damage at offset 32."
+      },
+      {
+        "rva": "0x2a16b1d",
+        "operation": "Adds supplied cure at offset 24."
+      },
+      {
+        "rva": "0x2a16b31",
+        "operation": "Adds supplied withstand at offset 40."
+      }
+    ],
+    "numeric_report_input_supplied_to_this_audit": false
+  },
+  "field_damage_handler_identified": false,
+  "server_only_proven": false,
+  "weights_changed": false,
+  "independent_damage_accuracy": null,
+  "conclusions": [
+    "No Type-11100 damage handler was identified in the inspected source paths. This is not proof of absence in all executable or server code.",
+    "Direct getter references cover configuration/name lookup, generated wrappers and registration; reflection and indirect calls remain outside that scan.",
+    "Original unrounded report states/totals would improve numerical validation, but round HP deltas alone do not identify outgoing damage sources.",
+    "Raid animation agreement with a report is not independent validation of the original field damage arithmetic."
+  ]
+}
