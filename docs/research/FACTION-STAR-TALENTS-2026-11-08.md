@@ -2,6 +2,12 @@
 
 The supplied screenshot matches the client's Hero Faction Talent feature. This establishes availability for the account shown, not a universal release date. The planner now exposes all three branches, 24 nodes and 72 level rows in both editions.
 
+## Quick recording
+
+The selected-node inspector has +1 level and −1 level buttons. These immediately save the planner record, update available points and recalculate recommendations. One level may cost multiple Star Points; the + button shows the exact next-row cost. Total earned points are never decremented. Removing a recorded level releases that row's cost in the available-point calculation.
+
+Adding requires a known sufficient faction budget and completed prerequisites. Removing a prerequisite level is blocked while a purchased dependent needs it. Invalid totals, maximum/minimum levels and invalid draft selections disable the relevant action. The existing dropdown and Save button remain available for entering a complete historical build. Quick recording does not perform an action in the game.
+
 ## What enters the model
 
 The first three nodes of each branch provide additive **all-hero** ATK, DEF and HP. Their benefit IDs are 301828–301830. The current `benefits` names and `benefit_calc` ValueParam references are checked during export. Purchased current-level values enter the existing external-flat-stat path before passive percentages. The planner does not add all historical level rows together, multiply a node by squad size, or restrict these global bonuses to the faction that paid for them.
@@ -12,7 +18,7 @@ Recorded values feed hero ranking, squad scoring and optimization through the sa
 
 ## Tree interface
 
-Both editions display the in-game arrangement: Rover above the central faction emblem, Stalwart down-left and Aeronaut down-right. Exact client icons, faction colours, prerequisite connectors and current levels identify nodes. The tree fills the available desktop viewport; +/− controls and the mouse wheel zoom from 50% to 300%, dragging empty space pans, and Fit recentres the entire tree. Navigation does not alter purchased levels. Mouse/pointer capture is released when dragging ends, is cancelled or the view is unloaded. Selecting a node opens a single inspector, leaving the tree visible.
+Both editions display the in-game arrangement: Rover above the central faction emblem, Stalwart down-left and Aeronaut down-right. Exact client icons, faction colours, prerequisite connectors and current levels identify nodes. The tree fills the available desktop viewport; +/− controls and the mouse wheel zoom from 50% to 300%, dragging empty space pans, and Fit recentres the entire tree. Navigation does not alter purchased levels. Mouse/pointer capture is released when dragging ends, is cancelled or the view is unloaded. Selecting a node opens a single inspector, leaving the tree visible. Stalwart fork coordinates are reflected to match the supplied in-game reference: defense is above-left of health, including the troop-stat pair. Rover and Aeronaut retain their existing orientation; benefit identities and prerequisites are unchanged.
 
 The best affordable **scored** next upgrade in each independent point pool receives a gold glow and a NEXT badge. The matching recommendation button opens that node without purchasing or changing its recorded level. The white outline identifies selection, not a recommendation. Up to three gold markers can appear, one for each known faction point pool. Blank totals explicitly ask the user to fill the point cards. Badges update when points or purchased levels change; missing totals, unmet prerequisites and invalid edits cannot receive a recommendation. Unverified effects are not promoted to a scored recommendation.
 

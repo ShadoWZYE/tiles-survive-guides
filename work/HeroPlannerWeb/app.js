@@ -127,9 +127,11 @@
       localStorage.setItem(STORAGE_KEY, JSON.stringify(profile));
       status.textContent = "Saved in this browser";
       status.style.color = "var(--good)";
+      return true;
     } catch (_) {
       status.textContent = "Browser save unavailable — export profile";
       status.style.color = "var(--danger)";
+      return false;
     }
   }
 
@@ -137,8 +139,9 @@
     profile = sanitizeProfile(next);
     state.squad=[...profile.armies[profile.activeArmy].heroes];
     optimizerCache.clear();
-    saveProfile();
+    const stored=saveProfile();
     renderAll();
+    return stored;
   }
 
   function exportProfile() {
